@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30428</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{64AE91ED-9627-44F2-9CD5-FC04DA7310EC}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -45,16 +45,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CallStack.cs" />
+    <Compile Include="Commands\Call.cs" />
+    <Compile Include="Commands\CallMethod.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\Compare.cs" />
+    <Compile Include="Commands\Decrement.cs" />
+    <Compile Include="Commands\Increment.cs" />
+    <Compile Include="Commands\Initialize.cs" />
+    <Compile Include="Commands\Jump.cs" />
+    <Compile Include="Commands\Pop.cs" />
+    <Compile Include="Commands\Push.cs" />
+    <Compile Include="Commands\Return.cs" />
+    <Compile Include="Commands\ValueAccessor.cs" />
+    <Compile Include="Delayer.cs" />
     <Compile Include="Factories\MachineBuilder.cs" />
-    <Compile Include="ICommand.cs" />
+    <Compile Include="Factories\OperatingSystemBuilder.cs" />
+    <Compile Include="Factories\ProgramBuilder.cs" />
+    <Compile Include="Function.cs" />
+    <Compile Include="HardwareElement.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="ICommandContext.cs" />
+    <Compile Include="IFunctionLookup.cs" />
+    <Compile Include="ITransaction.cs" />
+    <Compile Include="Libraries\ILibrary.cs" />
+    <Compile Include="ProcessorInterruptInformation.cs" />
+    <Compile Include="InterruptRequest.cs" />
+    <Compile Include="IProcessorContext.cs" />
+    <Compile Include="IRunningContext.cs" />
+    <Compile Include="ISystemItem.cs" />
+    <Compile Include="Libraries\StandardLibrary.cs" />
     <Compile Include="Machine.cs" />
-    <Compile Include="CPU.cs" />
+    <Compile Include="Processor.cs" />
     <Compile Include="Memory.cs" />
+    <Compile Include="OperatingSystem.cs" />
     <Compile Include="Process.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scheduler.cs" />
+    <Compile Include="IScheduler.cs" />
+    <Compile Include="Register.cs" />
+    <Compile Include="RunStack.cs" />
+    <Compile Include="Schedulers\RoundRobinScheduler.cs" />
     <Compile Include="Thread.cs" />
+    <Compile Include="TransactionalStack.cs" />
+    <Compile Include="Types\BaseType.cs" />
+    <Compile Include="Types\FunctionPointer.cs" />
+    <Compile Include="Types\Integer.cs" />
+    <Compile Include="Types\String.cs" />
+    <Compile Include="Types\Thread.cs" />
+    <Compile Include="Types\ValueFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace VapeTeam.Psimulex.Core
+namespace VapeTeam.Psimulex.Core.Types
 {
-    public interface ICommand
+    public abstract class BaseType
     {
+
     }
 }
