@@ -10,23 +10,33 @@ namespace VapeTeam.Psimulex.Core
     /// </summary>
     public class Machine
     {
-        private List<CPU> cpus;
+        private ProcessorList processors;
 
-        private Scheduler scheduler;
+        public ProcessorList Processors
+        {
+            get
+            {
+                return processors;
+            }
+        }
+
+        public OperatingSystem System { get; set; }
 
         public Machine()
         {
-            cpus = new List<CPU>();
-            scheduler = new Scheduler();
+            processors = new ProcessorList();
+            //System = Factories.OperatingSystemBuilder.CreateOSWithRoundRobin();
+            //System.Setup(this);
+            //scheduler = new IScheduler();
         }
 
         /// <summary>
         /// Adds a processor to the machine.
         /// </summary>
         /// <param name="cpu"></param>
-        public void AddProcessor(CPU cpu)
+        public void AddProcessor(Processor processor)
         {
-            cpus.Add(cpu);
+            processors.Add(processor);
         }
 
         private int memorySize;
@@ -46,14 +56,16 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
-        public void Run(Program program)
+        public void Install(OperatingSystem operatingSystem)
         {
-
+            System = operatingSystem;
+            operatingSystem.Setup(this);
         }
 
-        public void Load(Program program)
+        public void Run()
         {
-
         }
+
+        public string ScreenContent { get; internal set; }
     }
 }
