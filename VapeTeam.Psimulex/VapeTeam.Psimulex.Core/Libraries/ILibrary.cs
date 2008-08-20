@@ -7,5 +7,6 @@ namespace VapeTeam.Psimulex.Core.Libraries
 {
     public interface ILibrary
     {
+        ISystemContext System { get; set;  }
     }
 }

@@ -7,70 +7,188 @@ namespace VapeTeam.Psimulex.Core
 {
     /// <summary>
     /// In Psimulex all stacks are based upon a special stack: TransactionalStack.
-    /// As its name suggests, you can use it via transactions that can be commited or rolled back.
+    /// As its name suggests, you can use it via transactions that can be commited or rolled back making
+    /// it possible to group several operations.
     /// </summary>
-    public class TransactionalStack<T>
+    public class TransactionalStack<T> : Stack<T>
     {
-        /// <summary>
-        /// The representation.
-        /// </summary>
-        private List<T> stack;
+        private List<ITransaction> transactions = new List<ITransaction>();
 
         /// <summary>
-        /// The pointer to the top of the stack.
+        /// Creates a new transaction. The changes you made will not affect this stack until you explicitly commit.
         /// </summary>
-        private int pointer;
-
-        public TransactionalStack ()
+        /// <returns></returns>
+        public StackTransaction<T> BeginTransaction()
         {
-            stack = new List<T>();
-            pointer = -1;
+            var t = new StackTransaction<T>(this, this.stack, this.pointer);
+            transactions.Add(t);
+            return t;
         }
 
-        public void Push(T elem)
+        public void CommitTransaction(StackTransaction<T> stackTransaction)
         {
-            stack.Add(elem);
-            ++pointer;
+            transactions.Remove(stackTransaction);
+            transactions.ForEach(t => t.Invalidate());
+            transactions.Clear();
+        }
+
+        internal void RollbackTransaction(StackTransaction<T> stackTransaction)
+        {
+            transactions.Remove(stackTransaction);
+        }
+    }
+
+    /// <summary>
+    /// The transaction that creates a snapshot of the original stack until you commit it.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class StackTransaction<T> : IStack<T>, ITransaction
+    {
+        protected TransactionalStack<T> originalStack;
+        protected List<T> originalStackRep;
+        protected int originalPointer;
+
+        protected int currentPointer;
+        protected Stack<T> tempStack;
+
+        public StackTransaction(TransactionalStack<T> stack, List<T> stackRep, int pointer)
+        {
+            originalStack = stack;
+            originalStackRep = stackRep;
+            originalPointer = pointer;
+            currentPointer = pointer;
+            tempStack = new Stack<T>();
+            Status = TransactionStates.Uncommitted;
+        }
+
+        public bool IsEmpty
+        {
+            get
+            {
+                return currentPointer < 0;
+            }
+        }
+
+        public T Pop()
+        {
+            // There is no item in the stack
+            if (IsEmpty)
+            {
+                throw new StackOverflowException();
+            }
+            // The item is in the original stack
+            else if (currentPointer <= originalPointer)
+            {
+                var ret = originalStackRep[currentPointer];
+                --currentPointer;
+                return ret;
+            }
+            // The item is in the new stack
+            else
+            {
+                var ret = tempStack.Pop();
+                --currentPointer;
+                return ret;
+            }
+        }
+
+        public void Push(T item)
+        {
+            tempStack.Push(item);
+            ++currentPointer;
         }
 
         public T Top
         {
-            get 
+            get
             {
-                if (pointer < 0 || pointer >= stack.Count)
+                // There is no item in the stack
+                if (IsEmpty)
+                {
                     throw new StackOverflowException();
-                return stack[pointer];
+                }
+                // The item is in the original stack
+                else if (currentPointer <= originalPointer)
+                {
+                    return originalStackRep[currentPointer];
+                }
+                // The item is in the new stack
+                else
+                {
+                    return tempStack.Top;
+                }
             }
         }
 
-        public bool IsEmpty 
+        public void Clear()
         {
-            get 
+            tempStack.Clear();
+            currentPointer = -1;
+        }
+
+        #region ITransaction Members
+
+        public TransactionStates Status
+        {
+            get;
+            internal set;
+        }
+
+        private void AssertUncommitted(string message)
+        {
+            if (Status != TransactionStates.Uncommitted)
             {
-                return pointer == -1;
+                throw new VapeTeam.Psimulex.Core.Exceptions.InvalidTransactionException(message);
             }
         }
 
-        //public TransactionalStack<T> 
-    }
-
-    public class StackTransaction<T> : ITransaction
-    {
-        private TransactionalStack<T> stack;
-
-        public void Push(T elem)
+        public void Invalidate()
         {
-
+            if (Status == TransactionStates.Uncommitted)
+                Status = TransactionStates.Invalid;
         }
 
-        public bool IsEmpty 
+        /// <summary>
+        /// Applies all modifications made to the stack.
+        /// After commit you cannot use this transaction anymore.
+        /// </summary>
+        public void Commit()
         {
-            get 
+            AssertUncommitted("You can only commit an uncommitted transaction");
+
+            int numberOfItemsToDelete = originalPointer - currentPointer + tempStack.Count;
+            for (int i = 0; i < numberOfItemsToDelete; ++i)
             {
-                return false;
+                originalStack.Pop();
             }
+            var reversedTempStack = tempStack.Reverse();
+            while (!reversedTempStack.IsEmpty)
+            {
+                var item = reversedTempStack.Pop();
+                originalStack.Push(item);
+            }
+
+            tempStack.Clear();
+            originalPointer = currentPointer;
+
+            Status = TransactionStates.Committed;
+            originalStack.CommitTransaction(this);
         }
+
+        /// <summary>
+        /// Rollback drops all information made in the transaction.
+        /// </summary>
+        public void Rollback()
+        {
+            AssertUncommitted("You can only rollback an uncommitted transaction");
+
+            currentPointer = originalPointer;
+            tempStack.Clear();
+
+            Status = TransactionStates.Rolledback;
+            originalStack.RollbackTransaction(this);
+        }
+
+        #endregion
     }
-
-
 }

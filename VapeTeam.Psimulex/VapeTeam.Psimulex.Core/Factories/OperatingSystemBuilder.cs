@@ -10,7 +10,7 @@ namespace VapeTeam.Psimulex.Core.Factories
         public static OperatingSystem CreateOSWithRoundRobin()
         {
             var os = new OperatingSystem(new Schedulers.RoundRobinScheduler());
-            os.InstallLibrary(new VapeTeam.Psimulex.Core.Libraries.StandardLibrary());
+            os.InstallLibrary(new VapeTeam.Psimulex.Core.Libraries.StandardLibrary(os));
             return os;
         }
     }

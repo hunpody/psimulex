@@ -13,16 +13,19 @@ namespace VapeTeam.Psimulex.Core.Commands
     {
         public ValueAccessModes AccessMode { get; private set; }
 
+        private BaseType value;
+
         #region ICommand Members
 
         public override void Do(ICommandContext context)
-        {            
-            throw new NotImplementedException();
+        {
+            context.RunStack.Push(value);
         }
 
         public Push(BaseType value, ValueAccessModes accessMode)
         {
             AccessMode = accessMode;
+            this.value = value;
         }
 
         public Push(object value)

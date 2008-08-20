@@ -18,5 +18,10 @@ namespace VapeTeam.Psimulex.Core.Types
             : this(string.Empty)
         {
         }
+
+        public override string ToString()
+        {
+            return value;
+        }
     }
 }
