@@ -19,7 +19,20 @@ namespace VapeTeam.Psimulex.Core
         /// </summary>
         public Program Program { get; set; }
 
-        private Machine Machine { get; set; }
+        public Machine Machine { get; set; }
+
+        public ISystemContext System { get; set; }
+
+        /// <summary>
+        /// True if there are active threads.
+        /// </summary>
+        public bool IsActive
+        {
+            get
+            {
+                return Threads.Exists(thread => thread.State != ThreadStates.Finished);
+            }
+        }
 
         public Process ParentProcess { get; set; }
         public List<Process> ChildProcesses { get; set; }

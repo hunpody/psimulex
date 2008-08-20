@@ -18,5 +18,15 @@ namespace VapeTeam.Psimulex.Core.Types
                 return new String(value.ToString());
             }
         }
+
+        public static object TransformToDotnetType(BaseType value, Type type)
+        {
+            if (type == typeof(string))
+            {
+                return value.ToString();
+            }
+            else
+                return null;
+        }
     }
 }

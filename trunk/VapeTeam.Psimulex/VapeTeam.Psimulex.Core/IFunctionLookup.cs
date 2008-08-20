@@ -7,7 +7,7 @@ namespace VapeTeam.Psimulex.Core
 {
     public interface IFunctionLookup
     {
-        bool IsDefined(string name);
-
+//        bool IsDefined(string name);
+        Function GetFunctionByName(string name);
     }
 }

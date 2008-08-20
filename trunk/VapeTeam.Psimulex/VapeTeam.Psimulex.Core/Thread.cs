@@ -33,7 +33,7 @@ namespace VapeTeam.Psimulex.Core
     /// <summary>
     /// The representation of a thread that cannot be parallelized.
     /// </summary>
-    public class Thread : ISystemItem
+    public class Thread : ISystemItem, ICommandContext
     {
         /// <summary>
         /// The program that the thread is running.
@@ -43,17 +43,60 @@ namespace VapeTeam.Psimulex.Core
         /// <summary>
         /// The pointer to the current instruction that the thread is running.
         /// </summary>
-        public int IP { get; set; }
+        public int PC { get; set; }
 
         /// <summary>
         /// The current state of the thread.
         /// </summary>
         public ThreadStates State { get; set; }
 
+        /// <summary>
+        /// The process that owns the thread.
+        /// </summary>
+        public Process HostProcess { get; set; }
+
+        public Thread()
+        {
+            CallStack = new CallStack();
+            RunStack = new RunStack();
+        }
+
         #region ISystemItem Members
 
         public string Name { get; set; }
         public int Id { get; set; }
+
+        #endregion
+
+        #region ICommandContext Members
+
+        public CallStack CallStack
+        {
+            get;
+            set;
+        }
+
+        public RunStack RunStack
+        {
+            get;
+            set;
+        }
+
+        public IFunctionLookup FunctionLookup
+        {
+            get
+            {
+                return ((IFunctionLookup)HostProcess.System);
+            }
+        }
+
+        public ISystemContext System
+        {
+            get
+            {
+                return HostProcess.System;
+            }
+        }
 
         #endregion
     }

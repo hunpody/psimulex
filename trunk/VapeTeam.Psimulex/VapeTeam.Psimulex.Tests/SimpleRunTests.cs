@@ -79,7 +79,7 @@ namespace VapeTeam.Psimulex.Tests
 
             var process = machine.System.Load(program);
 
-            machine.System.Run(program);
+            machine.System.Run(process);
 
             Assert.AreEqual("Hello world!", process.StandardOutput);
             Assert.AreEqual("Hello world!", machine.ScreenContent);

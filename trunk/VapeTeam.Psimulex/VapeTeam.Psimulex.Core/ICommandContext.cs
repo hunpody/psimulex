@@ -10,5 +10,6 @@ namespace VapeTeam.Psimulex.Core
         CallStack CallStack { get; }
         RunStack RunStack { get; }
         IFunctionLookup FunctionLookup { get; }
+        ISystemContext System { get; }
     }
 }

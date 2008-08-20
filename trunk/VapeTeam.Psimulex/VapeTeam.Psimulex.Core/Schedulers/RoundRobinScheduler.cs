@@ -11,7 +11,9 @@ namespace VapeTeam.Psimulex.Core.Schedulers
 
         public void Schedule(ProcessorList processors, ThreadList threads)
         {
-            throw new NotImplementedException();
+            // Just for testing, not serious. :)
+
+            processors[0].RunningTask = threads[0];
         }
 
         public int SwitchTime

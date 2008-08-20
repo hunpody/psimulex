@@ -46,11 +46,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\AssertionHelpers.cs" />
     <Compile Include="MachineTest.cs" />
     <Compile Include="ProcessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BasicCoreTest.cs" />
     <Compile Include="SimpleRunTests.cs" />
+    <Compile Include="TransactionalStackTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />

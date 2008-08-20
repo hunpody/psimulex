@@ -62,6 +62,14 @@ namespace VapeTeam.Psimulex.Core
             operatingSystem.Setup(this);
         }
 
+        public void Step()
+        {
+            foreach (var processor in Processors)
+            {
+                processor.Cycle();
+            }
+        }
+
         public void Run()
         {
         }
