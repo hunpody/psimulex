@@ -21,5 +21,10 @@ namespace VapeTeam.Psimulex.Core.Libraries
             Delayer.Delay(5);
             System.CallingProcess.AddToStandardOutput(message);
         }
+
+        public void Concat(string a, string b)
+        {
+            //System.
+        }
     }
 }

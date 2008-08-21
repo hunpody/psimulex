@@ -4,17 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VapeTeam.Psimulex.Core.Commands;
-using VapeTeam.Psimulex.Core;
 
 namespace VapeTeam.Psimulex.Tests
 {
     /// <summary>
-    /// Summary description for SimpleRunTests
+    /// Summary description for BaseTypeTests
     /// </summary>
     [TestClass]
-    public class SimpleRunTests
+    public class BaseTypeTests
     {
-        public SimpleRunTests()
+        public BaseTypeTests()
         {
             //
             // TODO: Add constructor logic here
@@ -62,41 +61,16 @@ namespace VapeTeam.Psimulex.Tests
         #endregion
 
         [TestMethod]
-        public void EmptyRun()
+        public void TestStringOperations1()
         {
-            //var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(1, 16);
-            //var program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Program;
-
-            //machine.System.Run(program);
-
-            Helpers.SystemHelper.CreateMachineAndRunProgram(VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Program);
-        }
-
-        [TestMethod]
-        public void HelloWorld1()
-        {
-            var process =
-                Helpers.SystemHelper.CreateMachineAndRunProgram(VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
-                new Push("Hello world!"),
-                new Call("print")));
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push("Hello "),
+                    new Push("world!"),
+                    new Call("concat"),
+                    new Call("print")));
 
             Assert.AreEqual("Hello world!", process.StandardOutput);
-            Assert.AreEqual("Hello world!", process.Machine.ScreenContent);
         }
-
-        [TestMethod]
-        public void HelloWorld2()
-        {
-            var process =
-                Helpers.SystemHelper.CreateMachineAndRunProgram(VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
-                new Push("Hello "),
-                new Call("print"),
-                new Push("world!"),
-                new Call("print")));
-
-            Assert.AreEqual("Hello world!", process.StandardOutput);
-            Assert.AreEqual("Hello world!", process.Machine.ScreenContent);
-        }
-
     }
 }

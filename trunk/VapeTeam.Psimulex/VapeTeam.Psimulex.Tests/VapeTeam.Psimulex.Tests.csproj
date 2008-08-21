@@ -46,7 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseTypeTests.cs" />
     <Compile Include="Helpers\AssertionHelpers.cs" />
+    <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="MachineTest.cs" />
     <Compile Include="ProcessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
