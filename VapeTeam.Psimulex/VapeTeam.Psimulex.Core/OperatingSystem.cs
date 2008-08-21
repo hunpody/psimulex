@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core.Libraries;
 using VapeTeam.Psimulex.Core.Types;
+using System.Reflection;
 
 namespace VapeTeam.Psimulex.Core
 {
@@ -52,15 +53,31 @@ namespace VapeTeam.Psimulex.Core
         /// </summary>
         public Process CallingProcess { get; set; }
 
+        /// <summary>
+        /// Performs a system call. It reads all the parameters from the Run Stack and passes them 
+        /// to the requested library function before invoking it via reflection.
+        /// </summary>
+        /// <param name="function"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public BaseType SystemCall(Function function, IEnumerable<BaseType> parameters)
         {
             var systemFunction = systemFunctions.GetFunction(function);
 
-            systemFunction.MethodInfo.Invoke(systemFunction.HostObject, new object[] { "Hello world!" });
+            ParameterInfo[] parameterInfoCollection = systemFunction.MethodInfo.GetParameters();
+
+            systemFunction.MethodInfo.Invoke(systemFunction.HostObject, 
+                ValueFactory.TransformBaseTypeArrayToDotnetType(parameters, 
+                    parameterInfoCollection.Select(par => par.ParameterType).ToArray()));
 
             return null;
         }
 
+        /// <summary>
+        /// Initializes the main thread of a given process.
+        /// </summary>
+        /// <param name="process"></param>
+        /// <returns></returns>
         protected virtual Thread CreateMainThread(Process process)
         {
             var thread = new Thread { 
@@ -72,6 +89,11 @@ namespace VapeTeam.Psimulex.Core
             return thread;
         }
 
+        /// <summary>
+        /// Loads the program which means it creates a process for it and registers its main thread as "Stopped" or "Initialized". (Undetermined yet)
+        /// </summary>
+        /// <param name="program"></param>
+        /// <returns></returns>
         public Process Load(Program program)
         {
             var process = new Process { Id = NextProcessId, Program = program, Machine = machine, System = this };
@@ -162,15 +184,23 @@ namespace VapeTeam.Psimulex.Core
         private void Explore(ILibrary library)
         {
             library = new StandardLibrary(this);
-            systemFunctions.Add(new SystemFunction
-                {
-                    Name = "print",
-                    HostObject = library,
-                    MethodInfo = library.GetType().GetMethod("print", 
-                        System.Reflection.BindingFlags.IgnoreCase | 
+
+            // The BindingFlags parameter must be extended
+            MethodInfo[] methodsOfLibrary = library.GetType().GetMethods(System.Reflection.BindingFlags.IgnoreCase |
                         System.Reflection.BindingFlags.Instance |
-                        System.Reflection.BindingFlags.Public),
+                        System.Reflection.BindingFlags.Public);
+
+            foreach (var method in methodsOfLibrary)
+            {
+                systemFunctions.Add(new SystemFunction
+                {
+                    Name = method.Name.ToLower(),
+                    HostObject = library,
+                    MethodInfo = method,
+                    HasReturnValue = method.ReturnType != typeof(void),
+                    ParametersCount = method.GetParameters().Length
                 });
+            }
         }
 
 

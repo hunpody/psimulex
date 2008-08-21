@@ -18,6 +18,11 @@ namespace VapeTeam.Psimulex.Core.Commands
             // IFunctionLookup
             var function = context.FunctionLookup.GetFunctionByName(functionName);
 
+            if (function == null)
+            {
+                throw new PsimulexCoreException("Call to an undefined function: " + functionName);
+            }
+
             if (function.IsUserDefined)
             {
                 // Just jump.

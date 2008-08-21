@@ -66,17 +66,23 @@ namespace VapeTeam.Psimulex.Core
         /// </summary>
         public void Cycle()
         {
-            if (RunningTask != null && RunningTask.State == ThreadStates.Running)
+            if (RunningTask != null)
             {
-                RunningTask.System.CallingProcess = RunningTask.HostProcess;
-                RunningTask.Program[RunningTask.PC].Do(RunningTask);
-                ++RunningTask.PC;
                 if (RunningTask.PC >= RunningTask.Program.CommandList.Count)
                 {
                     RunningTask.State = ThreadStates.Finished;
                 }
+
+                if (RunningTask.State == ThreadStates.Running)
+                {
+                    RunningTask.System.CallingProcess = RunningTask.HostProcess;
+                    RunningTask.Program[RunningTask.PC].Do(RunningTask);
+                    ++RunningTask.PC;
+                }
             }
             ++cycles;
+
+            // Checking if we should request an interrupt.
             processorInterruptList.Where(i => (cycles - i.LastInterruptTime) >= i.Frequence).ToList().ForEach(
                 irq => irq.Interrupt(cycles));
         }
