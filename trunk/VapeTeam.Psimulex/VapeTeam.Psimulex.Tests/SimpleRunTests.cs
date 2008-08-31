@@ -98,5 +98,53 @@ namespace VapeTeam.Psimulex.Tests
             Assert.AreEqual("Hello world!", process.Machine.ScreenContent);
         }
 
+        [TestMethod]
+        public void HelloWorld3()
+        {
+            var process =
+                Helpers.SystemHelper.CreateMachineAndRunProgram(VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push("Hello world!"),
+                new Initialize("s"),
+                new Push("s", ValueAccessModes.LocalVariable),
+                new Call("print")));
+
+            Assert.AreEqual("Hello world!", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void HelloWorld4()
+        {
+            var process =
+                Helpers.SystemHelper.CreateMachineAndRunProgram(VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push("Hello "),
+                new Initialize("s"),
+                new Push("world!"),
+                new Initialize("s2"),
+                new Push("s", ValueAccessModes.LocalVariable),
+                new Call("print"),
+                new Push("s2", ValueAccessModes.LocalVariable),
+                new Call("print")));
+
+            Assert.AreEqual("Hello world!", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void HelloWorld5()
+        {
+            var process =
+                Helpers.SystemHelper.CreateMachineAndRunProgram(VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push("Hello "),
+                new Initialize("s"),
+                new Push("world!"),
+                new Initialize("s2"),
+                new Push("s", ValueAccessModes.LocalVariable),
+                new Push("s2", ValueAccessModes.LocalVariable),
+                new Call("concat"),
+                new Push("Hello world!"),
+                new Compare(Compare.ComparisonModes.Equal),
+                new Call("print")));
+
+            Assert.AreEqual("True", process.StandardOutput);
+        }
     }
 }

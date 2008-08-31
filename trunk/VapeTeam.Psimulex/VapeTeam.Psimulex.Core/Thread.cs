@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VapeTeam.Psimulex.Core.Types;
 
 namespace VapeTeam.Psimulex.Core
 {
@@ -97,6 +98,25 @@ namespace VapeTeam.Psimulex.Core
                 return HostProcess.System;
             }
         }
+
+        private Dictionary<string, int> _variableMap = new Dictionary<string, int>();
+
+        public BaseType GetVariable(string name)
+        {
+            if (_variableMap.ContainsKey(name))
+            {
+                return RunStack[_variableMap[name]];
+            }
+            throw new PsimulexCoreException(string.Format("Undefined variable: {0}.",name));
+        }
+
+        public void AddVariable(string name, BaseType value)
+        {
+            RunStack.Push(value);
+
+            _variableMap.Add(name, RunStack.Count - 1);
+        }
+
 
         #endregion
     }

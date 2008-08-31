@@ -1,0 +1,1 @@
+java org.antlr.Tool "Grammar\Psimulex.g" -fo Generated

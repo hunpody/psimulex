@@ -22,9 +22,10 @@ namespace VapeTeam.Psimulex.Core.Libraries
             System.CallingProcess.AddToStandardOutput(message);
         }
 
-        public void Concat(string a, string b)
+        public string Concat(string a, string b)
         {
-            //System.
+            Delayer.Delay(a.Length + b.Length);
+            return a + b;
         }
     }
 }

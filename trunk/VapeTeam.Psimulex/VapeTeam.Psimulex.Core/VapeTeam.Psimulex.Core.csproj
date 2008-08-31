@@ -35,14 +35,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CallStack.cs" />
@@ -98,10 +90,13 @@
     <Compile Include="TransactionalStack.cs" />
     <Compile Include="TransactionStates.cs" />
     <Compile Include="Types\BaseType.cs" />
+    <Compile Include="Types\Boolean.cs" />
     <Compile Include="Types\FunctionPointer.cs" />
     <Compile Include="Types\Integer.cs" />
     <Compile Include="Types\String.cs" />
     <Compile Include="Types\Thread.cs" />
+    <Compile Include="Types\TypeEnum.cs" />
+    <Compile Include="Types\TypeHierarchy.cs" />
     <Compile Include="Types\ValueFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

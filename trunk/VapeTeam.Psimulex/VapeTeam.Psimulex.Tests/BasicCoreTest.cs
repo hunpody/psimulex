@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VapeTeam.Psimulex.Core;
 using VapeTeam.Psimulex.Core.Factories;
+using VapeTeam.Psimulex.Core.Commands;
 
 namespace VapeTeam.Psimulex.Tests
 {
@@ -62,7 +63,7 @@ namespace VapeTeam.Psimulex.Tests
         #endregion
 
         [TestMethod]
-        public void TestMachineSetup()
+        public void MachineSetup()
         {
             MachineBuilder machineBuilder = new MachineBuilder();
             Machine machine = machineBuilder.CreateMachine(1, 1024);

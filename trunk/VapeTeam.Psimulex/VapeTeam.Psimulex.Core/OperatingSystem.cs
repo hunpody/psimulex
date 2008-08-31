@@ -66,11 +66,18 @@ namespace VapeTeam.Psimulex.Core
 
             ParameterInfo[] parameterInfoCollection = systemFunction.MethodInfo.GetParameters();
 
-            systemFunction.MethodInfo.Invoke(systemFunction.HostObject, 
+            object returnValue = systemFunction.MethodInfo.Invoke(systemFunction.HostObject, 
                 ValueFactory.TransformBaseTypeArrayToDotnetType(parameters, 
                     parameterInfoCollection.Select(par => par.ParameterType).ToArray()));
 
-            return null;
+            if (systemFunction.HasReturnValue)
+            {
+                return ValueFactory.Create(returnValue);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>

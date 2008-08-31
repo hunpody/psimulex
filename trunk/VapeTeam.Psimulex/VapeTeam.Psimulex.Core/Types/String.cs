@@ -23,5 +23,29 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             return value;
         }
+
+        public override object ToObject()
+        {
+            return value;
+        }
+
+        /// <summary>
+        /// ToUpper remains in the Psimulex Type System.
+        /// </summary>
+        /// <returns></returns>
+        public String ToUpper()
+        {
+            return new String(value.ToUpper());
+        }
+
+        /// <summary>
+        /// Contains gets out of the type system but still discoverable by the engine.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool Contains(string s)
+        {
+            return value.Contains(s);
+        }
     }
 }
