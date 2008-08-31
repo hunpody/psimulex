@@ -9,7 +9,7 @@ namespace VapeTeam.Psimulex.Tests.Helpers
     internal static class AssertionHelpers
     {
         /// <summary>
-        /// Asserts if a given action throws a specified type of exception.
+        /// Asserts that a given action throws a specified type of exception.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="f"></param>

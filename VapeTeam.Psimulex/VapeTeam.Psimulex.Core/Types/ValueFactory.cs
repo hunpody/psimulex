@@ -9,9 +9,21 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         public static BaseType Create(object value)
         {
-            if (value.GetType() == typeof(string))
+            if (value.GetType() == typeof(BaseType) || value.GetType().IsSubclassOf(typeof(BaseType)))
+            {
+                return (BaseType) value;
+            }
+            else if (value.GetType() == typeof(int))
+            {
+                return new Integer((int)value);
+            }
+            else if (value.GetType() == typeof(string))
             {
                 return new String((string)value);
+            }
+            else if (value.GetType() == typeof(bool))
+            {
+                return new Boolean((bool)value);
             }
             else
             {
@@ -54,5 +66,58 @@ namespace VapeTeam.Psimulex.Core.Types
 
             return objArray;
         }
+
+        /// <summary>
+        /// Creates a BaseType value from the given typeEnum.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static BaseType CreateValue(TypeEnum type)
+        {
+            switch (type)
+            {
+                case TypeEnum.Void:
+                    return null;
+                    break;
+                case TypeEnum.Integer:
+                    return new Integer();
+                    break;
+                case TypeEnum.Char:
+                    //return new Char();
+                    return null;
+                    break;
+                case TypeEnum.String:
+                    return new String();
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+        }
+
+
+        /// <summary>
+        /// Creates a BaseType value from the type name string.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static BaseType CreateValue(string type)
+        {
+            object parsedType = Enum.Parse(typeof(TypeEnum), type);
+            if (parsedType != null)
+            {
+                return CreateValue((TypeEnum)parsedType);
+            }
+            else
+            {
+                // throw ex?
+                return null;
+            }
+        }
+
+        //public static void ConvertToHigher(BaseType a, BaseType b, out BaseType convertedA, out BaseType convertedB)
+        //{          
+
+        //}
     }
 }

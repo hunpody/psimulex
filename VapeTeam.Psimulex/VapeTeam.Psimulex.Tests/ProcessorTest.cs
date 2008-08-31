@@ -60,9 +60,17 @@ namespace VapeTeam.Psimulex.Tests
         #endregion
 
         [TestMethod]
-        public void TestInterrupt()
+        public void ProcessorInterrupt()
         {
-            Assert.Inconclusive("TODO: Implement test.");
+            VapeTeam.Psimulex.Core.Processor processor = new VapeTeam.Psimulex.Core.Processor();
+            int numberOfTimesInterrupted = 0;
+            processor.SetupPeriodicalTimeInterrupt(100,
+                new EventHandler<VapeTeam.Psimulex.Core.InterruptRequestEventArgs>((o, e) => numberOfTimesInterrupted++));
+
+            for (int i=0; i<=1000; ++i)
+                processor.Cycle();
+
+            Assert.AreEqual(10, numberOfTimesInterrupted);
         }
     }
 }

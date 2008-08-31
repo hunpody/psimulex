@@ -25,19 +25,25 @@ namespace VapeTeam.Psimulex.Core.Commands
 
             if (function.IsUserDefined)
             {
-                // Just jump.
+                // Just jump to its entry point.
             }
             else
             {
                 // Pack each parameter, and Invoke.
 
+                Stack<BaseType> poppedValues = new Stack<BaseType>();
                 var parameters = new List<BaseType>(function.ParametersCount);
                 for (int i=0; i<function.ParametersCount; ++i)
                 {
-                    parameters.Add(context.RunStack.Pop());
+                    poppedValues.Push(context.RunStack.Pop());
                 }
 
+                parameters.AddRange(poppedValues.AsEnumerable());
+
+                // Make the call
                 var returnValue = context.System.SystemCall(function, parameters);
+
+                // Push the returned value
                 if (function.HasReturnValue)
                 {
                     context.RunStack.Push(returnValue);

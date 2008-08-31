@@ -50,6 +50,37 @@ namespace VapeTeam.Psimulex.Core
             return item;
         }
 
+        public virtual IEnumerable<T> Pop(int count)
+        {
+            if (pointer >= stack.Count || pointer + 1 < count)
+                throw new StackOverflowException();
+
+            List<T> items = new List<T>(count);
+
+            for (int i = 0; i < count; ++i)
+                items.Add(Pop());
+
+            return items;
+        }
+
+        /// <summary>
+        /// Returns the nth element from the bottom of the stack.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public virtual T this[int index]
+        {
+            get
+            {
+                if (!(0 <= index && index <= Count - 1))
+                {
+                    throw new StackOverflowException();
+                }
+
+                return stack[index];
+            }
+        }
+
         public Stack<T> Reverse()
         {
             return new Stack<T>(stack.ToArray().Reverse());
@@ -89,6 +120,30 @@ namespace VapeTeam.Psimulex.Core
         {
             stack.Clear();
             pointer = -1;
+        }
+
+        public override string ToString()
+        {
+            if (stack.Count == 0)
+            {
+                return "<Empty stack>";
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+                for (int i = stack.Count - 1; i >= 0; --i)
+                {
+                    if (i != stack.Count - 1)
+                        sb.AppendLine(",");
+                    sb.Append(string.Format("[{0:000}]: {1}", stack.Count - 1 - i, stack[i]));
+                }
+                return sb.ToString();
+            }
+        }
+
+        public IEnumerable<T> AsEnumerable()
+        {
+            return Reverse().stack;
         }
     }
 }

@@ -14,23 +14,46 @@ namespace VapeTeam.Psimulex.Core.Commands
         public ValueAccessModes AccessMode { get; private set; }
 
         private BaseType value;
+        private string name;
 
         #region ICommand Members
 
         public override void Do(ICommandContext context)
         {
-            context.RunStack.Push(value);
+            switch (AccessMode)
+            {
+                case ValueAccessModes.Constant:
+                    context.RunStack.Push(value);
+                    break;
+                case ValueAccessModes.InMemory:
+                    break;
+                case ValueAccessModes.Register:
+                    break;
+                case ValueAccessModes.LocalVariable:
+                    context.RunStack.Push(context.GetVariable(name));
+                    break;
+                default:
+                    break;
+            }
+
         }
 
-        public Push(BaseType value, ValueAccessModes accessMode)
+        //public Push(BaseType value, ValueAccessModes accessMode)
+        //{
+        //    AccessMode = accessMode;
+        //    this.value = value;
+        //}
+
+        public Push(string name, ValueAccessModes accessMode)
         {
             AccessMode = accessMode;
-            this.value = value;
+            this.name = name;
         }
 
         public Push(object value)
-            : this(ValueFactory.Create(value), ValueAccessModes.Constant)
         {
+            AccessMode = ValueAccessModes.Constant;
+            this.value = ValueFactory.Create(value);
         }
 
         #endregion

@@ -62,7 +62,7 @@ namespace VapeTeam.Psimulex.Tests
         #endregion
 
         [TestMethod]
-        public void TestTransactionalStack1()
+        public void TransactionalStack1()
         {
             var stack = new TransactionalStack<int>();
             stack.Push(1);
@@ -118,7 +118,7 @@ namespace VapeTeam.Psimulex.Tests
         }
 
         [TestMethod]
-        public void TestTransactionalStack2()
+        public void TransactionalStack2()
         {
             var stack = new TransactionalStack<int>();
             for (int i = 0; i < 1000; ++i)
@@ -156,7 +156,7 @@ namespace VapeTeam.Psimulex.Tests
         }
 
         [TestMethod]
-        public void TestTransactionalStack3()
+        public void TransactionalStack3()
         {
             var stack = new TransactionalStack<int>();
 
@@ -191,5 +191,21 @@ namespace VapeTeam.Psimulex.Tests
             transactions.ForEach(t => AssertionHelpers.AssertThrows<Psimulex.Core.Exceptions.InvalidTransactionException>(() => t.Commit()));
         }
 
+        [TestMethod]
+        public void SpecialStackOperations1()
+        {
+            Psimulex.Core.Stack<int> stack = new VapeTeam.Psimulex.Core.Stack<int>();
+
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+
+            var poppedList = stack.Pop(3).ToArray();
+
+            Assert.AreEqual(3, poppedList[0]);
+            Assert.AreEqual(2, poppedList[1]);
+            Assert.AreEqual(1, poppedList[2]);
+            Assert.IsTrue(stack.IsEmpty);
+        }
     }
 }

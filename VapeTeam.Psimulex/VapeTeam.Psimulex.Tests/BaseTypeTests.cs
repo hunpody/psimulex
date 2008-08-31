@@ -61,7 +61,7 @@ namespace VapeTeam.Psimulex.Tests
         #endregion
 
         [TestMethod]
-        public void TestStringOperations1()
+        public void StringOperations1()
         {
             var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
@@ -71,6 +71,141 @@ namespace VapeTeam.Psimulex.Tests
                     new Call("print")));
 
             Assert.AreEqual("Hello world!", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void StringOperations2()
+        {
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push("Hello world"),
+                    new CallMethod("ToUpper"),
+                    new Call("print")));
+
+            Assert.AreEqual("HELLO WORLD", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void StringOperations3()
+        {
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push("w"),
+                    new Push("Hello world"),
+                    new CallMethod("Contains"),
+                    new Call("print")));
+
+            Assert.AreEqual("True", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void StringOperations4()
+        {
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push("w"),
+                    new Push("Hello world"),
+                    new CallMethod("Contains"),
+                    new Push(new Psimulex.Core.Types.Boolean(true)),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print")));
+
+            Assert.AreEqual("True", process.StandardOutput);
+
+            var process2 = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push("s"),
+                    new Push("Hello world"),
+                    new CallMethod("Contains"),
+                    new Push(new Psimulex.Core.Types.Boolean(true)),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print")));
+
+            Assert.AreEqual("False", process2.StandardOutput);
+
+            var process3 = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push("s"),
+                    new Push("Hello world"),
+                    new CallMethod("Contains"),
+                    new Push(false),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print")));
+
+            Assert.AreEqual("True", process3.StandardOutput);
+
+            var process4 = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push("s"),
+                    new Push("Hello world"),
+                    new CallMethod("Contains"),
+                    new Call("print")));
+
+            Assert.AreEqual("False", process4.StandardOutput);
+        }
+
+        [TestMethod]
+        public void IntegerOperations1()
+        {
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push(5),
+                    new Push(6),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print"),
+                    new Push(118),
+                    new Push(118),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print")));
+
+            Assert.AreEqual("FalseTrue", process.StandardOutput);
+
+            var process2 = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push(-9),
+                    new Push(9),
+                    new Compare(Compare.ComparisonModes.LessThan),
+                    new Call("print"),
+                    new Push(-9),
+                    new Push(9),
+                    new Compare(Compare.ComparisonModes.LessThanOrEqual),
+                    new Call("print"),
+                    new Push(-9),
+                    new Push(9),
+                    new Compare(Compare.ComparisonModes.NotEqual),
+                    new Call("print"),
+                    new Push(11),
+                    new Push(11),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print"),
+                    new Push(11),
+                    new Push(11),
+                    new Compare(Compare.ComparisonModes.LessThanOrEqual),
+                    new Call("print"),
+                    new Push(11),
+                    new Push(11),
+                    new Compare(Compare.ComparisonModes.GreaterThanOrEqual),
+                    new Call("print"),
+                    new Push(11),
+                    new Push(11),
+                    new Compare(Compare.ComparisonModes.NotEqual),
+                    new Push(false),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print"),
+                    new Push(50),
+                    new Push(9),
+                    new Compare(Compare.ComparisonModes.GreaterThan),
+                    new Call("print"),
+                    new Push(50),
+                    new Push(9),
+                    new Compare(Compare.ComparisonModes.GreaterThanOrEqual),
+                    new Call("print"),
+                    new Push(50),
+                    new Push(9),
+                    new Compare(Compare.ComparisonModes.NotEqual),
+                    new Call("print")));
+
+            Assert.AreEqual("TrueTrueTrueTrueTrueTrueTrueTrueTrueTrue", process2.StandardOutput);
         }
     }
 }
