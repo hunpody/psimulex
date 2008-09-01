@@ -142,7 +142,7 @@ formalParameterDeclsRest
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 parExpression
-    :   '(' expression ')'
+    :   LP! expression RP!
     ;
     
 expression
@@ -190,7 +190,7 @@ relationalOp
     ;	// Loptam. Nem bántom. Nem teljesen értem, miért van így, csak sejtem.
 
 additiveExpression
-    :   multiplicativeExpression ( ('+' | '-') multiplicativeExpression )*
+    :   multiplicativeExpression ( ('+'^ | '-'^) multiplicativeExpression )*
     ;
 
 multiplicativeExpression
@@ -373,6 +373,19 @@ options {k=3;} //Emiatt kellene (ID ID to ID) ...
 ///////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TOKENS //
+
+/* 
+KeyWords, 
+Operators, 
+Marks 
+*/
+
+LP	:	'('	;    
+RP	:	')'	;
+
+
 
 // Még nem használtam fel sehol, hátha kell valahova, betükészlet korlátozására, egyebekre ...
 fragment

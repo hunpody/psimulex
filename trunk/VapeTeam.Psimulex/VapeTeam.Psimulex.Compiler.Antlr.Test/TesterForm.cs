@@ -28,7 +28,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                 sb.AppendLine(message);
             }
 
-            resultTextBox.Text = sb.ToString();
+            //resultTextBox.Text = sb.ToString();
+            //resultTextBox.Text = compiler.treeAdaptor.ToString();
+            resultTextBox.Text = compiler.output;
+            txtErrors.Text = sb.ToString();
         }
 
         private void closeButton_Click(object sender, EventArgs e)
