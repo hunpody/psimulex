@@ -88,19 +88,19 @@
             // closeButton
             // 
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(901, 567);
+            this.closeButton.Location = new System.Drawing.Point(814, 533);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.Size = new System.Drawing.Size(162, 57);
             this.closeButton.TabIndex = 3;
-            this.closeButton.Text = "Close";
+            this.closeButton.Text = "Close And Save";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // compileButton
             // 
-            this.compileButton.Location = new System.Drawing.Point(901, 278);
+            this.compileButton.Location = new System.Drawing.Point(782, 278);
             this.compileButton.Name = "compileButton";
-            this.compileButton.Size = new System.Drawing.Size(75, 23);
+            this.compileButton.Size = new System.Drawing.Size(194, 39);
             this.compileButton.TabIndex = 4;
             this.compileButton.Text = "Compile";
             this.compileButton.UseVisualStyleBackColor = true;

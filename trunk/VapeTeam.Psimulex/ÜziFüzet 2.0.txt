@@ -1,1 +1,19 @@
 Csak, hgoy ez is lehessen.
+
+2008.09.02.
+
+Hiba :
+"i++" -> i ismer fel (ez nemjó)
+"++i++"	-> (++ (i ++)) (ez jó)
+
+Változók, Identifier használatánál nem mûködik a móka. :
+a+b+c -> a lesz
+
+
+
+A tesztkörnyezetbeni változtatások : 
+- Ha a save and closera kattolsz, akkor ment bezárás elõtt és
+következõ megnyitáskór a mentett hozza elõ + archivál mindent,
+ha netán egy jó teszteset kéne újra, még jólehet.
+- A szintax highlightot bekapcsoltam, lényegében ezzel :)
+- F5,F6,F7,F8 -ra fordít ( Simulexbõl néztem ki, hgoy csináltad, ezzel si újat tanultam :) )
