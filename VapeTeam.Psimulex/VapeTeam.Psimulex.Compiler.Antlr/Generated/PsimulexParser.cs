@@ -1,4 +1,4 @@
-// $ANTLR 3.1 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2008-09-02 15:41:52
+// $ANTLR 3.1 Grammar\\Psimulex.g 2008-09-02 23:24:37
 
 using System;
 using Antlr.Runtime;
@@ -206,7 +206,7 @@ public partial class PsimulexParser : Parser
         public PsimulexParser(ITokenStream input, RecognizerSharedState state)
     		: base(input, state) {
     		InitializeCyclicDFAs();
-            this.state.ruleMemo = new Hashtable[157+1];
+            this.state.ruleMemo = new Hashtable[156+1];
              
              
         }
@@ -226,7 +226,7 @@ public partial class PsimulexParser : Parser
     }
 
     override public string GrammarFileName {
-		get { return "C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g"; }
+		get { return "Grammar\\Psimulex.g"; }
     }
 
 
@@ -241,7 +241,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "compilationUnit"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:11:1: compilationUnit : ( simpleProgram | multiFunctionalProgram );
+    // Grammar\\Psimulex.g:11:1: compilationUnit : ( simpleProgram | multiFunctionalProgram );
     public PsimulexParser.compilationUnit_return compilationUnit() // throws RecognitionException [1]
     {   
         PsimulexParser.compilationUnit_return retval = new PsimulexParser.compilationUnit_return();
@@ -261,13 +261,13 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:12:5: ( simpleProgram | multiFunctionalProgram )
+            // Grammar\\Psimulex.g:12:5: ( simpleProgram | multiFunctionalProgram )
             int alt1 = 2;
             alt1 = dfa1.Predict(input);
             switch (alt1) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:12:7: simpleProgram
+                    // Grammar\\Psimulex.g:12:7: simpleProgram
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -280,7 +280,7 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:13:7: multiFunctionalProgram
+                    // Grammar\\Psimulex.g:13:7: multiFunctionalProgram
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -330,7 +330,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "globalVariableDeclaration"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:16:1: globalVariableDeclaration : fieldDeclaration ;
+    // Grammar\\Psimulex.g:16:1: globalVariableDeclaration : fieldDeclaration ;
     public PsimulexParser.globalVariableDeclaration_return globalVariableDeclaration() // throws RecognitionException [1]
     {   
         PsimulexParser.globalVariableDeclaration_return retval = new PsimulexParser.globalVariableDeclaration_return();
@@ -348,8 +348,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:17:2: ( fieldDeclaration )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:17:4: fieldDeclaration
+            // Grammar\\Psimulex.g:17:2: ( fieldDeclaration )
+            // Grammar\\Psimulex.g:17:4: fieldDeclaration
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -397,7 +397,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "simpleProgram"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:20:1: simpleProgram : ( blockStatement )* ;
+    // Grammar\\Psimulex.g:20:1: simpleProgram : ( blockStatement )* ;
     public PsimulexParser.simpleProgram_return simpleProgram() // throws RecognitionException [1]
     {   
         PsimulexParser.simpleProgram_return retval = new PsimulexParser.simpleProgram_return();
@@ -415,12 +415,12 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:21:2: ( ( blockStatement )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:21:4: ( blockStatement )*
+            // Grammar\\Psimulex.g:21:2: ( ( blockStatement )* )
+            // Grammar\\Psimulex.g:21:4: ( blockStatement )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:21:4: ( blockStatement )*
+            	// Grammar\\Psimulex.g:21:4: ( blockStatement )*
             	do 
             	{
             	    int alt2 = 2;
@@ -435,7 +435,7 @@ public partial class PsimulexParser : Parser
             	    switch (alt2) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: blockStatement
+            			    // Grammar\\Psimulex.g:0:0: blockStatement
             			    {
             			    	PushFollow(FOLLOW_blockStatement_in_simpleProgram97);
             			    	blockStatement4 = blockStatement();
@@ -493,7 +493,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "multiFunctionalProgram"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:24:1: multiFunctionalProgram : ( importDeclaration )* ( typeDeclaration )* ( globalVariableDeclaration )* ( functionDeclaration )* ;
+    // Grammar\\Psimulex.g:24:1: multiFunctionalProgram : ( importDeclaration )* ( typeDeclaration )* ( globalVariableDeclaration )* ( functionDeclaration )* ;
     public PsimulexParser.multiFunctionalProgram_return multiFunctionalProgram() // throws RecognitionException [1]
     {   
         PsimulexParser.multiFunctionalProgram_return retval = new PsimulexParser.multiFunctionalProgram_return();
@@ -517,12 +517,12 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:25:2: ( ( importDeclaration )* ( typeDeclaration )* ( globalVariableDeclaration )* ( functionDeclaration )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:25:4: ( importDeclaration )* ( typeDeclaration )* ( globalVariableDeclaration )* ( functionDeclaration )*
+            // Grammar\\Psimulex.g:25:2: ( ( importDeclaration )* ( typeDeclaration )* ( globalVariableDeclaration )* ( functionDeclaration )* )
+            // Grammar\\Psimulex.g:25:4: ( importDeclaration )* ( typeDeclaration )* ( globalVariableDeclaration )* ( functionDeclaration )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:25:4: ( importDeclaration )*
+            	// Grammar\\Psimulex.g:25:4: ( importDeclaration )*
             	do 
             	{
             	    int alt3 = 2;
@@ -537,7 +537,7 @@ public partial class PsimulexParser : Parser
             	    switch (alt3) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: importDeclaration
+            			    // Grammar\\Psimulex.g:0:0: importDeclaration
             			    {
             			    	PushFollow(FOLLOW_importDeclaration_in_multiFunctionalProgram109);
             			    	importDeclaration5 = importDeclaration();
@@ -556,7 +556,7 @@ public partial class PsimulexParser : Parser
             	loop3:
             		;	// Stops C# compiler whining that label 'loop3' has no statements
 
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:26:6: ( typeDeclaration )*
+            	// Grammar\\Psimulex.g:26:6: ( typeDeclaration )*
             	do 
             	{
             	    int alt4 = 2;
@@ -571,7 +571,7 @@ public partial class PsimulexParser : Parser
             	    switch (alt4) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: typeDeclaration
+            			    // Grammar\\Psimulex.g:0:0: typeDeclaration
             			    {
             			    	PushFollow(FOLLOW_typeDeclaration_in_multiFunctionalProgram117);
             			    	typeDeclaration6 = typeDeclaration();
@@ -590,7 +590,7 @@ public partial class PsimulexParser : Parser
             	loop4:
             		;	// Stops C# compiler whining that label 'loop4' has no statements
 
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:27:6: ( globalVariableDeclaration )*
+            	// Grammar\\Psimulex.g:27:6: ( globalVariableDeclaration )*
             	do 
             	{
             	    int alt5 = 2;
@@ -605,7 +605,7 @@ public partial class PsimulexParser : Parser
             	    switch (alt5) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: globalVariableDeclaration
+            			    // Grammar\\Psimulex.g:0:0: globalVariableDeclaration
             			    {
             			    	PushFollow(FOLLOW_globalVariableDeclaration_in_multiFunctionalProgram125);
             			    	globalVariableDeclaration7 = globalVariableDeclaration();
@@ -624,7 +624,7 @@ public partial class PsimulexParser : Parser
             	loop5:
             		;	// Stops C# compiler whining that label 'loop5' has no statements
 
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:28:3: ( functionDeclaration )*
+            	// Grammar\\Psimulex.g:28:3: ( functionDeclaration )*
             	do 
             	{
             	    int alt6 = 2;
@@ -639,7 +639,7 @@ public partial class PsimulexParser : Parser
             	    switch (alt6) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: functionDeclaration
+            			    // Grammar\\Psimulex.g:0:0: functionDeclaration
             			    {
             			    	PushFollow(FOLLOW_functionDeclaration_in_multiFunctionalProgram130);
             			    	functionDeclaration8 = functionDeclaration();
@@ -697,7 +697,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "importDeclaration"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:45:1: importDeclaration : IMPORT StringLiteral SC ;
+    // Grammar\\Psimulex.g:45:1: importDeclaration : IMPORT StringLiteral SC ;
     public PsimulexParser.importDeclaration_return importDeclaration() // throws RecognitionException [1]
     {   
         PsimulexParser.importDeclaration_return retval = new PsimulexParser.importDeclaration_return();
@@ -719,8 +719,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:46:5: ( IMPORT StringLiteral SC )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:46:9: IMPORT StringLiteral SC
+            // Grammar\\Psimulex.g:46:5: ( IMPORT StringLiteral SC )
+            // Grammar\\Psimulex.g:46:9: IMPORT StringLiteral SC
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -774,7 +774,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "typeDeclaration"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:49:1: typeDeclaration : ( structDeclaration | SC );
+    // Grammar\\Psimulex.g:49:1: typeDeclaration : ( structDeclaration | SC );
     public PsimulexParser.typeDeclaration_return typeDeclaration() // throws RecognitionException [1]
     {   
         PsimulexParser.typeDeclaration_return retval = new PsimulexParser.typeDeclaration_return();
@@ -794,7 +794,7 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:50:5: ( structDeclaration | SC )
+            // Grammar\\Psimulex.g:50:5: ( structDeclaration | SC )
             int alt7 = 2;
             int LA7_0 = input.LA(1);
 
@@ -817,7 +817,7 @@ public partial class PsimulexParser : Parser
             switch (alt7) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:50:9: structDeclaration
+                    // Grammar\\Psimulex.g:50:9: structDeclaration
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -830,7 +830,7 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:51:9: SC
+                    // Grammar\\Psimulex.g:51:9: SC
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -876,7 +876,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "structDeclaration"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:54:1: structDeclaration : STRUCT Identifier structBody ;
+    // Grammar\\Psimulex.g:54:1: structDeclaration : STRUCT Identifier structBody ;
     public PsimulexParser.structDeclaration_return structDeclaration() // throws RecognitionException [1]
     {   
         PsimulexParser.structDeclaration_return retval = new PsimulexParser.structDeclaration_return();
@@ -898,8 +898,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:55:5: ( STRUCT Identifier structBody )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:55:9: STRUCT Identifier structBody
+            // Grammar\\Psimulex.g:55:5: ( STRUCT Identifier structBody )
+            // Grammar\\Psimulex.g:55:9: STRUCT Identifier structBody
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -957,7 +957,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "structBody"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:59:1: structBody : LB ( structBodyDeclaration )* RB ;
+    // Grammar\\Psimulex.g:59:1: structBody : LB ( structBodyDeclaration )* RB ;
     public PsimulexParser.structBody_return structBody() // throws RecognitionException [1]
     {   
         PsimulexParser.structBody_return retval = new PsimulexParser.structBody_return();
@@ -979,13 +979,13 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:60:5: ( LB ( structBodyDeclaration )* RB )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:60:9: LB ( structBodyDeclaration )* RB
+            // Grammar\\Psimulex.g:60:5: ( LB ( structBodyDeclaration )* RB )
+            // Grammar\\Psimulex.g:60:9: LB ( structBodyDeclaration )* RB
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
             	LB17=(IToken)Match(input,LB,FOLLOW_LB_in_structBody247); if (state.failed) return retval;
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:60:13: ( structBodyDeclaration )*
+            	// Grammar\\Psimulex.g:60:13: ( structBodyDeclaration )*
             	do 
             	{
             	    int alt8 = 2;
@@ -1000,7 +1000,7 @@ public partial class PsimulexParser : Parser
             	    switch (alt8) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: structBodyDeclaration
+            			    // Grammar\\Psimulex.g:0:0: structBodyDeclaration
             			    {
             			    	PushFollow(FOLLOW_structBodyDeclaration_in_structBody250);
             			    	structBodyDeclaration18 = structBodyDeclaration();
@@ -1059,7 +1059,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "structBodyDeclaration"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:63:1: structBodyDeclaration : ( memberDeclaration )+ ;
+    // Grammar\\Psimulex.g:63:1: structBodyDeclaration : ( memberDeclaration )+ ;
     public PsimulexParser.structBodyDeclaration_return structBodyDeclaration() // throws RecognitionException [1]
     {   
         PsimulexParser.structBodyDeclaration_return retval = new PsimulexParser.structBodyDeclaration_return();
@@ -1077,12 +1077,12 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:64:5: ( ( memberDeclaration )+ )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:64:9: ( memberDeclaration )+
+            // Grammar\\Psimulex.g:64:5: ( ( memberDeclaration )+ )
+            // Grammar\\Psimulex.g:64:9: ( memberDeclaration )+
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:64:9: ( memberDeclaration )+
+            	// Grammar\\Psimulex.g:64:9: ( memberDeclaration )+
             	int cnt9 = 0;
             	do 
             	{
@@ -1105,7 +1105,7 @@ public partial class PsimulexParser : Parser
             	    switch (alt9) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: memberDeclaration
+            			    // Grammar\\Psimulex.g:0:0: memberDeclaration
             			    {
             			    	PushFollow(FOLLOW_memberDeclaration_in_structBodyDeclaration273);
             			    	memberDeclaration20 = memberDeclaration();
@@ -1168,7 +1168,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "memberDeclaration"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:67:1: memberDeclaration : type fieldDeclaration ;
+    // Grammar\\Psimulex.g:67:1: memberDeclaration : type fieldDeclaration ;
     public PsimulexParser.memberDeclaration_return memberDeclaration() // throws RecognitionException [1]
     {   
         PsimulexParser.memberDeclaration_return retval = new PsimulexParser.memberDeclaration_return();
@@ -1188,8 +1188,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:68:5: ( type fieldDeclaration )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:68:9: type fieldDeclaration
+            // Grammar\\Psimulex.g:68:5: ( type fieldDeclaration )
+            // Grammar\\Psimulex.g:68:9: type fieldDeclaration
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -1242,7 +1242,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "fieldDeclaration"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:71:1: fieldDeclaration : variableDeclaratorId ( A literal )? SC ;
+    // Grammar\\Psimulex.g:71:1: fieldDeclaration : variableDeclaratorId ( A literal )? SC ;
     public PsimulexParser.fieldDeclaration_return fieldDeclaration() // throws RecognitionException [1]
     {   
         PsimulexParser.fieldDeclaration_return retval = new PsimulexParser.fieldDeclaration_return();
@@ -1266,8 +1266,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:72:5: ( variableDeclaratorId ( A literal )? SC )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:72:9: variableDeclaratorId ( A literal )? SC
+            // Grammar\\Psimulex.g:72:5: ( variableDeclaratorId ( A literal )? SC )
+            // Grammar\\Psimulex.g:72:9: variableDeclaratorId ( A literal )? SC
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -1276,7 +1276,7 @@ public partial class PsimulexParser : Parser
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, variableDeclaratorId23.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:72:30: ( A literal )?
+            	// Grammar\\Psimulex.g:72:30: ( A literal )?
             	int alt10 = 2;
             	int LA10_0 = input.LA(1);
 
@@ -1287,7 +1287,7 @@ public partial class PsimulexParser : Parser
             	switch (alt10) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:72:31: A literal
+            	        // Grammar\\Psimulex.g:72:31: A literal
             	        {
             	        	A24=(IToken)Match(input,A,FOLLOW_A_in_fieldDeclaration317); if (state.failed) return retval;
             	        	if ( state.backtracking == 0 )
@@ -1345,7 +1345,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "variableDeclarator"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:75:1: variableDeclarator : variableDeclaratorId ( A variableInitializer )? ;
+    // Grammar\\Psimulex.g:75:1: variableDeclarator : variableDeclaratorId ( A variableInitializer )? ;
     public PsimulexParser.variableDeclarator_return variableDeclarator() // throws RecognitionException [1]
     {   
         PsimulexParser.variableDeclarator_return retval = new PsimulexParser.variableDeclarator_return();
@@ -1367,8 +1367,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:76:5: ( variableDeclaratorId ( A variableInitializer )? )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:76:9: variableDeclaratorId ( A variableInitializer )?
+            // Grammar\\Psimulex.g:76:5: ( variableDeclaratorId ( A variableInitializer )? )
+            // Grammar\\Psimulex.g:76:9: variableDeclaratorId ( A variableInitializer )?
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -1377,7 +1377,7 @@ public partial class PsimulexParser : Parser
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, variableDeclaratorId27.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:76:30: ( A variableInitializer )?
+            	// Grammar\\Psimulex.g:76:30: ( A variableInitializer )?
             	int alt11 = 2;
             	int LA11_0 = input.LA(1);
 
@@ -1388,7 +1388,7 @@ public partial class PsimulexParser : Parser
             	switch (alt11) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:76:31: A variableInitializer
+            	        // Grammar\\Psimulex.g:76:31: A variableInitializer
             	        {
             	        	A28=(IToken)Match(input,A,FOLLOW_A_in_variableDeclarator348); if (state.failed) return retval;
             	        	if ( state.backtracking == 0 )
@@ -1445,7 +1445,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "functionDeclaration"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:79:1: functionDeclaration : type Identifier LP formalParameters RP block ;
+    // Grammar\\Psimulex.g:79:1: functionDeclaration : type Identifier LP formalParameters RP block ;
     public PsimulexParser.functionDeclaration_return functionDeclaration() // throws RecognitionException [1]
     {   
         PsimulexParser.functionDeclaration_return retval = new PsimulexParser.functionDeclaration_return();
@@ -1473,8 +1473,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:80:5: ( type Identifier LP formalParameters RP block )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:81:6: type Identifier LP formalParameters RP block
+            // Grammar\\Psimulex.g:80:5: ( type Identifier LP formalParameters RP block )
+            // Grammar\\Psimulex.g:81:6: type Identifier LP formalParameters RP block
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -1539,7 +1539,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "variableDeclaratorId"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:85:1: variableDeclaratorId : Identifier ( LS RS | LS C RS )? ;
+    // Grammar\\Psimulex.g:85:1: variableDeclaratorId : Identifier ( LS RS | LS C RS )? ;
     public PsimulexParser.variableDeclaratorId_return variableDeclaratorId() // throws RecognitionException [1]
     {   
         PsimulexParser.variableDeclaratorId_return retval = new PsimulexParser.variableDeclaratorId_return();
@@ -1567,8 +1567,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:86:5: ( Identifier ( LS RS | LS C RS )? )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:86:9: Identifier ( LS RS | LS C RS )?
+            // Grammar\\Psimulex.g:86:5: ( Identifier ( LS RS | LS C RS )? )
+            // Grammar\\Psimulex.g:86:9: Identifier ( LS RS | LS C RS )?
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -1577,7 +1577,7 @@ public partial class PsimulexParser : Parser
             	{Identifier36_tree = (CommonTree)adaptor.Create(Identifier36);
             		adaptor.AddChild(root_0, Identifier36_tree);
             	}
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:86:20: ( LS RS | LS C RS )?
+            	// Grammar\\Psimulex.g:86:20: ( LS RS | LS C RS )?
             	int alt12 = 3;
             	int LA12_0 = input.LA(1);
 
@@ -1597,7 +1597,7 @@ public partial class PsimulexParser : Parser
             	switch (alt12) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:86:21: LS RS
+            	        // Grammar\\Psimulex.g:86:21: LS RS
             	        {
             	        	LS37=(IToken)Match(input,LS,FOLLOW_LS_in_variableDeclaratorId418); if (state.failed) return retval;
             	        	if ( state.backtracking == 0 )
@@ -1613,7 +1613,7 @@ public partial class PsimulexParser : Parser
             	        }
             	        break;
             	    case 2 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:86:27: LS C RS
+            	        // Grammar\\Psimulex.g:86:27: LS C RS
             	        {
             	        	LS39=(IToken)Match(input,LS,FOLLOW_LS_in_variableDeclaratorId422); if (state.failed) return retval;
             	        	if ( state.backtracking == 0 )
@@ -1675,7 +1675,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "variableInitializer"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:89:1: variableInitializer : ( | expression );
+    // Grammar\\Psimulex.g:89:1: variableInitializer : ( | expression );
     public PsimulexParser.variableInitializer_return variableInitializer() // throws RecognitionException [1]
     {   
         PsimulexParser.variableInitializer_return retval = new PsimulexParser.variableInitializer_return();
@@ -1693,7 +1693,7 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:90:5: ( | expression )
+            // Grammar\\Psimulex.g:90:5: ( | expression )
             int alt13 = 2;
             int LA13_0 = input.LA(1);
 
@@ -1716,14 +1716,14 @@ public partial class PsimulexParser : Parser
             switch (alt13) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:91:5: 
+                    // Grammar\\Psimulex.g:91:5: 
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:91:9: expression
+                    // Grammar\\Psimulex.g:91:9: expression
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -1773,7 +1773,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "type"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:100:1: type : primitiveType ( LS RS | LS C RS )? ;
+    // Grammar\\Psimulex.g:100:1: type : primitiveType ( LS RS | LS C RS )? ;
     public PsimulexParser.type_return type() // throws RecognitionException [1]
     {   
         PsimulexParser.type_return retval = new PsimulexParser.type_return();
@@ -1801,8 +1801,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:101:5: ( primitiveType ( LS RS | LS C RS )? )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:101:7: primitiveType ( LS RS | LS C RS )?
+            // Grammar\\Psimulex.g:101:5: ( primitiveType ( LS RS | LS C RS )? )
+            // Grammar\\Psimulex.g:101:7: primitiveType ( LS RS | LS C RS )?
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -1811,7 +1811,7 @@ public partial class PsimulexParser : Parser
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, primitiveType43.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:101:21: ( LS RS | LS C RS )?
+            	// Grammar\\Psimulex.g:101:21: ( LS RS | LS C RS )?
             	int alt14 = 3;
             	int LA14_0 = input.LA(1);
 
@@ -1831,7 +1831,7 @@ public partial class PsimulexParser : Parser
             	switch (alt14) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:101:22: LS RS
+            	        // Grammar\\Psimulex.g:101:22: LS RS
             	        {
             	        	LS44=(IToken)Match(input,LS,FOLLOW_LS_in_type488); if (state.failed) return retval;
             	        	if ( state.backtracking == 0 )
@@ -1847,7 +1847,7 @@ public partial class PsimulexParser : Parser
             	        }
             	        break;
             	    case 2 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:101:28: LS C RS
+            	        // Grammar\\Psimulex.g:101:28: LS C RS
             	        {
             	        	LS46=(IToken)Match(input,LS,FOLLOW_LS_in_type492); if (state.failed) return retval;
             	        	if ( state.backtracking == 0 )
@@ -1909,7 +1909,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "primitiveType"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:104:1: primitiveType : ( BOOL | CHAR | INT | DECIMAL | STRING );
+    // Grammar\\Psimulex.g:104:1: primitiveType : ( BOOL | CHAR | INT | DECIMAL | STRING );
     public PsimulexParser.primitiveType_return primitiveType() // throws RecognitionException [1]
     {   
         PsimulexParser.primitiveType_return retval = new PsimulexParser.primitiveType_return();
@@ -1927,8 +1927,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:105:5: ( BOOL | CHAR | INT | DECIMAL | STRING )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:105:5: ( BOOL | CHAR | INT | DECIMAL | STRING )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -1985,7 +1985,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "builtInType"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:113:1: builtInType : ( TREE | BINTREE | SET | LIST | STACK | QUEUE | PQUEUE );
+    // Grammar\\Psimulex.g:113:1: builtInType : ( TREE | BINTREE | SET | LIST | STACK | QUEUE | PQUEUE );
     public PsimulexParser.builtInType_return builtInType() // throws RecognitionException [1]
     {   
         PsimulexParser.builtInType_return retval = new PsimulexParser.builtInType_return();
@@ -2003,8 +2003,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:114:5: ( TREE | BINTREE | SET | LIST | STACK | QUEUE | PQUEUE )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:114:5: ( TREE | BINTREE | SET | LIST | STACK | QUEUE | PQUEUE )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -2061,7 +2061,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "formalParameters"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:124:1: formalParameters : LP ( formalParameterDecls )? RP ;
+    // Grammar\\Psimulex.g:124:1: formalParameters : LP ( formalParameterDecls )? RP ;
     public PsimulexParser.formalParameters_return formalParameters() // throws RecognitionException [1]
     {   
         PsimulexParser.formalParameters_return retval = new PsimulexParser.formalParameters_return();
@@ -2083,13 +2083,13 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:125:5: ( LP ( formalParameterDecls )? RP )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:125:9: LP ( formalParameterDecls )? RP
+            // Grammar\\Psimulex.g:125:5: ( LP ( formalParameterDecls )? RP )
+            // Grammar\\Psimulex.g:125:9: LP ( formalParameterDecls )? RP
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
             	LP51=(IToken)Match(input,LP,FOLLOW_LP_in_formalParameters619); if (state.failed) return retval;
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:125:13: ( formalParameterDecls )?
+            	// Grammar\\Psimulex.g:125:13: ( formalParameterDecls )?
             	int alt15 = 2;
             	int LA15_0 = input.LA(1);
 
@@ -2100,7 +2100,7 @@ public partial class PsimulexParser : Parser
             	switch (alt15) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: formalParameterDecls
+            	        // Grammar\\Psimulex.g:0:0: formalParameterDecls
             	        {
             	        	PushFollow(FOLLOW_formalParameterDecls_in_formalParameters622);
             	        	formalParameterDecls52 = formalParameterDecls();
@@ -2153,7 +2153,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "formalParameterDecls"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:128:1: formalParameterDecls : type ( REF )? formalParameterDeclsRest ;
+    // Grammar\\Psimulex.g:128:1: formalParameterDecls : type ( REF )? formalParameterDeclsRest ;
     public PsimulexParser.formalParameterDecls_return formalParameterDecls() // throws RecognitionException [1]
     {   
         PsimulexParser.formalParameterDecls_return retval = new PsimulexParser.formalParameterDecls_return();
@@ -2175,8 +2175,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:129:5: ( type ( REF )? formalParameterDeclsRest )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:129:9: type ( REF )? formalParameterDeclsRest
+            // Grammar\\Psimulex.g:129:5: ( type ( REF )? formalParameterDeclsRest )
+            // Grammar\\Psimulex.g:129:9: type ( REF )? formalParameterDeclsRest
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -2185,7 +2185,7 @@ public partial class PsimulexParser : Parser
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, type54.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:129:14: ( REF )?
+            	// Grammar\\Psimulex.g:129:14: ( REF )?
             	int alt16 = 2;
             	int LA16_0 = input.LA(1);
 
@@ -2196,7 +2196,7 @@ public partial class PsimulexParser : Parser
             	switch (alt16) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:129:15: REF
+            	        // Grammar\\Psimulex.g:129:15: REF
             	        {
             	        	REF55=(IToken)Match(input,REF,FOLLOW_REF_in_formalParameterDecls652); if (state.failed) return retval;
             	        	if ( state.backtracking == 0 )
@@ -2253,7 +2253,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "formalParameterDeclsRest"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:132:1: formalParameterDeclsRest : variableDeclaratorId ( C formalParameterDecls )? ;
+    // Grammar\\Psimulex.g:132:1: formalParameterDeclsRest : variableDeclaratorId ( C formalParameterDecls )? ;
     public PsimulexParser.formalParameterDeclsRest_return formalParameterDeclsRest() // throws RecognitionException [1]
     {   
         PsimulexParser.formalParameterDeclsRest_return retval = new PsimulexParser.formalParameterDeclsRest_return();
@@ -2275,8 +2275,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:133:5: ( variableDeclaratorId ( C formalParameterDecls )? )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:133:9: variableDeclaratorId ( C formalParameterDecls )?
+            // Grammar\\Psimulex.g:133:5: ( variableDeclaratorId ( C formalParameterDecls )? )
+            // Grammar\\Psimulex.g:133:9: variableDeclaratorId ( C formalParameterDecls )?
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -2285,7 +2285,7 @@ public partial class PsimulexParser : Parser
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, variableDeclaratorId57.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:133:30: ( C formalParameterDecls )?
+            	// Grammar\\Psimulex.g:133:30: ( C formalParameterDecls )?
             	int alt17 = 2;
             	int LA17_0 = input.LA(1);
 
@@ -2296,7 +2296,7 @@ public partial class PsimulexParser : Parser
             	switch (alt17) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:133:31: C formalParameterDecls
+            	        // Grammar\\Psimulex.g:133:31: C formalParameterDecls
             	        {
             	        	C58=(IToken)Match(input,C,FOLLOW_C_in_formalParameterDeclsRest682); if (state.failed) return retval;
             	        	PushFollow(FOLLOW_formalParameterDecls_in_formalParameterDeclsRest685);
@@ -2349,7 +2349,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "expression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:145:1: expression : ( assignment | conditionalOrExpression );
+    // Grammar\\Psimulex.g:145:1: expression : ( assignment | conditionalOrExpression );
     public PsimulexParser.expression_return expression() // throws RecognitionException [1]
     {   
         PsimulexParser.expression_return retval = new PsimulexParser.expression_return();
@@ -2369,7 +2369,7 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:146:2: ( assignment | conditionalOrExpression )
+            // Grammar\\Psimulex.g:146:2: ( assignment | conditionalOrExpression )
             int alt18 = 2;
             switch ( input.LA(1) ) 
             {
@@ -2444,7 +2444,7 @@ public partial class PsimulexParser : Parser
             switch (alt18) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:146:4: assignment
+                    // Grammar\\Psimulex.g:146:4: assignment
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -2457,7 +2457,7 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:147:4: conditionalOrExpression
+                    // Grammar\\Psimulex.g:147:4: conditionalOrExpression
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -2507,7 +2507,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "assignment"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:149:1: assignment : leftValue ( assignmentOperator expression )? ;
+    // Grammar\\Psimulex.g:149:1: assignment : leftValue assignmentOperator expression ;
     public PsimulexParser.assignment_return assignment() // throws RecognitionException [1]
     {   
         PsimulexParser.assignment_return retval = new PsimulexParser.assignment_return();
@@ -2529,8 +2529,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:150:2: ( leftValue ( assignmentOperator expression )? )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:150:4: leftValue ( assignmentOperator expression )?
+            // Grammar\\Psimulex.g:150:2: ( leftValue assignmentOperator expression )
+            // Grammar\\Psimulex.g:150:4: leftValue assignmentOperator expression
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -2539,35 +2539,16 @@ public partial class PsimulexParser : Parser
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, leftValue62.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:150:14: ( assignmentOperator expression )?
-            	int alt19 = 2;
-            	int LA19_0 = input.LA(1);
-
-            	if ( (LA19_0 == A || (LA19_0 >= AA && LA19_0 <= AMOD)) )
-            	{
-            	    alt19 = 1;
-            	}
-            	switch (alt19) 
-            	{
-            	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:150:15: assignmentOperator expression
-            	        {
-            	        	PushFollow(FOLLOW_assignmentOperator_in_assignment728);
-            	        	assignmentOperator63 = assignmentOperator();
-            	        	state.followingStackPointer--;
-            	        	if (state.failed) return retval;
-            	        	if ( state.backtracking == 0 ) root_0 = (CommonTree)adaptor.BecomeRoot(assignmentOperator63.Tree, root_0);
-            	        	PushFollow(FOLLOW_expression_in_assignment731);
-            	        	expression64 = expression();
-            	        	state.followingStackPointer--;
-            	        	if (state.failed) return retval;
-            	        	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression64.Tree);
-
-            	        }
-            	        break;
-
-            	}
-
+            	PushFollow(FOLLOW_assignmentOperator_in_assignment727);
+            	assignmentOperator63 = assignmentOperator();
+            	state.followingStackPointer--;
+            	if (state.failed) return retval;
+            	if ( state.backtracking == 0 ) root_0 = (CommonTree)adaptor.BecomeRoot(assignmentOperator63.Tree, root_0);
+            	PushFollow(FOLLOW_expression_in_assignment730);
+            	expression64 = expression();
+            	state.followingStackPointer--;
+            	if (state.failed) return retval;
+            	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression64.Tree);
 
             }
 
@@ -2607,7 +2588,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "assignmentOperator"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:153:1: assignmentOperator : ( A | AA | AS | AM | ADIV | AMOD );
+    // Grammar\\Psimulex.g:153:1: assignmentOperator : ( A | AA | AS | AM | ADIV | AMOD );
     public PsimulexParser.assignmentOperator_return assignmentOperator() // throws RecognitionException [1]
     {   
         PsimulexParser.assignmentOperator_return retval = new PsimulexParser.assignmentOperator_return();
@@ -2625,8 +2606,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:154:2: ( A | AA | AS | AM | ADIV | AMOD )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:154:2: ( A | AA | AS | AM | ADIV | AMOD )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -2683,7 +2664,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "conditionalOrExpression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:157:1: conditionalOrExpression : conditionalAndExpression ( OR conditionalAndExpression )* ;
+    // Grammar\\Psimulex.g:157:1: conditionalOrExpression : conditionalAndExpression ( OR conditionalAndExpression )* ;
     public PsimulexParser.conditionalOrExpression_return conditionalOrExpression() // throws RecognitionException [1]
     {   
         PsimulexParser.conditionalOrExpression_return retval = new PsimulexParser.conditionalOrExpression_return();
@@ -2705,39 +2686,39 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:158:5: ( conditionalAndExpression ( OR conditionalAndExpression )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:158:9: conditionalAndExpression ( OR conditionalAndExpression )*
+            // Grammar\\Psimulex.g:158:5: ( conditionalAndExpression ( OR conditionalAndExpression )* )
+            // Grammar\\Psimulex.g:158:9: conditionalAndExpression ( OR conditionalAndExpression )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_conditionalAndExpression_in_conditionalOrExpression774);
+            	PushFollow(FOLLOW_conditionalAndExpression_in_conditionalOrExpression771);
             	conditionalAndExpression66 = conditionalAndExpression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, conditionalAndExpression66.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:158:34: ( OR conditionalAndExpression )*
+            	// Grammar\\Psimulex.g:158:34: ( OR conditionalAndExpression )*
             	do 
             	{
-            	    int alt20 = 2;
-            	    int LA20_0 = input.LA(1);
+            	    int alt19 = 2;
+            	    int LA19_0 = input.LA(1);
 
-            	    if ( (LA20_0 == OR) )
+            	    if ( (LA19_0 == OR) )
             	    {
-            	        alt20 = 1;
+            	        alt19 = 1;
             	    }
 
 
-            	    switch (alt20) 
+            	    switch (alt19) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:158:36: OR conditionalAndExpression
+            			    // Grammar\\Psimulex.g:158:36: OR conditionalAndExpression
             			    {
-            			    	OR67=(IToken)Match(input,OR,FOLLOW_OR_in_conditionalOrExpression778); if (state.failed) return retval;
+            			    	OR67=(IToken)Match(input,OR,FOLLOW_OR_in_conditionalOrExpression775); if (state.failed) return retval;
             			    	if ( state.backtracking == 0 )
             			    	{OR67_tree = (CommonTree)adaptor.Create(OR67);
             			    		root_0 = (CommonTree)adaptor.BecomeRoot(OR67_tree, root_0);
             			    	}
-            			    	PushFollow(FOLLOW_conditionalAndExpression_in_conditionalOrExpression781);
+            			    	PushFollow(FOLLOW_conditionalAndExpression_in_conditionalOrExpression778);
             			    	conditionalAndExpression68 = conditionalAndExpression();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -2747,12 +2728,12 @@ public partial class PsimulexParser : Parser
             			    break;
 
             			default:
-            			    goto loop20;
+            			    goto loop19;
             	    }
             	} while (true);
 
-            	loop20:
-            		;	// Stops C# compiler whining that label 'loop20' has no statements
+            	loop19:
+            		;	// Stops C# compiler whining that label 'loop19' has no statements
 
 
             }
@@ -2793,7 +2774,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "conditionalAndExpression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:161:1: conditionalAndExpression : equalityExpression ( AND equalityExpression )* ;
+    // Grammar\\Psimulex.g:161:1: conditionalAndExpression : equalityExpression ( AND equalityExpression )* ;
     public PsimulexParser.conditionalAndExpression_return conditionalAndExpression() // throws RecognitionException [1]
     {   
         PsimulexParser.conditionalAndExpression_return retval = new PsimulexParser.conditionalAndExpression_return();
@@ -2815,39 +2796,39 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:162:5: ( equalityExpression ( AND equalityExpression )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:162:9: equalityExpression ( AND equalityExpression )*
+            // Grammar\\Psimulex.g:162:5: ( equalityExpression ( AND equalityExpression )* )
+            // Grammar\\Psimulex.g:162:9: equalityExpression ( AND equalityExpression )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_equalityExpression_in_conditionalAndExpression803);
+            	PushFollow(FOLLOW_equalityExpression_in_conditionalAndExpression800);
             	equalityExpression69 = equalityExpression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, equalityExpression69.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:162:28: ( AND equalityExpression )*
+            	// Grammar\\Psimulex.g:162:28: ( AND equalityExpression )*
             	do 
             	{
-            	    int alt21 = 2;
-            	    int LA21_0 = input.LA(1);
+            	    int alt20 = 2;
+            	    int LA20_0 = input.LA(1);
 
-            	    if ( (LA21_0 == AND) )
+            	    if ( (LA20_0 == AND) )
             	    {
-            	        alt21 = 1;
+            	        alt20 = 1;
             	    }
 
 
-            	    switch (alt21) 
+            	    switch (alt20) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:162:30: AND equalityExpression
+            			    // Grammar\\Psimulex.g:162:30: AND equalityExpression
             			    {
-            			    	AND70=(IToken)Match(input,AND,FOLLOW_AND_in_conditionalAndExpression807); if (state.failed) return retval;
+            			    	AND70=(IToken)Match(input,AND,FOLLOW_AND_in_conditionalAndExpression804); if (state.failed) return retval;
             			    	if ( state.backtracking == 0 )
             			    	{AND70_tree = (CommonTree)adaptor.Create(AND70);
             			    		root_0 = (CommonTree)adaptor.BecomeRoot(AND70_tree, root_0);
             			    	}
-            			    	PushFollow(FOLLOW_equalityExpression_in_conditionalAndExpression810);
+            			    	PushFollow(FOLLOW_equalityExpression_in_conditionalAndExpression807);
             			    	equalityExpression71 = equalityExpression();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -2857,12 +2838,12 @@ public partial class PsimulexParser : Parser
             			    break;
 
             			default:
-            			    goto loop21;
+            			    goto loop20;
             	    }
             	} while (true);
 
-            	loop21:
-            		;	// Stops C# compiler whining that label 'loop21' has no statements
+            	loop20:
+            		;	// Stops C# compiler whining that label 'loop20' has no statements
 
 
             }
@@ -2903,7 +2884,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "equalityExpression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:165:1: equalityExpression : relationalExpression ( ( equalityOp ) relationalExpression )* ;
+    // Grammar\\Psimulex.g:165:1: equalityExpression : relationalExpression ( ( equalityOp ) relationalExpression )* ;
     public PsimulexParser.equalityExpression_return equalityExpression() // throws RecognitionException [1]
     {   
         PsimulexParser.equalityExpression_return retval = new PsimulexParser.equalityExpression_return();
@@ -2925,37 +2906,37 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:166:5: ( relationalExpression ( ( equalityOp ) relationalExpression )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:166:9: relationalExpression ( ( equalityOp ) relationalExpression )*
+            // Grammar\\Psimulex.g:166:5: ( relationalExpression ( ( equalityOp ) relationalExpression )* )
+            // Grammar\\Psimulex.g:166:9: relationalExpression ( ( equalityOp ) relationalExpression )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_relationalExpression_in_equalityExpression832);
+            	PushFollow(FOLLOW_relationalExpression_in_equalityExpression829);
             	relationalExpression72 = relationalExpression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, relationalExpression72.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:166:30: ( ( equalityOp ) relationalExpression )*
+            	// Grammar\\Psimulex.g:166:30: ( ( equalityOp ) relationalExpression )*
             	do 
             	{
-            	    int alt22 = 2;
-            	    int LA22_0 = input.LA(1);
+            	    int alt21 = 2;
+            	    int LA21_0 = input.LA(1);
 
-            	    if ( ((LA22_0 >= E && LA22_0 <= NE)) )
+            	    if ( ((LA21_0 >= E && LA21_0 <= NE)) )
             	    {
-            	        alt22 = 1;
+            	        alt21 = 1;
             	    }
 
 
-            	    switch (alt22) 
+            	    switch (alt21) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:166:32: ( equalityOp ) relationalExpression
+            			    // Grammar\\Psimulex.g:166:32: ( equalityOp ) relationalExpression
             			    {
-            			    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:166:32: ( equalityOp )
-            			    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:166:34: equalityOp
+            			    	// Grammar\\Psimulex.g:166:32: ( equalityOp )
+            			    	// Grammar\\Psimulex.g:166:34: equalityOp
             			    	{
-            			    		PushFollow(FOLLOW_equalityOp_in_equalityExpression838);
+            			    		PushFollow(FOLLOW_equalityOp_in_equalityExpression835);
             			    		equalityOp73 = equalityOp();
             			    		state.followingStackPointer--;
             			    		if (state.failed) return retval;
@@ -2963,7 +2944,7 @@ public partial class PsimulexParser : Parser
 
             			    	}
 
-            			    	PushFollow(FOLLOW_relationalExpression_in_equalityExpression843);
+            			    	PushFollow(FOLLOW_relationalExpression_in_equalityExpression840);
             			    	relationalExpression74 = relationalExpression();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -2973,12 +2954,12 @@ public partial class PsimulexParser : Parser
             			    break;
 
             			default:
-            			    goto loop22;
+            			    goto loop21;
             	    }
             	} while (true);
 
-            	loop22:
-            		;	// Stops C# compiler whining that label 'loop22' has no statements
+            	loop21:
+            		;	// Stops C# compiler whining that label 'loop21' has no statements
 
 
             }
@@ -3019,7 +3000,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "equalityOp"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:169:1: equalityOp : ( E | NE );
+    // Grammar\\Psimulex.g:169:1: equalityOp : ( E | NE );
     public PsimulexParser.equalityOp_return equalityOp() // throws RecognitionException [1]
     {   
         PsimulexParser.equalityOp_return retval = new PsimulexParser.equalityOp_return();
@@ -3037,8 +3018,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:170:2: ( E | NE )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:170:2: ( E | NE )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -3095,7 +3076,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "relationalExpression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:173:1: relationalExpression : additiveExpression ( relationalOp additiveExpression )* ;
+    // Grammar\\Psimulex.g:173:1: relationalExpression : additiveExpression ( relationalOp additiveExpression )* ;
     public PsimulexParser.relationalExpression_return relationalExpression() // throws RecognitionException [1]
     {   
         PsimulexParser.relationalExpression_return retval = new PsimulexParser.relationalExpression_return();
@@ -3117,39 +3098,39 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:174:5: ( additiveExpression ( relationalOp additiveExpression )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:174:9: additiveExpression ( relationalOp additiveExpression )*
+            // Grammar\\Psimulex.g:174:5: ( additiveExpression ( relationalOp additiveExpression )* )
+            // Grammar\\Psimulex.g:174:9: additiveExpression ( relationalOp additiveExpression )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_additiveExpression_in_relationalExpression878);
+            	PushFollow(FOLLOW_additiveExpression_in_relationalExpression875);
             	additiveExpression76 = additiveExpression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, additiveExpression76.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:174:28: ( relationalOp additiveExpression )*
+            	// Grammar\\Psimulex.g:174:28: ( relationalOp additiveExpression )*
             	do 
             	{
-            	    int alt23 = 2;
-            	    int LA23_0 = input.LA(1);
+            	    int alt22 = 2;
+            	    int LA22_0 = input.LA(1);
 
-            	    if ( ((LA23_0 >= LT && LA23_0 <= GTE)) )
+            	    if ( ((LA22_0 >= LT && LA22_0 <= GTE)) )
             	    {
-            	        alt23 = 1;
+            	        alt22 = 1;
             	    }
 
 
-            	    switch (alt23) 
+            	    switch (alt22) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:174:30: relationalOp additiveExpression
+            			    // Grammar\\Psimulex.g:174:30: relationalOp additiveExpression
             			    {
-            			    	PushFollow(FOLLOW_relationalOp_in_relationalExpression882);
+            			    	PushFollow(FOLLOW_relationalOp_in_relationalExpression879);
             			    	relationalOp77 = relationalOp();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
             			    	if ( state.backtracking == 0 ) root_0 = (CommonTree)adaptor.BecomeRoot(relationalOp77.Tree, root_0);
-            			    	PushFollow(FOLLOW_additiveExpression_in_relationalExpression885);
+            			    	PushFollow(FOLLOW_additiveExpression_in_relationalExpression882);
             			    	additiveExpression78 = additiveExpression();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -3159,12 +3140,12 @@ public partial class PsimulexParser : Parser
             			    break;
 
             			default:
-            			    goto loop23;
+            			    goto loop22;
             	    }
             	} while (true);
 
-            	loop23:
-            		;	// Stops C# compiler whining that label 'loop23' has no statements
+            	loop22:
+            		;	// Stops C# compiler whining that label 'loop22' has no statements
 
 
             }
@@ -3205,7 +3186,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "relationalOp"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:177:1: relationalOp : ( LT | LTE | GT | GTE );
+    // Grammar\\Psimulex.g:177:1: relationalOp : ( LT | LTE | GT | GTE );
     public PsimulexParser.relationalOp_return relationalOp() // throws RecognitionException [1]
     {   
         PsimulexParser.relationalOp_return retval = new PsimulexParser.relationalOp_return();
@@ -3223,8 +3204,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:178:5: ( LT | LTE | GT | GTE )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:178:5: ( LT | LTE | GT | GTE )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -3281,7 +3262,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "additiveExpression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:194:1: additiveExpression : multiplicativeExpression ( additiveOp multiplicativeExpression )* ;
+    // Grammar\\Psimulex.g:194:1: additiveExpression : multiplicativeExpression ( additiveOp multiplicativeExpression )* ;
     public PsimulexParser.additiveExpression_return additiveExpression() // throws RecognitionException [1]
     {   
         PsimulexParser.additiveExpression_return retval = new PsimulexParser.additiveExpression_return();
@@ -3303,39 +3284,39 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:195:5: ( multiplicativeExpression ( additiveOp multiplicativeExpression )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:195:9: multiplicativeExpression ( additiveOp multiplicativeExpression )*
+            // Grammar\\Psimulex.g:195:5: ( multiplicativeExpression ( additiveOp multiplicativeExpression )* )
+            // Grammar\\Psimulex.g:195:9: multiplicativeExpression ( additiveOp multiplicativeExpression )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression945);
+            	PushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression942);
             	multiplicativeExpression80 = multiplicativeExpression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, multiplicativeExpression80.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:195:34: ( additiveOp multiplicativeExpression )*
+            	// Grammar\\Psimulex.g:195:34: ( additiveOp multiplicativeExpression )*
             	do 
             	{
-            	    int alt24 = 2;
-            	    int LA24_0 = input.LA(1);
+            	    int alt23 = 2;
+            	    int LA23_0 = input.LA(1);
 
-            	    if ( ((LA24_0 >= P && LA24_0 <= M)) )
+            	    if ( ((LA23_0 >= P && LA23_0 <= M)) )
             	    {
-            	        alt24 = 1;
+            	        alt23 = 1;
             	    }
 
 
-            	    switch (alt24) 
+            	    switch (alt23) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:195:36: additiveOp multiplicativeExpression
+            			    // Grammar\\Psimulex.g:195:36: additiveOp multiplicativeExpression
             			    {
-            			    	PushFollow(FOLLOW_additiveOp_in_additiveExpression949);
+            			    	PushFollow(FOLLOW_additiveOp_in_additiveExpression946);
             			    	additiveOp81 = additiveOp();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
             			    	if ( state.backtracking == 0 ) root_0 = (CommonTree)adaptor.BecomeRoot(additiveOp81.Tree, root_0);
-            			    	PushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression952);
+            			    	PushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression949);
             			    	multiplicativeExpression82 = multiplicativeExpression();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -3345,12 +3326,12 @@ public partial class PsimulexParser : Parser
             			    break;
 
             			default:
-            			    goto loop24;
+            			    goto loop23;
             	    }
             	} while (true);
 
-            	loop24:
-            		;	// Stops C# compiler whining that label 'loop24' has no statements
+            	loop23:
+            		;	// Stops C# compiler whining that label 'loop23' has no statements
 
 
             }
@@ -3391,7 +3372,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "additiveOp"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:198:1: additiveOp : ( P | M );
+    // Grammar\\Psimulex.g:198:1: additiveOp : ( P | M );
     public PsimulexParser.additiveOp_return additiveOp() // throws RecognitionException [1]
     {   
         PsimulexParser.additiveOp_return retval = new PsimulexParser.additiveOp_return();
@@ -3409,8 +3390,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:199:2: ( P | M )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:199:2: ( P | M )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -3467,7 +3448,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "multiplicativeExpression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:202:1: multiplicativeExpression : unaryExpression ( multiplicativeOp unaryExpression )* ;
+    // Grammar\\Psimulex.g:202:1: multiplicativeExpression : unaryExpression ( multiplicativeOp unaryExpression )* ;
     public PsimulexParser.multiplicativeExpression_return multiplicativeExpression() // throws RecognitionException [1]
     {   
         PsimulexParser.multiplicativeExpression_return retval = new PsimulexParser.multiplicativeExpression_return();
@@ -3489,39 +3470,39 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:203:5: ( unaryExpression ( multiplicativeOp unaryExpression )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:203:9: unaryExpression ( multiplicativeOp unaryExpression )*
+            // Grammar\\Psimulex.g:203:5: ( unaryExpression ( multiplicativeOp unaryExpression )* )
+            // Grammar\\Psimulex.g:203:9: unaryExpression ( multiplicativeOp unaryExpression )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_unaryExpression_in_multiplicativeExpression987);
+            	PushFollow(FOLLOW_unaryExpression_in_multiplicativeExpression984);
             	unaryExpression84 = unaryExpression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, unaryExpression84.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:203:25: ( multiplicativeOp unaryExpression )*
+            	// Grammar\\Psimulex.g:203:25: ( multiplicativeOp unaryExpression )*
             	do 
             	{
-            	    int alt25 = 2;
-            	    int LA25_0 = input.LA(1);
+            	    int alt24 = 2;
+            	    int LA24_0 = input.LA(1);
 
-            	    if ( ((LA25_0 >= STAR && LA25_0 <= MOD)) )
+            	    if ( ((LA24_0 >= STAR && LA24_0 <= MOD)) )
             	    {
-            	        alt25 = 1;
+            	        alt24 = 1;
             	    }
 
 
-            	    switch (alt25) 
+            	    switch (alt24) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:203:27: multiplicativeOp unaryExpression
+            			    // Grammar\\Psimulex.g:203:27: multiplicativeOp unaryExpression
             			    {
-            			    	PushFollow(FOLLOW_multiplicativeOp_in_multiplicativeExpression991);
+            			    	PushFollow(FOLLOW_multiplicativeOp_in_multiplicativeExpression988);
             			    	multiplicativeOp85 = multiplicativeOp();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
             			    	if ( state.backtracking == 0 ) root_0 = (CommonTree)adaptor.BecomeRoot(multiplicativeOp85.Tree, root_0);
-            			    	PushFollow(FOLLOW_unaryExpression_in_multiplicativeExpression994);
+            			    	PushFollow(FOLLOW_unaryExpression_in_multiplicativeExpression991);
             			    	unaryExpression86 = unaryExpression();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -3531,12 +3512,12 @@ public partial class PsimulexParser : Parser
             			    break;
 
             			default:
-            			    goto loop25;
+            			    goto loop24;
             	    }
             	} while (true);
 
-            	loop25:
-            		;	// Stops C# compiler whining that label 'loop25' has no statements
+            	loop24:
+            		;	// Stops C# compiler whining that label 'loop24' has no statements
 
 
             }
@@ -3577,7 +3558,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "multiplicativeOp"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:206:1: multiplicativeOp : ( STAR | DIV | MOD );
+    // Grammar\\Psimulex.g:206:1: multiplicativeOp : ( STAR | DIV | MOD );
     public PsimulexParser.multiplicativeOp_return multiplicativeOp() // throws RecognitionException [1]
     {   
         PsimulexParser.multiplicativeOp_return retval = new PsimulexParser.multiplicativeOp_return();
@@ -3595,8 +3576,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:207:2: ( STAR | DIV | MOD )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:207:2: ( STAR | DIV | MOD )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -3653,7 +3634,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "unaryExpression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:210:1: unaryExpression : ( unaryPrefixOp unaryExpression | unaryExpressionPostPlusPlusMinusMinus | primaryExpression );
+    // Grammar\\Psimulex.g:210:1: unaryExpression : ( unaryPrefixOp unaryExpression | primaryExpression ( unaryPostfixOp )? );
     public PsimulexParser.unaryExpression_return unaryExpression() // throws RecognitionException [1]
     {   
         PsimulexParser.unaryExpression_return retval = new PsimulexParser.unaryExpression_return();
@@ -3665,9 +3646,9 @@ public partial class PsimulexParser : Parser
 
         PsimulexParser.unaryExpression_return unaryExpression89 = default(PsimulexParser.unaryExpression_return);
 
-        PsimulexParser.unaryExpressionPostPlusPlusMinusMinus_return unaryExpressionPostPlusPlusMinusMinus90 = default(PsimulexParser.unaryExpressionPostPlusPlusMinusMinus_return);
+        PsimulexParser.primaryExpression_return primaryExpression90 = default(PsimulexParser.primaryExpression_return);
 
-        PsimulexParser.primaryExpression_return primaryExpression91 = default(PsimulexParser.primaryExpression_return);
+        PsimulexParser.unaryPostfixOp_return unaryPostfixOp91 = default(PsimulexParser.unaryPostfixOp_return);
 
 
 
@@ -3677,112 +3658,39 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:211:5: ( unaryPrefixOp unaryExpression | unaryExpressionPostPlusPlusMinusMinus | primaryExpression )
-            int alt26 = 3;
-            switch ( input.LA(1) ) 
+            // Grammar\\Psimulex.g:211:5: ( unaryPrefixOp unaryExpression | primaryExpression ( unaryPostfixOp )? )
+            int alt26 = 2;
+            int LA26_0 = input.LA(1);
+
+            if ( ((LA26_0 >= P && LA26_0 <= M) || (LA26_0 >= PP && LA26_0 <= NOT)) )
             {
-            case P:
-            case M:
-            case PP:
-            case MM:
-            case NOT:
-            	{
                 alt26 = 1;
-                }
-                break;
-            case LP:
-            	{
-                int LA26_2 = input.LA(2);
-
-                if ( (synpred51_Psimulex()) )
-                {
-                    alt26 = 2;
-                }
-                else if ( (true) )
-                {
-                    alt26 = 3;
-                }
-                else 
-                {
-                    if ( state.backtracking > 0 ) {state.failed = true; return retval;}
-                    NoViableAltException nvae_d26s2 =
-                        new NoViableAltException("", 26, 2, input);
-
-                    throw nvae_d26s2;
-                }
-                }
-                break;
-            case Identifier:
-            	{
-                int LA26_3 = input.LA(2);
-
-                if ( (synpred51_Psimulex()) )
-                {
-                    alt26 = 2;
-                }
-                else if ( (true) )
-                {
-                    alt26 = 3;
-                }
-                else 
-                {
-                    if ( state.backtracking > 0 ) {state.failed = true; return retval;}
-                    NoViableAltException nvae_d26s3 =
-                        new NoViableAltException("", 26, 3, input);
-
-                    throw nvae_d26s3;
-                }
-                }
-                break;
-            case StringLiteral:
-            case IntegerLiteral:
-            case DecimalLiteral:
-            case CharacterLiteral:
-            case BooleanLiteral:
-            case NullLiteral:
-            case InfinityLiteral:
-            	{
-                int LA26_4 = input.LA(2);
-
-                if ( (synpred51_Psimulex()) )
-                {
-                    alt26 = 2;
-                }
-                else if ( (true) )
-                {
-                    alt26 = 3;
-                }
-                else 
-                {
-                    if ( state.backtracking > 0 ) {state.failed = true; return retval;}
-                    NoViableAltException nvae_d26s4 =
-                        new NoViableAltException("", 26, 4, input);
-
-                    throw nvae_d26s4;
-                }
-                }
-                break;
-            	default:
-            	    if ( state.backtracking > 0 ) {state.failed = true; return retval;}
-            	    NoViableAltException nvae_d26s0 =
-            	        new NoViableAltException("", 26, 0, input);
-
-            	    throw nvae_d26s0;
             }
+            else if ( (LA26_0 == StringLiteral || LA26_0 == Identifier || LA26_0 == LP || (LA26_0 >= IntegerLiteral && LA26_0 <= InfinityLiteral)) )
+            {
+                alt26 = 2;
+            }
+            else 
+            {
+                if ( state.backtracking > 0 ) {state.failed = true; return retval;}
+                NoViableAltException nvae_d26s0 =
+                    new NoViableAltException("", 26, 0, input);
 
+                throw nvae_d26s0;
+            }
             switch (alt26) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:211:7: unaryPrefixOp unaryExpression
+                    // Grammar\\Psimulex.g:211:7: unaryPrefixOp unaryExpression
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_unaryPrefixOp_in_unaryExpression1029);
+                    	PushFollow(FOLLOW_unaryPrefixOp_in_unaryExpression1026);
                     	unaryPrefixOp88 = unaryPrefixOp();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) root_0 = (CommonTree)adaptor.BecomeRoot(unaryPrefixOp88.Tree, root_0);
-                    	PushFollow(FOLLOW_unaryExpression_in_unaryExpression1032);
+                    	PushFollow(FOLLOW_unaryExpression_in_unaryExpression1029);
                     	unaryExpression89 = unaryExpression();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -3791,28 +3699,39 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:212:7: unaryExpressionPostPlusPlusMinusMinus
+                    // Grammar\\Psimulex.g:212:7: primaryExpression ( unaryPostfixOp )?
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_unaryExpressionPostPlusPlusMinusMinus_in_unaryExpression1040);
-                    	unaryExpressionPostPlusPlusMinusMinus90 = unaryExpressionPostPlusPlusMinusMinus();
+                    	PushFollow(FOLLOW_primaryExpression_in_unaryExpression1037);
+                    	primaryExpression90 = primaryExpression();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
-                    	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, unaryExpressionPostPlusPlusMinusMinus90.Tree);
+                    	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, primaryExpression90.Tree);
+                    	// Grammar\\Psimulex.g:212:25: ( unaryPostfixOp )?
+                    	int alt25 = 2;
+                    	int LA25_0 = input.LA(1);
 
-                    }
-                    break;
-                case 3 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:213:7: primaryExpression
-                    {
-                    	root_0 = (CommonTree)adaptor.GetNilNode();
+                    	if ( ((LA25_0 >= PP && LA25_0 <= MM)) )
+                    	{
+                    	    alt25 = 1;
+                    	}
+                    	switch (alt25) 
+                    	{
+                    	    case 1 :
+                    	        // Grammar\\Psimulex.g:212:26: unaryPostfixOp
+                    	        {
+                    	        	PushFollow(FOLLOW_unaryPostfixOp_in_unaryExpression1040);
+                    	        	unaryPostfixOp91 = unaryPostfixOp();
+                    	        	state.followingStackPointer--;
+                    	        	if (state.failed) return retval;
+                    	        	if ( state.backtracking == 0 ) root_0 = (CommonTree)adaptor.BecomeRoot(unaryPostfixOp91.Tree, root_0);
 
-                    	PushFollow(FOLLOW_primaryExpression_in_unaryExpression1048);
-                    	primaryExpression91 = primaryExpression();
-                    	state.followingStackPointer--;
-                    	if (state.failed) return retval;
-                    	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, primaryExpression91.Tree);
+                    	        }
+                    	        break;
+
+                    	}
+
 
                     }
                     break;
@@ -3854,7 +3773,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "unaryPrefixOp"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:216:1: unaryPrefixOp : ( P | M | PP | MM | NOT );
+    // Grammar\\Psimulex.g:215:1: unaryPrefixOp : ( P | M | PP | MM | NOT );
     public PsimulexParser.unaryPrefixOp_return unaryPrefixOp() // throws RecognitionException [1]
     {   
         PsimulexParser.unaryPrefixOp_return retval = new PsimulexParser.unaryPrefixOp_return();
@@ -3872,8 +3791,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:217:2: ( P | M | PP | MM | NOT )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:216:2: ( P | M | PP | MM | NOT )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -3930,7 +3849,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "unaryPostfixOp"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:220:1: unaryPostfixOp : ( PP | MM );
+    // Grammar\\Psimulex.g:219:1: unaryPostfixOp : ( PP | MM );
     public PsimulexParser.unaryPostfixOp_return unaryPostfixOp() // throws RecognitionException [1]
     {   
         PsimulexParser.unaryPostfixOp_return retval = new PsimulexParser.unaryPostfixOp_return();
@@ -3948,8 +3867,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:221:2: ( PP | MM )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:220:2: ( PP | MM )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -4006,7 +3925,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "unaryExpressionPostPlusPlusMinusMinus"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:224:1: unaryExpressionPostPlusPlusMinusMinus : primaryExpression ( unaryPostfixOp )* ;
+    // Grammar\\Psimulex.g:223:1: unaryExpressionPostPlusPlusMinusMinus : primaryExpression ( unaryPostfixOp )* ;
     public PsimulexParser.unaryExpressionPostPlusPlusMinusMinus_return unaryExpressionPostPlusPlusMinusMinus() // throws RecognitionException [1]
     {   
         PsimulexParser.unaryExpressionPostPlusPlusMinusMinus_return retval = new PsimulexParser.unaryExpressionPostPlusPlusMinusMinus_return();
@@ -4026,17 +3945,17 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:225:5: ( primaryExpression ( unaryPostfixOp )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:225:9: primaryExpression ( unaryPostfixOp )*
+            // Grammar\\Psimulex.g:224:5: ( primaryExpression ( unaryPostfixOp )* )
+            // Grammar\\Psimulex.g:224:9: primaryExpression ( unaryPostfixOp )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_primaryExpression_in_unaryExpressionPostPlusPlusMinusMinus1100);
+            	PushFollow(FOLLOW_primaryExpression_in_unaryExpressionPostPlusPlusMinusMinus1095);
             	primaryExpression94 = primaryExpression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, primaryExpression94.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:225:27: ( unaryPostfixOp )*
+            	// Grammar\\Psimulex.g:224:27: ( unaryPostfixOp )*
             	do 
             	{
             	    int alt27 = 2;
@@ -4051,9 +3970,9 @@ public partial class PsimulexParser : Parser
             	    switch (alt27) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:225:28: unaryPostfixOp
+            			    // Grammar\\Psimulex.g:224:28: unaryPostfixOp
             			    {
-            			    	PushFollow(FOLLOW_unaryPostfixOp_in_unaryExpressionPostPlusPlusMinusMinus1103);
+            			    	PushFollow(FOLLOW_unaryPostfixOp_in_unaryExpressionPostPlusPlusMinusMinus1098);
             			    	unaryPostfixOp95 = unaryPostfixOp();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -4109,7 +4028,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "primaryExpression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:228:1: primaryExpression : ( parExpression | leftValue | literal );
+    // Grammar\\Psimulex.g:227:1: primaryExpression : ( parExpression | leftValue | literal );
     public PsimulexParser.primaryExpression_return primaryExpression() // throws RecognitionException [1]
     {   
         PsimulexParser.primaryExpression_return retval = new PsimulexParser.primaryExpression_return();
@@ -4131,7 +4050,7 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:229:5: ( parExpression | leftValue | literal )
+            // Grammar\\Psimulex.g:228:5: ( parExpression | leftValue | literal )
             int alt28 = 3;
             switch ( input.LA(1) ) 
             {
@@ -4139,11 +4058,11 @@ public partial class PsimulexParser : Parser
             	{
                 int LA28_1 = input.LA(2);
 
-                if ( (synpred58_Psimulex()) )
+                if ( (synpred57_Psimulex()) )
                 {
                     alt28 = 1;
                 }
-                else if ( (synpred59_Psimulex()) )
+                else if ( (synpred58_Psimulex()) )
                 {
                     alt28 = 2;
                 }
@@ -4184,11 +4103,11 @@ public partial class PsimulexParser : Parser
             switch (alt28) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:229:9: parExpression
+                    // Grammar\\Psimulex.g:228:9: parExpression
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_parExpression_in_primaryExpression1125);
+                    	PushFollow(FOLLOW_parExpression_in_primaryExpression1120);
                     	parExpression96 = parExpression();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -4197,11 +4116,11 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:230:7: leftValue
+                    // Grammar\\Psimulex.g:229:7: leftValue
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_leftValue_in_primaryExpression1133);
+                    	PushFollow(FOLLOW_leftValue_in_primaryExpression1128);
                     	leftValue97 = leftValue();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -4210,11 +4129,11 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 3 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:231:9: literal
+                    // Grammar\\Psimulex.g:230:9: literal
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_literal_in_primaryExpression1143);
+                    	PushFollow(FOLLOW_literal_in_primaryExpression1138);
                     	literal98 = literal();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -4260,7 +4179,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "parExpression"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:234:1: parExpression : LP expression RP ;
+    // Grammar\\Psimulex.g:233:1: parExpression : LP expression RP ;
     public PsimulexParser.parExpression_return parExpression() // throws RecognitionException [1]
     {   
         PsimulexParser.parExpression_return retval = new PsimulexParser.parExpression_return();
@@ -4282,18 +4201,18 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:235:5: ( LP expression RP )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:235:9: LP expression RP
+            // Grammar\\Psimulex.g:234:5: ( LP expression RP )
+            // Grammar\\Psimulex.g:234:9: LP expression RP
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	LP99=(IToken)Match(input,LP,FOLLOW_LP_in_parExpression1162); if (state.failed) return retval;
-            	PushFollow(FOLLOW_expression_in_parExpression1165);
+            	LP99=(IToken)Match(input,LP,FOLLOW_LP_in_parExpression1157); if (state.failed) return retval;
+            	PushFollow(FOLLOW_expression_in_parExpression1160);
             	expression100 = expression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression100.Tree);
-            	RP101=(IToken)Match(input,RP,FOLLOW_RP_in_parExpression1167); if (state.failed) return retval;
+            	RP101=(IToken)Match(input,RP,FOLLOW_RP_in_parExpression1162); if (state.failed) return retval;
 
             }
 
@@ -4333,7 +4252,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "leftValue"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:238:1: leftValue : ( variable | selecting );
+    // Grammar\\Psimulex.g:237:1: leftValue : ( variable | selecting );
     public PsimulexParser.leftValue_return leftValue() // throws RecognitionException [1]
     {   
         PsimulexParser.leftValue_return retval = new PsimulexParser.leftValue_return();
@@ -4353,7 +4272,7 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:239:2: ( variable | selecting )
+            // Grammar\\Psimulex.g:238:2: ( variable | selecting )
             int alt29 = 2;
             int LA29_0 = input.LA(1);
 
@@ -4361,7 +4280,7 @@ public partial class PsimulexParser : Parser
             {
                 int LA29_1 = input.LA(2);
 
-                if ( (synpred60_Psimulex()) )
+                if ( (synpred59_Psimulex()) )
                 {
                     alt29 = 1;
                 }
@@ -4393,11 +4312,11 @@ public partial class PsimulexParser : Parser
             switch (alt29) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:239:4: variable
+                    // Grammar\\Psimulex.g:238:4: variable
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_variable_in_leftValue1182);
+                    	PushFollow(FOLLOW_variable_in_leftValue1177);
                     	variable102 = variable();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -4406,11 +4325,11 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:240:4: selecting
+                    // Grammar\\Psimulex.g:239:4: selecting
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_selecting_in_leftValue1187);
+                    	PushFollow(FOLLOW_selecting_in_leftValue1182);
                     	selecting103 = selecting();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -4456,7 +4375,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "variable"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:243:1: variable : Identifier ;
+    // Grammar\\Psimulex.g:242:1: variable : Identifier ;
     public PsimulexParser.variable_return variable() // throws RecognitionException [1]
     {   
         PsimulexParser.variable_return retval = new PsimulexParser.variable_return();
@@ -4474,12 +4393,12 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:244:2: ( Identifier )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:244:4: Identifier
+            // Grammar\\Psimulex.g:243:2: ( Identifier )
+            // Grammar\\Psimulex.g:243:4: Identifier
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	Identifier104=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_variable1198); if (state.failed) return retval;
+            	Identifier104=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_variable1193); if (state.failed) return retval;
             	if ( state.backtracking == 0 )
             	{Identifier104_tree = (CommonTree)adaptor.Create(Identifier104);
             		adaptor.AddChild(root_0, Identifier104_tree);
@@ -4523,7 +4442,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "selecting"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:247:1: selecting : ( Identifier | parExpression ) ( selector )* ;
+    // Grammar\\Psimulex.g:246:1: selecting : ( Identifier | parExpression ) ( selector )* ;
     public PsimulexParser.selecting_return selecting() // throws RecognitionException [1]
     {   
         PsimulexParser.selecting_return retval = new PsimulexParser.selecting_return();
@@ -4545,12 +4464,12 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:248:2: ( ( Identifier | parExpression ) ( selector )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:248:4: ( Identifier | parExpression ) ( selector )*
+            // Grammar\\Psimulex.g:247:2: ( ( Identifier | parExpression ) ( selector )* )
+            // Grammar\\Psimulex.g:247:4: ( Identifier | parExpression ) ( selector )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:248:4: ( Identifier | parExpression )
+            	// Grammar\\Psimulex.g:247:4: ( Identifier | parExpression )
             	int alt30 = 2;
             	int LA30_0 = input.LA(1);
 
@@ -4573,9 +4492,9 @@ public partial class PsimulexParser : Parser
             	switch (alt30) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:248:5: Identifier
+            	        // Grammar\\Psimulex.g:247:5: Identifier
             	        {
-            	        	Identifier105=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_selecting1210); if (state.failed) return retval;
+            	        	Identifier105=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_selecting1205); if (state.failed) return retval;
             	        	if ( state.backtracking == 0 )
             	        	{Identifier105_tree = (CommonTree)adaptor.Create(Identifier105);
             	        		adaptor.AddChild(root_0, Identifier105_tree);
@@ -4584,9 +4503,9 @@ public partial class PsimulexParser : Parser
             	        }
             	        break;
             	    case 2 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:248:16: parExpression
+            	        // Grammar\\Psimulex.g:247:16: parExpression
             	        {
-            	        	PushFollow(FOLLOW_parExpression_in_selecting1212);
+            	        	PushFollow(FOLLOW_parExpression_in_selecting1207);
             	        	parExpression106 = parExpression();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -4597,7 +4516,7 @@ public partial class PsimulexParser : Parser
 
             	}
 
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:248:31: ( selector )*
+            	// Grammar\\Psimulex.g:247:31: ( selector )*
             	do 
             	{
             	    int alt31 = 2;
@@ -4612,9 +4531,9 @@ public partial class PsimulexParser : Parser
             	    switch (alt31) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: selector
+            			    // Grammar\\Psimulex.g:0:0: selector
             			    {
-            			    	PushFollow(FOLLOW_selector_in_selecting1215);
+            			    	PushFollow(FOLLOW_selector_in_selecting1210);
             			    	selector107 = selector();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -4670,7 +4589,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "selector"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:251:1: selector options {k=3; } : ( memberSelect | memberFunctionCall | indexing );
+    // Grammar\\Psimulex.g:250:1: selector options {k=3; } : ( memberSelect | memberFunctionCall | indexing );
     public PsimulexParser.selector_return selector() // throws RecognitionException [1]
     {   
         PsimulexParser.selector_return retval = new PsimulexParser.selector_return();
@@ -4692,17 +4611,17 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:253:5: ( memberSelect | memberFunctionCall | indexing )
+            // Grammar\\Psimulex.g:252:5: ( memberSelect | memberFunctionCall | indexing )
             int alt32 = 3;
             alt32 = dfa32.Predict(input);
             switch (alt32) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:253:9: memberSelect
+                    // Grammar\\Psimulex.g:252:9: memberSelect
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_memberSelect_in_selector1239);
+                    	PushFollow(FOLLOW_memberSelect_in_selector1234);
                     	memberSelect108 = memberSelect();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -4711,11 +4630,11 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:254:9: memberFunctionCall
+                    // Grammar\\Psimulex.g:253:9: memberFunctionCall
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_memberFunctionCall_in_selector1249);
+                    	PushFollow(FOLLOW_memberFunctionCall_in_selector1244);
                     	memberFunctionCall109 = memberFunctionCall();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -4724,11 +4643,11 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 3 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:255:9: indexing
+                    // Grammar\\Psimulex.g:254:9: indexing
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_indexing_in_selector1259);
+                    	PushFollow(FOLLOW_indexing_in_selector1254);
                     	indexing110 = indexing();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -4774,7 +4693,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "memberSelect"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:258:1: memberSelect options {k=3; } : DOT Identifier ;
+    // Grammar\\Psimulex.g:257:1: memberSelect options {k=3; } : DOT Identifier ;
     public PsimulexParser.memberSelect_return memberSelect() // throws RecognitionException [1]
     {   
         PsimulexParser.memberSelect_return retval = new PsimulexParser.memberSelect_return();
@@ -4794,13 +4713,13 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:260:2: ( DOT Identifier )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:260:4: DOT Identifier
+            // Grammar\\Psimulex.g:259:2: ( DOT Identifier )
+            // Grammar\\Psimulex.g:259:4: DOT Identifier
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	DOT111=(IToken)Match(input,DOT,FOLLOW_DOT_in_memberSelect1280); if (state.failed) return retval;
-            	Identifier112=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_memberSelect1283); if (state.failed) return retval;
+            	DOT111=(IToken)Match(input,DOT,FOLLOW_DOT_in_memberSelect1275); if (state.failed) return retval;
+            	Identifier112=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_memberSelect1278); if (state.failed) return retval;
             	if ( state.backtracking == 0 )
             	{Identifier112_tree = (CommonTree)adaptor.Create(Identifier112);
             		adaptor.AddChild(root_0, Identifier112_tree);
@@ -4844,7 +4763,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "memberFunctionCall"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:263:1: memberFunctionCall options {k=3; } : DOT Identifier arguments ;
+    // Grammar\\Psimulex.g:262:1: memberFunctionCall options {k=3; } : DOT Identifier arguments ;
     public PsimulexParser.memberFunctionCall_return memberFunctionCall() // throws RecognitionException [1]
     {   
         PsimulexParser.memberFunctionCall_return retval = new PsimulexParser.memberFunctionCall_return();
@@ -4866,18 +4785,18 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:265:2: ( DOT Identifier arguments )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:265:4: DOT Identifier arguments
+            // Grammar\\Psimulex.g:264:2: ( DOT Identifier arguments )
+            // Grammar\\Psimulex.g:264:4: DOT Identifier arguments
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	DOT113=(IToken)Match(input,DOT,FOLLOW_DOT_in_memberFunctionCall1301); if (state.failed) return retval;
-            	Identifier114=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_memberFunctionCall1304); if (state.failed) return retval;
+            	DOT113=(IToken)Match(input,DOT,FOLLOW_DOT_in_memberFunctionCall1296); if (state.failed) return retval;
+            	Identifier114=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_memberFunctionCall1299); if (state.failed) return retval;
             	if ( state.backtracking == 0 )
             	{Identifier114_tree = (CommonTree)adaptor.Create(Identifier114);
             		adaptor.AddChild(root_0, Identifier114_tree);
             	}
-            	PushFollow(FOLLOW_arguments_in_memberFunctionCall1306);
+            	PushFollow(FOLLOW_arguments_in_memberFunctionCall1301);
             	arguments115 = arguments();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -4921,7 +4840,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "indexing"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:292:1: indexing : ( arrayIndexing | matrixIndexing );
+    // Grammar\\Psimulex.g:291:1: indexing : ( arrayIndexing | matrixIndexing );
     public PsimulexParser.indexing_return indexing() // throws RecognitionException [1]
     {   
         PsimulexParser.indexing_return retval = new PsimulexParser.indexing_return();
@@ -4941,7 +4860,7 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:293:2: ( arrayIndexing | matrixIndexing )
+            // Grammar\\Psimulex.g:292:2: ( arrayIndexing | matrixIndexing )
             int alt33 = 2;
             int LA33_0 = input.LA(1);
 
@@ -4949,7 +4868,7 @@ public partial class PsimulexParser : Parser
             {
                 int LA33_1 = input.LA(2);
 
-                if ( (synpred65_Psimulex()) )
+                if ( (synpred64_Psimulex()) )
                 {
                     alt33 = 1;
                 }
@@ -4977,11 +4896,11 @@ public partial class PsimulexParser : Parser
             switch (alt33) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:293:4: arrayIndexing
+                    // Grammar\\Psimulex.g:292:4: arrayIndexing
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_arrayIndexing_in_indexing1324);
+                    	PushFollow(FOLLOW_arrayIndexing_in_indexing1319);
                     	arrayIndexing116 = arrayIndexing();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -4990,11 +4909,11 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:294:4: matrixIndexing
+                    // Grammar\\Psimulex.g:293:4: matrixIndexing
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_matrixIndexing_in_indexing1329);
+                    	PushFollow(FOLLOW_matrixIndexing_in_indexing1324);
                     	matrixIndexing117 = matrixIndexing();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -5040,7 +4959,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "arrayIndexing"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:297:1: arrayIndexing : LS expression RS ;
+    // Grammar\\Psimulex.g:296:1: arrayIndexing : LS expression RS ;
     public PsimulexParser.arrayIndexing_return arrayIndexing() // throws RecognitionException [1]
     {   
         PsimulexParser.arrayIndexing_return retval = new PsimulexParser.arrayIndexing_return();
@@ -5062,18 +4981,18 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:298:2: ( LS expression RS )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:298:4: LS expression RS
+            // Grammar\\Psimulex.g:297:2: ( LS expression RS )
+            // Grammar\\Psimulex.g:297:4: LS expression RS
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	LS118=(IToken)Match(input,LS,FOLLOW_LS_in_arrayIndexing1341); if (state.failed) return retval;
-            	PushFollow(FOLLOW_expression_in_arrayIndexing1344);
+            	LS118=(IToken)Match(input,LS,FOLLOW_LS_in_arrayIndexing1336); if (state.failed) return retval;
+            	PushFollow(FOLLOW_expression_in_arrayIndexing1339);
             	expression119 = expression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression119.Tree);
-            	RS120=(IToken)Match(input,RS,FOLLOW_RS_in_arrayIndexing1346); if (state.failed) return retval;
+            	RS120=(IToken)Match(input,RS,FOLLOW_RS_in_arrayIndexing1341); if (state.failed) return retval;
 
             }
 
@@ -5113,7 +5032,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "matrixIndexing"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:301:1: matrixIndexing : LS expression C expression RS ;
+    // Grammar\\Psimulex.g:300:1: matrixIndexing : LS expression C expression RS ;
     public PsimulexParser.matrixIndexing_return matrixIndexing() // throws RecognitionException [1]
     {   
         PsimulexParser.matrixIndexing_return retval = new PsimulexParser.matrixIndexing_return();
@@ -5139,24 +5058,24 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:302:2: ( LS expression C expression RS )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:302:4: LS expression C expression RS
+            // Grammar\\Psimulex.g:301:2: ( LS expression C expression RS )
+            // Grammar\\Psimulex.g:301:4: LS expression C expression RS
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	LS121=(IToken)Match(input,LS,FOLLOW_LS_in_matrixIndexing1358); if (state.failed) return retval;
-            	PushFollow(FOLLOW_expression_in_matrixIndexing1361);
+            	LS121=(IToken)Match(input,LS,FOLLOW_LS_in_matrixIndexing1353); if (state.failed) return retval;
+            	PushFollow(FOLLOW_expression_in_matrixIndexing1356);
             	expression122 = expression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression122.Tree);
-            	C123=(IToken)Match(input,C,FOLLOW_C_in_matrixIndexing1363); if (state.failed) return retval;
-            	PushFollow(FOLLOW_expression_in_matrixIndexing1366);
+            	C123=(IToken)Match(input,C,FOLLOW_C_in_matrixIndexing1358); if (state.failed) return retval;
+            	PushFollow(FOLLOW_expression_in_matrixIndexing1361);
             	expression124 = expression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression124.Tree);
-            	RS125=(IToken)Match(input,RS,FOLLOW_RS_in_matrixIndexing1368); if (state.failed) return retval;
+            	RS125=(IToken)Match(input,RS,FOLLOW_RS_in_matrixIndexing1363); if (state.failed) return retval;
 
             }
 
@@ -5196,7 +5115,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "arguments"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:305:1: arguments : LP ( expressionList )? RP ;
+    // Grammar\\Psimulex.g:304:1: arguments : LP ( expressionList )? RP ;
     public PsimulexParser.arguments_return arguments() // throws RecognitionException [1]
     {   
         PsimulexParser.arguments_return retval = new PsimulexParser.arguments_return();
@@ -5218,13 +5137,13 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:306:5: ( LP ( expressionList )? RP )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:306:9: LP ( expressionList )? RP
+            // Grammar\\Psimulex.g:305:5: ( LP ( expressionList )? RP )
+            // Grammar\\Psimulex.g:305:9: LP ( expressionList )? RP
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	LP126=(IToken)Match(input,LP,FOLLOW_LP_in_arguments1386); if (state.failed) return retval;
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:306:13: ( expressionList )?
+            	LP126=(IToken)Match(input,LP,FOLLOW_LP_in_arguments1381); if (state.failed) return retval;
+            	// Grammar\\Psimulex.g:305:13: ( expressionList )?
             	int alt34 = 2;
             	int LA34_0 = input.LA(1);
 
@@ -5235,9 +5154,9 @@ public partial class PsimulexParser : Parser
             	switch (alt34) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: expressionList
+            	        // Grammar\\Psimulex.g:0:0: expressionList
             	        {
-            	        	PushFollow(FOLLOW_expressionList_in_arguments1389);
+            	        	PushFollow(FOLLOW_expressionList_in_arguments1384);
             	        	expressionList127 = expressionList();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -5248,7 +5167,7 @@ public partial class PsimulexParser : Parser
 
             	}
 
-            	RP128=(IToken)Match(input,RP,FOLLOW_RP_in_arguments1392); if (state.failed) return retval;
+            	RP128=(IToken)Match(input,RP,FOLLOW_RP_in_arguments1387); if (state.failed) return retval;
 
             }
 
@@ -5288,7 +5207,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "expressionList"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:309:1: expressionList : expression ( C expression )* ;
+    // Grammar\\Psimulex.g:308:1: expressionList : expression ( C expression )* ;
     public PsimulexParser.expressionList_return expressionList() // throws RecognitionException [1]
     {   
         PsimulexParser.expressionList_return retval = new PsimulexParser.expressionList_return();
@@ -5310,17 +5229,17 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:310:5: ( expression ( C expression )* )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:310:7: expression ( C expression )*
+            // Grammar\\Psimulex.g:309:5: ( expression ( C expression )* )
+            // Grammar\\Psimulex.g:309:7: expression ( C expression )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_expression_in_expressionList1410);
+            	PushFollow(FOLLOW_expression_in_expressionList1405);
             	expression129 = expression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression129.Tree);
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:310:18: ( C expression )*
+            	// Grammar\\Psimulex.g:309:18: ( C expression )*
             	do 
             	{
             	    int alt35 = 2;
@@ -5335,10 +5254,10 @@ public partial class PsimulexParser : Parser
             	    switch (alt35) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:310:19: C expression
+            			    // Grammar\\Psimulex.g:309:19: C expression
             			    {
-            			    	C130=(IToken)Match(input,C,FOLLOW_C_in_expressionList1413); if (state.failed) return retval;
-            			    	PushFollow(FOLLOW_expression_in_expressionList1416);
+            			    	C130=(IToken)Match(input,C,FOLLOW_C_in_expressionList1408); if (state.failed) return retval;
+            			    	PushFollow(FOLLOW_expression_in_expressionList1411);
             			    	expression131 = expression();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -5394,7 +5313,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "literal"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:313:1: literal : ( IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral );
+    // Grammar\\Psimulex.g:312:1: literal : ( IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral );
     public PsimulexParser.literal_return literal() // throws RecognitionException [1]
     {   
         PsimulexParser.literal_return retval = new PsimulexParser.literal_return();
@@ -5412,8 +5331,8 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:314:5: ( IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
+            // Grammar\\Psimulex.g:313:5: ( IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral )
+            // Grammar\\Psimulex.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -5470,7 +5389,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "block"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:332:1: block : LB ( blockStatement )* RB ;
+    // Grammar\\Psimulex.g:331:1: block : LB ( blockStatement )* RB ;
     public PsimulexParser.block_return block() // throws RecognitionException [1]
     {   
         PsimulexParser.block_return retval = new PsimulexParser.block_return();
@@ -5492,13 +5411,13 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:333:5: ( LB ( blockStatement )* RB )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:333:9: LB ( blockStatement )* RB
+            // Grammar\\Psimulex.g:332:5: ( LB ( blockStatement )* RB )
+            // Grammar\\Psimulex.g:332:9: LB ( blockStatement )* RB
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	LB133=(IToken)Match(input,LB,FOLLOW_LB_in_block1542); if (state.failed) return retval;
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:333:13: ( blockStatement )*
+            	LB133=(IToken)Match(input,LB,FOLLOW_LB_in_block1537); if (state.failed) return retval;
+            	// Grammar\\Psimulex.g:332:13: ( blockStatement )*
             	do 
             	{
             	    int alt36 = 2;
@@ -5513,9 +5432,9 @@ public partial class PsimulexParser : Parser
             	    switch (alt36) 
             		{
             			case 1 :
-            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: blockStatement
+            			    // Grammar\\Psimulex.g:0:0: blockStatement
             			    {
-            			    	PushFollow(FOLLOW_blockStatement_in_block1545);
+            			    	PushFollow(FOLLOW_blockStatement_in_block1540);
             			    	blockStatement134 = blockStatement();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -5532,7 +5451,7 @@ public partial class PsimulexParser : Parser
             	loop36:
             		;	// Stops C# compiler whining that label 'loop36' has no statements
 
-            	RB135=(IToken)Match(input,RB,FOLLOW_RB_in_block1548); if (state.failed) return retval;
+            	RB135=(IToken)Match(input,RB,FOLLOW_RB_in_block1543); if (state.failed) return retval;
 
             }
 
@@ -5572,7 +5491,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "blockStatement"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:336:1: blockStatement : ( localVariableDeclarationStatement | statement );
+    // Grammar\\Psimulex.g:335:1: blockStatement : ( localVariableDeclarationStatement | statement );
     public PsimulexParser.blockStatement_return blockStatement() // throws RecognitionException [1]
     {   
         PsimulexParser.blockStatement_return retval = new PsimulexParser.blockStatement_return();
@@ -5592,7 +5511,7 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:337:5: ( localVariableDeclarationStatement | statement )
+            // Grammar\\Psimulex.g:336:5: ( localVariableDeclarationStatement | statement )
             int alt37 = 2;
             int LA37_0 = input.LA(1);
 
@@ -5615,11 +5534,11 @@ public partial class PsimulexParser : Parser
             switch (alt37) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:337:9: localVariableDeclarationStatement
+                    // Grammar\\Psimulex.g:336:9: localVariableDeclarationStatement
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_localVariableDeclarationStatement_in_blockStatement1572);
+                    	PushFollow(FOLLOW_localVariableDeclarationStatement_in_blockStatement1567);
                     	localVariableDeclarationStatement136 = localVariableDeclarationStatement();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -5628,11 +5547,11 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:338:9: statement
+                    // Grammar\\Psimulex.g:337:9: statement
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_statement_in_blockStatement1582);
+                    	PushFollow(FOLLOW_statement_in_blockStatement1577);
                     	statement137 = statement();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -5678,7 +5597,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "localVariableDeclarationStatement"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:341:1: localVariableDeclarationStatement : localVariableDeclaration SC ;
+    // Grammar\\Psimulex.g:340:1: localVariableDeclarationStatement : localVariableDeclaration SC ;
     public PsimulexParser.localVariableDeclarationStatement_return localVariableDeclarationStatement() // throws RecognitionException [1]
     {   
         PsimulexParser.localVariableDeclarationStatement_return retval = new PsimulexParser.localVariableDeclarationStatement_return();
@@ -5698,17 +5617,17 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:342:5: ( localVariableDeclaration SC )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:342:10: localVariableDeclaration SC
+            // Grammar\\Psimulex.g:341:5: ( localVariableDeclaration SC )
+            // Grammar\\Psimulex.g:341:10: localVariableDeclaration SC
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_localVariableDeclaration_in_localVariableDeclarationStatement1606);
+            	PushFollow(FOLLOW_localVariableDeclaration_in_localVariableDeclarationStatement1601);
             	localVariableDeclaration138 = localVariableDeclaration();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, localVariableDeclaration138.Tree);
-            	SC139=(IToken)Match(input,SC,FOLLOW_SC_in_localVariableDeclarationStatement1608); if (state.failed) return retval;
+            	SC139=(IToken)Match(input,SC,FOLLOW_SC_in_localVariableDeclarationStatement1603); if (state.failed) return retval;
 
             }
 
@@ -5748,7 +5667,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "localVariableDeclaration"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:345:1: localVariableDeclaration : type variableDeclarator ;
+    // Grammar\\Psimulex.g:344:1: localVariableDeclaration : type variableDeclarator ;
     public PsimulexParser.localVariableDeclaration_return localVariableDeclaration() // throws RecognitionException [1]
     {   
         PsimulexParser.localVariableDeclaration_return retval = new PsimulexParser.localVariableDeclaration_return();
@@ -5768,17 +5687,17 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:346:5: ( type variableDeclarator )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:346:9: type variableDeclarator
+            // Grammar\\Psimulex.g:345:5: ( type variableDeclarator )
+            // Grammar\\Psimulex.g:345:9: type variableDeclarator
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_type_in_localVariableDeclaration1628);
+            	PushFollow(FOLLOW_type_in_localVariableDeclaration1623);
             	type140 = type();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, type140.Tree);
-            	PushFollow(FOLLOW_variableDeclarator_in_localVariableDeclaration1630);
+            	PushFollow(FOLLOW_variableDeclarator_in_localVariableDeclaration1625);
             	variableDeclarator141 = variableDeclarator();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -5822,7 +5741,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "branch"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:349:1: branch : ( block | blockStatement );
+    // Grammar\\Psimulex.g:348:1: branch : ( block | blockStatement );
     public PsimulexParser.branch_return branch() // throws RecognitionException [1]
     {   
         PsimulexParser.branch_return retval = new PsimulexParser.branch_return();
@@ -5842,7 +5761,7 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:350:5: ( block | blockStatement )
+            // Grammar\\Psimulex.g:349:5: ( block | blockStatement )
             int alt38 = 2;
             int LA38_0 = input.LA(1);
 
@@ -5865,11 +5784,11 @@ public partial class PsimulexParser : Parser
             switch (alt38) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:350:7: block
+                    // Grammar\\Psimulex.g:349:7: block
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_block_in_branch1651);
+                    	PushFollow(FOLLOW_block_in_branch1646);
                     	block142 = block();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -5878,11 +5797,11 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:350:13: blockStatement
+                    // Grammar\\Psimulex.g:349:13: blockStatement
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_blockStatement_in_branch1653);
+                    	PushFollow(FOLLOW_blockStatement_in_branch1648);
                     	blockStatement143 = blockStatement();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -5928,7 +5847,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "statement"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:353:1: statement : ( IF parExpression branch ( options {k=1; } : ELSE branch )? | ( FOR | PFOR ) LP forControl RP branch | ( FOREACH | PFOREACH ) LP foreachControl RP branch | LOOP LP loopControl RP branch | WHILE parExpression branch | DO branch WHILE parExpression SC | PDO block | RETURN ( expression )? SC | BREAK SC | CONTINUE SC | SC | expression SC );
+    // Grammar\\Psimulex.g:352:1: statement : ( IF parExpression branch ( options {k=1; } : ELSE branch )? | ( FOR | PFOR ) LP forControl RP branch | ( FOREACH | PFOREACH ) LP foreachControl RP branch | LOOP LP loopControl RP branch | WHILE parExpression branch | DO branch WHILE parExpression SC | PDO block | RETURN ( expression )? SC | BREAK SC | CONTINUE SC | SC | expression SC );
     public PsimulexParser.statement_return statement() // throws RecognitionException [1]
     {   
         PsimulexParser.statement_return retval = new PsimulexParser.statement_return();
@@ -6024,7 +5943,7 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:354:5: ( IF parExpression branch ( options {k=1; } : ELSE branch )? | ( FOR | PFOR ) LP forControl RP branch | ( FOREACH | PFOREACH ) LP foreachControl RP branch | LOOP LP loopControl RP branch | WHILE parExpression branch | DO branch WHILE parExpression SC | PDO block | RETURN ( expression )? SC | BREAK SC | CONTINUE SC | SC | expression SC )
+            // Grammar\\Psimulex.g:353:5: ( IF parExpression branch ( options {k=1; } : ELSE branch )? | ( FOR | PFOR ) LP forControl RP branch | ( FOREACH | PFOREACH ) LP foreachControl RP branch | LOOP LP loopControl RP branch | WHILE parExpression branch | DO branch WHILE parExpression SC | PDO block | RETURN ( expression )? SC | BREAK SC | CONTINUE SC | SC | expression SC )
             int alt41 = 12;
             switch ( input.LA(1) ) 
             {
@@ -6114,26 +6033,26 @@ public partial class PsimulexParser : Parser
             switch (alt41) 
             {
                 case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:354:7: IF parExpression branch ( options {k=1; } : ELSE branch )?
+                    // Grammar\\Psimulex.g:353:7: IF parExpression branch ( options {k=1; } : ELSE branch )?
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	IF144=(IToken)Match(input,IF,FOLLOW_IF_in_statement1670); if (state.failed) return retval;
+                    	IF144=(IToken)Match(input,IF,FOLLOW_IF_in_statement1665); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{IF144_tree = (CommonTree)adaptor.Create(IF144);
                     		adaptor.AddChild(root_0, IF144_tree);
                     	}
-                    	PushFollow(FOLLOW_parExpression_in_statement1672);
+                    	PushFollow(FOLLOW_parExpression_in_statement1667);
                     	parExpression145 = parExpression();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, parExpression145.Tree);
-                    	PushFollow(FOLLOW_branch_in_statement1674);
+                    	PushFollow(FOLLOW_branch_in_statement1669);
                     	branch146 = branch();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, branch146.Tree);
-                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:354:31: ( options {k=1; } : ELSE branch )?
+                    	// Grammar\\Psimulex.g:353:31: ( options {k=1; } : ELSE branch )?
                     	int alt39 = 2;
                     	int LA39_0 = input.LA(1);
 
@@ -6141,7 +6060,7 @@ public partial class PsimulexParser : Parser
                     	{
                     	    int LA39_2 = input.LA(2);
 
-                    	    if ( (synpred77_Psimulex()) )
+                    	    if ( (synpred76_Psimulex()) )
                     	    {
                     	        alt39 = 1;
                     	    }
@@ -6149,14 +6068,14 @@ public partial class PsimulexParser : Parser
                     	switch (alt39) 
                     	{
                     	    case 1 :
-                    	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:354:47: ELSE branch
+                    	        // Grammar\\Psimulex.g:353:47: ELSE branch
                     	        {
-                    	        	ELSE147=(IToken)Match(input,ELSE,FOLLOW_ELSE_in_statement1684); if (state.failed) return retval;
+                    	        	ELSE147=(IToken)Match(input,ELSE,FOLLOW_ELSE_in_statement1679); if (state.failed) return retval;
                     	        	if ( state.backtracking == 0 )
                     	        	{ELSE147_tree = (CommonTree)adaptor.Create(ELSE147);
                     	        		adaptor.AddChild(root_0, ELSE147_tree);
                     	        	}
-                    	        	PushFollow(FOLLOW_branch_in_statement1686);
+                    	        	PushFollow(FOLLOW_branch_in_statement1681);
                     	        	branch148 = branch();
                     	        	state.followingStackPointer--;
                     	        	if (state.failed) return retval;
@@ -6171,7 +6090,7 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:355:9: ( FOR | PFOR ) LP forControl RP branch
+                    // Grammar\\Psimulex.g:354:9: ( FOR | PFOR ) LP forControl RP branch
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -6189,14 +6108,14 @@ public partial class PsimulexParser : Parser
                     	    throw mse;
                     	}
 
-                    	LP150=(IToken)Match(input,LP,FOLLOW_LP_in_statement1704); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_forControl_in_statement1707);
+                    	LP150=(IToken)Match(input,LP,FOLLOW_LP_in_statement1699); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_forControl_in_statement1702);
                     	forControl151 = forControl();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, forControl151.Tree);
-                    	RP152=(IToken)Match(input,RP,FOLLOW_RP_in_statement1709); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_branch_in_statement1712);
+                    	RP152=(IToken)Match(input,RP,FOLLOW_RP_in_statement1704); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_branch_in_statement1707);
                     	branch153 = branch();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -6205,7 +6124,7 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 3 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:356:9: ( FOREACH | PFOREACH ) LP foreachControl RP branch
+                    // Grammar\\Psimulex.g:355:9: ( FOREACH | PFOREACH ) LP foreachControl RP branch
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -6223,14 +6142,14 @@ public partial class PsimulexParser : Parser
                     	    throw mse;
                     	}
 
-                    	LP155=(IToken)Match(input,LP,FOLLOW_LP_in_statement1728); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_foreachControl_in_statement1731);
+                    	LP155=(IToken)Match(input,LP,FOLLOW_LP_in_statement1723); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_foreachControl_in_statement1726);
                     	foreachControl156 = foreachControl();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, foreachControl156.Tree);
-                    	RP157=(IToken)Match(input,RP,FOLLOW_RP_in_statement1733); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_branch_in_statement1736);
+                    	RP157=(IToken)Match(input,RP,FOLLOW_RP_in_statement1728); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_branch_in_statement1731);
                     	branch158 = branch();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -6239,23 +6158,23 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 4 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:357:9: LOOP LP loopControl RP branch
+                    // Grammar\\Psimulex.g:356:9: LOOP LP loopControl RP branch
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	LOOP159=(IToken)Match(input,LOOP,FOLLOW_LOOP_in_statement1746); if (state.failed) return retval;
+                    	LOOP159=(IToken)Match(input,LOOP,FOLLOW_LOOP_in_statement1741); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{LOOP159_tree = (CommonTree)adaptor.Create(LOOP159);
                     		adaptor.AddChild(root_0, LOOP159_tree);
                     	}
-                    	LP160=(IToken)Match(input,LP,FOLLOW_LP_in_statement1748); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_loopControl_in_statement1751);
+                    	LP160=(IToken)Match(input,LP,FOLLOW_LP_in_statement1743); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_loopControl_in_statement1746);
                     	loopControl161 = loopControl();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, loopControl161.Tree);
-                    	RP162=(IToken)Match(input,RP,FOLLOW_RP_in_statement1753); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_branch_in_statement1756);
+                    	RP162=(IToken)Match(input,RP,FOLLOW_RP_in_statement1748); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_branch_in_statement1751);
                     	branch163 = branch();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -6264,21 +6183,21 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 5 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:358:9: WHILE parExpression branch
+                    // Grammar\\Psimulex.g:357:9: WHILE parExpression branch
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	WHILE164=(IToken)Match(input,WHILE,FOLLOW_WHILE_in_statement1766); if (state.failed) return retval;
+                    	WHILE164=(IToken)Match(input,WHILE,FOLLOW_WHILE_in_statement1761); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{WHILE164_tree = (CommonTree)adaptor.Create(WHILE164);
                     		adaptor.AddChild(root_0, WHILE164_tree);
                     	}
-                    	PushFollow(FOLLOW_parExpression_in_statement1768);
+                    	PushFollow(FOLLOW_parExpression_in_statement1763);
                     	parExpression165 = parExpression();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, parExpression165.Tree);
-                    	PushFollow(FOLLOW_branch_in_statement1770);
+                    	PushFollow(FOLLOW_branch_in_statement1765);
                     	branch166 = branch();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -6287,45 +6206,45 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 6 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:359:9: DO branch WHILE parExpression SC
+                    // Grammar\\Psimulex.g:358:9: DO branch WHILE parExpression SC
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	DO167=(IToken)Match(input,DO,FOLLOW_DO_in_statement1780); if (state.failed) return retval;
+                    	DO167=(IToken)Match(input,DO,FOLLOW_DO_in_statement1775); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{DO167_tree = (CommonTree)adaptor.Create(DO167);
                     		adaptor.AddChild(root_0, DO167_tree);
                     	}
-                    	PushFollow(FOLLOW_branch_in_statement1782);
+                    	PushFollow(FOLLOW_branch_in_statement1777);
                     	branch168 = branch();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, branch168.Tree);
-                    	WHILE169=(IToken)Match(input,WHILE,FOLLOW_WHILE_in_statement1784); if (state.failed) return retval;
+                    	WHILE169=(IToken)Match(input,WHILE,FOLLOW_WHILE_in_statement1779); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{WHILE169_tree = (CommonTree)adaptor.Create(WHILE169);
                     		adaptor.AddChild(root_0, WHILE169_tree);
                     	}
-                    	PushFollow(FOLLOW_parExpression_in_statement1786);
+                    	PushFollow(FOLLOW_parExpression_in_statement1781);
                     	parExpression170 = parExpression();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, parExpression170.Tree);
-                    	SC171=(IToken)Match(input,SC,FOLLOW_SC_in_statement1788); if (state.failed) return retval;
+                    	SC171=(IToken)Match(input,SC,FOLLOW_SC_in_statement1783); if (state.failed) return retval;
 
                     }
                     break;
                 case 7 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:360:9: PDO block
+                    // Grammar\\Psimulex.g:359:9: PDO block
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PDO172=(IToken)Match(input,PDO,FOLLOW_PDO_in_statement1799); if (state.failed) return retval;
+                    	PDO172=(IToken)Match(input,PDO,FOLLOW_PDO_in_statement1794); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{PDO172_tree = (CommonTree)adaptor.Create(PDO172);
                     		adaptor.AddChild(root_0, PDO172_tree);
                     	}
-                    	PushFollow(FOLLOW_block_in_statement1801);
+                    	PushFollow(FOLLOW_block_in_statement1796);
                     	block173 = block();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -6334,16 +6253,16 @@ public partial class PsimulexParser : Parser
                     }
                     break;
                 case 8 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:361:9: RETURN ( expression )? SC
+                    // Grammar\\Psimulex.g:360:9: RETURN ( expression )? SC
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	RETURN174=(IToken)Match(input,RETURN,FOLLOW_RETURN_in_statement1811); if (state.failed) return retval;
+                    	RETURN174=(IToken)Match(input,RETURN,FOLLOW_RETURN_in_statement1806); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{RETURN174_tree = (CommonTree)adaptor.Create(RETURN174);
                     		adaptor.AddChild(root_0, RETURN174_tree);
                     	}
-                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:361:16: ( expression )?
+                    	// Grammar\\Psimulex.g:360:16: ( expression )?
                     	int alt40 = 2;
                     	int LA40_0 = input.LA(1);
 
@@ -6354,9 +6273,9 @@ public partial class PsimulexParser : Parser
                     	switch (alt40) 
                     	{
                     	    case 1 :
-                    	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: expression
+                    	        // Grammar\\Psimulex.g:0:0: expression
                     	        {
-                    	        	PushFollow(FOLLOW_expression_in_statement1813);
+                    	        	PushFollow(FOLLOW_expression_in_statement1808);
                     	        	expression175 = expression();
                     	        	state.followingStackPointer--;
                     	        	if (state.failed) return retval;
@@ -6367,58 +6286,58 @@ public partial class PsimulexParser : Parser
 
                     	}
 
-                    	SC176=(IToken)Match(input,SC,FOLLOW_SC_in_statement1816); if (state.failed) return retval;
+                    	SC176=(IToken)Match(input,SC,FOLLOW_SC_in_statement1811); if (state.failed) return retval;
 
                     }
                     break;
                 case 9 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:362:9: BREAK SC
+                    // Grammar\\Psimulex.g:361:9: BREAK SC
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	BREAK177=(IToken)Match(input,BREAK,FOLLOW_BREAK_in_statement1827); if (state.failed) return retval;
+                    	BREAK177=(IToken)Match(input,BREAK,FOLLOW_BREAK_in_statement1822); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{BREAK177_tree = (CommonTree)adaptor.Create(BREAK177);
                     		adaptor.AddChild(root_0, BREAK177_tree);
                     	}
-                    	SC178=(IToken)Match(input,SC,FOLLOW_SC_in_statement1829); if (state.failed) return retval;
+                    	SC178=(IToken)Match(input,SC,FOLLOW_SC_in_statement1824); if (state.failed) return retval;
 
                     }
                     break;
                 case 10 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:363:9: CONTINUE SC
+                    // Grammar\\Psimulex.g:362:9: CONTINUE SC
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	CONTINUE179=(IToken)Match(input,CONTINUE,FOLLOW_CONTINUE_in_statement1840); if (state.failed) return retval;
+                    	CONTINUE179=(IToken)Match(input,CONTINUE,FOLLOW_CONTINUE_in_statement1835); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{CONTINUE179_tree = (CommonTree)adaptor.Create(CONTINUE179);
                     		adaptor.AddChild(root_0, CONTINUE179_tree);
                     	}
-                    	SC180=(IToken)Match(input,SC,FOLLOW_SC_in_statement1842); if (state.failed) return retval;
+                    	SC180=(IToken)Match(input,SC,FOLLOW_SC_in_statement1837); if (state.failed) return retval;
 
                     }
                     break;
                 case 11 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:364:9: SC
+                    // Grammar\\Psimulex.g:363:9: SC
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	SC181=(IToken)Match(input,SC,FOLLOW_SC_in_statement1853); if (state.failed) return retval;
+                    	SC181=(IToken)Match(input,SC,FOLLOW_SC_in_statement1848); if (state.failed) return retval;
 
                     }
                     break;
                 case 12 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:365:9: expression SC
+                    // Grammar\\Psimulex.g:364:9: expression SC
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_expression_in_statement1864);
+                    	PushFollow(FOLLOW_expression_in_statement1859);
                     	expression182 = expression();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression182.Tree);
-                    	SC183=(IToken)Match(input,SC,FOLLOW_SC_in_statement1866); if (state.failed) return retval;
+                    	SC183=(IToken)Match(input,SC,FOLLOW_SC_in_statement1861); if (state.failed) return retval;
 
                     }
                     break;
@@ -6460,7 +6379,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "forControl"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:368:1: forControl : ( forInit )? SC ( expression )? SC ( forUpdate )? ;
+    // Grammar\\Psimulex.g:367:1: forControl : ( forInit )? SC ( expression )? SC ( forUpdate )? ;
     public PsimulexParser.forControl_return forControl() // throws RecognitionException [1]
     {   
         PsimulexParser.forControl_return retval = new PsimulexParser.forControl_return();
@@ -6486,12 +6405,12 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:370:5: ( ( forInit )? SC ( expression )? SC ( forUpdate )? )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:370:10: ( forInit )? SC ( expression )? SC ( forUpdate )?
+            // Grammar\\Psimulex.g:369:5: ( ( forInit )? SC ( expression )? SC ( forUpdate )? )
+            // Grammar\\Psimulex.g:369:10: ( forInit )? SC ( expression )? SC ( forUpdate )?
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:370:10: ( forInit )?
+            	// Grammar\\Psimulex.g:369:10: ( forInit )?
             	int alt42 = 2;
             	int LA42_0 = input.LA(1);
 
@@ -6502,9 +6421,9 @@ public partial class PsimulexParser : Parser
             	switch (alt42) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: forInit
+            	        // Grammar\\Psimulex.g:0:0: forInit
             	        {
-            	        	PushFollow(FOLLOW_forInit_in_forControl1892);
+            	        	PushFollow(FOLLOW_forInit_in_forControl1887);
             	        	forInit184 = forInit();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -6515,8 +6434,8 @@ public partial class PsimulexParser : Parser
 
             	}
 
-            	SC185=(IToken)Match(input,SC,FOLLOW_SC_in_forControl1895); if (state.failed) return retval;
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:370:23: ( expression )?
+            	SC185=(IToken)Match(input,SC,FOLLOW_SC_in_forControl1890); if (state.failed) return retval;
+            	// Grammar\\Psimulex.g:369:23: ( expression )?
             	int alt43 = 2;
             	int LA43_0 = input.LA(1);
 
@@ -6527,9 +6446,9 @@ public partial class PsimulexParser : Parser
             	switch (alt43) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: expression
+            	        // Grammar\\Psimulex.g:0:0: expression
             	        {
-            	        	PushFollow(FOLLOW_expression_in_forControl1898);
+            	        	PushFollow(FOLLOW_expression_in_forControl1893);
             	        	expression186 = expression();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -6540,8 +6459,8 @@ public partial class PsimulexParser : Parser
 
             	}
 
-            	SC187=(IToken)Match(input,SC,FOLLOW_SC_in_forControl1901); if (state.failed) return retval;
-            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:370:39: ( forUpdate )?
+            	SC187=(IToken)Match(input,SC,FOLLOW_SC_in_forControl1896); if (state.failed) return retval;
+            	// Grammar\\Psimulex.g:369:39: ( forUpdate )?
             	int alt44 = 2;
             	int LA44_0 = input.LA(1);
 
@@ -6552,9 +6471,9 @@ public partial class PsimulexParser : Parser
             	switch (alt44) 
             	{
             	    case 1 :
-            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:0:0: forUpdate
+            	        // Grammar\\Psimulex.g:0:0: forUpdate
             	        {
-            	        	PushFollow(FOLLOW_forUpdate_in_forControl1904);
+            	        	PushFollow(FOLLOW_forUpdate_in_forControl1899);
             	        	forUpdate188 = forUpdate();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -6604,7 +6523,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "forInit"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:373:1: forInit : localVariableDeclaration ;
+    // Grammar\\Psimulex.g:372:1: forInit : localVariableDeclaration ;
     public PsimulexParser.forInit_return forInit() // throws RecognitionException [1]
     {   
         PsimulexParser.forInit_return retval = new PsimulexParser.forInit_return();
@@ -6622,12 +6541,12 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:374:5: ( localVariableDeclaration )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:374:9: localVariableDeclaration
+            // Grammar\\Psimulex.g:373:5: ( localVariableDeclaration )
+            // Grammar\\Psimulex.g:373:9: localVariableDeclaration
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_localVariableDeclaration_in_forInit1924);
+            	PushFollow(FOLLOW_localVariableDeclaration_in_forInit1919);
             	localVariableDeclaration189 = localVariableDeclaration();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -6671,7 +6590,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "forUpdate"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:377:1: forUpdate : expression ;
+    // Grammar\\Psimulex.g:376:1: forUpdate : expression ;
     public PsimulexParser.forUpdate_return forUpdate() // throws RecognitionException [1]
     {   
         PsimulexParser.forUpdate_return retval = new PsimulexParser.forUpdate_return();
@@ -6689,12 +6608,12 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:378:5: ( expression )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:378:9: expression
+            // Grammar\\Psimulex.g:377:5: ( expression )
+            // Grammar\\Psimulex.g:377:9: expression
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_expression_in_forUpdate1943);
+            	PushFollow(FOLLOW_expression_in_forUpdate1938);
             	expression190 = expression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -6738,7 +6657,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "foreachControl"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:381:1: foreachControl options {k=3; } : type Identifier IN expression ;
+    // Grammar\\Psimulex.g:380:1: foreachControl options {k=3; } : type Identifier IN expression ;
     public PsimulexParser.foreachControl_return foreachControl() // throws RecognitionException [1]
     {   
         PsimulexParser.foreachControl_return retval = new PsimulexParser.foreachControl_return();
@@ -6762,27 +6681,27 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:383:5: ( type Identifier IN expression )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:383:9: type Identifier IN expression
+            // Grammar\\Psimulex.g:382:5: ( type Identifier IN expression )
+            // Grammar\\Psimulex.g:382:9: type Identifier IN expression
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_type_in_foreachControl1974);
+            	PushFollow(FOLLOW_type_in_foreachControl1969);
             	type191 = type();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, type191.Tree);
-            	Identifier192=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_foreachControl1976); if (state.failed) return retval;
+            	Identifier192=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_foreachControl1971); if (state.failed) return retval;
             	if ( state.backtracking == 0 )
             	{Identifier192_tree = (CommonTree)adaptor.Create(Identifier192);
             		adaptor.AddChild(root_0, Identifier192_tree);
             	}
-            	IN193=(IToken)Match(input,IN,FOLLOW_IN_in_foreachControl1978); if (state.failed) return retval;
+            	IN193=(IToken)Match(input,IN,FOLLOW_IN_in_foreachControl1973); if (state.failed) return retval;
             	if ( state.backtracking == 0 )
             	{IN193_tree = (CommonTree)adaptor.Create(IN193);
             		adaptor.AddChild(root_0, IN193_tree);
             	}
-            	PushFollow(FOLLOW_expression_in_foreachControl1980);
+            	PushFollow(FOLLOW_expression_in_foreachControl1975);
             	expression194 = expression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -6826,7 +6745,7 @@ public partial class PsimulexParser : Parser
     };
 
     // $ANTLR start "loopControl"
-    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:387:1: loopControl options {k=3; } : type Identifier TO expression ;
+    // Grammar\\Psimulex.g:386:1: loopControl options {k=3; } : type Identifier TO expression ;
     public PsimulexParser.loopControl_return loopControl() // throws RecognitionException [1]
     {   
         PsimulexParser.loopControl_return retval = new PsimulexParser.loopControl_return();
@@ -6850,27 +6769,27 @@ public partial class PsimulexParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:389:5: ( type Identifier TO expression )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:389:9: type Identifier TO expression
+            // Grammar\\Psimulex.g:388:5: ( type Identifier TO expression )
+            // Grammar\\Psimulex.g:388:9: type Identifier TO expression
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_type_in_loopControl2012);
+            	PushFollow(FOLLOW_type_in_loopControl2007);
             	type195 = type();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, type195.Tree);
-            	Identifier196=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_loopControl2014); if (state.failed) return retval;
+            	Identifier196=(IToken)Match(input,Identifier,FOLLOW_Identifier_in_loopControl2009); if (state.failed) return retval;
             	if ( state.backtracking == 0 )
             	{Identifier196_tree = (CommonTree)adaptor.Create(Identifier196);
             		adaptor.AddChild(root_0, Identifier196_tree);
             	}
-            	TO197=(IToken)Match(input,TO,FOLLOW_TO_in_loopControl2016); if (state.failed) return retval;
+            	TO197=(IToken)Match(input,TO,FOLLOW_TO_in_loopControl2011); if (state.failed) return retval;
             	if ( state.backtracking == 0 )
             	{TO197_tree = (CommonTree)adaptor.Create(TO197);
             		adaptor.AddChild(root_0, TO197_tree);
             	}
-            	PushFollow(FOLLOW_expression_in_loopControl2018);
+            	PushFollow(FOLLOW_expression_in_loopControl2013);
             	expression198 = expression();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -6906,8 +6825,8 @@ public partial class PsimulexParser : Parser
     // $ANTLR start "synpred1_Psimulex"
     public void synpred1_Psimulex_fragment() //throws RecognitionException
     {   
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:12:7: ( simpleProgram )
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:12:7: simpleProgram
+        // Grammar\\Psimulex.g:12:7: ( simpleProgram )
+        // Grammar\\Psimulex.g:12:7: simpleProgram
         {
         	PushFollow(FOLLOW_simpleProgram_in_synpred1_Psimulex64);
         	simpleProgram();
@@ -6921,8 +6840,8 @@ public partial class PsimulexParser : Parser
     // $ANTLR start "synpred9_Psimulex"
     public void synpred9_Psimulex_fragment() //throws RecognitionException
     {   
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:64:9: ( memberDeclaration )
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:64:9: memberDeclaration
+        // Grammar\\Psimulex.g:64:9: ( memberDeclaration )
+        // Grammar\\Psimulex.g:64:9: memberDeclaration
         {
         	PushFollow(FOLLOW_memberDeclaration_in_synpred9_Psimulex273);
         	memberDeclaration();
@@ -6936,8 +6855,8 @@ public partial class PsimulexParser : Parser
     // $ANTLR start "synpred30_Psimulex"
     public void synpred30_Psimulex_fragment() //throws RecognitionException
     {   
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:146:4: ( assignment )
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:146:4: assignment
+        // Grammar\\Psimulex.g:146:4: ( assignment )
+        // Grammar\\Psimulex.g:146:4: assignment
         {
         	PushFollow(FOLLOW_assignment_in_synpred30_Psimulex710);
         	assignment();
@@ -6948,29 +6867,29 @@ public partial class PsimulexParser : Parser
     }
     // $ANTLR end "synpred30_Psimulex"
 
-    // $ANTLR start "synpred51_Psimulex"
-    public void synpred51_Psimulex_fragment() //throws RecognitionException
+    // $ANTLR start "synpred57_Psimulex"
+    public void synpred57_Psimulex_fragment() //throws RecognitionException
     {   
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:212:7: ( unaryExpressionPostPlusPlusMinusMinus )
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:212:7: unaryExpressionPostPlusPlusMinusMinus
+        // Grammar\\Psimulex.g:228:9: ( parExpression )
+        // Grammar\\Psimulex.g:228:9: parExpression
         {
-        	PushFollow(FOLLOW_unaryExpressionPostPlusPlusMinusMinus_in_synpred51_Psimulex1040);
-        	unaryExpressionPostPlusPlusMinusMinus();
+        	PushFollow(FOLLOW_parExpression_in_synpred57_Psimulex1120);
+        	parExpression();
         	state.followingStackPointer--;
         	if (state.failed) return ;
 
         }
     }
-    // $ANTLR end "synpred51_Psimulex"
+    // $ANTLR end "synpred57_Psimulex"
 
     // $ANTLR start "synpred58_Psimulex"
     public void synpred58_Psimulex_fragment() //throws RecognitionException
     {   
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:229:9: ( parExpression )
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:229:9: parExpression
+        // Grammar\\Psimulex.g:229:7: ( leftValue )
+        // Grammar\\Psimulex.g:229:7: leftValue
         {
-        	PushFollow(FOLLOW_parExpression_in_synpred58_Psimulex1125);
-        	parExpression();
+        	PushFollow(FOLLOW_leftValue_in_synpred58_Psimulex1128);
+        	leftValue();
         	state.followingStackPointer--;
         	if (state.failed) return ;
 
@@ -6981,11 +6900,11 @@ public partial class PsimulexParser : Parser
     // $ANTLR start "synpred59_Psimulex"
     public void synpred59_Psimulex_fragment() //throws RecognitionException
     {   
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:230:7: ( leftValue )
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:230:7: leftValue
+        // Grammar\\Psimulex.g:238:4: ( variable )
+        // Grammar\\Psimulex.g:238:4: variable
         {
-        	PushFollow(FOLLOW_leftValue_in_synpred59_Psimulex1133);
-        	leftValue();
+        	PushFollow(FOLLOW_variable_in_synpred59_Psimulex1177);
+        	variable();
         	state.followingStackPointer--;
         	if (state.failed) return ;
 
@@ -6993,51 +6912,36 @@ public partial class PsimulexParser : Parser
     }
     // $ANTLR end "synpred59_Psimulex"
 
-    // $ANTLR start "synpred60_Psimulex"
-    public void synpred60_Psimulex_fragment() //throws RecognitionException
+    // $ANTLR start "synpred64_Psimulex"
+    public void synpred64_Psimulex_fragment() //throws RecognitionException
     {   
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:239:4: ( variable )
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:239:4: variable
+        // Grammar\\Psimulex.g:292:4: ( arrayIndexing )
+        // Grammar\\Psimulex.g:292:4: arrayIndexing
         {
-        	PushFollow(FOLLOW_variable_in_synpred60_Psimulex1182);
-        	variable();
-        	state.followingStackPointer--;
-        	if (state.failed) return ;
-
-        }
-    }
-    // $ANTLR end "synpred60_Psimulex"
-
-    // $ANTLR start "synpred65_Psimulex"
-    public void synpred65_Psimulex_fragment() //throws RecognitionException
-    {   
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:293:4: ( arrayIndexing )
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:293:4: arrayIndexing
-        {
-        	PushFollow(FOLLOW_arrayIndexing_in_synpred65_Psimulex1324);
+        	PushFollow(FOLLOW_arrayIndexing_in_synpred64_Psimulex1319);
         	arrayIndexing();
         	state.followingStackPointer--;
         	if (state.failed) return ;
 
         }
     }
-    // $ANTLR end "synpred65_Psimulex"
+    // $ANTLR end "synpred64_Psimulex"
 
-    // $ANTLR start "synpred77_Psimulex"
-    public void synpred77_Psimulex_fragment() //throws RecognitionException
+    // $ANTLR start "synpred76_Psimulex"
+    public void synpred76_Psimulex_fragment() //throws RecognitionException
     {   
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:354:47: ( ELSE branch )
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:354:47: ELSE branch
+        // Grammar\\Psimulex.g:353:47: ( ELSE branch )
+        // Grammar\\Psimulex.g:353:47: ELSE branch
         {
-        	Match(input,ELSE,FOLLOW_ELSE_in_synpred77_Psimulex1684); if (state.failed) return ;
-        	PushFollow(FOLLOW_branch_in_synpred77_Psimulex1686);
+        	Match(input,ELSE,FOLLOW_ELSE_in_synpred76_Psimulex1679); if (state.failed) return ;
+        	PushFollow(FOLLOW_branch_in_synpred76_Psimulex1681);
         	branch();
         	state.followingStackPointer--;
         	if (state.failed) return ;
 
         }
     }
-    // $ANTLR end "synpred77_Psimulex"
+    // $ANTLR end "synpred76_Psimulex"
 
     // Delegated rules
 
@@ -7095,42 +6999,6 @@ public partial class PsimulexParser : Parser
    	    state.failed = false;
    	    return success;
    	}
-   	public bool synpred77_Psimulex() 
-   	{
-   	    state.backtracking++;
-   	    int start = input.Mark();
-   	    try 
-   	    {
-   	        synpred77_Psimulex_fragment(); // can never throw exception
-   	    }
-   	    catch (RecognitionException re) 
-   	    {
-   	        Console.Error.WriteLine("impossible: "+re);
-   	    }
-   	    bool success = !state.failed;
-   	    input.Rewind(start);
-   	    state.backtracking--;
-   	    state.failed = false;
-   	    return success;
-   	}
-   	public bool synpred51_Psimulex() 
-   	{
-   	    state.backtracking++;
-   	    int start = input.Mark();
-   	    try 
-   	    {
-   	        synpred51_Psimulex_fragment(); // can never throw exception
-   	    }
-   	    catch (RecognitionException re) 
-   	    {
-   	        Console.Error.WriteLine("impossible: "+re);
-   	    }
-   	    bool success = !state.failed;
-   	    input.Rewind(start);
-   	    state.backtracking--;
-   	    state.failed = false;
-   	    return success;
-   	}
    	public bool synpred9_Psimulex() 
    	{
    	    state.backtracking++;
@@ -7167,13 +7035,13 @@ public partial class PsimulexParser : Parser
    	    state.failed = false;
    	    return success;
    	}
-   	public bool synpred65_Psimulex() 
+   	public bool synpred76_Psimulex() 
    	{
    	    state.backtracking++;
    	    int start = input.Mark();
    	    try 
    	    {
-   	        synpred65_Psimulex_fragment(); // can never throw exception
+   	        synpred76_Psimulex_fragment(); // can never throw exception
    	    }
    	    catch (RecognitionException re) 
    	    {
@@ -7185,13 +7053,31 @@ public partial class PsimulexParser : Parser
    	    state.failed = false;
    	    return success;
    	}
-   	public bool synpred60_Psimulex() 
+   	public bool synpred57_Psimulex() 
    	{
    	    state.backtracking++;
    	    int start = input.Mark();
    	    try 
    	    {
-   	        synpred60_Psimulex_fragment(); // can never throw exception
+   	        synpred57_Psimulex_fragment(); // can never throw exception
+   	    }
+   	    catch (RecognitionException re) 
+   	    {
+   	        Console.Error.WriteLine("impossible: "+re);
+   	    }
+   	    bool success = !state.failed;
+   	    input.Rewind(start);
+   	    state.backtracking--;
+   	    state.failed = false;
+   	    return success;
+   	}
+   	public bool synpred64_Psimulex() 
+   	{
+   	    state.backtracking++;
+   	    int start = input.Mark();
+   	    try 
+   	    {
+   	        synpred64_Psimulex_fragment(); // can never throw exception
    	    }
    	    catch (RecognitionException re) 
    	    {
@@ -7230,7 +7116,7 @@ public partial class PsimulexParser : Parser
     const string DFA1_acceptS =
         "\x02\uffff\x01\x01\x03\uffff\x01\x02\x09\uffff";
     const string DFA1_specialS =
-        "\x03\uffff\x01\x00\x01\uffff\x01\x02\x04\uffff\x01\x01\x05\uffff}>";
+        "\x03\uffff\x01\x01\x01\uffff\x01\x02\x04\uffff\x01\x00\x05\uffff}>";
     static readonly string[] DFA1_transitionS = {
             "\x01\x06\x01\x02\x01\x03\x01\x06\x01\x04\x03\uffff\x01\x02"+
             "\x04\uffff\x05\x01\x15\uffff\x02\x02\x03\uffff\x03\x02\x01\uffff"+
@@ -7294,21 +7180,6 @@ public partial class PsimulexParser : Parser
         switch ( s )
         {
                	case 0 : 
-                   	int LA1_3 = input.LA(1);
-
-                   	 
-                   	int index1_3 = input.Index();
-                   	input.Rewind();
-                   	s = -1;
-                   	if ( (synpred1_Psimulex()) ) { s = 2; }
-
-                   	else if ( (true) ) { s = 6; }
-
-                   	 
-                   	input.Seek(index1_3);
-                   	if ( s >= 0 ) return s;
-                   	break;
-               	case 1 : 
                    	int LA1_10 = input.LA(1);
 
                    	 
@@ -7321,6 +7192,21 @@ public partial class PsimulexParser : Parser
 
                    	 
                    	input.Seek(index1_10);
+                   	if ( s >= 0 ) return s;
+                   	break;
+               	case 1 : 
+                   	int LA1_3 = input.LA(1);
+
+                   	 
+                   	int index1_3 = input.Index();
+                   	input.Rewind();
+                   	s = -1;
+                   	if ( (synpred1_Psimulex()) ) { s = 2; }
+
+                   	else if ( (true) ) { s = 6; }
+
+                   	 
+                   	input.Seek(index1_3);
                    	if ( s >= 0 ) return s;
                    	break;
                	case 2 : 
@@ -7348,21 +7234,21 @@ public partial class PsimulexParser : Parser
     const string DFA32_eotS =
         "\x14\uffff";
     const string DFA32_eofS =
-        "\x03\uffff\x01\x05\x10\uffff";
+        "\x03\uffff\x01\x04\x10\uffff";
     const string DFA32_minS =
         "\x01\x0e\x01\x08\x01\uffff\x01\x06\x10\uffff";
     const string DFA32_maxS =
         "\x01\x33\x01\x08\x01\uffff\x01\x33\x10\uffff";
     const string DFA32_acceptS =
-        "\x02\uffff\x01\x03\x01\uffff\x01\x02\x01\x01\x0e\uffff";
+        "\x02\uffff\x01\x03\x01\uffff\x01\x01\x0e\uffff\x01\x02";
     const string DFA32_specialS =
         "\x14\uffff}>";
     static readonly string[] DFA32_transitionS = {
             "\x01\x02\x24\uffff\x01\x01",
             "\x01\x03",
             "",
-            "\x01\x05\x04\uffff\x01\x05\x01\x04\x04\x05\x0d\uffff\x14\x05"+
-            "\x01\uffff\x01\x05",
+            "\x01\x04\x04\uffff\x01\x04\x01\x13\x04\x04\x0d\uffff\x14\x04"+
+            "\x01\uffff\x01\x04",
             "",
             "",
             "",
@@ -7407,7 +7293,7 @@ public partial class PsimulexParser : Parser
 
         override public string Description
         {
-            get { return "251:1: selector options {k=3; } : ( memberSelect | memberFunctionCall | indexing );"; }
+            get { return "250:1: selector options {k=3; } : ( memberSelect | memberFunctionCall | indexing );"; }
         }
 
     }
@@ -7475,152 +7361,151 @@ public partial class PsimulexParser : Parser
     public static readonly BitSet FOLLOW_formalParameterDecls_in_formalParameterDeclsRest685 = new BitSet(new ulong[]{0x0000000000000002UL});
     public static readonly BitSet FOLLOW_assignment_in_expression710 = new BitSet(new ulong[]{0x0000000000000002UL});
     public static readonly BitSet FOLLOW_conditionalOrExpression_in_expression715 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_leftValue_in_assignment725 = new BitSet(new ulong[]{0x00000007C0000802UL});
-    public static readonly BitSet FOLLOW_assignmentOperator_in_assignment728 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_assignment731 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_leftValue_in_assignment725 = new BitSet(new ulong[]{0x00000007C0000800UL});
+    public static readonly BitSet FOLLOW_assignmentOperator_in_assignment727 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_assignment730 = new BitSet(new ulong[]{0x0000000000000002UL});
     public static readonly BitSet FOLLOW_set_in_assignmentOperator0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_conditionalAndExpression_in_conditionalOrExpression774 = new BitSet(new ulong[]{0x0000000800000002UL});
-    public static readonly BitSet FOLLOW_OR_in_conditionalOrExpression778 = new BitSet(new ulong[]{0xF7F71808003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_conditionalAndExpression_in_conditionalOrExpression781 = new BitSet(new ulong[]{0x0000000800000002UL});
-    public static readonly BitSet FOLLOW_equalityExpression_in_conditionalAndExpression803 = new BitSet(new ulong[]{0x0000001000000002UL});
-    public static readonly BitSet FOLLOW_AND_in_conditionalAndExpression807 = new BitSet(new ulong[]{0xF7F71810003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_equalityExpression_in_conditionalAndExpression810 = new BitSet(new ulong[]{0x0000001000000002UL});
-    public static readonly BitSet FOLLOW_relationalExpression_in_equalityExpression832 = new BitSet(new ulong[]{0x0000006000000002UL});
-    public static readonly BitSet FOLLOW_equalityOp_in_equalityExpression838 = new BitSet(new ulong[]{0xF7F71860003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_relationalExpression_in_equalityExpression843 = new BitSet(new ulong[]{0xF7F71860003E1162UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_conditionalAndExpression_in_conditionalOrExpression771 = new BitSet(new ulong[]{0x0000000800000002UL});
+    public static readonly BitSet FOLLOW_OR_in_conditionalOrExpression775 = new BitSet(new ulong[]{0xF7F71808003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_conditionalAndExpression_in_conditionalOrExpression778 = new BitSet(new ulong[]{0x0000000800000002UL});
+    public static readonly BitSet FOLLOW_equalityExpression_in_conditionalAndExpression800 = new BitSet(new ulong[]{0x0000001000000002UL});
+    public static readonly BitSet FOLLOW_AND_in_conditionalAndExpression804 = new BitSet(new ulong[]{0xF7F71810003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_equalityExpression_in_conditionalAndExpression807 = new BitSet(new ulong[]{0x0000001000000002UL});
+    public static readonly BitSet FOLLOW_relationalExpression_in_equalityExpression829 = new BitSet(new ulong[]{0x0000006000000002UL});
+    public static readonly BitSet FOLLOW_equalityOp_in_equalityExpression835 = new BitSet(new ulong[]{0xF7F71860003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_relationalExpression_in_equalityExpression840 = new BitSet(new ulong[]{0xF7F71860003E1162UL,0x000000000000007FUL});
     public static readonly BitSet FOLLOW_set_in_equalityOp0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_additiveExpression_in_relationalExpression878 = new BitSet(new ulong[]{0x0000078000000002UL});
-    public static readonly BitSet FOLLOW_relationalOp_in_relationalExpression882 = new BitSet(new ulong[]{0xF7F71F80003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_additiveExpression_in_relationalExpression885 = new BitSet(new ulong[]{0xF7F71F80003E1162UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_additiveExpression_in_relationalExpression875 = new BitSet(new ulong[]{0x0000078000000002UL});
+    public static readonly BitSet FOLLOW_relationalOp_in_relationalExpression879 = new BitSet(new ulong[]{0xF7F71F80003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_additiveExpression_in_relationalExpression882 = new BitSet(new ulong[]{0xF7F71F80003E1162UL,0x000000000000007FUL});
     public static readonly BitSet FOLLOW_set_in_relationalOp0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_multiplicativeExpression_in_additiveExpression945 = new BitSet(new ulong[]{0x0000180000000002UL});
-    public static readonly BitSet FOLLOW_additiveOp_in_additiveExpression949 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_multiplicativeExpression_in_additiveExpression952 = new BitSet(new ulong[]{0xF7F71800003E1162UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_multiplicativeExpression_in_additiveExpression942 = new BitSet(new ulong[]{0x0000180000000002UL});
+    public static readonly BitSet FOLLOW_additiveOp_in_additiveExpression946 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_multiplicativeExpression_in_additiveExpression949 = new BitSet(new ulong[]{0xF7F71800003E1162UL,0x000000000000007FUL});
     public static readonly BitSet FOLLOW_set_in_additiveOp0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_unaryExpression_in_multiplicativeExpression987 = new BitSet(new ulong[]{0x0000E00000000002UL});
-    public static readonly BitSet FOLLOW_multiplicativeOp_in_multiplicativeExpression991 = new BitSet(new ulong[]{0xF7F7F800003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_unaryExpression_in_multiplicativeExpression994 = new BitSet(new ulong[]{0xF7F7F800003E1162UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_unaryExpression_in_multiplicativeExpression984 = new BitSet(new ulong[]{0x0000E00000000002UL});
+    public static readonly BitSet FOLLOW_multiplicativeOp_in_multiplicativeExpression988 = new BitSet(new ulong[]{0xF7F7F800003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_unaryExpression_in_multiplicativeExpression991 = new BitSet(new ulong[]{0xF7F7F800003E1162UL,0x000000000000007FUL});
     public static readonly BitSet FOLLOW_set_in_multiplicativeOp0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_unaryPrefixOp_in_unaryExpression1029 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_unaryExpression_in_unaryExpression1032 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_unaryExpressionPostPlusPlusMinusMinus_in_unaryExpression1040 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_primaryExpression_in_unaryExpression1048 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_unaryPrefixOp_in_unaryExpression1026 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_unaryExpression_in_unaryExpression1029 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_primaryExpression_in_unaryExpression1037 = new BitSet(new ulong[]{0x0003000000000002UL});
+    public static readonly BitSet FOLLOW_unaryPostfixOp_in_unaryExpression1040 = new BitSet(new ulong[]{0x0000000000000002UL});
     public static readonly BitSet FOLLOW_set_in_unaryPrefixOp0 = new BitSet(new ulong[]{0x0000000000000002UL});
     public static readonly BitSet FOLLOW_set_in_unaryPostfixOp0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_primaryExpression_in_unaryExpressionPostPlusPlusMinusMinus1100 = new BitSet(new ulong[]{0x0003000000000002UL});
-    public static readonly BitSet FOLLOW_unaryPostfixOp_in_unaryExpressionPostPlusPlusMinusMinus1103 = new BitSet(new ulong[]{0x0003000000000002UL});
-    public static readonly BitSet FOLLOW_parExpression_in_primaryExpression1125 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_leftValue_in_primaryExpression1133 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_literal_in_primaryExpression1143 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_LP_in_parExpression1162 = new BitSet(new ulong[]{0xF7F71800003E3160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_parExpression1165 = new BitSet(new ulong[]{0x0000000000002000UL});
-    public static readonly BitSet FOLLOW_RP_in_parExpression1167 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_variable_in_leftValue1182 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_selecting_in_leftValue1187 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_Identifier_in_variable1198 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_Identifier_in_selecting1210 = new BitSet(new ulong[]{0x0008000000004002UL});
-    public static readonly BitSet FOLLOW_parExpression_in_selecting1212 = new BitSet(new ulong[]{0x0008000000004002UL});
-    public static readonly BitSet FOLLOW_selector_in_selecting1215 = new BitSet(new ulong[]{0x0008000000004002UL});
-    public static readonly BitSet FOLLOW_memberSelect_in_selector1239 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_memberFunctionCall_in_selector1249 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_indexing_in_selector1259 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_DOT_in_memberSelect1280 = new BitSet(new ulong[]{0x0000000000000100UL});
-    public static readonly BitSet FOLLOW_Identifier_in_memberSelect1283 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_DOT_in_memberFunctionCall1301 = new BitSet(new ulong[]{0x0000000000000100UL});
-    public static readonly BitSet FOLLOW_Identifier_in_memberFunctionCall1304 = new BitSet(new ulong[]{0x0000000000001000UL});
-    public static readonly BitSet FOLLOW_arguments_in_memberFunctionCall1306 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_arrayIndexing_in_indexing1324 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_matrixIndexing_in_indexing1329 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_LS_in_arrayIndexing1341 = new BitSet(new ulong[]{0xF7F71800003E9160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_arrayIndexing1344 = new BitSet(new ulong[]{0x0000000000008000UL});
-    public static readonly BitSet FOLLOW_RS_in_arrayIndexing1346 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_LS_in_matrixIndexing1358 = new BitSet(new ulong[]{0xF7F71800003F1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_matrixIndexing1361 = new BitSet(new ulong[]{0x0000000000010000UL});
-    public static readonly BitSet FOLLOW_C_in_matrixIndexing1363 = new BitSet(new ulong[]{0xF7F71800003E9160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_matrixIndexing1366 = new BitSet(new ulong[]{0x0000000000008000UL});
-    public static readonly BitSet FOLLOW_RS_in_matrixIndexing1368 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_LP_in_arguments1386 = new BitSet(new ulong[]{0xF7F71800003F3160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expressionList_in_arguments1389 = new BitSet(new ulong[]{0x0000000000002000UL});
-    public static readonly BitSet FOLLOW_RP_in_arguments1392 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_expression_in_expressionList1410 = new BitSet(new ulong[]{0x0000000000010002UL});
-    public static readonly BitSet FOLLOW_C_in_expressionList1413 = new BitSet(new ulong[]{0xF7F71800003F1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_expressionList1416 = new BitSet(new ulong[]{0x0000000000010002UL});
+    public static readonly BitSet FOLLOW_primaryExpression_in_unaryExpressionPostPlusPlusMinusMinus1095 = new BitSet(new ulong[]{0x0003000000000002UL});
+    public static readonly BitSet FOLLOW_unaryPostfixOp_in_unaryExpressionPostPlusPlusMinusMinus1098 = new BitSet(new ulong[]{0x0003000000000002UL});
+    public static readonly BitSet FOLLOW_parExpression_in_primaryExpression1120 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_leftValue_in_primaryExpression1128 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_literal_in_primaryExpression1138 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_LP_in_parExpression1157 = new BitSet(new ulong[]{0xF7F71800003E3160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_parExpression1160 = new BitSet(new ulong[]{0x0000000000002000UL});
+    public static readonly BitSet FOLLOW_RP_in_parExpression1162 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_variable_in_leftValue1177 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_selecting_in_leftValue1182 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_Identifier_in_variable1193 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_Identifier_in_selecting1205 = new BitSet(new ulong[]{0x0008000000004002UL});
+    public static readonly BitSet FOLLOW_parExpression_in_selecting1207 = new BitSet(new ulong[]{0x0008000000004002UL});
+    public static readonly BitSet FOLLOW_selector_in_selecting1210 = new BitSet(new ulong[]{0x0008000000004002UL});
+    public static readonly BitSet FOLLOW_memberSelect_in_selector1234 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_memberFunctionCall_in_selector1244 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_indexing_in_selector1254 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_DOT_in_memberSelect1275 = new BitSet(new ulong[]{0x0000000000000100UL});
+    public static readonly BitSet FOLLOW_Identifier_in_memberSelect1278 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_DOT_in_memberFunctionCall1296 = new BitSet(new ulong[]{0x0000000000000100UL});
+    public static readonly BitSet FOLLOW_Identifier_in_memberFunctionCall1299 = new BitSet(new ulong[]{0x0000000000001000UL});
+    public static readonly BitSet FOLLOW_arguments_in_memberFunctionCall1301 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_arrayIndexing_in_indexing1319 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_matrixIndexing_in_indexing1324 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_LS_in_arrayIndexing1336 = new BitSet(new ulong[]{0xF7F71800003E9160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_arrayIndexing1339 = new BitSet(new ulong[]{0x0000000000008000UL});
+    public static readonly BitSet FOLLOW_RS_in_arrayIndexing1341 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_LS_in_matrixIndexing1353 = new BitSet(new ulong[]{0xF7F71800003F1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_matrixIndexing1356 = new BitSet(new ulong[]{0x0000000000010000UL});
+    public static readonly BitSet FOLLOW_C_in_matrixIndexing1358 = new BitSet(new ulong[]{0xF7F71800003E9160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_matrixIndexing1361 = new BitSet(new ulong[]{0x0000000000008000UL});
+    public static readonly BitSet FOLLOW_RS_in_matrixIndexing1363 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_LP_in_arguments1381 = new BitSet(new ulong[]{0xF7F71800003F3160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expressionList_in_arguments1384 = new BitSet(new ulong[]{0x0000000000002000UL});
+    public static readonly BitSet FOLLOW_RP_in_arguments1387 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_expression_in_expressionList1405 = new BitSet(new ulong[]{0x0000000000010002UL});
+    public static readonly BitSet FOLLOW_C_in_expressionList1408 = new BitSet(new ulong[]{0xF7F71800003F1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_expressionList1411 = new BitSet(new ulong[]{0x0000000000010002UL});
     public static readonly BitSet FOLLOW_set_in_literal0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_LB_in_block1542 = new BitSet(new ulong[]{0xF7F71800003E1560UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_blockStatement_in_block1545 = new BitSet(new ulong[]{0xF7F71800003E1560UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_RB_in_block1548 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_localVariableDeclarationStatement_in_blockStatement1572 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_statement_in_blockStatement1582 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_localVariableDeclaration_in_localVariableDeclarationStatement1606 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_SC_in_localVariableDeclarationStatement1608 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_type_in_localVariableDeclaration1628 = new BitSet(new ulong[]{0x00000000003E0900UL});
-    public static readonly BitSet FOLLOW_variableDeclarator_in_localVariableDeclaration1630 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_block_in_branch1651 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_blockStatement_in_branch1653 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_IF_in_statement1670 = new BitSet(new ulong[]{0x0000000000001100UL});
-    public static readonly BitSet FOLLOW_parExpression_in_statement1672 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_branch_in_statement1674 = new BitSet(new ulong[]{0x0800000000000002UL});
-    public static readonly BitSet FOLLOW_ELSE_in_statement1684 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_branch_in_statement1686 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_set_in_statement1698 = new BitSet(new ulong[]{0x0000000000001000UL});
-    public static readonly BitSet FOLLOW_LP_in_statement1704 = new BitSet(new ulong[]{0x00000000003E0040UL});
-    public static readonly BitSet FOLLOW_forControl_in_statement1707 = new BitSet(new ulong[]{0x0000000000002000UL});
-    public static readonly BitSet FOLLOW_RP_in_statement1709 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_branch_in_statement1712 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_set_in_statement1722 = new BitSet(new ulong[]{0x0000000000001000UL});
-    public static readonly BitSet FOLLOW_LP_in_statement1728 = new BitSet(new ulong[]{0x00000000003E0100UL});
-    public static readonly BitSet FOLLOW_foreachControl_in_statement1731 = new BitSet(new ulong[]{0x0000000000002000UL});
-    public static readonly BitSet FOLLOW_RP_in_statement1733 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_branch_in_statement1736 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_LOOP_in_statement1746 = new BitSet(new ulong[]{0x0000000000001000UL});
-    public static readonly BitSet FOLLOW_LP_in_statement1748 = new BitSet(new ulong[]{0x00000000003E0100UL});
-    public static readonly BitSet FOLLOW_loopControl_in_statement1751 = new BitSet(new ulong[]{0x0000000000002000UL});
-    public static readonly BitSet FOLLOW_RP_in_statement1753 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_branch_in_statement1756 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_WHILE_in_statement1766 = new BitSet(new ulong[]{0x0000000000001100UL});
-    public static readonly BitSet FOLLOW_parExpression_in_statement1768 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_branch_in_statement1770 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_DO_in_statement1780 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_branch_in_statement1782 = new BitSet(new ulong[]{0x0000000000000000UL,0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_WHILE_in_statement1784 = new BitSet(new ulong[]{0x0000000000001100UL});
-    public static readonly BitSet FOLLOW_parExpression_in_statement1786 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_SC_in_statement1788 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_PDO_in_statement1799 = new BitSet(new ulong[]{0x0000000000000200UL});
-    public static readonly BitSet FOLLOW_block_in_statement1801 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_RETURN_in_statement1811 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_statement1813 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_SC_in_statement1816 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_BREAK_in_statement1827 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_SC_in_statement1829 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_CONTINUE_in_statement1840 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_SC_in_statement1842 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_SC_in_statement1853 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_expression_in_statement1864 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_SC_in_statement1866 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_forInit_in_forControl1892 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_SC_in_forControl1895 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_forControl1898 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_SC_in_forControl1901 = new BitSet(new ulong[]{0xF7F71800003E1162UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_forUpdate_in_forControl1904 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_localVariableDeclaration_in_forInit1924 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_expression_in_forUpdate1943 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_type_in_foreachControl1974 = new BitSet(new ulong[]{0x0000000000000100UL});
-    public static readonly BitSet FOLLOW_Identifier_in_foreachControl1976 = new BitSet(new ulong[]{0x0000000000000000UL,0x0000000000000080UL});
-    public static readonly BitSet FOLLOW_IN_in_foreachControl1978 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_foreachControl1980 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_type_in_loopControl2012 = new BitSet(new ulong[]{0x0000000000000100UL});
-    public static readonly BitSet FOLLOW_Identifier_in_loopControl2014 = new BitSet(new ulong[]{0x0000000000000000UL,0x0000000000000100UL});
-    public static readonly BitSet FOLLOW_TO_in_loopControl2016 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_expression_in_loopControl2018 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_LB_in_block1537 = new BitSet(new ulong[]{0xF7F71800003E1560UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_blockStatement_in_block1540 = new BitSet(new ulong[]{0xF7F71800003E1560UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_RB_in_block1543 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_localVariableDeclarationStatement_in_blockStatement1567 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_statement_in_blockStatement1577 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_localVariableDeclaration_in_localVariableDeclarationStatement1601 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_SC_in_localVariableDeclarationStatement1603 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_type_in_localVariableDeclaration1623 = new BitSet(new ulong[]{0x00000000003E0900UL});
+    public static readonly BitSet FOLLOW_variableDeclarator_in_localVariableDeclaration1625 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_block_in_branch1646 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_blockStatement_in_branch1648 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_IF_in_statement1665 = new BitSet(new ulong[]{0x0000000000001100UL});
+    public static readonly BitSet FOLLOW_parExpression_in_statement1667 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_branch_in_statement1669 = new BitSet(new ulong[]{0x0800000000000002UL});
+    public static readonly BitSet FOLLOW_ELSE_in_statement1679 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_branch_in_statement1681 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_set_in_statement1693 = new BitSet(new ulong[]{0x0000000000001000UL});
+    public static readonly BitSet FOLLOW_LP_in_statement1699 = new BitSet(new ulong[]{0x00000000003E0040UL});
+    public static readonly BitSet FOLLOW_forControl_in_statement1702 = new BitSet(new ulong[]{0x0000000000002000UL});
+    public static readonly BitSet FOLLOW_RP_in_statement1704 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_branch_in_statement1707 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_set_in_statement1717 = new BitSet(new ulong[]{0x0000000000001000UL});
+    public static readonly BitSet FOLLOW_LP_in_statement1723 = new BitSet(new ulong[]{0x00000000003E0100UL});
+    public static readonly BitSet FOLLOW_foreachControl_in_statement1726 = new BitSet(new ulong[]{0x0000000000002000UL});
+    public static readonly BitSet FOLLOW_RP_in_statement1728 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_branch_in_statement1731 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_LOOP_in_statement1741 = new BitSet(new ulong[]{0x0000000000001000UL});
+    public static readonly BitSet FOLLOW_LP_in_statement1743 = new BitSet(new ulong[]{0x00000000003E0100UL});
+    public static readonly BitSet FOLLOW_loopControl_in_statement1746 = new BitSet(new ulong[]{0x0000000000002000UL});
+    public static readonly BitSet FOLLOW_RP_in_statement1748 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_branch_in_statement1751 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_WHILE_in_statement1761 = new BitSet(new ulong[]{0x0000000000001100UL});
+    public static readonly BitSet FOLLOW_parExpression_in_statement1763 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_branch_in_statement1765 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_DO_in_statement1775 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_branch_in_statement1777 = new BitSet(new ulong[]{0x0000000000000000UL,0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_WHILE_in_statement1779 = new BitSet(new ulong[]{0x0000000000001100UL});
+    public static readonly BitSet FOLLOW_parExpression_in_statement1781 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_SC_in_statement1783 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_PDO_in_statement1794 = new BitSet(new ulong[]{0x0000000000000200UL});
+    public static readonly BitSet FOLLOW_block_in_statement1796 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_RETURN_in_statement1806 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_statement1808 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_SC_in_statement1811 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_BREAK_in_statement1822 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_SC_in_statement1824 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_CONTINUE_in_statement1835 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_SC_in_statement1837 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_SC_in_statement1848 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_expression_in_statement1859 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_SC_in_statement1861 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_forInit_in_forControl1887 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_SC_in_forControl1890 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_forControl1893 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_SC_in_forControl1896 = new BitSet(new ulong[]{0xF7F71800003E1162UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_forUpdate_in_forControl1899 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_localVariableDeclaration_in_forInit1919 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_expression_in_forUpdate1938 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_type_in_foreachControl1969 = new BitSet(new ulong[]{0x0000000000000100UL});
+    public static readonly BitSet FOLLOW_Identifier_in_foreachControl1971 = new BitSet(new ulong[]{0x0000000000000000UL,0x0000000000000080UL});
+    public static readonly BitSet FOLLOW_IN_in_foreachControl1973 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_foreachControl1975 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_type_in_loopControl2007 = new BitSet(new ulong[]{0x0000000000000100UL});
+    public static readonly BitSet FOLLOW_Identifier_in_loopControl2009 = new BitSet(new ulong[]{0x0000000000000000UL,0x0000000000000100UL});
+    public static readonly BitSet FOLLOW_TO_in_loopControl2011 = new BitSet(new ulong[]{0xF7F71800003E1160UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_expression_in_loopControl2013 = new BitSet(new ulong[]{0x0000000000000002UL});
     public static readonly BitSet FOLLOW_simpleProgram_in_synpred1_Psimulex64 = new BitSet(new ulong[]{0x0000000000000002UL});
     public static readonly BitSet FOLLOW_memberDeclaration_in_synpred9_Psimulex273 = new BitSet(new ulong[]{0x0000000000000002UL});
     public static readonly BitSet FOLLOW_assignment_in_synpred30_Psimulex710 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_unaryExpressionPostPlusPlusMinusMinus_in_synpred51_Psimulex1040 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_parExpression_in_synpred58_Psimulex1125 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_leftValue_in_synpred59_Psimulex1133 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_variable_in_synpred60_Psimulex1182 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_arrayIndexing_in_synpred65_Psimulex1324 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_ELSE_in_synpred77_Psimulex1684 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
-    public static readonly BitSet FOLLOW_branch_in_synpred77_Psimulex1686 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_parExpression_in_synpred57_Psimulex1120 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_leftValue_in_synpred58_Psimulex1128 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_variable_in_synpred59_Psimulex1177 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_arrayIndexing_in_synpred64_Psimulex1319 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_ELSE_in_synpred76_Psimulex1679 = new BitSet(new ulong[]{0xF7F71800003E1360UL,0x000000000000007FUL});
+    public static readonly BitSet FOLLOW_branch_in_synpred76_Psimulex1681 = new BitSet(new ulong[]{0x0000000000000002UL});
 
 }
