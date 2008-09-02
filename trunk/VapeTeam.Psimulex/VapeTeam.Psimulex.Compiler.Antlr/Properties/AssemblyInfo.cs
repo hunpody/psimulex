@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VapeTeam.Psimulex.Compiler.Antlr")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ANTLR-generated Compiler For Psimulex Language")]
+[assembly: AssemblyDescription("by Peter Podoski and Zabb Laszlo")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("ELTE IK")]
 [assembly: AssemblyProduct("VapeTeam.Psimulex.Compiler.Antlr")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2008")]
+[assembly: AssemblyCopyright("Copyright © ELTE IK 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

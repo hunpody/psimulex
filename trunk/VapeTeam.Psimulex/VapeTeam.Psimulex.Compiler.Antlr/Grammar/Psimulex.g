@@ -147,7 +147,7 @@ expression
 	|	conditionalOrExpression
 	;
 assignment
-	:	leftValue (assignmentOperator^ expression)?
+	:	leftValue assignmentOperator^ expression
 	;
     
 assignmentOperator
@@ -209,8 +209,7 @@ multiplicativeOp
 
 unaryExpression
     :	unaryPrefixOp^ unaryExpression
-    |	unaryExpressionPostPlusPlusMinusMinus
-    |	primaryExpression
+    |	primaryExpression (unaryPostfixOp^)?
     ;
 
 unaryPrefixOp
