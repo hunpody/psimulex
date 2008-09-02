@@ -9,7 +9,8 @@ Hiba :
 Változók, Identifier használatánál nem mûködik a móka. :
 a+b+c -> a lesz
 
-
+Minden kulcsszót, egyebet felvettem Lexikai szabálynak. A szétválasztás után lehet a maradékot megcsinálni.
+... Amit nem bírtma megcsinálni.
 
 A tesztkörnyezetbeni változtatások : 
 - Ha a save and closera kattolsz, akkor ment bezárás elõtt és
