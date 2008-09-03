@@ -83,6 +83,5 @@ a paraméterekét a lambda kifejezésben.
 
 PL így :
 int add = (int a, int b) => a + b;
-
-2. Csináltam egy teszt mappát. Oda adogatom hozzá a teszteket + a teszt.psi, az a legutoljára használt lesz.
-Legalább is remélem :)
+Ha szerinted jó lesz így, szólj és ilyenre csinálom
+else megkell keresni mi a baja :)
