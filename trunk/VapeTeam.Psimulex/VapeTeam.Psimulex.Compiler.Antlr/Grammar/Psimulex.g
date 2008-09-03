@@ -197,7 +197,12 @@ multiplicativeOp
 unaryExpression
     :	unaryPrefixOp^ unaryExpression
     |	primaryExpression (unaryPostfixOp^)?
+	|	castExpression
     ;
+    
+castExpression 
+	:	'(' dataType ')' unaryExpression
+	;
 
 unaryPrefixOp
 	:	Plus|Minus|PlusPlus|MinusMinus|LogicalNot
@@ -286,7 +291,8 @@ literal
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-lambdaExpression	
+/*
+lambdaExpression
 	:	( simpleLambdaParameter | typedLambdaParameter ) '=>' lambdaStatement
 	;
 
@@ -311,15 +317,41 @@ lambdaStatement
 	; 
 	
 functionPointerType
-	:	dataType? Identifier '(' typeList ')'
+	:	( Func '<' dataType '>' )? Identifier  '(' typeList ')' 
 	;
 
 typeList
 	:	dataType ( ',' dataType )*
 	;
+ */
+ 
+lambdaExpression
+	:	( Identifier | '(' lambdaParameterList ')' ) '=>' lambdaStatement
+	;
 	
+lambdaParameterList
+	:	lambdaParameter ( ',' lambdaParameter )*
+	;
+ 
+lambdaParameter
+	:	dataType? Identifier
+	;
 	
-    
+lambdaStatement
+	:	expression | block
+	;
+	
+functionPointer
+	:	functionPointerType? Identifier
+	;
+	
+functionPointerType
+	:	Func '<' dataType '>' 
+	;
+
+
+
+
 ////////////////
 // STATEMENTS //
 ////////////////
@@ -465,6 +497,8 @@ While	:	'while'|'While'|'WHILE'							;
 Loop	:	'loop'|'Loop'|'LOOP'							;
 To		:	'to'|'To'|'TO'|'until'|'Until'|'UNTIL'			;
 In		:	'in'|'In'|'IN'									;
+
+Func	:	'func'|'Func'|'FUNC'							;
 
 
 // Literals
