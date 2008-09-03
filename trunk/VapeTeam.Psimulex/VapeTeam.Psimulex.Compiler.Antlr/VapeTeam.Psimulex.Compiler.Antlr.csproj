@@ -64,6 +64,7 @@
     </None>
     <None Include="Generated\Psimulex.tokens" />
     <None Include="Grammar\Psimulex.g" />
+    <None Include="Samples\teszt.psi" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VapeTeam.Psimulex.Compiler\VapeTeam.Psimulex.Compiler.csproj">
