@@ -31,7 +31,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
             CompileResult result = new CompileResult();
 
             try
-            {                    
+            {  
                 var stream = new global::Antlr.Runtime.ANTLRStringStream(source);       
                 PsimulexLexer lexer = new PsimulexLexer(stream);
                 PsimulexParser p = new PsimulexParser(new global::Antlr.Runtime.CommonTokenStream(lexer));

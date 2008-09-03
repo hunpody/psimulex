@@ -91,8 +91,13 @@ arrayInitializer
 */
 
 type
-    :	(primitiveType|builtInType) ('[' ']'|'[' ',' ']')?
+    :	dataType
+    |	functionPointerType
     ;
+
+dataType
+	:	( primitiveType | builtInType ) ( '[' ']' | '[' ',' ']' )?
+	;
 
 primitiveType
     :   Bool
@@ -138,6 +143,7 @@ formalParameterDeclsRest
 expression
 	:	assignment
 	|	conditionalOrExpression
+	|	lambdaExpression
 	;
 	
 assignment
@@ -248,7 +254,8 @@ indexing
 	;
 	
 arrayIndexing
-	:	'['! expression ']'!
+	:	l='['! expression r=']'!
+	//{System.Windows.Forms.MessageBox.Show($l.text + $expression.tree.ToString() + $r.text);}
 	;
 
 matrixIndexing
@@ -272,9 +279,46 @@ literal
     |   NullLiteral
     |   InfinityLiteral
     ;
+  
+////////////////////
+// LAMBDA SECTION //
+////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    
-    
+lambdaExpression	
+	:	( simpleLambdaParameter | typedLambdaParameter ) '=>' lambdaStatement
+	;
+
+simpleLambdaParameter 
+	:	Identifier | '(' identifierList? ')'
+	;
+
+identifierList
+    :   Identifier ( ',' Identifier )* 
+    ;
+
+typedLambdaParameter 
+	:	'(' typedIdentifierList ')'
+	;
+
+typedIdentifierList
+	:	dataType Identifier ( ',' dataType Identifier )*
+	;
+	
+lambdaStatement
+	:	expression | block
+	; 
+	
+functionPointerType
+	:	dataType? Identifier '(' typeList ')'
+	;
+
+typeList
+	:	dataType ( ',' dataType )*
+	;
+	
+	
     
 ////////////////
 // STATEMENTS //
