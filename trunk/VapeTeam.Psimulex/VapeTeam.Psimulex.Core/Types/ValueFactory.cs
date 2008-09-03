@@ -7,15 +7,25 @@ namespace VapeTeam.Psimulex.Core.Types
 {
     public class ValueFactory
     {
+        /// <summary>
+        /// Creates a Psimulex value object from the .NET object. It wraps .NET objects into Psimulex ones.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static BaseType Create(object value)
         {
             if (value.GetType() == typeof(BaseType) || value.GetType().IsSubclassOf(typeof(BaseType)))
             {
                 return (BaseType) value;
             }
+            else if (value.GetType() == typeof(long))
+            {
+                return new Integer((long)value);
+            }
             else if (value.GetType() == typeof(int))
             {
-                return new Integer((int)value);
+                long x = (int) value;
+                return new Integer(x);
             }
             else if (value.GetType() == typeof(string))
             {

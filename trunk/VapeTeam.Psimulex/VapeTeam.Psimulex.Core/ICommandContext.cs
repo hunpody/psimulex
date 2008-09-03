@@ -12,6 +12,7 @@ namespace VapeTeam.Psimulex.Core
         RunStack RunStack { get; }
         IFunctionLookup FunctionLookup { get; }
         ISystemContext System { get; }
+        int PC { get; set;  }
 
         BaseType GetVariable(string name);
         void AddVariable(string name, BaseType value);

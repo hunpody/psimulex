@@ -207,5 +207,224 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("TrueTrueTrueTrueTrueTrueTrueTrueTrueTrue", process2.StandardOutput);
         }
+
+        [TestMethod]
+        public void LogicalComparisons()
+        {
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push(false),
+                    new Push(false),
+                    new BinaryOperation(BinaryOperation.Operations.LogicalAnd),
+                    new Call("print"),
+                    new Push(true),
+                    new Push(false),
+                    new BinaryOperation(BinaryOperation.Operations.LogicalAnd),
+                    new Call("print"),
+                    new Push(true),
+                    new Push(true),
+                    new BinaryOperation(BinaryOperation.Operations.LogicalAnd),
+                    new Call("print"),
+                    new Push(false),
+                    new Push(false),
+                    new BinaryOperation(BinaryOperation.Operations.LogicalOr),
+                    new Call("print"),
+                    new Push(true),
+                    new Push(false),
+                    new BinaryOperation(BinaryOperation.Operations.LogicalOr),
+                    new Call("print"),
+                    new Push(true),
+                    new Push(true),
+                    new BinaryOperation(BinaryOperation.Operations.LogicalOr),
+                    new Call("print"),
+                    new Push(false),
+                    new Push(false),
+                    new BinaryOperation(BinaryOperation.Operations.LogicalXor),
+                    new Call("print"),
+                    new Push(true),
+                    new Push(false),
+                    new BinaryOperation(BinaryOperation.Operations.LogicalXor),
+                    new Call("print"),
+                    new Push(true),
+                    new Push(true),
+                    new BinaryOperation(BinaryOperation.Operations.LogicalXor),
+                    new Call("print")));
+
+            Assert.AreEqual("FalseFalseTrueFalseTrueTrueFalseTrueFalse", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void IntegerPrefixAndPostfixUnaryOperations1()
+        {
+            // We test the prefix/postfix increasing/decreasing operations on values.
+            VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(1),
+                    new UnaryOperation(UnaryOperation.Operations.PostfixDecrement),
+                    new Call("print"),
+                    new Push(1),
+                    new UnaryOperation(UnaryOperation.Operations.PrefixDecrement),
+                    new Call("print"),
+                    new Push(1),
+                    new UnaryOperation(UnaryOperation.Operations.PostfixIncrement),
+                    new Call("print"),
+                    new Push(1),
+                    new UnaryOperation(UnaryOperation.Operations.PrefixIncrement),
+                    new Call("print")
+            
+                ));
+
+            Assert.AreEqual("1012", process.StandardOutput);
+
+            // We test the prefix and postfix increasing / decreasing operations on local variables.
+
+            process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(1),
+                    new Initialize("a"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new UnaryOperation(UnaryOperation.Operations.PostfixDecrement),
+                    new Call("print"),
+                    // should be 1
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Call("print"),
+                    // should be 0
+                    new Push(1),
+                    new Initialize("b"),
+                    new Push("b", ValueAccessModes.LocalVariable),
+                    new UnaryOperation(UnaryOperation.Operations.PrefixDecrement),
+                    new Call("print"),
+                    // 0
+                    new Push("b", ValueAccessModes.LocalVariable),
+                    new Call("print"),
+                    // 0
+                    new Push(1),
+                    new Initialize("c"),
+                    new Push("c", ValueAccessModes.LocalVariable),
+                    new UnaryOperation(UnaryOperation.Operations.PostfixIncrement),
+                    new Call("print"),
+                    // 1
+                    new Push("c", ValueAccessModes.LocalVariable),
+                    new Call("print"),
+                    // 2
+                    new Push(1),
+                    new Initialize("d"),
+                    new Push("d", ValueAccessModes.LocalVariable),
+                    new UnaryOperation(UnaryOperation.Operations.PrefixIncrement),
+                    new Call("print"),
+                    // 2
+                    new Push("d", ValueAccessModes.LocalVariable),
+                    new Call("print")
+                    // 2
+                ));
+
+            Assert.AreEqual("10001222", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void IntegerUnaryOperations1()
+        {
+            VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(1),
+                    new UnaryOperation(UnaryOperation.Operations.Negate),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+                    new Push(5),
+                    new Initialize("a"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new UnaryOperation(UnaryOperation.Operations.Negate),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Call("print")
+
+                ));
+
+            Assert.AreEqual("-1;-5;5", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void LogicalNotOperations1()
+        {
+            VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(true),
+                    new UnaryOperation(UnaryOperation.Operations.LogicalNot),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+                    new Push(false),
+                    new UnaryOperation(UnaryOperation.Operations.LogicalNot),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+                    new Push(false),
+                    new Initialize("a"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new UnaryOperation(UnaryOperation.Operations.LogicalNot),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Call("print")
+
+                ));
+
+            Assert.AreEqual("False;True;True;False", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void IntegerBinaryOperations1()
+        {
+            VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(4),
+                    new Push(5),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(8),
+                    new Push(5),
+                    new BinaryOperation(BinaryOperation.Operations.Subtraction),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(8),
+                    new Push(2),
+                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(15),
+                    new Push(5),
+                    new BinaryOperation(BinaryOperation.Operations.Division),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(3),
+                    new Push(4),
+                    new BinaryOperation(BinaryOperation.Operations.Power),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print")
+
+                ));
+
+            Assert.AreEqual("9;3;16;3;81;", process.StandardOutput);
+
+        }
     }
 }

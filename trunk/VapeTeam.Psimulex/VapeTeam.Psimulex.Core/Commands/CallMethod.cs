@@ -7,6 +7,9 @@ using System.Reflection;
 
 namespace VapeTeam.Psimulex.Core.Commands
 {
+    /// <summary>
+    /// Calls a method of an object. The method is identified by its name.
+    /// </summary>
     public class CallMethod : CommandBase
     {
         private string methodName;
@@ -45,7 +48,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             }
             else
             {
-                throw new PsimulexCoreException(string.Format("The type {0} has no such method: {1}.", value.GetType(),  methodName));
+                throw new PsimulexCoreException(string.Format("The type {0} has no such method: {1}.", value.GetTypeName(),  methodName));
             }
         }
 

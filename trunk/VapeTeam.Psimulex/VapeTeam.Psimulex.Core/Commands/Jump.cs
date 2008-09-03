@@ -7,13 +7,20 @@ namespace VapeTeam.Psimulex.Core.Commands
 {
     public class Jump : CommandBase
     {
+        private int pc;
+
         #region ICommand Members
 
         public override void Do(ICommandContext context)
         {
-            throw new NotImplementedException();
+            context.PC = pc;
         }
 
         #endregion
+
+        public Jump(int pc)
+        {
+            this.pc = pc;
+        }
     }
 }
