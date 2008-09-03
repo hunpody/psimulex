@@ -69,3 +69,20 @@ de ez volt szimpi. Ha nem nevezem el, akor az ANTLR nevezi el generált névvel, g
 		° Lambdakalkulus ezt még kicsit tanulmányozgatom, mûvelõdök, de már van elképzelés.
 		° A Tree Parser, ezügyben, ha tudsz segíts légyszíves.
 		Nekem egy elképzelésem van, amit 2 fájlban "tudhatnék" megvalósítani, erre látam mintát.
+		
+		
+2008.09.03. 14:30 - vari
+
+1. Lambda belemûtve.
+	// Anomália. Egyenlõre nemtudom miért. A (int)
+	id(int) = a => a;
+	
+Igazából, lehet, hogy nem is kell. Sõt. Fölösleges 2 helyen jelezni a típust.
+Javaslatom a C# -os analógiához képest, hogy a fv pointernél cska visszatérési érték típusát lehessen emghatározni, 
+a paraméterekét a lambda kifejezésben.
+
+PL így :
+int add = (int a, int b) => a + b;
+
+2. Csináltam egy teszt mappát. Oda adogatom hozzá a teszteket + a teszt.psi, az a legutoljára használt lesz.
+Legalább is remélem :)
