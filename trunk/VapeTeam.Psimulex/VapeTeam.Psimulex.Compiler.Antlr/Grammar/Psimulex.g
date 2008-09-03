@@ -341,9 +341,9 @@ lambdaStatement
 	:	expression | block
 	;
 	
-functionPointer
-	:	functionPointerType? Identifier
-	;
+//functionPointer
+//	:	functionPointerType? Identifier
+//	;
 	
 functionPointerType
 	:	Func '<' dataType '>' 
