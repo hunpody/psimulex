@@ -39,3 +39,33 @@ assignment
 Gondolom ránézésre te is látod, hogy minden "leftvalue" jó egy expressionnek, mert az assignment nyelvtani szabály farka opcionális lett. A módosított nyelvtant bekommitáltam.
 
 Ha van még valami gond írj. Most eszek és még talán Core-ozok.
+
+2008.09.03. 04:00 - vari
+
+1. Elõzõ verzióban is el volt nevezve, igaz teljes nevük volt. Rövidítettem.
+a) Nelegyenek elnevezve ?
+b) Rendes nevük legyen ?
+
+Mindkettõ könnyen kivitelezhetõ. Mond, milyen lenne szebb, praktikusabb olyan lesz.
+
+2. Alapvetõen igazad van. Mivel nagyon hamar megvolt, azért kopogtam be, mint egy megoldás a témára.
+   Igazából a csupa kisbetû, ahogy mindenhol van is tökéletes lenne. Gondoltam kivenni pillanatok alatt megvan.
+   
+3. Az elgondolás amiért ilyen lett, hogy lehessen vele csupáncsak a.a(); parancsot írni.
+   Igazából átsíklottam mindannyiszor felette, amikro kerestem hol a hiba.
+   A mellékelt JAVA minta és a régi Simulex-es .g -t ötvöztem. Próbáltam kicsit letisztítani.
+   
+Változások :
+-	Átírtam normális nevûekre az idétlen rövidítéseimet. :)
+Azért is neveztem el mindent, hogy majd szépen lehessen PsimulexLexer.Pluss hivatkozni. Persze tudom, ez is megoldható ezermásféleképp,
+de ez volt szimpi. Ha nem nevezem el, akor az ANTLR nevezi el generált névvel, gondoltam, akkor legyen szép.
+-	Kijavítottam még egy apró hibát és most elméletielg a teljes Expression szekció mûködik. ( Teszteltem )
+-	Szelektorok, struktúra definiálás, globális változók, függvény definiálás tesztelve és mûködik
+-	A vezérlési szerkezeteket nem teszteltem agyon még, de egyébként azok is mennek.
+	Azaz, elméletielg az egész megy.
+
+#-#	Lényegében véve, elsõ nekifutásra összeállt a nyelvtan.
+	2 dolog van vele a köv körre : 
+		° Lambdakalkulus ezt még kicsit tanulmányozgatom, mûvelõdök, de már van elképzelés.
+		° A Tree Parser, ezügyben, ha tudsz segíts légyszíves.
+		Nekem egy elképzelésem van, amit 2 fájlban "tudhatnék" megvalósítani, erre látam mintát.

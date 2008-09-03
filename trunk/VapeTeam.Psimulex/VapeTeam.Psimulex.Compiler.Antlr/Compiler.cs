@@ -36,8 +36,9 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 PsimulexLexer lexer = new PsimulexLexer(stream);
                 PsimulexParser p = new PsimulexParser(new global::Antlr.Runtime.CommonTokenStream(lexer));
 
-                PsimulexParser.expression_return tree = p.expression();
-                //PsimulexParser.selecting_return tree = p.selecting();
+                PsimulexParser.compilationUnit_return tree = p.compilationUnit();
+                //PsimulexParser.block_return tree = p.block();
+                //PsimulexParser.expression_return tree = p.expression();
                 var treeAdaptor = p.TreeAdaptor;
 
                 _errorMessages = p.ErrorMessages;                

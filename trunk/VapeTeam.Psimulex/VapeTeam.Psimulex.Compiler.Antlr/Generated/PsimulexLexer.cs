@@ -1,4 +1,4 @@
-// $ANTLR 3.1 Grammar\\Psimulex.g 2008-09-02 23:24:38
+// $ANTLR 3.1 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2008-09-03 03:05:10
 
 using System;
 using Antlr.Runtime;
@@ -8,92 +8,89 @@ using Stack 		= Antlr.Runtime.Collections.StackList;
 
 
 public partial class PsimulexLexer : Lexer {
-    public const int NullLiteral = 56;
-    public const int LT = 39;
-    public const int STAR = 45;
-    public const int ADIV = 33;
-    public const int RB = 10;
-    public const int WHILE = 65;
-    public const int SingleLineComment = 87;
-    public const int RP = 13;
-    public const int MOD = 47;
-    public const int CharacterLiteral = 54;
-    public const int ESC = 78;
-    public const int LS = 14;
-    public const int SLC = 75;
-    public const int GTE = 42;
-    public const int LP = 12;
-    public const int CHAR = 18;
-    public const int DO = 66;
-    public const int FOR = 60;
-    public const int PFOR = 61;
-    public const int NOT = 50;
-    public const int AND = 36;
+    public const int Stack = 25;
+    public const int AssignAndAdd = 31;
+    public const int NullLiteral = 57;
+    public const int RelGreaterThanOrEqual = 43;
+    public const int RelEqual = 38;
+    public const int PQueue = 27;
+    public const int SingleLineComment = 84;
+    public const int CharacterLiteral = 55;
+    public const int AssignAndSubstract = 32;
+    public const int AssignAndDivide = 34;
+    public const int AssignAndMultiply = 33;
+    public const int Decimal = 18;
+    public const int While = 66;
+    public const int Modulo = 48;
+    public const int IDLetter = 78;
     public const int EOF = -1;
-    public const int IDLetter = 81;
-    public const int LTE = 40;
-    public const int BREAK = 69;
+    public const int Queue = 26;
+    public const int Set = 23;
+    public const int Int = 17;
     public const int Identifier = 8;
-    public const int BINTREE = 23;
-    public const int IF = 58;
-    public const int LMLC = 76;
-    public const int AS = 31;
-    public const int IMPORT = 4;
-    public const int IN = 71;
-    public const int TREE = 22;
-    public const int CONTINUE = 70;
-    public const int QM = 74;
-    public const int MM = 49;
-    public const int LOOP = 64;
-    public const int QUEUE = 27;
-    public const int RETURN = 68;
-    public const int AA = 30;
-    public const int PP = 48;
-    public const int STACK = 26;
-    public const int DOT = 51;
-    public const int MultiLineComment = 88;
-    public const int AP = 73;
-    public const int AM = 32;
-    public const int NE = 38;
-    public const int E = 37;
-    public const int A = 11;
-    public const int C = 16;
-    public const int TO = 72;
-    public const int M = 44;
-    public const int ELSE = 59;
-    public const int BOOL = 17;
-    public const int SET = 24;
-    public const int STRUCT = 7;
-    public const int INT = 19;
-    public const int P = 43;
-    public const int Digit = 82;
-    public const int LIST = 25;
-    public const int DecimalLiteral = 53;
-    public const int RMLC = 77;
-    public const int REF = 29;
-    public const int ELSEIF = 79;
+    public const int LeftSquare = 12;
+    public const int BinTree = 22;
+    public const int Assign = 11;
+    public const int To = 73;
+    public const int PForEach = 64;
+    public const int ForEach = 63;
+    public const int QuotationMark = 75;
+    public const int Char = 16;
+    public const int RelNotEqual = 39;
+    public const int Do = 67;
+    public const int RelGreaterThan = 42;
+    public const int String = 19;
+    public const int Return = 69;
+    public const int Struct = 7;
+    public const int Reference = 30;
+    public const int AssignAndModulo = 35;
+    public const int MultiLineComment = 85;
+    public const int If = 59;
+    public const int In = 72;
+    public const int Bool = 15;
+    public const int Import = 4;
+    public const int RightSquare = 13;
+    public const int Void = 20;
+    public const int Continue = 71;
+    public const int RightBracket = 10;
+    public const int LogicalOr = 36;
+    public const int LogicalAnd = 37;
+    public const int PDo = 68;
+    public const int ElseIf = 76;
+    public const int Tree = 21;
+    public const int Semicolon = 6;
+    public const int Digit = 79;
+    public const int DecimalLiteral = 54;
+    public const int For = 61;
+    public const int Divide = 47;
+    public const int List = 24;
     public const int StringLiteral = 5;
-    public const int SC = 6;
-    public const int WS = 86;
-    public const int DECIMAL = 20;
-    public const int AMOD = 34;
-    public const int PFOREACH = 63;
-    public const int PQUEUE = 28;
-    public const int DecimalTypeSuffix = 84;
-    public const int PDO = 67;
-    public const int OR = 35;
-    public const int RS = 15;
-    public const int GT = 41;
-    public const int LB = 9;
-    public const int FOREACH = 62;
-    public const int IntegerLiteral = 52;
-    public const int NotNullDigit = 83;
-    public const int DIV = 46;
-    public const int Letter = 80;
-    public const int EscapeSequence = 85;
-    public const int BooleanLiteral = 55;
-    public const int STRING = 21;
-    public const int InfinityLiteral = 57;
+    public const int Plus = 44;
+    public const int LogicalNot = 51;
+    public const int Minus = 45;
+    public const int WS = 83;
+    public const int RelLessThanOrEqual = 41;
+    public const int Break = 70;
+    public const int MinusMinus = 50;
+    public const int PFor = 62;
+    public const int DecimalTypeSuffix = 81;
+    public const int Dot = 52;
+    public const int LeftBracket = 9;
+    public const int RelLessThan = 40;
+    public const int LeftParen = 28;
+    public const int IntegerLiteral = 53;
+    public const int NotNullDigit = 80;
+    public const int Star = 46;
+    public const int RightParen = 29;
+    public const int Else = 60;
+    public const int Comma = 14;
+    public const int Letter = 77;
+    public const int EscapeSequence = 82;
+    public const int Loop = 65;
+    public const int Apostrophe = 74;
+    public const int BooleanLiteral = 56;
+    public const int PlusPlus = 49;
+    public const int InfinityLiteral = 58;
 
     // delegates
     // delegators
@@ -113,18 +110,18 @@ public partial class PsimulexLexer : Lexer {
     
     override public string GrammarFileName
     {
-    	get { return "Grammar\\Psimulex.g";} 
+    	get { return "C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g";} 
     }
 
-    // $ANTLR start "LP"
-    public void mLP() // throws RecognitionException [2]
+    // $ANTLR start "LeftParen"
+    public void mLeftParen() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = LP;
+            int _type = LeftParen;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:402:5: ( '(' )
-            // Grammar\\Psimulex.g:402:7: '('
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:354:13: ( '(' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:354:15: '('
             {
             	Match('('); 
 
@@ -137,17 +134,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "LP"
+    // $ANTLR end "LeftParen"
 
-    // $ANTLR start "RP"
-    public void mRP() // throws RecognitionException [2]
+    // $ANTLR start "RightParen"
+    public void mRightParen() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = RP;
+            int _type = RightParen;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:403:5: ( ')' )
-            // Grammar\\Psimulex.g:403:7: ')'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:355:14: ( ')' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:355:16: ')'
             {
             	Match(')'); 
 
@@ -160,17 +157,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "RP"
+    // $ANTLR end "RightParen"
 
-    // $ANTLR start "LS"
-    public void mLS() // throws RecognitionException [2]
+    // $ANTLR start "LeftSquare"
+    public void mLeftSquare() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = LS;
+            int _type = LeftSquare;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:404:5: ( '[' )
-            // Grammar\\Psimulex.g:404:7: '['
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:356:14: ( '[' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:356:16: '['
             {
             	Match('['); 
 
@@ -183,17 +180,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "LS"
+    // $ANTLR end "LeftSquare"
 
-    // $ANTLR start "RS"
-    public void mRS() // throws RecognitionException [2]
+    // $ANTLR start "RightSquare"
+    public void mRightSquare() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = RS;
+            int _type = RightSquare;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:405:5: ( ']' )
-            // Grammar\\Psimulex.g:405:7: ']'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:357:15: ( ']' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:357:17: ']'
             {
             	Match(']'); 
 
@@ -206,17 +203,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "RS"
+    // $ANTLR end "RightSquare"
 
-    // $ANTLR start "LB"
-    public void mLB() // throws RecognitionException [2]
+    // $ANTLR start "LeftBracket"
+    public void mLeftBracket() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = LB;
+            int _type = LeftBracket;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:406:5: ( '{' )
-            // Grammar\\Psimulex.g:406:7: '{'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:358:15: ( '{' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:358:17: '{'
             {
             	Match('{'); 
 
@@ -229,17 +226,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "LB"
+    // $ANTLR end "LeftBracket"
 
-    // $ANTLR start "RB"
-    public void mRB() // throws RecognitionException [2]
+    // $ANTLR start "RightBracket"
+    public void mRightBracket() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = RB;
+            int _type = RightBracket;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:407:5: ( '}' )
-            // Grammar\\Psimulex.g:407:7: '}'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:359:15: ( '}' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:359:17: '}'
             {
             	Match('}'); 
 
@@ -252,17 +249,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "RB"
+    // $ANTLR end "RightBracket"
 
-    // $ANTLR start "AND"
-    public void mAND() // throws RecognitionException [2]
+    // $ANTLR start "LogicalAnd"
+    public void mLogicalAnd() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = AND;
+            int _type = LogicalAnd;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:410:6: ( '&&' )
-            // Grammar\\Psimulex.g:410:8: '&&'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:362:15: ( '&&' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:362:17: '&&'
             {
             	Match("&&"); 
 
@@ -276,17 +273,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "AND"
+    // $ANTLR end "LogicalAnd"
 
-    // $ANTLR start "OR"
-    public void mOR() // throws RecognitionException [2]
+    // $ANTLR start "LogicalOr"
+    public void mLogicalOr() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = OR;
+            int _type = LogicalOr;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:411:5: ( '||' )
-            // Grammar\\Psimulex.g:411:7: '||'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:363:14: ( '||' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:363:16: '||'
             {
             	Match("||"); 
 
@@ -300,17 +297,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "OR"
+    // $ANTLR end "LogicalOr"
 
-    // $ANTLR start "NOT"
-    public void mNOT() // throws RecognitionException [2]
+    // $ANTLR start "LogicalNot"
+    public void mLogicalNot() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = NOT;
+            int _type = LogicalNot;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:412:6: ( '!' )
-            // Grammar\\Psimulex.g:412:8: '!'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:364:15: ( '!' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:364:17: '!'
             {
             	Match('!'); 
 
@@ -323,17 +320,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "NOT"
+    // $ANTLR end "LogicalNot"
 
-    // $ANTLR start "E"
-    public void mE() // throws RecognitionException [2]
+    // $ANTLR start "RelEqual"
+    public void mRelEqual() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = E;
+            int _type = RelEqual;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:413:4: ( '==' )
-            // Grammar\\Psimulex.g:413:6: '=='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:365:13: ( '==' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:365:15: '=='
             {
             	Match("=="); 
 
@@ -347,17 +344,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "E"
+    // $ANTLR end "RelEqual"
 
-    // $ANTLR start "NE"
-    public void mNE() // throws RecognitionException [2]
+    // $ANTLR start "RelNotEqual"
+    public void mRelNotEqual() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = NE;
+            int _type = RelNotEqual;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:414:5: ( '!=' )
-            // Grammar\\Psimulex.g:414:7: '!='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:366:16: ( '!=' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:366:18: '!='
             {
             	Match("!="); 
 
@@ -371,17 +368,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "NE"
+    // $ANTLR end "RelNotEqual"
 
-    // $ANTLR start "LT"
-    public void mLT() // throws RecognitionException [2]
+    // $ANTLR start "RelLessThan"
+    public void mRelLessThan() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = LT;
+            int _type = RelLessThan;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:415:5: ( '<' )
-            // Grammar\\Psimulex.g:415:7: '<'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:367:16: ( '<' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:367:18: '<'
             {
             	Match('<'); 
 
@@ -394,17 +391,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "LT"
+    // $ANTLR end "RelLessThan"
 
-    // $ANTLR start "LTE"
-    public void mLTE() // throws RecognitionException [2]
+    // $ANTLR start "RelLessThanOrEqual"
+    public void mRelLessThanOrEqual() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = LTE;
+            int _type = RelLessThanOrEqual;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:416:6: ( '<=' )
-            // Grammar\\Psimulex.g:416:8: '<='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:368:21: ( '<=' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:368:23: '<='
             {
             	Match("<="); 
 
@@ -418,17 +415,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "LTE"
+    // $ANTLR end "RelLessThanOrEqual"
 
-    // $ANTLR start "GT"
-    public void mGT() // throws RecognitionException [2]
+    // $ANTLR start "RelGreaterThan"
+    public void mRelGreaterThan() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = GT;
+            int _type = RelGreaterThan;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:417:5: ( '>' )
-            // Grammar\\Psimulex.g:417:7: '>'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:369:18: ( '>' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:369:20: '>'
             {
             	Match('>'); 
 
@@ -441,17 +438,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "GT"
+    // $ANTLR end "RelGreaterThan"
 
-    // $ANTLR start "GTE"
-    public void mGTE() // throws RecognitionException [2]
+    // $ANTLR start "RelGreaterThanOrEqual"
+    public void mRelGreaterThanOrEqual() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = GTE;
+            int _type = RelGreaterThanOrEqual;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:418:6: ( '>=' )
-            // Grammar\\Psimulex.g:418:8: '>='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:370:23: ( '>=' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:370:25: '>='
             {
             	Match(">="); 
 
@@ -465,17 +462,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "GTE"
+    // $ANTLR end "RelGreaterThanOrEqual"
 
-    // $ANTLR start "A"
-    public void mA() // throws RecognitionException [2]
+    // $ANTLR start "Assign"
+    public void mAssign() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = A;
+            int _type = Assign;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:421:4: ( '=' )
-            // Grammar\\Psimulex.g:421:6: '='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:373:11: ( '=' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:373:13: '='
             {
             	Match('='); 
 
@@ -488,17 +485,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "A"
+    // $ANTLR end "Assign"
 
-    // $ANTLR start "AA"
-    public void mAA() // throws RecognitionException [2]
+    // $ANTLR start "AssignAndAdd"
+    public void mAssignAndAdd() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = AA;
+            int _type = AssignAndAdd;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:422:5: ( '+=' )
-            // Grammar\\Psimulex.g:422:7: '+='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:374:15: ( '+=' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:374:17: '+='
             {
             	Match("+="); 
 
@@ -512,17 +509,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "AA"
+    // $ANTLR end "AssignAndAdd"
 
-    // $ANTLR start "AS"
-    public void mAS() // throws RecognitionException [2]
+    // $ANTLR start "AssignAndSubstract"
+    public void mAssignAndSubstract() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = AS;
+            int _type = AssignAndSubstract;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:423:5: ( '-=' )
-            // Grammar\\Psimulex.g:423:7: '-='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:375:20: ( '-=' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:375:22: '-='
             {
             	Match("-="); 
 
@@ -536,17 +533,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "AS"
+    // $ANTLR end "AssignAndSubstract"
 
-    // $ANTLR start "AM"
-    public void mAM() // throws RecognitionException [2]
+    // $ANTLR start "AssignAndMultiply"
+    public void mAssignAndMultiply() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = AM;
+            int _type = AssignAndMultiply;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:424:5: ( '*=' )
-            // Grammar\\Psimulex.g:424:7: '*='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:376:19: ( '*=' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:376:21: '*='
             {
             	Match("*="); 
 
@@ -560,17 +557,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "AM"
+    // $ANTLR end "AssignAndMultiply"
 
-    // $ANTLR start "ADIV"
-    public void mADIV() // throws RecognitionException [2]
+    // $ANTLR start "AssignAndDivide"
+    public void mAssignAndDivide() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = ADIV;
+            int _type = AssignAndDivide;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:425:6: ( '/=' )
-            // Grammar\\Psimulex.g:425:8: '/='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:377:18: ( '/=' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:377:20: '/='
             {
             	Match("/="); 
 
@@ -584,17 +581,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "ADIV"
+    // $ANTLR end "AssignAndDivide"
 
-    // $ANTLR start "AMOD"
-    public void mAMOD() // throws RecognitionException [2]
+    // $ANTLR start "AssignAndModulo"
+    public void mAssignAndModulo() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = AMOD;
+            int _type = AssignAndModulo;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:426:6: ( '%=' )
-            // Grammar\\Psimulex.g:426:8: '%='
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:378:18: ( '%=' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:378:20: '%='
             {
             	Match("%="); 
 
@@ -608,17 +605,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "AMOD"
+    // $ANTLR end "AssignAndModulo"
 
-    // $ANTLR start "P"
-    public void mP() // throws RecognitionException [2]
+    // $ANTLR start "Plus"
+    public void mPlus() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = P;
+            int _type = Plus;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:429:4: ( '+' )
-            // Grammar\\Psimulex.g:429:6: '+'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:381:7: ( '+' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:381:9: '+'
             {
             	Match('+'); 
 
@@ -631,17 +628,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "P"
+    // $ANTLR end "Plus"
 
-    // $ANTLR start "M"
-    public void mM() // throws RecognitionException [2]
+    // $ANTLR start "Minus"
+    public void mMinus() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = M;
+            int _type = Minus;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:430:4: ( '-' )
-            // Grammar\\Psimulex.g:430:6: '-'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:382:8: ( '-' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:382:10: '-'
             {
             	Match('-'); 
 
@@ -654,17 +651,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "M"
+    // $ANTLR end "Minus"
 
-    // $ANTLR start "STAR"
-    public void mSTAR() // throws RecognitionException [2]
+    // $ANTLR start "Star"
+    public void mStar() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = STAR;
+            int _type = Star;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:431:6: ( '*' )
-            // Grammar\\Psimulex.g:431:8: '*'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:383:7: ( '*' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:383:9: '*'
             {
             	Match('*'); 
 
@@ -677,17 +674,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "STAR"
+    // $ANTLR end "Star"
 
-    // $ANTLR start "DIV"
-    public void mDIV() // throws RecognitionException [2]
+    // $ANTLR start "Divide"
+    public void mDivide() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = DIV;
+            int _type = Divide;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:432:6: ( '/' )
-            // Grammar\\Psimulex.g:432:8: '/'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:384:9: ( '/' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:384:11: '/'
             {
             	Match('/'); 
 
@@ -700,17 +697,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "DIV"
+    // $ANTLR end "Divide"
 
-    // $ANTLR start "MOD"
-    public void mMOD() // throws RecognitionException [2]
+    // $ANTLR start "Modulo"
+    public void mModulo() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = MOD;
+            int _type = Modulo;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:433:6: ( '%' )
-            // Grammar\\Psimulex.g:433:8: '%'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:385:9: ( '%' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:385:11: '%'
             {
             	Match('%'); 
 
@@ -723,17 +720,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "MOD"
+    // $ANTLR end "Modulo"
 
-    // $ANTLR start "PP"
-    public void mPP() // throws RecognitionException [2]
+    // $ANTLR start "PlusPlus"
+    public void mPlusPlus() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = PP;
+            int _type = PlusPlus;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:434:5: ( '++' )
-            // Grammar\\Psimulex.g:434:7: '++'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:386:10: ( '++' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:386:12: '++'
             {
             	Match("++"); 
 
@@ -747,17 +744,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "PP"
+    // $ANTLR end "PlusPlus"
 
-    // $ANTLR start "MM"
-    public void mMM() // throws RecognitionException [2]
+    // $ANTLR start "MinusMinus"
+    public void mMinusMinus() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = MM;
+            int _type = MinusMinus;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:435:5: ( '--' )
-            // Grammar\\Psimulex.g:435:7: '--'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:387:12: ( '--' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:387:14: '--'
             {
             	Match("--"); 
 
@@ -771,17 +768,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "MM"
+    // $ANTLR end "MinusMinus"
 
-    // $ANTLR start "REF"
-    public void mREF() // throws RecognitionException [2]
+    // $ANTLR start "Reference"
+    public void mReference() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = REF;
+            int _type = Reference;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:438:6: ( '&' )
-            // Grammar\\Psimulex.g:438:8: '&'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:390:13: ( '&' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:390:15: '&'
             {
             	Match('&'); 
 
@@ -794,17 +791,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "REF"
+    // $ANTLR end "Reference"
 
-    // $ANTLR start "SC"
-    public void mSC() // throws RecognitionException [2]
+    // $ANTLR start "Semicolon"
+    public void mSemicolon() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = SC;
+            int _type = Semicolon;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:439:5: ( ';' )
-            // Grammar\\Psimulex.g:439:7: ';'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:391:12: ( ';' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:391:14: ';'
             {
             	Match(';'); 
 
@@ -817,17 +814,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "SC"
+    // $ANTLR end "Semicolon"
 
-    // $ANTLR start "C"
-    public void mC() // throws RecognitionException [2]
+    // $ANTLR start "Comma"
+    public void mComma() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = C;
+            int _type = Comma;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:440:4: ( ',' )
-            // Grammar\\Psimulex.g:440:6: ','
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:392:9: ( ',' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:392:11: ','
             {
             	Match(','); 
 
@@ -840,17 +837,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "C"
+    // $ANTLR end "Comma"
 
-    // $ANTLR start "DOT"
-    public void mDOT() // throws RecognitionException [2]
+    // $ANTLR start "Dot"
+    public void mDot() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = DOT;
+            int _type = Dot;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:441:6: ( '.' )
-            // Grammar\\Psimulex.g:441:8: '.'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:393:8: ( '.' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:393:10: '.'
             {
             	Match('.'); 
 
@@ -863,17 +860,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "DOT"
+    // $ANTLR end "Dot"
 
-    // $ANTLR start "AP"
-    public void mAP() // throws RecognitionException [2]
+    // $ANTLR start "Apostrophe"
+    public void mApostrophe() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = AP;
+            int _type = Apostrophe;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:442:5: ( '\\'' )
-            // Grammar\\Psimulex.g:442:7: '\\''
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:394:13: ( '\\'' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:394:15: '\\''
             {
             	Match('\''); 
 
@@ -886,17 +883,17 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "AP"
+    // $ANTLR end "Apostrophe"
 
-    // $ANTLR start "QM"
-    public void mQM() // throws RecognitionException [2]
+    // $ANTLR start "QuotationMark"
+    public void mQuotationMark() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = QM;
+            int _type = QuotationMark;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:443:5: ( '\"' )
-            // Grammar\\Psimulex.g:443:7: '\"'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:395:15: ( '\"' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:395:17: '\"'
             {
             	Match('\"'); 
 
@@ -909,117 +906,22 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "QM"
+    // $ANTLR end "QuotationMark"
 
-    // $ANTLR start "SLC"
-    public void mSLC() // throws RecognitionException [2]
+    // $ANTLR start "Bool"
+    public void mBool() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = SLC;
+            int _type = Bool;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:446:6: ( '//' )
-            // Grammar\\Psimulex.g:446:8: '//'
-            {
-            	Match("//"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "SLC"
-
-    // $ANTLR start "LMLC"
-    public void mLMLC() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = LMLC;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:447:6: ( '/*' )
-            // Grammar\\Psimulex.g:447:8: '/*'
-            {
-            	Match("/*"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "LMLC"
-
-    // $ANTLR start "RMLC"
-    public void mRMLC() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = RMLC;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:448:6: ( '*/' )
-            // Grammar\\Psimulex.g:448:8: '*/'
-            {
-            	Match("*/"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "RMLC"
-
-    // $ANTLR start "ESC"
-    public void mESC() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = ESC;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:449:6: ( '\\\\' )
-            // Grammar\\Psimulex.g:449:8: '\\\\'
-            {
-            	Match('\\'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "ESC"
-
-    // $ANTLR start "BOOL"
-    public void mBOOL() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = BOOL;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:452:9: ( 'bool' | 'Bool' | 'BOOL' | 'boolean' | 'Boolean' | 'BOOLEAN' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:398:9: ( 'bool' | 'Bool' | 'BOOL' | 'boolean' | 'Boolean' | 'BOOLEAN' )
             int alt1 = 6;
             alt1 = dfa1.Predict(input);
             switch (alt1) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:452:13: 'bool'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:398:13: 'bool'
                     {
                     	Match("bool"); 
 
@@ -1027,7 +929,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:452:20: 'Bool'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:398:20: 'Bool'
                     {
                     	Match("Bool"); 
 
@@ -1035,7 +937,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:452:27: 'BOOL'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:398:27: 'BOOL'
                     {
                     	Match("BOOL"); 
 
@@ -1043,7 +945,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 4 :
-                    // Grammar\\Psimulex.g:452:34: 'boolean'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:398:34: 'boolean'
                     {
                     	Match("boolean"); 
 
@@ -1051,7 +953,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 5 :
-                    // Grammar\\Psimulex.g:452:44: 'Boolean'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:398:44: 'Boolean'
                     {
                     	Match("Boolean"); 
 
@@ -1059,7 +961,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 6 :
-                    // Grammar\\Psimulex.g:452:54: 'BOOLEAN'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:398:54: 'BOOLEAN'
                     {
                     	Match("BOOLEAN"); 
 
@@ -1075,22 +977,22 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "BOOL"
+    // $ANTLR end "Bool"
 
-    // $ANTLR start "CHAR"
-    public void mCHAR() // throws RecognitionException [2]
+    // $ANTLR start "Char"
+    public void mChar() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = CHAR;
+            int _type = Char;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:453:6: ( 'char' | 'Char' | 'CHAR' | 'character' | 'Character' | 'CHARACTER' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:399:6: ( 'char' | 'Char' | 'CHAR' | 'character' | 'Character' | 'CHARACTER' )
             int alt2 = 6;
             alt2 = dfa2.Predict(input);
             switch (alt2) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:453:8: 'char'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:399:8: 'char'
                     {
                     	Match("char"); 
 
@@ -1098,7 +1000,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:453:15: 'Char'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:399:15: 'Char'
                     {
                     	Match("Char"); 
 
@@ -1106,7 +1008,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:453:22: 'CHAR'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:399:22: 'CHAR'
                     {
                     	Match("CHAR"); 
 
@@ -1114,7 +1016,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 4 :
-                    // Grammar\\Psimulex.g:453:29: 'character'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:399:29: 'character'
                     {
                     	Match("character"); 
 
@@ -1122,7 +1024,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 5 :
-                    // Grammar\\Psimulex.g:453:41: 'Character'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:399:41: 'Character'
                     {
                     	Match("Character"); 
 
@@ -1130,7 +1032,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 6 :
-                    // Grammar\\Psimulex.g:453:53: 'CHARACTER'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:399:53: 'CHARACTER'
                     {
                     	Match("CHARACTER"); 
 
@@ -1146,22 +1048,22 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "CHAR"
+    // $ANTLR end "Char"
 
-    // $ANTLR start "INT"
-    public void mINT() // throws RecognitionException [2]
+    // $ANTLR start "Int"
+    public void mInt() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = INT;
+            int _type = Int;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:454:6: ( 'int' | 'Int' | 'INT' | 'integer' | 'Integer' | 'INTEGER' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:400:6: ( 'int' | 'Int' | 'INT' | 'integer' | 'Integer' | 'INTEGER' )
             int alt3 = 6;
             alt3 = dfa3.Predict(input);
             switch (alt3) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:454:8: 'int'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:400:8: 'int'
                     {
                     	Match("int"); 
 
@@ -1169,7 +1071,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:454:14: 'Int'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:400:14: 'Int'
                     {
                     	Match("Int"); 
 
@@ -1177,7 +1079,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:454:20: 'INT'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:400:20: 'INT'
                     {
                     	Match("INT"); 
 
@@ -1185,7 +1087,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 4 :
-                    // Grammar\\Psimulex.g:454:26: 'integer'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:400:26: 'integer'
                     {
                     	Match("integer"); 
 
@@ -1193,7 +1095,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 5 :
-                    // Grammar\\Psimulex.g:454:36: 'Integer'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:400:36: 'Integer'
                     {
                     	Match("Integer"); 
 
@@ -1201,7 +1103,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 6 :
-                    // Grammar\\Psimulex.g:454:46: 'INTEGER'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:400:46: 'INTEGER'
                     {
                     	Match("INTEGER"); 
 
@@ -1217,16 +1119,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "INT"
+    // $ANTLR end "Int"
 
-    // $ANTLR start "DECIMAL"
-    public void mDECIMAL() // throws RecognitionException [2]
+    // $ANTLR start "Decimal"
+    public void mDecimal() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = DECIMAL;
+            int _type = Decimal;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:455:9: ( 'decimal' | 'Decimal' | 'DECIMAL' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:401:9: ( 'decimal' | 'Decimal' | 'DECIMAL' )
             int alt4 = 3;
             int LA4_0 = input.LA(1);
 
@@ -1264,7 +1166,7 @@ public partial class PsimulexLexer : Lexer {
             switch (alt4) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:455:11: 'decimal'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:401:11: 'decimal'
                     {
                     	Match("decimal"); 
 
@@ -1272,7 +1174,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:455:21: 'Decimal'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:401:21: 'Decimal'
                     {
                     	Match("Decimal"); 
 
@@ -1280,7 +1182,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:455:31: 'DECIMAL'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:401:31: 'DECIMAL'
                     {
                     	Match("DECIMAL"); 
 
@@ -1296,16 +1198,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "DECIMAL"
+    // $ANTLR end "Decimal"
 
-    // $ANTLR start "STRING"
-    public void mSTRING() // throws RecognitionException [2]
+    // $ANTLR start "String"
+    public void mString() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = STRING;
+            int _type = String;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:456:8: ( 'string' | 'String' | 'STRING' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:402:8: ( 'string' | 'String' | 'STRING' )
             int alt5 = 3;
             int LA5_0 = input.LA(1);
 
@@ -1343,7 +1245,7 @@ public partial class PsimulexLexer : Lexer {
             switch (alt5) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:456:10: 'string'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:402:10: 'string'
                     {
                     	Match("string"); 
 
@@ -1351,7 +1253,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:456:19: 'String'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:402:19: 'String'
                     {
                     	Match("String"); 
 
@@ -1359,7 +1261,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:456:28: 'STRING'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:402:28: 'STRING'
                     {
                     	Match("STRING"); 
 
@@ -1375,16 +1277,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "STRING"
+    // $ANTLR end "String"
 
-    // $ANTLR start "TREE"
-    public void mTREE() // throws RecognitionException [2]
+    // $ANTLR start "Tree"
+    public void mTree() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = TREE;
+            int _type = Tree;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:460:9: ( 'tree' | 'Tree' | 'TREE' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:406:9: ( 'tree' | 'Tree' | 'TREE' )
             int alt6 = 3;
             int LA6_0 = input.LA(1);
 
@@ -1422,7 +1324,7 @@ public partial class PsimulexLexer : Lexer {
             switch (alt6) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:460:11: 'tree'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:406:11: 'tree'
                     {
                     	Match("tree"); 
 
@@ -1430,7 +1332,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:460:18: 'Tree'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:406:18: 'Tree'
                     {
                     	Match("Tree"); 
 
@@ -1438,7 +1340,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:460:25: 'TREE'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:406:25: 'TREE'
                     {
                     	Match("TREE"); 
 
@@ -1454,16 +1356,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "TREE"
+    // $ANTLR end "Tree"
 
-    // $ANTLR start "BINTREE"
-    public void mBINTREE() // throws RecognitionException [2]
+    // $ANTLR start "BinTree"
+    public void mBinTree() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = BINTREE;
+            int _type = BinTree;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:461:9: ( 'bintree' | 'BinTree' | 'BINTREE' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:407:9: ( 'bintree' | 'BinTree' | 'BINTREE' )
             int alt7 = 3;
             int LA7_0 = input.LA(1);
 
@@ -1501,7 +1403,7 @@ public partial class PsimulexLexer : Lexer {
             switch (alt7) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:461:11: 'bintree'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:407:11: 'bintree'
                     {
                     	Match("bintree"); 
 
@@ -1509,7 +1411,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:461:21: 'BinTree'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:407:21: 'BinTree'
                     {
                     	Match("BinTree"); 
 
@@ -1517,7 +1419,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:461:31: 'BINTREE'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:407:31: 'BINTREE'
                     {
                     	Match("BINTREE"); 
 
@@ -1533,16 +1435,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "BINTREE"
+    // $ANTLR end "BinTree"
 
-    // $ANTLR start "SET"
-    public void mSET() // throws RecognitionException [2]
+    // $ANTLR start "Set"
+    public void mSet() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = SET;
+            int _type = Set;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:462:6: ( 'set' | 'Set' | 'SET' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:408:6: ( 'set' | 'Set' | 'SET' )
             int alt8 = 3;
             int LA8_0 = input.LA(1);
 
@@ -1580,7 +1482,7 @@ public partial class PsimulexLexer : Lexer {
             switch (alt8) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:462:8: 'set'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:408:8: 'set'
                     {
                     	Match("set"); 
 
@@ -1588,7 +1490,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:462:14: 'Set'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:408:14: 'Set'
                     {
                     	Match("Set"); 
 
@@ -1596,7 +1498,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:462:20: 'SET'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:408:20: 'SET'
                     {
                     	Match("SET"); 
 
@@ -1612,16 +1514,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "SET"
+    // $ANTLR end "Set"
 
-    // $ANTLR start "LIST"
-    public void mLIST() // throws RecognitionException [2]
+    // $ANTLR start "List"
+    public void mList() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = LIST;
+            int _type = List;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:463:6: ( 'list' | 'List' | 'LIST' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:409:6: ( 'list' | 'List' | 'LIST' )
             int alt9 = 3;
             int LA9_0 = input.LA(1);
 
@@ -1659,7 +1561,7 @@ public partial class PsimulexLexer : Lexer {
             switch (alt9) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:463:8: 'list'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:409:8: 'list'
                     {
                     	Match("list"); 
 
@@ -1667,7 +1569,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:463:15: 'List'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:409:15: 'List'
                     {
                     	Match("List"); 
 
@@ -1675,7 +1577,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:463:22: 'LIST'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:409:22: 'LIST'
                     {
                     	Match("LIST"); 
 
@@ -1691,16 +1593,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "LIST"
+    // $ANTLR end "List"
 
-    // $ANTLR start "STACK"
-    public void mSTACK() // throws RecognitionException [2]
+    // $ANTLR start "Stack"
+    public void mStack() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = STACK;
+            int _type = Stack;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:464:7: ( 'stack' | 'Stack' | 'STACK' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:410:7: ( 'stack' | 'Stack' | 'STACK' )
             int alt10 = 3;
             int LA10_0 = input.LA(1);
 
@@ -1738,7 +1640,7 @@ public partial class PsimulexLexer : Lexer {
             switch (alt10) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:464:9: 'stack'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:410:9: 'stack'
                     {
                     	Match("stack"); 
 
@@ -1746,7 +1648,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:464:17: 'Stack'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:410:17: 'Stack'
                     {
                     	Match("Stack"); 
 
@@ -1754,7 +1656,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:464:25: 'STACK'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:410:25: 'STACK'
                     {
                     	Match("STACK"); 
 
@@ -1770,16 +1672,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "STACK"
+    // $ANTLR end "Stack"
 
-    // $ANTLR start "QUEUE"
-    public void mQUEUE() // throws RecognitionException [2]
+    // $ANTLR start "Queue"
+    public void mQueue() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = QUEUE;
+            int _type = Queue;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:465:7: ( 'queue' | 'Queue' | 'QUEUE' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:411:7: ( 'queue' | 'Queue' | 'QUEUE' )
             int alt11 = 3;
             int LA11_0 = input.LA(1);
 
@@ -1817,7 +1719,7 @@ public partial class PsimulexLexer : Lexer {
             switch (alt11) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:465:9: 'queue'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:411:9: 'queue'
                     {
                     	Match("queue"); 
 
@@ -1825,7 +1727,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:465:17: 'Queue'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:411:17: 'Queue'
                     {
                     	Match("Queue"); 
 
@@ -1833,7 +1735,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:465:25: 'QUEUE'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:411:25: 'QUEUE'
                     {
                     	Match("QUEUE"); 
 
@@ -1849,16 +1751,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "QUEUE"
+    // $ANTLR end "Queue"
 
-    // $ANTLR start "PQUEUE"
-    public void mPQUEUE() // throws RecognitionException [2]
+    // $ANTLR start "PQueue"
+    public void mPQueue() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = PQUEUE;
+            int _type = PQueue;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:466:8: ( 'pqueue' | 'PQueue' | 'PQUEUE' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:412:8: ( 'pqueue' | 'PQueue' | 'PQUEUE' )
             int alt12 = 3;
             int LA12_0 = input.LA(1);
 
@@ -1908,7 +1810,7 @@ public partial class PsimulexLexer : Lexer {
             switch (alt12) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:466:10: 'pqueue'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:412:10: 'pqueue'
                     {
                     	Match("pqueue"); 
 
@@ -1916,7 +1818,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:466:19: 'PQueue'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:412:19: 'PQueue'
                     {
                     	Match("PQueue"); 
 
@@ -1924,7 +1826,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:466:28: 'PQUEUE'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:412:28: 'PQUEUE'
                     {
                     	Match("PQUEUE"); 
 
@@ -1940,32 +1842,32 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "PQUEUE"
+    // $ANTLR end "PQueue"
 
-    // $ANTLR start "STRUCT"
-    public void mSTRUCT() // throws RecognitionException [2]
+    // $ANTLR start "Void"
+    public void mVoid() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = STRUCT;
+            int _type = Void;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:470:8: ( 'struct' | 'Struct' | 'STRUCT' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:413:6: ( 'void' | 'Void' | 'VOID' )
             int alt13 = 3;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0 == 's') )
+            if ( (LA13_0 == 'v') )
             {
                 alt13 = 1;
             }
-            else if ( (LA13_0 == 'S') )
+            else if ( (LA13_0 == 'V') )
             {
                 int LA13_2 = input.LA(2);
 
-                if ( (LA13_2 == 't') )
+                if ( (LA13_2 == 'o') )
                 {
                     alt13 = 2;
                 }
-                else if ( (LA13_2 == 'T') )
+                else if ( (LA13_2 == 'O') )
                 {
                     alt13 = 3;
                 }
@@ -1987,25 +1889,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt13) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:470:10: 'struct'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:413:8: 'void'
                     {
-                    	Match("struct"); 
+                    	Match("void"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:470:19: 'Struct'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:413:15: 'Void'
                     {
-                    	Match("Struct"); 
+                    	Match("Void"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:470:28: 'STRUCT'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:413:22: 'VOID'
                     {
-                    	Match("STRUCT"); 
+                    	Match("VOID"); 
 
 
                     }
@@ -2019,32 +1921,32 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "STRUCT"
+    // $ANTLR end "Void"
 
-    // $ANTLR start "IMPORT"
-    public void mIMPORT() // throws RecognitionException [2]
+    // $ANTLR start "Struct"
+    public void mStruct() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = IMPORT;
+            int _type = Struct;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:471:8: ( 'import' | 'Import' | 'IMPORT' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:417:8: ( 'struct' | 'Struct' | 'STRUCT' )
             int alt14 = 3;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0 == 'i') )
+            if ( (LA14_0 == 's') )
             {
                 alt14 = 1;
             }
-            else if ( (LA14_0 == 'I') )
+            else if ( (LA14_0 == 'S') )
             {
                 int LA14_2 = input.LA(2);
 
-                if ( (LA14_2 == 'm') )
+                if ( (LA14_2 == 't') )
                 {
                     alt14 = 2;
                 }
-                else if ( (LA14_2 == 'M') )
+                else if ( (LA14_2 == 'T') )
                 {
                     alt14 = 3;
                 }
@@ -2066,25 +1968,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt14) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:471:10: 'import'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:417:10: 'struct'
                     {
-                    	Match("import"); 
+                    	Match("struct"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:471:19: 'Import'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:417:19: 'Struct'
                     {
-                    	Match("Import"); 
+                    	Match("Struct"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:471:28: 'IMPORT'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:417:28: 'STRUCT'
                     {
-                    	Match("IMPORT"); 
+                    	Match("STRUCT"); 
 
 
                     }
@@ -2098,32 +2000,32 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "IMPORT"
+    // $ANTLR end "Struct"
 
-    // $ANTLR start "BREAK"
-    public void mBREAK() // throws RecognitionException [2]
+    // $ANTLR start "Import"
+    public void mImport() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = BREAK;
+            int _type = Import;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:473:7: ( 'break' | 'Break' | 'BREAK' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:418:8: ( 'import' | 'Import' | 'IMPORT' )
             int alt15 = 3;
             int LA15_0 = input.LA(1);
 
-            if ( (LA15_0 == 'b') )
+            if ( (LA15_0 == 'i') )
             {
                 alt15 = 1;
             }
-            else if ( (LA15_0 == 'B') )
+            else if ( (LA15_0 == 'I') )
             {
                 int LA15_2 = input.LA(2);
 
-                if ( (LA15_2 == 'r') )
+                if ( (LA15_2 == 'm') )
                 {
                     alt15 = 2;
                 }
-                else if ( (LA15_2 == 'R') )
+                else if ( (LA15_2 == 'M') )
                 {
                     alt15 = 3;
                 }
@@ -2145,25 +2047,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt15) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:473:9: 'break'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:418:10: 'import'
                     {
-                    	Match("break"); 
+                    	Match("import"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:473:17: 'Break'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:418:19: 'Import'
                     {
-                    	Match("Break"); 
+                    	Match("Import"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:473:25: 'BREAK'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:418:28: 'IMPORT'
                     {
-                    	Match("BREAK"); 
+                    	Match("IMPORT"); 
 
 
                     }
@@ -2177,32 +2079,32 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "BREAK"
+    // $ANTLR end "Import"
 
-    // $ANTLR start "CONTINUE"
-    public void mCONTINUE() // throws RecognitionException [2]
+    // $ANTLR start "Break"
+    public void mBreak() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = CONTINUE;
+            int _type = Break;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:474:9: ( 'continue' | 'Continue' | 'CONTINUE' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:420:7: ( 'break' | 'Break' | 'BREAK' )
             int alt16 = 3;
             int LA16_0 = input.LA(1);
 
-            if ( (LA16_0 == 'c') )
+            if ( (LA16_0 == 'b') )
             {
                 alt16 = 1;
             }
-            else if ( (LA16_0 == 'C') )
+            else if ( (LA16_0 == 'B') )
             {
                 int LA16_2 = input.LA(2);
 
-                if ( (LA16_2 == 'o') )
+                if ( (LA16_2 == 'r') )
                 {
                     alt16 = 2;
                 }
-                else if ( (LA16_2 == 'O') )
+                else if ( (LA16_2 == 'R') )
                 {
                     alt16 = 3;
                 }
@@ -2224,7 +2126,86 @@ public partial class PsimulexLexer : Lexer {
             switch (alt16) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:474:11: 'continue'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:420:9: 'break'
+                    {
+                    	Match("break"); 
+
+
+                    }
+                    break;
+                case 2 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:420:17: 'Break'
+                    {
+                    	Match("Break"); 
+
+
+                    }
+                    break;
+                case 3 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:420:25: 'BREAK'
+                    {
+                    	Match("BREAK"); 
+
+
+                    }
+                    break;
+
+            }
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "Break"
+
+    // $ANTLR start "Continue"
+    public void mContinue() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = Continue;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:421:9: ( 'continue' | 'Continue' | 'CONTINUE' )
+            int alt17 = 3;
+            int LA17_0 = input.LA(1);
+
+            if ( (LA17_0 == 'c') )
+            {
+                alt17 = 1;
+            }
+            else if ( (LA17_0 == 'C') )
+            {
+                int LA17_2 = input.LA(2);
+
+                if ( (LA17_2 == 'o') )
+                {
+                    alt17 = 2;
+                }
+                else if ( (LA17_2 == 'O') )
+                {
+                    alt17 = 3;
+                }
+                else 
+                {
+                    NoViableAltException nvae_d17s2 =
+                        new NoViableAltException("", 17, 2, input);
+
+                    throw nvae_d17s2;
+                }
+            }
+            else 
+            {
+                NoViableAltException nvae_d17s0 =
+                    new NoViableAltException("", 17, 0, input);
+
+                throw nvae_d17s0;
+            }
+            switch (alt17) 
+            {
+                case 1 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:421:11: 'continue'
                     {
                     	Match("continue"); 
 
@@ -2232,7 +2213,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:474:22: 'Continue'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:421:22: 'Continue'
                     {
                     	Match("Continue"); 
 
@@ -2240,7 +2221,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:474:33: 'CONTINUE'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:421:33: 'CONTINUE'
                     {
                     	Match("CONTINUE"); 
 
@@ -2256,22 +2237,22 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "CONTINUE"
+    // $ANTLR end "Continue"
 
-    // $ANTLR start "RETURN"
-    public void mRETURN() // throws RecognitionException [2]
+    // $ANTLR start "Return"
+    public void mReturn() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = RETURN;
+            int _type = Return;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:475:8: ( 'ret' | 'Ret' | 'RET' | 'return' | 'Return' | 'RETURN' )
-            int alt17 = 6;
-            alt17 = dfa17.Predict(input);
-            switch (alt17) 
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:422:8: ( 'ret' | 'Ret' | 'RET' | 'return' | 'Return' | 'RETURN' )
+            int alt18 = 6;
+            alt18 = dfa18.Predict(input);
+            switch (alt18) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:475:10: 'ret'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:422:10: 'ret'
                     {
                     	Match("ret"); 
 
@@ -2279,7 +2260,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:475:16: 'Ret'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:422:16: 'Ret'
                     {
                     	Match("Ret"); 
 
@@ -2287,7 +2268,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:475:22: 'RET'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:422:22: 'RET'
                     {
                     	Match("RET"); 
 
@@ -2295,7 +2276,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 4 :
-                    // Grammar\\Psimulex.g:475:28: 'return'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:422:28: 'return'
                     {
                     	Match("return"); 
 
@@ -2303,7 +2284,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 5 :
-                    // Grammar\\Psimulex.g:475:37: 'Return'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:422:37: 'Return'
                     {
                     	Match("Return"); 
 
@@ -2311,7 +2292,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 6 :
-                    // Grammar\\Psimulex.g:475:46: 'RETURN'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:422:46: 'RETURN'
                     {
                     	Match("RETURN"); 
 
@@ -2327,111 +2308,32 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "RETURN"
+    // $ANTLR end "Return"
 
-    // $ANTLR start "IF"
-    public void mIF() // throws RecognitionException [2]
+    // $ANTLR start "If"
+    public void mIf() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = IF;
+            int _type = If;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:477:5: ( 'if' | 'If' | 'IF' )
-            int alt18 = 3;
-            int LA18_0 = input.LA(1);
-
-            if ( (LA18_0 == 'i') )
-            {
-                alt18 = 1;
-            }
-            else if ( (LA18_0 == 'I') )
-            {
-                int LA18_2 = input.LA(2);
-
-                if ( (LA18_2 == 'f') )
-                {
-                    alt18 = 2;
-                }
-                else if ( (LA18_2 == 'F') )
-                {
-                    alt18 = 3;
-                }
-                else 
-                {
-                    NoViableAltException nvae_d18s2 =
-                        new NoViableAltException("", 18, 2, input);
-
-                    throw nvae_d18s2;
-                }
-            }
-            else 
-            {
-                NoViableAltException nvae_d18s0 =
-                    new NoViableAltException("", 18, 0, input);
-
-                throw nvae_d18s0;
-            }
-            switch (alt18) 
-            {
-                case 1 :
-                    // Grammar\\Psimulex.g:477:7: 'if'
-                    {
-                    	Match("if"); 
-
-
-                    }
-                    break;
-                case 2 :
-                    // Grammar\\Psimulex.g:477:12: 'If'
-                    {
-                    	Match("If"); 
-
-
-                    }
-                    break;
-                case 3 :
-                    // Grammar\\Psimulex.g:477:17: 'IF'
-                    {
-                    	Match("IF"); 
-
-
-                    }
-                    break;
-
-            }
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "IF"
-
-    // $ANTLR start "ELSE"
-    public void mELSE() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = ELSE;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:478:6: ( 'else' | 'Else' | 'ELSE' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:424:5: ( 'if' | 'If' | 'IF' )
             int alt19 = 3;
             int LA19_0 = input.LA(1);
 
-            if ( (LA19_0 == 'e') )
+            if ( (LA19_0 == 'i') )
             {
                 alt19 = 1;
             }
-            else if ( (LA19_0 == 'E') )
+            else if ( (LA19_0 == 'I') )
             {
                 int LA19_2 = input.LA(2);
 
-                if ( (LA19_2 == 'l') )
+                if ( (LA19_2 == 'f') )
                 {
                     alt19 = 2;
                 }
-                else if ( (LA19_2 == 'L') )
+                else if ( (LA19_2 == 'F') )
                 {
                     alt19 = 3;
                 }
@@ -2453,25 +2355,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt19) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:478:8: 'else'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:424:7: 'if'
                     {
-                    	Match("else"); 
+                    	Match("if"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:478:15: 'Else'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:424:12: 'If'
                     {
-                    	Match("Else"); 
+                    	Match("If"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:478:22: 'ELSE'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:424:17: 'IF'
                     {
-                    	Match("ELSE"); 
+                    	Match("IF"); 
 
 
                     }
@@ -2485,16 +2387,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "ELSE"
+    // $ANTLR end "If"
 
-    // $ANTLR start "ELSEIF"
-    public void mELSEIF() // throws RecognitionException [2]
+    // $ANTLR start "Else"
+    public void mElse() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = ELSEIF;
+            int _type = Else;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:479:8: ( 'elseif' | 'ElseIf' | 'ELSEIF' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:425:6: ( 'else' | 'Else' | 'ELSE' )
             int alt20 = 3;
             int LA20_0 = input.LA(1);
 
@@ -2532,25 +2434,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt20) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:479:10: 'elseif'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:425:8: 'else'
                     {
-                    	Match("elseif"); 
+                    	Match("else"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:479:19: 'ElseIf'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:425:15: 'Else'
                     {
-                    	Match("ElseIf"); 
+                    	Match("Else"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:479:28: 'ELSEIF'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:425:22: 'ELSE'
                     {
-                    	Match("ELSEIF"); 
+                    	Match("ELSE"); 
 
 
                     }
@@ -2564,32 +2466,32 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "ELSEIF"
+    // $ANTLR end "Else"
 
-    // $ANTLR start "FOR"
-    public void mFOR() // throws RecognitionException [2]
+    // $ANTLR start "ElseIf"
+    public void mElseIf() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = FOR;
+            int _type = ElseIf;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:480:6: ( 'for' | 'For' | 'FOR' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:426:8: ( 'elseif' | 'ElseIf' | 'ELSEIF' )
             int alt21 = 3;
             int LA21_0 = input.LA(1);
 
-            if ( (LA21_0 == 'f') )
+            if ( (LA21_0 == 'e') )
             {
                 alt21 = 1;
             }
-            else if ( (LA21_0 == 'F') )
+            else if ( (LA21_0 == 'E') )
             {
                 int LA21_2 = input.LA(2);
 
-                if ( (LA21_2 == 'o') )
+                if ( (LA21_2 == 'l') )
                 {
                     alt21 = 2;
                 }
-                else if ( (LA21_2 == 'O') )
+                else if ( (LA21_2 == 'L') )
                 {
                     alt21 = 3;
                 }
@@ -2611,25 +2513,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt21) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:480:8: 'for'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:426:10: 'elseif'
                     {
-                    	Match("for"); 
+                    	Match("elseif"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:480:14: 'For'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:426:19: 'ElseIf'
                     {
-                    	Match("For"); 
+                    	Match("ElseIf"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:480:20: 'FOR'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:426:28: 'ELSEIF'
                     {
-                    	Match("FOR"); 
+                    	Match("ELSEIF"); 
 
 
                     }
@@ -2643,16 +2545,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "FOR"
+    // $ANTLR end "ElseIf"
 
-    // $ANTLR start "FOREACH"
-    public void mFOREACH() // throws RecognitionException [2]
+    // $ANTLR start "For"
+    public void mFor() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = FOREACH;
+            int _type = For;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:481:9: ( 'foreach' | 'ForEach' | 'FOREACH' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:427:6: ( 'for' | 'For' | 'FOR' )
             int alt22 = 3;
             int LA22_0 = input.LA(1);
 
@@ -2690,25 +2592,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt22) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:481:11: 'foreach'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:427:8: 'for'
                     {
-                    	Match("foreach"); 
+                    	Match("for"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:481:21: 'ForEach'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:427:14: 'For'
                     {
-                    	Match("ForEach"); 
+                    	Match("For"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:481:31: 'FOREACH'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:427:20: 'FOR'
                     {
-                    	Match("FOREACH"); 
+                    	Match("FOR"); 
 
 
                     }
@@ -2722,46 +2624,34 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "FOREACH"
+    // $ANTLR end "For"
 
-    // $ANTLR start "PFOR"
-    public void mPFOR() // throws RecognitionException [2]
+    // $ANTLR start "ForEach"
+    public void mForEach() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = PFOR;
+            int _type = ForEach;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:482:6: ( 'pfor' | 'PFor' | 'PFOR' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:428:9: ( 'foreach' | 'ForEach' | 'FOREACH' )
             int alt23 = 3;
             int LA23_0 = input.LA(1);
 
-            if ( (LA23_0 == 'p') )
+            if ( (LA23_0 == 'f') )
             {
                 alt23 = 1;
             }
-            else if ( (LA23_0 == 'P') )
+            else if ( (LA23_0 == 'F') )
             {
                 int LA23_2 = input.LA(2);
 
-                if ( (LA23_2 == 'F') )
+                if ( (LA23_2 == 'o') )
                 {
-                    int LA23_3 = input.LA(3);
-
-                    if ( (LA23_3 == 'o') )
-                    {
-                        alt23 = 2;
-                    }
-                    else if ( (LA23_3 == 'O') )
-                    {
-                        alt23 = 3;
-                    }
-                    else 
-                    {
-                        NoViableAltException nvae_d23s3 =
-                            new NoViableAltException("", 23, 3, input);
-
-                        throw nvae_d23s3;
-                    }
+                    alt23 = 2;
+                }
+                else if ( (LA23_2 == 'O') )
+                {
+                    alt23 = 3;
                 }
                 else 
                 {
@@ -2781,25 +2671,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt23) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:482:8: 'pfor'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:428:11: 'foreach'
                     {
-                    	Match("pfor"); 
+                    	Match("foreach"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:482:15: 'PFor'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:428:21: 'ForEach'
                     {
-                    	Match("PFor"); 
+                    	Match("ForEach"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:482:22: 'PFOR'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:428:31: 'FOREACH'
                     {
-                    	Match("PFOR"); 
+                    	Match("FOREACH"); 
 
 
                     }
@@ -2813,16 +2703,16 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "PFOR"
+    // $ANTLR end "ForEach"
 
-    // $ANTLR start "PFOREACH"
-    public void mPFOREACH() // throws RecognitionException [2]
+    // $ANTLR start "PFor"
+    public void mPFor() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = PFOREACH;
+            int _type = PFor;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:483:9: ( 'pforeach' | 'PForEach' | 'PFOREACH' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:429:6: ( 'pfor' | 'PFor' | 'PFOR' )
             int alt24 = 3;
             int LA24_0 = input.LA(1);
 
@@ -2872,25 +2762,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt24) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:483:11: 'pforeach'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:429:8: 'pfor'
                     {
-                    	Match("pforeach"); 
+                    	Match("pfor"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:483:22: 'PForEach'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:429:15: 'PFor'
                     {
-                    	Match("PForEach"); 
+                    	Match("PFor"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:483:33: 'PFOREACH'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:429:22: 'PFOR'
                     {
-                    	Match("PFOREACH"); 
+                    	Match("PFOR"); 
 
 
                     }
@@ -2904,34 +2794,46 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "PFOREACH"
+    // $ANTLR end "PFor"
 
-    // $ANTLR start "DO"
-    public void mDO() // throws RecognitionException [2]
+    // $ANTLR start "PForEach"
+    public void mPForEach() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = DO;
+            int _type = PForEach;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:484:5: ( 'do' | 'Do' | 'DO' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:430:9: ( 'pforeach' | 'PForEach' | 'PFOREACH' )
             int alt25 = 3;
             int LA25_0 = input.LA(1);
 
-            if ( (LA25_0 == 'd') )
+            if ( (LA25_0 == 'p') )
             {
                 alt25 = 1;
             }
-            else if ( (LA25_0 == 'D') )
+            else if ( (LA25_0 == 'P') )
             {
                 int LA25_2 = input.LA(2);
 
-                if ( (LA25_2 == 'o') )
+                if ( (LA25_2 == 'F') )
                 {
-                    alt25 = 2;
-                }
-                else if ( (LA25_2 == 'O') )
-                {
-                    alt25 = 3;
+                    int LA25_3 = input.LA(3);
+
+                    if ( (LA25_3 == 'o') )
+                    {
+                        alt25 = 2;
+                    }
+                    else if ( (LA25_3 == 'O') )
+                    {
+                        alt25 = 3;
+                    }
+                    else 
+                    {
+                        NoViableAltException nvae_d25s3 =
+                            new NoViableAltException("", 25, 3, input);
+
+                        throw nvae_d25s3;
+                    }
                 }
                 else 
                 {
@@ -2951,25 +2853,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt25) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:484:7: 'do'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:430:11: 'pforeach'
                     {
-                    	Match("do"); 
+                    	Match("pforeach"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:484:12: 'Do'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:430:22: 'PForEach'
                     {
-                    	Match("Do"); 
+                    	Match("PForEach"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:484:17: 'DO'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:430:33: 'PFOREACH'
                     {
-                    	Match("DO"); 
+                    	Match("PFOREACH"); 
 
 
                     }
@@ -2983,46 +2885,34 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "DO"
+    // $ANTLR end "PForEach"
 
-    // $ANTLR start "PDO"
-    public void mPDO() // throws RecognitionException [2]
+    // $ANTLR start "Do"
+    public void mDo() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = PDO;
+            int _type = Do;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:485:6: ( 'pdo' | 'PDo' | 'PDO' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:431:5: ( 'do' | 'Do' | 'DO' )
             int alt26 = 3;
             int LA26_0 = input.LA(1);
 
-            if ( (LA26_0 == 'p') )
+            if ( (LA26_0 == 'd') )
             {
                 alt26 = 1;
             }
-            else if ( (LA26_0 == 'P') )
+            else if ( (LA26_0 == 'D') )
             {
                 int LA26_2 = input.LA(2);
 
-                if ( (LA26_2 == 'D') )
+                if ( (LA26_2 == 'o') )
                 {
-                    int LA26_3 = input.LA(3);
-
-                    if ( (LA26_3 == 'o') )
-                    {
-                        alt26 = 2;
-                    }
-                    else if ( (LA26_3 == 'O') )
-                    {
-                        alt26 = 3;
-                    }
-                    else 
-                    {
-                        NoViableAltException nvae_d26s3 =
-                            new NoViableAltException("", 26, 3, input);
-
-                        throw nvae_d26s3;
-                    }
+                    alt26 = 2;
+                }
+                else if ( (LA26_2 == 'O') )
+                {
+                    alt26 = 3;
                 }
                 else 
                 {
@@ -3042,25 +2932,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt26) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:485:8: 'pdo'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:431:7: 'do'
                     {
-                    	Match("pdo"); 
+                    	Match("do"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:485:14: 'PDo'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:431:12: 'Do'
                     {
-                    	Match("PDo"); 
+                    	Match("Do"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:485:20: 'PDO'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:431:17: 'DO'
                     {
-                    	Match("PDO"); 
+                    	Match("DO"); 
 
 
                     }
@@ -3074,34 +2964,46 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "PDO"
+    // $ANTLR end "Do"
 
-    // $ANTLR start "WHILE"
-    public void mWHILE() // throws RecognitionException [2]
+    // $ANTLR start "PDo"
+    public void mPDo() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = WHILE;
+            int _type = PDo;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:486:7: ( 'while' | 'While' | 'WHILE' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:432:6: ( 'pdo' | 'PDo' | 'PDO' )
             int alt27 = 3;
             int LA27_0 = input.LA(1);
 
-            if ( (LA27_0 == 'w') )
+            if ( (LA27_0 == 'p') )
             {
                 alt27 = 1;
             }
-            else if ( (LA27_0 == 'W') )
+            else if ( (LA27_0 == 'P') )
             {
                 int LA27_2 = input.LA(2);
 
-                if ( (LA27_2 == 'h') )
+                if ( (LA27_2 == 'D') )
                 {
-                    alt27 = 2;
-                }
-                else if ( (LA27_2 == 'H') )
-                {
-                    alt27 = 3;
+                    int LA27_3 = input.LA(3);
+
+                    if ( (LA27_3 == 'o') )
+                    {
+                        alt27 = 2;
+                    }
+                    else if ( (LA27_3 == 'O') )
+                    {
+                        alt27 = 3;
+                    }
+                    else 
+                    {
+                        NoViableAltException nvae_d27s3 =
+                            new NoViableAltException("", 27, 3, input);
+
+                        throw nvae_d27s3;
+                    }
                 }
                 else 
                 {
@@ -3121,25 +3023,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt27) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:486:9: 'while'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:432:8: 'pdo'
                     {
-                    	Match("while"); 
+                    	Match("pdo"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:486:17: 'While'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:432:14: 'PDo'
                     {
-                    	Match("While"); 
+                    	Match("PDo"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:486:25: 'WHILE'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:432:20: 'PDO'
                     {
-                    	Match("WHILE"); 
+                    	Match("PDO"); 
 
 
                     }
@@ -3153,32 +3055,32 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "WHILE"
+    // $ANTLR end "PDo"
 
-    // $ANTLR start "LOOP"
-    public void mLOOP() // throws RecognitionException [2]
+    // $ANTLR start "While"
+    public void mWhile() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = LOOP;
+            int _type = While;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:487:6: ( 'loop' | 'Loop' | 'LOOP' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:433:7: ( 'while' | 'While' | 'WHILE' )
             int alt28 = 3;
             int LA28_0 = input.LA(1);
 
-            if ( (LA28_0 == 'l') )
+            if ( (LA28_0 == 'w') )
             {
                 alt28 = 1;
             }
-            else if ( (LA28_0 == 'L') )
+            else if ( (LA28_0 == 'W') )
             {
                 int LA28_2 = input.LA(2);
 
-                if ( (LA28_2 == 'o') )
+                if ( (LA28_2 == 'h') )
                 {
                     alt28 = 2;
                 }
-                else if ( (LA28_2 == 'O') )
+                else if ( (LA28_2 == 'H') )
                 {
                     alt28 = 3;
                 }
@@ -3200,25 +3102,25 @@ public partial class PsimulexLexer : Lexer {
             switch (alt28) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:487:8: 'loop'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:433:9: 'while'
                     {
-                    	Match("loop"); 
+                    	Match("while"); 
 
 
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:487:15: 'Loop'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:433:17: 'While'
                     {
-                    	Match("Loop"); 
+                    	Match("While"); 
 
 
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:487:22: 'LOOP'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:433:25: 'WHILE'
                     {
-                    	Match("LOOP"); 
+                    	Match("WHILE"); 
 
 
                     }
@@ -3232,26 +3134,25 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "LOOP"
+    // $ANTLR end "While"
 
-    // $ANTLR start "TO"
-    public void mTO() // throws RecognitionException [2]
+    // $ANTLR start "Loop"
+    public void mLoop() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = TO;
+            int _type = Loop;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:488:5: ( 'to' | 'To' | 'TO' | 'until' | 'Until' | 'UNTIL' )
-            int alt29 = 6;
-            switch ( input.LA(1) ) 
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:434:6: ( 'loop' | 'Loop' | 'LOOP' )
+            int alt29 = 3;
+            int LA29_0 = input.LA(1);
+
+            if ( (LA29_0 == 'l') )
             {
-            case 't':
-            	{
                 alt29 = 1;
-                }
-                break;
-            case 'T':
-            	{
+            }
+            else if ( (LA29_0 == 'L') )
+            {
                 int LA29_2 = input.LA(2);
 
                 if ( (LA29_2 == 'o') )
@@ -3269,45 +3170,125 @@ public partial class PsimulexLexer : Lexer {
 
                     throw nvae_d29s2;
                 }
+            }
+            else 
+            {
+                NoViableAltException nvae_d29s0 =
+                    new NoViableAltException("", 29, 0, input);
+
+                throw nvae_d29s0;
+            }
+            switch (alt29) 
+            {
+                case 1 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:434:8: 'loop'
+                    {
+                    	Match("loop"); 
+
+
+                    }
+                    break;
+                case 2 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:434:15: 'Loop'
+                    {
+                    	Match("Loop"); 
+
+
+                    }
+                    break;
+                case 3 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:434:22: 'LOOP'
+                    {
+                    	Match("LOOP"); 
+
+
+                    }
+                    break;
+
+            }
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "Loop"
+
+    // $ANTLR start "To"
+    public void mTo() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = To;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:435:5: ( 'to' | 'To' | 'TO' | 'until' | 'Until' | 'UNTIL' )
+            int alt30 = 6;
+            switch ( input.LA(1) ) 
+            {
+            case 't':
+            	{
+                alt30 = 1;
+                }
+                break;
+            case 'T':
+            	{
+                int LA30_2 = input.LA(2);
+
+                if ( (LA30_2 == 'o') )
+                {
+                    alt30 = 2;
+                }
+                else if ( (LA30_2 == 'O') )
+                {
+                    alt30 = 3;
+                }
+                else 
+                {
+                    NoViableAltException nvae_d30s2 =
+                        new NoViableAltException("", 30, 2, input);
+
+                    throw nvae_d30s2;
+                }
                 }
                 break;
             case 'u':
             	{
-                alt29 = 4;
+                alt30 = 4;
                 }
                 break;
             case 'U':
             	{
-                int LA29_4 = input.LA(2);
+                int LA30_4 = input.LA(2);
 
-                if ( (LA29_4 == 'n') )
+                if ( (LA30_4 == 'n') )
                 {
-                    alt29 = 5;
+                    alt30 = 5;
                 }
-                else if ( (LA29_4 == 'N') )
+                else if ( (LA30_4 == 'N') )
                 {
-                    alt29 = 6;
+                    alt30 = 6;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d29s4 =
-                        new NoViableAltException("", 29, 4, input);
+                    NoViableAltException nvae_d30s4 =
+                        new NoViableAltException("", 30, 4, input);
 
-                    throw nvae_d29s4;
+                    throw nvae_d30s4;
                 }
                 }
                 break;
             	default:
-            	    NoViableAltException nvae_d29s0 =
-            	        new NoViableAltException("", 29, 0, input);
+            	    NoViableAltException nvae_d30s0 =
+            	        new NoViableAltException("", 30, 0, input);
 
-            	    throw nvae_d29s0;
+            	    throw nvae_d30s0;
             }
 
-            switch (alt29) 
+            switch (alt30) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:488:7: 'to'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:435:7: 'to'
                     {
                     	Match("to"); 
 
@@ -3315,7 +3296,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:488:12: 'To'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:435:12: 'To'
                     {
                     	Match("To"); 
 
@@ -3323,7 +3304,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:488:17: 'TO'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:435:17: 'TO'
                     {
                     	Match("TO"); 
 
@@ -3331,7 +3312,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 4 :
-                    // Grammar\\Psimulex.g:488:22: 'until'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:435:22: 'until'
                     {
                     	Match("until"); 
 
@@ -3339,7 +3320,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 5 :
-                    // Grammar\\Psimulex.g:488:30: 'Until'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:435:30: 'Until'
                     {
                     	Match("Until"); 
 
@@ -3347,7 +3328,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 6 :
-                    // Grammar\\Psimulex.g:488:38: 'UNTIL'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:435:38: 'UNTIL'
                     {
                     	Match("UNTIL"); 
 
@@ -3363,54 +3344,54 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "TO"
+    // $ANTLR end "To"
 
-    // $ANTLR start "IN"
-    public void mIN() // throws RecognitionException [2]
+    // $ANTLR start "In"
+    public void mIn() // throws RecognitionException [2]
     {
     		try
     		{
-            int _type = IN;
+            int _type = In;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:489:5: ( 'in' | 'In' | 'IN' )
-            int alt30 = 3;
-            int LA30_0 = input.LA(1);
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:436:5: ( 'in' | 'In' | 'IN' )
+            int alt31 = 3;
+            int LA31_0 = input.LA(1);
 
-            if ( (LA30_0 == 'i') )
+            if ( (LA31_0 == 'i') )
             {
-                alt30 = 1;
+                alt31 = 1;
             }
-            else if ( (LA30_0 == 'I') )
+            else if ( (LA31_0 == 'I') )
             {
-                int LA30_2 = input.LA(2);
+                int LA31_2 = input.LA(2);
 
-                if ( (LA30_2 == 'n') )
+                if ( (LA31_2 == 'n') )
                 {
-                    alt30 = 2;
+                    alt31 = 2;
                 }
-                else if ( (LA30_2 == 'N') )
+                else if ( (LA31_2 == 'N') )
                 {
-                    alt30 = 3;
+                    alt31 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d30s2 =
-                        new NoViableAltException("", 30, 2, input);
+                    NoViableAltException nvae_d31s2 =
+                        new NoViableAltException("", 31, 2, input);
 
-                    throw nvae_d30s2;
+                    throw nvae_d31s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d30s0 =
-                    new NoViableAltException("", 30, 0, input);
+                NoViableAltException nvae_d31s0 =
+                    new NoViableAltException("", 31, 0, input);
 
-                throw nvae_d30s0;
+                throw nvae_d31s0;
             }
-            switch (alt30) 
+            switch (alt31) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:489:7: 'in'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:436:7: 'in'
                     {
                     	Match("in"); 
 
@@ -3418,7 +3399,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:489:12: 'In'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:436:12: 'In'
                     {
                     	Match("In"); 
 
@@ -3426,7 +3407,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:489:17: 'IN'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:436:17: 'IN'
                     {
                     	Match("IN"); 
 
@@ -3442,15 +3423,15 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "IN"
+    // $ANTLR end "In"
 
     // $ANTLR start "Letter"
     public void mLetter() // throws RecognitionException [2]
     {
     		try
     		{
-            // Grammar\\Psimulex.g:495:5: ( '\\u0024' | '\\u0041' .. '\\u005a' | '\\u005f' | '\\u0061' .. '\\u007a' | '\\u00c0' .. '\\u00d6' | '\\u00d8' .. '\\u00f6' | '\\u00f8' .. '\\u00ff' | '\\u0100' .. '\\u1fff' | '\\u3040' .. '\\u318f' | '\\u3300' .. '\\u337f' | '\\u3400' .. '\\u3d2d' | '\\u4e00' .. '\\u9fff' | '\\uf900' .. '\\ufaff' )
-            // Grammar\\Psimulex.g:
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:442:5: ( '\\u0024' | '\\u0041' .. '\\u005a' | '\\u005f' | '\\u0061' .. '\\u007a' | '\\u00c0' .. '\\u00d6' | '\\u00d8' .. '\\u00f6' | '\\u00f8' .. '\\u00ff' | '\\u0100' .. '\\u1fff' | '\\u3040' .. '\\u318f' | '\\u3300' .. '\\u337f' | '\\u3400' .. '\\u3d2d' | '\\u4e00' .. '\\u9fff' | '\\uf900' .. '\\ufaff' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
             {
             	if ( input.LA(1) == '$' || (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u00C0' && input.LA(1) <= '\u00D6') || (input.LA(1) >= '\u00D8' && input.LA(1) <= '\u00F6') || (input.LA(1) >= '\u00F8' && input.LA(1) <= '\u1FFF') || (input.LA(1) >= '\u3040' && input.LA(1) <= '\u318F') || (input.LA(1) >= '\u3300' && input.LA(1) <= '\u337F') || (input.LA(1) >= '\u3400' && input.LA(1) <= '\u3D2D') || (input.LA(1) >= '\u4E00' && input.LA(1) <= '\u9FFF') || (input.LA(1) >= '\uF900' && input.LA(1) <= '\uFAFF') ) 
             	{
@@ -3478,8 +3459,8 @@ public partial class PsimulexLexer : Lexer {
     {
     		try
     		{
-            // Grammar\\Psimulex.g:512:5: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
-            // Grammar\\Psimulex.g:
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:459:5: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
             {
             	if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) 
             	{
@@ -3507,8 +3488,8 @@ public partial class PsimulexLexer : Lexer {
     {
     		try
     		{
-            // Grammar\\Psimulex.g:519:5: ( '0' .. '9' )
-            // Grammar\\Psimulex.g:519:7: '0' .. '9'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:466:5: ( '0' .. '9' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:466:7: '0' .. '9'
             {
             	MatchRange('0','9'); 
 
@@ -3526,8 +3507,8 @@ public partial class PsimulexLexer : Lexer {
     {
     		try
     		{
-            // Grammar\\Psimulex.g:524:5: ( '1' .. '9' )
-            // Grammar\\Psimulex.g:524:7: '1' .. '9'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:471:5: ( '1' .. '9' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:471:7: '1' .. '9'
             {
             	MatchRange('1','9'); 
 
@@ -3547,57 +3528,57 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = IntegerLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:527:16: ( ( '0' | NotNullDigit ( Digit )* ) )
-            // Grammar\\Psimulex.g:527:18: ( '0' | NotNullDigit ( Digit )* )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:474:16: ( ( '0' | NotNullDigit ( Digit )* ) )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:474:18: ( '0' | NotNullDigit ( Digit )* )
             {
-            	// Grammar\\Psimulex.g:527:18: ( '0' | NotNullDigit ( Digit )* )
-            	int alt32 = 2;
-            	int LA32_0 = input.LA(1);
+            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:474:18: ( '0' | NotNullDigit ( Digit )* )
+            	int alt33 = 2;
+            	int LA33_0 = input.LA(1);
 
-            	if ( (LA32_0 == '0') )
+            	if ( (LA33_0 == '0') )
             	{
-            	    alt32 = 1;
+            	    alt33 = 1;
             	}
-            	else if ( ((LA32_0 >= '1' && LA32_0 <= '9')) )
+            	else if ( ((LA33_0 >= '1' && LA33_0 <= '9')) )
             	{
-            	    alt32 = 2;
+            	    alt33 = 2;
             	}
             	else 
             	{
-            	    NoViableAltException nvae_d32s0 =
-            	        new NoViableAltException("", 32, 0, input);
+            	    NoViableAltException nvae_d33s0 =
+            	        new NoViableAltException("", 33, 0, input);
 
-            	    throw nvae_d32s0;
+            	    throw nvae_d33s0;
             	}
-            	switch (alt32) 
+            	switch (alt33) 
             	{
             	    case 1 :
-            	        // Grammar\\Psimulex.g:527:19: '0'
+            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:474:19: '0'
             	        {
             	        	Match('0'); 
 
             	        }
             	        break;
             	    case 2 :
-            	        // Grammar\\Psimulex.g:527:25: NotNullDigit ( Digit )*
+            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:474:25: NotNullDigit ( Digit )*
             	        {
             	        	mNotNullDigit(); 
-            	        	// Grammar\\Psimulex.g:527:38: ( Digit )*
+            	        	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:474:38: ( Digit )*
             	        	do 
             	        	{
-            	        	    int alt31 = 2;
-            	        	    int LA31_0 = input.LA(1);
+            	        	    int alt32 = 2;
+            	        	    int LA32_0 = input.LA(1);
 
-            	        	    if ( ((LA31_0 >= '0' && LA31_0 <= '9')) )
+            	        	    if ( ((LA32_0 >= '0' && LA32_0 <= '9')) )
             	        	    {
-            	        	        alt31 = 1;
+            	        	        alt32 = 1;
             	        	    }
 
 
-            	        	    switch (alt31) 
+            	        	    switch (alt32) 
             	        		{
             	        			case 1 :
-            	        			    // Grammar\\Psimulex.g:527:38: Digit
+            	        			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:474:38: Digit
             	        			    {
             	        			    	mDigit(); 
 
@@ -3605,12 +3586,12 @@ public partial class PsimulexLexer : Lexer {
             	        			    break;
 
             	        			default:
-            	        			    goto loop31;
+            	        			    goto loop32;
             	        	    }
             	        	} while (true);
 
-            	        	loop31:
-            	        		;	// Stops C# compiler whining that label 'loop31' has no statements
+            	        	loop32:
+            	        		;	// Stops C# compiler whining that label 'loop32' has no statements
 
 
             	        }
@@ -3635,8 +3616,8 @@ public partial class PsimulexLexer : Lexer {
     {
     		try
     		{
-            // Grammar\\Psimulex.g:530:19: ( ( 'm' | 'M' | 'd' | 'D' ) )
-            // Grammar\\Psimulex.g:530:21: ( 'm' | 'M' | 'd' | 'D' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:477:19: ( ( 'm' | 'M' | 'd' | 'D' ) )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:477:21: ( 'm' | 'M' | 'd' | 'D' )
             {
             	if ( input.LA(1) == 'D' || input.LA(1) == 'M' || input.LA(1) == 'd' || input.LA(1) == 'm' ) 
             	{
@@ -3666,51 +3647,16 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = DecimalLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:533:5: ( ( Digit )+ '.' ( Digit )* | '.' ( Digit )+ | ( Digit )+ DecimalTypeSuffix )
-            int alt37 = 3;
-            alt37 = dfa37.Predict(input);
-            switch (alt37) 
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:480:5: ( ( Digit )+ '.' ( Digit )* | '.' ( Digit )+ | ( Digit )+ DecimalTypeSuffix )
+            int alt38 = 3;
+            alt38 = dfa38.Predict(input);
+            switch (alt38) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:533:9: ( Digit )+ '.' ( Digit )*
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:480:9: ( Digit )+ '.' ( Digit )*
                     {
-                    	// Grammar\\Psimulex.g:533:9: ( Digit )+
-                    	int cnt33 = 0;
-                    	do 
-                    	{
-                    	    int alt33 = 2;
-                    	    int LA33_0 = input.LA(1);
-
-                    	    if ( ((LA33_0 >= '0' && LA33_0 <= '9')) )
-                    	    {
-                    	        alt33 = 1;
-                    	    }
-
-
-                    	    switch (alt33) 
-                    		{
-                    			case 1 :
-                    			    // Grammar\\Psimulex.g:533:9: Digit
-                    			    {
-                    			    	mDigit(); 
-
-                    			    }
-                    			    break;
-
-                    			default:
-                    			    if ( cnt33 >= 1 ) goto loop33;
-                    		            EarlyExitException eee =
-                    		                new EarlyExitException(33, input);
-                    		            throw eee;
-                    	    }
-                    	    cnt33++;
-                    	} while (true);
-
-                    	loop33:
-                    		;	// Stops C# compiler whinging that label 'loop33' has no statements
-
-                    	Match('.'); 
-                    	// Grammar\\Psimulex.g:533:20: ( Digit )*
+                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:480:9: ( Digit )+
+                    	int cnt34 = 0;
                     	do 
                     	{
                     	    int alt34 = 2;
@@ -3725,7 +3671,7 @@ public partial class PsimulexLexer : Lexer {
                     	    switch (alt34) 
                     		{
                     			case 1 :
-                    			    // Grammar\\Psimulex.g:533:20: Digit
+                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:480:9: Digit
                     			    {
                     			    	mDigit(); 
 
@@ -3733,22 +3679,19 @@ public partial class PsimulexLexer : Lexer {
                     			    break;
 
                     			default:
-                    			    goto loop34;
+                    			    if ( cnt34 >= 1 ) goto loop34;
+                    		            EarlyExitException eee =
+                    		                new EarlyExitException(34, input);
+                    		            throw eee;
                     	    }
+                    	    cnt34++;
                     	} while (true);
 
                     	loop34:
-                    		;	// Stops C# compiler whining that label 'loop34' has no statements
+                    		;	// Stops C# compiler whinging that label 'loop34' has no statements
 
-
-                    }
-                    break;
-                case 2 :
-                    // Grammar\\Psimulex.g:534:9: '.' ( Digit )+
-                    {
                     	Match('.'); 
-                    	// Grammar\\Psimulex.g:534:13: ( Digit )+
-                    	int cnt35 = 0;
+                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:480:20: ( Digit )*
                     	do 
                     	{
                     	    int alt35 = 2;
@@ -3763,7 +3706,7 @@ public partial class PsimulexLexer : Lexer {
                     	    switch (alt35) 
                     		{
                     			case 1 :
-                    			    // Grammar\\Psimulex.g:534:13: Digit
+                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:480:20: Digit
                     			    {
                     			    	mDigit(); 
 
@@ -3771,24 +3714,21 @@ public partial class PsimulexLexer : Lexer {
                     			    break;
 
                     			default:
-                    			    if ( cnt35 >= 1 ) goto loop35;
-                    		            EarlyExitException eee =
-                    		                new EarlyExitException(35, input);
-                    		            throw eee;
+                    			    goto loop35;
                     	    }
-                    	    cnt35++;
                     	} while (true);
 
                     	loop35:
-                    		;	// Stops C# compiler whinging that label 'loop35' has no statements
+                    		;	// Stops C# compiler whining that label 'loop35' has no statements
 
 
                     }
                     break;
-                case 3 :
-                    // Grammar\\Psimulex.g:535:9: ( Digit )+ DecimalTypeSuffix
+                case 2 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:481:9: '.' ( Digit )+
                     {
-                    	// Grammar\\Psimulex.g:535:9: ( Digit )+
+                    	Match('.'); 
+                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:481:13: ( Digit )+
                     	int cnt36 = 0;
                     	do 
                     	{
@@ -3804,7 +3744,7 @@ public partial class PsimulexLexer : Lexer {
                     	    switch (alt36) 
                     		{
                     			case 1 :
-                    			    // Grammar\\Psimulex.g:535:9: Digit
+                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:481:13: Digit
                     			    {
                     			    	mDigit(); 
 
@@ -3822,6 +3762,47 @@ public partial class PsimulexLexer : Lexer {
 
                     	loop36:
                     		;	// Stops C# compiler whinging that label 'loop36' has no statements
+
+
+                    }
+                    break;
+                case 3 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:482:9: ( Digit )+ DecimalTypeSuffix
+                    {
+                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:482:9: ( Digit )+
+                    	int cnt37 = 0;
+                    	do 
+                    	{
+                    	    int alt37 = 2;
+                    	    int LA37_0 = input.LA(1);
+
+                    	    if ( ((LA37_0 >= '0' && LA37_0 <= '9')) )
+                    	    {
+                    	        alt37 = 1;
+                    	    }
+
+
+                    	    switch (alt37) 
+                    		{
+                    			case 1 :
+                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:482:9: Digit
+                    			    {
+                    			    	mDigit(); 
+
+                    			    }
+                    			    break;
+
+                    			default:
+                    			    if ( cnt37 >= 1 ) goto loop37;
+                    		            EarlyExitException eee =
+                    		                new EarlyExitException(37, input);
+                    		            throw eee;
+                    	    }
+                    	    cnt37++;
+                    	} while (true);
+
+                    	loop37:
+                    		;	// Stops C# compiler whinging that label 'loop37' has no statements
 
                     	mDecimalTypeSuffix(); 
 
@@ -3843,10 +3824,10 @@ public partial class PsimulexLexer : Lexer {
     {
     		try
     		{
-            // Grammar\\Psimulex.g:540:5: ( ESC ( 't' | 'n' | 'r' | QM | AP | ESC ) )
-            // Grammar\\Psimulex.g:540:9: ESC ( 't' | 'n' | 'r' | QM | AP | ESC )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:487:5: ( '\\\\' ( 't' | 'n' | 'r' | QuotationMark | Apostrophe | '\\\\' ) )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:487:9: '\\\\' ( 't' | 'n' | 'r' | QuotationMark | Apostrophe | '\\\\' )
             {
-            	mESC(); 
+            	Match('\\'); 
             	if ( input.LA(1) == '\"' || input.LA(1) == '\'' || input.LA(1) == '\\' || input.LA(1) == 'n' || input.LA(1) == 'r' || input.LA(1) == 't' ) 
             	{
             	    input.Consume();
@@ -3875,33 +3856,33 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = CharacterLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:544:5: ( AP ( EscapeSequence | ~ ( AP | ESC ) )? AP )
-            // Grammar\\Psimulex.g:544:9: AP ( EscapeSequence | ~ ( AP | ESC ) )? AP
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:491:5: ( Apostrophe ( EscapeSequence | ~ ( Apostrophe | '\\\\' ) )? Apostrophe )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:491:9: Apostrophe ( EscapeSequence | ~ ( Apostrophe | '\\\\' ) )? Apostrophe
             {
-            	mAP(); 
-            	// Grammar\\Psimulex.g:544:12: ( EscapeSequence | ~ ( AP | ESC ) )?
-            	int alt38 = 3;
-            	int LA38_0 = input.LA(1);
+            	mApostrophe(); 
+            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:491:20: ( EscapeSequence | ~ ( Apostrophe | '\\\\' ) )?
+            	int alt39 = 3;
+            	int LA39_0 = input.LA(1);
 
-            	if ( (LA38_0 == '\\') )
+            	if ( (LA39_0 == '\\') )
             	{
-            	    alt38 = 1;
+            	    alt39 = 1;
             	}
-            	else if ( ((LA38_0 >= '\u0000' && LA38_0 <= '&') || (LA38_0 >= '(' && LA38_0 <= '[') || (LA38_0 >= ']' && LA38_0 <= '\uFFFE')) )
+            	else if ( ((LA39_0 >= '\u0000' && LA39_0 <= '&') || (LA39_0 >= '(' && LA39_0 <= '[') || (LA39_0 >= ']' && LA39_0 <= '\uFFFE')) )
             	{
-            	    alt38 = 2;
+            	    alt39 = 2;
             	}
-            	switch (alt38) 
+            	switch (alt39) 
             	{
             	    case 1 :
-            	        // Grammar\\Psimulex.g:544:14: EscapeSequence
+            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:491:22: EscapeSequence
             	        {
             	        	mEscapeSequence(); 
 
             	        }
             	        break;
             	    case 2 :
-            	        // Grammar\\Psimulex.g:544:31: ~ ( AP | ESC )
+            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:491:39: ~ ( Apostrophe | '\\\\' )
             	        {
             	        	if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '&') || (input.LA(1) >= '(' && input.LA(1) <= '[') || (input.LA(1) >= ']' && input.LA(1) <= '\uFFFE') ) 
             	        	{
@@ -3920,7 +3901,7 @@ public partial class PsimulexLexer : Lexer {
 
             	}
 
-            	mAP(); 
+            	mApostrophe(); 
 
             }
 
@@ -3940,37 +3921,37 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = StringLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:548:5: ( QM ( EscapeSequence | ~ ( QM | ESC ) )* QM )
-            // Grammar\\Psimulex.g:548:7: QM ( EscapeSequence | ~ ( QM | ESC ) )* QM
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:495:5: ( QuotationMark ( EscapeSequence | ~ ( QuotationMark | '\\\\' ) )* QuotationMark )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:495:7: QuotationMark ( EscapeSequence | ~ ( QuotationMark | '\\\\' ) )* QuotationMark
             {
-            	mQM(); 
-            	// Grammar\\Psimulex.g:548:10: ( EscapeSequence | ~ ( QM | ESC ) )*
+            	mQuotationMark(); 
+            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:495:21: ( EscapeSequence | ~ ( QuotationMark | '\\\\' ) )*
             	do 
             	{
-            	    int alt39 = 3;
-            	    int LA39_0 = input.LA(1);
+            	    int alt40 = 3;
+            	    int LA40_0 = input.LA(1);
 
-            	    if ( (LA39_0 == '\\') )
+            	    if ( (LA40_0 == '\\') )
             	    {
-            	        alt39 = 1;
+            	        alt40 = 1;
             	    }
-            	    else if ( ((LA39_0 >= '\u0000' && LA39_0 <= '!') || (LA39_0 >= '#' && LA39_0 <= '[') || (LA39_0 >= ']' && LA39_0 <= '\uFFFE')) )
+            	    else if ( ((LA40_0 >= '\u0000' && LA40_0 <= '!') || (LA40_0 >= '#' && LA40_0 <= '[') || (LA40_0 >= ']' && LA40_0 <= '\uFFFE')) )
             	    {
-            	        alt39 = 2;
+            	        alt40 = 2;
             	    }
 
 
-            	    switch (alt39) 
+            	    switch (alt40) 
             		{
             			case 1 :
-            			    // Grammar\\Psimulex.g:548:12: EscapeSequence
+            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:495:23: EscapeSequence
             			    {
             			    	mEscapeSequence(); 
 
             			    }
             			    break;
             			case 2 :
-            			    // Grammar\\Psimulex.g:548:29: ~ ( QM | ESC )
+            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:495:40: ~ ( QuotationMark | '\\\\' )
             			    {
             			    	if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!') || (input.LA(1) >= '#' && input.LA(1) <= '[') || (input.LA(1) >= ']' && input.LA(1) <= '\uFFFE') ) 
             			    	{
@@ -3988,14 +3969,14 @@ public partial class PsimulexLexer : Lexer {
             			    break;
 
             			default:
-            			    goto loop39;
+            			    goto loop40;
             	    }
             	} while (true);
 
-            	loop39:
-            		;	// Stops C# compiler whining that label 'loop39' has no statements
+            	loop40:
+            		;	// Stops C# compiler whining that label 'loop40' has no statements
 
-            	mQM(); 
+            	mQuotationMark(); 
 
             }
 
@@ -4015,73 +3996,73 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = BooleanLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:552:5: ( 'true' | 'false' | 'True' | 'False' | 'TRUE' | 'FALSE' )
-            int alt40 = 6;
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:499:5: ( 'true' | 'false' | 'True' | 'False' | 'TRUE' | 'FALSE' )
+            int alt41 = 6;
             switch ( input.LA(1) ) 
             {
             case 't':
             	{
-                alt40 = 1;
+                alt41 = 1;
                 }
                 break;
             case 'f':
             	{
-                alt40 = 2;
+                alt41 = 2;
                 }
                 break;
             case 'T':
             	{
-                int LA40_3 = input.LA(2);
+                int LA41_3 = input.LA(2);
 
-                if ( (LA40_3 == 'r') )
+                if ( (LA41_3 == 'r') )
                 {
-                    alt40 = 3;
+                    alt41 = 3;
                 }
-                else if ( (LA40_3 == 'R') )
+                else if ( (LA41_3 == 'R') )
                 {
-                    alt40 = 5;
+                    alt41 = 5;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d40s3 =
-                        new NoViableAltException("", 40, 3, input);
+                    NoViableAltException nvae_d41s3 =
+                        new NoViableAltException("", 41, 3, input);
 
-                    throw nvae_d40s3;
+                    throw nvae_d41s3;
                 }
                 }
                 break;
             case 'F':
             	{
-                int LA40_4 = input.LA(2);
+                int LA41_4 = input.LA(2);
 
-                if ( (LA40_4 == 'a') )
+                if ( (LA41_4 == 'a') )
                 {
-                    alt40 = 4;
+                    alt41 = 4;
                 }
-                else if ( (LA40_4 == 'A') )
+                else if ( (LA41_4 == 'A') )
                 {
-                    alt40 = 6;
+                    alt41 = 6;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d40s4 =
-                        new NoViableAltException("", 40, 4, input);
+                    NoViableAltException nvae_d41s4 =
+                        new NoViableAltException("", 41, 4, input);
 
-                    throw nvae_d40s4;
+                    throw nvae_d41s4;
                 }
                 }
                 break;
             	default:
-            	    NoViableAltException nvae_d40s0 =
-            	        new NoViableAltException("", 40, 0, input);
+            	    NoViableAltException nvae_d41s0 =
+            	        new NoViableAltException("", 41, 0, input);
 
-            	    throw nvae_d40s0;
+            	    throw nvae_d41s0;
             }
 
-            switch (alt40) 
+            switch (alt41) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:552:7: 'true'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:499:7: 'true'
                     {
                     	Match("true"); 
 
@@ -4089,7 +4070,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:552:14: 'false'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:499:14: 'false'
                     {
                     	Match("false"); 
 
@@ -4097,7 +4078,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:553:7: 'True'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:500:7: 'True'
                     {
                     	Match("True"); 
 
@@ -4105,7 +4086,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 4 :
-                    // Grammar\\Psimulex.g:553:14: 'False'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:500:14: 'False'
                     {
                     	Match("False"); 
 
@@ -4113,7 +4094,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 5 :
-                    // Grammar\\Psimulex.g:554:7: 'TRUE'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:501:7: 'TRUE'
                     {
                     	Match("TRUE"); 
 
@@ -4121,7 +4102,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 6 :
-                    // Grammar\\Psimulex.g:554:14: 'FALSE'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:501:14: 'FALSE'
                     {
                     	Match("FALSE"); 
 
@@ -4146,73 +4127,73 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = NullLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:558:5: ( 'null' | 'nil' | 'Null' | 'Nil' | 'NULL' | 'NIL' )
-            int alt41 = 6;
-            int LA41_0 = input.LA(1);
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:505:5: ( 'null' | 'nil' | 'Null' | 'Nil' | 'NULL' | 'NIL' )
+            int alt42 = 6;
+            int LA42_0 = input.LA(1);
 
-            if ( (LA41_0 == 'n') )
+            if ( (LA42_0 == 'n') )
             {
-                int LA41_1 = input.LA(2);
+                int LA42_1 = input.LA(2);
 
-                if ( (LA41_1 == 'u') )
+                if ( (LA42_1 == 'u') )
                 {
-                    alt41 = 1;
+                    alt42 = 1;
                 }
-                else if ( (LA41_1 == 'i') )
+                else if ( (LA42_1 == 'i') )
                 {
-                    alt41 = 2;
+                    alt42 = 2;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d41s1 =
-                        new NoViableAltException("", 41, 1, input);
+                    NoViableAltException nvae_d42s1 =
+                        new NoViableAltException("", 42, 1, input);
 
-                    throw nvae_d41s1;
+                    throw nvae_d42s1;
                 }
             }
-            else if ( (LA41_0 == 'N') )
+            else if ( (LA42_0 == 'N') )
             {
                 switch ( input.LA(2) ) 
                 {
                 case 'u':
                 	{
-                    alt41 = 3;
+                    alt42 = 3;
                     }
                     break;
                 case 'i':
                 	{
-                    alt41 = 4;
+                    alt42 = 4;
                     }
                     break;
                 case 'U':
                 	{
-                    alt41 = 5;
+                    alt42 = 5;
                     }
                     break;
                 case 'I':
                 	{
-                    alt41 = 6;
+                    alt42 = 6;
                     }
                     break;
                 	default:
-                	    NoViableAltException nvae_d41s2 =
-                	        new NoViableAltException("", 41, 2, input);
+                	    NoViableAltException nvae_d42s2 =
+                	        new NoViableAltException("", 42, 2, input);
 
-                	    throw nvae_d41s2;
+                	    throw nvae_d42s2;
                 }
 
             }
             else 
             {
-                NoViableAltException nvae_d41s0 =
-                    new NoViableAltException("", 41, 0, input);
+                NoViableAltException nvae_d42s0 =
+                    new NoViableAltException("", 42, 0, input);
 
-                throw nvae_d41s0;
+                throw nvae_d42s0;
             }
-            switch (alt41) 
+            switch (alt42) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:558:7: 'null'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:505:7: 'null'
                     {
                     	Match("null"); 
 
@@ -4220,7 +4201,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:558:14: 'nil'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:505:14: 'nil'
                     {
                     	Match("nil"); 
 
@@ -4228,7 +4209,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:559:7: 'Null'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:506:7: 'Null'
                     {
                     	Match("Null"); 
 
@@ -4236,7 +4217,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 4 :
-                    // Grammar\\Psimulex.g:559:14: 'Nil'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:506:14: 'Nil'
                     {
                     	Match("Nil"); 
 
@@ -4244,7 +4225,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 5 :
-                    // Grammar\\Psimulex.g:560:7: 'NULL'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:507:7: 'NULL'
                     {
                     	Match("NULL"); 
 
@@ -4252,7 +4233,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 6 :
-                    // Grammar\\Psimulex.g:560:14: 'NIL'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:507:14: 'NIL'
                     {
                     	Match("NIL"); 
 
@@ -4277,13 +4258,13 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = InfinityLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:564:5: ( 'inf' | 'infinity' | 'Inf' | 'Infinity' | 'INF' | 'INFINITY' )
-            int alt42 = 6;
-            alt42 = dfa42.Predict(input);
-            switch (alt42) 
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:511:5: ( 'inf' | 'infinity' | 'Inf' | 'Infinity' | 'INF' | 'INFINITY' )
+            int alt43 = 6;
+            alt43 = dfa43.Predict(input);
+            switch (alt43) 
             {
                 case 1 :
-                    // Grammar\\Psimulex.g:564:7: 'inf'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:511:7: 'inf'
                     {
                     	Match("inf"); 
 
@@ -4291,7 +4272,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // Grammar\\Psimulex.g:564:13: 'infinity'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:511:13: 'infinity'
                     {
                     	Match("infinity"); 
 
@@ -4299,7 +4280,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // Grammar\\Psimulex.g:565:7: 'Inf'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:512:7: 'Inf'
                     {
                     	Match("Inf"); 
 
@@ -4307,7 +4288,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 4 :
-                    // Grammar\\Psimulex.g:565:13: 'Infinity'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:512:13: 'Infinity'
                     {
                     	Match("Infinity"); 
 
@@ -4315,7 +4296,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 5 :
-                    // Grammar\\Psimulex.g:566:7: 'INF'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:513:7: 'INF'
                     {
                     	Match("INF"); 
 
@@ -4323,7 +4304,7 @@ public partial class PsimulexLexer : Lexer {
                     }
                     break;
                 case 6 :
-                    // Grammar\\Psimulex.g:566:13: 'INFINITY'
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:513:13: 'INFINITY'
                     {
                     	Match("INFINITY"); 
 
@@ -4348,26 +4329,26 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = Identifier;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:570:5: ( IDLetter ( IDLetter | Digit )* )
-            // Grammar\\Psimulex.g:570:9: IDLetter ( IDLetter | Digit )*
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:517:5: ( IDLetter ( IDLetter | Digit )* )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:517:9: IDLetter ( IDLetter | Digit )*
             {
             	mIDLetter(); 
-            	// Grammar\\Psimulex.g:570:18: ( IDLetter | Digit )*
+            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:517:18: ( IDLetter | Digit )*
             	do 
             	{
-            	    int alt43 = 2;
-            	    int LA43_0 = input.LA(1);
+            	    int alt44 = 2;
+            	    int LA44_0 = input.LA(1);
 
-            	    if ( ((LA43_0 >= '0' && LA43_0 <= '9') || (LA43_0 >= 'A' && LA43_0 <= 'Z') || LA43_0 == '_' || (LA43_0 >= 'a' && LA43_0 <= 'z')) )
+            	    if ( ((LA44_0 >= '0' && LA44_0 <= '9') || (LA44_0 >= 'A' && LA44_0 <= 'Z') || LA44_0 == '_' || (LA44_0 >= 'a' && LA44_0 <= 'z')) )
             	    {
-            	        alt43 = 1;
+            	        alt44 = 1;
             	    }
 
 
-            	    switch (alt43) 
+            	    switch (alt44) 
             		{
             			case 1 :
-            			    // Grammar\\Psimulex.g:
+            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
             			    {
             			    	if ( (input.LA(1) >= '0' && input.LA(1) <= '9') || (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) 
             			    	{
@@ -4385,12 +4366,12 @@ public partial class PsimulexLexer : Lexer {
             			    break;
 
             			default:
-            			    goto loop43;
+            			    goto loop44;
             	    }
             	} while (true);
 
-            	loop43:
-            		;	// Stops C# compiler whining that label 'loop43' has no statements
+            	loop44:
+            		;	// Stops C# compiler whining that label 'loop44' has no statements
 
 
             }
@@ -4411,8 +4392,8 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = WS;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:574:5: ( ( ' ' | '\\t' | '\\n' | '\\r' ) )
-            // Grammar\\Psimulex.g:574:7: ( ' ' | '\\t' | '\\n' | '\\r' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:521:5: ( ( ' ' | '\\t' | '\\n' | '\\r' ) )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:521:7: ( ' ' | '\\t' | '\\n' | '\\r' )
             {
             	if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n') || input.LA(1) == '\r' || input.LA(1) == ' ' ) 
             	{
@@ -4445,26 +4426,27 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = SingleLineComment;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:579:5: ( SLC (~ ( '\\n' | '\\r' ) )* ( '\\r' )? ( '\\n' )? )
-            // Grammar\\Psimulex.g:579:7: SLC (~ ( '\\n' | '\\r' ) )* ( '\\r' )? ( '\\n' )?
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:526:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? ( '\\n' )? )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:526:7: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? ( '\\n' )?
             {
-            	mSLC(); 
-            	// Grammar\\Psimulex.g:579:11: (~ ( '\\n' | '\\r' ) )*
+            	Match("//"); 
+
+            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:526:12: (~ ( '\\n' | '\\r' ) )*
             	do 
             	{
-            	    int alt44 = 2;
-            	    int LA44_0 = input.LA(1);
+            	    int alt45 = 2;
+            	    int LA45_0 = input.LA(1);
 
-            	    if ( ((LA44_0 >= '\u0000' && LA44_0 <= '\t') || (LA44_0 >= '\u000B' && LA44_0 <= '\f') || (LA44_0 >= '\u000E' && LA44_0 <= '\uFFFE')) )
+            	    if ( ((LA45_0 >= '\u0000' && LA45_0 <= '\t') || (LA45_0 >= '\u000B' && LA45_0 <= '\f') || (LA45_0 >= '\u000E' && LA45_0 <= '\uFFFE')) )
             	    {
-            	        alt44 = 1;
+            	        alt45 = 1;
             	    }
 
 
-            	    switch (alt44) 
+            	    switch (alt45) 
             		{
             			case 1 :
-            			    // Grammar\\Psimulex.g:579:11: ~ ( '\\n' | '\\r' )
+            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:526:12: ~ ( '\\n' | '\\r' )
             			    {
             			    	if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFE') ) 
             			    	{
@@ -4482,25 +4464,25 @@ public partial class PsimulexLexer : Lexer {
             			    break;
 
             			default:
-            			    goto loop44;
+            			    goto loop45;
             	    }
             	} while (true);
 
-            	loop44:
-            		;	// Stops C# compiler whining that label 'loop44' has no statements
+            	loop45:
+            		;	// Stops C# compiler whining that label 'loop45' has no statements
 
-            	// Grammar\\Psimulex.g:579:25: ( '\\r' )?
-            	int alt45 = 2;
-            	int LA45_0 = input.LA(1);
+            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:526:26: ( '\\r' )?
+            	int alt46 = 2;
+            	int LA46_0 = input.LA(1);
 
-            	if ( (LA45_0 == '\r') )
+            	if ( (LA46_0 == '\r') )
             	{
-            	    alt45 = 1;
+            	    alt46 = 1;
             	}
-            	switch (alt45) 
+            	switch (alt46) 
             	{
             	    case 1 :
-            	        // Grammar\\Psimulex.g:579:25: '\\r'
+            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:526:26: '\\r'
             	        {
             	        	Match('\r'); 
 
@@ -4509,18 +4491,18 @@ public partial class PsimulexLexer : Lexer {
 
             	}
 
-            	// Grammar\\Psimulex.g:579:31: ( '\\n' )?
-            	int alt46 = 2;
-            	int LA46_0 = input.LA(1);
+            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:526:32: ( '\\n' )?
+            	int alt47 = 2;
+            	int LA47_0 = input.LA(1);
 
-            	if ( (LA46_0 == '\n') )
+            	if ( (LA47_0 == '\n') )
             	{
-            	    alt46 = 1;
+            	    alt47 = 1;
             	}
-            	switch (alt46) 
+            	switch (alt47) 
             	{
             	    case 1 :
-            	        // Grammar\\Psimulex.g:579:31: '\\n'
+            	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:526:32: '\\n'
             	        {
             	        	Match('\n'); 
 
@@ -4549,41 +4531,42 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = MultiLineComment;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Grammar\\Psimulex.g:583:5: ( LMLC ( options {greedy=false; } : . )* RMLC )
-            // Grammar\\Psimulex.g:583:9: LMLC ( options {greedy=false; } : . )* RMLC
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:530:5: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:530:9: '/*' ( options {greedy=false; } : . )* '*/'
             {
-            	mLMLC(); 
-            	// Grammar\\Psimulex.g:583:14: ( options {greedy=false; } : . )*
+            	Match("/*"); 
+
+            	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:530:14: ( options {greedy=false; } : . )*
             	do 
             	{
-            	    int alt47 = 2;
-            	    int LA47_0 = input.LA(1);
+            	    int alt48 = 2;
+            	    int LA48_0 = input.LA(1);
 
-            	    if ( (LA47_0 == '*') )
+            	    if ( (LA48_0 == '*') )
             	    {
-            	        int LA47_1 = input.LA(2);
+            	        int LA48_1 = input.LA(2);
 
-            	        if ( (LA47_1 == '/') )
+            	        if ( (LA48_1 == '/') )
             	        {
-            	            alt47 = 2;
+            	            alt48 = 2;
             	        }
-            	        else if ( ((LA47_1 >= '\u0000' && LA47_1 <= '.') || (LA47_1 >= '0' && LA47_1 <= '\uFFFE')) )
+            	        else if ( ((LA48_1 >= '\u0000' && LA48_1 <= '.') || (LA48_1 >= '0' && LA48_1 <= '\uFFFE')) )
             	        {
-            	            alt47 = 1;
+            	            alt48 = 1;
             	        }
 
 
             	    }
-            	    else if ( ((LA47_0 >= '\u0000' && LA47_0 <= ')') || (LA47_0 >= '+' && LA47_0 <= '\uFFFE')) )
+            	    else if ( ((LA48_0 >= '\u0000' && LA48_0 <= ')') || (LA48_0 >= '+' && LA48_0 <= '\uFFFE')) )
             	    {
-            	        alt47 = 1;
+            	        alt48 = 1;
             	    }
 
 
-            	    switch (alt47) 
+            	    switch (alt48) 
             		{
             			case 1 :
-            			    // Grammar\\Psimulex.g:583:42: .
+            			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:530:42: .
             			    {
             			    	MatchAny(); 
 
@@ -4591,14 +4574,15 @@ public partial class PsimulexLexer : Lexer {
             			    break;
 
             			default:
-            			    goto loop47;
+            			    goto loop48;
             	    }
             	} while (true);
 
-            	loop47:
-            		;	// Stops C# compiler whining that label 'loop47' has no statements
+            	loop48:
+            		;	// Stops C# compiler whining that label 'loop48' has no statements
 
-            	mRMLC(); 
+            	Match("*/"); 
+
             	_channel=HIDDEN;
 
             }
@@ -4614,559 +4598,538 @@ public partial class PsimulexLexer : Lexer {
 
     override public void mTokens() // throws RecognitionException 
     {
-        // Grammar\\Psimulex.g:1:8: ( LP | RP | LS | RS | LB | RB | AND | OR | NOT | E | NE | LT | LTE | GT | GTE | A | AA | AS | AM | ADIV | AMOD | P | M | STAR | DIV | MOD | PP | MM | REF | SC | C | DOT | AP | QM | SLC | LMLC | RMLC | ESC | BOOL | CHAR | INT | DECIMAL | STRING | TREE | BINTREE | SET | LIST | STACK | QUEUE | PQUEUE | STRUCT | IMPORT | BREAK | CONTINUE | RETURN | IF | ELSE | ELSEIF | FOR | FOREACH | PFOR | PFOREACH | DO | PDO | WHILE | LOOP | TO | IN | IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral | Identifier | WS | SingleLineComment | MultiLineComment )
-        int alt48 = 79;
-        alt48 = dfa48.Predict(input);
-        switch (alt48) 
+        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:8: ( LeftParen | RightParen | LeftSquare | RightSquare | LeftBracket | RightBracket | LogicalAnd | LogicalOr | LogicalNot | RelEqual | RelNotEqual | RelLessThan | RelLessThanOrEqual | RelGreaterThan | RelGreaterThanOrEqual | Assign | AssignAndAdd | AssignAndSubstract | AssignAndMultiply | AssignAndDivide | AssignAndModulo | Plus | Minus | Star | Divide | Modulo | PlusPlus | MinusMinus | Reference | Semicolon | Comma | Dot | Apostrophe | QuotationMark | Bool | Char | Int | Decimal | String | Tree | BinTree | Set | List | Stack | Queue | PQueue | Void | Struct | Import | Break | Continue | Return | If | Else | ElseIf | For | ForEach | PFor | PForEach | Do | PDo | While | Loop | To | In | IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral | Identifier | WS | SingleLineComment | MultiLineComment )
+        int alt49 = 76;
+        alt49 = dfa49.Predict(input);
+        switch (alt49) 
         {
             case 1 :
-                // Grammar\\Psimulex.g:1:10: LP
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:10: LeftParen
                 {
-                	mLP(); 
+                	mLeftParen(); 
 
                 }
                 break;
             case 2 :
-                // Grammar\\Psimulex.g:1:13: RP
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:20: RightParen
                 {
-                	mRP(); 
+                	mRightParen(); 
 
                 }
                 break;
             case 3 :
-                // Grammar\\Psimulex.g:1:16: LS
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:31: LeftSquare
                 {
-                	mLS(); 
+                	mLeftSquare(); 
 
                 }
                 break;
             case 4 :
-                // Grammar\\Psimulex.g:1:19: RS
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:42: RightSquare
                 {
-                	mRS(); 
+                	mRightSquare(); 
 
                 }
                 break;
             case 5 :
-                // Grammar\\Psimulex.g:1:22: LB
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:54: LeftBracket
                 {
-                	mLB(); 
+                	mLeftBracket(); 
 
                 }
                 break;
             case 6 :
-                // Grammar\\Psimulex.g:1:25: RB
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:66: RightBracket
                 {
-                	mRB(); 
+                	mRightBracket(); 
 
                 }
                 break;
             case 7 :
-                // Grammar\\Psimulex.g:1:28: AND
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:79: LogicalAnd
                 {
-                	mAND(); 
+                	mLogicalAnd(); 
 
                 }
                 break;
             case 8 :
-                // Grammar\\Psimulex.g:1:32: OR
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:90: LogicalOr
                 {
-                	mOR(); 
+                	mLogicalOr(); 
 
                 }
                 break;
             case 9 :
-                // Grammar\\Psimulex.g:1:35: NOT
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:100: LogicalNot
                 {
-                	mNOT(); 
+                	mLogicalNot(); 
 
                 }
                 break;
             case 10 :
-                // Grammar\\Psimulex.g:1:39: E
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:111: RelEqual
                 {
-                	mE(); 
+                	mRelEqual(); 
 
                 }
                 break;
             case 11 :
-                // Grammar\\Psimulex.g:1:41: NE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:120: RelNotEqual
                 {
-                	mNE(); 
+                	mRelNotEqual(); 
 
                 }
                 break;
             case 12 :
-                // Grammar\\Psimulex.g:1:44: LT
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:132: RelLessThan
                 {
-                	mLT(); 
+                	mRelLessThan(); 
 
                 }
                 break;
             case 13 :
-                // Grammar\\Psimulex.g:1:47: LTE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:144: RelLessThanOrEqual
                 {
-                	mLTE(); 
+                	mRelLessThanOrEqual(); 
 
                 }
                 break;
             case 14 :
-                // Grammar\\Psimulex.g:1:51: GT
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:163: RelGreaterThan
                 {
-                	mGT(); 
+                	mRelGreaterThan(); 
 
                 }
                 break;
             case 15 :
-                // Grammar\\Psimulex.g:1:54: GTE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:178: RelGreaterThanOrEqual
                 {
-                	mGTE(); 
+                	mRelGreaterThanOrEqual(); 
 
                 }
                 break;
             case 16 :
-                // Grammar\\Psimulex.g:1:58: A
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:200: Assign
                 {
-                	mA(); 
+                	mAssign(); 
 
                 }
                 break;
             case 17 :
-                // Grammar\\Psimulex.g:1:60: AA
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:207: AssignAndAdd
                 {
-                	mAA(); 
+                	mAssignAndAdd(); 
 
                 }
                 break;
             case 18 :
-                // Grammar\\Psimulex.g:1:63: AS
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:220: AssignAndSubstract
                 {
-                	mAS(); 
+                	mAssignAndSubstract(); 
 
                 }
                 break;
             case 19 :
-                // Grammar\\Psimulex.g:1:66: AM
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:239: AssignAndMultiply
                 {
-                	mAM(); 
+                	mAssignAndMultiply(); 
 
                 }
                 break;
             case 20 :
-                // Grammar\\Psimulex.g:1:69: ADIV
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:257: AssignAndDivide
                 {
-                	mADIV(); 
+                	mAssignAndDivide(); 
 
                 }
                 break;
             case 21 :
-                // Grammar\\Psimulex.g:1:74: AMOD
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:273: AssignAndModulo
                 {
-                	mAMOD(); 
+                	mAssignAndModulo(); 
 
                 }
                 break;
             case 22 :
-                // Grammar\\Psimulex.g:1:79: P
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:289: Plus
                 {
-                	mP(); 
+                	mPlus(); 
 
                 }
                 break;
             case 23 :
-                // Grammar\\Psimulex.g:1:81: M
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:294: Minus
                 {
-                	mM(); 
+                	mMinus(); 
 
                 }
                 break;
             case 24 :
-                // Grammar\\Psimulex.g:1:83: STAR
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:300: Star
                 {
-                	mSTAR(); 
+                	mStar(); 
 
                 }
                 break;
             case 25 :
-                // Grammar\\Psimulex.g:1:88: DIV
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:305: Divide
                 {
-                	mDIV(); 
+                	mDivide(); 
 
                 }
                 break;
             case 26 :
-                // Grammar\\Psimulex.g:1:92: MOD
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:312: Modulo
                 {
-                	mMOD(); 
+                	mModulo(); 
 
                 }
                 break;
             case 27 :
-                // Grammar\\Psimulex.g:1:96: PP
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:319: PlusPlus
                 {
-                	mPP(); 
+                	mPlusPlus(); 
 
                 }
                 break;
             case 28 :
-                // Grammar\\Psimulex.g:1:99: MM
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:328: MinusMinus
                 {
-                	mMM(); 
+                	mMinusMinus(); 
 
                 }
                 break;
             case 29 :
-                // Grammar\\Psimulex.g:1:102: REF
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:339: Reference
                 {
-                	mREF(); 
+                	mReference(); 
 
                 }
                 break;
             case 30 :
-                // Grammar\\Psimulex.g:1:106: SC
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:349: Semicolon
                 {
-                	mSC(); 
+                	mSemicolon(); 
 
                 }
                 break;
             case 31 :
-                // Grammar\\Psimulex.g:1:109: C
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:359: Comma
                 {
-                	mC(); 
+                	mComma(); 
 
                 }
                 break;
             case 32 :
-                // Grammar\\Psimulex.g:1:111: DOT
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:365: Dot
                 {
-                	mDOT(); 
+                	mDot(); 
 
                 }
                 break;
             case 33 :
-                // Grammar\\Psimulex.g:1:115: AP
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:369: Apostrophe
                 {
-                	mAP(); 
+                	mApostrophe(); 
 
                 }
                 break;
             case 34 :
-                // Grammar\\Psimulex.g:1:118: QM
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:380: QuotationMark
                 {
-                	mQM(); 
+                	mQuotationMark(); 
 
                 }
                 break;
             case 35 :
-                // Grammar\\Psimulex.g:1:121: SLC
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:394: Bool
                 {
-                	mSLC(); 
+                	mBool(); 
 
                 }
                 break;
             case 36 :
-                // Grammar\\Psimulex.g:1:125: LMLC
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:399: Char
                 {
-                	mLMLC(); 
+                	mChar(); 
 
                 }
                 break;
             case 37 :
-                // Grammar\\Psimulex.g:1:130: RMLC
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:404: Int
                 {
-                	mRMLC(); 
+                	mInt(); 
 
                 }
                 break;
             case 38 :
-                // Grammar\\Psimulex.g:1:135: ESC
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:408: Decimal
                 {
-                	mESC(); 
+                	mDecimal(); 
 
                 }
                 break;
             case 39 :
-                // Grammar\\Psimulex.g:1:139: BOOL
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:416: String
                 {
-                	mBOOL(); 
+                	mString(); 
 
                 }
                 break;
             case 40 :
-                // Grammar\\Psimulex.g:1:144: CHAR
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:423: Tree
                 {
-                	mCHAR(); 
+                	mTree(); 
 
                 }
                 break;
             case 41 :
-                // Grammar\\Psimulex.g:1:149: INT
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:428: BinTree
                 {
-                	mINT(); 
+                	mBinTree(); 
 
                 }
                 break;
             case 42 :
-                // Grammar\\Psimulex.g:1:153: DECIMAL
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:436: Set
                 {
-                	mDECIMAL(); 
+                	mSet(); 
 
                 }
                 break;
             case 43 :
-                // Grammar\\Psimulex.g:1:161: STRING
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:440: List
                 {
-                	mSTRING(); 
+                	mList(); 
 
                 }
                 break;
             case 44 :
-                // Grammar\\Psimulex.g:1:168: TREE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:445: Stack
                 {
-                	mTREE(); 
+                	mStack(); 
 
                 }
                 break;
             case 45 :
-                // Grammar\\Psimulex.g:1:173: BINTREE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:451: Queue
                 {
-                	mBINTREE(); 
+                	mQueue(); 
 
                 }
                 break;
             case 46 :
-                // Grammar\\Psimulex.g:1:181: SET
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:457: PQueue
                 {
-                	mSET(); 
+                	mPQueue(); 
 
                 }
                 break;
             case 47 :
-                // Grammar\\Psimulex.g:1:185: LIST
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:464: Void
                 {
-                	mLIST(); 
+                	mVoid(); 
 
                 }
                 break;
             case 48 :
-                // Grammar\\Psimulex.g:1:190: STACK
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:469: Struct
                 {
-                	mSTACK(); 
+                	mStruct(); 
 
                 }
                 break;
             case 49 :
-                // Grammar\\Psimulex.g:1:196: QUEUE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:476: Import
                 {
-                	mQUEUE(); 
+                	mImport(); 
 
                 }
                 break;
             case 50 :
-                // Grammar\\Psimulex.g:1:202: PQUEUE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:483: Break
                 {
-                	mPQUEUE(); 
+                	mBreak(); 
 
                 }
                 break;
             case 51 :
-                // Grammar\\Psimulex.g:1:209: STRUCT
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:489: Continue
                 {
-                	mSTRUCT(); 
+                	mContinue(); 
 
                 }
                 break;
             case 52 :
-                // Grammar\\Psimulex.g:1:216: IMPORT
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:498: Return
                 {
-                	mIMPORT(); 
+                	mReturn(); 
 
                 }
                 break;
             case 53 :
-                // Grammar\\Psimulex.g:1:223: BREAK
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:505: If
                 {
-                	mBREAK(); 
+                	mIf(); 
 
                 }
                 break;
             case 54 :
-                // Grammar\\Psimulex.g:1:229: CONTINUE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:508: Else
                 {
-                	mCONTINUE(); 
+                	mElse(); 
 
                 }
                 break;
             case 55 :
-                // Grammar\\Psimulex.g:1:238: RETURN
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:513: ElseIf
                 {
-                	mRETURN(); 
+                	mElseIf(); 
 
                 }
                 break;
             case 56 :
-                // Grammar\\Psimulex.g:1:245: IF
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:520: For
                 {
-                	mIF(); 
+                	mFor(); 
 
                 }
                 break;
             case 57 :
-                // Grammar\\Psimulex.g:1:248: ELSE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:524: ForEach
                 {
-                	mELSE(); 
+                	mForEach(); 
 
                 }
                 break;
             case 58 :
-                // Grammar\\Psimulex.g:1:253: ELSEIF
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:532: PFor
                 {
-                	mELSEIF(); 
+                	mPFor(); 
 
                 }
                 break;
             case 59 :
-                // Grammar\\Psimulex.g:1:260: FOR
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:537: PForEach
                 {
-                	mFOR(); 
+                	mPForEach(); 
 
                 }
                 break;
             case 60 :
-                // Grammar\\Psimulex.g:1:264: FOREACH
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:546: Do
                 {
-                	mFOREACH(); 
+                	mDo(); 
 
                 }
                 break;
             case 61 :
-                // Grammar\\Psimulex.g:1:272: PFOR
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:549: PDo
                 {
-                	mPFOR(); 
+                	mPDo(); 
 
                 }
                 break;
             case 62 :
-                // Grammar\\Psimulex.g:1:277: PFOREACH
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:553: While
                 {
-                	mPFOREACH(); 
+                	mWhile(); 
 
                 }
                 break;
             case 63 :
-                // Grammar\\Psimulex.g:1:286: DO
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:559: Loop
                 {
-                	mDO(); 
+                	mLoop(); 
 
                 }
                 break;
             case 64 :
-                // Grammar\\Psimulex.g:1:289: PDO
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:564: To
                 {
-                	mPDO(); 
+                	mTo(); 
 
                 }
                 break;
             case 65 :
-                // Grammar\\Psimulex.g:1:293: WHILE
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:567: In
                 {
-                	mWHILE(); 
+                	mIn(); 
 
                 }
                 break;
             case 66 :
-                // Grammar\\Psimulex.g:1:299: LOOP
-                {
-                	mLOOP(); 
-
-                }
-                break;
-            case 67 :
-                // Grammar\\Psimulex.g:1:304: TO
-                {
-                	mTO(); 
-
-                }
-                break;
-            case 68 :
-                // Grammar\\Psimulex.g:1:307: IN
-                {
-                	mIN(); 
-
-                }
-                break;
-            case 69 :
-                // Grammar\\Psimulex.g:1:310: IntegerLiteral
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:570: IntegerLiteral
                 {
                 	mIntegerLiteral(); 
 
                 }
                 break;
-            case 70 :
-                // Grammar\\Psimulex.g:1:325: DecimalLiteral
+            case 67 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:585: DecimalLiteral
                 {
                 	mDecimalLiteral(); 
 
                 }
                 break;
-            case 71 :
-                // Grammar\\Psimulex.g:1:340: CharacterLiteral
+            case 68 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:600: CharacterLiteral
                 {
                 	mCharacterLiteral(); 
 
                 }
                 break;
-            case 72 :
-                // Grammar\\Psimulex.g:1:357: StringLiteral
+            case 69 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:617: StringLiteral
                 {
                 	mStringLiteral(); 
 
                 }
                 break;
-            case 73 :
-                // Grammar\\Psimulex.g:1:371: BooleanLiteral
+            case 70 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:631: BooleanLiteral
                 {
                 	mBooleanLiteral(); 
 
                 }
                 break;
-            case 74 :
-                // Grammar\\Psimulex.g:1:386: NullLiteral
+            case 71 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:646: NullLiteral
                 {
                 	mNullLiteral(); 
 
                 }
                 break;
-            case 75 :
-                // Grammar\\Psimulex.g:1:398: InfinityLiteral
+            case 72 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:658: InfinityLiteral
                 {
                 	mInfinityLiteral(); 
 
                 }
                 break;
-            case 76 :
-                // Grammar\\Psimulex.g:1:414: Identifier
+            case 73 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:674: Identifier
                 {
                 	mIdentifier(); 
 
                 }
                 break;
-            case 77 :
-                // Grammar\\Psimulex.g:1:425: WS
+            case 74 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:685: WS
                 {
                 	mWS(); 
 
                 }
                 break;
-            case 78 :
-                // Grammar\\Psimulex.g:1:428: SingleLineComment
+            case 75 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:688: SingleLineComment
                 {
                 	mSingleLineComment(); 
 
                 }
                 break;
-            case 79 :
-                // Grammar\\Psimulex.g:1:446: MultiLineComment
+            case 76 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:706: MultiLineComment
                 {
                 	mMultiLineComment(); 
 
@@ -5181,19 +5144,19 @@ public partial class PsimulexLexer : Lexer {
     protected DFA1 dfa1;
     protected DFA2 dfa2;
     protected DFA3 dfa3;
-    protected DFA17 dfa17;
-    protected DFA37 dfa37;
-    protected DFA42 dfa42;
-    protected DFA48 dfa48;
+    protected DFA18 dfa18;
+    protected DFA38 dfa38;
+    protected DFA43 dfa43;
+    protected DFA49 dfa49;
 	private void InitializeCyclicDFAs()
 	{
 	    this.dfa1 = new DFA1(this);
 	    this.dfa2 = new DFA2(this);
 	    this.dfa3 = new DFA3(this);
-	    this.dfa17 = new DFA17(this);
-	    this.dfa37 = new DFA37(this);
-	    this.dfa42 = new DFA42(this);
-	    this.dfa48 = new DFA48(this);
+	    this.dfa18 = new DFA18(this);
+	    this.dfa38 = new DFA38(this);
+	    this.dfa43 = new DFA43(this);
+	    this.dfa49 = new DFA49(this);
 
 
 
@@ -5263,7 +5226,7 @@ public partial class PsimulexLexer : Lexer {
 
         override public string Description
         {
-            get { return "452:1: BOOL : ( 'bool' | 'Bool' | 'BOOL' | 'boolean' | 'Boolean' | 'BOOLEAN' );"; }
+            get { return "398:1: Bool : ( 'bool' | 'Bool' | 'BOOL' | 'boolean' | 'Boolean' | 'BOOLEAN' );"; }
         }
 
     }
@@ -5329,7 +5292,7 @@ public partial class PsimulexLexer : Lexer {
 
         override public string Description
         {
-            get { return "453:1: CHAR : ( 'char' | 'Char' | 'CHAR' | 'character' | 'Character' | 'CHARACTER' );"; }
+            get { return "399:1: Char : ( 'char' | 'Char' | 'CHAR' | 'character' | 'Character' | 'CHARACTER' );"; }
         }
 
     }
@@ -5390,24 +5353,24 @@ public partial class PsimulexLexer : Lexer {
 
         override public string Description
         {
-            get { return "454:1: INT : ( 'int' | 'Int' | 'INT' | 'integer' | 'Integer' | 'INTEGER' );"; }
+            get { return "400:1: Int : ( 'int' | 'Int' | 'INT' | 'integer' | 'Integer' | 'INTEGER' );"; }
         }
 
     }
 
-    const string DFA17_eotS =
+    const string DFA18_eotS =
         "\x06\uffff\x01\x0a\x01\x0c\x01\x0e\x06\uffff";
-    const string DFA17_eofS =
+    const string DFA18_eofS =
         "\x0f\uffff";
-    const string DFA17_minS =
+    const string DFA18_minS =
         "\x01\x52\x01\x65\x01\x45\x02\x74\x01\x54\x02\x75\x01\x55\x06\uffff";
-    const string DFA17_maxS =
+    const string DFA18_maxS =
         "\x01\x72\x02\x65\x02\x74\x01\x54\x02\x75\x01\x55\x06\uffff";
-    const string DFA17_acceptS =
+    const string DFA18_acceptS =
         "\x09\uffff\x01\x04\x01\x01\x01\x05\x01\x02\x01\x06\x01\x03";
-    const string DFA17_specialS =
+    const string DFA18_specialS =
         "\x0f\uffff}>";
-    static readonly string[] DFA17_transitionS = {
+    static readonly string[] DFA18_transitionS = {
             "\x01\x02\x1f\uffff\x01\x01",
             "\x01\x03",
             "\x01\x05\x1f\uffff\x01\x04",
@@ -5425,102 +5388,102 @@ public partial class PsimulexLexer : Lexer {
             ""
     };
 
-    static readonly short[] DFA17_eot = DFA.UnpackEncodedString(DFA17_eotS);
-    static readonly short[] DFA17_eof = DFA.UnpackEncodedString(DFA17_eofS);
-    static readonly char[] DFA17_min = DFA.UnpackEncodedStringToUnsignedChars(DFA17_minS);
-    static readonly char[] DFA17_max = DFA.UnpackEncodedStringToUnsignedChars(DFA17_maxS);
-    static readonly short[] DFA17_accept = DFA.UnpackEncodedString(DFA17_acceptS);
-    static readonly short[] DFA17_special = DFA.UnpackEncodedString(DFA17_specialS);
-    static readonly short[][] DFA17_transition = DFA.UnpackEncodedStringArray(DFA17_transitionS);
+    static readonly short[] DFA18_eot = DFA.UnpackEncodedString(DFA18_eotS);
+    static readonly short[] DFA18_eof = DFA.UnpackEncodedString(DFA18_eofS);
+    static readonly char[] DFA18_min = DFA.UnpackEncodedStringToUnsignedChars(DFA18_minS);
+    static readonly char[] DFA18_max = DFA.UnpackEncodedStringToUnsignedChars(DFA18_maxS);
+    static readonly short[] DFA18_accept = DFA.UnpackEncodedString(DFA18_acceptS);
+    static readonly short[] DFA18_special = DFA.UnpackEncodedString(DFA18_specialS);
+    static readonly short[][] DFA18_transition = DFA.UnpackEncodedStringArray(DFA18_transitionS);
 
-    protected class DFA17 : DFA
+    protected class DFA18 : DFA
     {
-        public DFA17(BaseRecognizer recognizer)
+        public DFA18(BaseRecognizer recognizer)
         {
             this.recognizer = recognizer;
-            this.decisionNumber = 17;
-            this.eot = DFA17_eot;
-            this.eof = DFA17_eof;
-            this.min = DFA17_min;
-            this.max = DFA17_max;
-            this.accept = DFA17_accept;
-            this.special = DFA17_special;
-            this.transition = DFA17_transition;
+            this.decisionNumber = 18;
+            this.eot = DFA18_eot;
+            this.eof = DFA18_eof;
+            this.min = DFA18_min;
+            this.max = DFA18_max;
+            this.accept = DFA18_accept;
+            this.special = DFA18_special;
+            this.transition = DFA18_transition;
 
         }
 
         override public string Description
         {
-            get { return "475:1: RETURN : ( 'ret' | 'Ret' | 'RET' | 'return' | 'Return' | 'RETURN' );"; }
+            get { return "422:1: Return : ( 'ret' | 'Ret' | 'RET' | 'return' | 'Return' | 'RETURN' );"; }
         }
 
     }
 
-    const string DFA37_eotS =
+    const string DFA38_eotS =
         "\x05\uffff";
-    const string DFA37_eofS =
+    const string DFA38_eofS =
         "\x05\uffff";
-    const string DFA37_minS =
+    const string DFA38_minS =
         "\x02\x2e\x03\uffff";
-    const string DFA37_maxS =
+    const string DFA38_maxS =
         "\x01\x39\x01\x6d\x03\uffff";
-    const string DFA37_acceptS =
-        "\x02\uffff\x01\x02\x01\x03\x01\x01";
-    const string DFA37_specialS =
+    const string DFA38_acceptS =
+        "\x02\uffff\x01\x02\x01\x01\x01\x03";
+    const string DFA38_specialS =
         "\x05\uffff}>";
-    static readonly string[] DFA37_transitionS = {
+    static readonly string[] DFA38_transitionS = {
             "\x01\x02\x01\uffff\x0a\x01",
-            "\x01\x04\x01\uffff\x0a\x01\x0a\uffff\x01\x03\x08\uffff\x01"+
-            "\x03\x16\uffff\x01\x03\x08\uffff\x01\x03",
+            "\x01\x03\x01\uffff\x0a\x01\x0a\uffff\x01\x04\x08\uffff\x01"+
+            "\x04\x16\uffff\x01\x04\x08\uffff\x01\x04",
             "",
             "",
             ""
     };
 
-    static readonly short[] DFA37_eot = DFA.UnpackEncodedString(DFA37_eotS);
-    static readonly short[] DFA37_eof = DFA.UnpackEncodedString(DFA37_eofS);
-    static readonly char[] DFA37_min = DFA.UnpackEncodedStringToUnsignedChars(DFA37_minS);
-    static readonly char[] DFA37_max = DFA.UnpackEncodedStringToUnsignedChars(DFA37_maxS);
-    static readonly short[] DFA37_accept = DFA.UnpackEncodedString(DFA37_acceptS);
-    static readonly short[] DFA37_special = DFA.UnpackEncodedString(DFA37_specialS);
-    static readonly short[][] DFA37_transition = DFA.UnpackEncodedStringArray(DFA37_transitionS);
+    static readonly short[] DFA38_eot = DFA.UnpackEncodedString(DFA38_eotS);
+    static readonly short[] DFA38_eof = DFA.UnpackEncodedString(DFA38_eofS);
+    static readonly char[] DFA38_min = DFA.UnpackEncodedStringToUnsignedChars(DFA38_minS);
+    static readonly char[] DFA38_max = DFA.UnpackEncodedStringToUnsignedChars(DFA38_maxS);
+    static readonly short[] DFA38_accept = DFA.UnpackEncodedString(DFA38_acceptS);
+    static readonly short[] DFA38_special = DFA.UnpackEncodedString(DFA38_specialS);
+    static readonly short[][] DFA38_transition = DFA.UnpackEncodedStringArray(DFA38_transitionS);
 
-    protected class DFA37 : DFA
+    protected class DFA38 : DFA
     {
-        public DFA37(BaseRecognizer recognizer)
+        public DFA38(BaseRecognizer recognizer)
         {
             this.recognizer = recognizer;
-            this.decisionNumber = 37;
-            this.eot = DFA37_eot;
-            this.eof = DFA37_eof;
-            this.min = DFA37_min;
-            this.max = DFA37_max;
-            this.accept = DFA37_accept;
-            this.special = DFA37_special;
-            this.transition = DFA37_transition;
+            this.decisionNumber = 38;
+            this.eot = DFA38_eot;
+            this.eof = DFA38_eof;
+            this.min = DFA38_min;
+            this.max = DFA38_max;
+            this.accept = DFA38_accept;
+            this.special = DFA38_special;
+            this.transition = DFA38_transition;
 
         }
 
         override public string Description
         {
-            get { return "532:1: DecimalLiteral : ( ( Digit )+ '.' ( Digit )* | '.' ( Digit )+ | ( Digit )+ DecimalTypeSuffix );"; }
+            get { return "479:1: DecimalLiteral : ( ( Digit )+ '.' ( Digit )* | '.' ( Digit )+ | ( Digit )+ DecimalTypeSuffix );"; }
         }
 
     }
 
-    const string DFA42_eotS =
+    const string DFA43_eotS =
         "\x06\uffff\x01\x0a\x01\x0c\x01\x0e\x06\uffff";
-    const string DFA42_eofS =
+    const string DFA43_eofS =
         "\x0f\uffff";
-    const string DFA42_minS =
+    const string DFA43_minS =
         "\x01\x49\x01\x6e\x01\x4e\x02\x66\x01\x46\x02\x69\x01\x49\x06\uffff";
-    const string DFA42_maxS =
+    const string DFA43_maxS =
         "\x01\x69\x02\x6e\x02\x66\x01\x46\x02\x69\x01\x49\x06\uffff";
-    const string DFA42_acceptS =
+    const string DFA43_acceptS =
         "\x09\uffff\x01\x02\x01\x01\x01\x04\x01\x03\x01\x06\x01\x05";
-    const string DFA42_specialS =
+    const string DFA43_specialS =
         "\x0f\uffff}>";
-    static readonly string[] DFA42_transitionS = {
+    static readonly string[] DFA43_transitionS = {
             "\x01\x02\x1f\uffff\x01\x01",
             "\x01\x03",
             "\x01\x05\x1f\uffff\x01\x04",
@@ -5538,217 +5501,216 @@ public partial class PsimulexLexer : Lexer {
             ""
     };
 
-    static readonly short[] DFA42_eot = DFA.UnpackEncodedString(DFA42_eotS);
-    static readonly short[] DFA42_eof = DFA.UnpackEncodedString(DFA42_eofS);
-    static readonly char[] DFA42_min = DFA.UnpackEncodedStringToUnsignedChars(DFA42_minS);
-    static readonly char[] DFA42_max = DFA.UnpackEncodedStringToUnsignedChars(DFA42_maxS);
-    static readonly short[] DFA42_accept = DFA.UnpackEncodedString(DFA42_acceptS);
-    static readonly short[] DFA42_special = DFA.UnpackEncodedString(DFA42_specialS);
-    static readonly short[][] DFA42_transition = DFA.UnpackEncodedStringArray(DFA42_transitionS);
+    static readonly short[] DFA43_eot = DFA.UnpackEncodedString(DFA43_eotS);
+    static readonly short[] DFA43_eof = DFA.UnpackEncodedString(DFA43_eofS);
+    static readonly char[] DFA43_min = DFA.UnpackEncodedStringToUnsignedChars(DFA43_minS);
+    static readonly char[] DFA43_max = DFA.UnpackEncodedStringToUnsignedChars(DFA43_maxS);
+    static readonly short[] DFA43_accept = DFA.UnpackEncodedString(DFA43_acceptS);
+    static readonly short[] DFA43_special = DFA.UnpackEncodedString(DFA43_specialS);
+    static readonly short[][] DFA43_transition = DFA.UnpackEncodedStringArray(DFA43_transitionS);
 
-    protected class DFA42 : DFA
+    protected class DFA43 : DFA
     {
-        public DFA42(BaseRecognizer recognizer)
+        public DFA43(BaseRecognizer recognizer)
         {
             this.recognizer = recognizer;
-            this.decisionNumber = 42;
-            this.eot = DFA42_eot;
-            this.eof = DFA42_eof;
-            this.min = DFA42_min;
-            this.max = DFA42_max;
-            this.accept = DFA42_accept;
-            this.special = DFA42_special;
-            this.transition = DFA42_transition;
+            this.decisionNumber = 43;
+            this.eot = DFA43_eot;
+            this.eof = DFA43_eof;
+            this.min = DFA43_min;
+            this.max = DFA43_max;
+            this.accept = DFA43_accept;
+            this.special = DFA43_special;
+            this.transition = DFA43_transition;
 
         }
 
         override public string Description
         {
-            get { return "563:1: InfinityLiteral : ( 'inf' | 'infinity' | 'Inf' | 'Infinity' | 'INF' | 'INFINITY' );"; }
+            get { return "510:1: InfinityLiteral : ( 'inf' | 'infinity' | 'Inf' | 'Infinity' | 'INF' | 'INFINITY' );"; }
         }
 
     }
 
-    const string DFA48_eotS =
-        "\x07\uffff\x01\x3b\x01\uffff\x01\x3d\x01\x3f\x01\x41\x01\x43\x01"+
-        "\x46\x01\x49\x01\x4c\x01\x50\x01\x52\x02\uffff\x01\x53\x01\x55\x01"+
-        "\x57\x01\uffff\x1c\x38\x02\u00a4\x02\x38\x16\uffff\x01\u00ac\x01"+
-        "\u00ae\x09\uffff\x0f\x38\x01\u00c1\x01\x38\x01\u00c3\x02\u00c1\x02"+
-        "\x38\x02\u00c3\x01\x38\x01\u00cb\x02\x38\x02\u00cb\x07\x38\x01\u00d9"+
-        "\x02\x38\x02\u00d9\x21\x38\x01\uffff\x01\u00a4\x06\x38\x04\uffff"+
-        "\x0f\x38\x01\u0118\x01\u011a\x01\uffff\x01\x38\x01\uffff\x01\u0118"+
-        "\x01\u011a\x01\u0118\x01\u011a\x03\x38\x01\uffff\x04\x38\x01\u0128"+
-        "\x04\x38\x02\u0128\x02\x38\x01\uffff\x0f\x38\x01\u0140\x04\x38\x02"+
-        "\u0140\x03\u0146\x03\x38\x01\u014d\x01\x38\x02\u014d\x09\x38\x01"+
-        "\u015a\x01\x38\x01\u015a\x01\x38\x01\u015a\x01\u015e\x02\x38\x02"+
-        "\u015e\x04\x38\x01\u0168\x01\x38\x02\u0168\x03\x38\x01\uffff\x01"+
-        "\x38\x01\uffff\x0d\x38\x01\uffff\x06\x38\x01\u0183\x01\u0184\x01"+
-        "\u0183\x01\u0184\x01\u0183\x01\u0184\x01\u0185\x01\u0186\x02\u0185"+
-        "\x02\u0186\x04\x38\x01\u018c\x01\uffff\x02\x38\x02\u018c\x01\x38"+
-        "\x01\uffff\x02\x38\x03\u0195\x01\x38\x01\uffff\x0b\x38\x01\u015a"+
-        "\x01\uffff\x02\u015a\x01\x38\x01\uffff\x01\x38\x01\u01a6\x04\x38"+
-        "\x02\u01a6\x01\x38\x01\uffff\x13\x38\x01\u01bf\x02\x38\x01\u01bf"+
-        "\x02\x38\x01\u01bf\x04\uffff\x03\u01c4\x02\x38\x01\uffff\x08\x38"+
-        "\x01\uffff\x03\x38\x01\u0184\x02\x38\x02\u0184\x03\u01d4\x03\u00d9"+
-        "\x02\x38\x01\uffff\x0c\x38\x01\u01e3\x04\x38\x02\u01e3\x03\x38\x01"+
-        "\u01eb\x01\u01ec\x01\uffff\x01\u01eb\x01\u01ec\x01\u01eb\x01\u01ec"+
-        "\x01\uffff\x01\u01ed\x01\x38\x02\u01ed\x02\x38\x03\u0146\x03\u01f1"+
-        "\x03\x38\x01\uffff\x01\u015e\x01\u01f5\x02\u015e\x02\u01f5\x06\x38"+
-        "\x01\u0118\x01\x38\x01\uffff\x01\u0118\x01\x38\x01\u0118\x01\x38"+
-        "\x03\u01ff\x03\uffff\x03\x38\x01\uffff\x03\u0203\x01\uffff\x01\x38"+
-        "\x01\u0205\x02\x38\x02\u0205\x03\u011a\x01\uffff\x03\u0208\x01\uffff"+
-        "\x01\u0168\x01\uffff\x02\u0168\x01\uffff";
-    const string DFA48_eofS =
-        "\u0209\uffff";
-    const string DFA48_minS =
+    const string DFA49_eotS =
+        "\x07\uffff\x01\x3c\x01\uffff\x01\x3e\x01\x40\x01\x42\x01\x44\x01"+
+        "\x47\x01\x4a\x01\x4c\x01\x50\x01\x52\x02\uffff\x01\x54\x01\x55\x01"+
+        "\x57\x1e\x39\x02\u00a7\x02\x39\x20\uffff\x0f\x39\x01\u00c0\x01\x39"+
+        "\x01\u00c2\x02\u00c0\x02\x39\x02\u00c2\x01\x39\x01\u00ca\x02\x39"+
+        "\x02\u00ca\x07\x39\x01\u00d8\x02\x39\x02\u00d8\x24\x39\x01\uffff"+
+        "\x01\u00a7\x15\x39\x01\u011a\x01\u011c\x01\uffff\x01\x39\x01\uffff"+
+        "\x01\u011a\x01\u011c\x01\u011a\x01\u011c\x03\x39\x01\uffff\x04\x39"+
+        "\x01\u012a\x04\x39\x02\u012a\x02\x39\x01\uffff\x0f\x39\x01\u0142"+
+        "\x04\x39\x02\u0142\x03\x39\x03\u014b\x03\x39\x01\u0152\x01\x39\x02"+
+        "\u0152\x09\x39\x01\u015f\x01\x39\x01\u015f\x01\x39\x01\u015f\x01"+
+        "\u0163\x02\x39\x02\u0163\x04\x39\x01\u016d\x01\x39\x02\u016d\x03"+
+        "\x39\x01\uffff\x01\x39\x01\uffff\x0d\x39\x01\uffff\x06\x39\x01\u0188"+
+        "\x01\u0189\x01\u0188\x01\u0189\x01\u0188\x01\u0189\x01\u018a\x01"+
+        "\u018b\x02\u018a\x02\u018b\x04\x39\x01\u0191\x01\uffff\x02\x39\x02"+
+        "\u0191\x03\u0196\x01\x39\x01\uffff\x02\x39\x03\u019b\x01\x39\x01"+
+        "\uffff\x0b\x39\x01\u015f\x01\uffff\x02\u015f\x01\x39\x01\uffff\x01"+
+        "\x39\x01\u01ac\x04\x39\x02\u01ac\x01\x39\x01\uffff\x13\x39\x01\u01c5"+
+        "\x02\x39\x01\u01c5\x02\x39\x01\u01c5\x04\uffff\x03\u01ca\x02\x39"+
+        "\x01\uffff\x04\x39\x01\uffff\x04\x39\x01\uffff\x03\x39\x01\u0189"+
+        "\x02\x39\x02\u0189\x03\u01da\x03\u00d8\x02\x39\x01\uffff\x0c\x39"+
+        "\x01\u01e9\x04\x39\x02\u01e9\x03\x39\x01\u01f1\x01\u01f2\x01\uffff"+
+        "\x01\u01f1\x01\u01f2\x01\u01f1\x01\u01f2\x01\uffff\x01\u01f3\x01"+
+        "\x39\x02\u01f3\x02\x39\x03\u014b\x03\u01f7\x03\x39\x01\uffff\x01"+
+        "\u0163\x01\u01fb\x02\u0163\x02\u01fb\x06\x39\x01\u011a\x01\x39\x01"+
+        "\uffff\x01\u011a\x01\x39\x01\u011a\x01\x39\x03\u0205\x03\uffff\x03"+
+        "\x39\x01\uffff\x03\u0209\x01\uffff\x01\x39\x01\u020b\x02\x39\x02"+
+        "\u020b\x03\u011c\x01\uffff\x03\u020e\x01\uffff\x01\u016d\x01\uffff"+
+        "\x02\u016d\x01\uffff";
+    const string DFA49_eofS =
+        "\u020f\uffff";
+    const string DFA49_minS =
         "\x01\x09\x06\uffff\x01\x26\x01\uffff\x04\x3d\x01\x2b\x01\x2d\x01"+
-        "\x2f\x01\x2a\x01\x3d\x02\uffff\x01\x30\x02\x00\x01\uffff\x01\x69"+
-        "\x01\x49\x01\x68\x01\x48\x01\x66\x01\x46\x01\x65\x01\x45\x01\x65"+
-        "\x01\x45\x01\x6f\x01\x4f\x01\x69\x01\x49\x01\x75\x01\x55\x01\x64"+
-        "\x01\x44\x01\x65\x01\x45\x01\x6c\x01\x4c\x01\x61\x01\x41\x01\x68"+
-        "\x01\x48\x01\x6e\x01\x4e\x02\x2e\x01\x69\x01\x49\x16\uffff\x02\x00"+
-        "\x09\uffff\x01\x6f\x01\x6e\x01\x65\x01\x6f\x01\x4f\x01\x6e\x01\x4e"+
-        "\x01\x65\x01\x45\x01\x61\x01\x6e\x01\x61\x01\x41\x01\x6e\x01\x4e"+
-        "\x01\x30\x01\x70\x03\x30\x01\x70\x01\x50\x02\x30\x01\x63\x01\x30"+
-        "\x01\x63\x01\x43\x02\x30\x01\x61\x01\x74\x01\x61\x01\x41\x01\x74"+
-        "\x01\x54\x01\x65\x01\x30\x01\x65\x01\x45\x02\x30\x01\x73\x01\x6f"+
-        "\x01\x73\x01\x53\x01\x6f\x01\x4f\x02\x65\x01\x45\x01\x75\x02\x6f"+
-        "\x01\x55\x02\x4f\x02\x74\x01\x54\x02\x73\x01\x53\x01\x72\x01\x6c"+
-        "\x01\x72\x01\x52\x01\x6c\x01\x4c\x02\x69\x01\x49\x02\x74\x01\x54"+
-        "\x01\uffff\x01\x2e\x04\x6c\x02\x4c\x04\uffff\x01\x6c\x01\x74\x01"+
-        "\x61\x01\x6c\x01\x4c\x02\x54\x01\x61\x01\x41\x01\x72\x01\x74\x01"+
-        "\x72\x01\x52\x01\x74\x01\x54\x02\x30\x01\uffff\x01\x6f\x01\uffff"+
-        "\x04\x30\x01\x6f\x01\x4f\x01\x69\x01\uffff\x01\x69\x01\x49\x01\x69"+
-        "\x01\x63\x01\x30\x01\x69\x01\x63\x01\x49\x01\x43\x02\x30\x02\x65"+
-        "\x01\uffff\x02\x65\x02\x45\x01\x74\x01\x70\x01\x74\x01\x54\x01\x70"+
-        "\x01\x50\x02\x75\x01\x55\x01\x65\x01\x72\x01\x30\x01\x65\x01\x45"+
-        "\x01\x72\x01\x52\x05\x30\x02\x65\x01\x45\x01\x30\x01\x73\x02\x30"+
-        "\x01\x73\x01\x53\x02\x6c\x01\x4c\x02\x69\x01\x49\x01\x6c\x01\x30"+
-        "\x01\x6c\x01\x30\x01\x4c\x02\x30\x01\x72\x01\x6b\x02\x30\x01\x72"+
-        "\x01\x52\x01\x6b\x01\x4b\x01\x30\x01\x69\x02\x30\x01\x69\x01\x49"+
-        "\x01\x67\x01\uffff\x01\x6e\x01\uffff\x01\x72\x01\x67\x01\x6e\x01"+
-        "\x47\x01\x4e\x01\x72\x01\x52\x02\x6d\x01\x4d\x01\x6e\x01\x63\x01"+
-        "\x6b\x01\uffff\x01\x6e\x01\x63\x01\x6b\x01\x4e\x01\x43\x01\x4b\x0c"+
-        "\x30\x02\x65\x01\x45\x01\x75\x01\x30\x01\uffff\x01\x75\x01\x55\x02"+
-        "\x30\x01\x72\x01\uffff\x01\x72\x01\x52\x03\x30\x01\x61\x01\uffff"+
-        "\x01\x65\x01\x61\x01\x41\x01\x65\x01\x45\x02\x65\x01\x45\x02\x6c"+
-        "\x01\x4c\x01\x30\x01\uffff\x02\x30\x01\x61\x01\uffff\x01\x65\x01"+
-        "\x30\x01\x61\x01\x41\x01\x65\x01\x45\x02\x30\x01\x63\x01\uffff\x01"+
-        "\x6e\x01\x63\x01\x43\x01\x6e\x01\x4e\x01\x65\x01\x69\x01\x74\x01"+
-        "\x65\x01\x69\x01\x45\x01\x49\x01\x74\x01\x54\x02\x61\x01\x41\x01"+
-        "\x67\x01\x74\x01\x30\x01\x67\x01\x74\x01\x30\x01\x47\x01\x54\x01"+
-        "\x30\x04\uffff\x03\x30\x01\x65\x01\x61\x01\uffff\x01\x65\x01\x45"+
-        "\x01\x61\x01\x41\x02\x6e\x01\x4e\x01\x66\x01\uffff\x01\x66\x01\x46"+
-        "\x01\x63\x01\x30\x01\x63\x01\x43\x08\x30\x01\x6e\x01\x65\x01\uffff"+
-        "\x01\x6e\x01\x4e\x01\x65\x01\x45\x01\x74\x01\x75\x01\x74\x01\x54"+
-        "\x01\x75\x01\x55\x01\x72\x01\x74\x01\x30\x01\x72\x01\x74\x01\x52"+
-        "\x01\x54\x02\x30\x02\x6c\x01\x4c\x02\x30\x01\uffff\x04\x30\x01\uffff"+
-        "\x01\x30\x01\x63\x02\x30\x01\x63\x01\x43\x06\x30\x02\x68\x01\x48"+
-        "\x01\uffff\x06\x30\x03\x65\x01\x45\x01\x65\x01\x45\x01\x30\x01\x79"+
-        "\x01\uffff\x01\x30\x01\x79\x01\x30\x01\x59\x03\x30\x03\uffff\x02"+
-        "\x68\x01\x48\x01\uffff\x03\x30\x01\uffff\x01\x72\x01\x30\x01\x72"+
-        "\x01\x52\x05\x30\x01\uffff\x03\x30\x01\uffff\x01\x30\x01\uffff\x02"+
-        "\x30\x01\uffff";
-    const string DFA48_maxS =
+        "\x3d\x01\x2a\x01\x3d\x02\uffff\x01\x30\x02\x00\x01\x69\x01\x49\x01"+
+        "\x68\x01\x48\x01\x66\x01\x46\x01\x65\x01\x45\x01\x65\x01\x45\x01"+
+        "\x6f\x01\x4f\x01\x69\x01\x49\x01\x75\x01\x55\x01\x64\x01\x44\x01"+
+        "\x6f\x01\x4f\x01\x65\x01\x45\x01\x6c\x01\x4c\x01\x61\x01\x41\x01"+
+        "\x68\x01\x48\x01\x6e\x01\x4e\x02\x2e\x01\x69\x01\x49\x20\uffff\x01"+
+        "\x6f\x01\x6e\x01\x65\x01\x6f\x01\x4f\x01\x6e\x01\x4e\x01\x65\x01"+
+        "\x45\x01\x61\x01\x6e\x01\x61\x01\x41\x01\x6e\x01\x4e\x01\x30\x01"+
+        "\x70\x03\x30\x01\x70\x01\x50\x02\x30\x01\x63\x01\x30\x01\x63\x01"+
+        "\x43\x02\x30\x01\x61\x01\x74\x01\x61\x01\x41\x01\x74\x01\x54\x01"+
+        "\x65\x01\x30\x01\x65\x01\x45\x02\x30\x01\x73\x01\x6f\x01\x73\x01"+
+        "\x53\x01\x6f\x01\x4f\x02\x65\x01\x45\x01\x75\x02\x6f\x01\x55\x02"+
+        "\x4f\x02\x69\x01\x49\x02\x74\x01\x54\x02\x73\x01\x53\x01\x72\x01"+
+        "\x6c\x01\x72\x01\x52\x01\x6c\x01\x4c\x02\x69\x01\x49\x02\x74\x01"+
+        "\x54\x01\uffff\x01\x2e\x04\x6c\x02\x4c\x01\x6c\x01\x74\x01\x61\x01"+
+        "\x6c\x01\x4c\x02\x54\x01\x61\x01\x41\x01\x72\x01\x74\x01\x72\x01"+
+        "\x52\x01\x74\x01\x54\x02\x30\x01\uffff\x01\x6f\x01\uffff\x04\x30"+
+        "\x01\x6f\x01\x4f\x01\x69\x01\uffff\x01\x69\x01\x49\x01\x69\x01\x63"+
+        "\x01\x30\x01\x69\x01\x63\x01\x49\x01\x43\x02\x30\x02\x65\x01\uffff"+
+        "\x02\x65\x02\x45\x01\x74\x01\x70\x01\x74\x01\x54\x01\x70\x01\x50"+
+        "\x02\x75\x01\x55\x01\x65\x01\x72\x01\x30\x01\x65\x01\x45\x01\x72"+
+        "\x01\x52\x02\x30\x02\x64\x01\x44\x03\x30\x02\x65\x01\x45\x01\x30"+
+        "\x01\x73\x02\x30\x01\x73\x01\x53\x02\x6c\x01\x4c\x02\x69\x01\x49"+
+        "\x01\x6c\x01\x30\x01\x6c\x01\x30\x01\x4c\x02\x30\x01\x72\x01\x6b"+
+        "\x02\x30\x01\x72\x01\x52\x01\x6b\x01\x4b\x01\x30\x01\x69\x02\x30"+
+        "\x01\x69\x01\x49\x01\x67\x01\uffff\x01\x6e\x01\uffff\x01\x72\x01"+
+        "\x67\x01\x6e\x01\x47\x01\x4e\x01\x72\x01\x52\x02\x6d\x01\x4d\x01"+
+        "\x6e\x01\x63\x01\x6b\x01\uffff\x01\x6e\x01\x63\x01\x6b\x01\x4e\x01"+
+        "\x43\x01\x4b\x0c\x30\x02\x65\x01\x45\x01\x75\x01\x30\x01\uffff\x01"+
+        "\x75\x01\x55\x05\x30\x01\x72\x01\uffff\x01\x72\x01\x52\x03\x30\x01"+
+        "\x61\x01\uffff\x01\x65\x01\x61\x01\x41\x01\x65\x01\x45\x02\x65\x01"+
+        "\x45\x02\x6c\x01\x4c\x01\x30\x01\uffff\x02\x30\x01\x61\x01\uffff"+
+        "\x01\x65\x01\x30\x01\x61\x01\x41\x01\x65\x01\x45\x02\x30\x01\x63"+
+        "\x01\uffff\x01\x6e\x01\x63\x01\x43\x01\x6e\x01\x4e\x01\x65\x01\x69"+
+        "\x01\x74\x01\x65\x01\x69\x01\x45\x01\x49\x01\x74\x01\x54\x02\x61"+
+        "\x01\x41\x01\x67\x01\x74\x01\x30\x01\x67\x01\x74\x01\x30\x01\x47"+
+        "\x01\x54\x01\x30\x04\uffff\x03\x30\x01\x65\x01\x61\x01\uffff\x01"+
+        "\x65\x01\x45\x01\x61\x01\x41\x01\uffff\x02\x6e\x01\x4e\x01\x66\x01"+
+        "\uffff\x01\x66\x01\x46\x01\x63\x01\x30\x01\x63\x01\x43\x08\x30\x01"+
+        "\x6e\x01\x65\x01\uffff\x01\x6e\x01\x4e\x01\x65\x01\x45\x01\x74\x01"+
+        "\x75\x01\x74\x01\x54\x01\x75\x01\x55\x01\x72\x01\x74\x01\x30\x01"+
+        "\x72\x01\x74\x01\x52\x01\x54\x02\x30\x02\x6c\x01\x4c\x02\x30\x01"+
+        "\uffff\x04\x30\x01\uffff\x01\x30\x01\x63\x02\x30\x01\x63\x01\x43"+
+        "\x06\x30\x02\x68\x01\x48\x01\uffff\x06\x30\x03\x65\x01\x45\x01\x65"+
+        "\x01\x45\x01\x30\x01\x79\x01\uffff\x01\x30\x01\x79\x01\x30\x01\x59"+
+        "\x03\x30\x03\uffff\x02\x68\x01\x48\x01\uffff\x03\x30\x01\uffff\x01"+
+        "\x72\x01\x30\x01\x72\x01\x52\x05\x30\x01\uffff\x03\x30\x01\uffff"+
+        "\x01\x30\x01\uffff\x02\x30\x01\uffff";
+    const string DFA49_maxS =
         "\x01\x7d\x06\uffff\x01\x26\x01\uffff\x09\x3d\x02\uffff\x01\x39"+
-        "\x02\ufffe\x01\uffff\x02\x72\x02\x6f\x02\x6e\x02\x6f\x02\x74\x02"+
-        "\x72\x02\x6f\x02\x75\x01\x71\x01\x51\x02\x65\x02\x6c\x02\x6f\x02"+
-        "\x68\x02\x6e\x02\x6d\x02\x75\x16\uffff\x02\ufffe\x09\uffff\x01\x6f"+
-        "\x01\x6e\x01\x65\x01\x6f\x01\x4f\x01\x6e\x01\x4e\x01\x65\x01\x45"+
-        "\x01\x61\x01\x6e\x01\x61\x01\x41\x01\x6e\x01\x4e\x01\x7a\x01\x70"+
-        "\x03\x7a\x01\x70\x01\x50\x02\x7a\x01\x63\x01\x7a\x01\x63\x01\x43"+
-        "\x02\x7a\x01\x72\x01\x74\x01\x72\x01\x52\x01\x74\x01\x54\x01\x75"+
-        "\x01\x7a\x01\x75\x01\x55\x02\x7a\x01\x73\x01\x6f\x01\x73\x01\x53"+
-        "\x01\x6f\x01\x4f\x02\x65\x01\x45\x01\x75\x02\x6f\x01\x75\x02\x6f"+
-        "\x02\x74\x01\x54\x02\x73\x01\x53\x01\x72\x01\x6c\x01\x72\x01\x52"+
-        "\x01\x6c\x01\x4c\x02\x69\x01\x49\x02\x74\x01\x54\x01\uffff\x01\x6d"+
-        "\x04\x6c\x02\x4c\x04\uffff\x01\x6c\x01\x74\x01\x61\x01\x6c\x01\x4c"+
-        "\x02\x54\x01\x61\x01\x41\x01\x72\x01\x74\x01\x72\x01\x52\x01\x74"+
-        "\x01\x54\x02\x7a\x01\uffff\x01\x6f\x01\uffff\x04\x7a\x01\x6f\x01"+
-        "\x4f\x01\x69\x01\uffff\x01\x69\x01\x49\x01\x75\x01\x63\x01\x7a\x01"+
-        "\x75\x01\x63\x01\x55\x01\x43\x02\x7a\x02\x65\x01\uffff\x02\x65\x02"+
-        "\x45\x01\x74\x01\x70\x01\x74\x01\x54\x01\x70\x01\x50\x02\x75\x01"+
-        "\x55\x01\x65\x01\x72\x01\x7a\x01\x65\x01\x45\x01\x72\x01\x52\x05"+
-        "\x7a\x02\x65\x01\x45\x01\x7a\x01\x73\x02\x7a\x01\x73\x01\x53\x02"+
-        "\x6c\x01\x4c\x02\x69\x01\x49\x01\x6c\x01\x7a\x01\x6c\x01\x7a\x01"+
-        "\x4c\x02\x7a\x01\x72\x01\x6b\x02\x7a\x01\x72\x01\x52\x01\x6b\x01"+
-        "\x4b\x01\x7a\x01\x69\x02\x7a\x01\x69\x01\x49\x01\x67\x01\uffff\x01"+
-        "\x6e\x01\uffff\x01\x72\x01\x67\x01\x6e\x01\x47\x01\x4e\x01\x72\x01"+
-        "\x52\x02\x6d\x01\x4d\x01\x6e\x01\x63\x01\x6b\x01\uffff\x01\x6e\x01"+
-        "\x63\x01\x6b\x01\x4e\x01\x43\x01\x4b\x0c\x7a\x02\x65\x01\x45\x01"+
-        "\x75\x01\x7a\x01\uffff\x01\x75\x01\x55\x02\x7a\x01\x72\x01\uffff"+
-        "\x01\x72\x01\x52\x03\x7a\x01\x61\x01\uffff\x01\x65\x01\x61\x01\x41"+
-        "\x01\x65\x01\x45\x02\x65\x01\x45\x02\x6c\x01\x4c\x01\x7a\x01\uffff"+
-        "\x02\x7a\x01\x61\x01\uffff\x01\x65\x01\x7a\x01\x61\x01\x41\x01\x65"+
-        "\x01\x45\x02\x7a\x01\x63\x01\uffff\x01\x6e\x01\x63\x01\x43\x01\x6e"+
-        "\x01\x4e\x01\x65\x01\x69\x01\x74\x01\x65\x01\x69\x01\x45\x01\x49"+
-        "\x01\x74\x01\x54\x02\x61\x01\x41\x01\x67\x01\x74\x01\x7a\x01\x67"+
-        "\x01\x74\x01\x7a\x01\x47\x01\x54\x01\x7a\x04\uffff\x03\x7a\x01\x65"+
-        "\x01\x61\x01\uffff\x01\x65\x01\x45\x01\x61\x01\x41\x02\x6e\x01\x4e"+
-        "\x01\x66\x01\uffff\x01\x66\x01\x46\x01\x63\x01\x7a\x01\x63\x01\x43"+
-        "\x08\x7a\x01\x6e\x01\x65\x01\uffff\x01\x6e\x01\x4e\x01\x65\x01\x45"+
-        "\x01\x74\x01\x75\x01\x74\x01\x54\x01\x75\x01\x55\x01\x72\x01\x74"+
-        "\x01\x7a\x01\x72\x01\x74\x01\x52\x01\x54\x02\x7a\x02\x6c\x01\x4c"+
-        "\x02\x7a\x01\uffff\x04\x7a\x01\uffff\x01\x7a\x01\x63\x02\x7a\x01"+
-        "\x63\x01\x43\x06\x7a\x02\x68\x01\x48\x01\uffff\x06\x7a\x03\x65\x01"+
-        "\x45\x01\x65\x01\x45\x01\x7a\x01\x79\x01\uffff\x01\x7a\x01\x79\x01"+
-        "\x7a\x01\x59\x03\x7a\x03\uffff\x02\x68\x01\x48\x01\uffff\x03\x7a"+
-        "\x01\uffff\x01\x72\x01\x7a\x01\x72\x01\x52\x05\x7a\x01\uffff\x03"+
-        "\x7a\x01\uffff\x01\x7a\x01\uffff\x02\x7a\x01\uffff";
-    const string DFA48_acceptS =
+        "\x02\ufffe\x02\x72\x02\x6f\x02\x6e\x02\x6f\x02\x74\x02\x72\x02\x6f"+
+        "\x02\x75\x01\x71\x01\x51\x02\x6f\x02\x65\x02\x6c\x02\x6f\x02\x68"+
+        "\x02\x6e\x02\x6d\x02\x75\x20\uffff\x01\x6f\x01\x6e\x01\x65\x01\x6f"+
+        "\x01\x4f\x01\x6e\x01\x4e\x01\x65\x01\x45\x01\x61\x01\x6e\x01\x61"+
+        "\x01\x41\x01\x6e\x01\x4e\x01\x7a\x01\x70\x03\x7a\x01\x70\x01\x50"+
+        "\x02\x7a\x01\x63\x01\x7a\x01\x63\x01\x43\x02\x7a\x01\x72\x01\x74"+
+        "\x01\x72\x01\x52\x01\x74\x01\x54\x01\x75\x01\x7a\x01\x75\x01\x55"+
+        "\x02\x7a\x01\x73\x01\x6f\x01\x73\x01\x53\x01\x6f\x01\x4f\x02\x65"+
+        "\x01\x45\x01\x75\x02\x6f\x01\x75\x02\x6f\x02\x69\x01\x49\x02\x74"+
+        "\x01\x54\x02\x73\x01\x53\x01\x72\x01\x6c\x01\x72\x01\x52\x01\x6c"+
+        "\x01\x4c\x02\x69\x01\x49\x02\x74\x01\x54\x01\uffff\x01\x6d\x04\x6c"+
+        "\x02\x4c\x01\x6c\x01\x74\x01\x61\x01\x6c\x01\x4c\x02\x54\x01\x61"+
+        "\x01\x41\x01\x72\x01\x74\x01\x72\x01\x52\x01\x74\x01\x54\x02\x7a"+
+        "\x01\uffff\x01\x6f\x01\uffff\x04\x7a\x01\x6f\x01\x4f\x01\x69\x01"+
+        "\uffff\x01\x69\x01\x49\x01\x75\x01\x63\x01\x7a\x01\x75\x01\x63\x01"+
+        "\x55\x01\x43\x02\x7a\x02\x65\x01\uffff\x02\x65\x02\x45\x01\x74\x01"+
+        "\x70\x01\x74\x01\x54\x01\x70\x01\x50\x02\x75\x01\x55\x01\x65\x01"+
+        "\x72\x01\x7a\x01\x65\x01\x45\x01\x72\x01\x52\x02\x7a\x02\x64\x01"+
+        "\x44\x03\x7a\x02\x65\x01\x45\x01\x7a\x01\x73\x02\x7a\x01\x73\x01"+
+        "\x53\x02\x6c\x01\x4c\x02\x69\x01\x49\x01\x6c\x01\x7a\x01\x6c\x01"+
+        "\x7a\x01\x4c\x02\x7a\x01\x72\x01\x6b\x02\x7a\x01\x72\x01\x52\x01"+
+        "\x6b\x01\x4b\x01\x7a\x01\x69\x02\x7a\x01\x69\x01\x49\x01\x67\x01"+
+        "\uffff\x01\x6e\x01\uffff\x01\x72\x01\x67\x01\x6e\x01\x47\x01\x4e"+
+        "\x01\x72\x01\x52\x02\x6d\x01\x4d\x01\x6e\x01\x63\x01\x6b\x01\uffff"+
+        "\x01\x6e\x01\x63\x01\x6b\x01\x4e\x01\x43\x01\x4b\x0c\x7a\x02\x65"+
+        "\x01\x45\x01\x75\x01\x7a\x01\uffff\x01\x75\x01\x55\x05\x7a\x01\x72"+
+        "\x01\uffff\x01\x72\x01\x52\x03\x7a\x01\x61\x01\uffff\x01\x65\x01"+
+        "\x61\x01\x41\x01\x65\x01\x45\x02\x65\x01\x45\x02\x6c\x01\x4c\x01"+
+        "\x7a\x01\uffff\x02\x7a\x01\x61\x01\uffff\x01\x65\x01\x7a\x01\x61"+
+        "\x01\x41\x01\x65\x01\x45\x02\x7a\x01\x63\x01\uffff\x01\x6e\x01\x63"+
+        "\x01\x43\x01\x6e\x01\x4e\x01\x65\x01\x69\x01\x74\x01\x65\x01\x69"+
+        "\x01\x45\x01\x49\x01\x74\x01\x54\x02\x61\x01\x41\x01\x67\x01\x74"+
+        "\x01\x7a\x01\x67\x01\x74\x01\x7a\x01\x47\x01\x54\x01\x7a\x04\uffff"+
+        "\x03\x7a\x01\x65\x01\x61\x01\uffff\x01\x65\x01\x45\x01\x61\x01\x41"+
+        "\x01\uffff\x02\x6e\x01\x4e\x01\x66\x01\uffff\x01\x66\x01\x46\x01"+
+        "\x63\x01\x7a\x01\x63\x01\x43\x08\x7a\x01\x6e\x01\x65\x01\uffff\x01"+
+        "\x6e\x01\x4e\x01\x65\x01\x45\x01\x74\x01\x75\x01\x74\x01\x54\x01"+
+        "\x75\x01\x55\x01\x72\x01\x74\x01\x7a\x01\x72\x01\x74\x01\x52\x01"+
+        "\x54\x02\x7a\x02\x6c\x01\x4c\x02\x7a\x01\uffff\x04\x7a\x01\uffff"+
+        "\x01\x7a\x01\x63\x02\x7a\x01\x63\x01\x43\x06\x7a\x02\x68\x01\x48"+
+        "\x01\uffff\x06\x7a\x03\x65\x01\x45\x01\x65\x01\x45\x01\x7a\x01\x79"+
+        "\x01\uffff\x01\x7a\x01\x79\x01\x7a\x01\x59\x03\x7a\x03\uffff\x02"+
+        "\x68\x01\x48\x01\uffff\x03\x7a\x01\uffff\x01\x72\x01\x7a\x01\x72"+
+        "\x01\x52\x05\x7a\x01\uffff\x03\x7a\x01\uffff\x01\x7a\x01\uffff\x02"+
+        "\x7a\x01\uffff";
+    const string DFA49_acceptS =
         "\x01\uffff\x01\x01\x01\x02\x01\x03\x01\x04\x01\x05\x01\x06\x01"+
-        "\uffff\x01\x08\x09\uffff\x01\x1e\x01\x1f\x03\uffff\x01\x26\x20\uffff"+
-        "\x01\x4c\x01\x4d\x01\x07\x01\x1d\x01\x0b\x01\x09\x01\x0a\x01\x10"+
-        "\x01\x0d\x01\x0c\x01\x0f\x01\x0e\x01\x11\x01\x1b\x01\x16\x01\x12"+
-        "\x01\x1c\x01\x17\x01\x13\x01\x25\x01\x18\x01\x14\x02\uffff\x01\x19"+
-        "\x01\x15\x01\x1a\x01\x20\x01\x46\x01\x21\x01\x47\x01\x22\x01\x48"+
-        "\x4b\uffff\x01\x45\x07\uffff\x01\x23\x01\x4e\x01\x24\x01\x4f\x11"+
-        "\uffff\x01\x44\x01\uffff\x01\x38\x07\uffff\x01\x3f\x0d\uffff\x01"+
-        "\x43\x3e\uffff\x01\x29\x01\uffff\x01\x4b\x0d\uffff\x01\x2e\x17\uffff"+
-        "\x01\x40\x05\uffff\x01\x37\x06\uffff\x01\x3b\x0c\uffff\x01\x4a\x03"+
-        "\uffff\x01\x27\x09\uffff\x01\x28\x1a\uffff\x01\x2c\x01\x49\x01\x2f"+
-        "\x01\x42\x05\uffff\x01\x3d\x08\uffff\x01\x39\x10\uffff\x01\x35\x18"+
-        "\uffff\x01\x30\x04\uffff\x01\x31\x0f\uffff\x01\x41\x0e\uffff\x01"+
-        "\x34\x07\uffff\x01\x2b\x01\x33\x01\x32\x03\uffff\x01\x3a\x03\uffff"+
-        "\x01\x2d\x09\uffff\x01\x2a\x03\uffff\x01\x3c\x01\uffff\x01\x36\x02"+
-        "\uffff\x01\x3e";
-    const string DFA48_specialS =
-        "\u0209\uffff}>";
-    static readonly string[] DFA48_transitionS = {
-            "\x02\x39\x02\uffff\x01\x39\x12\uffff\x01\x39\x01\x09\x01\x16"+
+        "\uffff\x01\x08\x09\uffff\x01\x1e\x01\x1f\x25\uffff\x01\x49\x01\x4a"+
+        "\x01\x07\x01\x1d\x01\x0b\x01\x09\x01\x0a\x01\x10\x01\x0d\x01\x0c"+
+        "\x01\x0f\x01\x0e\x01\x11\x01\x1b\x01\x16\x01\x12\x01\x1c\x01\x17"+
+        "\x01\x13\x01\x18\x01\x14\x01\x4b\x01\x4c\x01\x19\x01\x15\x01\x1a"+
+        "\x01\x43\x01\x20\x01\x21\x01\x44\x01\x22\x01\x45\x4e\uffff\x01\x42"+
+        "\x18\uffff\x01\x41\x01\uffff\x01\x35\x07\uffff\x01\x3c\x0d\uffff"+
+        "\x01\x40\x41\uffff\x01\x25\x01\uffff\x01\x48\x0d\uffff\x01\x2a\x17"+
+        "\uffff\x01\x3d\x08\uffff\x01\x34\x06\uffff\x01\x38\x0c\uffff\x01"+
+        "\x47\x03\uffff\x01\x23\x09\uffff\x01\x24\x1a\uffff\x01\x28\x01\x46"+
+        "\x01\x2b\x01\x3f\x05\uffff\x01\x3a\x04\uffff\x01\x2f\x04\uffff\x01"+
+        "\x36\x10\uffff\x01\x32\x18\uffff\x01\x2c\x04\uffff\x01\x2d\x0f\uffff"+
+        "\x01\x3e\x0e\uffff\x01\x31\x07\uffff\x01\x27\x01\x30\x01\x2e\x03"+
+        "\uffff\x01\x37\x03\uffff\x01\x29\x09\uffff\x01\x26\x03\uffff\x01"+
+        "\x39\x01\uffff\x01\x33\x02\uffff\x01\x3b";
+    const string DFA49_specialS =
+        "\u020f\uffff}>";
+    static readonly string[] DFA49_transitionS = {
+            "\x02\x3a\x02\uffff\x01\x3a\x12\uffff\x01\x3a\x01\x09\x01\x16"+
             "\x02\uffff\x01\x11\x01\x07\x01\x15\x01\x01\x01\x02\x01\x0f\x01"+
-            "\x0d\x01\x13\x01\x0e\x01\x14\x01\x10\x01\x34\x09\x35\x01\uffff"+
-            "\x01\x12\x01\x0b\x01\x0a\x01\x0c\x02\uffff\x01\x38\x01\x19\x01"+
-            "\x1b\x01\x1f\x01\x2d\x01\x2f\x02\x38\x01\x1d\x02\x38\x01\x25"+
-            "\x01\x38\x01\x37\x01\x38\x01\x29\x01\x27\x01\x2b\x01\x21\x01"+
-            "\x23\x01\x33\x01\x38\x01\x31\x03\x38\x01\x03\x01\x17\x01\x04"+
-            "\x01\uffff\x01\x38\x01\uffff\x01\x38\x01\x18\x01\x1a\x01\x1e"+
-            "\x01\x2c\x01\x2e\x02\x38\x01\x1c\x02\x38\x01\x24\x01\x38\x01"+
-            "\x36\x01\x38\x01\x28\x01\x26\x01\x2a\x01\x20\x01\x22\x01\x32"+
-            "\x01\x38\x01\x30\x03\x38\x01\x05\x01\x08\x01\x06",
+            "\x0d\x01\x13\x01\x0e\x01\x14\x01\x10\x01\x35\x09\x36\x01\uffff"+
+            "\x01\x12\x01\x0b\x01\x0a\x01\x0c\x02\uffff\x01\x39\x01\x18\x01"+
+            "\x1a\x01\x1e\x01\x2e\x01\x30\x02\x39\x01\x1c\x02\x39\x01\x24"+
+            "\x01\x39\x01\x38\x01\x39\x01\x28\x01\x26\x01\x2c\x01\x20\x01"+
+            "\x22\x01\x34\x01\x2a\x01\x32\x03\x39\x01\x03\x01\uffff\x01\x04"+
+            "\x01\uffff\x01\x39\x01\uffff\x01\x39\x01\x17\x01\x19\x01\x1d"+
+            "\x01\x2d\x01\x2f\x02\x39\x01\x1b\x02\x39\x01\x23\x01\x39\x01"+
+            "\x37\x01\x39\x01\x27\x01\x25\x01\x2b\x01\x1f\x01\x21\x01\x33"+
+            "\x01\x29\x01\x31\x03\x39\x01\x05\x01\x08\x01\x06",
             "",
             "",
             "",
             "",
             "",
             "",
-            "\x01\x3a",
+            "\x01\x3b",
             "",
-            "\x01\x3c",
-            "\x01\x3e",
-            "\x01\x40",
-            "\x01\x42",
-            "\x01\x45\x11\uffff\x01\x44",
-            "\x01\x48\x0f\uffff\x01\x47",
-            "\x01\x4b\x0d\uffff\x01\x4a",
+            "\x01\x3d",
+            "\x01\x3f",
+            "\x01\x41",
+            "\x01\x43",
+            "\x01\x46\x11\uffff\x01\x45",
+            "\x01\x49\x0f\uffff\x01\x48",
+            "\x01\x4b",
             "\x01\x4f\x04\uffff\x01\x4e\x0d\uffff\x01\x4d",
             "\x01\x51",
             "",
             "",
-            "\x0a\x54",
+            "\x0a\x53",
             "\uffff\x56",
             "\uffff\x58",
-            "",
             "\x01\x5a\x05\uffff\x01\x59\x02\uffff\x01\x5b",
             "\x01\x5f\x05\uffff\x01\x5d\x02\uffff\x01\x61\x16\uffff\x01"+
             "\x5e\x05\uffff\x01\x5c\x02\uffff\x01\x60",
@@ -5778,20 +5740,22 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u0094\x1f\uffff\x01\u0093",
             "\x01\u0095",
             "\x01\u0097\x1f\uffff\x01\u0096",
-            "\x01\u0099\x0d\uffff\x01\u0098",
-            "\x01\u009d\x0d\uffff\x01\u009b\x11\uffff\x01\u009c\x0d\uffff"+
-            "\x01\u009a",
-            "\x01\u009e",
-            "\x01\u00a0\x1f\uffff\x01\u009f",
+            "\x01\u0098",
+            "\x01\u009a\x1f\uffff\x01\u0099",
+            "\x01\u009c\x0d\uffff\x01\u009b",
+            "\x01\u00a0\x0d\uffff\x01\u009e\x11\uffff\x01\u009f\x0d\uffff"+
+            "\x01\u009d",
             "\x01\u00a1",
             "\x01\u00a3\x1f\uffff\x01\u00a2",
-            "\x01\x54\x01\uffff\x0a\x54\x0a\uffff\x01\x54\x08\uffff\x01"+
-            "\x54\x16\uffff\x01\x54\x08\uffff\x01\x54",
-            "\x01\x54\x01\uffff\x0a\u00a5\x0a\uffff\x01\x54\x08\uffff\x01"+
-            "\x54\x16\uffff\x01\x54\x08\uffff\x01\x54",
-            "\x01\u00a7\x0b\uffff\x01\u00a6",
-            "\x01\u00ab\x0b\uffff\x01\u00aa\x13\uffff\x01\u00a9\x0b\uffff"+
-            "\x01\u00a8",
+            "\x01\u00a4",
+            "\x01\u00a6\x1f\uffff\x01\u00a5",
+            "\x01\x53\x01\uffff\x0a\x53\x0a\uffff\x01\x53\x08\uffff\x01"+
+            "\x53\x16\uffff\x01\x53\x08\uffff\x01\x53",
+            "\x01\x53\x01\uffff\x0a\u00a8\x0a\uffff\x01\x53\x08\uffff\x01"+
+            "\x53\x16\uffff\x01\x53\x08\uffff\x01\x53",
+            "\x01\u00aa\x0b\uffff\x01\u00a9",
+            "\x01\u00ae\x0b\uffff\x01\u00ad\x13\uffff\x01\u00ac\x0b\uffff"+
+            "\x01\u00ab",
             "",
             "",
             "",
@@ -5814,8 +5778,6 @@ public partial class PsimulexLexer : Lexer {
             "",
             "",
             "",
-            "\uffff\u00ad",
-            "\uffff\u00af",
             "",
             "",
             "",
@@ -5825,6 +5787,8 @@ public partial class PsimulexLexer : Lexer {
             "",
             "",
             "",
+            "",
+            "\x01\u00af",
             "\x01\u00b0",
             "\x01\u00b1",
             "\x01\u00b2",
@@ -5839,46 +5803,46 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u00bb",
             "\x01\u00bc",
             "\x01\u00bd",
-            "\x01\u00be",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x05"+
-            "\x38\x01\u00c0\x0d\x38\x01\u00bf\x06\x38",
-            "\x01\u00c2",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x05"+
-            "\x38\x01\u00c5\x0d\x38\x01\u00c4\x06\x38",
-            "\x0a\x38\x07\uffff\x05\x38\x01\u00c7\x0d\x38\x01\u00c6\x06"+
-            "\x38\x04\uffff\x01\x38\x01\uffff\x1a\x38",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x05"+
+            "\x39\x01\u00bf\x0d\x39\x01\u00be\x06\x39",
+            "\x01\u00c1",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x05"+
+            "\x39\x01\u00c4\x0d\x39\x01\u00c3\x06\x39",
+            "\x0a\x39\x07\uffff\x05\x39\x01\u00c6\x0d\x39\x01\u00c5\x06"+
+            "\x39\x04\uffff\x01\x39\x01\uffff\x1a\x39",
+            "\x01\u00c7",
             "\x01\u00c8",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u00c9",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x01\u00ca",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u00cb",
             "\x01\u00cc",
-            "\x01\u00cd",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x01\u00cf\x10\uffff\x01\u00ce",
-            "\x01\u00d0",
-            "\x01\u00d2\x10\uffff\x01\u00d1",
-            "\x01\u00d4\x10\uffff\x01\u00d3",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u00ce\x10\uffff\x01\u00cd",
+            "\x01\u00cf",
+            "\x01\u00d1\x10\uffff\x01\u00d0",
+            "\x01\u00d3\x10\uffff\x01\u00d2",
+            "\x01\u00d4",
             "\x01\u00d5",
-            "\x01\u00d6",
-            "\x01\u00d7\x0f\uffff\x01\u00d8",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x01\u00da\x0f\uffff\x01\u00db",
-            "\x01\u00dc\x0f\uffff\x01\u00dd",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u00d6\x0f\uffff\x01\u00d7",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u00d9\x0f\uffff\x01\u00da",
+            "\x01\u00db\x0f\uffff\x01\u00dc",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u00dd",
             "\x01\u00de",
             "\x01\u00df",
             "\x01\u00e0",
@@ -5890,10 +5854,10 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u00e6",
             "\x01\u00e7",
             "\x01\u00e8",
-            "\x01\u00e9",
-            "\x01\u00eb\x1f\uffff\x01\u00ea",
-            "\x01\u00ed\x1f\uffff\x01\u00ec",
-            "\x01\u00ef\x1f\uffff\x01\u00ee",
+            "\x01\u00ea\x1f\uffff\x01\u00e9",
+            "\x01\u00ec\x1f\uffff\x01\u00eb",
+            "\x01\u00ee\x1f\uffff\x01\u00ed",
+            "\x01\u00ef",
             "\x01\u00f0",
             "\x01\u00f1",
             "\x01\u00f2",
@@ -5912,19 +5876,15 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u00ff",
             "\x01\u0100",
             "\x01\u0101",
-            "",
-            "\x01\x54\x01\uffff\x0a\u00a5\x0a\uffff\x01\x54\x08\uffff\x01"+
-            "\x54\x16\uffff\x01\x54\x08\uffff\x01\x54",
             "\x01\u0102",
             "\x01\u0103",
+            "",
+            "\x01\x53\x01\uffff\x0a\u00a8\x0a\uffff\x01\x53\x08\uffff\x01"+
+            "\x53\x16\uffff\x01\x53\x08\uffff\x01\x53",
             "\x01\u0104",
             "\x01\u0105",
             "\x01\u0106",
             "\x01\u0107",
-            "",
-            "",
-            "",
-            "",
             "\x01\u0108",
             "\x01\u0109",
             "\x01\u010a",
@@ -5940,44 +5900,44 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u0114",
             "\x01\u0115",
             "\x01\u0116",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x04"+
-            "\x38\x01\u0117\x15\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x08"+
-            "\x38\x01\u0119\x11\x38",
+            "\x01\u0117",
+            "\x01\u0118",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x04"+
+            "\x39\x01\u0119\x15\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x08"+
+            "\x39\x01\u011b\x11\x39",
             "",
-            "\x01\u011b",
+            "\x01\u011d",
             "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x04"+
-            "\x38\x01\u011c\x15\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x08"+
-            "\x38\x01\u011d\x11\x38",
-            "\x0a\x38\x07\uffff\x04\x38\x01\u011e\x15\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
-            "\x0a\x38\x07\uffff\x08\x38\x01\u011f\x11\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
-            "\x01\u0120",
-            "\x01\u0121",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x04"+
+            "\x39\x01\u011e\x15\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x08"+
+            "\x39\x01\u011f\x11\x39",
+            "\x0a\x39\x07\uffff\x04\x39\x01\u0120\x15\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
+            "\x0a\x39\x07\uffff\x08\x39\x01\u0121\x11\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
             "\x01\u0122",
-            "",
             "\x01\u0123",
             "\x01\u0124",
-            "\x01\u0125\x0b\uffff\x01\u0126",
-            "\x01\u0127",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x01\u0129\x0b\uffff\x01\u012a",
-            "\x01\u012b",
-            "\x01\u012c\x0b\uffff\x01\u012d",
-            "\x01\u012e",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x01\u012f",
-            "\x01\u0130",
             "",
+            "\x01\u0125",
+            "\x01\u0126",
+            "\x01\u0127\x0b\uffff\x01\u0128",
+            "\x01\u0129",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u012b\x0b\uffff\x01\u012c",
+            "\x01\u012d",
+            "\x01\u012e\x0b\uffff\x01\u012f",
+            "\x01\u0130",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u0131",
             "\x01\u0132",
+            "",
             "\x01\u0133",
             "\x01\u0134",
             "\x01\u0135",
@@ -5991,79 +5951,79 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u013d",
             "\x01\u013e",
             "\x01\u013f",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u0140",
             "\x01\u0141",
-            "\x01\u0142",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u0143",
             "\x01\u0144",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x14"+
-            "\x38\x01\u0145\x05\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x14"+
-            "\x38\x01\u0147\x05\x38",
-            "\x0a\x38\x07\uffff\x14\x38\x01\u0148\x05\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
+            "\x01\u0145",
+            "\x01\u0146",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u0147",
+            "\x01\u0148",
             "\x01\u0149",
-            "\x01\u014a",
-            "\x01\u014b",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x04"+
-            "\x38\x01\u014c\x15\x38",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x14"+
+            "\x39\x01\u014a\x05\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x14"+
+            "\x39\x01\u014c\x05\x39",
+            "\x0a\x39\x07\uffff\x14\x39\x01\u014d\x05\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
             "\x01\u014e",
-            "\x0a\x38\x07\uffff\x04\x38\x01\u014f\x15\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
-            "\x0a\x38\x07\uffff\x04\x38\x01\u0150\x15\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
-            "\x01\u0151",
-            "\x01\u0152",
+            "\x01\u014f",
+            "\x01\u0150",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x04"+
+            "\x39\x01\u0151\x15\x39",
             "\x01\u0153",
-            "\x01\u0154",
-            "\x01\u0155",
+            "\x0a\x39\x07\uffff\x04\x39\x01\u0154\x15\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
+            "\x0a\x39\x07\uffff\x04\x39\x01\u0155\x15\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
             "\x01\u0156",
             "\x01\u0157",
             "\x01\u0158",
             "\x01\u0159",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u015a",
             "\x01\u015b",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
             "\x01\u015c",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x04"+
-            "\x38\x01\u015d\x15\x38",
-            "\x01\u015f",
+            "\x01\u015d",
+            "\x01\u015e",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u0160",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x04"+
-            "\x38\x01\u0161\x15\x38",
-            "\x0a\x38\x07\uffff\x04\x38\x01\u0162\x15\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
-            "\x01\u0163",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u0161",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x04"+
+            "\x39\x01\u0162\x15\x39",
             "\x01\u0164",
             "\x01\u0165",
-            "\x01\u0166",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x01"+
-            "\u0167\x19\x38",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x04"+
+            "\x39\x01\u0166\x15\x39",
+            "\x0a\x39\x07\uffff\x04\x39\x01\u0167\x15\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
+            "\x01\u0168",
             "\x01\u0169",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x01"+
-            "\u016a\x19\x38",
-            "\x0a\x38\x07\uffff\x01\u016b\x19\x38\x04\uffff\x01\x38\x01"+
-            "\uffff\x1a\x38",
-            "\x01\u016c",
-            "\x01\u016d",
+            "\x01\u016a",
+            "\x01\u016b",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x01"+
+            "\u016c\x19\x39",
             "\x01\u016e",
-            "",
-            "\x01\u016f",
-            "",
-            "\x01\u0170",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x01"+
+            "\u016f\x19\x39",
+            "\x0a\x39\x07\uffff\x01\u0170\x19\x39\x04\uffff\x01\x39\x01"+
+            "\uffff\x1a\x39",
             "\x01\u0171",
             "\x01\u0172",
             "\x01\u0173",
+            "",
             "\x01\u0174",
+            "",
             "\x01\u0175",
             "\x01\u0176",
             "\x01\u0177",
@@ -6072,101 +6032,106 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u017a",
             "\x01\u017b",
             "\x01\u017c",
-            "",
             "\x01\u017d",
             "\x01\u017e",
             "\x01\u017f",
             "\x01\u0180",
             "\x01\u0181",
-            "\x01\u0182",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x01\u0187",
-            "\x01\u0188",
-            "\x01\u0189",
-            "\x01\u018a",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x04"+
-            "\x38\x01\u018b\x15\x38",
             "",
+            "\x01\u0182",
+            "\x01\u0183",
+            "\x01\u0184",
+            "\x01\u0185",
+            "\x01\u0186",
+            "\x01\u0187",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u018c",
             "\x01\u018d",
             "\x01\u018e",
-            "\x0a\x38\x07\uffff\x04\x38\x01\u018f\x15\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
-            "\x0a\x38\x07\uffff\x04\x38\x01\u0190\x15\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
-            "\x01\u0191",
+            "\x01\u018f",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x04"+
+            "\x39\x01\u0190\x15\x39",
             "",
             "\x01\u0192",
             "\x01\u0193",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x08"+
-            "\x38\x01\u0194\x11\x38",
-            "\x0a\x38\x07\uffff\x08\x38\x01\u0196\x11\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
-            "\x0a\x38\x07\uffff\x08\x38\x01\u0197\x11\x38\x04\uffff\x01"+
-            "\x38\x01\uffff\x1a\x38",
-            "\x01\u0198",
+            "\x0a\x39\x07\uffff\x04\x39\x01\u0194\x15\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
+            "\x0a\x39\x07\uffff\x04\x39\x01\u0195\x15\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u0197",
             "",
+            "\x01\u0198",
             "\x01\u0199",
-            "\x01\u019a",
-            "\x01\u019b",
-            "\x01\u019c",
-            "\x01\u019d",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x08"+
+            "\x39\x01\u019a\x11\x39",
+            "\x0a\x39\x07\uffff\x08\x39\x01\u019c\x11\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
+            "\x0a\x39\x07\uffff\x08\x39\x01\u019d\x11\x39\x04\uffff\x01"+
+            "\x39\x01\uffff\x1a\x39",
             "\x01\u019e",
+            "",
             "\x01\u019f",
             "\x01\u01a0",
             "\x01\u01a1",
             "\x01\u01a2",
             "\x01\u01a3",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
             "\x01\u01a4",
-            "",
             "\x01\u01a5",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u01a6",
             "\x01\u01a7",
             "\x01\u01a8",
             "\x01\u01a9",
-            "\x01\u01aa",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x01\u01ab",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "",
-            "\x01\u01ac",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u01aa",
+            "",
+            "\x01\u01ab",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01ad",
             "\x01\u01ae",
             "\x01\u01af",
             "\x01\u01b0",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01b1",
+            "",
             "\x01\u01b2",
             "\x01\u01b3",
             "\x01\u01b4",
@@ -6180,236 +6145,243 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u01bc",
             "\x01\u01bd",
             "\x01\u01be",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u01bf",
             "\x01\u01c0",
             "\x01\u01c1",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
             "\x01\u01c2",
             "\x01\u01c3",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "",
-            "",
-            "",
-            "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x01\u01c5",
+            "\x01\u01c4",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01c6",
-            "",
             "\x01\u01c7",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01c8",
             "\x01\u01c9",
-            "\x01\u01ca",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "",
+            "",
+            "",
+            "",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01cb",
             "\x01\u01cc",
+            "",
             "\x01\u01cd",
             "\x01\u01ce",
-            "",
             "\x01\u01cf",
             "\x01\u01d0",
+            "",
             "\x01\u01d1",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
             "\x01\u01d2",
             "\x01\u01d3",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u01d4",
+            "",
             "\x01\u01d5",
             "\x01\u01d6",
-            "",
             "\x01\u01d7",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01d8",
             "\x01\u01d9",
-            "\x01\u01da",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01db",
             "\x01\u01dc",
+            "",
             "\x01\u01dd",
             "\x01\u01de",
             "\x01\u01df",
             "\x01\u01e0",
             "\x01\u01e1",
             "\x01\u01e2",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u01e3",
             "\x01\u01e4",
             "\x01\u01e5",
             "\x01\u01e6",
             "\x01\u01e7",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
             "\x01\u01e8",
-            "\x01\u01e9",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01ea",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u01eb",
+            "\x01\u01ec",
+            "\x01\u01ed",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01ee",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
             "\x01\u01ef",
             "\x01\u01f0",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x01\u01f2",
-            "\x01\u01f3",
-            "\x01\u01f4",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u01f4",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u01f5",
             "\x01\u01f6",
-            "\x01\u01f7",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01f8",
             "\x01\u01f9",
             "\x01\u01fa",
-            "\x01\u01fb",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u01fc",
-            "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
             "\x01\u01fd",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
             "\x01\u01fe",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "",
-            "",
-            "",
+            "\x01\u01ff",
             "\x01\u0200",
             "\x01\u0201",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u0202",
             "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u0203",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "\x01\u0204",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "",
+            "",
+            "",
             "\x01\u0206",
             "\x01\u0207",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u0208",
             "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x01\u020a",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x01\u020c",
+            "\x01\u020d",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             "",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
-            "\x0a\x38\x07\uffff\x1a\x38\x04\uffff\x01\x38\x01\uffff\x1a"+
-            "\x38",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
+            "\x0a\x39\x07\uffff\x1a\x39\x04\uffff\x01\x39\x01\uffff\x1a"+
+            "\x39",
             ""
     };
 
-    static readonly short[] DFA48_eot = DFA.UnpackEncodedString(DFA48_eotS);
-    static readonly short[] DFA48_eof = DFA.UnpackEncodedString(DFA48_eofS);
-    static readonly char[] DFA48_min = DFA.UnpackEncodedStringToUnsignedChars(DFA48_minS);
-    static readonly char[] DFA48_max = DFA.UnpackEncodedStringToUnsignedChars(DFA48_maxS);
-    static readonly short[] DFA48_accept = DFA.UnpackEncodedString(DFA48_acceptS);
-    static readonly short[] DFA48_special = DFA.UnpackEncodedString(DFA48_specialS);
-    static readonly short[][] DFA48_transition = DFA.UnpackEncodedStringArray(DFA48_transitionS);
+    static readonly short[] DFA49_eot = DFA.UnpackEncodedString(DFA49_eotS);
+    static readonly short[] DFA49_eof = DFA.UnpackEncodedString(DFA49_eofS);
+    static readonly char[] DFA49_min = DFA.UnpackEncodedStringToUnsignedChars(DFA49_minS);
+    static readonly char[] DFA49_max = DFA.UnpackEncodedStringToUnsignedChars(DFA49_maxS);
+    static readonly short[] DFA49_accept = DFA.UnpackEncodedString(DFA49_acceptS);
+    static readonly short[] DFA49_special = DFA.UnpackEncodedString(DFA49_specialS);
+    static readonly short[][] DFA49_transition = DFA.UnpackEncodedStringArray(DFA49_transitionS);
 
-    protected class DFA48 : DFA
+    protected class DFA49 : DFA
     {
-        public DFA48(BaseRecognizer recognizer)
+        public DFA49(BaseRecognizer recognizer)
         {
             this.recognizer = recognizer;
-            this.decisionNumber = 48;
-            this.eot = DFA48_eot;
-            this.eof = DFA48_eof;
-            this.min = DFA48_min;
-            this.max = DFA48_max;
-            this.accept = DFA48_accept;
-            this.special = DFA48_special;
-            this.transition = DFA48_transition;
+            this.decisionNumber = 49;
+            this.eot = DFA49_eot;
+            this.eof = DFA49_eof;
+            this.min = DFA49_min;
+            this.max = DFA49_max;
+            this.accept = DFA49_accept;
+            this.special = DFA49_special;
+            this.transition = DFA49_transition;
 
         }
 
         override public string Description
         {
-            get { return "1:1: Tokens : ( LP | RP | LS | RS | LB | RB | AND | OR | NOT | E | NE | LT | LTE | GT | GTE | A | AA | AS | AM | ADIV | AMOD | P | M | STAR | DIV | MOD | PP | MM | REF | SC | C | DOT | AP | QM | SLC | LMLC | RMLC | ESC | BOOL | CHAR | INT | DECIMAL | STRING | TREE | BINTREE | SET | LIST | STACK | QUEUE | PQUEUE | STRUCT | IMPORT | BREAK | CONTINUE | RETURN | IF | ELSE | ELSEIF | FOR | FOREACH | PFOR | PFOREACH | DO | PDO | WHILE | LOOP | TO | IN | IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral | Identifier | WS | SingleLineComment | MultiLineComment );"; }
+            get { return "1:1: Tokens : ( LeftParen | RightParen | LeftSquare | RightSquare | LeftBracket | RightBracket | LogicalAnd | LogicalOr | LogicalNot | RelEqual | RelNotEqual | RelLessThan | RelLessThanOrEqual | RelGreaterThan | RelGreaterThanOrEqual | Assign | AssignAndAdd | AssignAndSubstract | AssignAndMultiply | AssignAndDivide | AssignAndModulo | Plus | Minus | Star | Divide | Modulo | PlusPlus | MinusMinus | Reference | Semicolon | Comma | Dot | Apostrophe | QuotationMark | Bool | Char | Int | Decimal | String | Tree | BinTree | Set | List | Stack | Queue | PQueue | Void | Struct | Import | Break | Continue | Return | If | Else | ElseIf | For | ForEach | PFor | PForEach | Do | PDo | While | Loop | To | In | IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral | Identifier | WS | SingleLineComment | MultiLineComment );"; }
         }
 
     }
