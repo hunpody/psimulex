@@ -85,3 +85,63 @@ PL így :
 int add = (int a, int b) => a + b;
 Ha szerinted jó lesz így, szólj és ilyenre csinálom
 else megkell keresni mi a baja :)
+
+2008.09.04. 1:10 - vari
+
+1.
+
+- Kicsit átdolgoztam a nyelvtant több ponton.
+- Kivettem pár feleslegesnek tûnõ átvezetõ szabályt, módosítottam pár dolgot.
+- Volt pár dolog, ami nem a saját szekciócskájában volt, azokon is pakolásztam picit.
+- Volt egy-két dolog, amit átkereszteltem, bár nekem is fáj néha, ahogy elnevezem, de nincs jobb ötletem.
+
+Ez de szép már ! :
+
+import "asd";
+
+struct record	{	int i = 10;	string s = "asd";	bool b = true;	char c = 's';	}
+
+int i;
+string s = "sanyi";
+
+int main(int i)
+{
+	for(int i = 10; i < 10; i++)
+		i++;
+		
+	while(a==b)
+	{	string s = "as";	}
+	
+	f = a => a + a;
+	int f = (bool b, char c) => b % c;
+		
+	id = a => 
+	{
+		int i;
+		a+b+c-d--;
+		return a;
+	};
+	
+	id = a => a;
+	
+	l--;
+}
+
+És ez mind megy.
+
+2.
+
+Elkészítettem egy PsiAST vázlatot. Egy alapnak nemrossz.
+Vízionáltam még pár statikus fv-t amit majd a fa építésekor tudunk használni.
+
+Van még egy érvem a minden elnevezése mellet : Amikor az ANTL ToTreeString() -je 
+megcsinálja azt az eredmény stringet és valmi hiba lép fel,, akkor a hiányzó token számát adja meg.
+Igen ám, de ha én nem adtam neki nevet, akkor T_83 les za token neve és mégcsak ASCI kódra se stimmel a dolog.
+Persze ennek a jelentõsége zéróra fog csökkenni, nohde akkor is egy szempont.
+
+Még megsasolom mit kommitáltál, csorgó nyállal oszt nekem is szunya.
+Holnap Andi jön és 6 ig ittlesz kb. Szóval este leszek.
+HA van energiád magyarázni -- én meg felfogom -- :) akor nekitudok állni ennek a résznek is.
+Izgin hangzik. :)
+
+V
