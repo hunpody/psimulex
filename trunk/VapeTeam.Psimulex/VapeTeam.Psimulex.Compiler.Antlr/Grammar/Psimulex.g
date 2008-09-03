@@ -9,11 +9,11 @@ options {
 }
 
 compilationUnit
-    :	(simpleProgram | multiFunctionalProgram) EOF
+    :	( simpleProgram | multiFunctionalProgram ) EOF
     ;
 
 simpleProgram
-	:	blockStatement*
+	:	statement*
 	;
 
 multiFunctionalProgram
@@ -53,42 +53,41 @@ structDeclaration
     ;
 
 structBody
-    :   '{'! structBodyDeclaration '}'!
-    ;
-
-structBodyDeclaration
-    :   memberDeclaration+
+    :   '{'! memberDeclaration+ '}'!
     ;
 
 memberDeclaration
-    :   type fieldDeclaration
+    :   type Identifier arrayMatrxSize? (Assign^ literal )? ';'!
     ;
 
-fieldDeclaration
-    :   variableDeclaratorId (Assign^ literal )? ';'!
+localVariableDeclaration
+    :   type Identifier arrayMatrxSize? (Assign^ variableInitializer)?
     ;
-
-variableDeclarator
-    :   variableDeclaratorId (Assign^ variableInitializer)?
-    ;
-
-functionDeclaration
-    :	type Identifier formalParameters block
-    ;    
     
-variableDeclaratorId
-    :   Identifier ('[' ']'|'[' ',' ']')?
-    ;
-
 variableInitializer
     :   expression	/* arrayInitializer, MatrixInitializer */
     ;
-        
-/*
-arrayInitializer
-    :   '{' (variableInitializer (',' variableInitializer)* )? '}'
+    
+arrayMatrxSize
+	:	( '[' expression ']' | '[' expression ',' expression ']' )
+	;
+    
+functionDeclaration
+    :	type arrayMatrixType? Identifier formalParameters block
     ;
-*/
+
+formalParameters
+    :   '('! formalParameterDecls? ')'!
+    ;
+    
+formalParameterDecls
+    :   type arrayMatrixType? Reference? Identifier (','! formalParameterDecls)?
+    ;
+    
+    
+///////////
+// Types //
+///////////
 
 type
     :	dataType
@@ -96,7 +95,11 @@ type
     ;
 
 dataType
-	:	( primitiveType | builtInType ) ( '[' ']' | '[' ',' ']' )?
+	:	primitiveType | builtInType
+	;
+
+arrayMatrixType
+	:	'[' ']' | '[' ',' ']'
 	;
 
 primitiveType
@@ -119,18 +122,6 @@ builtInType
 	|	PQueue
 	// ...
 	;
-
-formalParameters
-    :   '('! formalParameterDecls? ')'!
-    ;
-    
-formalParameterDecls
-    :   type (Reference)? formalParameterDeclsRest
-    ;
-    
-formalParameterDeclsRest
-    :   variableDeclaratorId (','! formalParameterDecls)?
-    ;
 
 
 
@@ -290,41 +281,7 @@ literal
 ////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-/*
-lambdaExpression
-	:	( simpleLambdaParameter | typedLambdaParameter ) '=>' lambdaStatement
-	;
-
-simpleLambdaParameter 
-	:	Identifier | '(' identifierList? ')'
-	;
-
-identifierList
-    :   Identifier ( ',' Identifier )* 
-    ;
-
-typedLambdaParameter 
-	:	'(' typedIdentifierList ')'
-	;
-
-typedIdentifierList
-	:	dataType Identifier ( ',' dataType Identifier )*
-	;
-	
-lambdaStatement
-	:	expression | block
-	; 
-	
-functionPointerType
-	:	( Func '<' dataType '>' )? Identifier  '(' typeList ')' 
-	;
-
-typeList
-	:	dataType ( ',' dataType )*
-	;
- */
- 
+     
 lambdaExpression
 	:	( Identifier | '(' lambdaParameterList ')' ) '=>' lambdaStatement
 	;
@@ -341,10 +298,6 @@ lambdaStatement
 	:	expression | block
 	;
 	
-//functionPointer
-//	:	functionPointerType? Identifier
-//	;
-	
 functionPointerType
 	:	Func '<' dataType '>' 
 	;
@@ -359,23 +312,11 @@ functionPointerType
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 block
-    :   '{'! blockStatement* '}'!
-    ;
-    
-blockStatement
-    :   localVariableDeclarationStatement | statement
-    ;
-    
-localVariableDeclarationStatement
-    :    localVariableDeclaration ';'!
-    ;
-
-localVariableDeclaration
-    :   type variableDeclarator
-    ;
+    :   '{'! statement* '}'!
+    ;    
     
 branch
-    :	block|blockStatement
+    :	block | statement
     ;
 
 statement	// ElseIf kell mgé bele
@@ -391,6 +332,7 @@ statement	// ElseIf kell mgé bele
     |   Continue ';'!
     |   ';'!
     |   expression ';'!
+    |	localVariableDeclaration ';'!
     ;
     
 forControl
