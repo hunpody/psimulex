@@ -6,6 +6,9 @@ using VapeTeam.Psimulex.Core.Types;
 
 namespace VapeTeam.Psimulex.Core.Commands
 {
+    /// <summary>
+    /// Binary comparison relational and logicals.
+    /// </summary>
     public class Compare : CommandBase
     {
         public enum ComparisonModes
@@ -16,7 +19,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             LessThan,
             LessThanOrEqual,
             GreaterThan,
-            GreaterThanOrEqual
+            GreaterThanOrEqual,
         }
 
         private ComparisonModes mode;
@@ -25,9 +28,10 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public override void Do(ICommandContext context)
         {
+            bool result = false;
+
             BaseType op2 = context.RunStack.Pop();
             BaseType op1 = context.RunStack.Pop();
-            bool result = false;
 
             switch (mode)
             {
@@ -51,6 +55,7 @@ namespace VapeTeam.Psimulex.Core.Commands
                 case ComparisonModes.GreaterThanOrEqual:
                     result = op1.IsGreaterThanOrEqual(op2);
                     break;
+
                 default:
                     break;
             }
@@ -59,7 +64,7 @@ namespace VapeTeam.Psimulex.Core.Commands
         }
 
         #endregion
-
+            
         public Compare(ComparisonModes mode)
         {
             this.mode = mode;

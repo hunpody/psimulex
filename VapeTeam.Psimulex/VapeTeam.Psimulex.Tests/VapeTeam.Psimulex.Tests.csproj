@@ -41,6 +41,7 @@
     <Compile Include="BaseTypeTests.cs" />
     <Compile Include="Helpers\AssertionHelpers.cs" />
     <Compile Include="Helpers\SystemHelper.cs" />
+    <Compile Include="JumpTests.cs" />
     <Compile Include="ProcessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BasicCoreTest.cs" />

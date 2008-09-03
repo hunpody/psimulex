@@ -76,8 +76,13 @@ namespace VapeTeam.Psimulex.Core
                 if (RunningTask.State == ThreadStates.Running)
                 {
                     RunningTask.System.CallingProcess = RunningTask.HostProcess;
+                    int oldPC = RunningTask.PC;
                     RunningTask.Program[RunningTask.PC].Do(RunningTask);
-                    ++RunningTask.PC;
+                    // If there was no jump
+                    if (oldPC == RunningTask.PC)
+                    {
+                        ++RunningTask.PC;
+                    }
                 }
             }
             ++cycles;
