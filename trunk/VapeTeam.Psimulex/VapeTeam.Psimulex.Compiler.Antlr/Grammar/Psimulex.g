@@ -9,13 +9,8 @@ options {
 }
 
 compilationUnit
-    :	simpleProgram
-    |	multiFunctionalProgram
+    :	(simpleProgram | multiFunctionalProgram) EOF
     ;
-
-globalVariableDeclaration
-	:	fieldDeclaration
-	;
 
 simpleProgram
 	:	blockStatement*
@@ -27,7 +22,10 @@ multiFunctionalProgram
     	globalVariableDeclaration*
 		functionDeclaration*
 	;
-   
+
+globalVariableDeclaration
+	:	memberDeclaration
+	;   
 
 
 //////////////////
@@ -43,21 +41,19 @@ usingDeclaration
 */
 
 importDeclaration
-    :   IMPORT StringLiteral SC!	// FileName
+    :   Import StringLiteral ';'!
     ;
 
 typeDeclaration
     :   structDeclaration
-    |   SC!
     ;
 
 structDeclaration
-    :   STRUCT Identifier
-        structBody
+    :   Struct Identifier structBody
     ;
 
 structBody
-    :   LB! structBodyDeclaration* RB!
+    :   '{'! structBodyDeclaration '}'!
     ;
 
 structBodyDeclaration
@@ -69,26 +65,23 @@ memberDeclaration
     ;
 
 fieldDeclaration
-    :   variableDeclaratorId (A^ literal )? SC!
+    :   variableDeclaratorId (Assign^ literal )? ';'!
     ;
 
 variableDeclarator
-    :   variableDeclaratorId (A^ variableInitializer)?
+    :   variableDeclaratorId (Assign^ variableInitializer)?
     ;
 
 functionDeclaration
-    :
-    	type Identifier LP! formalParameters RP! block
-    ;
-    
+    :	type Identifier formalParameters block
+    ;    
     
 variableDeclaratorId
-    :   Identifier (LS RS|LS C RS)?
+    :   Identifier ('[' ']'|'[' ',' ']')?
     ;
 
 variableInitializer
-    :   /* arrayInitializer, MatrixInitializer */
-    |   expression
+    :   expression	/* arrayInitializer, MatrixInitializer */
     ;
         
 /*
@@ -98,41 +91,41 @@ arrayInitializer
 */
 
 type
-    :	primitiveType (LS RS|LS C RS)?
+    :	(primitiveType|builtInType) ('[' ']'|'[' ',' ']')?
     ;
 
 primitiveType
-    :   BOOL
-    |	CHAR
-    |	INT
-    |	DECIMAL
-    |	STRING
+    :   Bool
+    |	Char
+    |	Int
+    |	Decimal
+    |	String
+	|   Void
     // ...
     ;
 
 builtInType
-    :	TREE
-	|	BINTREE
-	|	SET
-	|	LIST
-	|	STACK
-	|	QUEUE
-	|	PQUEUE
+    :	Tree
+	|	BinTree
+	|	Set
+	|	List
+	|	Stack
+	|	Queue
+	|	PQueue
 	// ...
 	;
 
 formalParameters
-    :   LP! formalParameterDecls? RP!
+    :   '('! formalParameterDecls? ')'!
     ;
     
 formalParameterDecls
-    :   type (REF)? formalParameterDeclsRest
+    :   type (Reference)? formalParameterDeclsRest
     ;
     
 formalParameterDeclsRest
-    :   variableDeclaratorId (C! formalParameterDecls)?
+    :   variableDeclaratorId (','! formalParameterDecls)?
     ;
-
 
 
 
@@ -146,20 +139,21 @@ expression
 	:	assignment
 	|	conditionalOrExpression
 	;
+	
 assignment
 	:	leftValue assignmentOperator^ expression
 	;
     
 assignmentOperator
-	:	A|AA|AS|AM|ADIV|AMOD
+	:	Assign|AssignAndAdd|AssignAndSubstract|AssignAndMultiply|AssignAndDivide|AssignAndModulo
 	;
 
 conditionalOrExpression
-    :   conditionalAndExpression ( OR^ conditionalAndExpression )*
+    :   conditionalAndExpression ( LogicalOr^ conditionalAndExpression )*
     ;
 
 conditionalAndExpression
-    :   equalityExpression ( AND^ equalityExpression )*
+    :   equalityExpression ( LogicalAnd^ equalityExpression )*
     ;
 
 equalityExpression
@@ -167,7 +161,7 @@ equalityExpression
     ;
 
 equalityOp
-	:	E|NE
+	:	RelEqual|RelNotEqual
 	;
 
 relationalExpression
@@ -175,28 +169,15 @@ relationalExpression
     ;
     
 relationalOp
-    :	LT|LTE|GT|GTE
+    :	RelLessThan| RelLessThanOrEqual|RelGreaterThan|RelGreaterThanOrEqual
     ;
     
-    /*
-relationalOp
-    :   ('<' '=')=> t1='<' t2='=' 
-        { $t1.Line == $t2.Line && 
-          $t1.CharPositionInLine + 1 == $t2.CharPositionInLine }?
-    |   ('>' '=')=> t1='>' t2='=' 
-        { $t1.Line == $t2.Line && 
-          $t1.CharPositionInLine + 1 == $t2.CharPositionInLine }?
-    |   '<' 
-    |   '>' 
-    ;	// Loptam. Nem bántom.
-    */
-
 additiveExpression
     :   multiplicativeExpression ( additiveOp^ multiplicativeExpression )*
     ;
 
 additiveOp
-	:	P|M
+	:	Plus|Minus
 	;
 
 multiplicativeExpression
@@ -204,7 +185,7 @@ multiplicativeExpression
     ;
 
 multiplicativeOp
-	:	STAR|DIV|MOD
+	:	Star|Divide|Modulo
 	;
 
 unaryExpression
@@ -213,11 +194,11 @@ unaryExpression
     ;
 
 unaryPrefixOp
-	:	P|M|PP|MM|NOT
+	:	Plus|Minus|PlusPlus|MinusMinus|LogicalNot
 	;
 	
 unaryPostfixOp
-	:	PP|MM
+	:	PlusPlus|MinusMinus
 	;
 
 unaryExpressionPostPlusPlusMinusMinus
@@ -231,7 +212,7 @@ primaryExpression
     ;
 
 parExpression
-    :   LP! expression RP!
+    :   '('! expression ')'!
     ;
 
 leftValue
@@ -244,49 +225,22 @@ variable
 	;
 
 selecting
-	:	(Identifier|parExpression) selector*
+	:	(Identifier|parExpression) selector+
 	;
 
 selector
-options {k=3;}
     :   memberSelect
     |   memberFunctionCall
     |   indexing
     ;
 
 memberSelect
-options {k=3;}
-	:	DOT! Identifier
+	:	'.'! Identifier
 	;
 
 memberFunctionCall
-options {k=3;}
-	:	DOT! Identifier arguments
+	:	'.'! Identifier arguments
 	;
-
-/*	
-indexing
-	:	'[' indexList ']'
-	;
-
-indexList
-    :	expression (',' expression)?
-    ;
-*/
-	
-/*
-indexing
-	:	'[' firstIndex secondIndex? ']'
-	;
-
-firstIndex
-	:	expression
-	;
-
-secondIndex
-	:	',' expression
-	;
-*/
 
 indexing
 	:	arrayIndexing
@@ -294,19 +248,19 @@ indexing
 	;
 	
 arrayIndexing
-	:	LS! expression RS!
+	:	'['! expression ']'!
 	;
 
 matrixIndexing
-	:	LS! expression C! expression RS!
+	:	'['! expression ','! expression ']'!
 	;
 	
 arguments
-    :   LP! expressionList? RP!
+    :   '('! expressionList? ')'!
     ;
 
 expressionList
-    :	expression (C! expression)*
+    :	expression (','! expression)*
     ;
     
 literal 
@@ -329,16 +283,15 @@ literal
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 block
-    :   LB! blockStatement* RB!
+    :   '{'! blockStatement* '}'!
     ;
     
 blockStatement
-    :   localVariableDeclarationStatement
-    |   statement
+    :   localVariableDeclarationStatement | statement
     ;
     
 localVariableDeclarationStatement
-    :    localVariableDeclaration SC!
+    :    localVariableDeclaration ';'!
     ;
 
 localVariableDeclaration
@@ -349,24 +302,23 @@ branch
     :	block|blockStatement
     ;
 
-statement
-    :	IF parExpression branch (options {k=1;}:ELSE branch)?
-    |   (FOR|PFOR) LP! forControl RP! branch
-    |   (FOREACH|PFOREACH) LP! foreachControl RP! branch
-    |   LOOP LP! loopControl RP! branch
-    |   WHILE parExpression branch
-    |   DO branch WHILE parExpression SC!
-    |   PDO block
-    |   RETURN expression? SC!
-    |   BREAK SC!
-    |   CONTINUE SC!
-    |   SC!
-    |   expression SC!
+statement	// ElseIf kell mgé bele
+    :	If parExpression branch (options {k=1;}:Else branch)?
+    |   (For|PFor) '('! forControl ')'! branch
+    |   (ForEach|PForEach) '('! foreachControl ')'! branch
+    |   Loop '('! loopControl ')'! branch
+    |   While parExpression branch
+    |   Do branch While parExpression ';'!
+    |   PDo block
+    |   Return expression? ';'!
+    |   Break ';'!
+    |   Continue ';'!
+    |   ';'!
+    |   expression ';'!
     ;
     
 forControl
-//options {k=3;} Emiatt kellene (ID ID : ID) ...
-    :    forInit? SC! expression? SC! forUpdate?
+    :    forInit? ';'! expression? ';'! forUpdate?
     ;
 
 forInit
@@ -379,13 +331,13 @@ forUpdate
     
 foreachControl
 options {k=3;} //Emiatt kellene (ID ID in ID) ...
-    :   type Identifier IN expression
+    :   type Identifier In expression
     ;
 
     
 loopControl
 options {k=3;} //Emiatt kellene (ID ID to ID) ...
-    :   type Identifier TO expression
+    :   type Identifier To expression
     ;
 
 
@@ -398,95 +350,77 @@ options {k=3;} //Emiatt kellene (ID ID to ID) ...
 
 // TOKENS //
 
-/*Parensises*/
-LP		:	'('		;    
-RP		:	')'		;
-LS		:	'['		;
-RS		:	']'		;
-LB		:	'{'		;
-RB		:	'}'		;
-
 /*Logical Comparisons*/
-AND		:	'&&'	;
-OR		:	'||'	;
-NOT		:	'!'		;
-E		:	'=='	;
-NE		:	'!='	;
-LT		:	'<'		;
-LTE		:	'<='	;
-GT		:	'>'		;
-GTE		:	'>='	;
+LogicalAnd				:	'&&'	;
+LogicalOr				:	'||'	;
+LogicalNot				:	'!'		;
+RelEqual				:	'=='	;
+RelNotEqual				:	'!='	;
+RelLessThan				:	'<'		;
+RelLessThanOrEqual		:	'<='	;
+RelGreaterThan			:	'>'		;
+RelGreaterThanOrEqual	:	'>='	;
 
 /*Assigns*/
-A		:	'='		;
-AA		:	'+='	;
-AS		:	'-='	;
-AM		:	'*='	;
-ADIV	:	'/='	;
-AMOD	:	'%='	;
+Assign				:	'='		;
+AssignAndAdd		:	'+='	;
+AssignAndSubstract	:	'-='	;
+AssignAndMultiply	:	'*='	;
+AssignAndDivide		:	'/='	;
+AssignAndModulo		:	'%='	;
 
 /*Operators*/
-P		:	'+'		;
-M		:	'-'		;
-STAR	:	'*'		;
-DIV		:	'/'		;
-MOD		:	'%'		;
-PP		:	'++'	;
-MM		:	'--'	;
+Plus		:	'+'		;
+Minus		:	'-'		;
+Star		:	'*'		;
+Divide		:	'/'		;
+Modulo		:	'%'		;
+PlusPlus	:	'++'	;
+MinusMinus	:	'--'	;
 
-/*Separators*/
-REF 	:	'&'		;
-SC		:	';'		;
-C		:	','		;
-DOT		:	'.'		;
-AP		:	'\''	;
-QM		:	'"'		;
-
-/*Other*/
-SLC		:	'//'	;
-LMLC	:	'/*'	;
-RMLC	:	'*/'	;
-ESC		:	'\\'	;
+/*Reference*/
+Reference 		:	'&'		;
 
 /*Primitive Types*/
-BOOL    :   'bool'|'Bool'|'BOOL'|'boolean'|'Boolean'|'BOOLEAN'				;
-CHAR	:	'char'|'Char'|'CHAR'|'character'|'Character'|'CHARACTER'		;
-INT		:	'int'|'Int'|'INT'|'integer'|'Integer'|'INTEGER'					;
-DECIMAL	:	'decimal'|'Decimal'|'DECIMAL'	/*|'float'|'Float'|'FLOAT'*/	;
-STRING	:	'string'|'String'|'STRING'										;
+Bool    :   'bool'|'Bool'|'BOOL'|'boolean'|'Boolean'|'BOOLEAN'				;
+Char	:	'char'|'Char'|'CHAR'|'character'|'Character'|'CHARACTER'		;
+Int		:	'int'|'Int'|'INT'|'integer'|'Integer'|'INTEGER'					;
+Decimal	:	'decimal'|'Decimal'|'DECIMAL'	/*|'float'|'Float'|'FLOAT'*/	;
+String	:	'string'|'String'|'STRING'										;
 // ...
 
 /*BuiltIn Types*/
-TREE    :	'tree'|'Tree'|'TREE'			;
-BINTREE	:	'bintree'|'BinTree'|'BINTREE'	;
-SET		:	'set'|'Set'|'SET'				;
-LIST	:	'list'|'List'|'LIST'			;
-STACK	:	'stack'|'Stack'|'STACK'			;
-QUEUE	:	'queue'|'Queue'|'QUEUE'			;
-PQUEUE	:	'pqueue'|'PQueue'|'PQUEUE'		;
+Tree    :	'tree'|'Tree'|'TREE'			;
+BinTree	:	'bintree'|'BinTree'|'BINTREE'	;
+Set		:	'set'|'Set'|'SET'				;
+List	:	'list'|'List'|'LIST'			;
+Stack	:	'stack'|'Stack'|'STACK'			;
+Queue	:	'queue'|'Queue'|'QUEUE'			;
+PQueue	:	'pqueue'|'PQueue'|'PQUEUE'		;
+Void	:	'void'|'Void'|'VOID'			;
 // ...
 
 /*Key Words*/
-STRUCT	:	'struct'|'Struct'|'STRUCT'						;
-IMPORT	:	'import'|'Import'|'IMPORT'						;
+Struct	:	'struct'|'Struct'|'STRUCT'						;
+Import	:	'import'|'Import'|'IMPORT'						;
 
-BREAK	:	'break'|'Break'|'BREAK'							;
-CONTINUE:	'continue'|'Continue'|'CONTINUE'				;
-RETURN	:	'ret'|'Ret'|'RET'|'return'|'Return'|'RETURN'	;
+Break	:	'break'|'Break'|'BREAK'							;
+Continue:	'continue'|'Continue'|'CONTINUE'				;
+Return	:	'ret'|'Ret'|'RET'|'return'|'Return'|'RETURN'	;
 
-IF		:	'if'|'If'|'IF'									;
-ELSE	:	'else'|'Else'|'ELSE'							;
-ELSEIF	:	'elseif'|'ElseIf'|'ELSEIF'						;
-FOR		:	'for'|'For'|'FOR'								;
-FOREACH	:	'foreach'|'ForEach'|'FOREACH'					;
-PFOR	:	'pfor'|'PFor'|'PFOR'							;
-PFOREACH:	'pforeach'|'PForEach'|'PFOREACH'				;	// MIért is ne ?
-DO		:	'do'|'Do'|'DO'									;
-PDO		:	'pdo'|'PDo'|'PDO'								;
-WHILE	:	'while'|'While'|'WHILE'							;
-LOOP	:	'loop'|'Loop'|'LOOP'							;
-TO		:	'to'|'To'|'TO'|'until'|'Until'|'UNTIL'			;
-IN		:	'in'|'In'|'IN'									;
+If		:	'if'|'If'|'IF'									;
+Else	:	'else'|'Else'|'ELSE'							;
+ElseIf	:	'elseif'|'ElseIf'|'ELSEIF'						;
+For		:	'for'|'For'|'FOR'								;
+ForEach	:	'foreach'|'ForEach'|'FOREACH'					;
+PFor	:	'pfor'|'PFor'|'PFOR'							;
+PForEach:	'pforeach'|'PForEach'|'PFOREACH'				;	// MIért is ne ?
+Do		:	'do'|'Do'|'DO'									;
+PDo		:	'pdo'|'PDo'|'PDO'								;
+While	:	'while'|'While'|'WHILE'							;
+Loop	:	'loop'|'Loop'|'LOOP'							;
+To		:	'to'|'To'|'TO'|'until'|'Until'|'UNTIL'			;
+In		:	'in'|'In'|'IN'									;
 
 
 // Literals
@@ -537,15 +471,15 @@ DecimalLiteral
     
 fragment
 EscapeSequence
-    :   ESC ('t'|'n'|'r'|QM|AP|ESC)
+    :   '\\' ('t'|'n'|'r'|'"'|'\''|'\\')
     ;
 
 CharacterLiteral
-    :   AP ( EscapeSequence | ~(AP|ESC) )? AP
+    :   '\'' ( EscapeSequence | ~('\''|'\\') )? '\''
     ;
 
 StringLiteral
-    :	QM ( EscapeSequence | ~(QM|ESC) )* QM
+    :	'"' ( EscapeSequence | ~('"'|'\\') )* '"'
     ;
 
 BooleanLiteral
@@ -576,9 +510,9 @@ WS  :	(' '|'\t'|'\n'|'\r') {$channel=HIDDEN;}
 
 // Comments
 SingleLineComment
-    :	SLC ~('\n'|'\r')* '\r'? '\n'? {$channel=HIDDEN;}
+    :	'//' ~('\n'|'\r')* '\r'? '\n'? {$channel=HIDDEN;}
     ;
 
 MultiLineComment
-    :   LMLC ( options {greedy=false;} : . )* RMLC {$channel=HIDDEN;}
+    :   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     ;
