@@ -53,23 +53,36 @@ structDeclaration
     ;
 
 structBody
-    :   '{'! memberDeclaration+ '}'!
+    :   '{'! memberDeclaration+ '}'! 
     ;
 
 memberDeclaration
-    :   typedIdentifier (Assign^ literal )? ';'!
+    :   typedIdentifierNonRef (Assign^ literal )? ';'!
     ;
 
 localVariableDeclaration
-    :   typedIdentifier (Assign^ variableInitializer)?
+    :   typedIdentifierNonRef (Assign^ variableInitializer)?
+	|	typedIdentifierRef Assign^ variableInitializer
     ;
     
 variableInitializer
     :   expression	/* arrayInitializer, MatrixInitializer */
     ;
     
+scalarOrArrayType
+	:	type ('[' expression (',' expression)* ']')?
+	;
+	
+typedIdentifierNonRef
+	:	 scalarOrArrayType Identifier 
+	;
+
+typedIdentifierRef
+	:	scalarOrArrayType Reference Identifier
+	;	
+	
 typedIdentifier
-	:	type ('[' expression (',' expression)* ']')?  Reference? Identifier 
+	:	typedIdentifierNonRef | typedIdentifierRef
 	;
    
 functionDeclaration
