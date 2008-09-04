@@ -8,6 +8,12 @@ options {
     ASTLabelType=CommonTree;
 }
 
+tokens {
+	VARINIT_NONREF;
+	VARINIT_REF;
+	VARDECLARE_NONREF;
+}
+
 compilationUnit
     :	( simpleProgram | multiFunctionalProgram ) EOF
     ;
@@ -61,8 +67,9 @@ memberDeclaration
     ;
 
 localVariableDeclaration
-    :   typedIdentifierNonRef (Assign^ variableInitializer)?
-	|	typedIdentifierRef Assign^ variableInitializer
+    :   typedIdentifierNonRef -> ^(VARDECLARE_NONREF typedIdentifierNonRef)
+    |   typedIdentifierNonRef Assign variableInitializer-> ^(VARINIT_NONREF typedIdentifierNonRef variableInitializer)
+	|	typedIdentifierRef Assign variableInitializer -> ^(VARINIT_REF typedIdentifierRef variableInitializer)
     ;
     
 variableInitializer

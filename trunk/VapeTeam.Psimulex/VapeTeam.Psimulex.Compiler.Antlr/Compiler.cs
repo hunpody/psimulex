@@ -8,7 +8,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
 {
     public class Compiler : VapeTeam.Psimulex.Compiler.ICompiler
     {
-        private List<string> _errorMessages;
+        private List<string> _errorMessages = new List<string>();
         public List<string> ErrorMessages
         {
             get
