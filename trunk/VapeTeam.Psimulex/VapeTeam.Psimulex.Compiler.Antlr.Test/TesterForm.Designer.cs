@@ -47,7 +47,7 @@
             this.sourceCodeTextEditorControl.IsReadOnly = false;
             this.sourceCodeTextEditorControl.Location = new System.Drawing.Point(3, 16);
             this.sourceCodeTextEditorControl.Name = "sourceCodeTextEditorControl";
-            this.sourceCodeTextEditorControl.Size = new System.Drawing.Size(969, 244);
+            this.sourceCodeTextEditorControl.Size = new System.Drawing.Size(901, 244);
             this.sourceCodeTextEditorControl.TabIndex = 0;
             this.sourceCodeTextEditorControl.Text = "(10)";
             // 
@@ -58,7 +58,7 @@
             this.groupBox1.Controls.Add(this.sourceCodeTextEditorControl);
             this.groupBox1.Location = new System.Drawing.Point(3, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(975, 263);
+            this.groupBox1.Size = new System.Drawing.Size(907, 263);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit Source Code";
@@ -69,9 +69,9 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.resultTextBox);
-            this.groupBox2.Location = new System.Drawing.Point(6, 307);
+            this.groupBox2.Location = new System.Drawing.Point(6, 318);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(976, 77);
+            this.groupBox2.Size = new System.Drawing.Size(905, 115);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Result";
@@ -82,15 +82,16 @@
             this.resultTextBox.Location = new System.Drawing.Point(3, 16);
             this.resultTextBox.Multiline = true;
             this.resultTextBox.Name = "resultTextBox";
-            this.resultTextBox.Size = new System.Drawing.Size(970, 58);
+            this.resultTextBox.Size = new System.Drawing.Size(899, 96);
             this.resultTextBox.TabIndex = 0;
             // 
             // closeButton
             // 
+            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(814, 533);
+            this.closeButton.Location = new System.Drawing.Point(807, 594);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(162, 57);
+            this.closeButton.Size = new System.Drawing.Size(103, 33);
             this.closeButton.TabIndex = 3;
             this.closeButton.Text = "Close And Save";
             this.closeButton.UseVisualStyleBackColor = true;
@@ -98,9 +99,10 @@
             // 
             // compileButton
             // 
-            this.compileButton.Location = new System.Drawing.Point(782, 278);
+            this.compileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.compileButton.Location = new System.Drawing.Point(830, 282);
             this.compileButton.Name = "compileButton";
-            this.compileButton.Size = new System.Drawing.Size(194, 39);
+            this.compileButton.Size = new System.Drawing.Size(80, 31);
             this.compileButton.TabIndex = 4;
             this.compileButton.Text = "Compile";
             this.compileButton.UseVisualStyleBackColor = true;
@@ -108,13 +110,12 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.txtErrors);
-            this.groupBox3.Location = new System.Drawing.Point(9, 453);
+            this.groupBox3.Location = new System.Drawing.Point(6, 439);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(976, 77);
+            this.groupBox3.Size = new System.Drawing.Size(905, 149);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Errors";
@@ -125,14 +126,14 @@
             this.txtErrors.Location = new System.Drawing.Point(3, 16);
             this.txtErrors.Multiline = true;
             this.txtErrors.Name = "txtErrors";
-            this.txtErrors.Size = new System.Drawing.Size(970, 58);
+            this.txtErrors.Size = new System.Drawing.Size(899, 130);
             this.txtErrors.TabIndex = 0;
             // 
             // TesterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 601);
+            this.ClientSize = new System.Drawing.Size(914, 632);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.compileButton);
             this.Controls.Add(this.closeButton);

@@ -57,33 +57,28 @@ structBody
     ;
 
 memberDeclaration
-    :   type Identifier arrayMatrxSize? (Assign^ literal )? ';'!
+    :   typedIdentifier (Assign^ literal )? ';'!
     ;
 
 localVariableDeclaration
-    :   type Identifier arrayMatrxSize? (Assign^ variableInitializer)?
+    :   typedIdentifier (Assign^ variableInitializer)?
     ;
     
 variableInitializer
     :   expression	/* arrayInitializer, MatrixInitializer */
     ;
     
-arrayMatrxSize
-	:	( '[' expression ']' | '[' expression ',' expression ']' )
+typedIdentifier
+	:	type ('[' expression (',' expression)* ']')?  Reference? Identifier 
 	;
-    
+   
 functionDeclaration
-    :	type arrayMatrixType? Identifier formalParameters block
+    :	typedIdentifier formalParameters block
     ;
 
 formalParameters
-    :   '('! formalParameterDecls? ')'!
+    :   '('! typedIdentifier (','! typedIdentifier)* ')'!
     ;
-    
-formalParameterDecls
-    :   type arrayMatrixType? Reference? Identifier (','! formalParameterDecls)?
-    ;
-    
     
 ///////////
 // Types //
@@ -96,10 +91,6 @@ type
 
 dataType
 	:	primitiveType | builtInType
-	;
-
-arrayMatrixType
-	:	'[' ']' | '[' ',' ']'
 	;
 
 primitiveType
