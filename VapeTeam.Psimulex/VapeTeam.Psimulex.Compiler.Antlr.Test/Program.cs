@@ -15,7 +15,12 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TesterForm());
+            TesterForm tf = new TesterForm();
+            Application.Run(tf);
+
+            string s = "Teszt\\teszt " + DateTime.Now.ToLongDateString().Replace(':', '-') + " " + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".psi";
+            tf.sourceCodeTextEditorControl.SaveFile(s);
+            tf.sourceCodeTextEditorControl.SaveFile("Teszt\\teszt.psi");
         }
     }
 }

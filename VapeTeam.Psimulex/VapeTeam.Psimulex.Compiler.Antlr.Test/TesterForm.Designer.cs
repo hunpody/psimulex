@@ -36,6 +36,7 @@
             this.compileButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtErrors = new System.Windows.Forms.TextBox();
+            this.btnViewTree = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -129,11 +130,24 @@
             this.txtErrors.Size = new System.Drawing.Size(899, 130);
             this.txtErrors.TabIndex = 0;
             // 
+            // btnViewTree
+            // 
+            this.btnViewTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewTree.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnViewTree.Location = new System.Drawing.Point(9, 594);
+            this.btnViewTree.Name = "btnViewTree";
+            this.btnViewTree.Size = new System.Drawing.Size(103, 33);
+            this.btnViewTree.TabIndex = 5;
+            this.btnViewTree.Text = "View Tree";
+            this.btnViewTree.UseVisualStyleBackColor = true;
+            this.btnViewTree.Click += new System.EventHandler(this.btnViewTree_Click);
+            // 
             // TesterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 632);
+            this.Controls.Add(this.btnViewTree);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.compileButton);
             this.Controls.Add(this.closeButton);
@@ -152,7 +166,6 @@
 
         #endregion
 
-        private ICSharpCode.TextEditor.TextEditorControl sourceCodeTextEditorControl;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button closeButton;
@@ -160,6 +173,8 @@
         private System.Windows.Forms.TextBox resultTextBox;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtErrors;
+        private System.Windows.Forms.Button btnViewTree;
+        public ICSharpCode.TextEditor.TextEditorControl sourceCodeTextEditorControl;
     }
 }
 

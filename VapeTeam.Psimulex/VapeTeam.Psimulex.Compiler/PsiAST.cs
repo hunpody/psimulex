@@ -2,13 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace VapeTeam.Psimulex.Compiler
 {
+    using CommonTree = global::Antlr.Runtime.Tree.CommonTree;
+
     public enum Type
     {
+        X,
+        ASTLabel,
         ASTLabel1,
-        ASTLabel2
+        ASTLabel2,
+        CharLiteral,
+        StringLiteral,
+        IntLiteral,
+        DecimalLiteral,
+        BoolLiteral,
+        NullLiteral,
+        InfinityLiteral
+        
+    }
+
+    public enum ViewMode
+    {
+        All,
+        Values,
+        Hibrid
     }
 
     public class PsiASTException : Exception
@@ -40,16 +60,32 @@ namespace VapeTeam.Psimulex.Compiler
         /// </summary>
         public Type Type { get; set; }
 
+        /// <summary>
+        /// It is true if the Node is Virtual. (Don't have value)
+        /// Can hold additional Informations.
+        /// </summary>
+        public bool IsVirtual { get; set; }
+
+        /// <summary>
+        /// Comment to the dislpa. Example : ( NotImplemented, ... )
+        /// </summary>
+        public string ViewComment { get; set; }
+
         public PsiAST()
         {
+            Value = "";
+            Type = Type.ASTLabel;
             Children = new List<PsiAST>();
         }
+
+        #region MemberFunctions
 
         public PsiAST(PsiAST parent, string val, Type lab)
         {
             Parent = parent;
             Value = val;
             Type = lab;
+            Children = new List<PsiAST>();
         }
 
         public int ChildrenCount
@@ -116,5 +152,75 @@ namespace VapeTeam.Psimulex.Compiler
             }
             return null;
         }
+
+        public override string ToString()
+        {
+            if (Value == null) Value = "NIL";
+            return "(" + Type.ToString() + ") " + Value.ToString();
+        }
+
+        public TreeNode ToTreeNode(ViewMode vm)
+        {
+            return FromPsiASTToTreeNode(this, vm);
+        }
+
+        #endregion
+
+        #region Static Functions
+
+        public static PsiAST FromCommonTreeToPsiAST(CommonTree tree)
+        {
+            PsiAST root = null;
+            if (tree != null)
+            {
+                root = new PsiAST(null, tree.Text, Type.X);
+                // Itt megkell még határozni, hogy miylen típusú legyen. (Type.ASTLabel1)
+                // Egy esetszétválasztás kell.
+                // ...
+
+                if (tree.Children != null)
+                    foreach (CommonTree child in tree.Children)
+                        root.Add(FromCommonTreeToPsiAST(child));
+            }
+            return root;       
+        }
+
+        public static TreeNode FromPsiASTToTreeNode(PsiAST tree, ViewMode vm)
+        {
+            if (tree != null)
+            {
+                // ViewMode
+                string text = "";
+                switch (vm)
+                {
+                    case ViewMode.All:
+                        text = tree.ToString();
+                        break;
+                    case ViewMode.Values:
+                        text = tree.Value;
+                        break;
+                    case ViewMode.Hibrid:
+                        if (tree.Value == "") text = tree.Type.ToString();
+                        else text = tree.Value;
+                        break;
+                    default:
+                        // Can't Be
+                        break;
+                }
+
+                if (tree.Children != null)
+                {
+                    TreeNode[] children = new TreeNode[tree.Children.Count];
+
+                    for (int i = 0; i < tree.Children.Count; i++)
+                        children[i] = FromPsiASTToTreeNode(tree.Children[i],vm);
+                    return new TreeNode(text, children);
+                }
+                return new TreeNode(text);
+            }
+            return new TreeNode("#");
+        }
+
+        #endregion
     }
 }
