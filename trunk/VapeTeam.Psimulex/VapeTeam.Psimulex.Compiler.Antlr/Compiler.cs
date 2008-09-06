@@ -20,7 +20,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
         #region Compiler TempMembers
 
         public string output;
-        public string exception;    
+        public string exception;
+        public global::Antlr.Runtime.Tree.CommonTree SintaxTree;
 
         #endregion
 
@@ -47,7 +48,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 //...
 
                 output = ((global::Antlr.Runtime.Tree.CommonTree)tree.Tree).ToStringTree();
-                global::Antlr.Runtime.Tree.CommonTree t = (global::Antlr.Runtime.Tree.CommonTree)tree.Tree;
+                SintaxTree = (global::Antlr.Runtime.Tree.CommonTree)tree.Tree;
             }
             catch (Exception e)
             {

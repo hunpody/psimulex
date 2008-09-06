@@ -55,19 +55,16 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                 case Keys.F5:
                     compileButton_Click(this, new EventArgs());
                     return true;
-                    break;
                 case Keys.F6:
                     compileButton_Click(this, new EventArgs());
                     return true;
-                    break;
                 case Keys.F7:
                     compileButton_Click(this, new EventArgs());
                     return true;
-                    break;
                 case Keys.F8:
-                    compileButton_Click(this, new EventArgs());
+                    btnViewTree_Click(this, new EventArgs());
                     return true;
-                    break;
+
             }
             return false;
         }
@@ -78,6 +75,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                 return true;
             else
                 return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void btnViewTree_Click(object sender, EventArgs e)
+        {
+            frmTree frmTree = new frmTree();
+            frmTree.PsiAST = PsiAST.FromCommonTreeToPsiAST(compiler.SintaxTree);
+            frmTree.Show();
         }
     }
 }

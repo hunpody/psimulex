@@ -9,29 +9,52 @@ options {
 }
 
 tokens {
-	VARINIT_NONREF;
-	VARINIT_REF;
-	VARDECLARE_NONREF;
+	SIMPLE_PROGRAM;
+	MULTY_FUNCTIONAL_PROGRAM;
+	
+	IMPORT_DECLARATIONS;
+	TYPE_DECLARATIONS;
+	STRUCTDEC;
+	GLOBAL_VARIABLE_DECLARATIONS;
+	MEMBERDEC;
+	FUNCTION_DECLARATIONS;
+	FUNCDEC;
+	FORMAL_PARAMETER;
+	
+	BLOCK;
+	
+	VARINIT;
+	VARINIT;
+	VARDECLARE;	
+
+	TYPE;
+	DATATYPE;
+	FUNCTIONPOINTERTYPE;
+	
+	EXPRESSION;
+	ASSIGNMENT;
+	LAMBDA_EXPRESSION;
+	
+	// Others
+	DIM;
 }
 
 compilationUnit
-    :	( simpleProgram | multiFunctionalProgram ) EOF
+    :	( simpleProgram | multiFunctionalProgram ) EOF!
     ;
 
 simpleProgram
-	:	statement*
+	:	statement* -> ^( SIMPLE_PROGRAM statement* )
 	;
 
 multiFunctionalProgram
-	:	importDeclaration*
-    	typeDeclaration*
-    	globalVariableDeclaration*
-		functionDeclaration*
+	:	importDeclarations typeDeclarations globalVariableDeclarations functionDeclarations
+		-> ^( MULTY_FUNCTIONAL_PROGRAM importDeclarations typeDeclarations globalVariableDeclarations functionDeclarations )
 	;
 
-globalVariableDeclaration
-	:	memberDeclaration
-	;   
+globalVariableDeclarations
+	:	memberDeclaration* -> ^( GLOBAL_VARIABLE_DECLARATIONS memberDeclaration* )
+	;
 
 
 //////////////////
@@ -46,16 +69,16 @@ usingDeclaration
     ;
 */
 
-importDeclaration
-    :   Import StringLiteral ';'!
+importDeclarations
+    :   ( Import StringLiteral ';' )* -> ^( IMPORT_DECLARATIONS StringLiteral* )
     ;
 
-typeDeclaration
-    :   structDeclaration
+typeDeclarations
+    :   structDeclaration* -> ^( TYPE_DECLARATIONS structDeclaration* )
     ;
 
 structDeclaration
-    :   Struct Identifier structBody
+    :   Struct Identifier structBody -> ^( STRUCTDEC Identifier structBody)
     ;
 
 structBody
@@ -63,13 +86,14 @@ structBody
     ;
 
 memberDeclaration
-    :   typedIdentifierNonRef (Assign^ literal )? ';'!
+    :   typedIdentifierNonRef ( Assign literal )? ';' -> ^( MEMBERDEC typedIdentifierNonRef literal? )
     ;
 
 localVariableDeclaration
-    :   typedIdentifierNonRef -> ^(VARDECLARE_NONREF typedIdentifierNonRef)
-    |   typedIdentifierNonRef Assign variableInitializer-> ^(VARINIT_NONREF typedIdentifierNonRef variableInitializer)
-	|	typedIdentifierRef Assign variableInitializer -> ^(VARINIT_REF typedIdentifierRef variableInitializer)
+options {k=3;}
+    :   typedIdentifierNonRef -> ^(VARDECLARE typedIdentifierNonRef)
+    |   typedIdentifierNonRef Assign variableInitializer -> ^(VARINIT typedIdentifierNonRef variableInitializer)
+	|	typedIdentifierRef Assign variableInitializer -> ^(VARINIT typedIdentifierRef variableInitializer)
     ;
     
 variableInitializer
@@ -77,39 +101,50 @@ variableInitializer
     ;
     
 scalarOrArrayType
-	:	type ('[' expression (',' expression)* ']')?
+	:	type ( '[' expression (',' expression)* ']' )? -> ^( TYPE type ^( DIM expression ( expression )* )? )
 	;
 	
 typedIdentifierNonRef
-	:	 scalarOrArrayType Identifier 
+	:	scalarOrArrayType Identifier 
 	;
 
 typedIdentifierRef
-	:	scalarOrArrayType Reference Identifier
+	:	scalarOrArrayType Reference? Identifier
 	;	
 	
 typedIdentifier
 	:	typedIdentifierNonRef | typedIdentifierRef
 	;
    
+functionDeclarations
+    :	functionDeclaration* -> ^( FUNCTION_DECLARATIONS functionDeclaration* )
+    ;
+    
 functionDeclaration
-    :	typedIdentifier formalParameters block
+    :	typedIdentifier formalParameters block -> ^( FUNCDEC typedIdentifier formalParameters block )
     ;
 
 formalParameters
-    :   '('! typedIdentifier (','! typedIdentifier)* ')'!
+    :   '('! formalParameter (','! formalParameter)* ')'!
     ;
+    
+formalParameter
+	:	typedIdentifier -> ^( FORMAL_PARAMETER typedIdentifier )
+	;
     
 ///////////
 // Types //
 ///////////
 
 type
-    :	dataType
-    |	functionPointerType
+    :	dataType | functionPointerType
     ;
 
 dataType
+	:	dataTypeName -> ^( DATATYPE dataTypeName )
+	;
+
+dataTypeName
 	:	primitiveType | builtInType
 	;
 
@@ -143,13 +178,11 @@ builtInType
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 expression
-	:	assignment
-	|	conditionalOrExpression
-	|	lambdaExpression
+	:	assignment | conditionalOrExpression | lambdaExpression
 	;
 	
 assignment
-	:	leftValue assignmentOperator^ expression
+	:	leftValue assignmentOperator expression -> ^( ASSIGNMENT ^( assignmentOperator leftValue expression ) )
 	;
     
 assignmentOperator
@@ -157,7 +190,7 @@ assignmentOperator
 	;
 
 conditionalOrExpression
-    :   conditionalAndExpression ( LogicalOr^ conditionalAndExpression )*
+    :   conditionalAndExpression ( LogicalOr conditionalAndExpression )* -> ^( EXPRESSION conditionalAndExpression ( ^( LogicalOr ) conditionalAndExpression )* )
     ;
 
 conditionalAndExpression
@@ -222,6 +255,7 @@ primaryExpression
     :   parExpression
     |	leftValue
     |   literal
+    |	functionCall
     ;
 
 parExpression
@@ -252,7 +286,11 @@ memberSelect
 	;
 
 memberFunctionCall
-	:	'.'! Identifier arguments
+	:	'.'! functionCall
+	;
+
+functionCall
+	:	Identifier arguments
 	;
 
 indexing
@@ -277,7 +315,7 @@ expressionList
     :	expression (','! expression)*
     ;
     
-literal 
+literal
     :	IntegerLiteral
     |   DecimalLiteral
     |   CharacterLiteral
@@ -294,7 +332,11 @@ literal
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      
 lambdaExpression
-	:	( Identifier | '(' lambdaParameterList ')' ) '=>' lambdaStatement
+	:	parameters '=>' lambdaStatement -> ^( LAMBDA_EXPRESSION parameters lambdaStatement )
+	;
+
+parameters
+	:	( Identifier | '('! lambdaParameterList ')'! )
 	;
 	
 lambdaParameterList
@@ -302,7 +344,7 @@ lambdaParameterList
 	;
  
 lambdaParameter
-	:	dataType? Identifier
+	:	dataType? Identifier^
 	;
 	
 lambdaStatement
@@ -310,7 +352,8 @@ lambdaStatement
 	;
 	
 functionPointerType
-	:	Func '<' dataType '>' 
+	:	Func '<' dataTypeName ( '[' ( ',' )* ']' )? '>' -> ^( FUNCTIONPOINTERTYPE dataTypeName ( '[' ( ',' )* ']' )?  )
+//	:	Func '<' dataTypeName '>' -> ^( FUNCTIONPOINTERTYPE dataTypeName )
 	;
 
 
@@ -323,7 +366,7 @@ functionPointerType
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 block
-    :   '{'! statement* '}'!
+    :   '{' statement* '}'	-> ^( BLOCK statement* )
     ;    
     
 branch
