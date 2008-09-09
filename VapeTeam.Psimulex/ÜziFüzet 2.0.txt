@@ -152,7 +152,6 @@ Felmerült pár dolog :
 1) FV viszsatérési értéke lehet e FunkcióPointer típus ? ( Jelenleg igen )
 2) Rekord mezõje csak meghatározott méretû tömb/mátrix lehet ? ( Jelenleg igen. int[10] i; lehetne int[] i; )
 3) FV visszatérési értéke csak meghatározott méretõ tömb/mátrix lehet ? ( Jelenleg igen )
-4) FV visszatérési értéke lehet funkció pointer ? ( Jelnleg igen )
 
 Megjegzés : Még pár virtuális csúcsot szeretnék beszúrkálni.
 Alapvetõen szeretnék egy egyensúlyt megtartani, a minél kevesebb csúcs 

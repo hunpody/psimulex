@@ -8,7 +8,7 @@ namespace VapeTeam.Psimulex.Compiler
 {
     using CommonTree = global::Antlr.Runtime.Tree.CommonTree;
 
-    public enum Type
+    public enum NodeType
     {
         X,
         ASTLabel,
@@ -58,7 +58,7 @@ namespace VapeTeam.Psimulex.Compiler
         /// <summary>
         /// Type is the Node type.
         /// </summary>
-        public Type Type { get; set; }
+        public NodeType Type { get; set; }
 
         /// <summary>
         /// It is true if the Node is Virtual. (Don't have value)
@@ -74,13 +74,13 @@ namespace VapeTeam.Psimulex.Compiler
         public PsiAST()
         {
             Value = "";
-            Type = Type.ASTLabel;
+            Type = NodeType.ASTLabel;
             Children = new List<PsiAST>();
         }
 
         #region MemberFunctions
 
-        public PsiAST(PsiAST parent, string val, Type lab)
+        public PsiAST(PsiAST parent, string val, NodeType lab)
         {
             Parent = parent;
             Value = val;
@@ -173,10 +173,21 @@ namespace VapeTeam.Psimulex.Compiler
             PsiAST root = null;
             if (tree != null)
             {
-                root = new PsiAST(null, tree.Text, Type.X);
                 // Itt megkell még határozni, hogy miylen típusú legyen. (Type.ASTLabel1)
                 // Egy esetszétválasztás kell.
                 // ...
+
+                switch (tree.Type)
+                {
+                    case Psimulex: 
+                        break;
+                    default:
+                        break;
+                }
+
+
+                root = new PsiAST(null, tree.Text, NodeType.X);
+
 
                 if (tree.Children != null)
                     foreach (CommonTree child in tree.Children)
@@ -222,5 +233,33 @@ namespace VapeTeam.Psimulex.Compiler
         }
 
         #endregion
+    }
+
+    // Visitor Terv //
+
+    public interface Visitor 
+    {
+        void Visit(PsiAST node);
+        void VisitPsiAST(PsiAST tree);
+    }
+
+    // Ez a PsiAST nodokba kell
+    public interface Node
+    {
+        void Accept(Visitor visitor);
+    }
+ 
+    class CompileVisitor : Visitor
+    {
+        public void Visit(PsiAST node)
+        {
+            // Switch NodeType alapján
+            // Hogy illeszkedik ide a a rekurzív bejárás ...
+        }
+     
+        public void VisitPsiAST(PsiAST tree)
+        {
+            // Fa bejárása
+        }
     }
 }
