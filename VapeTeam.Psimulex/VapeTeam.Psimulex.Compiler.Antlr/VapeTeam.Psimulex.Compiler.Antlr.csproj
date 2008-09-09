@@ -46,6 +46,7 @@
     <Compile Include="Generated\PsimulexLexer.cs" />
     <Compile Include="Generated\PsimulexParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PsiAST.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="antlrworks-1.2.jar" />
