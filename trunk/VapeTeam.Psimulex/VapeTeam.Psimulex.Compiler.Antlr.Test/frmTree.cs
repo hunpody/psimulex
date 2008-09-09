@@ -24,6 +24,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             treeView.Nodes.Add(PsiAST.FromPsiASTToTreeNode(PsiAST, ViewMode.Values));
             treeView.SelectedNode = treeView.Nodes[0];
             treeView.ExpandAll();
+            treeView.Nodes[0].EnsureVisible();
 
             // Collapse Import, Typedef, Global Variable Declaration sections
             if (treeView.Nodes[0].GetNodeCount(false) > 2)

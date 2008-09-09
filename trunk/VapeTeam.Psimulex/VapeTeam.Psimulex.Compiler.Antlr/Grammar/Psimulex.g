@@ -19,7 +19,7 @@ tokens {
 	MEMBERDEC;
 	FUNCTION_DECLARATIONS;
 	FUNCDEC;
-	FORMAL_PARAMETER;
+	FORMALPARAM;
 	
 	BLOCK;
 	
@@ -35,8 +35,17 @@ tokens {
 	ASSIGNMENT;
 	LAMBDA_EXPRESSION;
 	
+	MEMBER_FUNCTION_CALL;
+	FUNCTION_CALL;
+	MEMBER_SELECT;
+	INDEXING;
+	
+	LAMBDAPARAM;
+	LAMBDA_STATEMENT;
+	
 	// Others
-	DIM;
+	DIMS;
+	DIMMARKER;
 }
 
 compilationUnit
@@ -101,7 +110,19 @@ variableInitializer
     ;
     
 scalarOrArrayType
-	:	type ( '[' expression (',' expression)* ']' )? -> ^( TYPE type ^( DIM expression ( expression )* )? )
+	:	type arrayType? -> ^( TYPE type arrayType? )
+	;
+
+arrayType
+	:	staticArrayType | dynamicArrayType
+	;
+	
+staticArrayType
+	:	'[' expression (',' expression)* ']' -> ^( DIMS expression ( expression )* )
+	;
+
+dynamicArrayType
+	:	'[' ( ',' )* ']' -> ^( DIMMARKER '[' ( ',' )* ']' )
 	;
 	
 typedIdentifierNonRef
@@ -121,16 +142,14 @@ functionDeclarations
     ;
     
 functionDeclaration
-    :	typedIdentifier formalParameters block -> ^( FUNCDEC typedIdentifier formalParameters block )
+    :	typedIdentifier '(' formalParameters? ')' block -> ^( FUNCDEC typedIdentifier formalParameters? block )
     ;
 
 formalParameters
-    :   '('! formalParameter (','! formalParameter)* ')'!
+    :   typedIdentifier (',' typedIdentifier)* -> ^( FORMALPARAM typedIdentifier typedIdentifier* )
     ;
-    
-formalParameter
-	:	typedIdentifier -> ^( FORMAL_PARAMETER typedIdentifier )
-	;
+
+
     
 ///////////
 // Types //
@@ -139,6 +158,10 @@ formalParameter
 type
     :	dataType | functionPointerType
     ;
+
+functionPointerType
+	:	Func '<' dataType dynamicArrayType? '>' -> ^( FUNCTIONPOINTERTYPE dataType dynamicArrayType? )
+	;
 
 dataType
 	:	dataTypeName -> ^( DATATYPE dataTypeName )
@@ -178,7 +201,11 @@ builtInType
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 expression
-	:	assignment | conditionalOrExpression | lambdaExpression
+	:	assignment | exp | lambdaExpression
+	;
+
+exp
+	:	conditionalOrExpression -> ^( EXPRESSION conditionalOrExpression )
 	;
 	
 assignment
@@ -190,7 +217,7 @@ assignmentOperator
 	;
 
 conditionalOrExpression
-    :   conditionalAndExpression ( LogicalOr conditionalAndExpression )* -> ^( EXPRESSION conditionalAndExpression ( ^( LogicalOr ) conditionalAndExpression )* )
+    :   conditionalAndExpression ( LogicalOr^ conditionalAndExpression )*
     ;
 
 conditionalAndExpression
@@ -198,7 +225,7 @@ conditionalAndExpression
     ;
 
 equalityExpression
-    :   relationalExpression ( ( equalityOp^ ) relationalExpression )*
+    :   relationalExpression ( equalityOp^ relationalExpression )*
     ;
 
 equalityOp
@@ -272,7 +299,7 @@ variable
 	;
 
 selecting
-	:	(Identifier|parExpression) selector+
+	:	( Identifier | parExpression ) selector+
 	;
 
 selector
@@ -282,37 +309,23 @@ selector
     ;
 
 memberSelect
-	:	'.'! Identifier
+	:	'.' Identifier -> ^( MEMBER_SELECT Identifier )
 	;
 
 memberFunctionCall
-	:	'.'! functionCall
+	:	'.' Identifier arguments -> ^( MEMBER_FUNCTION_CALL Identifier arguments )
 	;
 
 functionCall
-	:	Identifier arguments
+	:	Identifier arguments -> ^( FUNCTION_CALL Identifier arguments )
 	;
 
 indexing
-	:	arrayIndexing
-	|	matrixIndexing
-	;
-	
-arrayIndexing
-	:	l='['! expression r=']'!
-	//{System.Windows.Forms.MessageBox.Show($l.text + $expression.tree.ToString() + $r.text);}
-	;
-
-matrixIndexing
-	:	'['! expression ','! expression ']'!
+	:	'[' expression ( ',' expression )* ']' -> ^( INDEXING expression ( expression )* )
 	;
 	
 arguments
-    :   '('! expressionList? ')'!
-    ;
-
-expressionList
-    :	expression (','! expression)*
+    :   '('! ( expression (','! expression)* )? ')'!
     ;
     
 literal
@@ -332,30 +345,28 @@ literal
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      
 lambdaExpression
-	:	parameters '=>' lambdaStatement -> ^( LAMBDA_EXPRESSION parameters lambdaStatement )
+	:	parameters '=>' lambdaStatement -> ^( LAMBDA_EXPRESSION parameters ^( LAMBDA_STATEMENT lambdaStatement ) )
 	;
 
 parameters
-	:	( Identifier | '('! lambdaParameterList ')'! )
+	:	( id | '('! lambdaParameterList ')'! )
+	;
+
+id
+	:	Identifier -> ^( LAMBDAPARAM Identifier )
 	;
 	
 lambdaParameterList
-	:	lambdaParameter ( ',' lambdaParameter )*
+	:	lambdaParameter ( ','! lambdaParameter )*
 	;
  
 lambdaParameter
-	:	dataType? Identifier^
+	:	dataType? Identifier -> ^( LAMBDAPARAM dataType? Identifier )
 	;
 	
 lambdaStatement
 	:	expression | block
 	;
-	
-functionPointerType
-	:	Func '<' dataTypeName ( '[' ( ',' )* ']' )? '>' -> ^( FUNCTIONPOINTERTYPE dataTypeName ( '[' ( ',' )* ']' )?  )
-//	:	Func '<' dataTypeName '>' -> ^( FUNCTIONPOINTERTYPE dataTypeName )
-	;
-
 
 
 
