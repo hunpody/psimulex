@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
+using VapeTeam.Psimulex.Compiler.Antlr.AST;
+
 namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 {
     public partial class TesterForm : Form
@@ -80,7 +82,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void btnViewTree_Click(object sender, EventArgs e)
         {
             frmTree frmTree = new frmTree();
-            frmTree.PsiAST = PsiAST.FromCommonTreeToPsiAST(compiler.SintaxTree);
+            frmTree.PsiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as PsiNode;
             frmTree.Show();
         }
     }

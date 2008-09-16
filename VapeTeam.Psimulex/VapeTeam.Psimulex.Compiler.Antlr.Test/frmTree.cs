@@ -6,12 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using VapeTeam.Psimulex.Compiler.Antlr.AST;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 {
     public partial class frmTree : Form
     {
-        public PsiAST PsiAST { get; set; }
+        public PsiNode PsiNode { get; set; }
 
         public frmTree()
         {
@@ -21,7 +22,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void Init()
         {
             // AST -> TreeView
-            treeView.Nodes.Add(PsiAST.FromPsiASTToTreeNode(PsiAST, ViewMode.Values));
+            treeView.Nodes.Add(TreeConverter.FromPsiNodeToTreeNode(PsiNode, ViewMode.All));
             treeView.SelectedNode = treeView.Nodes[0];
             treeView.ExpandAll();
             treeView.Nodes[0].EnsureVisible();
@@ -43,7 +44,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(PsiAST.FromPsiASTToTreeNode(PsiAST, ViewMode.All));
+            treeView.Nodes.Add(TreeConverter.FromPsiNodeToTreeNode(PsiNode, ViewMode.All));
             treeView.SelectedNode = treeView.Nodes[0];
             treeView.ExpandAll();
         }
@@ -51,7 +52,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void valuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(PsiAST.FromPsiASTToTreeNode(PsiAST, ViewMode.Values));
+            treeView.Nodes.Add(TreeConverter.FromPsiNodeToTreeNode(PsiNode, ViewMode.Values));
             treeView.SelectedNode = treeView.Nodes[0];
             treeView.ExpandAll();
         }
@@ -59,7 +60,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void hibridToolStripMenuItem_Click(object sender, EventArgs e)
         {
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(PsiAST.FromPsiASTToTreeNode(PsiAST, ViewMode.Hibrid));
+            treeView.Nodes.Add(TreeConverter.FromPsiNodeToTreeNode(PsiNode, ViewMode.Hibrid));
             treeView.SelectedNode = treeView.Nodes[0];
             treeView.ExpandAll();
         }
