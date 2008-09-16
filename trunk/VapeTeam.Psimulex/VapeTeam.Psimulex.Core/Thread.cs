@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core.Types;
-
+using VapeTeam.Psimulex.Core.Common;
 namespace VapeTeam.Psimulex.Core
 {
     /// <summary>
@@ -13,7 +13,7 @@ namespace VapeTeam.Psimulex.Core
     {
         /// <summary>
         /// The thread gets into this state when it was just created or explicitly stopped.
-        /// Cannot be scheduled.
+        /// A thread being is this state cannot be scheduled.
         /// </summary>
         Stopped,
 
@@ -26,7 +26,7 @@ namespace VapeTeam.Psimulex.Core
 
         /// <summary>
         /// The thread gets into this state when it has finished running. 
-        /// Cannot be scheduled.
+        /// A thread being is this state cannot be scheduled.
         /// </summary>
         Finished
     }
@@ -56,10 +56,34 @@ namespace VapeTeam.Psimulex.Core
         /// </summary>
         public Process HostProcess { get; set; }
 
+        
+        private Dictionary<string, BaseType> _globalVariables = new Dictionary<string,BaseType>();
+
+        /// <summary>
+        /// The global variables are those values that are initally defined or initialized outside any functions.
+        /// </summary>
+        public Dictionary<string, BaseType> GlobalVariables
+        {
+            get
+            {
+                return _globalVariables;
+            }
+        }
+
         public Thread()
         {
             CallStack = new CallStack();
             RunStack = new RunStack();
+        }
+
+        /// <summary>
+        /// Returns true if the thread has operations left to execute.
+        /// </summary>
+        public bool CanExecuteNext
+        {
+            get {
+                return PC < Program.CommandList.Count;
+            }
         }
 
         #region ISystemItem Members
@@ -115,10 +139,42 @@ namespace VapeTeam.Psimulex.Core
             RunStack.Push(value);
 
             _variableMap.Add(name, RunStack.Count - 1);
+
+            if (CallStack.Count == 0)
+            {
+                _globalVariables.AddOrOverwrite(name, value);
+            }
         }
 
-
         #endregion
+
+        /// <summary>
+        /// Starts the thread. Precondition: the thread shouldn't be finished or running.
+        /// </summary>
+        public void Start()
+        {
+            if (State == ThreadStates.Stopped)
+            {
+                State = ThreadStates.Running;
+            }
+        }
+
+        /// <summary>
+        /// Copies the global variables from the other thread.
+        /// </summary>
+        /// <param name="callingThread"></param>
+        public void CopyGlobalVariablesFromThread(Thread thread)
+        {
+            foreach (var variableKeyValuePair in thread.GlobalVariables)
+            {
+                AddVariable(variableKeyValuePair.Key, variableKeyValuePair.Value);
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Thread ({1}) \"{0}\"", this.Name, this.Id);
+        }
     }
 
     public class ThreadList : List<Thread>

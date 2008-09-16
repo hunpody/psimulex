@@ -66,16 +66,18 @@ namespace VapeTeam.Psimulex.Core
         /// </summary>
         public void Cycle()
         {
+            // If there is a thread to execute
             if (RunningTask != null)
             {
-                if (RunningTask.PC >= RunningTask.Program.CommandList.Count)
+                // Checks if it has ended
+                if (!RunningTask.CanExecuteNext)
                 {
                     RunningTask.State = ThreadStates.Finished;
                 }
 
                 if (RunningTask.State == ThreadStates.Running)
                 {
-                    RunningTask.System.CallingProcess = RunningTask.HostProcess;
+                    RunningTask.System.CallingThread = RunningTask;
                     int oldPC = RunningTask.PC;
                     RunningTask.Program[RunningTask.PC].Do(RunningTask);
                     // If there was no jump
@@ -91,9 +93,19 @@ namespace VapeTeam.Psimulex.Core
             processorInterruptList.Where(i => (cycles - i.LastInterruptTime) >= i.Frequence).ToList().ForEach(
                 irq => irq.Interrupt(cycles));
         }
+
+        /// <summary>
+        /// Returns the cycles made so far.
+        /// </summary>
+        public int Cycles
+        {
+            get
+            {
+                return cycles;
+            }
+        }
         
         #endregion
-
 
         public Thread RunningTask { get; set; }
 

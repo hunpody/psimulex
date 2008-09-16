@@ -30,7 +30,7 @@ namespace VapeTeam.Psimulex.Core
         {
             get
             {
-                return Threads.Exists(thread => thread.State != ThreadStates.Finished);
+                return Threads.Exists(thread => thread.State == ThreadStates.Running);
             }
         }
 
@@ -62,6 +62,17 @@ namespace VapeTeam.Psimulex.Core
             ChildProcesses = new List<Process>();
             Threads = new ThreadList();
             StandardOutput = string.Empty;
+        }
+
+        /// <summary>
+        /// Registers the thread to the process's thread list.
+        /// </summary>
+        /// <param name="thread"></param>
+        public void AddThread(Thread thread)
+        {
+            thread.HostProcess = this;
+            thread.State = ThreadStates.Stopped;
+            Threads.Add(thread);
         }
     }
 

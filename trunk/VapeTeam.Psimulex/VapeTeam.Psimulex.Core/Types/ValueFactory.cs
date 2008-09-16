@@ -35,6 +35,10 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 return new Boolean((bool)value);
             }
+            else if (value.GetType() == typeof(VapeTeam.Psimulex.Core.Thread))
+            {
+                return new VapeTeam.Psimulex.Core.Types.Thread((VapeTeam.Psimulex.Core.Thread)value);
+            }
             else
             {
                 return new String(value.ToString());
@@ -53,6 +57,14 @@ namespace VapeTeam.Psimulex.Core.Types
             if (type == typeof(string))
             {
                 return value.ToString();
+            }
+            else if (type == typeof(int))
+            {
+                return (int) value.ToInt();
+            }
+            else if (type == typeof(long))
+            {
+                return value.ToInt();
             }
             else
                 return null;
