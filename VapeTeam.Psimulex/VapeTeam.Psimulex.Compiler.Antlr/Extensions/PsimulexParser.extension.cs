@@ -17,7 +17,7 @@ public partial class PsimulexParser
 
     public override void ReportError(Antlr.Runtime.RecognitionException e)
     {
-        string msg = string.Format("{0}", e.Message);
+        string msg = string.Format("{0}", e.ToString());
         _errorMessages.Add(msg);
     }
 

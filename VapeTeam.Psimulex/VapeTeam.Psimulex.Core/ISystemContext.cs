@@ -12,7 +12,8 @@ namespace VapeTeam.Psimulex.Core
     /// </summary>
     public interface ISystemContext
     {
-        Process CallingProcess { get; set;  }
+        Thread CallingThread { get; set; }
+        Thread CreateThread(Thread callingThread, int entryPoint);
         BaseType SystemCall(Function function, IEnumerable<BaseType> parameters);
     }
 }

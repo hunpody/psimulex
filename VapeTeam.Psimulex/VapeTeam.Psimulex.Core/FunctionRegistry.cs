@@ -13,11 +13,13 @@ namespace VapeTeam.Psimulex.Core
         {
             if (map.ContainsKey(systemFunction.Name))
             {
-                throw new PsimulexCoreException(
-                    string.Format("System function with name {0} already defined.", systemFunction.Name));
+                //throw new PsimulexCoreException(
+                //    string.Format("System function with name {0} already defined.", systemFunction.Name));
             }
-
-            map.Add(systemFunction.Name, systemFunction);
+            else
+            {
+                map.Add(systemFunction.Name, systemFunction);
+            }
         }
 
         public SystemFunction GetFunction(Function function)

@@ -69,6 +69,11 @@ namespace VapeTeam.Psimulex.Core.Types
             this.value %= value.ToInt();
         }
 
+        public override void Assign(BaseType value)
+        {
+            this.value = value.ToInt();
+        }
+
         #endregion
     }
 }

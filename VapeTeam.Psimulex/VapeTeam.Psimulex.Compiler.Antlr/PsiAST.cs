@@ -179,8 +179,8 @@ namespace VapeTeam.Psimulex.Compiler
 
                 switch (tree.Type)
                 {
-                    case Psimulex: 
-                        break;
+                    //case Psimulex: 
+                    //    break;
                     default:
                         break;
                 }

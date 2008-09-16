@@ -7,7 +7,6 @@ namespace VapeTeam.Psimulex.Core.Types
 {
     public abstract class BaseType
     {
-
         public virtual string GetTypeName()
         {
             return GetType().Name;
@@ -71,6 +70,15 @@ namespace VapeTeam.Psimulex.Core.Types
         public virtual BaseType Dereference()
         {
             return this;
+        }
+
+        #endregion
+
+        #region
+
+        public virtual void Assign(BaseType value)
+        {
+            throw new PsimulexCoreException(string.Format("Cannot assign a {0} value to {1}.", value.GetTypeName(), this.GetTypeName())); 
         }
 
         #endregion
@@ -163,6 +171,5 @@ namespace VapeTeam.Psimulex.Core.Types
         }
 
         #endregion
-
     }
 }

@@ -68,5 +68,36 @@ namespace VapeTeam.Psimulex.Tests
             MachineBuilder machineBuilder = new MachineBuilder();
             Machine machine = machineBuilder.CreateMachine(1, 1024);
         }
+
+        private class TestLibrary : VapeTeam.Psimulex.Core.Libraries.ILibrary
+        {
+            public ISystemContext System { get; set; }
+
+            public int Add(int a, int b)
+            {
+                return a + b;
+            }
+        }
+
+        [TestMethod]
+        public void LibraryCall()
+        {
+
+            var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(1, 16);
+
+            machine.System.InstallLibrary(new TestLibrary());
+
+            var program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push(1),
+                new Push(2),
+                new Call("add"),
+                new Call("print"));
+
+            var process = machine.System.Load(program);
+
+            machine.System.Run(process);
+
+            Assert.AreEqual("3", process.StandardOutput);
+        }
     }
 }
