@@ -54,6 +54,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         {
             switch (keyData)
             {
+                case Keys.F1:
+                    compileButton_Click(this, new EventArgs());
+                    btnViewProgramString_Click(this, new EventArgs());
+                    return true;
                 case Keys.F5:
                     compileButton_Click(this, new EventArgs());
                     return true;
@@ -82,8 +86,19 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void btnViewTree_Click(object sender, EventArgs e)
         {
             frmTree frmTree = new frmTree();
-            frmTree.PsiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as PsiNode;
+            frmTree.PsiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
             frmTree.Show();
+        }
+
+        private void btnViewProgramString_Click(object sender, EventArgs e)
+        {
+            frmProgramString frmProgramString = new frmProgramString();
+
+            PsiProgramStringBuilderVisitor v = new PsiProgramStringBuilderVisitor();
+            v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);
+
+            frmProgramString.ProgramString = v.Program.ToString();
+            frmProgramString.Show();
         }
     }
 }

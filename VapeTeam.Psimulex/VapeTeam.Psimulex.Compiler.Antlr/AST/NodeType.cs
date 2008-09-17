@@ -14,6 +14,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
         X,
 
         /*High Level Node Types*/
+        CompilationUnit,
         SimpleProgram,
         MultiFunctionalProgram,
         ImportDeclarations,

@@ -37,6 +37,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtErrors = new System.Windows.Forms.TextBox();
             this.btnViewTree = new System.Windows.Forms.Button();
+            this.btnViewProgramString = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -142,11 +143,24 @@
             this.btnViewTree.UseVisualStyleBackColor = true;
             this.btnViewTree.Click += new System.EventHandler(this.btnViewTree_Click);
             // 
+            // btnViewProgramString
+            // 
+            this.btnViewProgramString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewProgramString.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnViewProgramString.Location = new System.Drawing.Point(684, 594);
+            this.btnViewProgramString.Name = "btnViewProgramString";
+            this.btnViewProgramString.Size = new System.Drawing.Size(117, 33);
+            this.btnViewProgramString.TabIndex = 6;
+            this.btnViewProgramString.Text = "View Program String";
+            this.btnViewProgramString.UseVisualStyleBackColor = true;
+            this.btnViewProgramString.Click += new System.EventHandler(this.btnViewProgramString_Click);
+            // 
             // TesterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 632);
+            this.Controls.Add(this.btnViewProgramString);
             this.Controls.Add(this.btnViewTree);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.compileButton);
@@ -175,6 +189,7 @@
         private System.Windows.Forms.TextBox txtErrors;
         private System.Windows.Forms.Button btnViewTree;
         public ICSharpCode.TextEditor.TextEditorControl sourceCodeTextEditorControl;
+        private System.Windows.Forms.Button btnViewProgramString;
     }
 }
 

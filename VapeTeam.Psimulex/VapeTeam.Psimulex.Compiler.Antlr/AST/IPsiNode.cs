@@ -20,5 +20,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
         void Accept(IPsiVisitor v);
         IPsiNode Clone();
         void Add(IPsiNode child);
+
+
+        void Init();
+        void Init(IPsiNode parent, string value, NodeType type);
+        void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment);
     }
 }

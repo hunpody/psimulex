@@ -36,26 +36,17 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
 
         public string ViewComment { get; set; }
 
-        public PsiNode()
-        {            
-            Value = "";
-            Type = NodeType.X;
-            IsVirtual = false;
-            ViewComment = "";
-            Children = new List<IPsiNode>();
-        }
-
-        public PsiNode(IPsiNode parent, string value, NodeType type)
+        public void Init()
         {
-            Parent = parent;
-            Value = value;
-            Type = type;
-            IsVirtual = false;
-            ViewComment = "";
-            Children = new List<IPsiNode>();
+            Init(null, "", NodeType.X, false, "");
         }
 
-        public PsiNode(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment)
+        public void Init(IPsiNode parent, string value, NodeType type)
+        {
+            Init(parent, value, type, false, "");
+        }
+
+        public void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment)
         {
             Parent = parent;
             Value = value;
@@ -67,12 +58,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
 
         public virtual void Accept(IPsiVisitor v)
         {
-            v.VisitPsiNode(this);
+            v.Visit(this);
         }
 
         public IPsiNode Clone()
         {
-            PsiNode c = new PsiNode(Parent, Value, Type, IsVirtual, ViewComment);
+            PsiNode c = new PsiNode();
+            c.Init(Parent, Value, Type, IsVirtual, ViewComment);
             if (Children.Count != 0)
                 foreach (IPsiNode t in Children)
                     c.Add(t.Clone());
@@ -97,10 +89,44 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
 
     #region Special Tree Nodes
 
+    /*Undefined Tree Node*/
+    public class XNode : PsiNode
+    {
+        public override void Accept(IPsiVisitor v)
+        {
+            v.Visit(this);
+        }
+    }
+
     /*High Level Tree Nodes*/
-    public class SimpleProgramNode : PsiNode { public override void Accept(IPsiVisitor v) { v.VisitSimpleProgramNode(this); } }
-    public class MultiFuncionalProgramNode : PsiNode { public override void Accept(IPsiVisitor v) { v.VisitMultiFunctionalProgramNode(this); } }
-    public class ImportDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.VisitImportDeclarationNode(this); } }
+    public class CompilationUnitNode : PsiNode
+    {
+        public override void Accept(IPsiVisitor v)
+        {
+            v.Visit(this);
+        }
+    }
+    public class SimpleProgramNode : PsiNode
+    {
+        public override void Accept(IPsiVisitor v)
+        {
+            v.Visit(this);
+        }
+    }
+    public class MultiFuncionalProgramNode : PsiNode
+    {
+        public override void Accept(IPsiVisitor v)
+        {
+            v.Visit(this);
+        }
+    }
+    public class ImportDeclarationNode : PsiNode
+    {
+        public override void Accept(IPsiVisitor v)
+        {
+            v.Visit(this);
+        }
+    }
     // ...
 
 
