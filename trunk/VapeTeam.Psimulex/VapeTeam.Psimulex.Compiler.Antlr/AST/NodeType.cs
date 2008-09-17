@@ -10,7 +10,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
     /// </summary>
     public enum NodeType
     {
-        /*Undef*/
+        /*Undefined*/
         X,
 
         /*High Level Node Types*/

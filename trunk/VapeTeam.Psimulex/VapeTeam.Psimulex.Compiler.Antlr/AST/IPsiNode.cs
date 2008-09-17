@@ -15,15 +15,16 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
         bool IsVirtual { get; set; }
 
         string ViewComment { get; set; }
-        
+
+        void Init();
+        void Init(IPsiNode parent, string value, NodeType type);
+        void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment);
 
         void Accept(IPsiVisitor v);
         IPsiNode Clone();
         void Add(IPsiNode child);
 
-
-        void Init();
-        void Init(IPsiNode parent, string value, NodeType type);
-        void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment);
+        IPsiNode First { get; set; }
+        IPsiNode Last { get; set; }
     }
 }

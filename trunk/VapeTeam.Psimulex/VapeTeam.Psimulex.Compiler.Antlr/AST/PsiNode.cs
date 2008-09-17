@@ -21,12 +21,15 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
         }
     }
 
+    #region Middle Class Type
 
     /// <summary>
-    /// Common AST Tree Node
+    /// Common PsiAST Tree Node
     /// </summary>
     public class PsiNode : IPsiNode
     {
+        #region IPsiNode Members
+
         public IPsiNode Parent { get; set; }
         public List<IPsiNode> Children { get; set; }
 
@@ -80,53 +83,72 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
             }
         }
 
+        public IPsiNode First
+        {
+            get
+            {
+                if (ChildrenCount > 0)
+                    return Children[0];
+                return null;
+            }
+
+            set
+            {
+                if (ChildrenCount > 0)
+                    Children[0] = value;
+                else
+                    Add(value);
+            }
+        }
+
+        public IPsiNode Last
+        {
+            get
+            {
+                if (Children.Count > 0)
+                    return Children[Children.Count - 1];
+                return null;
+            }
+
+            set
+            {
+                if (ChildrenCount > 0)
+                    Children[Children.Count - 1] = value;
+                else
+                    Add(value);
+            }
+        }
+
+        #endregion
+
+        #region PsiNode Members
+
+        public int ChildrenCount
+        {
+            get { return Children.Count; }
+        }        
+
         public override string ToString()
         {
-            if (Value == null) Value = "NIL";
-            return "(" + Type.ToString() + ") " + Value.ToString();
+            if (Value == null || Value == "") throw new PsiNodeException("Value nut initialised!");
+            return "( " + Type.ToString() + " ) " + Value.ToString();
         }
+
+        #endregion
     }
 
-    #region Special Tree Nodes
+    #endregion
+
+    #region Special Tree Node Types
 
     /*Undefined Tree Node*/
-    public class XNode : PsiNode
-    {
-        public override void Accept(IPsiVisitor v)
-        {
-            v.Visit(this);
-        }
-    }
+    public class XNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
     /*High Level Tree Nodes*/
-    public class CompilationUnitNode : PsiNode
-    {
-        public override void Accept(IPsiVisitor v)
-        {
-            v.Visit(this);
-        }
-    }
-    public class SimpleProgramNode : PsiNode
-    {
-        public override void Accept(IPsiVisitor v)
-        {
-            v.Visit(this);
-        }
-    }
-    public class MultiFuncionalProgramNode : PsiNode
-    {
-        public override void Accept(IPsiVisitor v)
-        {
-            v.Visit(this);
-        }
-    }
-    public class ImportDeclarationNode : PsiNode
-    {
-        public override void Accept(IPsiVisitor v)
-        {
-            v.Visit(this);
-        }
-    }
+    public class CompilationUnitNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class SimpleProgramNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class MultiFuncionalProgramNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class ImportDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     // ...
 
 

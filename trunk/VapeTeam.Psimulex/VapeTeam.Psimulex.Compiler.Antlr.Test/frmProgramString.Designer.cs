@@ -38,6 +38,7 @@
             this.txtProgramString.Location = new System.Drawing.Point(0, 0);
             this.txtProgramString.Multiline = true;
             this.txtProgramString.Name = "txtProgramString";
+            this.txtProgramString.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtProgramString.Size = new System.Drawing.Size(1106, 513);
             this.txtProgramString.TabIndex = 0;
             // 
