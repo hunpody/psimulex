@@ -188,7 +188,6 @@ namespace VapeTeam.Psimulex.Compiler
 
                 root = new PsiAST(null, tree.Text, NodeType.X);
 
-
                 if (tree.Children != null)
                     foreach (CommonTree child in tree.Children)
                         root.Add(FromCommonTreeToPsiAST(child));
