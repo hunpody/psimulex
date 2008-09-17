@@ -54,6 +54,7 @@
     <Compile Include="AST\PsiNode.cs" />
     <Compile Include="AST\PsiNodeFactory.cs" />
     <Compile Include="AST\PsiPrinterVisitor.cs" />
+    <Compile Include="AST\PsiProgramStringBuilderVisitor.cs" />
     <Compile Include="AST\TreeConverter.cs" />
     <Compile Include="Compiler.cs" />
     <Compile Include="Extensions\PsimulexParser.extension.cs" />

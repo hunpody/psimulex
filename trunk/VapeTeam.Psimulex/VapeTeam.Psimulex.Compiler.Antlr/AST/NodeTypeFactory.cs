@@ -25,6 +25,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
             switch (t)
             {
                 /*High Level Node Types*/
+                case PsimulexLexer.COMPILATION_UNIT: type = NodeType.CompilationUnit; break;
                 case PsimulexLexer.SIMPLE_PROGRAM: type = NodeType.SimpleProgram;  break;
                 case PsimulexLexer.MULTY_FUNCTIONAL_PROGRAM: type = NodeType.MultiFunctionalProgram; break;
                 case PsimulexLexer.IMPORT_DECLARATIONS: type = NodeType.ImportDeclarations; break;

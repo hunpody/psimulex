@@ -7,10 +7,12 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
 {
     public interface IPsiVisitor
     {
-        void VisitPsiNode(PsiNode node);
+        void Visit(PsiNode node);
+        void Visit(XNode node);
 
-        void VisitSimpleProgramNode(SimpleProgramNode node);
-        void VisitMultiFunctionalProgramNode(MultiFuncionalProgramNode node);
-        void VisitImportDeclarationNode(ImportDeclarationNode node);
+        void Visit(CompilationUnitNode node);
+        void Visit(SimpleProgramNode node);
+        void Visit(MultiFuncionalProgramNode node);
+        void Visit(ImportDeclarationNode node);
     }
 }

@@ -14,16 +14,29 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
             // Fontos, hogy az IsVirtualt itt el kell dönteni !
             // Itt lehet még view Commenteket adni ... Vagy törölni ezt a property-t.
 
-            IPsiNode node = new PsiNode(parent, value, type, false, "");
+            // If Not Implemented Requied Switch Case
+            IPsiNode node = new XNode();
 
             switch (type)
             {
+                /*Undefined*/
+                case NodeType.X:
+                    node = new XNode();
+                    break;
+
+                case NodeType.CompilationUnit:
+                    node = new CompilationUnitNode();
+                    break;
                 case NodeType.SimpleProgram:
+                    node = new SimpleProgramNode();
                     break;
                 case NodeType.MultiFunctionalProgram:
+                    node = new MultiFuncionalProgramNode();
                     break;
                 case NodeType.ImportDeclarations:
+                    node = new ImportDeclarationNode();
                     break;
+                
                 case NodeType.TypeDeclarations:
                     break;
                 case NodeType.StructDeclaration:
@@ -109,12 +122,14 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
                 case NodeType.Reference:
                     break;
 
-                case NodeType.X:
                 default:
-                    node = new PsiNode(parent, value, type, false, "");
+                    // If There Is Not The Requied Switch Case
+                    node = new XNode();
                     break;
             }
 
+            // IsVirtual Szétválasztás kell még
+            node.Init(parent, value, type, false, "");
             return node;
         }
 
