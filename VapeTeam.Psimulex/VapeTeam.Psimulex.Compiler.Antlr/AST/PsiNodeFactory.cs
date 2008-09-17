@@ -5,37 +5,39 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.AST
 {
+    /// <summary>
+    /// PsiNode creator factory.
+    /// </summary>
     public class PsiNodeFactory : IPsiNodeFactory
     {
+        /// <summary>
+        /// Create a tree node from some arguments.
+        /// The function determines that, the node IS or IS NOT a Virtual node
+        /// </summary>
+        /// <param name="type">The type of the node</param>
+        /// <param name="value">The value of the node</param>
+        /// <param name="viewComment">The viewcomment is an user comment</param>
+        /// <param name="parent">The parent of the node</param>
+        /// <param name="children">The children of the node</param>
+        /// <returns>The new node</returns>
         public IPsiNode CreateNode(NodeType type, string value,  string viewComment, IPsiNode parent, List<IPsiNode> children)
         {
-            // Itt kell egy jó nagy switch
-            // ...
-            // Fontos, hogy az IsVirtualt itt el kell dönteni !
-            // Itt lehet még view Commenteket adni ... Vagy törölni ezt a property-t.
+            // Default nod is Non Virtual Node
+            bool v = false;
 
-            // If Not Implemented Requied Switch Case
+            // If Not Implemented the Requied Switch Case (XNode)
             IPsiNode node = new XNode();
 
             switch (type)
             {
                 /*Undefined*/
-                case NodeType.X:
-                    node = new XNode();
-                    break;
+                case NodeType.X: node = new XNode(); break;
 
-                case NodeType.CompilationUnit:
-                    node = new CompilationUnitNode();
-                    break;
-                case NodeType.SimpleProgram:
-                    node = new SimpleProgramNode();
-                    break;
-                case NodeType.MultiFunctionalProgram:
-                    node = new MultiFuncionalProgramNode();
-                    break;
-                case NodeType.ImportDeclarations:
-                    node = new ImportDeclarationNode();
-                    break;
+                /*High Level Node Types*/
+                case NodeType.CompilationUnit: node = new CompilationUnitNode(); break;
+                case NodeType.SimpleProgram: node = new SimpleProgramNode(); break;
+                case NodeType.MultiFunctionalProgram: node = new MultiFuncionalProgramNode(); break;
+                case NodeType.ImportDeclarations: node = new ImportDeclarationNode(); break;
                 
                 case NodeType.TypeDeclarations:
                     break;
@@ -123,13 +125,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.AST
                     break;
 
                 default:
-                    // If There Is Not The Requied Switch Case
+                    // If There Is Not The Requied Switch Case (XNode)
                     node = new XNode();
                     break;
             }
-
-            // IsVirtual Szétválasztás kell még
-            node.Init(parent, value, type, false, "");
+            
+            // Init Datas in treeNode and Return
+            node.Init(parent, value, type, v, viewComment);
             return node;
         }
 

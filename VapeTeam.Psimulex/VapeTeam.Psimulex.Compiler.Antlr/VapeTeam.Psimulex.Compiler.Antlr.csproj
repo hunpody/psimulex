@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="antlrworks-1.2.jar" />
+    <Content Include="AST\Rem.txt" />
     <Content Include="Runtime\Antlr3.Runtime.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -6,7 +6,7 @@ using System.Text;
 namespace VapeTeam.Psimulex.Compiler.Antlr.AST
 {
     /// <summary>
-    /// PostOrder TreeVisiting and ToString() converting.
+    /// TreeVisiting and ToString() converting.
     /// </summary>
     public class PsiProgramStringBuilderVisitor : IPsiVisitor
     {
