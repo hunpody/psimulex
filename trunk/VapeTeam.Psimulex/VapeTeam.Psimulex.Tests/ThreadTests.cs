@@ -119,7 +119,7 @@ namespace VapeTeam.Psimulex.Tests
 
             var process3 = Helpers.SystemHelper.CreateMachineAndRunProgram(4, program);
             int maximumCyclesOf4Processor = process3.Machine.Processors.Max(p => p.Cycles);
-            Assert.IsTrue(process2.Machine.Processors[0].Cycles > 3.0 * maximumCyclesOf4Processor);
+            Assert.IsTrue(process2.Machine.Processors[0].Cycles > 1.80 * maximumCyclesOf4Processor);
         }
 
         [TestMethod]

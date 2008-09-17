@@ -62,7 +62,7 @@ namespace VapeTeam.Psimulex.Core.Schedulers
 
         private Thread FindNext()
         {
-            return scheduleQueue.FirstOrDefault(t => t.State == ThreadStates.Running);
+            return scheduleQueue.FirstOrDefault(t => !processors.Exists(p => p.RunningTask == t) && t.State == ThreadStates.Running);
             //Thread thread = null;
             //var threadArray = scheduleQueue.ToArray().Where(t => t.State == ThreadStates.Running);
             //for (int i=0; i<threadArray
