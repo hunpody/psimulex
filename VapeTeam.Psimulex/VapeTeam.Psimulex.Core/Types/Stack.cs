@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    class Array : BaseType
+    class Stack : BaseType
     {
     }
 }

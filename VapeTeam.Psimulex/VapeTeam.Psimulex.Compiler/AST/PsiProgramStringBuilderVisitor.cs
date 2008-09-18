@@ -5,6 +5,7 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Compiler.AST
 {
+    /*
     /// <summary>
     /// TreeVisiting and ToString() converting.
     /// </summary>
@@ -44,7 +45,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         #region IPsiVisitor Members
 
-        /*Undefined Tree Node Visits*/
+        //Undefined Tree Node Visits
         public void Visit(PsiNode node)
         {
             foreach (IPsiNode child in node.Children)
@@ -59,7 +60,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             Add(node,"XNode");
         }
 
-        /*High Level Tree Nodes Visits*/
+        //High Level Tree Nodes Visits
         public void Visit(CompilationUnitNode node)
         {
             Add("----", node, "CompilationUnitNode");
@@ -90,4 +91,5 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         #endregion
     }
+    */
 }

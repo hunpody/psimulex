@@ -11,27 +11,38 @@ namespace VapeTeam.Psimulex.Core.Types
     public enum TypeEnum
     {
         Undefined = 0,
-        Void,
-        Boolean,
-        Char,
-        Integer,
-        Float,
+
+        /*Primitive Types*/
+        Character,
         String,
-        Iterator,
-        Graph,
+        Integer,
+        Decimal,
+        Boolean, 
+     
+        Void,
+        
+        /*Built In Types*/
         Tree,
         BinaryTree,
+        Set,
+        List,
+        Stack,
+        Queue,
+    	PriorityQueue,
+        Graph,
         Node,
         Edge,
-        PriorityQueue,
-        Queue,
-        Stack,
-        Array,
-        Matrix,
-        List,
-        Set,
+        Float,
+        Iterator,
         Timer,
         Pointer,
-        Null
+        Null,
+
+        /*Other*/               
+        Array,
+        Matrix,
+        Thread,
+        FunctionPointerType,
+        UserDefinedType,
     }
 }

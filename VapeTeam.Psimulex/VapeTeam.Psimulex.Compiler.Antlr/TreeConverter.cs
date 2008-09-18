@@ -79,7 +79,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                         text = tree.Value;
                         break;
                     case ViewMode.Hibrid:
-                        if (tree.Value == "") text = tree.Type.ToString();
+                        if (tree.IsVirtual) text = "(" + tree.Type.ToString() + ")";
                         else text = tree.Value;
                         break;
                     default:

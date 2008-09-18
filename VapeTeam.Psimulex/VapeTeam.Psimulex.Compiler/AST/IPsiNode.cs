@@ -26,8 +26,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         IPsiNode Clone();
         void Add(IPsiNode child);
 
-        IPsiNode First { get; set; }
-        IPsiNode Last { get; set; }
+        IPsiNode Left { get; set; }
+        IPsiNode Right { get; set; }
     }
 
     /// <summary>

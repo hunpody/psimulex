@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DA262F79-572F-4CA6-BDF5-39C201BFE72B}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -50,6 +50,7 @@
     <Compile Include="NodeTypeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TreeConverter.cs" />
+    <Compile Include="TypeEnumFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="antlrworks-1.2.jar" />
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\VapeTeam.Psimulex.Compiler\VapeTeam.Psimulex.Compiler.csproj">
       <Project>{80B9390C-AD41-4F70-922A-823AC740F8C4}</Project>
       <Name>VapeTeam.Psimulex.Compiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VapeTeam.Psimulex.Core\VapeTeam.Psimulex.Core.csproj">
+      <Project>{64AE91ED-9627-44F2-9CD5-FC04DA7310EC}</Project>
+      <Name>VapeTeam.Psimulex.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

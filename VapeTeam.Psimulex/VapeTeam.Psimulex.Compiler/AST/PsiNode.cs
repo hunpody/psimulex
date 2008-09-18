@@ -21,7 +21,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
     }
 
-    #region Middle Class Type
+    #region Middle Tree Node Type
 
     /// <summary>
     /// Common PsiAST Tree Node
@@ -86,7 +86,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public IPsiNode First
+        public IPsiNode Left
         {
             get
             {
@@ -104,7 +104,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public IPsiNode Last
+        public IPsiNode Right
         {
             get
             {
@@ -133,7 +133,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public override string ToString()
         {
-            if (Value == null || Value == "") throw new PsiNodeException("Value nut initialised!");
+            if (Value == null || Value == "") throw new PsiNodeException("Value not initialised!");
             return "( " + Type.ToString() + " ) " + Value.ToString();
         }
 
