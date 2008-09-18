@@ -16,9 +16,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         string ViewComment { get; set; }
 
+        NodeValueInfo NodeValueInfo { get; set; }
+
         void Init();
-        void Init(IPsiNode parent, string value, NodeType type);
-        void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment);
+        void Init(IPsiNode parent, string value, NodeType type, NodeValueInfo nodeValueInfo);
+        void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment, NodeValueInfo nodeValueInfo);
 
         void Accept(IPsiVisitor v);
         IPsiNode Clone();
@@ -26,5 +28,38 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         IPsiNode First { get; set; }
         IPsiNode Last { get; set; }
+    }
+
+    /// <summary>
+    /// Informations about the token text localisation in the source code.
+    /// </summary>
+    public class NodeValueInfo
+    {
+        public NodeValueInfo()
+        {
+            CharPositionInLine = -1;
+            Line = -1;
+            StartIndex = -1;
+            StopIndex = -1;
+            TokenStartIndex = -1;
+            TokenStopIndex = -1;
+        }
+
+        public NodeValueInfo(int charPositionInLine, int line, int startIndex, int stopIndex, int tokenStartIndex, int tokenStopIndex)
+        {
+            CharPositionInLine = charPositionInLine;
+            Line = line;
+            StartIndex = startIndex;
+            StopIndex = stopIndex;
+            TokenStartIndex = tokenStartIndex;
+            TokenStopIndex = tokenStopIndex;
+        }
+
+        public int CharPositionInLine { get; set; }
+        public int Line { get; set; }
+        public int StartIndex { get; set; }
+        public int StopIndex { get; set; }
+        public int TokenStartIndex { get; set; }
+        public int TokenStopIndex { get; set; }
     }
 }

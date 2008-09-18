@@ -3,10 +3,14 @@
 
 Trees:
 ------
-PsiNode.cs -> ValamiNode : IPsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
 NodeType -> Valami,
 NodeTypeFactory -> case PsimulexLexer.VALAMI: type = NodeType.Valami; break;
-PsiNodeFactory
+PsiNode.cs -> ValamiNode : IPsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+PsiNodeFactory -> case NodeType.Valami: node = new ValamiNode(); (v = true;)? break;
 
 Visitors:
 ---------
+
+IPsiVisitor -> void Visit(ValamiNode node);
+PsiBuilderVisitor -> public void Visit(ValamiNode node){}

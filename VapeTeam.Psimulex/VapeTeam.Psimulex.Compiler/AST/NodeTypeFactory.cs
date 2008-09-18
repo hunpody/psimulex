@@ -79,9 +79,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 /*Expression*/
                 case PsimulexLexer.EXPRESSION: type = NodeType.Expression; break;
                 case PsimulexLexer.ASSIGNMENT: type = NodeType.Assignment; break;
+                /*
                 case PsimulexLexer.LAMBDA_EXPRESSION: type = NodeType.LambdaExpression; break;
                 case PsimulexLexer.LAMBDAPARAM: type = NodeType.LambdaParameter; break;
                 case PsimulexLexer.LAMBDA_STATEMENT: type = NodeType.LambdaStatement; break;
+                */
 
                 case PsimulexLexer.MEMBER_SELECT: type = NodeType.MemberSelect; break;
                 case PsimulexLexer.MEMBER_FUNCTION_CALL: type = NodeType.FunctionCall; break;
@@ -106,7 +108,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case PsimulexLexer.PQueue: type = NodeType.DataTypeName; break;
 
                 case PsimulexLexer.DATATYPE: type = NodeType.DataType; break;
+                /*
                 case PsimulexLexer.FUNCTIONPOINTERTYPE: type = NodeType.FunctionPointerType; break;
+                */
                 case PsimulexLexer.TYPE: type = NodeType.Type; break;
                 case PsimulexLexer.Reference: type = NodeType.Reference; break;
 

@@ -43,9 +43,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Expressions*/
         Expression,
         Assignment,
+        /*
         LambdaExpression,
         LambdaParameter,
         LambdaStatement,
+        */
 
         MemberSelect,
         MemberFunctionCall,        

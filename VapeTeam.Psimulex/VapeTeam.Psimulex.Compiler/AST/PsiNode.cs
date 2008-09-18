@@ -39,23 +39,26 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public string ViewComment { get; set; }
 
+        public NodeValueInfo NodeValueInfo { get; set; }
+
         public void Init()
         {
-            Init(null, "", NodeType.X, false, "");
+            Init(null, "", NodeType.X, false, "", new NodeValueInfo());
         }
 
-        public void Init(IPsiNode parent, string value, NodeType type)
+        public void Init(IPsiNode parent, string value, NodeType type, NodeValueInfo nodeValueInfo)
         {
-            Init(parent, value, type, false, "");
+            Init(parent, value, type, false, "", nodeValueInfo);
         }
 
-        public void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment)
+        public void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment, NodeValueInfo nodeValueInfo)
         {
             Parent = parent;
             Value = value;
             Type = type;
             IsVirtual = isVirtual;
             ViewComment = viewComment;
+            NodeValueInfo = nodeValueInfo;
             Children = new List<IPsiNode>();
         }
 
@@ -67,7 +70,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public IPsiNode Clone()
         {
             PsiNode c = new PsiNode();
-            c.Init(Parent, Value, Type, IsVirtual, ViewComment);
+            c.Init(Parent, Value, Type, IsVirtual, ViewComment, NodeValueInfo);
             if (Children.Count != 0)
                 foreach (IPsiNode t in Children)
                     c.Add(t.Clone());
@@ -149,8 +152,64 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class SimpleProgramNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class MultiFuncionalProgramNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class ImportDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    // ...
+    public class TypeDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class StructDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class MemberDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class GlobalVariableDeclarationsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class FunctionDeclarationsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class FunctionDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class FormalParameterNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class BlockNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
+    public class VariableInitialisationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class VariableDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+            
+    /*Operators*/
+    public class AssignmentOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class LogicalOrOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class LogicalAndOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class EqualityOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class RelationOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class AdditiveOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class MultiplicativeOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class UnaryOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+ 
+    /*Expressions*/
+    public class ExpressionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class AssignmentNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    /*
+    public class LambdaExpressionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class LambdaParameterNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class LambdaStatementNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    */
+
+    public class MemberSelectNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class MemberFunctionCallNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class FunctionCallNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class IndexingNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class DimensionsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class DimensionMarkerNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
+    /*ID*/
+    public class IdentifierNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
+    /*Literals*/
+    public class CharLiteralNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class StringLiteralNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class IntLiteralNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class DecimalLiteralNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class BoolLiteralNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class NullLiteralNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class InfinityLiteralNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
+    /*Types*/
+    public class DataTypeNameNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class DataTypeNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    /*
+    public class FunctionPointerTypeNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    */
+    public class TypeNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class ReferenceNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
     #endregion
 }

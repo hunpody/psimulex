@@ -7,8 +7,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 {
     public interface IPsiNodeFactory
     {
-        IPsiNode CreateNode(NodeType type, string value, string viewComment, IPsiNode parent, List<IPsiNode> children);
+        IPsiNode CreateNode(NodeType type, string value, NodeValueInfo nodeValueInfo, string viewComment, IPsiNode parent, List<IPsiNode> children);
         IPsiNode CreateNode(NodeType type);
-        IPsiNode CreateNode(NodeType type, string value);
+        IPsiNode CreateNode(NodeType type, string value, NodeValueInfo nodeValueInfo);
     }
 }
