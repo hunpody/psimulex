@@ -94,11 +94,20 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         {
             frmProgramString frmProgramString = new frmProgramString();
 
-            PsiProgramStringBuilderVisitor v = new PsiProgramStringBuilderVisitor();
+            //PsiProgramStringBuilderVisitor v = new PsiProgramStringBuilderVisitor();
+            //v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);
+
+            PsiBuilderVisitor v = new PsiBuilderVisitor();
             v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);
 
-            frmProgramString.ProgramString = v.Program.ToString();
+            frmProgramString.ProgramString = "Program Microlex Code:\n\r\n\r" + v.Program.ToString() + "Compiler Messages:\n\r\n\r" + v.CompilerMessages;
             frmProgramString.Show();
+        }
+
+        private void TesterForm_Load(object sender, EventArgs e)
+        {
+            compileButton_Click(this, new EventArgs());
+            btnViewProgramString_Click(this, new EventArgs());
         }
     }
 }

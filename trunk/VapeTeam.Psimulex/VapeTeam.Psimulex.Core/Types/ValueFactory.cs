@@ -104,7 +104,7 @@ namespace VapeTeam.Psimulex.Core.Types
                 case TypeEnum.Integer:
                     return new Integer();
                     break;
-                case TypeEnum.Char:
+                case TypeEnum.Character:
                     //return new Char();
                     return null;
                     break;

@@ -79,42 +79,30 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case NodeType.Dimensions: node = new DimensionsNode(); v = true; break;
                 case NodeType.DimensionMarker: node = new DimensionMarkerNode(); v = true; break;
 
+                /*Identifier*/
+                case NodeType.Identifier: node = new IdentifierNode(); break;
+
                 /*Literals*/
-                case NodeType.Identifier:
-                    break;
-                case NodeType.CharLiteral:
-                    break;
-                case NodeType.StringLiteral:
-                    break;
-                case NodeType.IntLiteral:
-                    break;
-                case NodeType.DecimalLiteral:
-                    break;
-                case NodeType.BoolLiteral:
-                    break;
-                case NodeType.NullLiteral:
-                    break;
-                case NodeType.InfinityLiteral:
-                    break;
+                case NodeType.CharLiteral: node = new CharLiteralNode();  break;
+                case NodeType.StringLiteral: node = new StringLiteralNode(); break;
+                case NodeType.IntLiteral: node = new IntLiteralNode(); break;
+                case NodeType.DecimalLiteral: node = new DecimalLiteralNode(); break;
+                case NodeType.BoolLiteral: node = new BoolLiteralNode(); break;
+                case NodeType.NullLiteral: node = new NullLiteralNode(); break;
+                case NodeType.InfinityLiteral: node = new InfinityLiteralNode(); break;
 
                 /*Types*/
-                case NodeType.DataTypeName:
-                    break;
-                case NodeType.DataType:
-                    break;
+                case NodeType.DataTypeName: node = new DataTypeNameNode(); break;
+                case NodeType.DataType: node = new DataTypeNode(); v = true; break;
                 /*
                 case NodeType.FunctionPointerType:
                     break;
                 */
-                case NodeType.Type:
-                    break;
-                case NodeType.Reference:
-                    break;
+                case NodeType.Type: node = new TypeNode(); break;
+                case NodeType.Reference: node = new ReferenceNode(); break;
 
-                default:
-                    // If There Is Not The Requied Switch Case (XNode)
-                    node = new XNode();
-                    break;
+                // If There Is Not The Requied Switch Case (XNode)
+                default: node = new XNode(); break;
             }
             
             // Init Datas in treeNode and Return

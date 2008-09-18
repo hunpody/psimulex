@@ -12,7 +12,7 @@ namespace VapeTeam.Psimulex.Core.Types
         static TypeHierarchy()
         {
             _typePriorities.Add(TypeEnum.Undefined, 0);
-            _typePriorities.Add(TypeEnum.Char, 10);
+            _typePriorities.Add(TypeEnum.Character, 10);
             _typePriorities.Add(TypeEnum.Integer, 100);
             _typePriorities.Add(TypeEnum.String, 10000);
             _typePriorities.Add(TypeEnum.Void, 0);

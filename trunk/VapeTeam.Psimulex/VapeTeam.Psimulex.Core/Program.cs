@@ -9,19 +9,45 @@ namespace VapeTeam.Psimulex.Core
     public class Program
     {
         public string Name { get; set; }
+        public CommandList CommandList { get; private set; }
 
-        private CommandList commandList = new CommandList();
-        public CommandList CommandList
+        public Program()
         {
-            get { return commandList; }
+            Name = "";
+            CommandList = new CommandList();
         }
 
         public ICommand this[int index]
         {
             get
             {
-                return commandList[index];
+                return CommandList[index];
             }
+        }
+
+        /// <summary>
+        /// Add a Command at the end of the Program
+        /// </summary>
+        /// <param name="command">The command</param>
+        public void Add(ICommand command)
+        {
+            CommandList.Add(command);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            int lineNumber = 0;
+
+            foreach (ICommand command in CommandList)
+            {
+                string line = "";
+                line = lineNumber.ToString("000") + " " + command.ToString() + "\n\r";
+                sb.Append(line);
+                lineNumber++;
+            }
+
+            return sb.ToString();
         }
     }
 }
