@@ -44,15 +44,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AST\INodeTypeFactory.cs" />
+    <Compile Include="AST\IPsiNode.cs" />
+    <Compile Include="AST\IPsiNodeFactory.cs" />
+    <Compile Include="AST\IPsiVisitor.cs" />
+    <Compile Include="AST\NodeType.cs" />
+    <Compile Include="AST\NodeTypeFactory.cs" />
+    <Compile Include="AST\PsiBuilderVisitor.cs" />
+    <Compile Include="AST\PsiNode.cs" />
+    <Compile Include="AST\PsiNodeFactory.cs" />
+    <Compile Include="AST\PsiPrinterVisitor.cs" />
+    <Compile Include="AST\PsiProgramStringBuilderVisitor.cs" />
+    <Compile Include="AST\TreeConverter.cs" />
+    <Compile Include="Compiler.cs" />
     <Compile Include="CompileResult.cs" />
     <Compile Include="ICompiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VapeTeam.Psimulex.Compiler.Antlr\VapeTeam.Psimulex.Compiler.Antlr.csproj">
+      <Project>{DA262F79-572F-4CA6-BDF5-39C201BFE72B}</Project>
+      <Name>VapeTeam.Psimulex.Compiler.Antlr</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VapeTeam.Psimulex.Core\VapeTeam.Psimulex.Core.csproj">
       <Project>{64AE91ED-9627-44F2-9CD5-FC04DA7310EC}</Project>
       <Name>VapeTeam.Psimulex.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AST\Rem.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Samples\teszt.psi" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

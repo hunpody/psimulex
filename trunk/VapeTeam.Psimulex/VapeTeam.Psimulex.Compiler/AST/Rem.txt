@@ -1,0 +1,12 @@
+﻿Új NodeTípus Felvétele Esetén Végrehajtandó Bővítések
+-----------------------------------------------------
+
+Trees:
+------
+PsiNode.cs -> ValamiNode : IPsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+NodeType -> Valami,
+NodeTypeFactory -> case PsimulexLexer.VALAMI: type = NodeType.Valami; break;
+PsiNodeFactory
+
+Visitors:
+---------

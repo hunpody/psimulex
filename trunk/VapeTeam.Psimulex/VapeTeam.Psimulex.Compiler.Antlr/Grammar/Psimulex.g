@@ -24,7 +24,6 @@ tokens {
 	BLOCK;
 	
 	VARINIT;
-	VARINIT;
 	VARDECLARE;	
 
 	TYPE;
@@ -237,7 +236,7 @@ relationalExpression
     ;
     
 relationalOp
-    :	RelLessThan| RelLessThanOrEqual|RelGreaterThan|RelGreaterThanOrEqual
+    :	RelLessThan|RelLessThanOrEqual|RelGreaterThan|RelGreaterThanOrEqual
     ;
     
 additiveExpression

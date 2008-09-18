@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using VapeTeam.Psimulex.Compiler.Antlr.AST;
+using VapeTeam.Psimulex.Compiler.AST;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 {
