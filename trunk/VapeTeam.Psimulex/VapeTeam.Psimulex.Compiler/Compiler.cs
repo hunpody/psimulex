@@ -8,7 +8,6 @@ namespace VapeTeam.Psimulex.Compiler
 {
     public class Compiler : VapeTeam.Psimulex.Compiler.ICompiler
     {
-
         private List<string> _errorMessages = new List<string>();
         public List<string> ErrorMessages
         {
