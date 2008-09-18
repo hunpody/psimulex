@@ -14,7 +14,7 @@ namespace VapeTeam.Psimulex.Compiler
         {
             get
             {
-                return _errorMessages;
+                return _errorMessages; 
             }
         }
 
