@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using global::Antlr.Runtime;
 
-namespace VapeTeam.Psimulex.Compiler
+namespace VapeTeam.Psimulex.Compiler.Antlr
 {
     public class Compiler : VapeTeam.Psimulex.Compiler.ICompiler
     {

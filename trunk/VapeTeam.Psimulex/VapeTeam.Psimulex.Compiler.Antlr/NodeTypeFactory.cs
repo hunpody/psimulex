@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VapeTeam.Psimulex.Compiler.AST;
 
-namespace VapeTeam.Psimulex.Compiler.AST
+namespace VapeTeam.Psimulex.Compiler.Antlr
 {
     public class NodeTypeFactory : INodeTypeFactory
     {
