@@ -43,20 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AST\INodeTypeFactory.cs" />
-    <Compile Include="AST\IPsiNode.cs" />
-    <Compile Include="AST\IPsiNodeFactory.cs" />
-    <Compile Include="AST\IPsiVisitor.cs" />
-    <Compile Include="AST\NodeType.cs" />
-    <Compile Include="AST\NodeTypeFactory.cs" />
-    <Compile Include="AST\PsiAST.cs" />
-    <Compile Include="AST\PsiBuilderVisitor.cs" />
-    <Compile Include="AST\PsiNode.cs" />
-    <Compile Include="AST\PsiNodeFactory.cs" />
-    <Compile Include="AST\PsiPrinterVisitor.cs" />
-    <Compile Include="AST\PsiProgramStringBuilderVisitor.cs" />
-    <Compile Include="AST\TreeConverter.cs" />
-    <Compile Include="Compiler.cs" />
     <Compile Include="Extensions\PsimulexParser.extension.cs" />
     <Compile Include="Generated\PsimulexLexer.cs" />
     <Compile Include="Generated\PsimulexParser.cs" />
@@ -64,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="antlrworks-1.2.jar" />
-    <Content Include="AST\Rem.txt" />
     <Content Include="Runtime\Antlr3.Runtime.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -80,13 +65,6 @@
     </None>
     <None Include="Generated\Psimulex.tokens" />
     <None Include="Grammar\Psimulex.g" />
-    <None Include="Samples\teszt.psi" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VapeTeam.Psimulex.Compiler\VapeTeam.Psimulex.Compiler.csproj">
-      <Project>{80B9390C-AD41-4F70-922A-823AC740F8C4}</Project>
-      <Name>VapeTeam.Psimulex.Compiler</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

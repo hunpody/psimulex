@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-using VapeTeam.Psimulex.Compiler.Antlr.AST;
+using VapeTeam.Psimulex.Compiler.AST;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 {
