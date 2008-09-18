@@ -5,6 +5,9 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
+    /// <summary>
+    /// General base class for the value objects.
+    /// </summary>
     public abstract class BaseType
     {
         public virtual string GetTypeName()
