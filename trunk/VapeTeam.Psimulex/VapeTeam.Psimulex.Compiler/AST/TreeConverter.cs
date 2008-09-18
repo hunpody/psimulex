@@ -37,7 +37,17 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 if (type == NodeType.X)
                     value = value + " # TypeID [" + tree.Type + "]";
 
-                root = nodeFactory.CreateNode(type, value);
+                root = nodeFactory.CreateNode
+                    (type, value, 
+                    new NodeValueInfo(
+                        tree.CharPositionInLine,
+                        tree.Line,
+                        tree.startIndex,
+                        tree.stopIndex,
+                        tree.TokenStartIndex,
+                        tree.TokenStopIndex
+                        )
+                    );
 
                 if (tree.Children != null)
                     foreach (CommonTree child in tree.Children)
