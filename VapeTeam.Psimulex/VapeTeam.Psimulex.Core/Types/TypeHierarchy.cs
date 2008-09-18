@@ -21,12 +21,12 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public static bool IsBiggerThan(TypeEnum type1, TypeEnum type2)
         {
-            if (_typePriorities.ContainsKey(type1) && _typePriorities.ContainsKey(type2))
-            {
-                return _typePriorities[type1] > _typePriorities[type2];
-            }
+            //if (_typePriorities.ContainsKey(type1) && _typePriorities.ContainsKey(type2))
+            //{
+            //    return _typePriorities[type1] > _typePriorities[type2];
+            //}
 
-            return false;
+            return type1 > type2;
         }
     }
 }

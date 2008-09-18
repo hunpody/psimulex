@@ -5,12 +5,33 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
+    /// <summary>
+    /// The types ordered by their priority.
+    /// </summary>
     public enum TypeEnum
     {
         Undefined = 0,
         Void,
-        Integer,
+        Boolean,
         Char,
-        String
+        Integer,
+        Float,
+        String,
+        Iterator,
+        Graph,
+        Tree,
+        BinaryTree,
+        Node,
+        Edge,
+        PriorityQueue,
+        Queue,
+        Stack,
+        Array,
+        Matrix,
+        List,
+        Set,
+        Timer,
+        Pointer,
+        Null
     }
 }
