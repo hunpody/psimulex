@@ -36,7 +36,7 @@ namespace VapeTeam.Psimulex.Core.Types
         Timer,
         Pointer,
         Thread,
-        /*FunctionPointerType,*/
+        FunctionPointerType,
         UserDefinedType,
         Null,
     }
