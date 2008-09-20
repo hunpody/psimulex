@@ -2,6 +2,7 @@
 import "megValmi.psi";
 import "ujfentValami.psi";
 
+
 struct iNt
 {
 	int z;
