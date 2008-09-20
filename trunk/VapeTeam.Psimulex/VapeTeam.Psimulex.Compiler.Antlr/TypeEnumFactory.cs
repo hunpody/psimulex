@@ -34,14 +34,18 @@ namespace VapeTeam.Psimulex.Compiler.ANTLR
                 case "queue": return TypeEnum.Queue;
                 case "pqueue": return TypeEnum.PriorityQueue;
                 case "graph": return TypeEnum.Graph;
-                case "graphnode": return TypeEnum.Node;
-                case "graphedge": return TypeEnum.Edge;
+                case "node": return TypeEnum.Node;
+                case "edge": return TypeEnum.Edge;
         
                 /*Other*/
                 case "thread": return TypeEnum.Thread;
+                case "timer": return TypeEnum.Timer;
 
                 default: return TypeEnum.Undefined; // Struct
             }
+
+            // Ellenőrizni kell még, hogy nem e user defined type !!!
+            // ...
         }
     }
 }
