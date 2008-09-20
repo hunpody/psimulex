@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core.Types;
 using VapeTeam.Psimulex.Core.Common;
+using VapeTeam.Psimulex.Core.Exceptions;
+
 namespace VapeTeam.Psimulex.Core
 {
     /// <summary>
@@ -136,9 +138,16 @@ namespace VapeTeam.Psimulex.Core
 
         public void AddVariable(string name, BaseType value)
         {
-            RunStack.Push(value);
+            if (_variableMap.ContainsKey(name))
+            {
+                RunStack[_variableMap[name]] = value;
+            }
+            else
+            {
+                RunStack.Push(value);
 
-            _variableMap.Add(name, RunStack.Count - 1);
+                _variableMap.AddOrOverwrite(name, RunStack.Count - 1);
+            }
 
             if (CallStack.Count == 0)
             {

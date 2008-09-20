@@ -74,10 +74,19 @@ namespace VapeTeam.Psimulex.Core
             {
                 if (!(0 <= index && index <= Count - 1))
                 {
-                    throw new StackOverflowException();
+                    throw new Exceptions.IndexOutOfRangeException("Stack indexing was out of range.");
                 }
 
                 return stack[index];
+            }
+            set
+            {
+                if (!(0 <= index && index <= Count - 1))
+                {
+                    throw new Exceptions.IndexOutOfRangeException("Stack indexing was out of range.");
+                }
+
+                stack[index] = value;
             }
         }
 

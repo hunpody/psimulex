@@ -67,6 +67,9 @@ namespace VapeTeam.Psimulex.Tests
         {
             MachineBuilder machineBuilder = new MachineBuilder();
             Machine machine = machineBuilder.CreateMachine(1, 1024);
+            Assert.AreEqual(1, machine.Processors.Count);
+
+            Assert.AreEqual(1024, machine.MemorySize);
         }
 
         private class TestLibrary : VapeTeam.Psimulex.Core.Libraries.ILibrary
@@ -82,7 +85,6 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void LibraryCall()
         {
-
             var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(1, 16);
 
             machine.System.InstallLibrary(new TestLibrary());

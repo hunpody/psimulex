@@ -24,7 +24,7 @@ namespace VapeTeam.Psimulex.Core.Types
             }
             else if (value.GetType() == typeof(int))
             {
-                long x = (int) value;
+                long x = (int)value;
                 return new Integer(x);
             }
             else if (value.GetType() == typeof(string))
@@ -34,6 +34,14 @@ namespace VapeTeam.Psimulex.Core.Types
             else if (value.GetType() == typeof(bool))
             {
                 return new Boolean((bool)value);
+            }
+            else if (value.GetType() == typeof(decimal))
+            {
+                return new Decimal((decimal)value);
+            }
+            else if (value.GetType() == typeof(float))
+            {
+                return new Float((float)value);
             }
             else if (value.GetType() == typeof(VapeTeam.Psimulex.Core.Thread))
             {
@@ -54,7 +62,11 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <returns></returns>
         public static object TransformToDotnetType(BaseType value, Type type)
         {
-            if (type == typeof(string))
+            if (type == typeof(BaseType))
+            {
+                return value;
+            }
+            else if (type == typeof(string))
             {
                 return value.ToString();
             }
@@ -65,6 +77,18 @@ namespace VapeTeam.Psimulex.Core.Types
             else if (type == typeof(long))
             {
                 return value.ToInt();
+            }
+            else if (type == typeof(decimal))
+            {
+                return value.ToDecimal();
+            }
+            else if (type == typeof(float))
+            {
+                return value.ToFloat();
+            }
+            else if (type == typeof(bool))
+            {
+                return value.ToBoolean();
             }
             else
                 return null;
@@ -100,20 +124,20 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 case TypeEnum.Void:
                     return null;
-                    break;
                 case TypeEnum.Integer:
                     return new Integer();
-                    break;
                 case TypeEnum.Character:
-                    //return new Char();
-                    return null;
-                    break;
+                    return new Character();
                 case TypeEnum.String:
                     return new String();
-                    break;
+                case TypeEnum.Decimal:
+                    return new Decimal();
+                case TypeEnum.Float:
+                    return new Float();
+                case TypeEnum.List:
+                    return new List();
                 default:
-                    return null;
-                    break;
+                    throw new Exceptions.PsimulexCoreException(string.Format("Cannot create value of type {0}.", type));
             }
         }
 

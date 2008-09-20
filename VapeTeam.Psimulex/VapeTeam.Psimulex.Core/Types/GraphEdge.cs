@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    class GraphEdge
+    public class GraphEdge : Graph
     {
     }
 }

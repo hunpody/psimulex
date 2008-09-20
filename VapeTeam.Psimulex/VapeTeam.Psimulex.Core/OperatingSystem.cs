@@ -167,6 +167,8 @@ namespace VapeTeam.Psimulex.Core
 
             process.MainThread.State = ThreadStates.Running;
 
+            Schedule();
+
             while (HasActiveProcesses)
             {
                 machine.Step();

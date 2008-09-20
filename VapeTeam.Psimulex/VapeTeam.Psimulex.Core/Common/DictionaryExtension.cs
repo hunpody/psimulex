@@ -14,7 +14,7 @@ namespace VapeTeam.Psimulex.Core.Common
         /// <param name="dictionary"></param>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public static void AddOrOverwrite(this IDictionary<string, BaseType> dictionary, string key, BaseType value)
+        public static void AddOrOverwrite<K, V>(this IDictionary<K, V> dictionary, K key, V value)
         {
             if (dictionary.ContainsKey(key))
             {

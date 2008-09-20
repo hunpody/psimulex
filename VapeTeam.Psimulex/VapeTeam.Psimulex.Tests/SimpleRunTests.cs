@@ -146,5 +146,26 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("True", process.StandardOutput);
         }
+
+        [TestMethod]
+        public void RunStackSizeIsGood()
+        {
+            var process =
+                Helpers.SystemHelper.CreateMachineAndRunProgram(VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push("Hello "),
+                new Initialize("s"),
+                new Push("world!"),
+                new Initialize("s2"),
+                new Push("s", ValueAccessModes.LocalVariable),
+                new Push("s2", ValueAccessModes.LocalVariable),
+                new Call("concat"),
+                new Push("Hello world!"),
+                new Compare(Compare.ComparisonModes.Equal),
+                new Call("print")));
+
+            Assert.AreEqual("True", process.StandardOutput);
+            // Local variables get stored in the runstack, so its size should be 2.
+            Assert.AreEqual(2, process.MainThread.RunStack.Count);
+        }
     }
 }

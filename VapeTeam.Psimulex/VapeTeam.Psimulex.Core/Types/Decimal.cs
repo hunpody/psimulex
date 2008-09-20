@@ -5,19 +5,16 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    /// <summary>
-    /// A standard integer value.
-    /// </summary>
-    public class Integer : BaseType
+    public class Decimal : BaseType
     {
-        private long value;
+        private decimal value;
 
-        public Integer(long value)
+        public Decimal(decimal value)
         {
             this.value = value;
         }
 
-        public Integer()
+        public Decimal()
             :this(0)
         {
         }
@@ -26,17 +23,17 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override bool IsLessThan(BaseType value)
         {
-            return this.value < value.ToInt();
+            return this.value < value.ToDecimal();
         }
 
         public override void Add(BaseType value)
         {
-            this.value += value.ToInt();
+            this.value += value.ToDecimal();
         }
 
         public override void Subtract(BaseType value)
         {
-            this.value -= value.ToInt();
+            this.value -= value.ToDecimal();
         }
 
         public override object ToObject()
@@ -51,34 +48,34 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override void Multiply(BaseType value)
         {
-            this.value *= value.ToInt();
+            this.value *= value.ToDecimal();
         }
 
         public override void Divide(BaseType value)
         {
-            this.value /= value.ToInt();
+            this.value /= value.ToDecimal();
         }
 
         public override void Power(BaseType value)
         {
-            this.value = (long) Math.Pow((double)this.value, (double) value.ToInt());
+            this.value = (long) Math.Pow((double)this.value, (double) value.ToDecimal());
         }
 
         public override void Modulo(BaseType value)
         {
-            this.value %= value.ToInt();
+            this.value %= value.ToDecimal();
         }
 
         public override void Assign(BaseType value)
         {
-            this.value = value.ToInt();
+            this.value = value.ToDecimal();
         }
 
         public override TypeEnum TypeEnum
         {
-            get { return TypeEnum.Integer; }
+            get { return TypeEnum.Decimal; }
         }
 
-        #endregion
+        #endregion    
     }
 }

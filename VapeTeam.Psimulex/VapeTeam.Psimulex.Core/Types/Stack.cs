@@ -5,7 +5,11 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    class Stack : BaseType
+    public class Stack : BaseType
     {
+        public override TypeEnum TypeEnum
+        {
+            get { return TypeEnum.Stack; }
+        }
     }
 }

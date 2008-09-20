@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VapeTeam.Psimulex.Core.Exceptions;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
@@ -10,10 +11,26 @@ namespace VapeTeam.Psimulex.Core.Types
     /// </summary>
     public abstract class BaseType
     {
+        #region Psimulex type information
+
+        /// <summary>
+        /// The type of the class.
+        /// </summary>
+        /// <returns></returns>
         public virtual string GetTypeName()
         {
             return GetType().Name;
         }
+
+        /// <summary>
+        /// The psimulex type of the value.
+        /// </summary>
+        public abstract TypeEnum TypeEnum
+        {
+            get;
+        }
+
+        #endregion
 
         #region Relational comparison operators
 
@@ -142,9 +159,13 @@ namespace VapeTeam.Psimulex.Core.Types
             return this;
         }
 
+
         public override string ToString()
         {
-            return ToObject().ToString();
+            object obj = ToObject();
+            if (obj != null && obj != this)
+                return obj.ToString();
+            else return GetTypeName();
         }
 
         public virtual long ToInt()
@@ -152,7 +173,31 @@ namespace VapeTeam.Psimulex.Core.Types
             object obj = ToObject();
             if (obj != null)
                 return Convert.ToInt64(obj);
-            else return 0;
+            else return default(long);
+        }
+
+        public virtual int ToInt32()
+        {
+            object obj = ToObject();
+            if (obj != null)
+                return Convert.ToInt32(obj);
+            else return default(int);
+        }
+
+        public virtual decimal ToDecimal()
+        {
+            object obj = ToObject();
+            if (obj != null)
+                return Convert.ToDecimal(obj);
+            else return default(decimal);
+        }
+
+        public virtual float ToFloat()
+        {
+            object obj = ToObject();
+            if (obj != null)
+                return Convert.ToSingle(obj);
+            else return default(float);
         }
 
         public virtual bool ToBoolean()
@@ -160,7 +205,7 @@ namespace VapeTeam.Psimulex.Core.Types
             object obj = ToObject();
             if (obj != null)
                 return Convert.ToBoolean(obj);
-            else return false;
+            else return default(bool);
         }
 
         #endregion

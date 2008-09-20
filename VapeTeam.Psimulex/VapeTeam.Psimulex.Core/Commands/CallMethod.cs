@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core.Types;
 using System.Reflection;
+using VapeTeam.Psimulex.Core.Exceptions;
 
 namespace VapeTeam.Psimulex.Core.Commands
 {
@@ -38,7 +39,17 @@ namespace VapeTeam.Psimulex.Core.Commands
                     ValueFactory.TransformBaseTypeArrayToDotnetType(poppedValues, methodParameterInfos.Select(pi => pi.ParameterType).ToArray());
 
                 // Make the call
-                var returnValue = method.Invoke(value, convertedParameters);
+                object returnValue = null;
+
+                try
+                {
+                    returnValue = method.Invoke(value, convertedParameters);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exceptions.PsimulexCoreException(string.Format("The invocation of method {0} of type {1} has thrown an exception.",
+                        methodName, value.GetTypeName()), ex);
+                }
 
                 // Push the returned value
                 if (returnValue != null)

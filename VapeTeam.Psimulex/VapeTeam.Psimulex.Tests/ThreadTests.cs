@@ -160,5 +160,23 @@ namespace VapeTeam.Psimulex.Tests
             Assert.IsTrue(process2.Machine.Processors.Count(p => p.RunningTask != null && p.RunningTask.Id == 1) <= 1);
             Assert.IsTrue(process2.Machine.Processors.Count(p => p.RunningTask != null && p.RunningTask.Id == 2) <= 1);
         }
+
+        [TestMethod]
+        public void ScheduleSimpleProgramHasNoOverhead()
+        {
+            // Assuem that Push's operation cost is 1
+            var program =
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push(0),
+                new Push(1),
+                new Push(2),
+                new Push(3),
+                new Push(4),
+                new Push(5));
+
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(program);
+
+            Assert.IsTrue(9 > process.Machine.Processors[0].Cycles);
+        }
     }
 }

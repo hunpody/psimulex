@@ -5,11 +5,11 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    public class Set : BaseType
+    /// <summary>
+    /// General interface for indexing.
+    /// </summary>
+    public interface IIndexable
     {
-        public override TypeEnum TypeEnum
-        {
-            get { return TypeEnum.Set; }
-        }
+        BaseType Index(int index);
     }
 }

@@ -28,6 +28,8 @@ namespace VapeTeam.Psimulex.Core.Commands
             BaseType second = context.RunStack.Pop().Clone();
             BaseType first = context.RunStack.Pop().Clone();
 
+            TypeHierarchy.OrderTypes(ref first, ref second);
+
             BaseType result = first;
 
             switch (operation)

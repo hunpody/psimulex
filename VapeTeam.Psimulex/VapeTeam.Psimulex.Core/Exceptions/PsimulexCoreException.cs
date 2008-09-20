@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace VapeTeam.Psimulex.Core
+namespace VapeTeam.Psimulex.Core.Exceptions
 {
     /// <summary>
     /// Base exception class for the exceptions thrown in the Psimulex.Core module.

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VapeTeam.Psimulex.Core.Commands;
+using VapeTeam.Psimulex.Core.Types;
 
 namespace VapeTeam.Psimulex.Tests
 {
@@ -63,6 +64,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void StringOperations1()
         {
+            // Testing system function concat
             var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                     new Push("Hello "),
@@ -76,6 +78,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void StringOperations2()
         {
+            // Testing string.ToUpper
             var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                     new Push("Hello world"),
@@ -88,6 +91,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void StringOperations3()
         {
+            // Testing string.Contains
             var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                     new Push("w"),
@@ -101,6 +105,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void StringOperations4()
         {
+            // Testing string.Contains and ==
             var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                     new Push("w"),
@@ -145,8 +150,9 @@ namespace VapeTeam.Psimulex.Tests
         }
 
         [TestMethod]
-        public void IntegerOperations1()
+        public void IntegerComparisons1()
         {
+            // Testing integer ==
             var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                     new Push(5),
@@ -160,6 +166,7 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("FalseTrue", process.StandardOutput);
 
+            // Testing integer <, <=, !=, ==, >, >=
             var process2 = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                     new Push(-9),
@@ -211,6 +218,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void LogicalComparisons()
         {
+            // Testing logical &&, ||, ^
             var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                     new Push(false),
@@ -256,7 +264,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void IntegerPrefixAndPostfixUnaryOperations1()
         {
-            // We test the prefix/postfix increasing/decreasing operations on values.
+            // Testing integer postfix and prefix ++, and --
             VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
 
@@ -277,7 +285,7 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("1012", process.StandardOutput);
 
-            // We test the prefix and postfix increasing / decreasing operations on local variables.
+            // Testing integer postfix and prefix ++, and -- on local variables
 
             process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
@@ -326,6 +334,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void IntegerUnaryOperations1()
         {
+            // Testing unary operation "-" (negation)
             VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
 
@@ -352,6 +361,8 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void LogicalNotOperations1()
         {
+            // Testing logical not "!"
+
             VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
 
@@ -383,6 +394,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void IntegerBinaryOperations1()
         {
+            // Testing binary integer operations : +, -, *, /, ^
             VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
 
@@ -424,7 +436,404 @@ namespace VapeTeam.Psimulex.Tests
                 ));
 
             Assert.AreEqual("9;3;16;3;81;", process.StandardOutput);
+        }
 
+        [TestMethod]
+        public void DecimalComparison1()
+        {
+            // Testing decimal <, <=, !=, ==, >, >=
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push(-9, TypeEnum.Decimal),
+                    new Push(9, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.LessThan),
+                    new Call("print"),
+                    new Push(-9, TypeEnum.Decimal),
+                    new Push(9, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.LessThanOrEqual),
+                    new Call("print"),
+                    new Push(-9, TypeEnum.Decimal),
+                    new Push(9, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.NotEqual),
+                    new Call("print"),
+                    new Push(11, TypeEnum.Decimal),
+                    new Push(11, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print"),
+                    new Push(11, TypeEnum.Decimal),
+                    new Push(11, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.LessThanOrEqual),
+                    new Call("print"),
+                    new Push(11, TypeEnum.Decimal),
+                    new Push(11, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.GreaterThanOrEqual),
+                    new Call("print"),
+                    new Push(11, TypeEnum.Decimal),
+                    new Push(11, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.NotEqual),
+                    new Push(false),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print"),
+                    new Push(50, TypeEnum.Decimal),
+                    new Push(9, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.GreaterThan),
+                    new Call("print"),
+                    new Push(50, TypeEnum.Decimal),
+                    new Push(9, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.GreaterThanOrEqual),
+                    new Call("print"),
+                    new Push(50, TypeEnum.Decimal),
+                    new Push(9, TypeEnum.Decimal),
+                    new Compare(Compare.ComparisonModes.NotEqual),
+                    new Call("print")));
+
+            Assert.AreEqual("TrueTrueTrueTrueTrueTrueTrueTrueTrueTrue", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void DecimalBinaryOperations1()
+        {
+            // Testing binary decimal operations : +, -, *, /, ^
+            VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(4, TypeEnum.Decimal),
+                    new Push(5, TypeEnum.Decimal),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(8, TypeEnum.Decimal),
+                    new Push(5, TypeEnum.Decimal),
+                    new BinaryOperation(BinaryOperation.Operations.Subtraction),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(8, TypeEnum.Decimal),
+                    new Push(2, TypeEnum.Decimal),
+                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(15, TypeEnum.Decimal),
+                    new Push(5, TypeEnum.Decimal),
+                    new BinaryOperation(BinaryOperation.Operations.Division),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(3, TypeEnum.Decimal),
+                    new Push(4, TypeEnum.Decimal),
+                    new BinaryOperation(BinaryOperation.Operations.Power),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print")
+
+                ));
+
+            Assert.AreEqual("9;3;16;3;81;", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void FloatComparison1()
+        {
+            // Testing Float <, <=, !=, ==, >, >=
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    new Push(-9, TypeEnum.Float),
+                    new Push(9, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.LessThan),
+                    new Call("print"),
+                    new Push(-9, TypeEnum.Float),
+                    new Push(9, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.LessThanOrEqual),
+                    new Call("print"),
+                    new Push(-9, TypeEnum.Float),
+                    new Push(9, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.NotEqual),
+                    new Call("print"),
+                    new Push(11, TypeEnum.Float),
+                    new Push(11, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print"),
+                    new Push(11, TypeEnum.Float),
+                    new Push(11, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.LessThanOrEqual),
+                    new Call("print"),
+                    new Push(11, TypeEnum.Float),
+                    new Push(11, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.GreaterThanOrEqual),
+                    new Call("print"),
+                    new Push(11, TypeEnum.Float),
+                    new Push(11, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.NotEqual),
+                    new Push(false),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print"),
+                    new Push(50, TypeEnum.Float),
+                    new Push(9, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.GreaterThan),
+                    new Call("print"),
+                    new Push(50, TypeEnum.Float),
+                    new Push(9, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.GreaterThanOrEqual),
+                    new Call("print"),
+                    new Push(50, TypeEnum.Float),
+                    new Push(9, TypeEnum.Float),
+                    new Compare(Compare.ComparisonModes.NotEqual),
+                    new Call("print")));
+
+            Assert.AreEqual("TrueTrueTrueTrueTrueTrueTrueTrueTrueTrue", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void FloatBinaryOperations1()
+        {
+            // Testing binary float operations : +, -, *, /, ^
+            VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(4, TypeEnum.Float),
+                    new Push(5, TypeEnum.Float),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(8, TypeEnum.Float),
+                    new Push(5, TypeEnum.Float),
+                    new BinaryOperation(BinaryOperation.Operations.Subtraction),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(8, TypeEnum.Float),
+                    new Push(2, TypeEnum.Float),
+                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(15, TypeEnum.Float),
+                    new Push(5, TypeEnum.Float),
+                    new BinaryOperation(BinaryOperation.Operations.Division),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print"),
+
+                    new Push(3, TypeEnum.Float),
+                    new Push(4, TypeEnum.Float),
+                    new BinaryOperation(BinaryOperation.Operations.Power),
+                    new Call("print"),
+                    new Push(";"),
+                    new Call("print")
+
+                ));
+
+            Assert.AreEqual("9;3;16;3;81;", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void ArrayOperations1()
+        {
+            // Testing array operations: create, index, Size
+            VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    // int[5] a;
+                    // a[0]=0;a[1]=1;a[2]=2;a[3]=3;a[4]=8;
+                    new Push(new VapeTeam.Psimulex.Core.Types.Array(TypeEnum.Integer, 5)),
+                    new Initialize("a"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(0),
+                    new Push(0),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(1),
+                    new Push(1),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(2),
+                    new Push(2),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(3),
+                    new Push(3),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(4),
+                    new Push(8),
+                    new Assign(),
+
+                    // for (i=0;i<5;++i) print(a[i]);
+                    new Push(0),
+                    new Initialize("i"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Indexing(),
+                    new Call("print"),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push(5),
+                    new Compare(Compare.ComparisonModes.GreaterThanOrEqual),
+                    new RelativeJumpIfTrue(2),
+                    new RelativeJump(-13),
+
+                    // print(a.Size);
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Select("Size"),
+                    new Call("print"),
+
+                    // print(a.Size - 1 == 4);
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Select("Size"),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Subtraction),
+                    new Push(4),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print")
+                ));
+
+            Assert.AreEqual("012385True", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void ArrayIndexOutOfRange()
+        {
+            // Testing array indexing with bad index
+            var program = 
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    // int[5] a; a[7]=0;
+                    new Push(new VapeTeam.Psimulex.Core.Types.Array(TypeEnum.Integer, 5)),
+                    new Initialize("a"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(7),
+                    new Push(0),
+                    new Assign());
+
+            Helpers.AssertionHelpers.AssertThrows<Psimulex.Core.Exceptions.IndexOutOfRangeException>(
+                () => Helpers.SystemHelper.CreateMachineAndRunProgram(program));
+        }
+
+        [TestMethod]
+        public void ListOperations1()
+        {
+            // Testing list operations : add, length, pushfront, pushback, removeat, clear
+            VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    // list L; L.Insert(0); L.Insert(1); L.Insert(2);
+                    new Push(ValueFactory.CreateValue(TypeEnum.List)),
+                    new Initialize("L"),
+                    new Push(0),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new CallMethod("Insert"),
+                    new Push(1),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new CallMethod("Insert"),
+                    new Push(2),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new CallMethod("Insert"),
+
+                    // print(L.Length == 3)
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Select("Length"),
+                    new Push(3),
+                    new Compare(Compare.ComparisonModes.Equal),
+                    new Call("print"), // Prints true
+
+                    // for (int i=0;i<3;++i) print(L[i]);
+                    new Push(0),
+                    new Initialize("i"),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Indexing(),
+                    new Call("print"),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push(3),
+                    new Compare(Compare.ComparisonModes.LessThan),
+                    new RelativeJumpIfTrue(-12),
+
+                    // print(L.First);
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Select("First"),
+                    new Call("print"),
+
+                    // print(L.Last);
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Select("Last"),
+                    new Call("print"),
+
+                    // L.PushFront(-1);
+                    new Push(-1),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new CallMethod("PushFront"),
+
+                    // L.PushBack(3);
+                    new Push(3),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new CallMethod("PushBack"),
+
+                    // print(L.Size);
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Select("Size"),
+                    new Call("print"),
+
+                    // L.RemoveAt(2);
+                    new Push(2),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new CallMethod("RemoveAt"),
+
+                    // print(L.First);
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Select("First"),
+                    new Call("print"),
+
+                    // print(L.Last);
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Select("Last"),
+                    new Call("print"),
+
+                    // for (i=0; i<L.Size; ++i) print(L[i]);
+                    new Push(0),
+                    new Initialize("i"),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Indexing(),
+                    new Call("print"),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Select("Size"),
+                    new Compare(Compare.ComparisonModes.LessThan),
+                    new RelativeJumpIfTrue(-13),
+
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new CallMethod("clear"),
+                    new Push("L", ValueAccessModes.LocalVariable),
+                    new Select("Size"),
+                    new Call("print")
+                ));
+
+            Assert.AreEqual("True012025-13-10230", process.StandardOutput);
+            Assert.AreEqual(2, process.MainThread.RunStack.Count);
         }
     }
 }

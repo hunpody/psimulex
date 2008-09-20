@@ -15,6 +15,7 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         private BaseType value;
         private string name;
+        private TypeEnum type;
 
         #region ICommand Members
 
@@ -50,10 +51,36 @@ namespace VapeTeam.Psimulex.Core.Commands
             this.name = name;
         }
 
+        public Push(BaseType value)
+        {
+            this.value = value;
+            this.type = value.TypeEnum;
+        }
+
         public Push(object value)
+            : this(value, TypeEnum.Undefined)
+        {
+        }
+
+        //public Push(TypeEnum type)
+        //{
+        //    this.value = ValueFactory.CreateValue(type);
+        //}
+
+        public Push(object value, TypeEnum type)
         {
             AccessMode = ValueAccessModes.Constant;
-            this.value = ValueFactory.Create(value);
+            this.type = type;
+            if (type == TypeEnum.Undefined)
+            {
+                this.value = ValueFactory.Create(value);
+            }
+            else
+            {
+                this.value = ValueFactory.CreateValue(type);
+                BaseType param = ValueFactory.Create(value);
+                this.value.Assign(param);
+            }
         }
 
         #endregion

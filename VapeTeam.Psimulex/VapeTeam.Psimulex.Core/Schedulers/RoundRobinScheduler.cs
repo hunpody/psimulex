@@ -44,7 +44,7 @@ namespace VapeTeam.Psimulex.Core.Schedulers
 
             foreach (var processor in processors)
             {
-                var thread = FindNext();
+                var thread = FindNext(processor);
                 if (thread != null)
                 {
                     Thread dequeuedThread = null;
@@ -60,9 +60,9 @@ namespace VapeTeam.Psimulex.Core.Schedulers
 
         //private void
 
-        private Thread FindNext()
+        private Thread FindNext(Processor processor)
         {
-            return scheduleQueue.FirstOrDefault(t => !processors.Exists(p => p.RunningTask == t) && t.State == ThreadStates.Running);
+            return scheduleQueue.FirstOrDefault(t => !processors.Exists(p => p.RunningTask == t && p != processor) && t.State == ThreadStates.Running);
             //Thread thread = null;
             //var threadArray = scheduleQueue.ToArray().Where(t => t.State == ThreadStates.Running);
             //for (int i=0; i<threadArray
