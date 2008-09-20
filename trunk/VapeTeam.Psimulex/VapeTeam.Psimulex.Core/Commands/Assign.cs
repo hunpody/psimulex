@@ -13,7 +13,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             BaseType valueToAssign = context.RunStack.Pop();
             BaseType targetValue = context.RunStack.Pop();
             targetValue.Assign(valueToAssign);
-            context.RunStack.Push(targetValue);
+            //context.RunStack.Push(targetValue);
         }
     }
 }

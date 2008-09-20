@@ -5,7 +5,11 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    class Queue : BaseType
+    public class Queue : BaseType
     {
+        public override TypeEnum TypeEnum
+        {
+            get { return TypeEnum.Queue; }
+        }
     }
 }

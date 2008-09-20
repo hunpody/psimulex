@@ -5,7 +5,11 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    class BinaryTree
+    public class BinaryTree : BaseType
     {
+        public override TypeEnum TypeEnum
+        {
+            get { return TypeEnum.BinaryTree; }
+        }
     }
 }

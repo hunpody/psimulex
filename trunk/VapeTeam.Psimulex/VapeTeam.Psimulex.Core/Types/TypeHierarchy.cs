@@ -5,28 +5,25 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
+    /// <summary>
+    /// This class tells which type has more priority.
+    /// </summary>
     public static class TypeHierarchy
     {
-        private static Dictionary<TypeEnum, int> _typePriorities = new Dictionary<TypeEnum, int>();
-
-        static TypeHierarchy()
-        {
-            _typePriorities.Add(TypeEnum.Undefined, 0);
-            _typePriorities.Add(TypeEnum.Character, 10);
-            _typePriorities.Add(TypeEnum.Integer, 100);
-            _typePriorities.Add(TypeEnum.String, 10000);
-            _typePriorities.Add(TypeEnum.Void, 0);
-
-        }
-
         public static bool IsBiggerThan(TypeEnum type1, TypeEnum type2)
         {
-            //if (_typePriorities.ContainsKey(type1) && _typePriorities.ContainsKey(type2))
-            //{
-            //    return _typePriorities[type1] > _typePriorities[type2];
-            //}
-
             return type1 > type2;
+        }
+
+        public static void OrderTypes(ref BaseType first, ref BaseType second)
+        {
+            BaseType higher;
+            if (IsBiggerThan(second.TypeEnum, first.TypeEnum))
+            {
+                higher = second;
+                second = first;
+                first = higher;
+            }                
         }
     }
 }

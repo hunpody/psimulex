@@ -21,5 +21,10 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             thread.Start();
         }
+
+        public override TypeEnum TypeEnum
+        {
+            get { return TypeEnum.Thread; }
+        }
     }
 }

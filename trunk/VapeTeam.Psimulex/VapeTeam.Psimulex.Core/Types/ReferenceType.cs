@@ -85,6 +85,16 @@ namespace VapeTeam.Psimulex.Core.Types
             return referencedValue.ToString();
         }
 
+        public override void Assign(BaseType value)
+        {
+            this.referencedValue.Assign(value);
+        }
+
+        public override TypeEnum TypeEnum
+        {
+            get { return referencedValue.TypeEnum; }
+        }
+
         #endregion
 
         #region Lifecycle methods

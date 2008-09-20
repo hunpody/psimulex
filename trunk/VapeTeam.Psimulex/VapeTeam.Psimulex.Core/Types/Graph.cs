@@ -5,7 +5,11 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    class Graph
+    public class Graph : BaseType
     {
+        public override TypeEnum TypeEnum
+        {
+            get { return TypeEnum.Graph; }
+        }
     }
 }

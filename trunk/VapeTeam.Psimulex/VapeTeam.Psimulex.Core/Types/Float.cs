@@ -5,19 +5,16 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    /// <summary>
-    /// A standard integer value.
-    /// </summary>
-    public class Integer : BaseType
+    public class Float : BaseType
     {
-        private long value;
+        private float value;
 
-        public Integer(long value)
+        public Float(float value)
         {
             this.value = value;
         }
 
-        public Integer()
+        public Float()
             :this(0)
         {
         }
@@ -26,17 +23,17 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override bool IsLessThan(BaseType value)
         {
-            return this.value < value.ToInt();
+            return this.value < value.ToFloat();
         }
 
         public override void Add(BaseType value)
         {
-            this.value += value.ToInt();
+            this.value += value.ToFloat();
         }
 
         public override void Subtract(BaseType value)
         {
-            this.value -= value.ToInt();
+            this.value -= value.ToFloat();
         }
 
         public override object ToObject()
@@ -51,34 +48,35 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override void Multiply(BaseType value)
         {
-            this.value *= value.ToInt();
+            this.value *= value.ToFloat();
         }
 
         public override void Divide(BaseType value)
         {
-            this.value /= value.ToInt();
+            this.value /= value.ToFloat();
         }
 
         public override void Power(BaseType value)
         {
-            this.value = (long) Math.Pow((double)this.value, (double) value.ToInt());
+            this.value = (long) Math.Pow((double)this.value, (double) value.ToFloat());
         }
 
         public override void Modulo(BaseType value)
         {
-            this.value %= value.ToInt();
+            this.value %= value.ToFloat();
         }
 
         public override void Assign(BaseType value)
         {
-            this.value = value.ToInt();
+            this.value = value.ToFloat();
         }
 
         public override TypeEnum TypeEnum
         {
-            get { return TypeEnum.Integer; }
+            get { return TypeEnum.Float; }
         }
 
-        #endregion
+        #endregion    
+
     }
 }

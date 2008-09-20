@@ -33,6 +33,8 @@ namespace VapeTeam.Psimulex.Core.Commands
             BaseType op2 = context.RunStack.Pop();
             BaseType op1 = context.RunStack.Pop();
 
+            TypeHierarchy.OrderTypes(ref op1, ref op2);
+
             switch (mode)
             {
                 case ComparisonModes.Undefined:

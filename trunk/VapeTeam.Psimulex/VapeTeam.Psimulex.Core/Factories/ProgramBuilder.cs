@@ -6,6 +6,9 @@ using VapeTeam.Psimulex.Core.Commands;
 
 namespace VapeTeam.Psimulex.Core.Factories
 {
+    /// <summary>
+    /// A builder class for creating programs from basic commands.
+    /// </summary>
     public class ProgramBuilder
     {
         public Program Program { get; private set; }

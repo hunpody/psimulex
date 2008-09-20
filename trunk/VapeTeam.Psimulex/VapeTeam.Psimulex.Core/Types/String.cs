@@ -29,6 +29,11 @@ namespace VapeTeam.Psimulex.Core.Types
             return value;
         }
 
+        public override TypeEnum TypeEnum
+        {
+            get { return TypeEnum.String; }
+        }
+
         /// <summary>
         /// ToUpper remains in the Psimulex Type System.
         /// </summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core.Types;
+using VapeTeam.Psimulex.Core.Exceptions;
 
 namespace VapeTeam.Psimulex.Core.Commands
 {
