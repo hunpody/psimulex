@@ -31,9 +31,17 @@ namespace VapeTeam.Psimulex.Core.Types
             return list[index];
         }
 
-        public abstract int Size
+        public virtual int Size
         {
-            get;
+            get
+            {
+                throw new Exceptions.InvalidOperationException();
+            }
+            set
+            {
+                // Supress exception
+                //throw new Exceptions.InvalidOperationException();
+            }
         }
 
         public virtual int Length
