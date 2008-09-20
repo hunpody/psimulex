@@ -47,9 +47,41 @@ namespace VapeTeam.Psimulex.Core.Types
             return ListIndexing(rep, index);
         }
 
+        /// <summary>
+        /// Resizes the array. Inserts new baseTypes or removes from the end.
+        /// </summary>
+        /// <param name="newSize"></param>
+        protected virtual void Resize(int newSize)
+        {
+            if (newSize < 0)
+            {
+                throw new Exceptions.InvalidOperationException(string.Format("Cannot resize array to {0}. Please provide a non-negative size.", newSize));
+            }
+
+            if (newSize > size)
+            {
+                for (int i = size; i < newSize; ++i)
+                {
+                    rep.Add(ValueFactory.CreateValue(initializatorType));
+                }
+            }
+            else
+            {
+                while (newSize < size--)
+                {
+                    rep.RemoveAt(rep.Count - 1);
+                }
+            }
+            size = newSize;
+        }
+
         public override int Size
         {
             get { return size; }
+            set 
+            {
+                Resize(value);
+            }
         }
     }
 }

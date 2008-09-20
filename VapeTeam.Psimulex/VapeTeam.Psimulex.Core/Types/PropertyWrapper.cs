@@ -19,7 +19,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             this.targetObject = targetObject;
             this.propertyInfo = propertyInfo;
-            this.correspondingPsimulexValue = ValueFactory.Create(GetValueObject());
+            this.correspondingPsimulexValue = ValueFactory.Create(GetValue());
         }
 
         public override TypeEnum TypeEnum
@@ -27,7 +27,7 @@ namespace VapeTeam.Psimulex.Core.Types
             get { return TypeEnum.PropertyWrapper; }
         }
 
-        protected object GetValueObject()
+        protected object GetValue()
         {
             object value = null;
             try
@@ -41,6 +41,16 @@ namespace VapeTeam.Psimulex.Core.Types
                     ex);
             }
             return value;
+        }
+
+        protected void SetValue(object value)
+        {
+            propertyInfo.SetValue(targetObject, value, null);
+        }
+
+        public override void Assign(BaseType value)
+        {
+            SetValue(ValueFactory.TransformToDotnetType(value, propertyInfo.PropertyType));
         }
 
         public override object ToObject()

@@ -724,6 +724,98 @@ namespace VapeTeam.Psimulex.Tests
         }
 
         [TestMethod]
+        public void ArrayResize()
+        {
+            // Testing array operations: create, index, Size
+            VapeTeam.Psimulex.Core.Process process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                    // int[5] a;
+                    // a[0]=0;a[1]=1;a[2]=2;a[3]=3;a[4]=8;
+                    new Push(new VapeTeam.Psimulex.Core.Types.Array(TypeEnum.Integer, 5)),
+                    new Initialize("a"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(0),
+                    new Push(0),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(1),
+                    new Push(1),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(2),
+                    new Push(2),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(3),
+                    new Push(3),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(4),
+                    new Push(8),
+                    new Assign(),
+
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Select("Size"),
+                    new Push(2),
+                    new Assign(),
+
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Select("Size"),
+                    new Call("print"),
+
+                    //// for (i=0;i<a.Size;++i) print(a[i]);
+                    new Push(0),
+                    new Initialize("i"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Indexing(),
+                    new Call("print"),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Select("size"),
+                    new Compare(Compare.ComparisonModes.LessThan),
+                    new RelativeJumpIfTrue(-13),
+
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Select("Size"),
+                    new Push(5),
+                    new Assign(),
+
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Indexing(4),
+                    new Push(9),
+                    new Assign(),
+
+                    new Push("-"),
+                    new Call("print"),
+
+                    new Push(0),
+                    new Initialize("i"),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Indexing(),
+                    new Call("print"),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(),
+                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Select("size"),
+                    new Compare(Compare.ComparisonModes.LessThan),
+                    new RelativeJumpIfTrue(-13)
+                ));
+
+            Assert.AreEqual("201-01009", process.StandardOutput);
+        }
+
+        [TestMethod]
         public void ListOperations1()
         {
             // Testing list operations : add, length, pushfront, pushback, removeat, clear
@@ -833,6 +925,8 @@ namespace VapeTeam.Psimulex.Tests
                 ));
 
             Assert.AreEqual("True012025-13-10230", process.StandardOutput);
+            
+            // Test if the run stack is well cleaned
             Assert.AreEqual(2, process.MainThread.RunStack.Count);
         }
     }
