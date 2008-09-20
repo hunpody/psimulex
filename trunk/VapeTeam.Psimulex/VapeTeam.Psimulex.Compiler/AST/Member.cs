@@ -11,6 +11,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class Member
     {
         public TypeEnum Type { get; set; }
+        public string TypeName { get; set; }
         public int DimensionCount { get; set; }
         public List<int> DimensionList { get; set; }
         public string Name { get; set; }
@@ -20,6 +21,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public Member()
         {
             Type = TypeEnum.Undefined;
+            TypeName = "";
             DimensionCount = 1;
             DimensionList = new List<int>();
             Name = "";
@@ -27,9 +29,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             IsInitialised = false;
         }
 
-        public Member(TypeEnum type, int dimensionCount, List<int> dimensionList, string name, BaseType value, bool isInitialised)
+        public Member(TypeEnum type, string typeName, int dimensionCount, List<int> dimensionList, string name, BaseType value, bool isInitialised)
         {
             Type = type;
+            TypeName = typeName;
             DimensionCount = dimensionCount;
             DimensionList = dimensionList;
             Name = name;
@@ -41,7 +44,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             string member = "";
 
-            member += Type + " ";
+            if (Type == TypeEnum.UserDefinedType)
+                member += TypeName + " ";
+            else
+                member += Type + " ";
             member += " ( Dim:" + DimensionCount + " ";
             member += "[";
             for (int i = 0; i < DimensionList.Count; i++)

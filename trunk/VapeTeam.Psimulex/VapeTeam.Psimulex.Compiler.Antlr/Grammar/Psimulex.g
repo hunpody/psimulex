@@ -52,7 +52,7 @@ tokens {
 }
 
 compilationUnit
-    :	( simpleProgram | multiFunctionalProgram ) EOF!
+    :	( simpleProgram | multiFunctionalProgram )? EOF!
     ;
 
 simpleProgram
@@ -161,11 +161,11 @@ functionDeclarations
     ;
     
 functionDeclaration
-    :	typedIdentifier '(' formalParameters? ')' block -> ^( FUNCDEC typedIdentifier formalParameters? block )
+    :	typedIdentifier formalParameters  block -> ^( FUNCDEC typedIdentifier formalParameters? block )
     ;
 
 formalParameters
-    :   typedIdentifier (',' typedIdentifier)* -> ^( FORMALPARAM typedIdentifier typedIdentifier* )
+    :   '(' ( typedIdentifier (',' typedIdentifier)* )? ')' -> ^( FORMALPARAM ( typedIdentifier typedIdentifier* )? )
     ;
 
 
