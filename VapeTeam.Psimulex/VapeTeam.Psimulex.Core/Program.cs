@@ -42,7 +42,7 @@ namespace VapeTeam.Psimulex.Core
             foreach (ICommand command in CommandList)
             {
                 string line = "";
-                line = lineNumber.ToString("000") + " " + command.ToString() + "\n\r";
+                line = lineNumber.ToString("000") + " " + command.ToString() + "\r\n";
                 sb.Append(line);
                 lineNumber++;
             }
