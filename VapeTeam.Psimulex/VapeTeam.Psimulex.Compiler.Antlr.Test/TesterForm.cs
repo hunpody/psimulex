@@ -9,13 +9,16 @@ using System.Windows.Forms;
 using System.IO;
 
 using VapeTeam.Psimulex.Compiler.AST;
+using VapeTeam.Psimulex.Core;
+using VapeTeam.Psimulex.Core.Factories;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 {
     public partial class TesterForm : Form
     {
         private Compiler compiler = new Compiler();
-
+        PsiCodeGeneratorVisitor visitor = new PsiCodeGeneratorVisitor();
+        
         public TesterForm()
         {
             InitializeComponent();
@@ -27,6 +30,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 
         private void compileButton_Click(object sender, EventArgs e)
         {
+            visitor = new PsiCodeGeneratorVisitor();
+
             var result = compiler.Compile(sourceCodeTextEditorControl.Text);
 
             StringBuilder sb = new StringBuilder();
@@ -40,6 +45,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             //resultTextBox.Text = compiler.treeAdaptor.ToString();
             resultTextBox.Text = compiler.output;
             txtErrors.Text = sb.ToString();
+
+            visitor.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -59,7 +66,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                     btnViewProgramString_Click(this, new EventArgs());
                     return true;
                 case Keys.F5:
-                    compileButton_Click(this, new EventArgs());
+                    btnRun_Click(this, new EventArgs());
                     return true;
                 case Keys.F6:
                     compileButton_Click(this, new EventArgs());
@@ -95,12 +102,9 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             frmProgramString frmProgramString = new frmProgramString();
 
             //PsiProgramStringBuilderVisitor v = new PsiProgramStringBuilderVisitor();
-            //v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);
+            //v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);            
 
-            PsiCodeGeneratorVisitor v = new PsiCodeGeneratorVisitor();
-            v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);
-
-            frmProgramString.ProgramString = "Program Microlex Code:\n\r\n\r" + v.Program.ToString() + "Compiler Messages:\n\r\n\r" + v.CompilerMessages;
+            frmProgramString.ProgramString = "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() + "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.CompilerMessages;
             frmProgramString.Show();
         }
 
@@ -108,6 +112,18 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         {
             compileButton_Click(this, new EventArgs());
             btnViewProgramString_Click(this, new EventArgs());
+            btnViewTree_Click(this, new EventArgs());
+        }
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            compileButton_Click(this, new EventArgs());
+
+            var machine = MachineBuilder.Instance.CreateMachine(1, 16);
+            var process = machine.System.Load(visitor.Program);
+            machine.System.Run(process);
+
+            resultTextBox.Text = process.StandardOutput;
         }
     }
 }
