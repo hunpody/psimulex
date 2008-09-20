@@ -87,6 +87,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 */
 
                 case PsimulexLexer.MEMBER_SELECT: type = NodeType.MemberSelect; break;
+                case PsimulexLexer.FUNCTION_CALL: type = NodeType.FunctionCall; break;
                 case PsimulexLexer.MEMBER_FUNCTION_CALL: type = NodeType.FunctionCall; break;
                 case PsimulexLexer.INDEXING: type = NodeType.Indexing; break;
                 case PsimulexLexer.DIMS: type = NodeType.Dimensions; break;

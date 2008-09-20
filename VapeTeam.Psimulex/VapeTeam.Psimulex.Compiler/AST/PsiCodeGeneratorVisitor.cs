@@ -47,10 +47,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private Member lastCompiledMember;
 
         private TypeEnum lastCompiledDataType;
+        private string lastCompiledUserDefinedDataType;
+
         private int lastCompiledDimensionCount;
         private List<int> lastCompiledDimensionList;
 
-        private BaseType lastCompiledConstantValue;
+        private BaseType lastCompiledConstantValue;        
 
         private bool lastCompiledArrayIsDynamic;
 
@@ -150,6 +152,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             node.Left.Accept(this);
             TypeEnum memberType = lastCompiledDataType;
+            string memberTypeName = node.Left.Left.Left.Value;
 
             int memberDimensionCount = lastCompiledDimensionCount;
             List<int> memberDimensionList = lastCompiledDimensionList;
@@ -166,6 +169,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             lastCompiledMember = new Member(
                 memberType,
+                memberTypeName,
                 memberDimensionCount,
                 memberDimensionList,
                 memberName,
@@ -185,44 +189,98 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 child.Accept(this);
 
                 // Message
-                string record = "Global Variable Found : " + lastCompiledMember.ToString();
-                AddMessage(record);
+                string global = "Global Variable Found : " + lastCompiledMember.ToString();
+                AddMessage(global);
 
                 // Globális változó felvétele a lastCompiledMember -ból
                 // ...
             }
         }
 
-        public void Visit(FunctionDeclarationsNode node)
-        {
-            VisitChildren(node);
-        }
-
+        public void Visit(FunctionDeclarationsNode node) { VisitChildren(node); }
         public void Visit(FunctionDeclarationNode node)
         {
-            VisitChildren(node);
+            // Új függvény kezdése -> név felvétele és mellé egy üres parancsobjektum tömb
+
+            node.Left.Accept(this);
+            TypeEnum functionType = lastCompiledDataType;
+            string functionTypeName = node.Left.Left.Left.Value;
+            // lastCompiledDimensionCount, Dimensions, IsDynamic
+
+            bool functionIsReferenceType = false;
+            if (node.ChildrenCount == 5)
+                functionIsReferenceType = true;
+
+            string functionName = node.GetChild(node.ChildrenCount - 3).Value;
+
+            // Message
+            string global = "Function Found : " + functionType + " " + functionName + " () ";
+            AddMessage(global);
+            // Message
+
+            node.GetChild(node.ChildrenCount - 2).Accept(this);
+            node.Right.Accept(this);
+            
+            // Függvény felvétele, adatainak rendezése
+            // ...
         }
 
         public void Visit(FormalParameterNode node)
         {
+            // Szépen ki kell gyűjteni. Esetleg Member álltalánosítása és erre is hasznosítása.
+            // Átnevezés ?
             VisitChildren(node);
         }
 
-        public void Visit(BlockNode node)
-        {
-            VisitChildren(node);
-        }
-
+        public void Visit(BlockNode node) { VisitChildren(node); }
         public void Visit(VariableInitialisationNode node)
         {
-            // Tömbnél tudni kell, hogy dinamikus vagy statikus.
-            VisitChildren(node);
+            // Type
+            node.Left.Accept(this);
+
+            // If this is UserDefined, than use lastCompiledUserDefinedDataType
+            TypeEnum varType = lastCompiledDataType;
+
+            string varTypeName = lastCompiledUserDefinedDataType;
+            bool varArrayIsDynamic = lastCompiledArrayIsDynamic;
+            int varDimensionCount = lastCompiledDimensionCount;
+
+            // Reference
+            bool varIsReference = false;
+            if (node.ChildrenCount == 4)
+                varIsReference = true;
+
+            // Name
+            string varName = node.GetChild(node.ChildrenCount - 2).Value;
+
+            // Expression
+            node.Right.Accept(this);
+
+
+
+            // Initialize
+            AddCommand(new Initialize(varName,varType));
         }
 
         public void Visit(VariableDeclarationNode node)
-        {
-            // Tömbnél tudni kell, hogy dinamikus vagy statikus.
-            VisitChildren(node);
+        {            
+            // Type
+            node.Left.Accept(this);
+
+            // If this is UserDefined, than use lastCompiledUserDefinedDataType
+            TypeEnum varType = lastCompiledDataType;
+
+            string varTypeName = lastCompiledUserDefinedDataType;
+            bool varArrayIsDynamic = lastCompiledArrayIsDynamic;
+            int varDimensionCount = lastCompiledDimensionCount;
+
+            // Name
+            string varName = node.GetChild(node.ChildrenCount - 2).Value;
+
+
+
+            // Declare
+            AddCommand(new Declare(varName,varType));
         }
 
         /*Operators*/
@@ -289,7 +347,15 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(FunctionCallNode node)
         {
-            VisitChildren(node);
+            // Name
+            string funcName = node.Left.Value;
+            
+            // Arguments
+            for (int i = 1; i < node.ChildrenCount; i++)
+                node.Children[i].Accept(this);
+
+            // FunctionCall
+            AddCommand(new Call(funcName));
         }
 
         public void Visit(IndexingNode node)
@@ -369,19 +435,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(DataTypeNode node)
         {
             lastCompiledDataType = TypeEnumFactory.CreateTypeEnum(node.Left.Value);
+            lastCompiledUserDefinedDataType = node.Left.Value;
+
             lastCompiledDimensionCount = 0;
             lastCompiledDimensionList = new List<int>();
         }
-        
-        public void Visit(DataTypeNameNode node)
-        {
-            VisitChildren(node);
-        }
-        
-        public void Visit(ReferenceNode node)
-        {
-            VisitChildren(node);
-        }
+
+        /**/public void Visit(DataTypeNameNode node) { VisitChildren(node); }
+        /**/public void Visit(ReferenceNode node) { VisitChildren(node); }
 
         #endregion
     }
