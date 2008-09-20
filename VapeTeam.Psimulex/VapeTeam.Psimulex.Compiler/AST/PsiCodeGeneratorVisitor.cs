@@ -5,6 +5,7 @@ using System.Text;
 using VapeTeam.Psimulex.Core;
 using VapeTeam.Psimulex.Core.Types;
 using VapeTeam.Psimulex.Core.Commands;
+using VapeTeam.Psimulex.Core.Factories;
 
 namespace VapeTeam.Psimulex.Compiler.AST
 {
@@ -12,19 +13,25 @@ namespace VapeTeam.Psimulex.Compiler.AST
     {
         #region PsiBuilderVisitor Members
         
-        public Program Program { get; set; }
+        public ProgramBuilder Program { get; set; }
         public StringBuilder CompilerMessages { get; private set; }
         
         public PsiCodeGeneratorVisitor()
         {
-            Program = new Program();
+            Program = ProgramBuilder.Create();
             CompilerMessages = new StringBuilder();
-            lastCompiledMember = new Member();
+
+            InitHelpers();
         }
 
         public void AddCommand(ICommand command)
         {
             Program.Add(command);
+        }
+
+        public void AddCommand(params ICommand[] commands)
+        {
+            Program.Add(commands);
         }
 
         public void AddMessage(string msg)
@@ -33,10 +40,37 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         /*Compile Helpers*/
+
         /// <summary>
         /// Global or Struct Member Variables.
         /// </summary>
         private Member lastCompiledMember;
+
+        private TypeEnum lastCompiledDataType;
+        private int lastCompiledDimensionCount;
+        private List<int> lastCompiledDimensionList;
+
+        private BaseType lastCompiledConstantValue;
+
+        private bool lastCompiledArrayIsDynamic;
+
+        private void InitHelpers()
+        {
+            lastCompiledMember = new Member();
+
+            lastCompiledDataType = TypeEnum.Undefined;
+            lastCompiledDimensionCount = 0;
+            lastCompiledDimensionList = new List<int>();
+
+            lastCompiledConstantValue = null;
+
+            lastCompiledArrayIsDynamic = false;
+        }
+
+        private string ToVal(string s)
+        {
+            return s.Replace("\"","").Replace("\'","");
+        }
 
 
         #endregion
@@ -67,6 +101,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
              * B) Importolási sorrendben végigfordítjuk és egy tömbbe pakoljuk.
              * C) ???
              */
+
+            // Message
             string imports = "Imports Found : ( ";
             foreach (IPsiNode child in node.Children)
             {
@@ -76,6 +112,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             imports += " )";
             AddMessage(imports);
+
+            // Tényleges Importálás, importált fájlok fordítása
+            // ...
         }
 
         public void Visit(TypeDeclarationNode node) { VisitChildren(node); }
@@ -83,30 +122,74 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             // User Defined Struct Name
             string structName = node.Left.Value;
+            List<Member> structMembers = new List<Member>();
+
             for (int i = 1; i < node.ChildrenCount; i++)
             {
-                //Visit(node); Return vagy nem return ?
-
-                // Itt kell kiolvasni az lastCompiledMember -t
-                // És felvenni az adott Struktúra tagváltozók közé (típus, név, esetleges kezdőérték)
+                node.Children[i].Accept(this);
+                structMembers.Add(lastCompiledMember);
             }
 
+            // Message
+            string record = "Struct Found : " + structName + " { ";
+            foreach (Member member in structMembers)
+            {
+                record += member.ToString();
+
+                if (member != structMembers[structMembers.Count - 1])
+                    record += ", ";
+            }
+            record += " }";
+            AddMessage(record);
+
+            // Struct Hozzáadása az UserDefinedTypes -hoz
+            // ...
         }
 
         public void Visit(MemberDeclarationNode node)
         {
-            VisitChildren(node);
-            //return new Member(TypeEnum.Undefined,"","",false);
+            node.Left.Accept(this);
+            TypeEnum memberType = lastCompiledDataType;
+
+            int memberDimensionCount = lastCompiledDimensionCount;
+            List<int> memberDimensionList = lastCompiledDimensionList;
+
+            string memberName = node.GetChild(1).Value;
+            bool memberIsInitialised = false;
+            BaseType memberValue = null;
+            if (node.GetChild(2) != null)
+            {
+                node.GetChild(2).Accept(this);
+                memberValue = lastCompiledConstantValue;
+                memberIsInitialised = true;
+            }
+
+            lastCompiledMember = new Member(
+                memberType,
+                memberDimensionCount,
+                memberDimensionList,
+                memberName,
+                memberValue,
+                memberIsInitialised
+                );
+
+            lastCompiledDimensionList = new List<int>();
+            lastCompiledDimensionCount = 1;
+            lastCompiledDataType = TypeEnum.Undefined;
         }
 
         public void Visit(GlobalVariableDeclarationsNode node)
         {
-            for (int i = 0; i < node.ChildrenCount; i++)
+            foreach (IPsiNode child in node.Children)
             {
-                //Visit(node); Return vagy nem return ?
-                
-                // Itt kell kiolvasni az lastCompiledMember -t
-                // És felvenni a globális változók közé (típus, név, esetleges kezdőérték)
+                child.Accept(this);
+
+                // Message
+                string record = "Global Variable Found : " + lastCompiledMember.ToString();
+                AddMessage(record);
+
+                // Globális változó felvétele a lastCompiledMember -ból
+                // ...
             }
         }
 
@@ -132,11 +215,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(VariableInitialisationNode node)
         {
+            // Tömbnél tudni kell, hogy dinamikus vagy statikus.
             VisitChildren(node);
         }
 
         public void Visit(VariableDeclarationNode node)
         {
+            // Tömbnél tudni kell, hogy dinamikus vagy statikus.
             VisitChildren(node);
         }
 
@@ -214,12 +299,26 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(DimensionsNode node)
         {
-            VisitChildren(node);
+            lastCompiledDimensionCount = node.ChildrenCount;
+            for (int i = 0; i < node.ChildrenCount; i++)
+                node.Children[i].Accept(this);
+
+            lastCompiledArrayIsDynamic = false;
+        }
+
+        public void Visit(ConstantDimensionsNode node)
+        {
+            lastCompiledDimensionList = new List<int>();
+            for (int i = 0; i < node.ChildrenCount; i++)
+                lastCompiledDimensionList.Add(Convert.ToInt32(ToVal(node.Children[i].Value)));
+            lastCompiledDimensionCount = lastCompiledDimensionList.Count;
         }
 
         public void Visit(DimensionMarkerNode node)
         {
-            VisitChildren(node);
+            lastCompiledDimensionCount = node.ChildrenCount - 2;
+            lastCompiledDimensionList = new List<int>();
+            lastCompiledArrayIsDynamic = true;
         }
 
         /*Identifier*/
@@ -231,6 +330,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Literals*/
         public void Visit(CharLiteralNode node)
         {
+            //lastCompiledBaseTypeValue = ...
             VisitChildren(node);
         }
 
@@ -265,21 +365,19 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         /*Types*/
+        public void Visit(TypeNode node) { VisitChildren(node); }
+        public void Visit(DataTypeNode node)
+        {
+            lastCompiledDataType = TypeEnumFactory.CreateTypeEnum(node.Left.Value);
+            lastCompiledDimensionCount = 0;
+            lastCompiledDimensionList = new List<int>();
+        }
+        
         public void Visit(DataTypeNameNode node)
         {
             VisitChildren(node);
         }
-
-        public void Visit(DataTypeNode node)
-        {
-            VisitChildren(node);
-        }
-
-        public void Visit(TypeNode node)
-        {
-            VisitChildren(node);
-        }
-
+        
         public void Visit(ReferenceNode node)
         {
             VisitChildren(node);

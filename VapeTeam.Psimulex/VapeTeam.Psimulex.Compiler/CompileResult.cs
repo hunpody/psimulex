@@ -10,5 +10,12 @@ namespace VapeTeam.Psimulex.Compiler
     {
         public Program CompiledProgram { get; set; }
         public string SourceText { get; set; }
+
+        // Ide még kell :
+        /* Fv lista (dictionary)
+         * User defined type dictionary ( Struct )
+         * CompilerMesages
+         * Esetleg külön Compiler errors.         * 
+         */
     }
 }

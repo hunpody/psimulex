@@ -90,6 +90,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 case PsimulexLexer.MEMBER_FUNCTION_CALL: type = NodeType.FunctionCall; break;
                 case PsimulexLexer.INDEXING: type = NodeType.Indexing; break;
                 case PsimulexLexer.DIMS: type = NodeType.Dimensions; break;
+                case PsimulexLexer.CONSTANT_DIMS: type = NodeType.ConstantDimensions; break;
                 case PsimulexLexer.DIMMARKER: type = NodeType.DimensionMarker; break;
                 
                 /*Types*/

@@ -25,6 +25,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Accept(IPsiVisitor v);
         IPsiNode Clone();
         void Add(IPsiNode child);
+        IPsiNode GetChild(int i);
 
         IPsiNode Left { get; set; }
         IPsiNode Right { get; set; }
