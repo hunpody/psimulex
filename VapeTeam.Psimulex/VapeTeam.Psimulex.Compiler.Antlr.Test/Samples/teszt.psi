@@ -1,31 +1,45 @@
-﻿import "asd";
+﻿import "valami.psi";
+import "megValmi.psi";
+import "ujfentValami.psi";
 
-struct record	{	int i = 10;	string s = "asd";	bool b = true;	char c = 's';	}
+struct iNt
+{
+	int z;
+	int[,,,,,] mm;
+	alma[10,10,10] x;
+}
 
-int i = 10;
+struct record	
+{	
+	string s = "asd";
+	bool b = true;
+	char c;
+}
+struct s {	int z = "10";	}
+
+int [,] z = 10;
+int [1,1] zx = 100;
+
 string s = "sanyi";
 
-int main(int i)
+int[] main()
 {
-	for(int i = 10; i < 10; i++)
+a.a;
+a.a(a);
+ a = b = c = 10;
+	for(int i = 1; i < 10; i++)
 		i++;
 		
-		
-	bool l;
-	bool l = true;
-	while(a==b)
-	{
-		string s = "as";
-	}
+	while(a==b || l ||k)
+	{	string s;	}
 	
-	func<int> f = a => a + a;
-		
-	id = a => 
-	{
-		int i;
-		a+b+c-d--;
-		return a;
-	};
-		
+	add(10+10,20*"as");
+	
+
 	l--;
+}
+
+list add(int[1,1] & a, int b)
+{
+	return a + b;
 }
