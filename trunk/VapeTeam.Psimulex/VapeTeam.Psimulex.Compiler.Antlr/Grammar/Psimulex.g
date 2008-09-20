@@ -9,6 +9,7 @@ options {
 }
 
 tokens {
+	COMPILATION_UNIT;
 	SIMPLE_PROGRAM;
 	MULTY_FUNCTIONAL_PROGRAM;
 	
@@ -32,15 +33,17 @@ tokens {
 	
 	EXPRESSION;
 	ASSIGNMENT;
-	LAMBDA_EXPRESSION;
+	/*LAMBDA_EXPRESSION;*/
 	
 	MEMBER_FUNCTION_CALL;
 	FUNCTION_CALL;
 	MEMBER_SELECT;
 	INDEXING;
 	
+	/*
 	LAMBDAPARAM;
 	LAMBDA_STATEMENT;
+	*/
 	
 	// Others
 	DIMS;
@@ -52,12 +55,12 @@ compilationUnit
     ;
 
 simpleProgram
-	:	statement* -> ^( SIMPLE_PROGRAM statement* )
+	:	statement* -> ^( COMPILATION_UNIT ^( SIMPLE_PROGRAM statement* ) )
 	;
 
 multiFunctionalProgram
 	:	importDeclarations typeDeclarations globalVariableDeclarations functionDeclarations
-		-> ^( MULTY_FUNCTIONAL_PROGRAM importDeclarations typeDeclarations globalVariableDeclarations functionDeclarations )
+		-> ^( COMPILATION_UNIT ^( MULTY_FUNCTIONAL_PROGRAM importDeclarations typeDeclarations globalVariableDeclarations functionDeclarations ) )
 	;
 
 globalVariableDeclarations
@@ -155,12 +158,14 @@ formalParameters
 ///////////
 
 type
-    :	dataType | functionPointerType
+    :	dataType /*| functionPointerType*/
     ;
 
+/*
 functionPointerType
 	:	Func '<' dataType dynamicArrayType? '>' -> ^( FUNCTIONPOINTERTYPE dataType dynamicArrayType? )
 	;
+*/
 
 dataType
 	:	dataTypeName -> ^( DATATYPE dataTypeName )
@@ -188,6 +193,11 @@ builtInType
 	|	Stack
 	|	Queue
 	|	PQueue
+	|	Thread
+	|	Timer
+	|	Graph
+	|	Node
+	|	Edge
 	// ...
 	;
 
@@ -200,7 +210,7 @@ builtInType
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 expression
-	:	assignment | exp | lambdaExpression
+	:	assignment | exp /*| lambdaExpression*/
 	;
 
 exp
@@ -342,7 +352,7 @@ literal
 ////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-     
+/*
 lambdaExpression
 	:	parameters '=>' lambdaStatement -> ^( LAMBDA_EXPRESSION parameters ^( LAMBDA_STATEMENT lambdaStatement ) )
 	;
@@ -366,7 +376,7 @@ lambdaParameter
 lambdaStatement
 	:	expression | block
 	;
-
+*/
 
 
 ////////////////
@@ -469,6 +479,7 @@ Char	:	'char'|'Char'|'CHAR'|'character'|'Character'|'CHARACTER'		;
 Int		:	'int'|'Int'|'INT'|'integer'|'Integer'|'INTEGER'					;
 Decimal	:	'decimal'|'Decimal'|'DECIMAL'	/*|'float'|'Float'|'FLOAT'*/	;
 String	:	'string'|'String'|'STRING'										;
+Void	:	'void'|'Void'|'VOID'			;
 // ...
 
 /*BuiltIn Types*/
@@ -479,7 +490,12 @@ List	:	'list'|'List'|'LIST'			;
 Stack	:	'stack'|'Stack'|'STACK'			;
 Queue	:	'queue'|'Queue'|'QUEUE'			;
 PQueue	:	'pqueue'|'PQueue'|'PQUEUE'		;
-Void	:	'void'|'Void'|'VOID'			;
+Thread	:	'thread'|'Thread'|'THREAD'		;
+Timer	:	'timer'|'Timer'|'TIMER'			;
+Graph	:	'graph'|'Graph'|'GRAPH'			;
+Edge	:	'edge'|'Edge'|'EDGE'			;
+Node	:	'node'|'Node'|'NODE'			;
+
 // ...
 
 /*Key Words*/
@@ -504,7 +520,7 @@ Loop	:	'loop'|'Loop'|'LOOP'							;
 To		:	'to'|'To'|'TO'|'until'|'Until'|'UNTIL'			;
 In		:	'in'|'In'|'IN'									;
 
-Func	:	'func'|'Func'|'FUNC'							;
+/*Func	:	'func'|'Func'|'FUNC'							;*/
 
 
 // Literals
