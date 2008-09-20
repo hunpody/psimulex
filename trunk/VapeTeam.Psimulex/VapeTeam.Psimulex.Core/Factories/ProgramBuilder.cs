@@ -42,5 +42,10 @@ namespace VapeTeam.Psimulex.Core.Factories
         {
             return builder.Program;
         }
+
+        public override string ToString()
+        {
+            return Program.ToString();
+        }
     }
 }
