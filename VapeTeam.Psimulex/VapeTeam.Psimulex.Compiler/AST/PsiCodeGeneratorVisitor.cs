@@ -399,6 +399,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(StringLiteralNode node)
         {
             lastCompiledConstantValue = ValueFactory.Create(Convert.ToString(ToVal(node.Value)));
+            AddCommand(new Push(lastCompiledConstantValue));
         }
 
         public void Visit(IntLiteralNode node)
