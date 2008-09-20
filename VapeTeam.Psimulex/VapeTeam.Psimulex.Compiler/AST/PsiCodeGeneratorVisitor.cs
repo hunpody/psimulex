@@ -388,45 +388,43 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         /*Identifier*/
-        public void Visit(IdentifierNode node)
-        {
-            VisitChildren(node);
-        }
+        /**/public void Visit(IdentifierNode node) { VisitChildren(node); }
 
         /*Literals*/
         public void Visit(CharLiteralNode node)
         {
-            //lastCompiledBaseTypeValue = ...
-            VisitChildren(node);
+            lastCompiledConstantValue = ValueFactory.Create(Convert.ToChar(ToVal(node.Value)));
         }
 
         public void Visit(StringLiteralNode node)
         {
-            VisitChildren(node);
+            lastCompiledConstantValue = ValueFactory.Create(Convert.ToString(ToVal(node.Value)));
         }
 
         public void Visit(IntLiteralNode node)
         {
-            VisitChildren(node);
+            lastCompiledConstantValue = ValueFactory.Create(Convert.ToInt32(ToVal(node.Value)));
         }
 
         public void Visit(DecimalLiteralNode node)
         {
-            VisitChildren(node);
+            lastCompiledConstantValue = ValueFactory.Create(Convert.ToDecimal(ToVal(node.Value)));
         }
 
         public void Visit(BoolLiteralNode node)
         {
-            VisitChildren(node);
+            lastCompiledConstantValue = ValueFactory.Create(Convert.ToBoolean(ToVal(node.Value)));
         }
 
         public void Visit(NullLiteralNode node)
         {
+            // ???
             VisitChildren(node);
         }
 
         public void Visit(InfinityLiteralNode node)
         {
+            // ???
             VisitChildren(node);
         }
 
