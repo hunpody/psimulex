@@ -77,6 +77,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case NodeType.FunctionCall: node = new FunctionCallNode(); v = true; break;
                 case NodeType.Indexing: node = new IndexingNode(); v = true; break;
                 case NodeType.Dimensions: node = new DimensionsNode(); v = true; break;
+                case NodeType.ConstantDimensions: node = new ConstantDimensionsNode(); v = true; break;
                 case NodeType.DimensionMarker: node = new DimensionMarkerNode(); v = true; break;
 
                 /*Identifier*/

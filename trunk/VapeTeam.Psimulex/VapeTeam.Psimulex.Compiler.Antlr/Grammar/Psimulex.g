@@ -47,6 +47,7 @@ tokens {
 	
 	// Others
 	DIMS;
+	CONSTANT_DIMS;
 	DIMMARKER;
 }
 
@@ -97,7 +98,7 @@ structBody
     ;
 
 memberDeclaration
-    :   typedIdentifierNonRef ( Assign literal )? ';' -> ^( MEMBERDEC typedIdentifierNonRef literal? )
+    :   memberTypedIdentifierNonRef ( Assign literal )? ';' -> ^( MEMBERDEC memberTypedIdentifierNonRef literal? )
     ;
 
 localVariableDeclaration
@@ -126,7 +127,23 @@ staticArrayType
 dynamicArrayType
 	:	'[' ( ',' )* ']' -> ^( DIMMARKER '[' ( ',' )* ']' )
 	;
+
+memberScalarOrArrayType
+	:	type memberArrayType? -> ^( TYPE type memberArrayType? )
+	;
+
+memberArrayType
+	:	memberStaticArrayType | dynamicArrayType
+	;
+
+memberStaticArrayType
+	:	'[' literal (',' literal)* ']' -> ^( CONSTANT_DIMS literal ( literal )* )
+	;
 	
+memberTypedIdentifierNonRef
+	:	memberScalarOrArrayType Identifier
+	;
+
 typedIdentifierNonRef
 	:	scalarOrArrayType Identifier 
 	;
@@ -172,7 +189,11 @@ dataType
 	;
 
 dataTypeName
-	:	primitiveType | builtInType
+	:	primitiveType | builtInType | userDefinedTypes
+	;
+	
+userDefinedTypes
+	:	Identifier
 	;
 
 primitiveType

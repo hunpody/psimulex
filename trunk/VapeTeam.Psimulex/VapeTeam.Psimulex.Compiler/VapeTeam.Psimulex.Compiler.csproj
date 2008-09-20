@@ -45,11 +45,12 @@
     <Compile Include="AST\IPsiVisitor.cs" />
     <Compile Include="AST\Member.cs" />
     <Compile Include="AST\NodeType.cs" />
-    <Compile Include="AST\PsiBuilderVisitor.cs" />
+    <Compile Include="AST\PsiCodeGeneratorVisitor.cs" />
     <Compile Include="AST\PsiNode.cs" />
     <Compile Include="AST\PsiNodeFactory.cs" />
     <Compile Include="AST\PsiPrinterVisitor.cs" />
     <Compile Include="AST\PsiProgramStringBuilderVisitor.cs" />
+    <Compile Include="AST\TypeEnumFactory.cs" />
     <Compile Include="CompileResult.cs" />
     <Compile Include="ICompiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

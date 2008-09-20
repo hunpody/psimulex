@@ -29,7 +29,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(ImportDeclarationNode node);
         void Visit(TypeDeclarationNode node);
         void Visit(StructDeclarationNode node);
-        Member Visit(MemberDeclarationNode node);
+        void Visit(MemberDeclarationNode node);
         void Visit(GlobalVariableDeclarationsNode node);
         void Visit(FunctionDeclarationsNode node);
         void Visit(FunctionDeclarationNode node);
@@ -63,6 +63,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(FunctionCallNode node);
         void Visit(IndexingNode node);
         void Visit(DimensionsNode node);
+        void Visit(ConstantDimensionsNode node);
         void Visit(DimensionMarkerNode node);
 
         /*ID*/

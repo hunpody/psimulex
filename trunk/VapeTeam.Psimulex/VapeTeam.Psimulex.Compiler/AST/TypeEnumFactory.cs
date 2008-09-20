@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core.Types;
 
-namespace VapeTeam.Psimulex.Compiler.ANTLR
+namespace VapeTeam.Psimulex.Compiler.AST
 {
-    public class TypeEnomFactory
+    public class TypeEnumFactory
     {
         public static TypeEnum CreateTypeEnum(string typeString)
         {

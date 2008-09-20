@@ -53,6 +53,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         MemberFunctionCall,        
         FunctionCall,
         Indexing,
+        ConstantDimensions,
         Dimensions,
         DimensionMarker,        
 

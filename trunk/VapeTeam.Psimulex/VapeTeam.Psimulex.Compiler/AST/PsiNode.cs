@@ -86,6 +86,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
+        public IPsiNode GetChild(int i)
+        {
+            if (i < ChildrenCount)
+                return Children[i];
+            else
+                return null;
+        }
+
         public IPsiNode Left
         {
             get
@@ -188,6 +196,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class FunctionCallNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class IndexingNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class DimensionsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class ConstantDimensionsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class DimensionMarkerNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
     /*ID*/

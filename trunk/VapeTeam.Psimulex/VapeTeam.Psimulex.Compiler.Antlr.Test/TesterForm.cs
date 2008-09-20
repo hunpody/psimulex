@@ -97,7 +97,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             //PsiProgramStringBuilderVisitor v = new PsiProgramStringBuilderVisitor();
             //v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);
 
-            PsiBuilderVisitor v = new PsiBuilderVisitor();
+            PsiCodeGeneratorVisitor v = new PsiCodeGeneratorVisitor();
             v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);
 
             frmProgramString.ProgramString = "Program Microlex Code:\n\r\n\r" + v.Program.ToString() + "Compiler Messages:\n\r\n\r" + v.CompilerMessages;
