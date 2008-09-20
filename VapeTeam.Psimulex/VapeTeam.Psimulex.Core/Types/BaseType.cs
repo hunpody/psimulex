@@ -101,6 +101,14 @@ namespace VapeTeam.Psimulex.Core.Types
             throw new PsimulexCoreException(string.Format("Cannot assign a {0} value to {1}.", value.GetTypeName(), this.GetTypeName())); 
         }
 
+        public virtual BaseType ConvertTo(TypeEnum type)
+        {
+            if (this.TypeEnum == type)
+                return this;
+
+            return ValueFactory.Convert(this, type);
+        }
+
         #endregion
 
         #region Unary arithmetical operations

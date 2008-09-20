@@ -141,6 +141,19 @@ namespace VapeTeam.Psimulex.Core.Types
             }
         }
 
+        /// <summary>
+        /// Converts a basetype value to the given type.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <returns></returns>
+        public static BaseType Convert(BaseType value, TypeEnum targetType)
+        {
+            var target = CreateValue(targetType);
+            target.Assign(value);
+            return target;
+        }
+
 
         /// <summary>
         /// Creates a BaseType value from the type name string.

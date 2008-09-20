@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTypeTests.cs" />
+    <Compile Include="CommandTests.cs" />
     <Compile Include="Helpers\AssertionHelpers.cs" />
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="JumpTests.cs" />
