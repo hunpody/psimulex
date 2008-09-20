@@ -38,6 +38,7 @@
             this.txtErrors = new System.Windows.Forms.TextBox();
             this.btnViewTree = new System.Windows.Forms.Button();
             this.btnViewProgramString = new System.Windows.Forms.Button();
+            this.btnRun = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -51,7 +52,7 @@
             this.sourceCodeTextEditorControl.Name = "sourceCodeTextEditorControl";
             this.sourceCodeTextEditorControl.Size = new System.Drawing.Size(901, 244);
             this.sourceCodeTextEditorControl.TabIndex = 0;
-            this.sourceCodeTextEditorControl.Text = "(10)";
+            this.sourceCodeTextEditorControl.Text = "string s = \"Helló World\";\r\nprint(s);";
             // 
             // groupBox1
             // 
@@ -155,11 +156,23 @@
             this.btnViewProgramString.UseVisualStyleBackColor = true;
             this.btnViewProgramString.Click += new System.EventHandler(this.btnViewProgramString_Click);
             // 
+            // btnRun
+            // 
+            this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRun.Location = new System.Drawing.Point(744, 282);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(80, 31);
+            this.btnRun.TabIndex = 7;
+            this.btnRun.Text = "Run";
+            this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            // 
             // TesterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 632);
+            this.Controls.Add(this.btnRun);
             this.Controls.Add(this.btnViewProgramString);
             this.Controls.Add(this.btnViewTree);
             this.Controls.Add(this.groupBox3);
@@ -191,6 +204,7 @@
         private System.Windows.Forms.Button btnViewTree;
         public ICSharpCode.TextEditor.TextEditorControl sourceCodeTextEditorControl;
         private System.Windows.Forms.Button btnViewProgramString;
+        private System.Windows.Forms.Button btnRun;
     }
 }
 
