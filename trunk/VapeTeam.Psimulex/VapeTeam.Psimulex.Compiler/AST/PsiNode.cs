@@ -184,12 +184,44 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
     public class GlobalVariableDeclarationsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class FunctionDeclarationsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class FunctionDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class FormalParameterNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class BlockNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class FunctionDeclarationNode : PsiNode
+    {
+        public IPsiNode FunctionType { get; set; }
+        public IPsiNode FunctionReference { get; set; }
+        public IPsiNode FunctionName { get; set; }
+        public IPsiNode FunctionParameterList { get; set; }
+        public IPsiNode FunctionBlock { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
 
-    public class VariableInitialisationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class VariableDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class FormalParameterListNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class FormalParameterNode : PsiNode
+    {
+        public IPsiNode ParameterType { get; set; }
+        public IPsiNode ParameterReference { get; set; }
+        public IPsiNode ParameterName { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class BlockNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class StatementNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
+    public class VariableInitialisationNode : PsiNode
+    {
+        public IPsiNode VariableType { get; set; }
+        public IPsiNode VariableReference { get; set; }
+        public IPsiNode VariableName { get; set; }
+        public IPsiNode VariableInitialValue { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class VariableDeclarationNode : PsiNode
+    {
+        public IPsiNode VariableType { get; set; }
+        public IPsiNode VariableReference { get; set; }
+        public IPsiNode VariableName { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
             
     /*Operators*/
     public class AssignmentOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }

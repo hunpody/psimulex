@@ -151,22 +151,22 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(MemberDeclarationNode node)
         {
             // MemberType
-            node.Left.Accept(this);
+            node.MemberType.Accept(this);
             TypeEnum memberType = lastCompiledDataType;
-            string memberTypeName = node.Left.Left.Left.Value;
+            string memberTypeName = node.MemberTypeName.Value;
 
             int memberDimensionCount = lastCompiledDimensionCount;
             List<int> memberDimensionList = lastCompiledDimensionList;
 
             // MemberName
-            string memberName = node.GetChild(1).Value;
+            string memberName = node.MemberName.Value;
             bool memberIsInitialised = false;
 
             // MemberInitiaValue
             BaseType memberValue = null;
-            if (node.GetChild(2) != null)
+            if (node.MemberInitialValue != null)
             {
-                node.GetChild(2).Accept(this);
+                node.MemberInitialValue.Accept(this);
                 memberValue = lastCompiledConstantValue;
                 memberIsInitialised = true;
             }
@@ -229,18 +229,20 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // ...
         }
 
+        public void Visit(FormalParameterListNode node) { VisitChildren(node); }
         public void Visit(FormalParameterNode node)
         {
             // Szépen ki kell gyűjteni. Esetleg Member álltalánosítása és erre is hasznosítása.
-            // Átnevezés ?
+            // Member Átnevezése Variable -ra ...
             VisitChildren(node);
         }
 
         public void Visit(BlockNode node) { VisitChildren(node); }
+        public void Visit(StatementNode node) { VisitChildren(node); } 
         public void Visit(VariableInitialisationNode node)
         {
             // Type
-            node.Left.Accept(this);
+            node.VariableType.Accept(this);
 
             // If this is UserDefined, than use lastCompiledUserDefinedDataType
             TypeEnum varType = lastCompiledDataType;
@@ -251,14 +253,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // Reference
             bool varIsReference = false;
-            if (node.ChildrenCount == 4)
+            if (node.VariableReference != null)
                 varIsReference = true;
 
             // Name
-            string varName = node.GetChild(node.ChildrenCount - 2).Value;
+            string varName = node.VariableName.Value;
 
             // Expression
-            node.Right.Accept(this);
+            node.VariableInitialValue.Accept(this);
 
 
 
@@ -269,7 +271,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(VariableDeclarationNode node)
         {            
             // Type
-            node.Left.Accept(this);
+            node.VariableType.Accept(this);
 
             // If this is UserDefined, than use lastCompiledUserDefinedDataType
             TypeEnum varType = lastCompiledDataType;
@@ -279,7 +281,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             int varDimensionCount = lastCompiledDimensionCount;
 
             // Name
-            string varName = node.GetChild(node.ChildrenCount - 2).Value;
+            string varName = node.VariableName.Value;
 
 
 
@@ -392,7 +394,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         /*Identifier*/
-        /**/public void Visit(IdentifierNode node) { VisitChildren(node); }
+        public void Visit(IdentifierNode node) 
+        {
+            AddCommand(new Push(node.Value, ValueAccessModes.LocalVariable));
+        }
 
         /*Literals*/
         public void Visit(CharLiteralNode node)
