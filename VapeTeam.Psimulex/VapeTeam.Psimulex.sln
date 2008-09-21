@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73AA0DBA-DC77-45EA-AA57-2D67FD13E690}"
 	ProjectSection(SolutionItems) = preProject
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		VapeTeam.Psimulex2.vsmdi = VapeTeam.Psimulex2.vsmdi
 		ÜziFüzet 2.0.txt = ÜziFüzet 2.0.txt
 	EndProjectSection
 EndProject
@@ -21,7 +22,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VapeTeam.Psimulex.Compiler.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VapeTeam.Psimulex.Compiler.Antlr.Test", "VapeTeam.Psimulex.Compiler.Antlr.Test\VapeTeam.Psimulex.Compiler.Antlr.Test.csproj", "{F242A461-6885-45BF-99F0-41530A1130FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VapeTeam.Psimulex.Compiler.Tests", "VapeTeam.Psimulex.Compiler.Tests\VapeTeam.Psimulex.Compiler.Tests.csproj", "{A667A04F-9597-4089-A67C-03378ACBD18C}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = VapeTeam.Psimulex2.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -55,6 +61,10 @@ Global
 		{F242A461-6885-45BF-99F0-41530A1130FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F242A461-6885-45BF-99F0-41530A1130FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F242A461-6885-45BF-99F0-41530A1130FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A667A04F-9597-4089-A67C-03378ACBD18C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A667A04F-9597-4089-A67C-03378ACBD18C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A667A04F-9597-4089-A67C-03378ACBD18C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A667A04F-9597-4089-A67C-03378ACBD18C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
