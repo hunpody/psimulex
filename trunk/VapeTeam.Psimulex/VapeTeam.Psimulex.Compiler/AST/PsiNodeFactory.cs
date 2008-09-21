@@ -40,9 +40,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case NodeType.ImportDeclarations: node = new ImportDeclarationNode(); v = true; break;
                 case NodeType.TypeDeclarations: node = new TypeDeclarationNode(); v = true; break;
                 case NodeType.StructDeclaration: node = new StructDeclarationNode(); v = true;
-                    node.Init(parent, children, value, type, v, viewComment, nodeValueInfo);
-                    (node as StructDeclarationNode).StructName = node.Children[0];
-                    (node as StructDeclarationNode).StructMembers = node.Children.GetRange(1, node.Children.Count - 1);
+                    (node as StructDeclarationNode).StructName = children[0];
+                    (node as StructDeclarationNode).StructMembers = children.GetRange(1, children.Count - 1);
                     break;
 
                 case NodeType.GlobalVariableDeclarations: node = new GlobalVariableDeclarationsNode(); v = true; break;
