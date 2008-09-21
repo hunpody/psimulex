@@ -33,8 +33,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(GlobalVariableDeclarationsNode node);
         void Visit(FunctionDeclarationsNode node);
         void Visit(FunctionDeclarationNode node);
+        void Visit(FormalParameterListNode node);
         void Visit(FormalParameterNode node);
         void Visit(BlockNode node);
+        void Visit(StatementNode node);        
 
         void Visit(VariableInitialisationNode node);
         void Visit(VariableDeclarationNode node);

@@ -84,6 +84,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TesterForm.resx">
       <DependentUpon>TesterForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

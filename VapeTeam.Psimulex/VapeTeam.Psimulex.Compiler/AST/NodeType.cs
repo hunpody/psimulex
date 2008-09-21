@@ -24,8 +24,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
         MemberDeclaration,
         FunctionDeclarations,
         FunctionDeclaration,
+        FormalParameterList,
         FormalParameter,
         Block,
+        Statement,
 
         VariableInitialisation,
         VariableDeclaration,        	

@@ -36,8 +36,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 case PsimulexLexer.MEMBERDEC: type = NodeType.MemberDeclaration; break;
                 case PsimulexLexer.FUNCTION_DECLARATIONS: type = NodeType.FunctionDeclarations; break;
                 case PsimulexLexer.FUNCDEC: type = NodeType.FunctionDeclaration; break;
-                case PsimulexLexer.FORMALPARAM: type = NodeType.FormalParameter; break;
+                case PsimulexLexer.FORMAL_PARAMETER_LIST: type = NodeType.FormalParameterList; break;
+                case PsimulexLexer.FORMAL_PARAMETER: type = NodeType.FormalParameter; break;
                 case PsimulexLexer.BLOCK: type = NodeType.Block; break;
+                case PsimulexLexer.STATEMENT: type = NodeType.Statement; break;
                 case PsimulexLexer.VARINIT: type = NodeType.VariableInitialisation; break;
                 case PsimulexLexer.VARDECLARE: type = NodeType.VariableDeclaration; break;
 

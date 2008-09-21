@@ -20,9 +20,11 @@ tokens {
 	MEMBERDEC;
 	FUNCTION_DECLARATIONS;
 	FUNCDEC;
-	FORMALPARAM;
+	FORMAL_PARAMETER_LIST;
+	FORMAL_PARAMETER;
 	
 	BLOCK;
+	STATEMENT;
 	
 	VARINIT;
 	VARDECLARE;	
@@ -161,13 +163,16 @@ functionDeclarations
     ;
     
 functionDeclaration
-    :	typedIdentifier formalParameters  block -> ^( FUNCDEC typedIdentifier formalParameters? block )
+    :	typedIdentifier formalParameterList  block -> ^( FUNCDEC typedIdentifier formalParameterList? block )
     ;
 
-formalParameters
-    :   '(' ( typedIdentifier (',' typedIdentifier)* )? ')' -> ^( FORMALPARAM ( typedIdentifier typedIdentifier* )? )
+formalParameterList
+    :   '(' ( formalParameter (',' formalParameter)* )? ')' -> ^( FORMAL_PARAMETER_LIST ( formalParameter formalParameter* )? )
     ;
 
+formalParameter
+    :   typedIdentifier -> ^( FORMAL_PARAMETER typedIdentifier )
+    ;
 
     
 ///////////
@@ -407,7 +412,7 @@ lambdaStatement
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 block
-    :   '{' statement* '}'	-> ^( BLOCK statement* )
+    :   '{' statement* '}'	-> ^( BLOCK ^( STATEMENT statement )* )
     ;    
     
 branch

@@ -39,20 +39,55 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case NodeType.MultiFunctionalProgram: node = new MultiFuncionalProgramNode(); v = true; break;
                 case NodeType.ImportDeclarations: node = new ImportDeclarationNode(); v = true; break;
                 case NodeType.TypeDeclarations: node = new TypeDeclarationNode(); v = true; break;
-                case NodeType.StructDeclaration: node = new StructDeclarationNode(); v = true;
-                    (node as StructDeclarationNode).StructName = children[0];
-                    (node as StructDeclarationNode).StructMembers = children.GetRange(1, children.Count - 1);
-                    break;
-
+                case NodeType.StructDeclaration:
+                    node = new StructDeclarationNode
+                    {
+                        StructName = children[0],
+                        StructMembers = children.GetRange(1, children.Count - 1)
+                    }; v = true; break;
                 case NodeType.GlobalVariableDeclarations: node = new GlobalVariableDeclarationsNode(); v = true; break;
-                case NodeType.MemberDeclaration: node = new MemberDeclarationNode(); v = true; break;
+                case NodeType.MemberDeclaration:
+                    node = new MemberDeclarationNode
+                    {
+                        MemberType = children[0],
+                        MemberTypeName = children[0].Left.Left,
+                        MemberName = children[1],
+                        MemberInitialValue = children.Count == 3 ? children[2] : null
+                    }; v = true; break;
                 case NodeType.FunctionDeclarations: node = new FunctionDeclarationsNode(); v = true; break;
-                case NodeType.FunctionDeclaration: node = new FunctionDeclarationNode(); v = true; break;
-                case NodeType.FormalParameter: node = new FormalParameterNode(); v = true; break;
+                case NodeType.FunctionDeclaration:
+                    node = new FunctionDeclarationNode
+                    {
+                        FunctionType = children[0],
+                        FunctionReference = children.Count == 5 ? children[1] : null,
+                        FunctionName = children[children.Count - 3],
+                        FunctionParameterList = children[children.Count - 2],
+                        FunctionBlock = children[children.Count - 1]
+                    }; v = true; break;
+                case NodeType.FormalParameterList: node = new FormalParameterListNode(); v = true; break;
+                case NodeType.FormalParameter:
+                    node = new FormalParameterNode
+                    {
+                        ParameterType = children[0],
+                        ParameterReference = children.Count == 3 ? children[1] : null,
+                        ParameterName = children[children.Count - 1]
+                    }; v = true; break;
                 case NodeType.Block: node = new BlockNode(); v = true; break;
-
-                case NodeType.VariableInitialisation: node = new VariableInitialisationNode(); v = true; break;
-                case NodeType.VariableDeclaration: node = new VariableDeclarationNode(); v = true; break;
+                case NodeType.Statement: node = new StatementNode(); v = true; break;
+                case NodeType.VariableInitialisation:
+                    node = new VariableInitialisationNode
+                    {
+                        VariableType = children[0],
+                        VariableReference = children.Count == 4 ? children[1] : null,
+                        VariableName = children[children.Count - 2],
+                        VariableInitialValue = children[children.Count - 1]
+                    }; v = true; break;
+                case NodeType.VariableDeclaration:
+                    node = new VariableDeclarationNode
+                    {
+                        VariableType = children[0],
+                        VariableName = children[1]
+                    }; v = true; break;
 
                 /*Operators*/
                 case NodeType.AssignmentOp: node = new AssignmentOpNode(); break;
