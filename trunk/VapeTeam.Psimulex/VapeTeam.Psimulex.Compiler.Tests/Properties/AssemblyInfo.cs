@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Functionality Unit Tests for Psimulex Core Engine")]
+[assembly: AssemblyTitle("Psimulex Compiler Unit Tests")]
 [assembly: AssemblyDescription("by Peter Podoski and Laszlo Zabb")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ELTE IK")]
-[assembly: AssemblyProduct("Functionality Unit Tests for Psimulex Core Engine")]
+[assembly: AssemblyProduct("Psimulex Compiler Unit Tests")]
 [assembly: AssemblyCopyright("Copyright © ELTE IK 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("aba19760-8bc7-432b-a516-591aad0fe2b1")]
+[assembly: Guid("5e82cb9a-855a-433f-bfdf-1ccb44685cf5")]
 
 // Version information for an assembly consists of the following four values:
 //

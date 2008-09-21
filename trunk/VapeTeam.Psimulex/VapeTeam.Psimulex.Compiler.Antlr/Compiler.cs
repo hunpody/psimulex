@@ -49,6 +49,14 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
 
                 output = ((global::Antlr.Runtime.Tree.CommonTree)tree.Tree).ToStringTree();
                 SintaxTree = (global::Antlr.Runtime.Tree.CommonTree)tree.Tree;
+
+                #region Added by pody, for temporary use (2008.09.21. 18:40)
+
+                var visitor = new Psimulex.Compiler.AST.PsiCodeGeneratorVisitor();
+                visitor.Visit(TreeConverter.FromCommonTreeToPsiNode(SintaxTree) as AST.CompilationUnitNode);
+                result.CompiledProgram = visitor.Program;
+
+                #endregion
             }
             catch (Exception e)
             {
