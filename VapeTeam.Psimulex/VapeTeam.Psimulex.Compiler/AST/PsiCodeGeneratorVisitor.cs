@@ -123,12 +123,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(StructDeclarationNode node)
         {
             // User Defined Struct Name
-            string structName = node.Left.Value;
+            string structName = node.StructName.Value;
             List<Member> structMembers = new List<Member>();
 
-            for (int i = 1; i < node.ChildrenCount; i++)
+            foreach (IPsiNode member in node.StructMembers)
             {
-                node.Children[i].Accept(this);
+                member.Accept(this);
                 structMembers.Add(lastCompiledMember);
             }
 
@@ -150,6 +150,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(MemberDeclarationNode node)
         {
+            // MemberType
             node.Left.Accept(this);
             TypeEnum memberType = lastCompiledDataType;
             string memberTypeName = node.Left.Left.Left.Value;
@@ -157,8 +158,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
             int memberDimensionCount = lastCompiledDimensionCount;
             List<int> memberDimensionList = lastCompiledDimensionList;
 
+            // MemberName
             string memberName = node.GetChild(1).Value;
             bool memberIsInitialised = false;
+
+            // MemberInitiaValue
             BaseType memberValue = null;
             if (node.GetChild(2) != null)
             {

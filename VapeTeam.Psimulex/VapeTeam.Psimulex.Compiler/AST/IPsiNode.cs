@@ -21,7 +21,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Init();
         void Init(IPsiNode parent, string value, NodeType type, NodeValueInfo nodeValueInfo);
         void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment, NodeValueInfo nodeValueInfo);
-
+        void Init(IPsiNode parent, List<IPsiNode> children, string value, NodeType type, bool isVirtual, string viewComment, NodeValueInfo nodeValueInfo);
+        
         void Accept(IPsiVisitor v);
         IPsiNode Clone();
         void Add(IPsiNode child);

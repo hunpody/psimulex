@@ -29,33 +29,43 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
         public static IPsiNode FromCommonTreeToPsiNode(CommonTree tree)
         {
             IPsiNode root = null;
+            NodeType type = nodeTypeFactory.CreateNodeType(tree.Type);
+
+            string value = tree.Text;
+            if (type == NodeType.X)
+                value = value + " # TypeID [" + tree.Type + "]";
 
             if (tree != null)
             {
-                NodeType type = nodeTypeFactory.CreateNodeType(tree.Type);
-                string value = tree.Text;
-
-                if (type == NodeType.X)
-                    value = value + " # TypeID [" + tree.Type + "]";
+                List<IPsiNode> children = new List<IPsiNode>();
+                if (tree.Children != null)
+                {    
+                    foreach (CommonTree antlrChild in tree.Children)
+                    {
+                        IPsiNode psiChild = FromCommonTreeToPsiNode(antlrChild);
+                        if (psiChild != null)
+                            children.Add(psiChild);
+                    }
+                }
 
                 root = nodeFactory.CreateNode
-                    (type, value, 
-                    new NodeValueInfo(
-                        tree.CharPositionInLine,
-                        tree.Line,
-                        tree.startIndex,
-                        tree.stopIndex,
-                        tree.TokenStartIndex,
-                        tree.TokenStopIndex
-                        )
-                    );
-
-                if (tree.Children != null)
-                    foreach (CommonTree child in tree.Children)
-                        root.Add(FromCommonTreeToPsiNode(child));
+                            (
+                                type, value,
+                                new NodeValueInfo
+                                (
+                                    tree.CharPositionInLine,
+                                    tree.Line,
+                                    tree.startIndex,
+                                    tree.stopIndex,
+                                    tree.TokenStartIndex,
+                                    tree.TokenStopIndex
+                                ),
+                                "",
+                                null,
+                                children
+                            );
             }
-
-            return root;    
+            return root;
         }
 
         /// <summary>

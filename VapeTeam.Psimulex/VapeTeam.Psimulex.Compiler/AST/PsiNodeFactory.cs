@@ -39,7 +39,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case NodeType.MultiFunctionalProgram: node = new MultiFuncionalProgramNode(); v = true; break;
                 case NodeType.ImportDeclarations: node = new ImportDeclarationNode(); v = true; break;
                 case NodeType.TypeDeclarations: node = new TypeDeclarationNode(); v = true; break;
-                case NodeType.StructDeclaration: node = new StructDeclarationNode(); v = true; break;
+                case NodeType.StructDeclaration: node = new StructDeclarationNode(); v = true;
+                    node.Init(parent, children, value, type, v, viewComment, nodeValueInfo);
+                    (node as StructDeclarationNode).StructName = node.Children[0];
+                    (node as StructDeclarationNode).StructMembers = node.Children.GetRange(1, node.Children.Count - 1);
+                    break;
+
                 case NodeType.GlobalVariableDeclarations: node = new GlobalVariableDeclarationsNode(); v = true; break;
                 case NodeType.MemberDeclaration: node = new MemberDeclarationNode(); v = true; break;
                 case NodeType.FunctionDeclarations: node = new FunctionDeclarationsNode(); v = true; break;
@@ -107,8 +112,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             
             // Init Datas in treeNode and Return
-            node.Init(parent, value, type, v, viewComment, nodeValueInfo);
+            node.Init(parent, children, value, type, v, viewComment, nodeValueInfo);
             return node;
+        }
+
+        public IPsiNode CreateNode(NodeType type, string value, NodeValueInfo nodeValueInfo, List<IPsiNode> children)
+        {
+            return CreateNode(type, value, nodeValueInfo, "", null, children);
         }
 
         public IPsiNode CreateNode(NodeType type)
