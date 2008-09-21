@@ -22,7 +22,7 @@ namespace VapeTeam.Psimulex.Core
         /// <summary>
         /// The thread gets into this state when it is running. 
         /// However it doesn't mean it is scheduled to actually run on a processor but it can be 
-        /// chosen to schedule onto the processor by the scheduler engine.
+        /// chosen to schedule onto a processor by the scheduler engine.
         /// </summary>
         Running,
 
@@ -100,13 +100,13 @@ namespace VapeTeam.Psimulex.Core
         public CallStack CallStack
         {
             get;
-            set;
+            private set;
         }
 
         public RunStack RunStack
         {
             get;
-            set;
+            private set;
         }
 
         public IFunctionLookup FunctionLookup
@@ -125,7 +125,40 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
-        private Dictionary<string, int> _variableMap = new Dictionary<string, int>();
+        /// <summary>
+        /// Pushes the current state into the callstack.
+        /// (PC, SP and VariableMap)
+        /// </summary>
+        public void PushState()
+        {
+            CallStack.Push(new State(PC, RunStack.Count, _variableMap));
+            _variableMap = new VariableMap();
+        }
+
+        /// <summary>
+        /// Restores the previously pushed state.
+        /// (PC, SP and VariableMap)
+        /// </summary>
+        public void PopState()
+        {
+            if (CallStack.IsEmpty)
+            {
+                State = ThreadStates.Finished;
+                return;
+            }
+
+            // Not safe!
+            RunStack.Pop(_variableMap.Count);
+
+            State state = CallStack.Pop();
+
+            RunStack.Pop(Math.Max(0, RunStack.Count - state.SP));
+
+            _variableMap = state.VariableMap;
+            PC = state.PC + 1;
+        }
+
+        private VariableMap _variableMap = new VariableMap();
 
         public BaseType GetVariable(string name)
         {
@@ -182,7 +215,7 @@ namespace VapeTeam.Psimulex.Core
 
         public override string ToString()
         {
-            return string.Format("Thread ({1}) \"{0}\"", this.Name, this.Id);
+            return string.Format("Thread ({1}) \"{0}\" @{2}", this.Name, this.Id, this.PC);
         }
     }
 

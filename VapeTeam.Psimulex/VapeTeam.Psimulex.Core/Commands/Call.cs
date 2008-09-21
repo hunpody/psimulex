@@ -7,16 +7,38 @@ using VapeTeam.Psimulex.Core.Exceptions;
 
 namespace VapeTeam.Psimulex.Core.Commands
 {
+    /// <summary>
+    /// Call can be initialized with an address or a function name.
+    /// </summary>
     public class Call : CommandBase
     {
         private string functionName;
+        private int functionAddress;
 
         #region ICommand Members
 
         public override void Do(ICommandContext context)
         {
+            if (!string.IsNullOrEmpty(functionName))
+            {
+                CallByName(context);
+            }
+            else
+            {
+                CallByAddress(context);
+            }
+        }
+
+        private void CallByAddress(ICommandContext context)
+        {
+            context.PushState();
+            context.PC = functionAddress;
+        }
+
+        private void CallByName(ICommandContext context)
+        {
             // It has to look up the availabe function names
-            // IFunctionLookup
+            // IFunctionLookup?
             var function = context.FunctionLookup.GetFunctionByName(functionName);
 
             if (function == null)
@@ -34,7 +56,7 @@ namespace VapeTeam.Psimulex.Core.Commands
 
                 Stack<BaseType> poppedValues = new Stack<BaseType>();
                 var parameters = new List<BaseType>(function.ParametersCount);
-                for (int i=0; i<function.ParametersCount; ++i)
+                for (int i = 0; i < function.ParametersCount; ++i)
                 {
                     poppedValues.Push(context.RunStack.Pop());
                 }
@@ -55,6 +77,11 @@ namespace VapeTeam.Psimulex.Core.Commands
         public Call(string procedureName)
         {
             this.functionName = procedureName;
+        }
+
+        public Call(int address)
+        {
+            this.functionAddress = address;
         }
 
         #endregion

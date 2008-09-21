@@ -62,10 +62,10 @@ namespace VapeTeam.Psimulex.Tests
         #endregion
 
         [TestMethod]
-        public void DeclareTest()
+        public void DeclareCommand()
         {
             // Testing declarations
-            var program =
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
 
                     // int a; int b; string c; a = 2 + c; b = a - 7; c = a+b; print(a); print(b); print(0+c);
@@ -94,11 +94,87 @@ namespace VapeTeam.Psimulex.Tests
                     new Push(0),
                     new Push("c", ValueAccessModes.LocalVariable),
                     new BinaryOperation(BinaryOperation.Operations.Addition),
-                    new Call("print"));
-
-            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(program);
+                    new Call("print")));
 
             Assert.AreEqual("2-50-3", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void CastCommand()
+        {
+            // Testing casts
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    // print((int) "15" + (int) '9'));
+                    new Push("15"),
+                    new Cast(TypeEnum.Integer),
+                    new Push('9'),
+                    new Cast(TypeEnum.Integer),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Call("print"),
+
+                    new Push("-"),
+                    new Call("print"),
+
+                    // print((string) 4 + (stirng) 8);
+                    new Push(4),
+                    new Cast(TypeEnum.String),
+                    new Push(8),
+                    new Cast(TypeEnum.String),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Call("print"),
+
+                    new Push("-"),
+                    new Call("print"),
+
+                    // print((char) "012" + (char) "345");
+                    new Push("012"),
+                    new Cast(TypeEnum.Character),
+                    new Push("345"),
+                    new Cast(TypeEnum.Character),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Call("print")
+
+                    ));
+
+            Assert.AreEqual("24-48-c", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void AssignCommand()
+        {
+            // Testing assign
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    // int a, b;
+                    // a = 2;
+                    // b = 9;
+                    // a = b = 6;
+                    // print (a); print(b);
+
+                    new Declare("a", TypeEnum.Integer),
+                    new Declare("b", TypeEnum.Integer),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Push(2),
+                    new Assign(),
+                    new Push("b", ValueAccessModes.LocalVariable),
+                    new Push(9),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Push("b", ValueAccessModes.LocalVariable),
+                    new Push(6),
+                    new Assign(true),
+                    new Assign(),
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Call("print"),
+                    new Push("b", ValueAccessModes.LocalVariable),
+                    new Call("print")
+                    ));            
+
+            Assert.AreEqual("66", process.StandardOutput);
+            Assert.AreEqual(2, process.MainThread.RunStack.Count);
         }
     }
 }

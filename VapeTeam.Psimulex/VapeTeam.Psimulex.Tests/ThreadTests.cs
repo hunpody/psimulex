@@ -120,6 +120,14 @@ namespace VapeTeam.Psimulex.Tests
             var process3 = Helpers.SystemHelper.CreateMachineAndRunProgram(4, program);
             int maximumCyclesOf4Processor = process3.Machine.Processors.Max(p => p.Cycles);
             Assert.IsTrue(process2.Machine.Processors[0].Cycles > 1.80 * maximumCyclesOf4Processor);
+
+            // Test if too much processors doesn't help in this situation
+            var process4 = Helpers.SystemHelper.CreateMachineAndRunProgram(16, program);
+            var process5 = Helpers.SystemHelper.CreateMachineAndRunProgram(64, program);
+
+            Assert.IsTrue(process4.Machine.Processors.Max(p => p.Cycles) == process5.Machine.Processors.Max(p => p.Cycles));
+            var maxCycles = process4.Machine.Processors.Max(p => p.Cycles);
+            Assert.IsTrue(process5.Machine.Processors.TrueForAll(p => p.Cycles == maxCycles));
         }
 
         [TestMethod]
@@ -157,8 +165,8 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.IsTrue(process.Machine.Processors.Max(p => p.Cycles) > 2.2 * process2.Machine.Processors.Max(p => p.Cycles));
 
-            Assert.IsTrue(process2.Machine.Processors.Count(p => p.RunningTask != null && p.RunningTask.Id == 1) <= 1);
-            Assert.IsTrue(process2.Machine.Processors.Count(p => p.RunningTask != null && p.RunningTask.Id == 2) <= 1);
+            Assert.IsTrue(process2.Machine.Processors.Count(p => p.CurrentThread != null && p.CurrentThread.Id == 1) <= 1);
+            Assert.IsTrue(process2.Machine.Processors.Count(p => p.CurrentThread != null && p.CurrentThread.Id == 2) <= 1);
         }
 
         [TestMethod]

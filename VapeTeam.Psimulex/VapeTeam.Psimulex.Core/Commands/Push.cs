@@ -84,5 +84,25 @@ namespace VapeTeam.Psimulex.Core.Commands
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            if (AccessMode == ValueAccessModes.LocalVariable)
+            {
+                return string.Format("push local {0}", name);
+            }
+            else 
+            {
+                if (type != TypeEnum.Undefined)
+                {
+                    return string.Format("push {0} ({1})", value, type);
+                }
+                else
+                {
+                    return string.Format("push {0}", value);
+                }
+
+            }
+        }
     }
 }

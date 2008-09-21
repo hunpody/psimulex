@@ -145,7 +145,7 @@ namespace VapeTeam.Psimulex.Core
             // If there is no "job" (active process running) then call schedule immediately
 
             // Do we need to simulate the bootup and process creation or the prescheduling?
-            if (!machine.Processors.Exists(p => p.RunningTask == null))
+            if (!machine.Processors.Exists(p => p.CurrentThread == null))
             {
                 Schedule();
             }
@@ -160,7 +160,7 @@ namespace VapeTeam.Psimulex.Core
 
         public void Run(Process process)
         {
-            if (!machine.Processors.Exists(p => p.RunningTask == null))
+            if (!machine.Processors.Exists(p => p.CurrentThread == null))
             {
                 Schedule();
             }

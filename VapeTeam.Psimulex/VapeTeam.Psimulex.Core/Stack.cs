@@ -42,7 +42,7 @@ namespace VapeTeam.Psimulex.Core
         public virtual T Pop()
         {
             if (pointer < 0 || pointer >= stack.Count)
-                throw new StackOverflowException();
+                throw new Exceptions.IndexOutOfRangeException("Stack indexing was out of range.");
 
             var item = stack[pointer];
             stack.RemoveAt(pointer);
@@ -53,7 +53,7 @@ namespace VapeTeam.Psimulex.Core
         public virtual IEnumerable<T> Pop(int count)
         {
             if (pointer >= stack.Count || pointer + 1 < count)
-                throw new StackOverflowException();
+                throw new Exceptions.IndexOutOfRangeException("Stack indexing was out of range.");
 
             List<T> items = new List<T>(count);
 
@@ -111,7 +111,7 @@ namespace VapeTeam.Psimulex.Core
             get
             {
                 if (pointer < 0 || pointer >= stack.Count)
-                    throw new StackOverflowException();
+                    throw new Exceptions.IndexOutOfRangeException("Stack indexing was out of range.");
                 return stack[pointer];
             }
         }

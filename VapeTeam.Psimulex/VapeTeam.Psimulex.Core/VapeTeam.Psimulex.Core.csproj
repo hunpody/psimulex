@@ -44,6 +44,7 @@
     <Compile Include="Commands\Call.cs" />
     <Compile Include="Commands\CallMethod.cs" />
     <Compile Include="Commands\Assign.cs" />
+    <Compile Include="Commands\Cast.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\Compare.cs" />
     <Compile Include="Commands\ConditionalJump.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="ISystemContext.cs" />
     <Compile Include="ITransaction.cs" />
     <Compile Include="Libraries\ILibrary.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="ProcessorInterruptInformation.cs" />
     <Compile Include="InterruptRequest.cs" />
     <Compile Include="IProcessorContext.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Schedulers\RandomScheduler.cs" />
     <Compile Include="Schedulers\RoundRobinScheduler.cs" />
     <Compile Include="Stack.cs" />
+    <Compile Include="State.cs" />
     <Compile Include="SystemFunction.cs" />
     <Compile Include="Thread.cs" />
     <Compile Include="TransactionalStack.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Types\TypeEnum.cs" />
     <Compile Include="Types\TypeHierarchy.cs" />
     <Compile Include="Types\ValueFactory.cs" />
+    <Compile Include="VariableMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Documentation\Core Project ClassDiagram.cd" />
