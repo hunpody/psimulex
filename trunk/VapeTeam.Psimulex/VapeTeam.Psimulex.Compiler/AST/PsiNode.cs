@@ -43,23 +43,28 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Init()
         {
-            Init(null, "", NodeType.X, false, "", new NodeValueInfo());
+            Init(null, new List<IPsiNode>(), "", NodeType.X, false, "", new NodeValueInfo());
         }
 
         public void Init(IPsiNode parent, string value, NodeType type, NodeValueInfo nodeValueInfo)
         {
-            Init(parent, value, type, false, "", nodeValueInfo);
+            Init(parent, new List<IPsiNode>(), value, type, false, "", nodeValueInfo);
         }
 
         public void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment, NodeValueInfo nodeValueInfo)
         {
+            Init(parent, new List<IPsiNode>(), value, type, false, "", nodeValueInfo);
+        }
+
+        public void Init(IPsiNode parent, List<IPsiNode> children, string value, NodeType type, bool isVirtual, string viewComment, NodeValueInfo nodeValueInfo)
+        {
             Parent = parent;
+            Children = children;
             Value = value;
             Type = type;
             IsVirtual = isVirtual;
             ViewComment = viewComment;
             NodeValueInfo = nodeValueInfo;
-            Children = new List<IPsiNode>();
         }
 
         public virtual void Accept(IPsiVisitor v)
@@ -161,8 +166,22 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class MultiFuncionalProgramNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class ImportDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class TypeDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class StructDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class MemberDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class StructDeclarationNode : PsiNode 
+    {
+        public IPsiNode StructName { get; set; }
+        public List<IPsiNode> StructMembers { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class MemberDeclarationNode : PsiNode
+    {
+        public IPsiNode MemberType { get; set; }
+        public IPsiNode MemberTypeName { get; set; }
+        public IPsiNode MemberName { get; set; }
+        public IPsiNode MemberInitialValue { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
     public class GlobalVariableDeclarationsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class FunctionDeclarationsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class FunctionDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }

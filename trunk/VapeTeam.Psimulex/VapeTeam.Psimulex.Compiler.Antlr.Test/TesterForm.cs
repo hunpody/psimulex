@@ -121,7 +121,15 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 
             var machine = MachineBuilder.Instance.CreateMachine(1, 16);
             var process = machine.System.Load(visitor.Program);
-            machine.System.Run(process);
+
+            try
+            {
+                machine.System.Run(process);
+            }
+            catch (Exception ex)
+            {
+                txtErrors.Text = ex.ToString();
+            }
 
             resultTextBox.Text = process.StandardOutput;
         }
