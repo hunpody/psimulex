@@ -10,6 +10,7 @@ using System.IO;
 
 using VapeTeam.Psimulex.Compiler.AST;
 using VapeTeam.Psimulex.Core;
+using VapeTeam.Psimulex.Core.Commands;
 using VapeTeam.Psimulex.Core.Factories;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.Test
@@ -102,9 +103,28 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             frmProgramString frmProgramString = new frmProgramString();
 
             //PsiProgramStringBuilderVisitor v = new PsiProgramStringBuilderVisitor();
-            //v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);            
+            //v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);      
+            /*
+            string src = sourceCodeTextEditorControl.Text;
+            string types = "\t\t\tvar process = Helpers.SystemHelper.CompileAndRunGetProcess(@\"" +
+                src.Replace("\"", "\"\"").Replace("\r\n", "") + "\");\r\n";
+            types += "Assert.AreEqual(" + visitor.Program.Program.CommandList.Count + ", process.Program.CommandList.Count);\r\n";
+            types += "\t\t\tType[] commandObjectTypes =\r\n\t\t\t{\r\n";
+            foreach (ICommand cmd in visitor.Program.Program.CommandList)
+            {
+                types += "\t\t\t\ttypeof(" + cmd.GetType().ToString() + ")";
+                if (cmd != visitor.Program.Program[visitor.Program.Program.CommandList.Count - 1])
+                    types += ",\r\n";
+            }
+            types += "\r\n\t\t\t};\r\n";
+            types += "\t\t\tfor (int i = 0; i < process.Program.CommandList.Count; i++)";
+            types += "\r\n\t\t\t\tAssert.IsInstanceOfType(process.Program.CommandList[i], commandObjectTypes[i]);";
+            */
 
-            frmProgramString.ProgramString = "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() + "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.CompilerMessages;
+            frmProgramString.ProgramString = 
+                "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() +
+                /*"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +*/
+                "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.CompilerMessages;
             frmProgramString.Show();
         }
 

@@ -52,7 +52,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private int lastCompiledDimensionCount;
         private List<int> lastCompiledDimensionList;
 
-        private BaseType lastCompiledConstantValue;        
+        private bool addToProgram;
+        private BaseType lastCompiledConstantValue;
 
         private bool lastCompiledArrayIsDynamic;
 
@@ -64,14 +65,17 @@ namespace VapeTeam.Psimulex.Compiler.AST
             lastCompiledDimensionCount = 0;
             lastCompiledDimensionList = new List<int>();
 
+            addToProgram = true;
             lastCompiledConstantValue = null;
 
             lastCompiledArrayIsDynamic = false;
         }
 
-        private string ToVal(string s)
+        private string SplitQuotes(string s)
         {
-            return s.Replace("\"","").Replace("\'","");
+            if (s[0] == '\'' || s[0] == '\"')
+                return s.Substring(1, s.Length - 2);
+            return s;
         }
 
 
@@ -166,6 +170,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             BaseType memberValue = null;
             if (node.MemberInitialValue != null)
             {
+                addToProgram = false;
                 node.MemberInitialValue.Accept(this);
                 memberValue = lastCompiledConstantValue;
                 memberIsInitialised = true;
@@ -206,15 +211,18 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             // Új függvény kezdése -> név felvétele és mellé egy üres parancsobjektum tömb
 
-            node.Left.Accept(this);
+            // FunctionType
+            node.FunctionType.Accept(this);
             TypeEnum functionType = lastCompiledDataType;
             string functionTypeName = node.Left.Left.Left.Value;
             // lastCompiledDimensionCount, Dimensions, IsDynamic
 
+            // FunctionReference
             bool functionIsReferenceType = false;
-            if (node.ChildrenCount == 5)
+            if (node.FunctionReference != null)
                 functionIsReferenceType = true;
 
+            // FunctionName
             string functionName = node.GetChild(node.ChildrenCount - 3).Value;
 
             // Message
@@ -222,8 +230,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddMessage(global);
             // Message
 
-            node.GetChild(node.ChildrenCount - 2).Accept(this);
-            node.Right.Accept(this);
+            // FunctionParameterList
+            node.FunctionParameterList.Accept(this);
+
+            // FunctionBlock
+            node.FunctionBlock.Accept(this);
             
             // Függvény felvétele, adatainak rendezése
             // ...
@@ -265,6 +276,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
 
             // Initialize
+            // Lenne itt még pár dolog ...
             AddCommand(new Initialize(varName,varType));
         }
 
@@ -290,9 +302,43 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         /*Operators*/
+        #region Operators        
+
         public void Visit(AssignmentOpNode node)
         {
-            VisitChildren(node);
+            // Figyelem a Scilent/nem scilent Assignolást még meg kell cisnálni !
+
+            if (node.Value == "=")
+            {
+                node.Left.Accept(this);
+                node.Right.Accept(this);
+                AddCommand(new Assign());
+            }
+            else
+            {
+                // x op= y -> x = x op y
+                node.Left.Accept(this);
+                node.Left.Accept(this);
+                node.Right.Accept(this);
+
+                switch (node.Value[0])
+                {
+                    case '+': AddCommand(new BinaryOperation(BinaryOperation.Operations.Addition)); break;
+                    case '-': AddCommand(new BinaryOperation(BinaryOperation.Operations.Subtraction)); break;
+                    case '*': AddCommand(new BinaryOperation(BinaryOperation.Operations.Multiplication)); break;
+                    case '/': AddCommand(new BinaryOperation(BinaryOperation.Operations.Division)); break;                    
+                    case '%': AddCommand(new BinaryOperation(BinaryOperation.Operations.Modulo)); break;
+                    case '^': AddCommand(new BinaryOperation(BinaryOperation.Operations.Power)); break;
+                    case '&': AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalAnd)); break;
+                    case '|': AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalOr)); break;
+                    case '~': AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalXor)); break;
+                    default:
+                        // Can't be
+                        break;
+                }
+
+                AddCommand(new Assign());
+            }
         }
 
         public void Visit(LogicalOrOpNode node)
@@ -330,17 +376,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
             VisitChildren(node);
         }
 
+        #endregion
+
         /*Expressions*/
-        public void Visit(ExpressionNode node)
-        {
-            VisitChildren(node);
-        }
+        #region Expression        
 
-        public void Visit(AssignmentNode node)
-        {
-            VisitChildren(node);
-        }
-
+        public void Visit(ExpressionNode node) { VisitChildren(node); }
+        public void Visit(AssignmentNode node) { VisitChildren(node); }
         public void Visit(MemberSelectNode node)
         {
             VisitChildren(node);
@@ -382,7 +424,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             lastCompiledDimensionList = new List<int>();
             for (int i = 0; i < node.ChildrenCount; i++)
-                lastCompiledDimensionList.Add(Convert.ToInt32(ToVal(node.Children[i].Value)));
+                lastCompiledDimensionList.Add(Convert.ToInt32(SplitQuotes(node.Children[i].Value)));
             lastCompiledDimensionCount = lastCompiledDimensionList.Count;
         }
 
@@ -393,6 +435,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
             lastCompiledArrayIsDynamic = true;
         }
 
+        #endregion
+
         /*Identifier*/
         public void Visit(IdentifierNode node) 
         {
@@ -400,30 +444,58 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         /*Literals*/
+        #region Literals
+
         public void Visit(CharLiteralNode node)
         {
-            lastCompiledConstantValue = ValueFactory.Create(Convert.ToChar(ToVal(node.Value)));
+            char charChar = ' ';
+            string strChar = SplitQuotes(node.Value);
+            switch (strChar)
+            {
+                case "\\n": charChar = '\n'; break; // Milegyne itt, hgyo jólegyen ?
+                case "\\\'": charChar = '\''; break;
+                case "\\\"": charChar = '\"'; break;
+                case "\\\\": charChar = '\\'; break;
+                default: charChar = strChar[0]; break;
+            }
+            lastCompiledConstantValue = ValueFactory.Create(charChar);
+            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
+            addToProgram = true;
         }
 
         public void Visit(StringLiteralNode node)
         {
-            lastCompiledConstantValue = ValueFactory.Create(Convert.ToString(ToVal(node.Value)));
-            AddCommand(new Push(lastCompiledConstantValue));
+            string str = SplitQuotes(node.Value).Replace("\\n", "\r\n").Replace("\\\'", "\'").Replace("\\\"", "\"").Replace("\\\\", "\\");            
+            lastCompiledConstantValue = ValueFactory.Create(Convert.ToString(str));
+            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
+            addToProgram = true;
         }
 
         public void Visit(IntLiteralNode node)
         {
-            lastCompiledConstantValue = ValueFactory.Create(Convert.ToInt32(ToVal(node.Value)));
+            lastCompiledConstantValue = ValueFactory.Create(Convert.ToInt32(SplitQuotes(node.Value)));
+            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
+            addToProgram = true;
         }
 
         public void Visit(DecimalLiteralNode node)
         {
-            lastCompiledConstantValue = ValueFactory.Create(Convert.ToDecimal(ToVal(node.Value)));
+            string str = node.Value.Replace(".", ",").Replace("m", "").Replace("M", "").Replace("d", "").Replace("D", "");
+            if (str[0] == '.')
+                str = "0" + str;
+            if (str[str.Length - 1] == '.')
+                str += "0";
+
+            lastCompiledConstantValue = ValueFactory.Create(Convert.ToDecimal(str));
+            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
+            addToProgram = true;
         }
 
         public void Visit(BoolLiteralNode node)
         {
-            lastCompiledConstantValue = ValueFactory.Create(Convert.ToBoolean(ToVal(node.Value)));
+            lastCompiledConstantValue = ValueFactory.Create(Convert.ToBoolean(SplitQuotes(node.Value)));
+            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
+            addToProgram = true;
         }
 
         public void Visit(NullLiteralNode node)
@@ -437,6 +509,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // ???
             VisitChildren(node);
         }
+
+        #endregion
+
 
         /*Types*/
         public void Visit(TypeNode node) { VisitChildren(node); }

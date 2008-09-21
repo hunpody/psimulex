@@ -206,3 +206,16 @@ list add(int[1,1] & a, int b)
 {
 	return a + b;
 }
+
+
+2008.09.22 01:00 - Vari
+
+- A View Program String Gomb alatt van teszt Eset Generálás.
+Az aktuális Programhoz generál egy az egyben másolható teszt esetet.
+- Mennek az Escape Characterek is ! 
+
+Ami nemmegy: char ch = '\n';
+Erre nem emel sort, mert ugye \r\n kéne.
+Lehet, hogy, felveszem a nyelvtanba a \r -t is, de igazából nincs szerepe.
+
+- Fordul a : VarInit,Vardec,intliteral,charliteral,stringliteral,functionvcall.

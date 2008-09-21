@@ -77,5 +77,85 @@ namespace VapeTeam.Psimulex.Compiler.Tests
             Assert.IsInstanceOfType(process.Program.CommandList[0], typeof(VapeTeam.Psimulex.Core.Commands.Push));
             Assert.IsInstanceOfType(process.Program.CommandList[1], typeof(VapeTeam.Psimulex.Core.Commands.Call));
         }
+
+        [TestMethod]
+        public void SimpleBasicVariableInitialisation1()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"int i = 10;bool bt = true;bool bf = false;string s = ""alma"";char c = 'c';print(i);print(bt);print(bf);print(s);print(c);");
+            Assert.AreEqual("10TrueFalsealmac", result);
+        }
+
+        [TestMethod]
+        public void SimpleBasicVariableInitialisation2_TestCommands()
+        {
+            var process = Helpers.SystemHelper.CompileAndRunGetProcess(@"int i = 10;bool bt = true;bool bf = false;string s = ""alma"";char c = 'c';print(i);print(bt);print(bf);print(s);print(c);");
+            Assert.AreEqual(20, process.Program.CommandList.Count);
+            Type[] commandObjectTypes =
+			{
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Initialize),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Initialize),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Initialize),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Initialize),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Initialize),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Call),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Call),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Call),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Call),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Call)
+			};
+            for (int i = 0; i < process.Program.CommandList.Count; i++)
+                Assert.IsInstanceOfType(process.Program.CommandList[i], commandObjectTypes[i]);
+        }
+
+        [TestMethod]
+        public void SimpleEscapeCharUse1()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"string sEsc = ""a\na\'a\""a\\a"";char cEscSQ = '\'';char cEscDQ = '\""';char cEscBS = '\\';print(cEscSQ);print(cEscDQ);print(cEscBS);print(sEsc);");
+            Assert.AreEqual(@"'""\a
+a'a""a\a", result);
+        }
+
+        [TestMethod]
+                public void SimpleEscapeCharUse2_TestCommands()
+        { 
+            var process = Helpers.SystemHelper.CompileAndRunGetProcess(@"string sEsc = ""a\na\'a\""a\\a"";char cEscSQ = '\'';char cEscDQ = '\""';char cEscBS = '\\';print(cEscSQ);print(cEscDQ);print(cEscBS);print(sEsc);");
+            Assert.AreEqual(16, process.Program.CommandList.Count);
+			Type[] commandObjectTypes =
+			{
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Initialize),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Initialize),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Initialize),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Initialize),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Call),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Call),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Call),
+				typeof(VapeTeam.Psimulex.Core.Commands.Push),
+				typeof(VapeTeam.Psimulex.Core.Commands.Call)
+			};
+			for (int i = 0; i < process.Program.CommandList.Count; i++)
+				Assert.IsInstanceOfType(process.Program.CommandList[i], commandObjectTypes[i]);
+        }
+
+
+
+
+       
     }
 }
