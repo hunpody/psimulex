@@ -39,6 +39,14 @@ namespace VapeTeam.Psimulex.Core.Types
             return value;
         }
 
+        public override char ToChar()
+        {
+            if (string.IsNullOrEmpty(value))
+                return (char)0;
+            else
+                return value[0];
+        }
+
         public override TypeEnum TypeEnum
         {
             get { return TypeEnum.String; }

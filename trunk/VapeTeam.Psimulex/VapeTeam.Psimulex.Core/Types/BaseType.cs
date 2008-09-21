@@ -94,7 +94,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
-        #region
+        #region Assign and Cast
 
         public virtual void Assign(BaseType value)
         {
@@ -162,6 +162,11 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Conversion operations
 
+        /// <summary>
+        /// If set to true then ToInt32, ToFloat, ToDecimal conversions are derivated from the ToInt conversion.
+        /// </summary>
+        protected bool isConversionToScalarBasedOnToInt = false;
+
         public virtual object ToObject()
         {
             return this;
@@ -186,6 +191,9 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual int ToInt32()
         {
+            if (isConversionToScalarBasedOnToInt)
+                return (int)ToInt();
+
             object obj = ToObject();
             if (obj != null)
                 return Convert.ToInt32(obj);
@@ -194,6 +202,9 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual decimal ToDecimal()
         {
+            if (isConversionToScalarBasedOnToInt)
+                return (decimal)ToInt();
+
             object obj = ToObject();
             if (obj != null)
                 return Convert.ToDecimal(obj);
@@ -202,6 +213,9 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual float ToFloat()
         {
+            if (isConversionToScalarBasedOnToInt)
+                return (float)ToInt();
+
             object obj = ToObject();
             if (obj != null)
                 return Convert.ToSingle(obj);
@@ -214,6 +228,14 @@ namespace VapeTeam.Psimulex.Core.Types
             if (obj != null)
                 return Convert.ToBoolean(obj);
             else return default(bool);
+        }
+
+        public virtual char ToChar()
+        {
+            object obj = ToObject();
+            if (obj != null)
+                return Convert.ToChar(obj);
+            else return default(char);
         }
 
         #endregion

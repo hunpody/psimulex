@@ -22,7 +22,7 @@ namespace VapeTeam.Psimulex.Core.Schedulers
             // Just for testing, not serious. :)
             
             var runningThreads = threads.Where(t => t.State == ThreadStates.Running).ToArray();
-            processors[0].RunningTask = runningThreads[rnd.Next(0, runningThreads.Length)];
+            processors[0].CurrentThread = runningThreads[rnd.Next(0, runningThreads.Length)];
         }
 
         public int SwitchTime

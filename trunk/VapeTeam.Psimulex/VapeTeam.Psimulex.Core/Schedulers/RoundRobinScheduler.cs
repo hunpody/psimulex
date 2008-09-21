@@ -54,7 +54,7 @@ namespace VapeTeam.Psimulex.Core.Schedulers
                         scheduleQueue.Enqueue(dequeuedThread);
                     }
                 }
-                processor.RunningTask = thread;
+                processor.CurrentThread = thread;
             }
         }
 
@@ -62,7 +62,7 @@ namespace VapeTeam.Psimulex.Core.Schedulers
 
         private Thread FindNext(Processor processor)
         {
-            return scheduleQueue.FirstOrDefault(t => !processors.Exists(p => p.RunningTask == t && p != processor) && t.State == ThreadStates.Running);
+            return scheduleQueue.FirstOrDefault(t => !processors.Exists(p => p.CurrentThread == t && p != processor) && t.State == ThreadStates.Running);
             //Thread thread = null;
             //var threadArray = scheduleQueue.ToArray().Where(t => t.State == ThreadStates.Running);
             //for (int i=0; i<threadArray

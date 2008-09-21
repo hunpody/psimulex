@@ -62,28 +62,29 @@ namespace VapeTeam.Psimulex.Core
         private int delayed;
 
         /// <summary>
-        /// 
+        /// Makes a CPU cycle.
         /// </summary>
         public void Cycle()
         {
             // If there is a thread to execute
-            if (RunningTask != null)
+            if (CurrentThread != null)
             {
                 // Checks if it has ended
-                if (!RunningTask.CanExecuteNext)
+                if (!CurrentThread.CanExecuteNext)
                 {
-                    RunningTask.State = ThreadStates.Finished;
+                    CurrentThread.State = ThreadStates.Finished;
                 }
 
-                if (RunningTask.State == ThreadStates.Running)
+                if (CurrentThread.State == ThreadStates.Running)
                 {
-                    RunningTask.System.CallingThread = RunningTask;
-                    int oldPC = RunningTask.PC;
-                    RunningTask.Program[RunningTask.PC].Do(RunningTask);
+                    CurrentThread.System.CallingThread = CurrentThread;
+                    int oldPC = CurrentThread.PC;
+                    Logger.Log(CurrentThread.Program[CurrentThread.PC].ToString());
+                    CurrentThread.Program[CurrentThread.PC].Do(CurrentThread);
                     // If there was no jump
-                    if (oldPC == RunningTask.PC)
+                    if (oldPC == CurrentThread.PC && CurrentThread.State == ThreadStates.Running)
                     {
-                        ++RunningTask.PC;
+                        ++CurrentThread.PC;
                     }
                 }
             }
@@ -107,7 +108,7 @@ namespace VapeTeam.Psimulex.Core
         
         #endregion
 
-        public Thread RunningTask { get; set; }
+        public Thread CurrentThread { get; set; }
 
 
         public Processor()
