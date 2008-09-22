@@ -71,5 +71,27 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             this.mode = mode;
         }
+
+        public override string ToString()
+        {
+            switch (this.mode)
+            {
+                case ComparisonModes.Equal:
+                    return "compare ==";
+                case ComparisonModes.NotEqual:
+                    return "compare !=";
+                case ComparisonModes.LessThan:
+                    return "compare <";
+                case ComparisonModes.LessThanOrEqual:
+                    return "compare <=";
+                case ComparisonModes.GreaterThan:
+                    return "compare >";
+                case ComparisonModes.GreaterThanOrEqual:
+                    return "compare >=";
+                case ComparisonModes.Undefined:
+                default:
+                    return "compare ??";
+            }
+        }
     }
 }

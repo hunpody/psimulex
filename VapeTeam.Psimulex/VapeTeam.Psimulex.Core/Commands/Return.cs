@@ -43,5 +43,17 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
 
         }
+
+        public override string ToString()
+        {
+            if (HasReturnValue)
+            {
+                return "return";
+            }
+            else
+            {
+                return "return_void";
+            }
+        }
     }
 }

@@ -7,8 +7,7 @@ using VapeTeam.Psimulex.Core.Types;
 namespace VapeTeam.Psimulex.Core.Commands
 {
     /// <summary>
-    /// Performs assignment. The first value is the value to assign and the second is the target value.
-    /// 
+    /// Performs an assignment. The first value is the value to assign and the second is the target value.
     /// </summary>
     public class Assign : CommandBase
     {
@@ -41,6 +40,18 @@ namespace VapeTeam.Psimulex.Core.Commands
         public Assign(bool pushResult)
         {
             this.pushResult = pushResult;
+        }
+
+        public override string ToString()
+        {
+            if (!pushResult)
+            {
+                return "assign";
+            }
+            else
+            {
+                return "assign_and_push";
+            }
         }
     }
 }

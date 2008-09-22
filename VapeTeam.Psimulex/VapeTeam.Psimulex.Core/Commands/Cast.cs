@@ -22,5 +22,10 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             this.targetType = targetType;
         }
+
+        public override string ToString()
+        {
+            return string.Format("cast {0}", targetType);
+        }
     }
 }

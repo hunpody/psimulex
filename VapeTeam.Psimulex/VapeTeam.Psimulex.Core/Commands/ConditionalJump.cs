@@ -45,6 +45,14 @@ namespace VapeTeam.Psimulex.Core.Commands
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            string isRelativeString = string.Empty;
+            if (IsRelative)
+                isRelativeString = "relative_";
+            return string.Format("{0}jump_if_{1} {2}", isRelativeString, Condition.ToString().ToLower(), this.PC);
+        }
     }
 
     #region Additional Jump commands

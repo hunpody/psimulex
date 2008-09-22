@@ -40,7 +40,18 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public Indexing()
         {
+        }
 
+        public override string ToString()
+        {
+            if (initializedWithIndex)
+            {
+                return string.Format("indexing at {0}", index);
+            }
+            else
+            {
+                return "indexing";
+            }
         }
     }
 }

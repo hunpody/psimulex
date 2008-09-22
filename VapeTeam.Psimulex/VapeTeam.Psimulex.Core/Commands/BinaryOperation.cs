@@ -74,5 +74,32 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             this.operation = operation;
         }
+
+        public override string ToString()
+        {
+            switch (operation)
+            {
+                case Operations.Addition:
+                    return "add";
+                case Operations.Subtraction:
+                    return "subtract";
+                case Operations.Multiplication:
+                    return "multiply";
+                case Operations.Division:
+                    return "divide";
+                case Operations.Power:
+                    return "power";
+                case Operations.Modulo:
+                    return "modulo";
+                case Operations.LogicalXor:
+                    return "logical_xor";
+                case Operations.LogicalOr:
+                    return "logical_or";
+                case Operations.LogicalAnd:
+                    return "logical_and";
+                default:
+                    return "binary_operation ??";
+            }
+        }
     }
 }
