@@ -235,7 +235,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
  
     /*Expressions*/
     public class ExpressionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class AssignmentNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     /*
     public class LambdaExpressionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class LambdaParameterNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }

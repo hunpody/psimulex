@@ -47,7 +47,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             resultTextBox.Text = compiler.output;
             txtErrors.Text = sb.ToString();
 
-            visitor.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);
+            CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
+            visitor.Visit(cun);
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -152,6 +153,30 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             }
 
             resultTextBox.Text = process.StandardOutput;
+
+            // Teszt Generátor
+            string testName = "TestGenAt_" + (DateTime.Now.ToLongDateString() + DateTime.Now.ToLongTimeString()).Replace(":", "_").Replace(" ", "_").Replace(".", "_");
+            string testCase =
+@"
+        [TestMethod]
+        public void " + testName + @"()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@""
+" + sourceCodeTextEditorControl.Text + @"
+"");
+
+            Assert.AreEqual(""" + resultTextBox.Text + @""", result);
+        }
+";
+            StreamWriter sw;
+            string file = "Teszt\\testCase.cs";
+            if (!File.Exists(file))
+                sw = new StreamWriter(file);
+            else
+                sw = new StreamWriter(file,true);
+            sw.WriteLine();
+            sw.WriteLine(testCase);
+            sw.Close();
         }
     }
 }

@@ -139,7 +139,7 @@ memberArrayType
 	;
 
 memberStaticArrayType
-	:	'[' literal (',' literal)* ']' -> ^( CONSTANT_DIMS literal ( literal )* )
+	:	'[' IntegerLiteral (',' IntegerLiteral)* ']' -> ^( CONSTANT_DIMS IntegerLiteral ( IntegerLiteral )* )
 	;
 	
 memberTypedIdentifierNonRef
@@ -235,8 +235,9 @@ builtInType
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/*
 expression
-	:	assignment | exp /*| lambdaExpression*/
+	:	assignment | exp //| lambdaExpression
 	;
 
 exp
@@ -245,6 +246,19 @@ exp
 	
 assignment
 	:	leftValue assignmentOperator expression -> ^( ASSIGNMENT ^( assignmentOperator leftValue expression ) )
+	;
+	*/
+	
+expression
+	:	exp -> ^( EXPRESSION exp )
+	;
+	
+exp
+	:	assignment | conditionalOrExpression //| lambdaExpression
+	;
+	
+assignment
+	:	leftValue assignmentOperator^ exp
 	;
     
 assignmentOperator

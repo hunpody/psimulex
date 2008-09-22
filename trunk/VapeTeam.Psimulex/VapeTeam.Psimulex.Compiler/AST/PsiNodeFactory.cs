@@ -101,7 +101,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
                 /*Expressions*/
                 case NodeType.Expression: node = new ExpressionNode(); v = true; break;
-                case NodeType.Assignment: node = new AssignmentNode(); v = true; break;
                 /*
                 case NodeType.LambdaExpression:
                     break;

@@ -190,6 +190,38 @@ namespace VapeTeam.Psimulex.Compiler.Tests
 			};
 			for (int i = 0; i < process.Program.CommandList.Count; i++)
 				Assert.IsInstanceOfType(process.Program.CommandList[i], commandObjectTypes[i]);
-        }       
+        }
+
+        #region Generated Tests
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_22_23_11_42()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int a;
+a = 10;
+a += 10;
+print(a);
+");
+
+            Assert.AreEqual("20", result);
+        }
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_23_0_36_29()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int b;
+int c;
+int a;
+a = b = c = 20;
+print(a);
+");
+
+            Assert.AreEqual("20", result);
+        }
+
+
+        #endregion
     }
 }

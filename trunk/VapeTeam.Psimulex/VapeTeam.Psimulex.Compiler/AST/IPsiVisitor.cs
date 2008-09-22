@@ -53,7 +53,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         /*Expressions*/
         void Visit(ExpressionNode node);
-        void Visit(AssignmentNode node);
         /*
         void Visit(LambdaExpressionNode node);
         void Visit(LambdaParameterNode node);
