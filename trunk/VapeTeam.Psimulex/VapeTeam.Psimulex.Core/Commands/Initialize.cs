@@ -28,15 +28,27 @@ namespace VapeTeam.Psimulex.Core.Commands
             this.type = type;
         }
 
-        public Initialize(string name, string typeName)
-        {
-            this.name = name;
-            this.typeName = typeName;
-        }
+        //public Initialize(string name, string typeName)
+        //{
+        //    this.name = name;
+        //    this.typeName = typeName;
+        //}
 
         public Initialize(string name)
             : this(name, TypeEnum.Undefined)
         {
+        }
+
+        public override string ToString()
+        {
+            if (type == TypeEnum.Undefined)
+            {
+                return string.Format("initialize {0}", type.ToString());
+            }
+            else
+            {
+                return string.Format("initialize {0} {1}", type.ToString(), name);
+            }
         }
     }
 }

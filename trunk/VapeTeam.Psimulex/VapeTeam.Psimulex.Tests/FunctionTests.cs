@@ -119,6 +119,15 @@ namespace VapeTeam.Psimulex.Tests
 
         private VapeTeam.Psimulex.Core.Process CreateAndRunFibonacci(long n)
         {
+
+            /* The program is:
+             * 
+             * print(fib(x));
+             * int fib(int n) { if (n <= 0) return 0; if (n == 1) return 1; return fib(n-2) + fib(n-1); }
+             * 
+             * Result == Fibonacci(x)
+            */
+
             var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
 
@@ -158,17 +167,9 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void RecursiveFunctionCallByAddress_Fibonacci1()
         {
-            // Test native calls
+            // Test recursive native calls
 
-            /* The program is:
-             * 
-             * print(fib(x));
-             * int fib(int n) { if (n <= 0) return 0; if (n == 1) return 1; return fib(n-2) + fib(n-1); }
-             * 
-             * Result == Fibonacci(x)
-            */
-
-            for (int i = 0; i <= 20; ++i)
+            for (int i = 0; i <= 10; ++i)
             {
                 Assert.AreEqual(Fibonacci(i).ToString(), CreateAndRunFibonacci(i).StandardOutput);
             }

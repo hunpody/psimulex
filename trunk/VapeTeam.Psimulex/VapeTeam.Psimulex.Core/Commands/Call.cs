@@ -15,6 +15,11 @@ namespace VapeTeam.Psimulex.Core.Commands
         private string functionName;
         private int functionAddress;
 
+        protected bool IsCallingByName
+        {
+            get { return !string.IsNullOrEmpty(functionName); }
+        }
+
         #region ICommand Members
 
         public override void Do(ICommandContext context)
@@ -85,5 +90,17 @@ namespace VapeTeam.Psimulex.Core.Commands
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            if (IsCallingByName)
+            {
+                return string.Format("call {0}", functionName);
+            }
+            else
+            {
+                return string.Format("call {0}", functionAddress.ToString());
+            }
+        }
     }
 }

@@ -95,7 +95,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             {
                 if (type != TypeEnum.Undefined)
                 {
-                    return string.Format("push {0} ({1})", value, type);
+                    return string.Format("push {1} {0}", value, type);
                 }
                 else
                 {

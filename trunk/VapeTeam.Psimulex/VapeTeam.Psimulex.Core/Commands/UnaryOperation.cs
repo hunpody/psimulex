@@ -64,5 +64,28 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             this.operation = operation;
         }
+
+        public override string ToString()
+        {
+            switch (this.operation)
+            {
+                case Operations.Negate:
+                    return "negate";
+                case Operations.Plus:
+                    return "plus";
+                case Operations.PrefixDecrement:
+                    return "prefix_decrement";
+                case Operations.PrefixIncrement:
+                    return "prefix_increment";
+                case Operations.PostfixDecrement:
+                    return "postfix_decrement";
+                case Operations.PostfixIncrement:
+                    return "postfix_increment";
+                case Operations.LogicalNot:
+                    return "logical_not";
+                default:
+                    return "unary_operation ??";
+            }
+        }
     }
 }

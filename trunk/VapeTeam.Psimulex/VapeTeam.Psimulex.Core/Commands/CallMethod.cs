@@ -69,5 +69,10 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             this.methodName = methodName;
         }
+
+        public override string ToString()
+        {
+            return string.Format("call_method {0}", methodName);
+        }
     }
 }

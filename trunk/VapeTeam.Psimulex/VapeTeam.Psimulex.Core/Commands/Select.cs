@@ -44,5 +44,10 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             this.name = name;
         }
+
+        public override string ToString()
+        {
+            return string.Format("select {0}", name);
+        }
     }
 }

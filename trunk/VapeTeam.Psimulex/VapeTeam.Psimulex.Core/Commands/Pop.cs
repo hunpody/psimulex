@@ -18,5 +18,10 @@ namespace VapeTeam.Psimulex.Core.Commands
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return "pop";
+        }
     }
 }
