@@ -81,7 +81,6 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
 
                 /*Expression*/
                 case PsimulexLexer.EXPRESSION: type = NodeType.Expression; break;
-                case PsimulexLexer.ASSIGNMENT: type = NodeType.Assignment; break;
                 /*
                 case PsimulexLexer.LAMBDA_EXPRESSION: type = NodeType.LambdaExpression; break;
                 case PsimulexLexer.LAMBDAPARAM: type = NodeType.LambdaParameter; break;

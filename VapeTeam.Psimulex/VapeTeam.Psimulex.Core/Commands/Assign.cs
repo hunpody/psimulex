@@ -11,7 +11,7 @@ namespace VapeTeam.Psimulex.Core.Commands
     /// </summary>
     public class Assign : CommandBase
     {
-        private bool pushResult;
+        public bool PushResult { get; set; }
 
         public override void Do(ICommandContext context)
         {
@@ -19,7 +19,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             BaseType targetValue = context.RunStack.Pop();
             targetValue.Assign(valueToAssign);
 
-            if (pushResult)
+            if (PushResult)
             {
                 context.RunStack.Push(targetValue);
             }
@@ -39,12 +39,12 @@ namespace VapeTeam.Psimulex.Core.Commands
         /// <param name="pushResult"></param>
         public Assign(bool pushResult)
         {
-            this.pushResult = pushResult;
+            this.PushResult = pushResult;
         }
 
         public override string ToString()
         {
-            if (!pushResult)
+            if (!PushResult)
             {
                 return "assign";
             }

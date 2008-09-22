@@ -57,6 +57,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         private bool lastCompiledArrayIsDynamic;
 
+        private Assign lastCompiledAssign;
+
         private void InitHelpers()
         {
             lastCompiledMember = new Member();
@@ -69,6 +71,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             lastCompiledConstantValue = null;
 
             lastCompiledArrayIsDynamic = false;
+            lastCompiledAssign = null;
         }
 
         private string SplitQuotes(string s)
@@ -277,7 +280,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // Initialize
             // Lenne itt még pár dolog ...
-            AddCommand(new Initialize(varName,varType));
+            AddCommand(new Initialize(varName, varType));
         }
 
         public void Visit(VariableDeclarationNode node)
@@ -312,7 +315,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             {
                 node.Left.Accept(this);
                 node.Right.Accept(this);
-                AddCommand(new Assign());
+                AddCommand(lastCompiledAssign = new Assign(true));
             }
             else
             {
@@ -337,7 +340,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                         break;
                 }
 
-                AddCommand(new Assign());
+                AddCommand(lastCompiledAssign = new Assign(true));
             }
         }
 
@@ -381,8 +384,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Expressions*/
         #region Expression        
 
-        public void Visit(ExpressionNode node) { VisitChildren(node); }
-        public void Visit(AssignmentNode node) { VisitChildren(node); }
+        public void Visit(ExpressionNode node)
+        {
+            VisitChildren(node);
+            if (lastCompiledAssign != null) lastCompiledAssign.PushResult = false;
+            lastCompiledAssign = null;
+        }
+
         public void Visit(MemberSelectNode node)
         {
             VisitChildren(node);
