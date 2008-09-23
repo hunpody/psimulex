@@ -60,6 +60,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             Parent = parent;
             Children = children;
+            foreach (IPsiNode child in Children)
+                child.Parent = this;
             Value = value;
             Type = type;
             IsVirtual = isVirtual;
@@ -235,6 +237,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
  
     /*Expressions*/
     public class ExpressionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class CastNode : PsiNode
+    {
+        public IPsiNode CastTypeName { get; set; }
+        public IPsiNode CastOperand { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+    public class PrefixUnaryOperationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     /*
     public class LambdaExpressionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class LambdaParameterNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
@@ -242,8 +251,21 @@ namespace VapeTeam.Psimulex.Compiler.AST
     */
 
     public class MemberSelectNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class MemberFunctionCallNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class FunctionCallNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class MemberFunctionCallNode : PsiNode
+    {
+        public IPsiNode MemberFunctionName { get; set; }
+        public List<IPsiNode> MemberFunctionArguments { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class FunctionCallNode : PsiNode 
+    {
+        public IPsiNode FunctionName { get; set; }
+        public List<IPsiNode> FunctionArguments { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class ArgumentsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class IndexingNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class DimensionsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class ConstantDimensionsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }

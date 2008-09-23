@@ -81,6 +81,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
 
                 /*Expression*/
                 case PsimulexLexer.EXPRESSION: type = NodeType.Expression; break;
+                case PsimulexLexer.CAST: type = NodeType.Cast; break;
+                case PsimulexLexer.PREFIXOP: type = NodeType.PrefixUnaryOperation; break;
                 /*
                 case PsimulexLexer.LAMBDA_EXPRESSION: type = NodeType.LambdaExpression; break;
                 case PsimulexLexer.LAMBDAPARAM: type = NodeType.LambdaParameter; break;
@@ -89,7 +91,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
 
                 case PsimulexLexer.MEMBER_SELECT: type = NodeType.MemberSelect; break;
                 case PsimulexLexer.FUNCTION_CALL: type = NodeType.FunctionCall; break;
-                case PsimulexLexer.MEMBER_FUNCTION_CALL: type = NodeType.FunctionCall; break;
+                case PsimulexLexer.MEMBER_FUNCTION_CALL: type = NodeType.MemberFunctionCall; break;
+                case PsimulexLexer.ARGUMENTS: type = NodeType.Arguments; break;
                 case PsimulexLexer.INDEXING: type = NodeType.Indexing; break;
                 case PsimulexLexer.DIMS: type = NodeType.Dimensions; break;
                 case PsimulexLexer.CONSTANT_DIMS: type = NodeType.ConstantDimensions; break;

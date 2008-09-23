@@ -53,6 +53,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         /*Expressions*/
         void Visit(ExpressionNode node);
+        void Visit(CastNode node);
+        void Visit(PrefixUnaryOperationNode node);
         /*
         void Visit(LambdaExpressionNode node);
         void Visit(LambdaParameterNode node);
@@ -62,6 +64,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(MemberSelectNode node);
         void Visit(MemberFunctionCallNode node);
         void Visit(FunctionCallNode node);
+        void Visit(ArgumentsNode node);
         void Visit(IndexingNode node);
         void Visit(DimensionsNode node);
         void Visit(ConstantDimensionsNode node);

@@ -101,6 +101,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
                 /*Expressions*/
                 case NodeType.Expression: node = new ExpressionNode(); v = true; break;
+                case NodeType.Cast: node = new CastNode();
+                    node = new CastNode
+                    {
+                        CastTypeName = children[0].Left,
+                        CastOperand = children[1]
+                    }; v = true; break;
+                case NodeType.PrefixUnaryOperation: node = new PrefixUnaryOperationNode(); v = true; break;
                 /*
                 case NodeType.LambdaExpression:
                     break;
@@ -111,8 +118,18 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 */
 
                 case NodeType.MemberSelect: node = new MemberSelectNode(); v = true; break;
-                case NodeType.MemberFunctionCall: node = new MemberFunctionCallNode(); v = true; break;
-                case NodeType.FunctionCall: node = new FunctionCallNode(); v = true; break;
+                case NodeType.MemberFunctionCall:
+                    node = new MemberFunctionCallNode
+                    {
+                        MemberFunctionName = children[0],
+                        MemberFunctionArguments = children.GetRange(1, children.Count - 1)
+                    }; v = true; break;
+                case NodeType.FunctionCall:
+                    node = new FunctionCallNode
+                    {
+                        FunctionName = children[0],
+                        FunctionArguments = children.GetRange(1, children.Count - 1)
+                    }; v = true; break;
                 case NodeType.Indexing: node = new IndexingNode(); v = true; break;
                 case NodeType.Dimensions: node = new DimensionsNode(); v = true; break;
                 case NodeType.ConstantDimensions: node = new ConstantDimensionsNode(); v = true; break;
