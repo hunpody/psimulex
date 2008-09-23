@@ -19,6 +19,18 @@ namespace VapeTeam.Psimulex.Core.Types
         {
         }
 
+        #region Overridden Operations
+
+        public override void Negate()
+        {
+            this.value = !this.value;
+        }
+
+        public override void Assign(BaseType value)
+        {
+            this.value = value.ToBoolean();
+        }
+
         public override object ToObject()
         {
             return value;
@@ -28,5 +40,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             get { return TypeEnum.Boolean; }
         }
+
+        #endregion
     }
 }

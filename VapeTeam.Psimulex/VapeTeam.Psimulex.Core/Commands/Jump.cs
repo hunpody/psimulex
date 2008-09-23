@@ -16,11 +16,7 @@ namespace VapeTeam.Psimulex.Core.Commands
         /// The target Program Counter position the command will jump to. 
         /// If the Jump is a Relative Jump then it is the amount of relocation.
         /// </summary>
-        public int PC
-        {
-            get;
-            private set;
-        }
+        public int PC { get; set; }
 
         /// <summary>
         /// Tells whether the jump will set the Program Counter to an absolute or relative position.
