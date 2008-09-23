@@ -130,6 +130,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             switch (type)
             {
+                /*Primitive Types*/
                 case TypeEnum.Void:
                     return null;
                 case TypeEnum.Integer:
@@ -142,6 +143,10 @@ namespace VapeTeam.Psimulex.Core.Types
                     return new Decimal();
                 case TypeEnum.Float:
                     return new Float();
+                case TypeEnum.Boolean:
+                    return new Boolean();
+
+                /*BuiltIn Types*/
                 case TypeEnum.List:
                     return new List();
                 default:
