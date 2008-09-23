@@ -360,5 +360,23 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("XADBCEADBCEADBCEADBCEADBCEX", process.StandardOutput);
         }
+
+        [TestMethod]
+        public void SilentJump()
+        {
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                new Push(true),
+                new Push(false),
+                new RelativeJumpIfFalse(2) { IsSilent = true },
+                new RelativeJumpIfTrue(2), // Noop
+                new Compare(Compare.ComparisonModes.NotEqual),
+                new RelativeJumpIfTrue(2) { IsSilent = true },
+                new Push("error"),
+                new Call("print")));
+
+            Assert.AreEqual("True", process.StandardOutput);
+        }
     }
 }

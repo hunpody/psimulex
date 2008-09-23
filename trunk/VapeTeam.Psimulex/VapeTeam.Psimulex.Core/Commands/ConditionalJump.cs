@@ -21,11 +21,26 @@ namespace VapeTeam.Psimulex.Core.Commands
             private set;
         }
 
+        /// <summary>
+        /// Means that the condition will not be popped out from the stack if it is true.
+        /// </summary>
+        public bool IsSilent { get; set; }
+
         #endregion
 
         public override void Do(ICommandContext context)
         {
-            if (context.RunStack.Pop().ToBoolean() == Condition)
+            bool value = false;
+            if (IsSilent)
+            {
+                value = context.RunStack.Top.ToBoolean();
+            }
+            else
+            {
+                value = context.RunStack.Pop().ToBoolean();
+            }
+
+            if (value == Condition)
             {
                 base.Do(context);
             }
@@ -51,7 +66,10 @@ namespace VapeTeam.Psimulex.Core.Commands
             string isRelativeString = string.Empty;
             if (IsRelative)
                 isRelativeString = "relative_";
-            return string.Format("{0}jump_if_{1} {2}", isRelativeString, Condition.ToString().ToLower(), this.PC);
+            string postfix = string.Empty;
+            if (IsSilent)
+                postfix = " (silent)";
+            return string.Format("{0}jump_if_{1} {2}{3}", isRelativeString, Condition.ToString().ToLower(), this.PC, postfix);
         }
     }
 
