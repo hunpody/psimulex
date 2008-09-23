@@ -9,11 +9,38 @@ using VapeTeam.Psimulex.Core.Factories;
 
 namespace VapeTeam.Psimulex.Compiler.AST
 {
+    public class PsiCodeGeneratorVisitorException : Exception
+    {         
+        public PsiCodeGeneratorVisitorException(string message)
+            : base(message)
+        {
+        }
+
+        public PsiCodeGeneratorVisitorException()
+        : this("PsiCodeGeneratorVisitorException")
+        {
+        }
+    }
+
+    public class UnknowOperatorException : PsiCodeGeneratorVisitorException
+    {
+        public UnknowOperatorException(string message)
+            : base(message)
+        {
+        }
+
+        public UnknowOperatorException()
+            : this("UnknowOperatorException")
+        {
+        }
+    }
+
     public class PsiCodeGeneratorVisitor : IPsiVisitor
     {
         #region PsiBuilderVisitor Members
         
         public ProgramBuilder Program { get; set; }
+        public int ProgramSize { get { return Program.Program.CommandList.Count; } }
         public StringBuilder CompilerMessages { get; private set; }
         
         public PsiCodeGeneratorVisitor()
@@ -59,6 +86,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         private Assign lastCompiledAssign;
 
+        private System.Collections.Generic.Stack<Jump> lazyEvaluationJumpStack;
+        private System.Collections.Generic.Stack<Jump> jumpStack;
+
         private void InitHelpers()
         {
             lastCompiledMember = new Member();
@@ -72,6 +102,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             lastCompiledArrayIsDynamic = false;
             lastCompiledAssign = null;
+
+            lazyEvaluationJumpStack = new System.Collections.Generic.Stack<Jump>();
+            jumpStack = new System.Collections.Generic.Stack<Jump>();
         }
 
         private string SplitQuotes(string s)
@@ -309,8 +342,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(AssignmentOpNode node)
         {
-            // Figyelem a Scilent/nem scilent Assignolást még meg kell cisnálni !
-
             if (node.Value == "=")
             {
                 node.Left.Accept(this);
@@ -319,7 +350,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             else
             {
-                // x op= y -> x = x op y
+                // x op= y -> x = x op y //
                 node.Left.Accept(this);
                 node.Left.Accept(this);
                 node.Right.Accept(this);
@@ -336,7 +367,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     case '|': AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalOr)); break;
                     case '~': AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalXor)); break;
                     default:
-                        // Can't be
+                        throw new UnknowOperatorException(string.Format("Unknow Assign Operator : {0}", node.Value));
                         break;
                 }
 
@@ -345,8 +376,23 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         public void Visit(LogicalOrOpNode node)
-        {
-            VisitChildren(node);
+        {   
+            // Left Operand
+            node.Left.Accept(this);
+            
+            // Lazy Jump
+            int address = ProgramSize;
+            RelativeJumpIfTrue jmp = new RelativeJumpIfTrue(0);
+            AddCommand(jmp);
+            lazyEvaluationJumpStack.Push(jmp);
+
+            // Right Operand
+            node.Right.Accept(this);
+
+            // Logical Or Operator
+            AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalOr));
+
+            lazyEvaluationJumpStack.Pop().PC = ProgramSize - address;
         }
 
         public void Visit(LogicalAndOpNode node)
@@ -501,7 +547,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(BoolLiteralNode node)
         {
-            lastCompiledConstantValue = ValueFactory.Create(Convert.ToBoolean(SplitQuotes(node.Value)));
+            string constant  = SplitQuotes(node.Value);
+            bool l = Convert.ToBoolean(constant);
+            lastCompiledConstantValue = ValueFactory.Create(l);
             if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
             addToProgram = true;
         }

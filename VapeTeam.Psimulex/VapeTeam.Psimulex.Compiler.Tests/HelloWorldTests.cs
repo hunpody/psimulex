@@ -216,9 +216,11 @@ int c;
 int a;
 a = b = c = 20;
 print(a);
+print(b);
+print(c);
 ");
 
-            Assert.AreEqual("20", result);
+            Assert.AreEqual("202020", result);
         }
 
 
