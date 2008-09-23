@@ -131,9 +131,9 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 
         private void TesterForm_Load(object sender, EventArgs e)
         {
-            compileButton_Click(this, new EventArgs());
-            btnViewProgramString_Click(this, new EventArgs());
-            btnViewTree_Click(this, new EventArgs());
+            //compileButton_Click(this, new EventArgs());
+            //btnViewProgramString_Click(this, new EventArgs());
+            //btnViewTree_Click(this, new EventArgs());
         }
 
         private void btnRun_Click(object sender, EventArgs e)
@@ -162,7 +162,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         public void " + testName + @"()
         {
             var result = Helpers.SystemHelper.CompileAndRun(@""
-" + sourceCodeTextEditorControl.Text + @"
+" + sourceCodeTextEditorControl.Text.Replace("\"","\"\"") + @"
 "");
 
             Assert.AreEqual(""" + resultTextBox.Text + @""", result);

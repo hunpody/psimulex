@@ -86,6 +86,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         private Assign lastCompiledAssign;
 
+        private bool operatorIsPrefixUnary;
+
         private System.Collections.Generic.Stack<Jump> lazyEvaluationJumpStack;
         private System.Collections.Generic.Stack<Jump> jumpStack;
 
@@ -102,6 +104,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             lastCompiledArrayIsDynamic = false;
             lastCompiledAssign = null;
+
+            operatorIsPrefixUnary = false;
 
             lazyEvaluationJumpStack = new System.Collections.Generic.Stack<Jump>();
             jumpStack = new System.Collections.Generic.Stack<Jump>();
@@ -382,7 +386,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             
             // Lazy Jump
             int address = ProgramSize;
-            RelativeJumpIfTrue jmp = new RelativeJumpIfTrue(0);
+            ScilentRelativeJumpIfTrue jmp = new ScilentRelativeJumpIfTrue(0);
             AddCommand(jmp);
             lazyEvaluationJumpStack.Push(jmp);
 
@@ -397,33 +401,206 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(LogicalAndOpNode node)
         {
-            VisitChildren(node);
+            // Left Operand
+            node.Left.Accept(this);
+
+            // Lazy Jump
+            int address = ProgramSize;
+            ScilentRelativeJumpIfFalse jmp = new ScilentRelativeJumpIfFalse(0);
+            AddCommand(jmp);
+            lazyEvaluationJumpStack.Push(jmp);
+
+            // Right Operand
+            node.Right.Accept(this);
+
+            // Logical And Operator
+            AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalAnd));
+
+            lazyEvaluationJumpStack.Pop().PC = ProgramSize - address;
         }
 
         public void Visit(EqualityOpNode node)
         {
-            VisitChildren(node);
+            // Left Operand
+            node.Left.Accept(this);
+
+            // Right Operand
+            node.Right.Accept(this);
+
+            // Compare Operation
+            switch (node.Value)
+            {
+                case "==": AddCommand(new Compare(Compare.ComparisonModes.Equal)); break;
+                case "!=": AddCommand(new Compare(Compare.ComparisonModes.NotEqual)); break;
+                default:
+                    throw new UnknowOperatorException(string.Format("Unknow Compare Operator : {0}", node.Value));
+                    break;
+            }
         }
 
         public void Visit(RelationOpNode node)
-        {
-            VisitChildren(node);
+        {            
+            // Left Operand
+            node.Left.Accept(this);
+
+            // Right Operand
+            node.Right.Accept(this);
+
+            // Relation Operation
+            switch (node.Value)
+            {
+                case "<": AddCommand(new Compare(Compare.ComparisonModes.LessThan)); break;
+                case "<=": AddCommand(new Compare(Compare.ComparisonModes.LessThanOrEqual)); break;
+                case ">": AddCommand(new Compare(Compare.ComparisonModes.GreaterThan)); break;
+                case ">=": AddCommand(new Compare(Compare.ComparisonModes.GreaterThanOrEqual)); break;
+                default:
+                    throw new UnknowOperatorException(string.Format("Unknow Compare Operator : {0}", node.Value));
+                    break;
+            }
         }
 
         public void Visit(AdditiveOpNode node)
         {
-            VisitChildren(node);
+            bool isUnary = operatorIsPrefixUnary;
+            operatorIsPrefixUnary = false;
+
+            // Left Operand
+            node.Left.Accept(this);
+
+            // Right Operand if Not Unary Negation
+            if (!isUnary) node.Right.Accept(this);
+
+            // Additive Operation
+            switch (node.Value)
+            {
+                case "+": AddCommand(new BinaryOperation(BinaryOperation.Operations.Addition)); break;
+                case "-":
+                    if (isUnary) AddCommand(new UnaryOperation(UnaryOperation.Operations.Negate));
+                    else AddCommand(new BinaryOperation(BinaryOperation.Operations.Subtraction));
+                    break;
+                default:
+                    throw new UnknowOperatorException(string.Format("Unknow Additive Operator : {0}", node.Value));
+                    break;
+            }
         }
 
         public void Visit(MultiplicativeOpNode node)
         {
-            VisitChildren(node);
+            // Left Operand
+            node.Left.Accept(this);
+
+            // Right Operand
+            node.Right.Accept(this);
+
+            // Additive Operation
+            switch (node.Value)
+            {
+                case "*": AddCommand(new BinaryOperation(BinaryOperation.Operations.Multiplication)); break;
+                case "/": AddCommand(new BinaryOperation(BinaryOperation.Operations.Division)); break;
+                case "%": AddCommand(new BinaryOperation(BinaryOperation.Operations.Modulo)); break;
+                case "^": AddCommand(new BinaryOperation(BinaryOperation.Operations.Power)); break;
+                default:
+                    throw new UnknowOperatorException(string.Format("Unknow Additive Operator : {0}", node.Value));
+                    break;
+            }
         }
 
         public void Visit(UnaryOpNode node)
         {
+            // 01 The Operand (EXP)
             VisitChildren(node);
+
+            // 02 LogicalNot Operation
+            if (node.Value == "!")
+            {
+                AddCommand(new UnaryOperation(UnaryOperation.Operations.LogicalNot));
+            }
+            else
+            {
+                // ( x ++ | ++ x ) -> x = x + 1
+                // ( x -- | -- x ) -> x = x - 1
+                // 02 Operand (EXP)
+                VisitChildren(node);
+
+                // Unary Operator
+                if (operatorIsPrefixUnary)
+                {
+                    /* 
+                     * ( ++EXP | --EXP ) :
+                     * -------------------
+                     * 01 Push EXP
+                     * 02 Push EXP
+                     * 03 ( Push +1 | Push -1 )
+                     * 04 Add
+                     * 05 Assign
+                     * 
+                     */
+
+                    // 03 ( Push +1 | Push -1 )
+                    if (node.Value == "++")
+                    {
+                        AddCommand(new Push(new Integer(1)));
+                    }
+                    else if (node.Value == "--")
+                    {
+                        AddCommand(new Push(new Integer(-1)));
+                    }
+                    else
+                    {
+                        throw new UnknowOperatorException(string.Format("Unknow UnaryPrefix Operator : {0}", node.Value));
+                    }
+
+                    // 04 Add Operation
+                    // 05 Assign Operation
+                    AddCommand
+                        (
+                        new BinaryOperation(BinaryOperation.Operations.Addition),
+                        new Assign()
+                        );
+                }
+                else
+                {
+                    /* 
+                     * ( EXP++ | EXP-- ) :
+                     * -------------------
+                     * 01 Push EXP
+                     * 02 Push EXP                     
+                     * 03 Push EXP
+                     * 04 ( Push +1 | Push -1 )
+                     * 05 Add
+                     * 06 Assign ( Scilent )
+                     * 07 Pop
+                     */
+
+                    // 03 Operand (EXP)
+                    VisitChildren(node);
+
+                    // 04 ( Push +1 | Push -1 )
+                    if (node.Value == "++")
+                    {
+                        AddCommand(new Push(new Integer(1)));
+                    }
+                    else if (node.Value == "--")
+                    {
+                        AddCommand(new Push(new Integer(-1)));
+                    }
+                    else
+                    {
+                        throw new UnknowOperatorException(string.Format("Unknow UnarPostfix Operator : {0}", node.Value));
+                    }
+
+                    // 05 Add Operation
+                    // 06 Assign (Scilent) Operation
+                    AddCommand
+                        (
+                        new BinaryOperation(BinaryOperation.Operations.Addition),
+                        new Assign(false)
+                        );
+                }
+            }
         }
+
+
 
         #endregion
 
@@ -436,33 +613,73 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if (lastCompiledAssign != null) lastCompiledAssign.PushResult = false;
             lastCompiledAssign = null;
         }
+        
+        public void Visit(CastNode node)
+        {
+            // Cast Operand
+            node.CastOperand.Accept(this);
+
+            // Cast TypeName
+            string castTypeName = node.CastTypeName.Value;
+            
+            // Cast Operation
+            AddCommand(new Cast(TypeEnumFactory.CreateTypeEnum(castTypeName)));
+        }
+
+        public void Visit(PrefixUnaryOperationNode node)
+        {
+            operatorIsPrefixUnary = true;
+            VisitChildren(node);
+            operatorIsPrefixUnary = false;
+        }
 
         public void Visit(MemberSelectNode node)
         {
-            VisitChildren(node);
+            // MemberName
+            string memberName = node.Left.Value;
+
+            // MemberSelect
+            AddCommand(new Select(memberName));
         }
 
         public void Visit(MemberFunctionCallNode node)
         {
-            VisitChildren(node);
+            // Name
+            string memberFunctionName = node.MemberFunctionName.Value;
+
+            // Arguments
+            foreach (IPsiNode child in node.MemberFunctionArguments)
+                child.Accept(this);
+
+            // MemberFunctionCall
+            AddCommand(new CallMethod(memberFunctionName));
         }
 
         public void Visit(FunctionCallNode node)
         {
             // Name
-            string funcName = node.Left.Value;
+            string functionName = node.FunctionName.Value;
             
             // Arguments
-            for (int i = 1; i < node.ChildrenCount; i++)
-                node.Children[i].Accept(this);
+            foreach (IPsiNode child in node.FunctionArguments)
+                child.Accept(this);
 
             // FunctionCall
-            AddCommand(new Call(funcName));
+            AddCommand(new Call(functionName));
         }
 
+        public void Visit(ArgumentsNode node) { VisitChildren(node); }
         public void Visit(IndexingNode node)
         {
+            // Concret Indexis
             VisitChildren(node);
+
+            // Dimension Number
+            int dim = node.Children.Count;
+
+            // Indexing
+            // !!! Csak egy Dimenzióig Indexel
+            AddCommand(new Indexing());
         }
 
         public void Visit(DimensionsNode node)

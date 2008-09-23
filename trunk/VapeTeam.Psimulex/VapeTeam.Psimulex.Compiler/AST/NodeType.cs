@@ -44,6 +44,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         /*Expressions*/
         Expression,
+        Cast,
+        PrefixUnaryOperation,
         /*
         LambdaExpression,
         LambdaParameter,
@@ -53,6 +55,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         MemberSelect,
         MemberFunctionCall,        
         FunctionCall,
+        Arguments,
         Indexing,
         ConstantDimensions,
         Dimensions,

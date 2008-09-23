@@ -34,11 +34,14 @@ tokens {
 	FUNCTIONPOINTERTYPE;
 	
 	EXPRESSION;
-	ASSIGNMENT;
+	CAST;
+	PREFIXOP;
+	POSTFIXOP;
 	/*LAMBDA_EXPRESSION;*/
 	
 	MEMBER_FUNCTION_CALL;
 	FUNCTION_CALL;
+	ARGUMENTS;
 	MEMBER_SELECT;
 	INDEXING;
 	
@@ -306,26 +309,30 @@ multiplicativeOp
 	;
 
 unaryExpression
-    :	unaryPrefixOp^ unaryExpression
-    |	primaryExpression (unaryPostfixOp^)?
+    :	unaryPrefixExpression
+    |	unaryPostfixExpression
 	|	castExpression
     ;
+
+unaryPrefixExpression
+	:	unaryPrefixOp unaryExpression	-> ^( PREFIXOP ^( unaryPrefixOp unaryExpression) )
+	;
+    
+unaryPostfixExpression
+	:	primaryExpression (unaryPostfixOp^)*
+	;
     
 castExpression 
-	:	'(' dataType ')' unaryExpression
+	:	'(' dataType ')' unaryExpression -> ^( CAST dataType unaryExpression )
 	;
 
 unaryPrefixOp
-	:	Plus|Minus|PlusPlus|MinusMinus|LogicalNot
+	:	Minus|PlusPlus|MinusMinus|LogicalNot
 	;
 	
 unaryPostfixOp
 	:	PlusPlus|MinusMinus
 	;
-
-unaryExpressionPostPlusPlusMinusMinus
-    :   primaryExpression (unaryPostfixOp^)*
-    ;
 
 primaryExpression
     :   parExpression
@@ -361,6 +368,16 @@ memberSelect
 	:	'.' Identifier -> ^( MEMBER_SELECT Identifier )
 	;
 
+/*
+memberFunctionCall
+	:	'.' Identifier arguments -> ^( MEMBER_FUNCTION_CALL Identifier arguments )
+	;
+
+functionCall
+	:	Identifier arguments -> ^( FUNCTION_CALL Identifier arguments )
+	;
+	*/
+
 memberFunctionCall
 	:	'.' Identifier arguments -> ^( MEMBER_FUNCTION_CALL Identifier arguments )
 	;
@@ -369,12 +386,13 @@ functionCall
 	:	Identifier arguments -> ^( FUNCTION_CALL Identifier arguments )
 	;
 
+
 indexing
 	:	'[' expression ( ',' expression )* ']' -> ^( INDEXING expression ( expression )* )
 	;
 	
 arguments
-    :   '('! ( expression (','! expression)* )? ')'!
+    :   '(' ( expression (',' expression)* )? ')' -> ^( ARGUMENTS ( expression expression* )? )
     ;
     
 literal
