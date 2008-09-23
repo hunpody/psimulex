@@ -49,7 +49,7 @@ namespace VapeTeam.Psimulex.Core.Commands
         #region Constructors
 
         public ConditionalJump(int pc, bool condition)
-            : this(pc, condition, false)
+            : this(pc, condition, false,false)
         {
         }
 
@@ -57,6 +57,14 @@ namespace VapeTeam.Psimulex.Core.Commands
             : base(pc, isRelative)
         {
             this.Condition = condition;
+            this.IsSilent = false;
+        }
+
+        public ConditionalJump(int pc, bool condition, bool isRelative, bool isScilent)
+            : base(pc, isRelative)
+        {
+            this.Condition = condition;
+            this.IsSilent = isScilent;
         }
 
         #endregion
@@ -81,6 +89,11 @@ namespace VapeTeam.Psimulex.Core.Commands
             : base(pc, condition, true)
         {
         }
+
+        public RelativeConditionalJump(int pc, bool condition, bool isScilent)
+            : base(pc, condition, true, isScilent)
+        {
+        }
     }
 
     public class RelativeJumpIfFalse : RelativeConditionalJump
@@ -95,6 +108,22 @@ namespace VapeTeam.Psimulex.Core.Commands
     {
         public RelativeJumpIfTrue(int pc)
             : base(pc, true)
+        {
+        }
+    }
+
+    public class ScilentRelativeJumpIfFalse : RelativeConditionalJump
+    {
+        public ScilentRelativeJumpIfFalse(int pc)
+            : base(pc, false, true)
+        {
+        }
+    }
+
+    public class ScilentRelativeJumpIfTrue : RelativeConditionalJump
+    {
+        public ScilentRelativeJumpIfTrue(int pc)
+            : base(pc, true, true)
         {
         }
     }
