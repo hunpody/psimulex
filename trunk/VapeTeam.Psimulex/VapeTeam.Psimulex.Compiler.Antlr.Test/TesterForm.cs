@@ -47,8 +47,11 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             resultTextBox.Text = compiler.output;
             txtErrors.Text = sb.ToString();
 
-            CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
-            visitor.Visit(cun);
+            if (txtErrors.Text == "")
+            {
+                CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
+                visitor.Visit(cun);
+            }
         }
 
         private void closeButton_Click(object sender, EventArgs e)
