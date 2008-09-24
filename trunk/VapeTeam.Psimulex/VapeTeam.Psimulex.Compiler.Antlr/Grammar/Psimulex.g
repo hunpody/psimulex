@@ -333,6 +333,47 @@ unaryPrefixOp
 unaryPostfixOp
 	:	PlusPlus|MinusMinus
 	;
+	
+	
+		/*
+
+multiplicativeExpression
+    :   unaryExpression ( multiplicativeOp^ unaryExpression )*
+    ;
+
+multiplicativeOp
+	:	Star|Divide|Modulo
+	;
+
+unaryExpression
+    :	unaryPrefixIncDecExpression
+    |	unaryPostfixIncDecExpression
+    ;
+
+unaryPrefixIncDecExpression
+	:	unaryPrefixIncDecOp unaryExpression	-> ^( PREFIXOP ^( unaryPrefixIncDecOp unaryExpression) )
+	;
+	
+unaryPrefixExpression
+	:	unaryPrefixOp unaryPrefixExpression	-> ^( PREFIXOP ^( unaryPrefixOp unaryPrefixExpression) )
+	;
+	
+unaryPostfixIncDecExpression
+	:	primaryExpression (unaryPostfixIncDecOp^)?
+	;
+
+unaryPrefixIncDecOp
+	:	PlusPlus|MinusMinus
+	;
+	
+unaryPostfixIncDecOp
+	:	PlusPlus|MinusMinus
+	;
+
+unaryPrefixOp
+	:	Minus|LogicalNot|castExpression
+	;
+	*/
 
 primaryExpression
     :   parExpression
