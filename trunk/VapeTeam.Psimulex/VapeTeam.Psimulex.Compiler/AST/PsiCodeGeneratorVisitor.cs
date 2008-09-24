@@ -507,6 +507,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(UnaryOpNode node)
         {
+            /*
+            -!--++--i++;
+                ->
+            -!( i = ( i = ( i = ( i - 1 ) + 1 ) - 1 ) );
+            */
+
+
             // 01 The Operand (EXP)
             VisitChildren(node);
 
