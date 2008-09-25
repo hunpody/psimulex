@@ -513,6 +513,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
             -!( i = ( i = ( i = ( i - 1 ) + 1 ) - 1 ) );
             */
 
+            /* 
+             * !EXP :
+             * -------------------
+             * 01 Push EXP
+             * 02 Not
+             * 
+            */
 
             // 01 The Operand (EXP)
             VisitChildren(node);
@@ -716,7 +723,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         #endregion
 
         /*Identifier*/
-        public void Visit(IdentifierNode node) 
+        public void Visit(IdentifierNode node)
         {
             AddCommand(new Push(node.Value, ValueAccessModes.LocalVariable));
         }
