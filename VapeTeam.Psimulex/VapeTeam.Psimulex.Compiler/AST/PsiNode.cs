@@ -215,10 +215,119 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
 
+    /*Program Structures*/
     public class BlockNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class StatementNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
-    public class VariableInitialisationNode : PsiNode
+    public class IfStatementNode : PsiNode 
+    {
+        public IPsiNode IfBranch { get; set; }
+        public List<IPsiNode> ElseIfBranchList { get; set; }
+        public IPsiNode ElseBranch { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class IfBranchNode : PsiNode 
+    {
+        public IPsiNode IfCondition { get; set; }
+        public IPsiNode IfCore { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); } 
+    }
+    public class ElseIfBranchNode : PsiNode
+    {
+        public IPsiNode ElseIfCondition { get; set; }
+        public IPsiNode ElseIfCore { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+    public class ElseBranchNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
+    public class DoStatementNode : PsiNode
+    {
+        public IPsiNode DoCore { get; set; }
+        public IPsiNode DoCondition { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+    public class WhileStatementNode : PsiNode
+    {
+        public IPsiNode WhileCondition { get; set; }
+        public IPsiNode WhileCore { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class PForStatementNode : PsiNode
+    {
+        public IPsiNode PForInitialization { get; set; }
+        public IPsiNode PForCondition { get; set; }
+        public IPsiNode PForUpdate { get; set; }
+        public IPsiNode PForCore { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class ForStatementNode : PsiNode
+    {
+        public IPsiNode ForInitialization { get; set; }
+        public IPsiNode ForCondition { get; set; }
+        public IPsiNode ForUpdate { get; set; }
+        public IPsiNode ForCore { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class ForInitNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class ForUpdateNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
+    public class PForEachStatementNode : PsiNode
+    {
+        public IPsiNode PForEachControl { get; set; }
+        public IPsiNode PForEachCore { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class ForEachStatementNode : PsiNode
+    {
+        public IPsiNode ForEachControl { get; set; }
+        public IPsiNode ForEachCore { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class ForEachControlNode : PsiNode
+    {
+        public IPsiNode ForEachIteratorType { get; set; }
+        public IPsiNode ForEachIteratorName { get; set; }
+        public IPsiNode ForEachCollectionExpression { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class LoopStatementNode : PsiNode
+    {
+        public IPsiNode LoopControl { get; set; }
+        public IPsiNode LoopCore { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class LoopControlNode : PsiNode    
+    {
+        public IPsiNode LoopIteratorInitialization { get; set; }
+        public IPsiNode LoopLimitExpression { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class ConditionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class CoreNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }   
+
+    public class PDoStatementNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class AsynStatementNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class LockStatementNode : PsiNode
+    {
+        public IPsiNode LockVariableName { get; set; }
+        public IPsiNode LockCore { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class ReturnNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class BreakNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    //public class ContinueNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
+    public class VariableInitializationNode : PsiNode
     {
         public IPsiNode VariableType { get; set; }
         public IPsiNode VariableReference { get; set; }

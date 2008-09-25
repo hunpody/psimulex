@@ -292,7 +292,85 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(BlockNode node) { VisitChildren(node); }
         public void Visit(StatementNode node) { VisitChildren(node); }
-        public void Visit(VariableInitialisationNode node)
+
+        public void Visit(IfStatementNode node) { VisitChildren(node); }
+        public void Visit(IfBranchNode node) { VisitChildren(node); }
+        public void Visit(ElseIfBranchNode node) { VisitChildren(node); }
+        public void Visit(ElseBranchNode node) { VisitChildren(node); }
+
+        public void Visit(PForStatementNode node)
+        { 
+            VisitChildren(node);
+            throw new NotImplementedException("PFor not implemented yet.");
+        }
+
+        public void Visit(ForStatementNode node) 
+        {
+            throw new NotImplementedException("Nix kész");
+
+            // Itt mentjük el az állapotot ( Simulexben Volt És most ? )
+            // AddCommand(new PushState());
+
+            // ForInitialization
+            node.ForInitialization.Accept(this);
+
+            int conditionAddress = ProgramSize;
+
+            // ForCondition
+            node.ForCondition.Accept(this);
+
+            RelativeJumpIfFalse dj = new RelativeJumpIfFalse(0);
+            AddCommand(dj);
+            jumpStack.Push(dj);
+
+            // ForCore
+            node.ForCore.Accept(this);
+
+            // ForUpdate
+            node.ForUpdate.Accept(this);
+
+            // Jump To The ForCondition
+            AddCommand(new RelativeJump(conditionAddress - ProgramSize - 1));
+
+
+            // Nemjó :D Majd átgyúrom
+
+            // A blokkban előforduló breakokat címzi a blokk utánra
+            //while (jumpStack.Peek().GetType() == (new Break()).GetType() && !(jumpStack.Peek() as Break).IsSettedUp)
+              //  (jumpStack.Peek() as Break).JumpSize = ProgramSize;
+
+            //jumpStack.Pop().PC = ProgramSize;
+
+            // Itt állítjuk visza az állípotot és takarítunk ( Simulexben Volt És most ? )
+            // AddCommand(new PopState());
+        }
+        public void Visit(ForInitNode node) { VisitChildren(node); }
+        public void Visit(ForUpdateNode node) { VisitChildren(node); }
+
+        public void Visit(DoStatementNode node) { VisitChildren(node); }
+        public void Visit(WhileStatementNode node) { VisitChildren(node); }
+        public void Visit(PForEachStatementNode node) { VisitChildren(node); }
+        public void Visit(ForEachStatementNode node) { VisitChildren(node); }
+        public void Visit(ForEachControlNode node) { VisitChildren(node); }
+        public void Visit(LoopStatementNode node) { VisitChildren(node); }
+        public void Visit(LoopControlNode node) { VisitChildren(node); }
+        public void Visit(ConditionNode node) { VisitChildren(node); }
+        public void Visit(CoreNode node) { VisitChildren(node); }
+        public void Visit(PDoStatementNode node) { VisitChildren(node); }
+        public void Visit(AsynStatementNode node) { VisitChildren(node); }
+        public void Visit(LockStatementNode node) { VisitChildren(node); }
+        public void Visit(ReturnNode node) { VisitChildren(node); }
+
+        public void Visit(BreakNode node) 
+        {
+            Break b = new Break();
+            AddCommand(b);
+            jumpStack.Push(b);
+        }
+
+        //public void Visit(ContinueNode node) { VisitChildren(node); }
+
+        public void Visit(VariableInitializationNode node)
         {
             // Type
             node.VariableType.Accept(this);
@@ -316,11 +394,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.VariableInitialValue.Accept(this);
 
             // Initialize
-            if (varIsReference) throw new PsiCodeGeneratorVisitorException("Reference variable definition/initialisation is not supported yet!");
-            if (varArrayIsDynamic) throw new PsiCodeGeneratorVisitorException("Dynamic array initialisation is not supported yet!");
+            if (varIsReference) throw new PsiCodeGeneratorVisitorException("Reference variable definition/initialization is not supported yet!");
+            if (varArrayIsDynamic) throw new PsiCodeGeneratorVisitorException("Dynamic array initialization is not supported yet!");
             if (varType != TypeEnum.UserDefinedType)
             {
-                if (varDimensionCount > 0) throw new PsiCodeGeneratorVisitorException("Array initialisation is not supported yet!");
+                if (varDimensionCount > 0) throw new PsiCodeGeneratorVisitorException("Array initialization is not supported yet!");
                 else AddCommand(new Initialize(varName, varType));
             }
             else

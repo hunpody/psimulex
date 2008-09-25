@@ -72,10 +72,106 @@ namespace VapeTeam.Psimulex.Compiler.AST
                         ParameterReference = children.Count == 3 ? children[1] : null,
                         ParameterName = children[children.Count - 1]
                     }; v = true; break;
+
+                /*Program Structures*/
                 case NodeType.Block: node = new BlockNode(); v = true; break;
                 case NodeType.Statement: node = new StatementNode(); v = true; break;
-                case NodeType.VariableInitialisation:
-                    node = new VariableInitialisationNode
+                case NodeType.IfStatement:
+                    node = new IfStatementNode
+                    {
+                        IfBranch = children[0],
+                        ElseIfBranchList = children.Count > 2 ? children.GetRange(1, children.Count - 2) : null,
+                        ElseBranch = children[children.Count - 1]                        
+                    }; v = true; break;
+                case NodeType.IfBranch:
+                    node = new IfBranchNode
+                    {
+                        IfCondition = children[0],
+                        IfCore = children[1]                         
+                    }; v = true; break;
+                case NodeType.ElseIfBranch:
+                    node = new ElseIfBranchNode
+                    {
+                        ElseIfCondition = children[0],
+                        ElseIfCore = children[1]
+                    }; v = true; break;
+
+                case NodeType.ElseBranch: node = new ElseBranchNode(); v = true; break;
+                case NodeType.DoStatement:
+                    node = new DoStatementNode
+                    {
+                        DoCore = children[0],
+                        DoCondition = children[1]
+                    }; v = true; break;
+                case NodeType.WhileStatement:
+                    node = new WhileStatementNode
+                    {
+                        WhileCondition = children[0],
+                        WhileCore = children[1]
+                    }; v = true; break;
+                case NodeType.PForStatement:
+                    node = new PForStatementNode
+                    {                         
+                        PForInitialization = children[0],                        
+                        PForCondition = children[1],
+                        PForUpdate = children[2],
+                        PForCore = children[3]
+                    }; v = true; break;
+                case NodeType.ForStatement:
+                    node = new ForStatementNode
+                    {
+                        ForInitialization = children[0],
+                        ForCondition = children[1],
+                        ForUpdate = children[2],
+                        ForCore = children[3]                     
+                    }; v = true; break;
+                case NodeType.ForInitialization: node = new ForInitNode(); v = true; break;
+                case NodeType.ForUpdate: node = new ForUpdateNode(); v = true; break;
+                case NodeType.PForEachStatement:
+                    node = new PForEachStatementNode
+                    {
+                        PForEachControl = children[0],
+                        PForEachCore = children[1]                     
+                    }; v = true; break;
+                case NodeType.ForEachStatement:
+                    node = new ForEachStatementNode
+                    {
+                        ForEachControl = children[0],
+                        ForEachCore = children[1]
+                    }; v = true; break;
+                case NodeType.ForEachControl:
+                    node = new ForEachControlNode
+                    {
+                        ForEachIteratorType = children[0],
+                        ForEachIteratorName = children[1],
+                        ForEachCollectionExpression = children[2]
+                    }; v = true; break;
+                case NodeType.LoopStatement:
+                    node= new LoopStatementNode
+                    {
+                        LoopControl = children[0],
+                        LoopCore = children[1]
+                    }; v = true; break;
+                case NodeType.LoopControl: node = new LoopControlNode   
+                {
+                    LoopIteratorInitialization = children[0],
+                    LoopLimitExpression = children[1]
+                }; v = true; break;
+                case NodeType.Condition: node = new ConditionNode(); v = true; break;
+                case NodeType.Core: node = new CoreNode(); v = true; break;
+                case NodeType.PDoStatement: node = new PDoStatementNode(); v = true; break;
+                case NodeType.AsynStatement: node = new AsynStatementNode(); v = true; break;
+                case NodeType.LockStatement:
+                    node = new LockStatementNode
+                    {
+                        LockVariableName = children[0],
+                        LockCore = children[1]
+                    }; v = true; break;
+                case NodeType.Return: node = new ReturnNode(); v = true; break;
+                case NodeType.Break: node = new BreakNode(); break;
+                //case NodeType.Continue: node = new ContinueNode(); break;
+                case NodeType.VariableInitialization:
+                    node = new VariableInitializationNode
                     {
                         VariableType = children[0],
                         VariableReference = children.Count == 4 ? children[1] : null,
