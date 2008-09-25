@@ -105,7 +105,7 @@ namespace VapeTeam.Psimulex.Tests
                 Helpers.SystemHelper.CreateMachineAndRunProgram(VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                 new Push("Hello world!"),
                 new Initialize("s"),
-                new Push("s", ValueAccessModes.LocalVariable),
+                new Push("s", ValueAccessModes.LocalVariableReference),
                 new Call("print")));
 
             Assert.AreEqual("Hello world!", process.StandardOutput);
@@ -120,9 +120,9 @@ namespace VapeTeam.Psimulex.Tests
                 new Initialize("s"),
                 new Push("world!"),
                 new Initialize("s2"),
-                new Push("s", ValueAccessModes.LocalVariable),
+                new Push("s", ValueAccessModes.LocalVariableReference),
                 new Call("print"),
-                new Push("s2", ValueAccessModes.LocalVariable),
+                new Push("s2", ValueAccessModes.LocalVariableReference),
                 new Call("print")));
 
             Assert.AreEqual("Hello world!", process.StandardOutput);
@@ -137,8 +137,8 @@ namespace VapeTeam.Psimulex.Tests
                 new Initialize("s"),
                 new Push("world!"),
                 new Initialize("s2"),
-                new Push("s", ValueAccessModes.LocalVariable),
-                new Push("s2", ValueAccessModes.LocalVariable),
+                new Push("s", ValueAccessModes.LocalVariableReference),
+                new Push("s2", ValueAccessModes.LocalVariableReference),
                 new Call("concat"),
                 new Push("Hello world!"),
                 new Compare(Compare.ComparisonModes.Equal),
@@ -156,8 +156,8 @@ namespace VapeTeam.Psimulex.Tests
                 new Initialize("s"),
                 new Push("world!"),
                 new Initialize("s2"),
-                new Push("s", ValueAccessModes.LocalVariable),
-                new Push("s2", ValueAccessModes.LocalVariable),
+                new Push("s", ValueAccessModes.LocalVariableReference),
+                new Push("s2", ValueAccessModes.LocalVariableReference),
                 new Call("concat"),
                 new Push("Hello world!"),
                 new Compare(Compare.ComparisonModes.Equal),

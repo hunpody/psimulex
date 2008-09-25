@@ -19,8 +19,7 @@ namespace VapeTeam.Psimulex.Core.Commands
     public enum ValueAccessModes
     {
         Constant,
-        InMemory,
-        Register,
-        LocalVariable
+        LocalVariable,
+        LocalVariableReference
     }
 }

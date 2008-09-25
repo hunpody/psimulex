@@ -112,17 +112,17 @@ namespace VapeTeam.Psimulex.Core.Commands
         }
     }
 
-    public class ScilentRelativeJumpIfFalse : RelativeConditionalJump
+    public class SilentRelativeJumpIfFalse : RelativeConditionalJump
     {
-        public ScilentRelativeJumpIfFalse(int pc)
+        public SilentRelativeJumpIfFalse(int pc)
             : base(pc, false, true)
         {
         }
     }
 
-    public class ScilentRelativeJumpIfTrue : RelativeConditionalJump
+    public class SilentRelativeJumpIfTrue : RelativeConditionalJump
     {
-        public ScilentRelativeJumpIfTrue(int pc)
+        public SilentRelativeJumpIfTrue(int pc)
             : base(pc, true, true)
         {
         }

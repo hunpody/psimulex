@@ -26,11 +26,10 @@ namespace VapeTeam.Psimulex.Core.Commands
                 case ValueAccessModes.Constant:
                     context.RunStack.Push(value);
                     break;
-                case ValueAccessModes.InMemory:
-                    break;
-                case ValueAccessModes.Register:
-                    break;
                 case ValueAccessModes.LocalVariable:
+                    context.RunStack.Push(context.GetVariable(name).Clone());
+                    break;
+                case ValueAccessModes.LocalVariableReference:
                     context.RunStack.Push(context.GetVariable(name));
                     break;
                 default:
@@ -55,6 +54,7 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             this.value = value;
             this.type = value.TypeEnum;
+            this.AccessMode = ValueAccessModes.Constant;
         }
 
         public Push(object value)
@@ -91,6 +91,10 @@ namespace VapeTeam.Psimulex.Core.Commands
             {
                 return string.Format("push local {0}", name);
             }
+            else if (AccessMode == ValueAccessModes.LocalVariableReference)
+            {
+                return string.Format("push local &{0}", name);
+            }
             else 
             {
                 if (type != TypeEnum.Undefined)
@@ -103,6 +107,22 @@ namespace VapeTeam.Psimulex.Core.Commands
                 }
 
             }
+        }
+    }
+
+    public class PushByValue : Push
+    {
+        public PushByValue(string variableName)
+            : base(variableName, ValueAccessModes.LocalVariable)
+        {
+        }
+    }
+
+    public class PushByReference : Push
+    {
+        public PushByReference(string variableName)
+            : base(variableName, ValueAccessModes.LocalVariableReference)
+        {
         }
     }
 }
