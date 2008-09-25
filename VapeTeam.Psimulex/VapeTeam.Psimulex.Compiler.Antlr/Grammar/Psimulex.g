@@ -319,7 +319,13 @@ unaryPrefixExpression
 	;
     
 unaryPostfixExpression
-	:	primaryExpression (unaryPostfixOp^)*
+	:	primaryExpression
+	|	leftValueExpression unaryPostfixOp^
+	;
+
+leftValueExpression
+	:	leftValue
+	|	unaryPrefixAssignerOp leftValueExpression -> ^( PREFIXOP ^( unaryPrefixAssignerOp leftValueExpression) )
 	;
     
 castExpression 
@@ -327,7 +333,11 @@ castExpression
 	;
 
 unaryPrefixOp
-	:	Minus|PlusPlus|MinusMinus|LogicalNot
+	:	Minus|LogicalNot
+	;
+	
+unaryPrefixAssignerOp
+	:	PlusPlus|MinusMinus
 	;
 	
 unaryPostfixOp
