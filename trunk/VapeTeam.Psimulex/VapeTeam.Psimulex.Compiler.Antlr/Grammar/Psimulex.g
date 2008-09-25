@@ -319,8 +319,8 @@ unaryPrefixExpression
 	;
     
 unaryPostfixExpression
-	:	primaryExpression
-	|	leftValueExpression unaryPostfixOp^
+	:	leftValueExpression (unaryPostfixOp^)?
+	|	primaryExpression
 	;
 
 leftValueExpression
