@@ -172,7 +172,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             string structName = node.StructName.Value;
             List<Member> structMembers = new List<Member>();
 
-            foreach (IPsiNode member in node.StructMembers)
+            foreach (IPsiNode member in node.StructMemberList)
             {
                 member.Accept(this);
                 structMembers.Add(lastCompiledMember);
@@ -291,7 +291,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         public void Visit(BlockNode node) { VisitChildren(node); }
-        public void Visit(StatementNode node) { VisitChildren(node); } 
+        public void Visit(StatementNode node) { VisitChildren(node); }
         public void Visit(VariableInitialisationNode node)
         {
             // Type
@@ -315,11 +315,18 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Expression
             node.VariableInitialValue.Accept(this);
 
-
-
             // Initialize
-            // Lenne itt még pár dolog ...
-            AddCommand(new Initialize(varName, varType));
+            if (varIsReference) throw new PsiCodeGeneratorVisitorException("Reference variable definition/initialisation is not supported yet!");
+            if (varArrayIsDynamic) throw new PsiCodeGeneratorVisitorException("Dynamic array initialisation is not supported yet!");
+            if (varType != TypeEnum.UserDefinedType)
+            {
+                if (varDimensionCount > 0) throw new PsiCodeGeneratorVisitorException("Array initialisation is not supported yet!");
+                else AddCommand(new Initialize(varName, varType));
+            }
+            else
+            {
+                throw new PsiCodeGeneratorVisitorException(string.Format("User defined types is not supported yet! ({0})", varTypeName));
+            }
         }
 
         public void Visit(VariableDeclarationNode node)
@@ -337,10 +344,17 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Name
             string varName = node.VariableName.Value;
 
-
-
             // Declare
-            AddCommand(new Declare(varName,varType));
+            if (varArrayIsDynamic) throw new PsiCodeGeneratorVisitorException("Dynamic array declaration is not supported yet!");
+            if (varType != TypeEnum.UserDefinedType)
+            {
+                if (varDimensionCount > 0) AddCommand(new ArrayDeclaration(varName, varType, varDimensionCount));
+                else AddCommand(new Declare(varName, varType));
+            }
+            else
+            {
+                throw new PsiCodeGeneratorVisitorException(string.Format("User defined types is not supported yet! ({0})", varTypeName));
+            }           
         }
 
         /*Operators*/
@@ -513,12 +527,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(UnaryOpNode node)
         {
-            /*
-            -!--++--i++;
-                ->
-            -!( i = ( i = ( i = ( i - 1 ) + 1 ) - 1 ) );
-            */
-
             if (node.Value == "!")
             {
                 /* 
@@ -537,10 +545,35 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             else if (operatorIsPrefixUnary)
             {
+                /*
+                --++--i;
+                ->
+                ( i = ( i = ( i = ( i - 1 ) + 1 ) - 1 ) );
+                */
+
+                /* i
+                 * x => { i ( y => { i i 1 - = } ) 1 + = }
+                 * 1
+                 * -
+                 * =
+                 */
+
+                /* i
+                 * { 
+                 *   i 
+                 *   { 
+                 *     i
+                 *     i 1 - =
+                 *   }
+                 *   1 + = 
+                 * }
+                 * 1 - =
+                 */
+
                 /* 
                  * ( ++EXP | --EXP ) :
                  * -------------------
-                 * 01 Push EXP
+                 * 01 Push UnaryOperand
                  * 02 Push EXP
                  * 03 ( Push +1 | Push -1 )
                  * 04 Add
@@ -548,13 +581,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
                  * 
                  */
 
-                // 01 The Operand (EXP) as Assignment Target
+                // 01 The UnaryOperand as Assignment Target
                 isCompilingAssignmentTarget = true;
-                VisitChildren(node);
+                VisitChildren(node.UnaryOperand);
                 isCompilingAssignmentTarget = false;
 
-                // ( x ++ | ++ x ) -> x = x + 1
-                // ( x -- | -- x ) -> x = x - 1
                 // 02 Operand (EXP)
                 VisitChildren(node);
 
@@ -586,25 +617,20 @@ namespace VapeTeam.Psimulex.Compiler.AST
                  * ( EXP++ | EXP-- ) :
                  * -------------------
                  * 01 Push EXP
-                 * 02 Push EXP                     
-                 * 03 Push EXP
-                 * 04 ( Push +1 | Push -1 )
-                 * 05 Add
-                 * 06 Assign ( Silent )
+                 * 02 Duplicate                     
+                 * 03 ( Push +1 | Push -1 )
+                 * 04 Add
+                 * 05 Push UnaryOperand
+                 * 06 Revert Assign ( Silent )
                  */
 
-                // 01 The Operand (EXP) as return value of the operation
+                // 01 Operand (EXP)
                 VisitChildren(node);
 
-                // 02 Operand (EXP) as Assignment Target
-                isCompilingAssignmentTarget = true;
-                VisitChildren(node);
-                isCompilingAssignmentTarget = false;
+                // 02 Duplicate
+                AddCommand(new Duplicate());
 
-                // 03 Operand (EXP)
-                VisitChildren(node);
-
-                // 04 ( Push +1 | Push -1 )
+                // 02 ( Push +1 | Push -1 )
                 if (node.Value == "++")
                 {
                     AddCommand(new Push(new Integer(1)));
@@ -618,13 +644,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     throw new UnknownOperatorException(string.Format("Unknown UnarPostfix Operator : {0}", node.Value));
                 }
 
-                // 05 Add Operation
+                // 04 Add Operation                
+                AddCommand( new BinaryOperation(BinaryOperation.Operations.Addition));
+
+                // 05 The UnaryOperand as Assignment Target
+                isCompilingAssignmentTarget = true;
+                VisitChildren(node.UnaryOperand);
+                isCompilingAssignmentTarget = false;
+
                 // 06 Assign (Silent) Operation
-                AddCommand
-                    (
-                    new BinaryOperation(BinaryOperation.Operations.Addition),
-                    new Assign(false)
-                    );
+                AddCommand(new Assign(false,true));
             }
         }
 
@@ -659,6 +688,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
             operatorIsPrefixUnary = false;
         }
 
+        public void Visit(SelectorNode node)
+        {
+            // SelectorOperand
+            node.SelectorOperand.Accept(this);
+
+            // SelectorList
+            foreach (IPsiNode child in node.SelectorList)
+                child.Accept(this);
+        }
+
         public void Visit(MemberSelectNode node)
         {
             // MemberName
@@ -674,7 +713,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             string memberFunctionName = node.MemberFunctionName.Value;
 
             // Arguments
-            foreach (IPsiNode child in node.MemberFunctionArguments)
+            foreach (IPsiNode child in node.MemberFunctionArgumentList)
                 child.Accept(this);
 
             // MemberFunctionCall
@@ -687,7 +726,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             string functionName = node.FunctionName.Value;
             
             // Arguments
-            foreach (IPsiNode child in node.FunctionArguments)
+            foreach (IPsiNode child in node.FunctionArgumentList)
                 child.Accept(this);
 
             // FunctionCall
@@ -704,8 +743,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             int dim = node.Children.Count;
 
             // Indexing
-            // !!! Csak egy Dimenzióig Indexel
-            AddCommand(new Indexing());
+            if(dim > 1)
+                throw new PsiCodeGeneratorVisitorException("More than one dimension array indexing is not supported yet!");
+            else
+                AddCommand(new Indexing());
         }
 
         public void Visit(DimensionsNode node)

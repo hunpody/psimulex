@@ -49,8 +49,15 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 
             if (txtErrors.Text == "")
             {
-                CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
-                visitor.Visit(cun);
+                try
+                {
+                    CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
+                    visitor.Visit(cun);
+                }
+                catch(Exception ex)
+                {
+                    txtErrors.Text = ex.ToString();
+                }
             }
         }
 
