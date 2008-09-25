@@ -79,7 +79,7 @@ namespace VapeTeam.Psimulex.Compiler.Tests
         }
 
         [TestMethod]
-        public void SimpleBasicVariableInitialisation1()
+        public void SimpleBasicVariableInitialization1()
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
                 int i = 10;
@@ -97,7 +97,7 @@ namespace VapeTeam.Psimulex.Compiler.Tests
         }
 
         [TestMethod]
-        public void SimpleBasicVariableInitialisation2_TestCommands()
+        public void SimpleBasicVariableInitialization2_TestCommands()
         {
             var process = Helpers.SystemHelper.CompileAndRunGetProcess(@"
                 int i = 10;

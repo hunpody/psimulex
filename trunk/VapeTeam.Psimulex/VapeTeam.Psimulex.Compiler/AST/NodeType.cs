@@ -26,10 +26,43 @@ namespace VapeTeam.Psimulex.Compiler.AST
         FunctionDeclaration,
         FormalParameterList,
         FormalParameter,
+
+        /*ProgramStructures*/
         Block,
         Statement,
 
-        VariableInitialisation,
+	    IfStatement,
+	    IfBranch,
+	    ElseIfBranch,
+	    ElseBranch,
+
+        DoStatement,
+        WhileStatement,
+
+	    PForStatement,
+	    ForStatement,
+	    ForInitialization,
+	    ForUpdate,
+    	
+	    PForEachStatement,
+	    ForEachStatement,
+	    ForEachControl,
+
+	    LoopStatement,
+	    LoopControl,
+
+        Condition,
+        Core,        
+
+	    PDoStatement,
+	    AsynStatement,
+	    LockStatement,
+	
+	    Return,
+        Break,
+//        Continue,
+
+        VariableInitialization,
         VariableDeclaration,        	
 
         /*Operators*/

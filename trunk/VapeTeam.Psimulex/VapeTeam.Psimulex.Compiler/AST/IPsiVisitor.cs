@@ -35,10 +35,34 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(FunctionDeclarationNode node);
         void Visit(FormalParameterListNode node);
         void Visit(FormalParameterNode node);
-        void Visit(BlockNode node);
-        void Visit(StatementNode node);        
 
-        void Visit(VariableInitialisationNode node);
+        /*Program Structures*/
+        void Visit(BlockNode node);
+        void Visit(StatementNode node);
+        void Visit(IfStatementNode node);
+        void Visit(IfBranchNode node);
+        void Visit(ElseIfBranchNode node);
+        void Visit(ElseBranchNode node);
+        void Visit(PForStatementNode node);
+        void Visit(ForStatementNode node);
+        void Visit(ForInitNode node);
+        void Visit(ForUpdateNode node);
+        void Visit(DoStatementNode node);
+        void Visit(WhileStatementNode node);
+        void Visit(PForEachStatementNode node);
+        void Visit(ForEachStatementNode node);
+        void Visit(ForEachControlNode node);
+        void Visit(LoopStatementNode node);
+        void Visit(LoopControlNode node);
+        void Visit(ConditionNode node);
+        void Visit(CoreNode node);
+        void Visit(PDoStatementNode node);
+        void Visit(AsynStatementNode node);
+        void Visit(LockStatementNode node);
+        void Visit(ReturnNode node);
+        void Visit(BreakNode node);
+        //void Visit(ContinueNode node);
+        void Visit(VariableInitializationNode node);
         void Visit(VariableDeclarationNode node);
 
         /*Operators*/

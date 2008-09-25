@@ -38,9 +38,44 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 case PsimulexLexer.FUNCDEC: type = NodeType.FunctionDeclaration; break;
                 case PsimulexLexer.FORMAL_PARAMETER_LIST: type = NodeType.FormalParameterList; break;
                 case PsimulexLexer.FORMAL_PARAMETER: type = NodeType.FormalParameter; break;
+
+                /*Program Structures*/
                 case PsimulexLexer.BLOCK: type = NodeType.Block; break;
                 case PsimulexLexer.STATEMENT: type = NodeType.Statement; break;
-                case PsimulexLexer.VARINIT: type = NodeType.VariableInitialisation; break;
+                
+                case PsimulexLexer.IFSTATEMENT: type = NodeType.IfStatement; break;
+                case PsimulexLexer.IFBRANCH: type = NodeType.IfBranch; break;
+                case PsimulexLexer.ELSEIFBRANCH: type = NodeType.ElseIfBranch; break;
+                case PsimulexLexer.ELSEBRANCH: type = NodeType.ElseBranch; break;
+
+                case PsimulexLexer.PFORSTATEMENT: type = NodeType.PForStatement; break;
+                case PsimulexLexer.FORSTATEMENT: type = NodeType.ForStatement; break;
+                case PsimulexLexer.FORINIT: type = NodeType.ForInitialization; break;
+                case PsimulexLexer.FORUPDATE: type = NodeType.ForUpdate; break;
+
+    	        case PsimulexLexer.DOSTATEMENT: type = NodeType.DoStatement; break;
+
+    	        case PsimulexLexer.WHILESTATEMENT: type = NodeType.WhileStatement; break;
+
+    	        case PsimulexLexer.PFOREACHSTATEMENT: type = NodeType.PForEachStatement; break;
+                case PsimulexLexer.FOREACHSTATEMENT: type = NodeType.ForEachStatement; break;
+                case PsimulexLexer.FOREACHCONTROL: type = NodeType.ForEachControl; break;
+
+    	        case PsimulexLexer.LOOPSTATEMENT: type = NodeType.LoopStatement; break;
+                case PsimulexLexer.LOOPCONTROL: type = NodeType.LoopControl; break;
+
+                case PsimulexLexer.CONDITION: type = NodeType.Condition; break;
+                case PsimulexLexer.CORE: type = NodeType.Core; break;
+
+                case PsimulexLexer.PDOSTATEMENT: type = NodeType.PDoStatement; break;
+                case PsimulexLexer.ASYNCSTATEMENT: type = NodeType.AsynStatement; break;
+                case PsimulexLexer.LOCKSTATEMENT: type = NodeType.LockStatement; break;
+
+                case PsimulexLexer.RETURN: type = NodeType.Return; break;
+                case PsimulexLexer.Break: type = NodeType.Break; break;
+                //case PsimulexLexer.Continue: type = NodeType.Continue; break;
+
+                case PsimulexLexer.VARINIT: type = NodeType.VariableInitialization; break;
                 case PsimulexLexer.VARDECLARE: type = NodeType.VariableDeclaration; break;
 
                 /*ID*/
