@@ -439,18 +439,233 @@ print (a);
 
 
         [TestMethod]
-        public void TestGenAt_2008__szeptember_23_22_31_05()
+        public void TestGenAt_2008__szeptember_25_14_11_47()
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
-int a = 10;
-int b = 10;
-int c;
-a += b -= c = 5;
-print (a);
+int i = 10;
+print(------i++);
+print(i);
 ");
 
-            Assert.AreEqual("15", result);
+            Assert.AreEqual("78", result);
         }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_14_12_04()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 10;
+print(!i++);
+print(i);
+");
+
+            Assert.AreEqual("False11", result);
+        }
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_14_14_30()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 10;
+print((int)'a');
+print(i);
+");
+
+            Assert.AreEqual("9710", result);
+        }
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_14_15_37()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = (int)'a';
+print((char)(i++));
+print(i);
+");
+
+            Assert.AreEqual("a98", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_14_15_47()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = (int)'a';
+print((char)(i++));
+print((char)i);
+");
+
+            Assert.AreEqual("ab", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_14_16_08()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = (int)'a';
+print(++--++--++i++);
+print(i);
+");
+
+            Assert.AreEqual("9899", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_14_16_13()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 10;
+print(++--++--++i++);
+print(i);
+");
+
+            Assert.AreEqual("1112", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_14_16_22()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 10;
+print(-++--++--++i++);
+print(i);
+");
+
+            Assert.AreEqual("-1112", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_14_16_27()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 10;
+print(!-++--++--++i++);
+print(i);
+");
+
+            Assert.AreEqual("False12", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_14_17_46()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 0;
+print(!--i++);
+print(-++--++--++i++);
+print(i);
+");
+
+            Assert.AreEqual("True-12", result);
+        }
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_17_00_03()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+void main()
+{
+	int[2] t;
+	t[0] = 111;
+	print(t[0]);
+}
+
+");
+
+            Assert.AreEqual("111", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_17_01_33()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+void main()
+{
+	int[2] t;
+	t[0] = 111;	
+	print(t[0]);
+}
+
+");
+
+            Assert.AreEqual("111", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_17_01_37()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+void main()
+{
+	int[2] t;
+	//t[0] = 111;	
+	print(t[0]);
+}
+
+");
+
+            Assert.AreEqual("0", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_17_01_39()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+void main()
+{
+	int[2] t;
+	t[0] = 111;	
+	print(t[0]);
+}
+
+");
+
+            Assert.AreEqual("111", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_25_17_04_32()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+void main()
+{
+	int[2] t;
+	t[0] = 111;
+	t[1] = t[0];	
+	print(t[1]);
+}
+
+");
+
+            Assert.AreEqual("111", result);
+        }
+
+
 
         #endregion
     }

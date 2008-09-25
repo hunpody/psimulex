@@ -52,6 +52,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         LambdaStatement,
         */
 
+        Selector,
         MemberSelect,
         MemberFunctionCall,        
         FunctionCall,

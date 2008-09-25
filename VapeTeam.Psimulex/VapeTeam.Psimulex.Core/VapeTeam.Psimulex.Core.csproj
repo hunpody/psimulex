@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{64AE91ED-9627-44F2-9CD5-FC04DA7310EC}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CallStack.cs" />
+    <Compile Include="Commands\ArrayDeclaration.cs" />
     <Compile Include="Commands\BinaryOperation.cs" />
     <Compile Include="Commands\Call.cs" />
     <Compile Include="Commands\CallMethod.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Commands\Compare.cs" />
     <Compile Include="Commands\ConditionalJump.cs" />
     <Compile Include="Commands\Declare.cs" />
+    <Compile Include="Commands\Duplicate.cs" />
     <Compile Include="Commands\Indexing.cs" />
     <Compile Include="Commands\Initialize.cs" />
     <Compile Include="Commands\Jump.cs" />

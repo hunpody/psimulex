@@ -43,7 +43,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     node = new StructDeclarationNode
                     {
                         StructName = children[0],
-                        StructMembers = children.GetRange(1, children.Count - 1)
+                        StructMemberList = children.GetRange(1, children.Count - 1)
                     }; v = true; break;
                 case NodeType.GlobalVariableDeclarations: node = new GlobalVariableDeclarationsNode(); v = true; break;
                 case NodeType.MemberDeclaration:
@@ -117,19 +117,26 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     break;
                 */
 
+                case NodeType.Selector:
+                    node = new SelectorNode
+                    {
+                        SelectorOperand = children[0],
+                        SelectorList = children.GetRange(1, children.Count - 1)
+                    }; v = true; break;
                 case NodeType.MemberSelect: node = new MemberSelectNode(); v = true; break;
                 case NodeType.MemberFunctionCall:
                     node = new MemberFunctionCallNode
                     {
                         MemberFunctionName = children[0],
-                        MemberFunctionArguments = children.GetRange(1, children.Count - 1)
+                        MemberFunctionArgumentList = children.GetRange(1, children.Count - 1)
                     }; v = true; break;
                 case NodeType.FunctionCall:
                     node = new FunctionCallNode
                     {
                         FunctionName = children[0],
-                        FunctionArguments = children.GetRange(1, children.Count - 1)
+                        FunctionArgumentList = children.GetRange(1, children.Count - 1)
                     }; v = true; break;
+                case NodeType.Arguments: node = new ArgumentsNode(); v = true; break;
                 case NodeType.Indexing: node = new IndexingNode(); v = true; break;
                 case NodeType.Dimensions: node = new DimensionsNode(); v = true; break;
                 case NodeType.ConstantDimensions: node = new ConstantDimensionsNode(); v = true; break;

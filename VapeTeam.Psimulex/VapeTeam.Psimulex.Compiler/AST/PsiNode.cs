@@ -95,27 +95,22 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public IPsiNode GetChild(int i)
         {
-            if (i < ChildrenCount)
-                return Children[i];
-            else
-                return null;
+            if (i < ChildrenCount) return Children[i];
+            return null;
         }
 
         public IPsiNode Left
         {
             get
             {
-                if (ChildrenCount > 0)
-                    return Children[0];
+                if (ChildrenCount > 0) return Children[0];
                 return null;
             }
 
             set
             {
-                if (ChildrenCount > 0)
-                    Children[0] = value;
-                else
-                    Add(value);
+                if (ChildrenCount > 0) Children[0] = value;
+                else Add(value);
             }
         }
 
@@ -123,17 +118,32 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             get
             {
-                if (Children.Count > 0)
-                    return Children[Children.Count - 1];
+                if (Children.Count > 0) return Children[Children.Count - 1];
                 return null;
             }
 
             set
             {
-                if (ChildrenCount > 0)
-                    Children[Children.Count - 1] = value;
-                else
-                    Add(value);
+                if (ChildrenCount > 0) Children[Children.Count - 1] = value;
+                else Add(value);
+            }
+        }
+
+        public IPsiNode BottomLeft
+        {
+            get
+            {
+                if (Left == null) return this;
+                return Left.BottomLeft;
+            }
+        }
+
+        public IPsiNode BottomRight
+        {
+            get
+            {
+                if (Right == null) return this;
+                return Right.BottomRight;
             }
         }
 
@@ -171,7 +181,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class StructDeclarationNode : PsiNode 
     {
         public IPsiNode StructName { get; set; }
-        public List<IPsiNode> StructMembers { get; set; }
+        public List<IPsiNode> StructMemberList { get; set; }
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
 
@@ -233,7 +243,25 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class RelationOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class AdditiveOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class MultiplicativeOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class UnaryOpNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class UnaryOpNode : PsiNode
+    {
+        public IPsiNode UnaryOperand 
+        {
+            get
+            {
+                return Operand(this);
+            }
+        }
+
+        private IPsiNode Operand(IPsiNode node)
+        {
+            if ((node.Right != null) && (node.Right.Type == NodeType.UnaryOp || node.Right.Type == NodeType.PrefixUnaryOperation))
+                return Operand(node.Right);
+            return node;
+        }
+
+        public override void Accept(IPsiVisitor v) { v.Visit(this); } 
+    }
  
     /*Expressions*/
     public class ExpressionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
@@ -250,18 +278,25 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class LambdaStatementNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     */
 
+    public class SelectorNode : PsiNode
+    {
+        public IPsiNode SelectorOperand { get; set; }
+        public List<IPsiNode> SelectorList { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
     public class MemberSelectNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class MemberFunctionCallNode : PsiNode
     {
         public IPsiNode MemberFunctionName { get; set; }
-        public List<IPsiNode> MemberFunctionArguments { get; set; }
+        public List<IPsiNode> MemberFunctionArgumentList { get; set; }
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
 
     public class FunctionCallNode : PsiNode 
     {
         public IPsiNode FunctionName { get; set; }
-        public List<IPsiNode> FunctionArguments { get; set; }
+        public List<IPsiNode> FunctionArgumentList { get; set; }
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
 

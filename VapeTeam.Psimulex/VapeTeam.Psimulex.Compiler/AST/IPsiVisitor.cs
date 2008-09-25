@@ -61,6 +61,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(LambdaStatementNode node);
         */
 
+        void Visit(SelectorNode node);
         void Visit(MemberSelectNode node);
         void Visit(MemberFunctionCallNode node);
         void Visit(FunctionCallNode node);
