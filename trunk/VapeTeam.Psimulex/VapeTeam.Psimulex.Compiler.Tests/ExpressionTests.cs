@@ -60,6 +60,29 @@ namespace VapeTeam.Psimulex.Compiler.Tests
         //
         #endregion
 
+        [TestMethod]
+        public void PostfixPlusPlus()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int a=10;
+print(a++);
+print(a);
+");
+            Assert.AreEqual("1011", result);
+        }
+
+        [TestMethod]
+        public void PrefixPlusPlus()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int a=10;
+print(--a);
+print(a);
+");
+            Assert.AreEqual("99", result);
+        }
+
+
         #region Generated Tests
 
         [TestMethod]

@@ -22,15 +22,15 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
     }
 
-    public class UnknowOperatorException : PsiCodeGeneratorVisitorException
+    public class UnknownOperatorException : PsiCodeGeneratorVisitorException
     {
-        public UnknowOperatorException(string message)
+        public UnknownOperatorException(string message)
             : base(message)
         {
         }
 
-        public UnknowOperatorException()
-            : this("UnknowOperatorException")
+        public UnknownOperatorException()
+            : this("UnknownOperatorException")
         {
         }
     }
@@ -87,6 +87,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private Assign lastCompiledAssign;
 
         private bool operatorIsPrefixUnary;
+
+        private bool isCompilingAssignmentTarget;
 
         private System.Collections.Generic.Stack<Jump> lazyEvaluationJumpStack;
         private System.Collections.Generic.Stack<Jump> jumpStack;
@@ -348,14 +350,18 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             if (node.Value == "=")
             {
+                isCompilingAssignmentTarget = true;
                 node.Left.Accept(this);
+                isCompilingAssignmentTarget = false;
                 node.Right.Accept(this);
                 AddCommand(lastCompiledAssign = new Assign(true));
             }
             else
             {
                 // x op= y -> x = x op y //
+                isCompilingAssignmentTarget = true;
                 node.Left.Accept(this);
+                isCompilingAssignmentTarget = false;
                 node.Left.Accept(this);
                 node.Right.Accept(this);
 
@@ -371,7 +377,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     case '|': AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalOr)); break;
                     case '~': AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalXor)); break;
                     default:
-                        throw new UnknowOperatorException(string.Format("Unknow Assign Operator : {0}", node.Value));
+                        throw new UnknownOperatorException(string.Format("Unknown Assign Operator : {0}", node.Value));
                         break;
                 }
 
@@ -386,7 +392,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             
             // Lazy Jump
             int address = ProgramSize;
-            ScilentRelativeJumpIfTrue jmp = new ScilentRelativeJumpIfTrue(0);
+            SilentRelativeJumpIfTrue jmp = new SilentRelativeJumpIfTrue(0);
             AddCommand(jmp);
             lazyEvaluationJumpStack.Push(jmp);
 
@@ -406,7 +412,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // Lazy Jump
             int address = ProgramSize;
-            ScilentRelativeJumpIfFalse jmp = new ScilentRelativeJumpIfFalse(0);
+            SilentRelativeJumpIfFalse jmp = new SilentRelativeJumpIfFalse(0);
             AddCommand(jmp);
             lazyEvaluationJumpStack.Push(jmp);
 
@@ -433,7 +439,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case "==": AddCommand(new Compare(Compare.ComparisonModes.Equal)); break;
                 case "!=": AddCommand(new Compare(Compare.ComparisonModes.NotEqual)); break;
                 default:
-                    throw new UnknowOperatorException(string.Format("Unknow Compare Operator : {0}", node.Value));
+                    throw new UnknownOperatorException(string.Format("Unknown Compare Operator : {0}", node.Value));
                     break;
             }
         }
@@ -454,7 +460,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case ">": AddCommand(new Compare(Compare.ComparisonModes.GreaterThan)); break;
                 case ">=": AddCommand(new Compare(Compare.ComparisonModes.GreaterThanOrEqual)); break;
                 default:
-                    throw new UnknowOperatorException(string.Format("Unknow Compare Operator : {0}", node.Value));
+                    throw new UnknownOperatorException(string.Format("Unknown Compare Operator : {0}", node.Value));
                     break;
             }
         }
@@ -479,7 +485,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     else AddCommand(new BinaryOperation(BinaryOperation.Operations.Subtraction));
                     break;
                 default:
-                    throw new UnknowOperatorException(string.Format("Unknow Additive Operator : {0}", node.Value));
+                    throw new UnknownOperatorException(string.Format("Unknown Additive Operator : {0}", node.Value));
                     break;
             }
         }
@@ -500,7 +506,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case "%": AddCommand(new BinaryOperation(BinaryOperation.Operations.Modulo)); break;
                 case "^": AddCommand(new BinaryOperation(BinaryOperation.Operations.Power)); break;
                 default:
-                    throw new UnknowOperatorException(string.Format("Unknow Additive Operator : {0}", node.Value));
+                    throw new UnknownOperatorException(string.Format("Unknown Additive Operator : {0}", node.Value));
                     break;
             }
         }
@@ -513,108 +519,114 @@ namespace VapeTeam.Psimulex.Compiler.AST
             -!( i = ( i = ( i = ( i - 1 ) + 1 ) - 1 ) );
             */
 
-            /* 
-             * !EXP :
-             * -------------------
-             * 01 Push EXP
-             * 02 Not
-             * 
-            */
-
-            // 01 The Operand (EXP)
-            VisitChildren(node);
-
-            // 02 LogicalNot Operation
             if (node.Value == "!")
             {
+                /* 
+                 * !EXP :
+                 * -------------------
+                 * 01 Push EXP
+                 * 02 Not
+                 * 
+                */
+
+                // 01 The Operand (EXP)
+                VisitChildren(node);
+
+                // 02 LogicalNot Operation
                 AddCommand(new UnaryOperation(UnaryOperation.Operations.LogicalNot));
             }
-            else
+            else if (operatorIsPrefixUnary)
             {
+                /* 
+                 * ( ++EXP | --EXP ) :
+                 * -------------------
+                 * 01 Push EXP
+                 * 02 Push EXP
+                 * 03 ( Push +1 | Push -1 )
+                 * 04 Add
+                 * 05 Assign
+                 * 
+                 */
+
+                // 01 The Operand (EXP) as Assignment Target
+                isCompilingAssignmentTarget = true;
+                VisitChildren(node);
+                isCompilingAssignmentTarget = false;
+
                 // ( x ++ | ++ x ) -> x = x + 1
                 // ( x -- | -- x ) -> x = x - 1
                 // 02 Operand (EXP)
                 VisitChildren(node);
 
-                // Unary Operator
-                if (operatorIsPrefixUnary)
+                // 03 ( Push +1 | Push -1 )
+                if (node.Value == "++")
                 {
-                    /* 
-                     * ( ++EXP | --EXP ) :
-                     * -------------------
-                     * 01 Push EXP
-                     * 02 Push EXP
-                     * 03 ( Push +1 | Push -1 )
-                     * 04 Add
-                     * 05 Assign
-                     * 
-                     */
-
-                    // 03 ( Push +1 | Push -1 )
-                    if (node.Value == "++")
-                    {
-                        AddCommand(new Push(new Integer(1)));
-                    }
-                    else if (node.Value == "--")
-                    {
-                        AddCommand(new Push(new Integer(-1)));
-                    }
-                    else
-                    {
-                        throw new UnknowOperatorException(string.Format("Unknow UnaryPrefix Operator : {0}", node.Value));
-                    }
-
-                    // 04 Add Operation
-                    // 05 Assign Operation
-                    AddCommand
-                        (
-                        new BinaryOperation(BinaryOperation.Operations.Addition),
-                        new Assign()
-                        );
+                    AddCommand(new Push(new Integer(1)));
+                }
+                else if (node.Value == "--")
+                {
+                    AddCommand(new Push(new Integer(-1)));
                 }
                 else
                 {
-                    /* 
-                     * ( EXP++ | EXP-- ) :
-                     * -------------------
-                     * 01 Push EXP
-                     * 02 Push EXP                     
-                     * 03 Push EXP
-                     * 04 ( Push +1 | Push -1 )
-                     * 05 Add
-                     * 06 Assign ( Scilent )
-                     * 07 Pop
-                     */
-
-                    // 03 Operand (EXP)
-                    VisitChildren(node);
-
-                    // 04 ( Push +1 | Push -1 )
-                    if (node.Value == "++")
-                    {
-                        AddCommand(new Push(new Integer(1)));
-                    }
-                    else if (node.Value == "--")
-                    {
-                        AddCommand(new Push(new Integer(-1)));
-                    }
-                    else
-                    {
-                        throw new UnknowOperatorException(string.Format("Unknow UnarPostfix Operator : {0}", node.Value));
-                    }
-
-                    // 05 Add Operation
-                    // 06 Assign (Scilent) Operation
-                    AddCommand
-                        (
-                        new BinaryOperation(BinaryOperation.Operations.Addition),
-                        new Assign(false)
-                        );
+                    throw new UnknownOperatorException(string.Format("Unknown UnaryPrefix Operator : {0}", node.Value));
                 }
+
+                // 04 Add Operation
+                // 05 Assign Operation with PushBack
+                AddCommand
+                    (
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(true)
+                    );
+            }
+            else // Postfix Unary Operation
+            {
+                /* 
+                 * ( EXP++ | EXP-- ) :
+                 * -------------------
+                 * 01 Push EXP
+                 * 02 Push EXP                     
+                 * 03 Push EXP
+                 * 04 ( Push +1 | Push -1 )
+                 * 05 Add
+                 * 06 Assign ( Silent )
+                 */
+
+                // 01 The Operand (EXP) as return value of the operation
+                VisitChildren(node);
+
+                // 02 Operand (EXP) as Assignment Target
+                isCompilingAssignmentTarget = true;
+                VisitChildren(node);
+                isCompilingAssignmentTarget = false;
+
+                // 03 Operand (EXP)
+                VisitChildren(node);
+
+                // 04 ( Push +1 | Push -1 )
+                if (node.Value == "++")
+                {
+                    AddCommand(new Push(new Integer(1)));
+                }
+                else if (node.Value == "--")
+                {
+                    AddCommand(new Push(new Integer(-1)));
+                }
+                else
+                {
+                    throw new UnknownOperatorException(string.Format("Unknown UnarPostfix Operator : {0}", node.Value));
+                }
+
+                // 05 Add Operation
+                // 06 Assign (Silent) Operation
+                AddCommand
+                    (
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(false)
+                    );
             }
         }
-
-
 
         #endregion
 
@@ -723,9 +735,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
         #endregion
 
         /*Identifier*/
-        public void Visit(IdentifierNode node)
+        public void Visit(IdentifierNode node) 
         {
-            AddCommand(new Push(node.Value, ValueAccessModes.LocalVariable));
+            AddCommand(new Push(node.Value, 
+                isCompilingAssignmentTarget ? ValueAccessModes.LocalVariableReference : ValueAccessModes.LocalVariable));
         }
 
         /*Literals*/

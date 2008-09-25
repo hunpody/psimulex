@@ -219,7 +219,7 @@ namespace VapeTeam.Psimulex.Tests
                     new Push(0),
                     new Initialize("i"),
 
-                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariableReference),
                     new UnaryOperation(UnaryOperation.Operations.PostfixIncrement),
 
                     new Push("A"),
@@ -244,7 +244,7 @@ namespace VapeTeam.Psimulex.Tests
                     new Call("print"),
 
                     // Here we simulate a loop condition i < 5
-                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariableReference),
                     new Push(5),
                     new Compare(Compare.ComparisonModes.LessThan),
                     new JumpIfTrue(4),
@@ -296,7 +296,7 @@ namespace VapeTeam.Psimulex.Tests
                     new Push(0),
                     new Initialize("i"),
 
-                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariableReference),
                     new UnaryOperation(UnaryOperation.Operations.PostfixIncrement),
 
                     new Push("A"),
@@ -321,7 +321,7 @@ namespace VapeTeam.Psimulex.Tests
                     new Call("print"),
 
                     // Here we simulate a loop condition i < 5
-                    new Push("i", ValueAccessModes.LocalVariable),
+                    new Push("i", ValueAccessModes.LocalVariableReference),
                     new Push(5),
                     new Compare(Compare.ComparisonModes.LessThan),
                     new RelativeJumpIfTrue(-18),
