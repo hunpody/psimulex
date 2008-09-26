@@ -272,7 +272,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
 
-    public class ForInitNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class ForInitializationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class ForConditionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class ForUpdateNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
     public class PForEachStatementNode : PsiNode

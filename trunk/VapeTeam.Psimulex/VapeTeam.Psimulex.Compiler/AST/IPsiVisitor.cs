@@ -45,7 +45,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(ElseBranchNode node);
         void Visit(PForStatementNode node);
         void Visit(ForStatementNode node);
-        void Visit(ForInitNode node);
+        void Visit(ForInitializationNode node);
         void Visit(ForUpdateNode node);
         void Visit(DoStatementNode node);
         void Visit(WhileStatementNode node);

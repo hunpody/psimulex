@@ -33,6 +33,14 @@ namespace VapeTeam.Psimulex.Core.Factories
             return this;
         }
 
+        public int GetCommandIndex(CommandBase cmd)
+        {
+            for (int i = 0; i < Program.CommandList.Count; i++)
+                if (Program.CommandList[i] == cmd)
+                    return i;
+            return -1;
+        }
+
         public static ProgramBuilder Create()
         {
             return new ProgramBuilder();
