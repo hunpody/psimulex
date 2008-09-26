@@ -50,6 +50,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
 
                 case PsimulexLexer.PFORSTATEMENT: type = NodeType.PForStatement; break;
                 case PsimulexLexer.FORSTATEMENT: type = NodeType.ForStatement; break;
+                case PsimulexLexer.FORCONDITION: type = NodeType.ForCondition; break;
                 case PsimulexLexer.FORINIT: type = NodeType.ForInitialization; break;
                 case PsimulexLexer.FORUPDATE: type = NodeType.ForUpdate; break;
 

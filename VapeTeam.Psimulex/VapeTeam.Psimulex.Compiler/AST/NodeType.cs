@@ -41,6 +41,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
 	    PForStatement,
 	    ForStatement,
+        ForCondition,
 	    ForInitialization,
 	    ForUpdate,
     	

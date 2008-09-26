@@ -125,7 +125,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
                         ForUpdate = children[2],
                         ForCore = children[3]                     
                     }; v = true; break;
-                case NodeType.ForInitialization: node = new ForInitNode(); v = true; break;
+                case NodeType.ForInitialization: node = new ForInitializationNode(); v = true; break;
+                case NodeType.ForCondition: node = new ForConditionNode(); v = true; break;
                 case NodeType.ForUpdate: node = new ForUpdateNode(); v = true; break;
                 case NodeType.PForEachStatement:
                     node = new PForEachStatementNode

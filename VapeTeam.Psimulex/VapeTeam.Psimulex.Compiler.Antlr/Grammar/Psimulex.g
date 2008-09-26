@@ -26,6 +26,38 @@ tokens {
 	BLOCK;
 	STATEMENT;
 	
+	IFSTATEMENT;
+	IFBRANCH;
+	ELSEIFBRANCH;
+	ELSEBRANCH;
+	
+	PFORSTATEMENT;
+	FORSTATEMENT;
+	FORCONDITION;
+	FORINIT;
+	FORUPDATE;
+	
+	DOSTATEMENT;
+	
+	WHILESTATEMENT;
+	
+	PFOREACHSTATEMENT;
+	FOREACHSTATEMENT;
+	FOREACHCONTROL;
+
+	LOOPSTATEMENT;
+	LOOPCONTROL;
+	
+	CORE;
+	CONDITION;
+	
+	PDOSTATEMENT;
+	ASYNCSTATEMENT;
+	LOCKSTATEMENT;
+	
+	RETURN;
+
+	
 	VARINIT;
 	VARDECLARE;	
 
@@ -39,6 +71,7 @@ tokens {
 	POSTFIXOP;
 	/*LAMBDA_EXPRESSION;*/
 	
+	SELECTOR;
 	MEMBER_FUNCTION_CALL;
 	FUNCTION_CALL;
 	ARGUMENTS;
@@ -118,7 +151,7 @@ variableInitializer
     ;
     
 scalarOrArrayType
-	:	type arrayType? -> ^( TYPE type arrayType? )
+	:	type staticArrayType? -> ^( TYPE type staticArrayType? )
 	;
 
 arrayType
@@ -150,7 +183,7 @@ memberTypedIdentifierNonRef
 	;
 
 typedIdentifierNonRef
-	:	scalarOrArrayType Identifier 
+	:	scalarOrArrayType Identifier
 	;
 
 typedIdentifierRef
@@ -343,47 +376,6 @@ unaryPrefixAssignerOp
 unaryPostfixOp
 	:	PlusPlus|MinusMinus
 	;
-	
-	
-		/*
-
-multiplicativeExpression
-    :   unaryExpression ( multiplicativeOp^ unaryExpression )*
-    ;
-
-multiplicativeOp
-	:	Star|Divide|Modulo
-	;
-
-unaryExpression
-    :	unaryPrefixIncDecExpression
-    |	unaryPostfixIncDecExpression
-    ;
-
-unaryPrefixIncDecExpression
-	:	unaryPrefixIncDecOp unaryExpression	-> ^( PREFIXOP ^( unaryPrefixIncDecOp unaryExpression) )
-	;
-	
-unaryPrefixExpression
-	:	unaryPrefixOp unaryPrefixExpression	-> ^( PREFIXOP ^( unaryPrefixOp unaryPrefixExpression) )
-	;
-	
-unaryPostfixIncDecExpression
-	:	primaryExpression (unaryPostfixIncDecOp^)?
-	;
-
-unaryPrefixIncDecOp
-	:	PlusPlus|MinusMinus
-	;
-	
-unaryPostfixIncDecOp
-	:	PlusPlus|MinusMinus
-	;
-
-unaryPrefixOp
-	:	Minus|LogicalNot|castExpression
-	;
-	*/
 
 primaryExpression
     :   parExpression
@@ -406,28 +398,16 @@ variable
 	;
 
 selecting
-	:	( Identifier | parExpression ) selector+
+	:	selector -> ^( SELECTOR selector )
 	;
 
 selector
-    :   memberSelect
-    |   memberFunctionCall
-    |   indexing
+    :   ( Identifier | parExpression ) (memberSelect | memberFunctionCall | indexing)+
     ;
 
 memberSelect
 	:	'.' Identifier -> ^( MEMBER_SELECT Identifier )
 	;
-
-/*
-memberFunctionCall
-	:	'.' Identifier arguments -> ^( MEMBER_FUNCTION_CALL Identifier arguments )
-	;
-
-functionCall
-	:	Identifier arguments -> ^( FUNCTION_CALL Identifier arguments )
-	;
-	*/
 
 memberFunctionCall
 	:	'.' Identifier arguments -> ^( MEMBER_FUNCTION_CALL Identifier arguments )
@@ -502,44 +482,52 @@ branch
     :	block | statement
     ;
 
-statement	// ElseIf kell mgé bele
-    :	If parExpression branch (options {k=1;}:Else branch)?
-    |   (For|PFor) '('! forControl ')'! branch
-    |   (ForEach|PForEach) '('! foreachControl ')'! branch
-    |   Loop '('! loopControl ')'! branch
-    |   While parExpression branch
-    |   Do branch While parExpression ';'!
-    |   PDo block
-    |   Return expression? ';'!
+statement
+    :	ifStatement -> ^( IFSTATEMENT ifStatement )
+    |	( forStatement | pForStatement )
+    |   ( forEachStatement | pForEachStatement )
+    |   loopStatement
+    |   whileStatement
+    |   doStatement   
+    |   PDo block -> ^( PDOSTATEMENT block )									// PDO { STATEMENT(n) } n db Statement n db Thread
+    |   Async block -> ^( ASYNCSTATEMENT block )								// A blockot Assinkron futtatja
+    |   Lock '(' Identifier ')' block -> ^( LOCKSTATEMENT Identifier block )	// Egy változót zárol kizárólagos hozzáférésre
+    |   Return expression? ';' -> ^( RETURN expression? )
     |   Break ';'!
-    |   Continue ';'!
+//    |   Continue ';'!
     |   ';'!
     |   expression ';'!
     |	localVariableDeclaration ';'!
     ;
     
-forControl
-    :    forInit? ';'! expression? ';'! forUpdate?
-    ;
+ifStatement			:	ifBranch ( ( elseIfBranches elseBranch ) | elseBranch? );
+ifBranch			:	If condition core -> ^( IFBRANCH condition core);
+elseIfBranches		:	( ElseIf condition core )* -> ^( ELSEIFBRANCH ( condition core )* );
+elseBranch			:	Else core -> ^( ELSEBRANCH core);
 
-forInit
-    :   localVariableDeclaration
-    ;
+forStatement		:	For '(' forControl ')' core -> ^( FORSTATEMENT forControl core );
+pForStatement		:	PFor '(' forControl ')' core -> ^( PFORSTATEMENT forControl core );
+forControl			:	forInit? ';' forCondition? ';' forUpdate? -> ^( FORINIT forInit? ) ^( FORCONDITION forCondition? ) ^( FORUPDATE forUpdate? );
+forInit				:   localVariableDeclaration;
+forCondition		:   expression;
+forUpdate			:   expression;
 
-forUpdate
-    :   expression
-    ;
-    
-foreachControl
-options {k=3;} //Emiatt kellene (ID ID in ID) ...
-    :   type Identifier In expression
-    ;
+whileStatement		:	While condition core -> ^( WHILESTATEMENT condition core );
 
-    
-loopControl
-options {k=3;} //Emiatt kellene (ID ID to ID) ...
-    :   type Identifier To expression
-    ;
+doStatement			:	Do core While condition ';' -> ^( DOSTATEMENT core condition );
+
+pForEachStatement	:	PForEach forEachTrailer -> ^( PFOREACHSTATEMENT forEachTrailer );
+forEachStatement	:	ForEach forEachTrailer -> ^( FOREACHSTATEMENT forEachTrailer );
+forEachTrailer		:	'('! forEachControl ')'! core;  
+forEachControl			options {k=3;} // Emiatt kellene (ID ID in ID)
+    				:   type Identifier In expression -> ^( FOREACHCONTROL type expression );
+
+loopStatement		:	Loop '(' loopControl ')' core -> ^( LOOPSTATEMENT loopControl core ); 
+loopControl				options {k=3;} // Emiatt kellene (ID ID to ID)
+				    :   localVariableDeclaration To expression -> ^( LOOPCONTROL localVariableDeclaration expression );
+
+core				:	branch -> ^( CORE branch );
+condition			:	parExpression -> ^( CONDITION parExpression );
 
 
 
@@ -621,13 +609,16 @@ ElseIf	:	'elseif'|'ElseIf'|'ELSEIF'						;
 For		:	'for'|'For'|'FOR'								;
 ForEach	:	'foreach'|'ForEach'|'FOREACH'					;
 PFor	:	'pfor'|'PFor'|'PFOR'							;
-PForEach:	'pforeach'|'PForEach'|'PFOREACH'				;	// MIért is ne ?
+PForEach:	'pforeach'|'PForEach'|'PFOREACH'				;
 Do		:	'do'|'Do'|'DO'									;
 PDo		:	'pdo'|'PDo'|'PDO'								;
 While	:	'while'|'While'|'WHILE'							;
 Loop	:	'loop'|'Loop'|'LOOP'							;
 To		:	'to'|'To'|'TO'|'until'|'Until'|'UNTIL'			;
 In		:	'in'|'In'|'IN'									;
+Async	:	'async'|'Async'|'ASYNC'							;
+Atomic	:	'atomic'|'Atomic'|'ATOMIC'						;
+Lock	:	'lock'|'Lock'|'LOCK'							;
 
 /*Func	:	'func'|'Func'|'FUNC'							;*/
 

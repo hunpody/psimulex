@@ -61,6 +61,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
             Program.Add(commands);
         }
 
+        public int GetCommandIndex(CommandBase cmd)
+        {
+            return Program.GetCommandIndex(cmd);
+        }
+
         public void AddMessage(string msg)
         {
             CompilerMessages.AppendLine(msg);
@@ -306,8 +311,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(ForStatementNode node) 
         {
-            throw new NotImplementedException("Nix kész");
-
             // Itt mentjük el az állapotot ( Simulexben Volt És most ? )
             // AddCommand(new PushState());
 
@@ -330,21 +333,22 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.ForUpdate.Accept(this);
 
             // Jump To The ForCondition
-            AddCommand(new RelativeJump(conditionAddress - ProgramSize - 1));
-
-
-            // Nemjó :D Majd átgyúrom
+            AddCommand(new RelativeJump(conditionAddress - ProgramSize));
 
             // A blokkban előforduló breakokat címzi a blokk utánra
-            //while (jumpStack.Peek().GetType() == (new Break()).GetType() && !(jumpStack.Peek() as Break).IsSettedUp)
-              //  (jumpStack.Peek() as Break).JumpSize = ProgramSize;
+            while (jumpStack.Peek().GetType() == (new Break()).GetType() && !(jumpStack.Peek() as Break).IsSettedUp)
+            {
+                Break br = (jumpStack.Pop() as Break);
+                br.JumpSize = ProgramSize - GetCommandIndex(br);
+            }
 
-            //jumpStack.Pop().PC = ProgramSize;
+            Jump jmp = jumpStack.Pop();
+            jmp.PC = ProgramSize - GetCommandIndex(jmp);
 
             // Itt állítjuk visza az állípotot és takarítunk ( Simulexben Volt És most ? )
             // AddCommand(new PopState());
         }
-        public void Visit(ForInitNode node) { VisitChildren(node); }
+        public void Visit(ForInitializationNode node) { VisitChildren(node); }
         public void Visit(ForUpdateNode node) { VisitChildren(node); }
 
         public void Visit(DoStatementNode node) { VisitChildren(node); }
