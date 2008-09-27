@@ -317,7 +317,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             // AddCommand( new PushState() );
 
-            node.
+            //node.
 
             // AddCommand( new PopState() );
         }
