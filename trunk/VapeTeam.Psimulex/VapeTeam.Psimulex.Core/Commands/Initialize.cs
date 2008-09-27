@@ -9,15 +9,23 @@ namespace VapeTeam.Psimulex.Core.Commands
     public class Initialize : CommandBase
     {
         private TypeEnum type;
-        private string typeName;
         private string name;
+
+        /// <summary>
+        /// True if the value should store only a reference to the assigner statement.
+        /// </summary>
+        public bool IsReference { get; set; }
 
         #region ICommand Members
 
         public override void Do(ICommandContext context)
         {
             BaseType value = context.RunStack.Pop();
-            context.AddVariable(name, value);
+            if (IsReference)
+                value = value.ToReference();
+            else
+                value = value.Dereference();
+            context.AddVariable(name, value.Clone());
         }
 
         #endregion
@@ -28,12 +36,6 @@ namespace VapeTeam.Psimulex.Core.Commands
             this.type = type;
         }
 
-        //public Initialize(string name, string typeName)
-        //{
-        //    this.name = name;
-        //    this.typeName = typeName;
-        //}
-
         public Initialize(string name)
             : this(name, TypeEnum.Undefined)
         {
@@ -41,13 +43,17 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public override string ToString()
         {
+            string referencePrefix = string.Empty;
+            if (IsReference)
+                referencePrefix = "&";
+
             if (type == TypeEnum.Undefined)
             {
-                return string.Format("initialize {0}", type.ToString());
+                return string.Format("initialize {1}{0}", type.ToString(), referencePrefix);
             }
             else
             {
-                return string.Format("initialize {0} {1}", type.ToString(), name);
+                return string.Format("initialize {2}{0} {1}", type.ToString(), name, referencePrefix);
             }
         }
     }

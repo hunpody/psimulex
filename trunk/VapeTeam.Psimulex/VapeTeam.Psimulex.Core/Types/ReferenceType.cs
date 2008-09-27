@@ -65,6 +65,71 @@ namespace VapeTeam.Psimulex.Core.Types
             return referencedValue.NotEqualsTo(value);
         }
 
+        public override void Add(BaseType value)
+        {
+            referencedValue.Add(value);
+        }
+
+        public override BaseType ConvertTo(TypeEnum type)
+        {
+            return referencedValue.ConvertTo(type);
+        }
+
+        public override void Divide(BaseType value)
+        {
+            referencedValue.Divide(value);
+        }
+
+        public override string GetTypeName()
+        {
+            return referencedValue.GetTypeName();
+        }
+
+        public override void Modulo(BaseType value)
+        {
+            referencedValue.Modulo(value);
+        }
+
+        public override void Multiply(BaseType value)
+        {
+            referencedValue.Multiply(value);
+        }
+
+        public override void Negate()
+        {
+            referencedValue.Negate();
+        }
+
+        public override void Power(BaseType value)
+        {
+            referencedValue.Power(value);
+        }
+
+        public override void Subtract(BaseType value)
+        {
+            referencedValue.Subtract(value);
+        }
+
+        public override char ToChar()
+        {
+            return referencedValue.ToChar();
+        }
+
+        public override decimal ToDecimal()
+        {
+            return referencedValue.ToDecimal();
+        }
+
+        public override float ToFloat()
+        {
+            return referencedValue.ToFloat();
+        }
+
+        public override int ToInt32()
+        {
+            return referencedValue.ToInt32();
+        }
+
         public override bool ToBoolean()
         {
             return referencedValue.ToBoolean();
