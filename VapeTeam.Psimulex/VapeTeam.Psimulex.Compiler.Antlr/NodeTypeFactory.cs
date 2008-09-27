@@ -45,7 +45,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 
                 case PsimulexLexer.IFSTATEMENT: type = NodeType.IfStatement; break;
                 case PsimulexLexer.IFBRANCH: type = NodeType.IfBranch; break;
-                case PsimulexLexer.ELSEIFBRANCH: type = NodeType.ElseIfBranch; break;
+                case PsimulexLexer.ELSEIFBRANCHES: type = NodeType.ElseIfBranches; break;
+                case PsimulexLexer.CONDITIONALBRANCH: type = NodeType.ConditionalBranch; break;
                 case PsimulexLexer.ELSEBRANCH: type = NodeType.ElseBranch; break;
 
                 case PsimulexLexer.PFORSTATEMENT: type = NodeType.PForStatement; break;
