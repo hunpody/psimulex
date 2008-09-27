@@ -12,23 +12,11 @@ namespace VapeTeam.Psimulex.Core.Commands
     public class Assign : CommandBase
     {
         public bool PushResult { get; set; }
-        public bool ReverseAssign { get; set; }
 
         public override void Do(ICommandContext context)
         {
-            BaseType valueToAssign;
-            BaseType targetValue;
-
-            if (!ReverseAssign)
-            {
-                valueToAssign = context.RunStack.Pop();
-                targetValue = context.RunStack.Pop();
-            }
-            else
-            {
-                targetValue = context.RunStack.Pop();
-                valueToAssign = context.RunStack.Pop(); 
-            }
+            BaseType valueToAssign = context.RunStack.Pop();
+            BaseType targetValue = context.RunStack.Pop();
 
             targetValue.Assign(valueToAssign);
 
@@ -42,7 +30,7 @@ namespace VapeTeam.Psimulex.Core.Commands
         /// Initializes a new Assign command. The result won't be pushed back.
         /// </summary>
         public Assign()
-            : this(false,false)
+            : this(false)
         {
         }
 
@@ -53,24 +41,17 @@ namespace VapeTeam.Psimulex.Core.Commands
         public Assign(bool pushResult)
         {
             this.PushResult = pushResult;
-            this.ReverseAssign = false;
-        }
-
-        public Assign(bool pushResult, bool reverseAssign)
-        {
-            this.PushResult = pushResult;
-            this.ReverseAssign = reverseAssign;
         }
 
         public override string ToString()
         {
             if (!PushResult)
             {
-                return ( ReverseAssign ? "revert " : "" ) + "assign";
+                return "assign";
             }
             else
             {
-                return ( ReverseAssign ? "revert " : "" ) + "assign_and_push";
+                return "assign_and_push";
             }
         }
     }

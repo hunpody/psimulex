@@ -416,7 +416,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Type
             node.VariableType.Accept(this);
 
-            // If this is UserDefined, than use lastCompiledUserDefinedDataType
+            // If this is UserDefined, then use lastCompiledUserDefinedDataType
             TypeEnum varType = lastCompiledDataType;
 
             string varTypeName = lastCompiledUserDefinedDataType;
@@ -430,8 +430,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if (varArrayIsDynamic) throw new PsiCodeGeneratorVisitorException("Dynamic array declaration is not supported yet!");
             if (varType != TypeEnum.UserDefinedType)
             {
-                if (varDimensionCount > 0) AddCommand(new ArrayDeclaration(varName, varType, varDimensionCount));
-                else AddCommand(new Declare(varName, varType));
+                if (varDimensionCount > 0)
+                {
+                    AddCommand(new ArrayDeclare(varName, varType, varDimensionCount));
+                }
+                else
+                {
+                    AddCommand(new Declare(varName, varType));
+                }
             }
             else
             {
@@ -699,20 +705,31 @@ namespace VapeTeam.Psimulex.Compiler.AST
                  * ( EXP++ | EXP-- ) :
                  * -------------------
                  * 01 Push EXP
-                 * 02 Duplicate                     
-                 * 03 ( Push +1 | Push -1 )
-                 * 04 Add
-                 * 05 Push UnaryOperand
-                 * 06 Revert Assign ( Silent )
+                 * 02 Pop ax -> Duplication step 1. Store
+                 * 03 Push ax -> Duplication step 2. Push first
+                 * 04 Push ax -> Duplication step 3. Push second
+                 * 05 ( Push +1 | Push -1 )
+                 * 06 Add
+                 * 07 Pop bx -> Store the result
+                 * 08 Push UnaryOperand
+                 * 09 Push bx -> Push the result
+                 * 10 Assign ( Silent )
                  */
 
                 // 01 Operand (EXP)
                 VisitChildren(node);
 
-                // 02 Duplicate
-                AddCommand(new Duplicate());
+                // Duplicate
+                // 02 Pop ax -> Duplication step 1. Store
+                AddCommand(new Pop("ax"));
 
-                // 02 ( Push +1 | Push -1 )
+                // 03 Push ax -> Duplication step 2. Push first
+                AddCommand(new PushRegister("ax"));
+
+                // 04 Push ax -> Duplication step 3. Push second
+                AddCommand(new PushRegister("ax"));
+
+                // 05 Push +1 | Push -1 )
                 if (node.Value == "++")
                 {
                     AddCommand(new Push(new Integer(1)));
@@ -723,19 +740,25 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 }
                 else
                 {
-                    throw new UnknownOperatorException(string.Format("Unknown UnarPostfix Operator : {0}", node.Value));
+                    throw new UnknownOperatorException(string.Format("Unknown UnaryPostfix Operator : {0}", node.Value));
                 }
 
-                // 04 Add Operation                
-                AddCommand( new BinaryOperation(BinaryOperation.Operations.Addition));
+                // 06 Add Operation                
+                AddCommand(new BinaryOperation(BinaryOperation.Operations.Addition));
 
-                // 05 The UnaryOperand as Assignment Target
+                // 07 Save result
+                AddCommand(new Pop("bx"));
+
+                // 08 The UnaryOperand as Assignment Target
                 isCompilingAssignmentTarget = true;
                 VisitChildren(node.UnaryOperand);
                 isCompilingAssignmentTarget = false;
 
-                // 06 Assign (Silent) Operation
-                AddCommand(new Assign(false,true));
+                // 09 Push result
+                AddCommand(new PushRegister("bx"));
+
+                // 10 Assign (Silent) Operation
+                AddCommand(new Assign(false));
             }
         }
 

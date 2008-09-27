@@ -163,7 +163,7 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("OKOK", process2.StandardOutput);
 
-            Assert.IsTrue(process.Machine.Processors.Max(p => p.Cycles) > 2.2 * process2.Machine.Processors.Max(p => p.Cycles));
+            Assert.IsTrue(process.Machine.Processors.Max(p => p.Cycles) > 1.5 * process2.Machine.Processors.Max(p => p.Cycles));
 
             Assert.IsTrue(process2.Machine.Processors.Count(p => p.CurrentThread != null && p.CurrentThread.Id == 1) <= 1);
             Assert.IsTrue(process2.Machine.Processors.Count(p => p.CurrentThread != null && p.CurrentThread.Id == 2) <= 1);

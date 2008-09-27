@@ -20,9 +20,9 @@ namespace VapeTeam.Psimulex.Core
         /// Stack pointer.
         /// </summary>
         public int SP { get; private set; }
-        public VariableMap VariableMap { get; private set; }
+        public VariableLocator VariableMap { get; private set; }
 
-        public State(int pc, int sp, VariableMap variableMap)
+        public State(int pc, int sp, VariableLocator variableMap)
         {
             this.PC = pc;
             this.SP = sp;

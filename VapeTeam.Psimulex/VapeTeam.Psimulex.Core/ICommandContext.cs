@@ -10,6 +10,7 @@ namespace VapeTeam.Psimulex.Core
     {
         CallStack CallStack { get; }
         RunStack RunStack { get; }
+        IRegistry Registry { get; }
         IFunctionLookup FunctionLookup { get; }
         ISystemContext System { get; }
         int PC { get; set;  }

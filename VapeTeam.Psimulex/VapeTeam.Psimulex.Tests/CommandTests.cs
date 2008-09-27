@@ -176,5 +176,53 @@ namespace VapeTeam.Psimulex.Tests
             Assert.AreEqual("66", process.StandardOutput);
             Assert.AreEqual(2, process.MainThread.RunStack.Count);
         }
+
+        [TestMethod]
+        public void RegistryUsage()
+        {
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(0),
+                    new Push(1),
+                    new Push(2),
+                    new Push(3),
+                    new Pop(0),
+                    new Pop(1),
+                    new Pop(2),
+                    new Pop(3),
+                //new Declare("s", TypeEnum.String),
+                //new Push("s", ValueAccessModes.LocalVariableReference),
+                    new Push("ax", ValueAccessModes.Register),
+                    new Call("print"),
+                    new Push("bx", ValueAccessModes.Register),
+                    new Call("print"),
+                    new Push("cx", ValueAccessModes.Register),
+                    new Call("print"),
+                    new Push("dx", ValueAccessModes.Register),
+                    new Call("print"),
+                    
+                    new Push("ax", ValueAccessModes.Register),
+                    new Push("bx", ValueAccessModes.Register),
+                    new Push("cx", ValueAccessModes.Register),
+                    new Push("dx", ValueAccessModes.Register),
+                    new Pop("ax"),
+                    new Pop("bx"),
+                    new Pop("cx"),
+                    new Pop("dx"),
+
+                    new Push(0, ValueAccessModes.Register),
+                    new Call("print"),
+                    new Push(1, ValueAccessModes.Register),
+                    new Call("print"),
+                    new Push(2, ValueAccessModes.Register),
+                    new Call("print"),
+                    new Push(3, ValueAccessModes.Register),
+                    new Call("print")
+
+                    ));
+
+            Assert.AreEqual("32100123", process.StandardOutput);
+        }
     }
 }

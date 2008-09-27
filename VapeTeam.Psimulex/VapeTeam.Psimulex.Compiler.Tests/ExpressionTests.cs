@@ -82,6 +82,17 @@ print(a);
             Assert.AreEqual("99", result);
         }
 
+        [TestMethod]
+        public void ArraySizeAsExpression()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int[(7+5)*2] a;
+print(a[0]);
+print(a.Size);
+");
+            Assert.AreEqual("024", result);
+        }
+
 
         #region Generated Tests
 
@@ -591,62 +602,6 @@ void main()
 
             Assert.AreEqual("111", result);
         }
-
-
-
-        [TestMethod]
-        public void TestGenAt_2008__szeptember_25_17_01_33()
-        {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
-void main()
-{
-	int[2] t;
-	t[0] = 111;	
-	print(t[0]);
-}
-
-");
-
-            Assert.AreEqual("111", result);
-        }
-
-
-
-        [TestMethod]
-        public void TestGenAt_2008__szeptember_25_17_01_37()
-        {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
-void main()
-{
-	int[2] t;
-	//t[0] = 111;	
-	print(t[0]);
-}
-
-");
-
-            Assert.AreEqual("0", result);
-        }
-
-
-
-        [TestMethod]
-        public void TestGenAt_2008__szeptember_25_17_01_39()
-        {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
-void main()
-{
-	int[2] t;
-	t[0] = 111;	
-	print(t[0]);
-}
-
-");
-
-            Assert.AreEqual("111", result);
-        }
-
-
 
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_17_04_32()
