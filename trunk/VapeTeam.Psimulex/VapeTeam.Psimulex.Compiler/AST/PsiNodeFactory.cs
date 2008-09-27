@@ -145,14 +145,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case NodeType.LoopStatement:
                     node= new LoopStatementNode
                     {
-                        LoopControl = children[0],
-                        LoopCore = children[1]
+                        LoopIteratorInitialization = children[0],
+                        LoopIteratorName = children[0].Left.Children[children[0].Left.Children.Count - 2],
+                        LoopLimitExpression = children[1],
+                        LoopCore = children[2]
                     }; v = true; break;
-                case NodeType.LoopControl: node = new LoopControlNode   
-                {
-                    LoopIteratorInitialization = children[0],
-                    LoopLimitExpression = children[1]
-                }; v = true; break;
+                case NodeType.LoopInitialization: node = new LoopInitializationNode(); v = true; break;
+                case NodeType.LoopLimit: node = new LoopLimitNode(); v = true; break;
                 case NodeType.Condition: node = new ConditionNode(); v = true; break;
                 case NodeType.Core: node = new CoreNode(); v = true; break;
                 case NodeType.PDoStatement: node = new PDoStatementNode(); v = true; break;

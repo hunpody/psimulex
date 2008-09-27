@@ -9,6 +9,8 @@ using VapeTeam.Psimulex.Core.Factories;
 
 namespace VapeTeam.Psimulex.Compiler.AST
 {
+    #region PsiCodeGeneratorVisitor Exceptions
+
     public class PsiCodeGeneratorVisitorException : Exception
     {         
         public PsiCodeGeneratorVisitorException(string message)
@@ -34,6 +36,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
         }
     }
+
+    #endregion
 
     public class PsiCodeGeneratorVisitor : IPsiVisitor
     {
@@ -72,6 +76,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         /*Compile Helpers*/
+        #region Compiler Helpers
 
         /// <summary>
         /// Global or Struct Member Variables.
@@ -129,13 +134,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
             return s;
         }
 
-        private void SetUpTopJumpInJumpStack()
+        private void SetUpTopJumpInJumpStack(int corrigation)
         {
             Jump jmp = jumpStack.Pop();
-            jmp.PC = ProgramSize - GetCommandIndex(jmp);
+            jmp.PC = ProgramSize - GetCommandIndex(jmp) + corrigation;
         }
 
-
+        #endregion
+        
         #endregion
 
         #region IPsiVisitor Members
@@ -147,13 +153,19 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 child.Accept(this);
         }
 
+        #region Unknow Nodes
+
         /*Common Tree Node*/    // Igazából ilyennek nem szabad lennie a végén ! //
         public void Visit(PsiNode node) { AddMessage("PsiNode Found : " + node.ToString()); VisitChildren(node); }
 
         /*Undefined Tree Node*/     // És ilyennek sem ! //
         public void Visit(XNode node) { AddMessage("XNode Found : " + node.ToString()); VisitChildren(node); }
 
+        #endregion
+
         /*High Level Tree Nodes*/
+        #region High Level Tree Nodes
+
         public void Visit(CompilationUnitNode node) { VisitChildren(node); }
         public void Visit(SimpleProgramNode node) { VisitChildren(node); }
         public void Visit(MultiFuncionalProgramNode node) { VisitChildren(node); }
@@ -305,6 +317,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
             VisitChildren(node);
         }
 
+        #endregion
+
+        /*Program Structures*/
+        #region Program Structures
+
         public void Visit(BlockNode node) { VisitChildren(node); }
         public void Visit(StatementNode node) { VisitChildren(node); }
 
@@ -327,7 +344,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // Set up PC of all conditionJump to the end of the IfStatement
             for (int i = 0; i < conditionCount; i++)
-                SetUpTopJumpInJumpStack();
+                SetUpTopJumpInJumpStack(0);
         }
 
         public void Visit(ConditionalBranchNode node)
@@ -350,10 +367,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Pop all Break command from the jumpStack
             System.Collections.Generic.Stack<Jump> tempBreakStack = new System.Collections.Generic.Stack<Jump>();
 
-            while (jumpStack.Count != 0 && jumpStack.Peek().GetType() == (new Break()).GetType() /*&& !(jumpStack.Peek() as Break).IsSettedUp*/)
+            while (jumpStack.Count != 0 && jumpStack.Peek().GetType() == (new Break()).GetType() )
                 tempBreakStack.Push(jumpStack.Pop());
 
-            SetUpTopJumpInJumpStack();
+            SetUpTopJumpInJumpStack(0);
 
             // Push all Break back to the jumpStack
             while (tempBreakStack.Count != 0) jumpStack.Push(tempBreakStack.Pop());
@@ -379,9 +396,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         public void Visit(PForStatementNode node)
-        { 
-            VisitChildren(node);
-            throw new NotImplementedException("PFor not implemented yet.");
+        {            
+            throw new NotImplementedException("PFor is not implemented yet.");
         }
 
         public void Visit(ForStatementNode node) 
@@ -396,6 +412,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // ForCondition
             node.ForCondition.Accept(this);
 
+            // Jump To The end of the ForStatement if the ForCondition is false
             RelativeJumpIfFalse rj = new RelativeJumpIfFalse(0);
             AddCommand(rj);
             jumpStack.Push(rj);
@@ -410,29 +427,159 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(new RelativeJump(conditionAddress - ProgramSize));
 
             // Pop all Break from the jumpStack and set up it's PC to the end of the block
-            while (jumpStack.Peek().GetType() == (new Break()).GetType() /*&& !(jumpStack.Peek() as Break).IsSettedUp*/)
-                SetUpTopJumpInJumpStack();
+            while (jumpStack.Peek().GetType() == (new Break()).GetType() )
+                SetUpTopJumpInJumpStack(0);
 
-            SetUpTopJumpInJumpStack();
+            SetUpTopJumpInJumpStack(0);
             
             // AddCommand(new PopState());
         }
+        
         public void Visit(ForInitializationNode node) { VisitChildren(node); }
+        public void Visit(ForConditionNode node) { VisitChildren(node); }
         public void Visit(ForUpdateNode node) { VisitChildren(node); }
 
-        public void Visit(DoStatementNode node) { VisitChildren(node); }
-        public void Visit(WhileStatementNode node) { VisitChildren(node); }
-        public void Visit(PForEachStatementNode node) { VisitChildren(node); }
+        public void Visit(DoStatementNode node) 
+        {
+            // AddCommand(new PushState());
+
+            int beginingAddress = ProgramSize;
+
+            // This is just a Fake jump, to "cover" the Break Jumps on the upper level
+            RelativeJumpIfTrue rj = new RelativeJumpIfTrue(0);
+            jumpStack.Push(rj);
+
+            // DoCore
+            node.DoCore.Accept(this);
+
+            // DoCondition
+            node.DoCondition.Accept(this);
+
+            // Pop all Break from the jumpStack and set up it's PC to the end of the block
+            // Correction +1 is because, de last jump, what jump to the front of the DoStatement
+            while (jumpStack.Peek().GetType() == (new Break()).GetType())
+                SetUpTopJumpInJumpStack(1);
+
+            rj.PC = beginingAddress - ProgramSize;
+            AddCommand(rj);
+
+            // AddCommand(new PopState());
+        }
+
+        public void Visit(WhileStatementNode node) 
+        {
+            // AddCommand(new PushState());
+
+            int conditionAddress = ProgramSize;
+
+            // WhileCondition
+            node.WhileCondition.Accept(this);
+
+            // Jump To The end of the WhileStatement if the WhileCondition if false
+            RelativeJumpIfFalse rj = new RelativeJumpIfFalse(0);
+            AddCommand(rj);
+            jumpStack.Push(rj);
+
+            // WhileCore
+            node.WhileCore.Accept(this);
+
+            // Jump to the while condition
+            AddCommand(new RelativeJump(conditionAddress - ProgramSize));
+
+            // Pop all Break from the jumpStack and set up it's PC to the end of the block
+            while (jumpStack.Peek().GetType() == (new Break()).GetType())
+                SetUpTopJumpInJumpStack(0);
+
+            SetUpTopJumpInJumpStack(0);
+
+            // AddCommand(new PopState());
+        }
+
+        public void Visit(PForEachStatementNode node)
+        {
+            throw new NotImplementedException("PForEach is not implemented yet.");
+        }
+
         public void Visit(ForEachStatementNode node) { VisitChildren(node); }
         public void Visit(ForEachControlNode node) { VisitChildren(node); }
-        public void Visit(LoopStatementNode node) { VisitChildren(node); }
-        public void Visit(LoopControlNode node) { VisitChildren(node); }
+
+        public void Visit(LoopStatementNode node) 
+        {
+            // AddCommand(new PushState());
+
+            // LoopIteratorInitialization
+            node.LoopIteratorInitialization.Accept(this);
+
+            int conditionAddress = ProgramSize;
+
+            // LoopCondition //
+            string loopIteratorName = node.LoopIteratorName.Value;
+            AddCommand(new Push(loopIteratorName,ValueAccessModes.LocalVariable));
+
+            // LoopLimitExpression
+            node.LoopLimitExpression.Accept(this);
+
+            AddCommand(new Compare(Compare.ComparisonModes.LessThanOrEqual));
+            // LoopCondition //
+
+            RelativeJumpIfFalse rj = new RelativeJumpIfFalse(0);
+            AddCommand(rj);
+            jumpStack.Push(rj);
+
+            // LoopCore
+            node.LoopCore.Accept(this);
+
+            // LoopUpdate
+            AddCommand(new Push(loopIteratorName, ValueAccessModes.LocalVariableReference));
+            AddCommand(new Push(loopIteratorName, ValueAccessModes.LocalVariable));
+            AddCommand(new Push(new Integer(1)));
+            AddCommand(new BinaryOperation(BinaryOperation.Operations.Addition));
+            AddCommand(new Assign(false));
+
+            AddCommand(new RelativeJump(conditionAddress - ProgramSize));
+
+            // Pop all Break from the jumpStack and set up it's PC to the end of the block
+            while (jumpStack.Peek().GetType() == (new Break()).GetType())
+                SetUpTopJumpInJumpStack(0);
+
+            SetUpTopJumpInJumpStack(0);
+
+            // AddCommand(new PopState());
+        }
+
+        public void Visit(LoopInitializationNode node) { VisitChildren(node); }
+        public void Visit(LoopLimitNode node) { VisitChildren(node); }
+
         public void Visit(ConditionNode node) { VisitChildren(node); }
         public void Visit(CoreNode node) { VisitChildren(node); }
-        public void Visit(PDoStatementNode node) { VisitChildren(node); }
-        public void Visit(AsynStatementNode node) { VisitChildren(node); }
-        public void Visit(LockStatementNode node) { VisitChildren(node); }
-        public void Visit(ReturnNode node) { VisitChildren(node); }
+
+        public void Visit(PDoStatementNode node)
+        {
+            throw new NotImplementedException("PDo is not implemented yet.");
+        }
+
+        public void Visit(AsynStatementNode node) 
+        {
+            throw new NotImplementedException("Async is not implemented yet.");
+        }
+
+        public void Visit(LockStatementNode node)
+        {
+            throw new NotImplementedException("Lock is not implemented yet.");
+        }
+
+        public void Visit(ReturnNode node) 
+        {
+            // Has or Not Has Return Value
+            bool hasReturnValue = false;
+            if(node.Left != null)
+            {
+                node.Left.Accept(this);
+                hasReturnValue = true;
+            }
+
+            AddCommand(new Return(hasReturnValue));
+        }
 
         public void Visit(BreakNode node) 
         {
@@ -511,8 +658,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             else
             {
                 throw new PsiCodeGeneratorVisitorException(string.Format("User defined types is not supported yet! ({0})", varTypeName));
-            }           
+            }
         }
+
+        #endregion
 
         /*Operators*/
         #region Operators        
@@ -950,11 +1099,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
         #endregion
 
         /*Identifier*/
+        #region Identifier
+
         public void Visit(IdentifierNode node) 
         {
-            AddCommand(new Push(node.Value, 
-                isCompilingAssignmentTarget ? ValueAccessModes.LocalVariableReference : ValueAccessModes.LocalVariable));
+            AddCommand(new Push(node.Value, isCompilingAssignmentTarget ? ValueAccessModes.LocalVariableReference : ValueAccessModes.LocalVariable));
         }
+
+        #endregion
 
         /*Literals*/
         #region Literals
@@ -1027,8 +1179,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         #endregion
 
-
         /*Types*/
+        #region Types
+
         public void Visit(TypeNode node) { VisitChildren(node); }
         public void Visit(DataTypeNode node)
         {
@@ -1039,8 +1192,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             lastCompiledDimensionList = new List<int>();
         }
 
-        /**/public void Visit(DataTypeNameNode node) { VisitChildren(node); }
-        /**/public void Visit(ReferenceNode node) { VisitChildren(node); }
+        public void Visit(DataTypeNameNode node) { VisitChildren(node); }
+        public void Visit(ReferenceNode node) { VisitChildren(node); }
+
+        #endregion
 
         #endregion
     }

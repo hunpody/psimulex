@@ -47,6 +47,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(PForStatementNode node);
         void Visit(ForStatementNode node);
         void Visit(ForInitializationNode node);
+        void Visit(ForConditionNode node);
         void Visit(ForUpdateNode node);
         void Visit(DoStatementNode node);
         void Visit(WhileStatementNode node);
@@ -54,7 +55,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(ForEachStatementNode node);
         void Visit(ForEachControlNode node);
         void Visit(LoopStatementNode node);
-        void Visit(LoopControlNode node);
+        void Visit(LoopInitializationNode node);
+        void Visit(LoopLimitNode node);
         void Visit(ConditionNode node);
         void Visit(CoreNode node);
         void Visit(PDoStatementNode node);

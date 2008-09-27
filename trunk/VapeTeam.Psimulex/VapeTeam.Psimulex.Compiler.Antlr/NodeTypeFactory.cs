@@ -64,7 +64,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 case PsimulexLexer.FOREACHCONTROL: type = NodeType.ForEachControl; break;
 
     	        case PsimulexLexer.LOOPSTATEMENT: type = NodeType.LoopStatement; break;
-                case PsimulexLexer.LOOPCONTROL: type = NodeType.LoopControl; break;
+                case PsimulexLexer.LOOPINIT: type = NodeType.LoopInitialization; break;
+                case PsimulexLexer.LOOPLIMIT: type = NodeType.LoopLimit; break;
 
                 case PsimulexLexer.CONDITION: type = NodeType.Condition; break;
                 case PsimulexLexer.CORE: type = NodeType.Core; break;

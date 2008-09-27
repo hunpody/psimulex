@@ -363,6 +363,79 @@ for(int i = 0; i < 10; i++)
             Assert.AreEqual(@"012345break", result);
         }
 
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_20_51_45()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 0;
+while( i < 10 )
+{
+	print(i);
+	i++;
+}
+");
+
+            Assert.AreEqual(@"0123456789", result);
+        }
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_21_18_09()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 0;
+do
+{
+	print(i);
+	++i;
+}while( i < 10 );
+");
+
+            Assert.AreEqual(@"0123456789", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_21_18_17()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 0;
+do
+{
+	print(i);
+	++i;
+}while( i < 0 );
+");
+
+            Assert.AreEqual(@"0", result);
+        }
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_22_44_22()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+loop( int i = 0 to 10 )
+{
+print(i);
+}
+");
+
+            Assert.AreEqual(@"012345678910", result);
+        }
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_22_47_08()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+loop( char ch = 'a' to 'z' )
+	print(ch);
+");
+
+            Assert.AreEqual(@"abcdefghijklmnopqrstuvwxyz", result);
+        }
+
 
 
         #endregion
