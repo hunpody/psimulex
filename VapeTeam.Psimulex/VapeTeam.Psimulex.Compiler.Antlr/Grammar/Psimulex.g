@@ -47,7 +47,8 @@ tokens {
 	FOREACHCONTROL;
 
 	LOOPSTATEMENT;
-	LOOPCONTROL;
+	LOOPINIT;
+	LOOPLIMIT;
 	
 	CORE;
 	CONDITION;
@@ -525,7 +526,7 @@ forEachControl			options {k=3;} // Emiatt kellene (ID ID in ID)
 
 loopStatement		:	Loop '(' loopControl ')' core -> ^( LOOPSTATEMENT loopControl core ); 
 loopControl				options {k=3;} // Emiatt kellene (ID ID to ID)
-				    :   localVariableDeclaration To expression -> ^( LOOPCONTROL localVariableDeclaration expression );
+				    :   localVariableDeclaration To expression -> ^( LOOPINIT localVariableDeclaration ) ^( LOOPLIMIT expression );
 
 core				:	branch -> ^( CORE branch );
 condition			:	parExpression -> ^( CONDITION parExpression );
