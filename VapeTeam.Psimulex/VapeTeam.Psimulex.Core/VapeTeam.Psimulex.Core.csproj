@@ -69,6 +69,7 @@
     <Compile Include="Factories\OperatingSystemBuilder.cs" />
     <Compile Include="Factories\ProgramBuilder.cs" />
     <Compile Include="Function.cs" />
+    <Compile Include="FunctionMap.cs" />
     <Compile Include="FunctionRegistry.cs" />
     <Compile Include="HardwareElement.cs" />
     <Compile Include="Commands\ICommand.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Types\TypeHierarchy.cs" />
     <Compile Include="Types\UserDefinedTypes.cs" />
     <Compile Include="Types\ValueFactory.cs" />
+    <Compile Include="UserDefinedFunction.cs" />
     <Compile Include="VariableLocator.cs" />
     <Compile Include="VariableMap.cs">
       <SubType>Code</SubType>
