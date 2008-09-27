@@ -28,7 +28,8 @@ tokens {
 	
 	IFSTATEMENT;
 	IFBRANCH;
-	ELSEIFBRANCH;
+	ELSEIFBRANCHES;
+	CONDITIONALBRANCH;
 	ELSEBRANCH;
 	
 	PFORSTATEMENT;
@@ -501,8 +502,8 @@ statement
     ;
     
 ifStatement			:	ifBranch ( ( elseIfBranches elseBranch ) | elseBranch? );
-ifBranch			:	If condition core -> ^( IFBRANCH condition core);
-elseIfBranches		:	( ElseIf condition core )* -> ^( ELSEIFBRANCH ( condition core )* );
+ifBranch			:	If condition core -> ^( IFBRANCH ^( CONDITIONALBRANCH condition core ) );
+elseIfBranches		:	( ElseIf condition core )* -> ^( ELSEIFBRANCHES ( ^( CONDITIONALBRANCH condition core ) )* );
 elseBranch			:	Else core -> ^( ELSEBRANCH core);
 
 forStatement		:	For '(' forControl ')' core -> ^( FORSTATEMENT forControl core );
