@@ -1,0 +1,25 @@
+loop( char ch = 'a' to 'z' )
+	print(ch);
+
+print("\n");
+
+loop( char ch = 'A' to 'Z' )
+	print(ch);
+
+print("\n");
+	
+loop( char ch = 'a' to 'z' )
+{
+	if( ch == 'd')
+		break;
+	print(ch);
+}
+
+print("\n");
+	
+loop( char ch = 'A' to 'Z' )
+{
+	if( ch == 'D')
+		break;
+	print(ch);
+}

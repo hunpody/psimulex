@@ -436,6 +436,157 @@ loop( char ch = 'a' to 'z' )
             Assert.AreEqual(@"abcdefghijklmnopqrstuvwxyz", result);
         }
 
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_22_51_45()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+loop( char ch = 'A' to 'Z' )
+	print(ch);
+");
+
+            Assert.AreEqual(@"ABCDEFGHIJKLMNOPQRSTUVWXYZ", result);
+        }
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_22_52_14()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+loop( char ch = 'A' to 'z' )
+	print(ch);
+");
+
+            Assert.AreEqual(@"ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz", result);
+        }
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_23_08_47()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+int i = 0;
+while( i < 10 )
+{
+	print(i);
+	++i;
+}
+
+print(""\n"");
+
+int i = 0;
+do
+{
+	print(i);
+	i++;
+}while( i < 10 );
+
+print(""\n"");
+
+for( int i = 0; i < 10; i++ )
+	print(i);
+
+print(""\n"");
+
+loop( int i = 0 to 9 )
+	print(i);
+");
+
+            Assert.AreEqual(@"0123456789
+0123456789
+0123456789
+0123456789", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_23_10_44()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+loop( char ch = 'a' to 'z' )
+	print(ch);
+
+print(""\n"");
+
+loop( char ch = 'A' to 'Z' )
+	print(ch);
+");
+
+            Assert.AreEqual(@"abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ", result);
+        }
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_23_15_44()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+loop( char ch = 'a' to 'z' )
+	print(ch);
+
+print(""\n"");
+
+loop( char ch = 'A' to 'Z' )
+	print(ch);
+
+print(""\n"");
+	
+loop( char ch = 'a' to 'z' )
+{
+	if( ch == 'd')
+		break;
+	print(ch);
+}
+
+print(""\n"");
+	
+loop( char ch = 'A' to 'Z' )
+{
+	if( ch == 'D')
+		break;
+	print(ch);
+}
+");
+
+            Assert.AreEqual(@"abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abc
+ABC", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_23_18_15()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+if(true)
+	print(""IF\n"");
+elseif(true)
+	print(""ELSEIF\n"");
+else
+	print(""ELSE\n"");
+
+if(false)
+	print(""IF\n"");
+elseif(true)
+	print(""ELSEIF\n"");
+else
+	print(""ELSE\n"");
+
+if(false)
+	print(""IF\n"");
+elseif(false)
+	print(""ELSEIF\n"");
+else
+	print(""ELSE\n"");
+");
+
+            Assert.AreEqual(@"IF
+ELSEIF
+ELSE
+", result);
+        }
+
 
 
         #endregion
