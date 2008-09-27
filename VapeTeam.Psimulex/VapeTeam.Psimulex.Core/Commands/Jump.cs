@@ -83,37 +83,12 @@ namespace VapeTeam.Psimulex.Core.Commands
     }
 
     /// <summary>
-    /// To identifi Break jumps
+    /// To identifi Break jumps.
+    /// Special Jump to make different between Break Statement Jumps and other Jumps.
+    /// It needed to compile Break Statements.
     /// </summary>
     public class Break : RelativeJump
     {
-        /*
-        public bool IsSettedUp { get; set; }
-
-        public int JumpSize 
-        {
-            get
-            { 
-                return PC; 
-            }
-            set 
-            {
-                PC = value;
-                IsSettedUp = true;
-            }
-        }
-
-        public Break()
-            : this(0)
-        { }
-
-        public Break(int PC)
-            : base(PC)
-        {
-            IsSettedUp = false;
-        }
-        */
-
         public Break()
             : this(0)
         { }

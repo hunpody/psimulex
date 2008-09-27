@@ -181,7 +181,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "TesterForm";
-            this.Text = "Tester Form";
+            this.Text = "Visual PSimulex Paralell Algorithm Studio ( Codename Psi# )";
             this.Load += new System.EventHandler(this.TesterForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

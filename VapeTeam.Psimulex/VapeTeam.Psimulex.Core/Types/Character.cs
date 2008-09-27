@@ -17,6 +17,11 @@ namespace VapeTeam.Psimulex.Core.Types
             get { return TypeEnum.Character; }
         }
 
+        public override bool IsLessThan(BaseType value)
+        {
+            return (int)this.value < value.ToInt();
+        }
+
         public override void Add(BaseType value)
         {
             this.value += value.ToChar();

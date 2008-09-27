@@ -51,7 +51,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 	    ForEachControl,
 
 	    LoopStatement,
-	    LoopControl,
+	    LoopInitialization,
+        LoopLimit,
 
         Condition,
         Core,        
