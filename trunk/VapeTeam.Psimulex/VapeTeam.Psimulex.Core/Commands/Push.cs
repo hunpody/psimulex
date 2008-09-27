@@ -68,7 +68,7 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             AccessMode = accessMode;
             this.name = name.ToString();
-            if (accessMode == ValueAccessModes.Register)
+            if (accessMode == ValueAccessModes.Register || accessMode == ValueAccessModes.RegisterByReference)
             {
                 if (name is int)
                 {
@@ -168,13 +168,23 @@ namespace VapeTeam.Psimulex.Core.Commands
 
     public class PushRegister : Push
     {
+        public PushRegister(int index, bool byReference)
+            : base(index, byReference ? ValueAccessModes.RegisterByReference : ValueAccessModes.Register)
+        {
+        }
+
+        public PushRegister(string name, bool byReference)
+            : base(name, byReference ? ValueAccessModes.RegisterByReference : ValueAccessModes.Register)
+        {
+        }
+
         public PushRegister(int index)
-            : base(index, ValueAccessModes.Register)
+            : this(index, false)
         {
         }
 
         public PushRegister(string name)
-            : base(name, ValueAccessModes.Register)
+            : this(name, false)
         {
         }
     }

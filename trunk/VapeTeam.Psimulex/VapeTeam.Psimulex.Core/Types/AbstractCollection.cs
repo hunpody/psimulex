@@ -9,11 +9,6 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         #region IIndexable Members
 
-        //public virtual BaseType Index(int index)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public abstract BaseType Index(int index);
 
         /// <summary>
@@ -30,6 +25,10 @@ namespace VapeTeam.Psimulex.Core.Types
             }
             return list[index];
         }
+
+        #endregion
+
+        #region Size
 
         public virtual int Size
         {
@@ -52,6 +51,17 @@ namespace VapeTeam.Psimulex.Core.Types
         public virtual int Count
         {
             get { return Size; }
+        }
+
+        #endregion
+
+        #region Iterator
+
+        protected abstract System.Collections.IEnumerable GetAsEnumerable();
+
+        public Iterator GetIterator()
+        {
+            return new Iterator(GetAsEnumerable());
         }
 
         #endregion

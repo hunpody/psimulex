@@ -39,6 +39,11 @@ namespace VapeTeam.Psimulex.Core.Types
             return ListIndexing(rep, index);
         }
 
+        protected override System.Collections.IEnumerable GetAsEnumerable()
+        {
+            return rep;
+        }
+
         public override int Size
         {
             get { return rep.Count; }

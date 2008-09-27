@@ -929,5 +929,82 @@ namespace VapeTeam.Psimulex.Tests
             // Test if the run stack is well cleaned
             Assert.AreEqual(2, process.MainThread.RunStack.Count);
         }
+
+        [TestMethod]
+        public void Iterators1()
+        {
+            // Testing array indexing with bad index
+            var program =
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    // int[4] a; a[0] = 0; a[1] = 1; a[2] = 2; a[3] = 3;
+                    // it = a.GetIterator();
+                    // while(it.MoveNext()) print(it.GetCurrent());
+                    // it = a.GetIterator();
+                    // while(it.MoveNext()) ++(it.GetCurrent());
+                    // it = a.GetIterator();
+                    // while(it.MoveNext()) print(it.GetCurrent());
+
+                    new Push(new VapeTeam.Psimulex.Core.Types.Array(TypeEnum.Integer, 4)),
+                    new Initialize("a"),
+                    new PushByReference("a"),
+                    new Indexing(0),
+                    new Push(0),
+                    new Assign(),
+                    new PushByReference("a"),
+                    new Indexing(1),
+                    new Push(1),
+                    new Assign(),
+                    new PushByReference("a"),
+                    new Indexing(2),
+                    new Push(2),
+                    new Assign(),
+                    new PushByReference("a"),
+                    new Indexing(3),
+                    new Push(3),
+                    new Assign(),
+
+                    new PushByReference("a"),
+                    new CallMethod("GetIterator"),
+                    new Initialize("it"),
+                    new PushByReference("it"),
+                    new CallMethod("MoveNext"),
+                    new RelativeJumpIfFalse(5),
+                    new PushByReference("it"),
+                    new CallMethod("Current"),
+                    new Call("print"),
+                    new RelativeJump(-6),
+
+                    new PushByReference("a"),
+                    new CallMethod("GetIterator"),
+                    new Initialize("it"),
+                    new PushByReference("it"),
+                    new CallMethod("MoveNext"),
+                    new RelativeJumpIfFalse(10),
+                    new PushByReference("it"),
+                    new CallMethod("Current"),
+                    new Pop("ax"),
+                    new PushRegister("ax", true),
+                    new PushRegister("ax"),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(),
+                    new RelativeJump(-11),
+                    
+                    new PushByReference("a"),
+                    new CallMethod("GetIterator"),
+                    new Initialize("it"),
+                    new PushByReference("it"),
+                    new CallMethod("MoveNext"),
+                    new RelativeJumpIfFalse(5),
+                    new PushByReference("it"),
+                    new CallMethod("Current"),
+                    new Call("print"),
+                    new RelativeJump(-6));
+
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(program);
+
+            Assert.AreEqual("01231234", process.StandardOutput);
+        }
     }
 }
