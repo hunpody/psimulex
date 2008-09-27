@@ -227,18 +227,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
 
-    public class IfBranchNode : PsiNode 
+    public class IfBranchNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class ElseIfBranchNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
+    public class ConditionalBranchNode : PsiNode
     {
-        public IPsiNode IfCondition { get; set; }
-        public IPsiNode IfCore { get; set; }
-        public override void Accept(IPsiVisitor v) { v.Visit(this); } 
-    }
-    public class ElseIfBranchNode : PsiNode
-    {
-        public IPsiNode ElseIfCondition { get; set; }
-        public IPsiNode ElseIfCore { get; set; }
+        public IPsiNode ConditionalBranchCondition { get; set; }
+        public IPsiNode ConditionalBranchCore { get; set; }
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
+
     public class ElseBranchNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
     public class DoStatementNode : PsiNode
@@ -247,6 +245,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public IPsiNode DoCondition { get; set; }
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
+
     public class WhileStatementNode : PsiNode
     {
         public IPsiNode WhileCondition { get; set; }
