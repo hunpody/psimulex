@@ -94,7 +94,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Samples\teszt.psi" />
+    <None Include="Samples\SequentialAlgorithms\BubbleSort 1.0.psi" />
+    <None Include="Samples\SimplePrograms\Abc.psi" />
+    <None Include="Samples\SimplePrograms\Branches.psi" />
+    <None Include="Samples\SimplePrograms\Characters from 1 to 1000.psi" />
+    <None Include="Samples\SimplePrograms\Cycles.psi" />
+    <None Include="Samples\SimplePrograms\Hello World.psi" />
+    <None Include="Samples\Tutorial\01. Sample %28 Hello World %29.psi" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -117,6 +123,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="References\ICSharpCode.TextEditor.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Samples\HelpFunctions\" />
+    <Folder Include="Samples\ParallelAlgorithms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

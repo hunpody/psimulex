@@ -1,0 +1,20 @@
+if(true)
+	print("IF\n");
+elseif(true)
+	print("ELSEIF\n");
+else
+	print("ELSE\n");
+
+if(false)
+	print("IF\n");
+elseif(true)
+	print("ELSEIF\n");
+else
+	print("ELSE\n");
+
+if(false)
+	print("IF\n");
+elseif(false)
+	print("ELSEIF\n");
+else
+	print("ELSE\n");

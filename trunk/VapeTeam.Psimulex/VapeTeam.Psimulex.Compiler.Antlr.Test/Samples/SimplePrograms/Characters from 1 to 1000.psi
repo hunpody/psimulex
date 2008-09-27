@@ -1,0 +1,2 @@
+loop( int ch = 1 to 1000 )
+	print( (char)ch );
