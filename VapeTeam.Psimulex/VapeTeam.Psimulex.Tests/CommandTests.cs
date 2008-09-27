@@ -241,5 +241,49 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("8", process.StandardOutput);
         }
+
+        [TestMethod]
+        public void InitializeCommand()
+        {
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(0),
+                    new Initialize("a"),
+                    new PushByReference("a"),
+                    new PushByReference("a"),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(false),
+                    new PushByValue("a"),
+                    new Call("print"),
+
+                    new PushByReference("a"),
+                    new Initialize("b"),
+                    new PushByReference("b"),
+                    new PushByReference("b"),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(false),
+                    new PushByValue("a"),
+                    new Call("print"),
+                    new PushByValue("b"),
+                    new Call("print"),
+
+                    new PushByReference("a"),
+                    new Initialize("c") { IsReference = true },
+                    new PushByReference("c"),
+                    new PushByReference("c"),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Assign(false),
+                    new PushByValue("a"),
+                    new Call("print"),
+                    new PushByValue("c"),
+                    new Call("print")
+                ));
+
+            Assert.AreEqual("11222", process.StandardOutput);
+        }
     }
 }
