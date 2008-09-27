@@ -20,6 +20,8 @@ namespace VapeTeam.Psimulex.Core.Commands
     {
         Constant,
         LocalVariable,
-        LocalVariableReference
+        LocalVariableReference,
+        Register,
+        RegisterByReference
     }
 }

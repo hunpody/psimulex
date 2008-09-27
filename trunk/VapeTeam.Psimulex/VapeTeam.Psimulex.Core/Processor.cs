@@ -81,11 +81,12 @@ namespace VapeTeam.Psimulex.Core
                     int oldPC = CurrentThread.PC;
                     Logger.Log(CurrentThread.Program[CurrentThread.PC].ToString());
                     CurrentThread.Program[CurrentThread.PC].Do(CurrentThread);
-                    // If there was no jump
+                    // If there was no jump, then increse the program counter
                     if (oldPC == CurrentThread.PC && CurrentThread.State == ThreadStates.Running)
                     {
                         ++CurrentThread.PC;
                     }
+                    ++workingCycles;
                 }
             }
             ++cycles;
@@ -105,10 +106,46 @@ namespace VapeTeam.Psimulex.Core
                 return cycles;
             }
         }
+
+        /// <summary>
+        /// Returns the cycles that were spent on non-idle operations.
+        /// </summary>
+        public int WorkingCycles
+        {
+            get
+            {
+                return workingCycles;
+            }
+        }
         
         #endregion
 
-        public Thread CurrentThread { get; set; }
+        #region Registers
+
+        public IRegistry Registry { get; internal set; }
+
+        #endregion
+
+        private Thread currentThread;
+
+        public Thread CurrentThread 
+        {
+            get { return currentThread; }
+            set
+            {
+                if (currentThread != null)
+                {
+                    currentThread.Registry = this.Registry;
+                }
+                
+                currentThread = value;
+                
+                if (currentThread != null)
+                {
+                    this.Registry = value.Registry;
+                }
+            }
+        }
 
 
         public Processor()

@@ -8,6 +8,8 @@ namespace VapeTeam.Psimulex.Core.Commands
 {
     /// <summary>
     /// Pusher Microlex command. It can push registers, constants or in-memory objects to the stack.
+    /// 
+    /// TODO: There are too many constructors. Marked for refactoring.
     /// </summary>
     public class Push : CommandBase
     {
@@ -15,39 +17,69 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         private BaseType value;
         private string name;
+
+        private int registryIndex = -1;
+        private string registerName; 
+
         private TypeEnum type;
 
         #region ICommand Members
 
         public override void Do(ICommandContext context)
         {
+            BaseType valueToPush = null;
+
             switch (AccessMode)
             {
                 case ValueAccessModes.Constant:
-                    context.RunStack.Push(value.Clone());
+                    valueToPush = value;
                     break;
                 case ValueAccessModes.LocalVariable:
-                    context.RunStack.Push(context.GetVariable(name).Clone());
-                    break;
                 case ValueAccessModes.LocalVariableReference:
-                    context.RunStack.Push(context.GetVariable(name));
+                    valueToPush = context.GetVariable(name);
                     break;
-                default:
+                case ValueAccessModes.Register:
+                case ValueAccessModes.RegisterByReference:
+                    if (registryIndex >= 0)
+                    {
+                        valueToPush = context.Registry[registryIndex];
+                    }
+                    else
+                    {
+                        valueToPush = context.Registry[registerName];
+                    }
                     break;
             }
 
+            if (AccessMode == ValueAccessModes.Register || AccessMode == ValueAccessModes.LocalVariable || AccessMode == ValueAccessModes.Constant)
+            {
+                valueToPush = valueToPush.Clone();
+            }
+
+            if (valueToPush == null)
+            {
+                throw new Exceptions.InvalidOperationException("Cannot push a null.");
+            }
+
+            context.RunStack.Push(valueToPush);
         }
 
-        //public Push(BaseType value, ValueAccessModes accessMode)
-        //{
-        //    AccessMode = accessMode;
-        //    this.value = value;
-        //}
-
-        public Push(string name, ValueAccessModes accessMode)
+        public Push(object name, ValueAccessModes accessMode)
         {
             AccessMode = accessMode;
-            this.name = name;
+            this.name = name.ToString();
+            if (accessMode == ValueAccessModes.Register)
+            {
+                if (name is int)
+                {
+                    this.registryIndex = (int)name;
+                }
+                else
+                {
+                    this.registerName = name.ToString();
+                }
+            }
+           
         }
 
         public Push(BaseType value)
@@ -57,16 +89,20 @@ namespace VapeTeam.Psimulex.Core.Commands
             this.AccessMode = ValueAccessModes.Constant;
         }
 
+        /// <summary>
+        /// Pushes the value converted into Psimulex type system.
+        /// </summary>
+        /// <param name="value"></param>
         public Push(object value)
             : this(value, TypeEnum.Undefined)
         {
         }
 
-        //public Push(TypeEnum type)
-        //{
-        //    this.value = ValueFactory.CreateValue(type);
-        //}
-
+        /// <summary>
+        /// Pushes the value converted to the given type.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="type"></param>
         public Push(object value, TypeEnum type)
         {
             AccessMode = ValueAccessModes.Constant;
@@ -95,7 +131,11 @@ namespace VapeTeam.Psimulex.Core.Commands
             {
                 return string.Format("push local &{0}", name);
             }
-            else 
+            else if (AccessMode == ValueAccessModes.Register)
+            {
+                return string.Format("push register {0}", name);
+            }
+            else
             {
                 if (type != TypeEnum.Undefined)
                 {
@@ -122,6 +162,19 @@ namespace VapeTeam.Psimulex.Core.Commands
     {
         public PushByReference(string variableName)
             : base(variableName, ValueAccessModes.LocalVariableReference)
+        {
+        }
+    }
+
+    public class PushRegister : Push
+    {
+        public PushRegister(int index)
+            : base(index, ValueAccessModes.Register)
+        {
+        }
+
+        public PushRegister(string name)
+            : base(name, ValueAccessModes.Register)
         {
         }
     }

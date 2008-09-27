@@ -8,9 +8,9 @@ using VapeTeam.Psimulex.Core;
 namespace VapeTeam.Psimulex.Core.Commands
 {
     /// <summary>
-    /// Array Declaration.
+    /// The size of each dimension will be popped from the run stack.
     /// </summary>
-    public class ArrayDeclaration : CommandBase
+    public class ArrayDeclare : CommandBase
     {
         private string name;
         private TypeEnum type;
@@ -21,10 +21,10 @@ namespace VapeTeam.Psimulex.Core.Commands
             if (dimension == 1)
                 context.AddVariable(name, new Types.Array(type, context.RunStack.Pop().ToInt32()));
             else
-                throw new Psimulex.Core.Exceptions.PsimulexException("More than one dimension array is not implemented yet!");
+                throw new Psimulex.Core.Exceptions.PsimulexException("More than one dimensional array is not implemented yet!");
         }
 
-        public ArrayDeclaration(string name, TypeEnum type, int dimension)
+        public ArrayDeclare(string name, TypeEnum type, int dimension)
         {
             this.name = name;
             this.type = type;
@@ -33,7 +33,7 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public override string ToString()
         {
-            return string.Format("array declare {0}[Dim:{1}] {2}", type.ToString(), dimension, name);
+            return string.Format("array_declare {0}[dim:{1}] {2}", type.ToString(), dimension, name);
         }
     
     }

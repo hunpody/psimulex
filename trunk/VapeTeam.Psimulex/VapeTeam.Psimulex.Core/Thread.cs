@@ -58,24 +58,29 @@ namespace VapeTeam.Psimulex.Core
         /// </summary>
         public Process HostProcess { get; set; }
 
-        
-        private Dictionary<string, BaseType> _globalVariables = new Dictionary<string,BaseType>();
-
-        /// <summary>
+      /// <summary>
         /// The global variables are those values that are initally defined or initialized outside any functions.
         /// </summary>
-        public Dictionary<string, BaseType> GlobalVariables
+        public VariableMap GlobalVariables
         {
-            get
-            {
-                return _globalVariables;
-            }
+            get; private set;
         }
+
+        #region Registers
+
+        /// <summary>
+        /// The registry of the processor.
+        /// </summary>
+        public IRegistry Registry { get; internal set; }
+        
+        #endregion
 
         public Thread()
         {
             CallStack = new CallStack();
             RunStack = new RunStack();
+            GlobalVariables = new VariableMap();
+            Registry = new Registry();
         }
 
         /// <summary>
@@ -132,7 +137,7 @@ namespace VapeTeam.Psimulex.Core
         public void PushState()
         {
             CallStack.Push(new State(PC, RunStack.Count, _variableMap));
-            _variableMap = new VariableMap();
+            _variableMap = new VariableLocator();
         }
 
         /// <summary>
@@ -158,7 +163,7 @@ namespace VapeTeam.Psimulex.Core
             PC = state.PC + 1;
         }
 
-        private VariableMap _variableMap = new VariableMap();
+        private VariableLocator _variableMap = new VariableLocator();
 
         public BaseType GetVariable(string name)
         {
@@ -184,7 +189,7 @@ namespace VapeTeam.Psimulex.Core
 
             if (CallStack.Count == 0)
             {
-                _globalVariables.AddOrOverwrite(name, value);
+                GlobalVariables.AddOrOverwrite(name, value);
             }
         }
 
