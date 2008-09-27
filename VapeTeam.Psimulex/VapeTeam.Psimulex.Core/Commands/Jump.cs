@@ -87,6 +87,7 @@ namespace VapeTeam.Psimulex.Core.Commands
     /// </summary>
     public class Break : RelativeJump
     {
+        /*
         public bool IsSettedUp { get; set; }
 
         public int JumpSize 
@@ -110,6 +111,16 @@ namespace VapeTeam.Psimulex.Core.Commands
             : base(PC)
         {
             IsSettedUp = false;
+        }
+        */
+
+        public Break()
+            : this(0)
+        { }
+
+        public Break(int PC)
+            : base(PC)
+        {
         }
     }
 }
