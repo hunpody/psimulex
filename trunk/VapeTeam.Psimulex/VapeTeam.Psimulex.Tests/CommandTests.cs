@@ -191,8 +191,7 @@ namespace VapeTeam.Psimulex.Tests
                     new Pop(1),
                     new Pop(2),
                     new Pop(3),
-                //new Declare("s", TypeEnum.String),
-                //new Push("s", ValueAccessModes.LocalVariableReference),
+
                     new Push("ax", ValueAccessModes.Register),
                     new Call("print"),
                     new Push("bx", ValueAccessModes.Register),
@@ -223,6 +222,24 @@ namespace VapeTeam.Psimulex.Tests
                     ));
 
             Assert.AreEqual("32100123", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void ArrayDeclareCommand()
+        {
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
+                VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+
+                    new Push(4),
+                    new Push(2),
+                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
+                    new ArrayDeclare("a", TypeEnum.Integer, 1),
+                    new PushByReference("a"),
+                    new Select("size"),
+                    new Call("print")
+                ));
+
+            Assert.AreEqual("8", process.StandardOutput);
         }
     }
 }
