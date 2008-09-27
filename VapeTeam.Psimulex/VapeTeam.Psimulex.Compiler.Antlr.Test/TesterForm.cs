@@ -175,7 +175,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 " + sourceCodeTextEditorControl.Text.Replace("\"","\"\"") + @"
 "");
 
-            Assert.AreEqual(""" + resultTextBox.Text + @""", result);
+            Assert.AreEqual(@""" + resultTextBox.Text + @""", result);
         }
 ";
             StreamWriter sw;
