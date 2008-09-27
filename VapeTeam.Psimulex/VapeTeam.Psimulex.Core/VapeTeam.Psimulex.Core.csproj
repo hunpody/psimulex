@@ -121,6 +121,7 @@
     <Compile Include="Types\GraphNode.cs" />
     <Compile Include="Types\IIndexable.cs" />
     <Compile Include="Types\Integer.cs" />
+    <Compile Include="Types\Iterator.cs" />
     <Compile Include="Types\LinkedList.cs" />
     <Compile Include="Types\List.cs" />
     <Compile Include="Types\PriorityQueue.cs" />

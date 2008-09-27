@@ -47,6 +47,11 @@ namespace VapeTeam.Psimulex.Core.Types
             return ListIndexing(rep, index);
         }
 
+        protected override System.Collections.IEnumerable GetAsEnumerable()
+        {
+            return rep;
+        }
+
         /// <summary>
         /// Resizes the array. Inserts new baseTypes or removes from the end.
         /// </summary>
