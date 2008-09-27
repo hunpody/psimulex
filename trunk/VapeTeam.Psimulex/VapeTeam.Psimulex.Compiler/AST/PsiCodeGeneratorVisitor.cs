@@ -298,10 +298,29 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(BlockNode node) { VisitChildren(node); }
         public void Visit(StatementNode node) { VisitChildren(node); }
 
-        public void Visit(IfStatementNode node) { VisitChildren(node); }
+        public void Visit(IfStatementNode node)
+        {
+            // IfBranch
+            node.IfBranch.Accept(this);
+
+            // ElseIfBranchList
+            foreach (IPsiNode child in node.ElseIfBranchList)
+                child.Accept(this);
+
+            // Else Branch
+            node.ElseBranch.Accept(this);
+        }
+
         public void Visit(IfBranchNode node) { VisitChildren(node); }
         public void Visit(ElseIfBranchNode node) { VisitChildren(node); }
-        public void Visit(ElseBranchNode node) { VisitChildren(node); }
+        public void Visit(ElseBranchNode node) 
+        {
+            // AddCommand( new PushState() );
+
+            node.
+
+            // AddCommand( new PopState() );
+        }
 
         public void Visit(PForStatementNode node)
         { 
