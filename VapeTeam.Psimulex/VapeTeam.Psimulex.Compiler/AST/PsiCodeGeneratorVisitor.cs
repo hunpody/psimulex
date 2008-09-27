@@ -98,6 +98,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private System.Collections.Generic.Stack<Jump> lazyEvaluationJumpStack;
         private System.Collections.Generic.Stack<Jump> jumpStack;
 
+        private int conditionCount;
+
         private void InitHelpers()
         {
             lastCompiledMember = new Member();
@@ -116,6 +118,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             lazyEvaluationJumpStack = new System.Collections.Generic.Stack<Jump>();
             jumpStack = new System.Collections.Generic.Stack<Jump>();
+
+            conditionCount = 0;
         }
 
         private string SplitQuotes(string s)
@@ -123,6 +127,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if (s[0] == '\'' || s[0] == '\"')
                 return s.Substring(1, s.Length - 2);
             return s;
+        }
+
+        private void SetUpTopJumpInJumpStack()
+        {
+            Jump jmp = jumpStack.Pop();
+            jmp.PC = ProgramSize - GetCommandIndex(jmp);
         }
 
 
@@ -300,24 +310,70 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(IfStatementNode node)
         {
+            // The Count of the conditionJumps pushed in the jumpStack
+            conditionCount = 0;
+
             // IfBranch
             node.IfBranch.Accept(this);
 
             // ElseIfBranchList
-            foreach (IPsiNode child in node.ElseIfBranchList)
-                child.Accept(this);
+            if( node.ElseIfBranchList != null )
+                foreach (IPsiNode child in node.ElseIfBranchList)
+                    child.Accept(this);
 
             // Else Branch
-            node.ElseBranch.Accept(this);
+            if(node.ElseBranch != null)
+                node.ElseBranch.Accept(this);
+
+            // Set up PC of all conditionJump to the end of the IfStatement
+            for (int i = 0; i < conditionCount; i++)
+                SetUpTopJumpInJumpStack();
         }
 
+        public void Visit(ConditionalBranchNode node)
+        {
+            // AddCommand( new PushState() );
+
+            node.ConditionalBranchCondition.Accept(this);
+
+            RelativeJumpIfFalse falseConditionJump = new RelativeJumpIfFalse(0);
+            AddCommand(falseConditionJump);
+            jumpStack.Push(falseConditionJump);
+
+            // IfCore
+            node.ConditionalBranchCore.Accept(this);
+
+            // This will jump to the end of the IfStatement
+            RelativeJump toEndJump = new RelativeJump(0);
+            AddCommand(toEndJump);
+
+            // Pop all Break command from the jumpStack
+            System.Collections.Generic.Stack<Jump> tempBreakStack = new System.Collections.Generic.Stack<Jump>();
+
+            while (jumpStack.Count != 0 && jumpStack.Peek().GetType() == (new Break()).GetType() /*&& !(jumpStack.Peek() as Break).IsSettedUp*/)
+                tempBreakStack.Push(jumpStack.Pop());
+
+            SetUpTopJumpInJumpStack();
+
+            // Push all Break back to the jumpStack
+            while (tempBreakStack.Count != 0) jumpStack.Push(tempBreakStack.Pop());
+
+            // Push the falseConditionJump to set up PC later
+            jumpStack.Push(toEndJump);
+            conditionCount++;
+
+            // AddCommand( new PopState() );
+        }
+        
         public void Visit(IfBranchNode node) { VisitChildren(node); }
         public void Visit(ElseIfBranchNode node) { VisitChildren(node); }
+
         public void Visit(ElseBranchNode node) 
         {
             // AddCommand( new PushState() );
 
-            //node.
+            // ElseCore
+            node.Left.Accept(this);
 
             // AddCommand( new PopState() );
         }
@@ -330,7 +386,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(ForStatementNode node) 
         {
-            // Itt mentjük el az állapotot ( Simulexben Volt És most ? )
             // AddCommand(new PushState());
 
             // ForInitialization
@@ -341,9 +396,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // ForCondition
             node.ForCondition.Accept(this);
 
-            RelativeJumpIfFalse dj = new RelativeJumpIfFalse(0);
-            AddCommand(dj);
-            jumpStack.Push(dj);
+            RelativeJumpIfFalse rj = new RelativeJumpIfFalse(0);
+            AddCommand(rj);
+            jumpStack.Push(rj);
 
             // ForCore
             node.ForCore.Accept(this);
@@ -354,17 +409,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Jump To The ForCondition
             AddCommand(new RelativeJump(conditionAddress - ProgramSize));
 
-            // A blokkban előforduló breakokat címzi a blokk utánra
-            while (jumpStack.Peek().GetType() == (new Break()).GetType() && !(jumpStack.Peek() as Break).IsSettedUp)
-            {
-                Break br = (jumpStack.Pop() as Break);
-                br.JumpSize = ProgramSize - GetCommandIndex(br);
-            }
+            // Pop all Break from the jumpStack and set up it's PC to the end of the block
+            while (jumpStack.Peek().GetType() == (new Break()).GetType() /*&& !(jumpStack.Peek() as Break).IsSettedUp*/)
+                SetUpTopJumpInJumpStack();
 
-            Jump jmp = jumpStack.Pop();
-            jmp.PC = ProgramSize - GetCommandIndex(jmp);
-
-            // Itt állítjuk visza az állípotot és takarítunk ( Simulexben Volt És most ? )
+            SetUpTopJumpInJumpStack();
+            
             // AddCommand(new PopState());
         }
         public void Visit(ForInitializationNode node) { VisitChildren(node); }

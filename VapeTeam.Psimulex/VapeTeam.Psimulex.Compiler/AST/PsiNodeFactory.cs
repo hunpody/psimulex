@@ -83,19 +83,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
                         ElseIfBranchList = children.Count > 2 ? children.GetRange(1, children.Count - 2) : null,
                         ElseBranch = children[children.Count - 1]                        
                     }; v = true; break;
-                case NodeType.IfBranch:
-                    node = new IfBranchNode
+                case NodeType.IfBranch: node = new IfBranchNode(); v = true; break;
+                case NodeType.ElseIfBranches: node = new ElseIfBranchNode(); v = true; break;
+                case NodeType.ConditionalBranch:
+                    node = new ConditionalBranchNode
                     {
-                        IfCondition = children[0],
-                        IfCore = children[1]                         
+                        ConditionalBranchCondition = children[0],
+                        ConditionalBranchCore = children[1]
                     }; v = true; break;
-                case NodeType.ElseIfBranch:
-                    node = new ElseIfBranchNode
-                    {
-                        ElseIfCondition = children[0],
-                        ElseIfCore = children[1]
-                    }; v = true; break;
-
                 case NodeType.ElseBranch: node = new ElseBranchNode(); v = true; break;
                 case NodeType.DoStatement:
                     node = new DoStatementNode

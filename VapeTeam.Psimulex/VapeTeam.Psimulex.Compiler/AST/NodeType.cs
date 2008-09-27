@@ -33,7 +33,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
 	    IfStatement,
 	    IfBranch,
-	    ElseIfBranch,
+	    ElseIfBranches,
+        ConditionalBranch,
 	    ElseBranch,
 
         DoStatement,
