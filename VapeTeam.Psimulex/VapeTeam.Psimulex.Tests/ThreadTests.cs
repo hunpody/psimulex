@@ -172,7 +172,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void ScheduleSimpleProgramHasNoOverhead()
         {
-            // Assuem that Push's operation cost is 1
+            // Assume that Push's operation cost is 1
             var program =
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                 new Push(0),
