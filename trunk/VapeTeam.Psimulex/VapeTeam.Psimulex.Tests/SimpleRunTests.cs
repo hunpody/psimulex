@@ -148,6 +148,25 @@ namespace VapeTeam.Psimulex.Tests
         }
 
         [TestMethod]
+        public void HelloWorld6_UppercaseFunctionNames()
+        {
+            var process =
+                Helpers.SystemHelper.CreateMachineAndRunProgram(VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push("Hello "),
+                new Initialize("s"),
+                new Push("world!"),
+                new Initialize("s2"),
+                new Push("s", ValueAccessModes.LocalVariableReference),
+                new Push("s2", ValueAccessModes.LocalVariableReference),
+                new Call("coNCat"),
+                new Push("Hello world!"),
+                new Compare(Compare.ComparisonModes.Equal),
+                new Call("Print")));
+
+            Assert.AreEqual("True", process.StandardOutput);
+        }
+
+        [TestMethod]
         public void RunStackSizeIsGood()
         {
             var process =

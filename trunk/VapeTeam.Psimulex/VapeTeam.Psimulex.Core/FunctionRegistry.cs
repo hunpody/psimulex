@@ -11,22 +11,24 @@ namespace VapeTeam.Psimulex.Core
 
         public void Add(SystemFunction systemFunction)
         {
-            if (map.ContainsKey(systemFunction.Name))
+            string functionName = systemFunction.Name.ToLower();
+            if (map.ContainsKey(functionName))
             {
                 //throw new PsimulexCoreException(
                 //    string.Format("System function with name {0} already defined.", systemFunction.Name));
             }
             else
             {
-                map.Add(systemFunction.Name, systemFunction);
+                map.Add(functionName, systemFunction);
             }
         }
 
         public SystemFunction GetFunction(Function function)
         {
-            if (map.ContainsKey(function.Name))
+            string functionName = function.Name.ToLower();
+            if (map.ContainsKey(functionName))
             {
-                return map[function.Name];
+                return map[functionName];
             }
             else
             {
