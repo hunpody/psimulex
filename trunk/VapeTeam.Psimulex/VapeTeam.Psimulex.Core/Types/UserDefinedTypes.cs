@@ -24,15 +24,8 @@ namespace VapeTeam.Psimulex.Core.Types
     /// This is Simpli a List of User Defined Types.
     /// Create one for each Program.
     /// </summary>
-    public class UserDefinedTypes
+    public class UserDefinedTypes : Dictionary<string,UserDefinedType>
     {
-        Dictionary<string,UserDefinedType> UserDefinedTypeDictionary { get; set; }
-
-        public UserDefinedTypes()
-        {
-            UserDefinedTypeDictionary = new Dictionary<string, UserDefinedType>();
-        }
-
         /// <summary>
         /// Created Instance can assigned as a BaseType.
         /// </summary>
@@ -40,9 +33,9 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <returns>An "instance" of an user type.</returns>
         public UserDefinedType CreatAnInstanceOf(string typeName)
         {
-            if (!UserDefinedTypeDictionary.ContainsKey(typeName))
+            if (!this.ContainsKey(typeName))
                 throw new UserDefinedTypeException(string.Format("Type {0} not defined!", typeName));
-            return UserDefinedTypeDictionary[typeName].Clone() as UserDefinedType;
+            return this[typeName].Clone() as UserDefinedType;
         }
     }
 
@@ -129,17 +122,14 @@ namespace VapeTeam.Psimulex.Core.Types
         }
     }
 
-
-
-
     /// <summary>
     /// Just for joke/thinking at this time.
     /// </summary>
     public class Class : UserDefinedType
     {     
-        public class Function
+        public class ClassFunction
         {
-            public class Parameter
+            public class FunctionParameter
             {
                 public string Name { get; set; }
                 public TypeEnum Type { get; set; }
@@ -149,7 +139,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
             public string Name { get; set; }
             
-            public List<Parameter> ParameterList { get; set; }
+            public List<FunctionParameter> ParameterList { get; set; }
             public TypeEnum ReturnType { get; set; }
             public string ReturnTypeName { get; set; }
             public bool ReturnTypeIsReference { get; set; }
@@ -159,7 +149,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public string ParentClassName { get; set; }
         public Dictionary<string, Attribute> Attributes { get; set; }
-        public Dictionary<string, Function> Functions { get; set; }
+        public Dictionary<string, ClassFunction> Functions { get; set; }
 
         public override Attribute this[string name]
         {
