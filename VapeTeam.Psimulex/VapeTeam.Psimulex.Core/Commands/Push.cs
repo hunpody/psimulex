@@ -24,7 +24,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             switch (AccessMode)
             {
                 case ValueAccessModes.Constant:
-                    context.RunStack.Push(value);
+                    context.RunStack.Push(value.Clone());
                     break;
                 case ValueAccessModes.LocalVariable:
                     context.RunStack.Push(context.GetVariable(name).Clone());
