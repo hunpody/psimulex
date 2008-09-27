@@ -8,10 +8,12 @@ namespace VapeTeam.Psimulex.Core.Libraries
     public class StandardLibrary : ILibrary
     {
         public ISystemContext System { get; set; }
+        public Random Random { get; set; }
 
         public StandardLibrary(ISystemContext context)
         {
             System = context;
+            Random = new Random();
         }
 
         /// <summary>
@@ -47,5 +49,35 @@ namespace VapeTeam.Psimulex.Core.Libraries
         {
             return System.CreateThread(System.CallingThread, entryPoint);
         }
+
+        #region Tool Functions
+
+        public int IntRandom(int min, int max)
+        {
+            return Random.Next(min, max);
+        }
+
+        public Decimal DecimalRandom()
+        {
+            return Convert.ToDecimal(Random.NextDouble());
+        }
+
+        public void Swap( ref int a, ref int b)
+        {
+            int tmp = a;
+            a = b;
+            b = tmp;
+        }
+
+        public int[] GenerateRandomIntArray(int length, int min, int max)
+        {
+            int[] array = new int[length];
+            for (int i = 0; i < length; i++)
+                array[i] = Random.Next(min, max);
+
+            return array;
+        }
+
+        #endregion
     }
 }

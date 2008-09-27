@@ -224,6 +224,147 @@ for(int i = 0;i<10;++i++)
 
 
 
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_15_24_19()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+if(true)
+{
+print(""if"");
+}
+elseif(false)
+{
+print(""elseif1"");
+}
+elseif(false)
+{
+print(""elseif2"");
+}
+else
+{
+print(""else"");
+}
+");
+
+            Assert.AreEqual(@"if", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_15_24_27()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+if(false)
+{
+print(""if"");
+}
+elseif(true)
+{
+print(""elseif1"");
+}
+elseif(false)
+{
+print(""elseif2"");
+}
+else
+{
+print(""else"");
+}
+");
+
+            Assert.AreEqual(@"elseif1", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_15_24_43()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+if(false)
+{
+print(""if"");
+}
+elseif(false)
+{
+print(""elseif1"");
+}
+elseif(true)
+{
+print(""elseif2"");
+}
+else
+{
+print(""else"");
+}
+");
+
+            Assert.AreEqual(@"elseif2", result);
+        }
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_15_24_57()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+if(false)
+{
+print(""if"");
+}
+elseif(false)
+{
+print(""elseif1"");
+}
+elseif(false)
+{
+print(""elseif2"");
+}
+else
+{
+print(""else"");
+}
+");
+
+            Assert.AreEqual(@"else", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_15_27_50()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+for(int i = 0; i < 10; i++)
+	if( i == 5 )
+		break;
+");
+
+            Assert.AreEqual(@"", result);
+        }
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_27_15_28_21()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+for(int i = 0; i < 10; i++)
+{
+	print(i);
+	if( i == 5 )
+	{
+		print(""break"");
+		break;
+	}
+}
+");
+
+            Assert.AreEqual(@"012345break", result);
+        }
+
+
+
         #endregion
     }
 }
