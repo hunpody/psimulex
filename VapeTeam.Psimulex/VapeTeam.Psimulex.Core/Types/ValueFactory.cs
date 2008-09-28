@@ -149,6 +149,10 @@ namespace VapeTeam.Psimulex.Core.Types
                 /*BuiltIn Types*/
                 case TypeEnum.List:
                     return new List();
+                case TypeEnum.Stack:
+                    return new Stack();
+                case TypeEnum.Queue:
+                    return new Queue();
                 default:
                     throw new Exceptions.PsimulexCoreException(string.Format("Cannot create value of type {0}.", type));
             }

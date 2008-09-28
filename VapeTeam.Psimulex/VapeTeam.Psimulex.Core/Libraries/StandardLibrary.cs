@@ -78,6 +78,16 @@ namespace VapeTeam.Psimulex.Core.Libraries
             return array;
         }
 
+        public void Write(string s)
+        {
+            Print(s + " ");
+        }
+
+        public void WriteLine(string s)
+        {
+            Print(s + "\r\n");
+        }
+
         #endregion
     }
 }

@@ -65,5 +65,22 @@ namespace VapeTeam.Psimulex.Core.Types
         }
 
         #endregion
+
+        #region Clear
+
+        public void Delete() { Clear(); }
+        public void Empty() { Clear(); }
+        public virtual void Clear() 
+        {
+            throw new Exceptions.InvalidOperationException(); 
+        }        
+
+        #endregion
+
+        #region IsEmpty
+
+        public bool IsEmpty { get { return Size == 0 ? true : false; } }
+
+        #endregion
     }
 }
