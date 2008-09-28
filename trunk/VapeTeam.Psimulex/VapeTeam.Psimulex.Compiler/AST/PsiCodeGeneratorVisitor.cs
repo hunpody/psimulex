@@ -528,7 +528,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // ForEachCollectionExpression, IteratorInitialization
             node.ForEachCollectionExpression.Accept(this);
-            AddCommand(new CallMethod("GetAsEnumerable"));            
+            AddCommand(new CallMethod("GetIterator"));            
             string iteratorName = GenerateIteratorName();
             AddCommand(new Initialize(iteratorName, TypeEnum.Iterator));
 

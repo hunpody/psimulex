@@ -589,6 +589,23 @@ ELSE
 
 
 
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_28_18_24_20()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+list L;
+L.Insert(0);
+L.Insert(1);
+L.Insert(2);
+
+foreach( int i in L )
+	print(i);
+");
+
+            Assert.AreEqual(@"012", result);
+        }
+
+
         #endregion
     }
 }
