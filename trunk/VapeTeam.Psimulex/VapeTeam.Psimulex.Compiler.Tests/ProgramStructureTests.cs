@@ -605,7 +605,31 @@ foreach( int i in L )
             Assert.AreEqual(@"012", result);
         }
 
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_28_19_06_53()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+list L;
 
+for(int i = 0; i < 10; ++i)
+	L.Insert(i);
+
+foreach( int i in L )
+	print(i);
+
+print(""\n"");
+
+iterator it=L.getiterator();
+while(it.movenext())
+{
+	int i=it.current();
+	print(i);
+}
+");
+
+            Assert.AreEqual(@"0123456789
+0123456789", result);
+        }
         #endregion
     }
 }

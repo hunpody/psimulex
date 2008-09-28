@@ -38,6 +38,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case "edge": return TypeEnum.Edge;
         
                 /*Other*/
+                case "iterator": return TypeEnum.Iterator;                
                 case "thread": return TypeEnum.Thread;
                 case "timer": return TypeEnum.Timer;
 
