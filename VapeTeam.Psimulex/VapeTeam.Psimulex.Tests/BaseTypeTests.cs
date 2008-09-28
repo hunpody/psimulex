@@ -671,8 +671,8 @@ namespace VapeTeam.Psimulex.Tests
                     // for (i=0;i<5;++i) print(a[i]);
                     new Push(0),
                     new Initialize("i"),
-                    new Push("a", ValueAccessModes.LocalVariableReference),
                     new Push("i", ValueAccessModes.LocalVariableReference),
+                    new Push("a", ValueAccessModes.LocalVariableReference),
                     new Indexing(),
                     new Call("print"),
                     new Push("i", ValueAccessModes.LocalVariableReference),
@@ -766,8 +766,8 @@ namespace VapeTeam.Psimulex.Tests
                     //// for (i=0;i<a.Size;++i) print(a[i]);
                     new Push(0),
                     new Initialize("i"),
-                    new Push("a", ValueAccessModes.LocalVariableReference),
                     new Push("i", ValueAccessModes.LocalVariableReference),
+                    new Push("a", ValueAccessModes.LocalVariableReference),                    
                     new Indexing(),
                     new Call("print"),
                     new Push("i", ValueAccessModes.LocalVariableReference),
@@ -796,8 +796,8 @@ namespace VapeTeam.Psimulex.Tests
 
                     new Push(0),
                     new Initialize("i"),
-                    new Push("a", ValueAccessModes.LocalVariableReference),
                     new Push("i", ValueAccessModes.LocalVariableReference),
+                    new Push("a", ValueAccessModes.LocalVariableReference),                    
                     new Indexing(),
                     new Call("print"),
                     new Push("i", ValueAccessModes.LocalVariableReference),
@@ -845,8 +845,8 @@ namespace VapeTeam.Psimulex.Tests
                     // for (int i=0;i<3;++i) print(L[i]);
                     new Push(0),
                     new Initialize("i"),
-                    new Push("L", ValueAccessModes.LocalVariableReference),
                     new Push("i", ValueAccessModes.LocalVariableReference),
+                    new Push("L", ValueAccessModes.LocalVariableReference),                    
                     new Indexing(),
                     new Call("print"),
                     new Push("i", ValueAccessModes.LocalVariableReference),
@@ -902,8 +902,8 @@ namespace VapeTeam.Psimulex.Tests
                     // for (i=0; i<L.Size; ++i) print(L[i]);
                     new Push(0),
                     new Initialize("i"),
-                    new Push("L", ValueAccessModes.LocalVariableReference),
                     new Push("i", ValueAccessModes.LocalVariableReference),
+                    new Push("L", ValueAccessModes.LocalVariableReference),                    
                     new Indexing(),
                     new Call("print"),
                     new Push("i", ValueAccessModes.LocalVariableReference),

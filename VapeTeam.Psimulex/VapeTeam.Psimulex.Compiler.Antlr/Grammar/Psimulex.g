@@ -44,7 +44,8 @@ tokens {
 	
 	PFOREACHSTATEMENT;
 	FOREACHSTATEMENT;
-	FOREACHCONTROL;
+	FOREACHINIT;
+	FOREACHCOLLECTION;
 
 	LOOPSTATEMENT;
 	LOOPINIT;
@@ -522,7 +523,7 @@ pForEachStatement	:	PForEach forEachTrailer -> ^( PFOREACHSTATEMENT forEachTrail
 forEachStatement	:	ForEach forEachTrailer -> ^( FOREACHSTATEMENT forEachTrailer );
 forEachTrailer		:	'('! forEachControl ')'! core;  
 forEachControl			options {k=3;} // Emiatt kellene (ID ID in ID)
-    				:   type Identifier In expression -> ^( FOREACHCONTROL type expression );
+    				:   type Identifier In expression -> ^( FOREACHINIT type  Identifier ) ^( FOREACHCOLLECTION expression );
 
 loopStatement		:	Loop '(' loopControl ')' core -> ^( LOOPSTATEMENT loopControl core ); 
 loopControl				options {k=3;} // Emiatt kellene (ID ID to ID)
