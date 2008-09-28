@@ -126,22 +126,23 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case NodeType.PForEachStatement:
                     node = new PForEachStatementNode
                     {
-                        PForEachControl = children[0],
-                        PForEachCore = children[1]                     
+                        PForEachIteratorType = children[0].Left,
+                        PForEachIteratorName = children[0].Right,
+                        PForEachInitialization = children[0],
+                        PForEachCollectionExpression = children[1],
+                        PForEachCore = children[2],                  
                     }; v = true; break;
                 case NodeType.ForEachStatement:
                     node = new ForEachStatementNode
                     {
-                        ForEachControl = children[0],
-                        ForEachCore = children[1]
+                        ForEachRunningVariableType = children[0].Left,
+                        ForEachRunningVariableName = children[0].Right,                  
+                        ForEachInitialization = children[0],
+                        ForEachCollectionExpression = children[1],
+                        ForEachCore = children[2],
                     }; v = true; break;
-                case NodeType.ForEachControl:
-                    node = new ForEachControlNode
-                    {
-                        ForEachIteratorType = children[0],
-                        ForEachIteratorName = children[1],
-                        ForEachCollectionExpression = children[2]
-                    }; v = true; break;
+                case NodeType.ForEachInitialization: node = new ForEachInitializationNode(); v = true; break;
+                case NodeType.ForEachCollectionExpression: node = new ForEachCollectionExpressionNode(); v = true; break;
                 case NodeType.LoopStatement:
                     node= new LoopStatementNode
                     {

@@ -17,18 +17,19 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public override void Do(ICommandContext context)
         {
-            int index = this.index;
-            if (!initializedWithIndex)
-            {
-                index = context.RunStack.Pop().ToInt32();
-            }
-
             var value = context.RunStack.Pop();
             var container = value as IIndexable;
             if (container == null)
             {
                 throw new Exceptions.PsimulexCoreException(string.Format("Cannot index {0}.", value.GetTypeName()));
             }
+
+            int index = this.index;
+            if (!initializedWithIndex)
+            {
+                index = context.RunStack.Pop().ToInt32();
+            }
+
             context.RunStack.Push(container.Index(index).ToReference());
         }
 

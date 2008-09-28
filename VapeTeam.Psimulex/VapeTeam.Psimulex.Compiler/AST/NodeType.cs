@@ -48,7 +48,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
     	
 	    PForEachStatement,
 	    ForEachStatement,
-	    ForEachControl,
+	    ForEachInitialization,
+        ForEachCollectionExpression,
 
 	    LoopStatement,
 	    LoopInitialization,
