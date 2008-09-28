@@ -273,25 +273,26 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class ForUpdateNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class PForEachStatementNode : PsiNode
     {
-        public IPsiNode PForEachControl { get; set; }
+        public IPsiNode PForEachIteratorType { get; set; }
+        public IPsiNode PForEachIteratorName { get; set; }
+        public IPsiNode PForEachInitialization { get; set; }
+        public IPsiNode PForEachCollectionExpression { get; set; }
         public IPsiNode PForEachCore { get; set; }
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
 
     public class ForEachStatementNode : PsiNode
     {
-        public IPsiNode ForEachControl { get; set; }
+        public IPsiNode ForEachRunningVariableType { get; set; }
+        public IPsiNode ForEachRunningVariableName { get; set; }
+        public IPsiNode ForEachInitialization { get; set; }
+        public IPsiNode ForEachCollectionExpression { get; set; }
         public IPsiNode ForEachCore { get; set; }
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
 
-    public class ForEachControlNode : PsiNode
-    {
-        public IPsiNode ForEachIteratorType { get; set; }
-        public IPsiNode ForEachIteratorName { get; set; }
-        public IPsiNode ForEachCollectionExpression { get; set; }
-        public override void Accept(IPsiVisitor v) { v.Visit(this); }
-    }
+    public class ForEachInitializationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class ForEachCollectionExpressionNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
     public class LoopStatementNode : PsiNode
     {

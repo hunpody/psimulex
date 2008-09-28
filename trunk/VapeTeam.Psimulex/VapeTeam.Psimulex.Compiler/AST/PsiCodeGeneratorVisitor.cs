@@ -84,7 +84,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private Member lastCompiledMember;
 
         private TypeEnum lastCompiledDataType;
-        private string lastCompiledUserDefinedDataType;
+        private string lastCompiledUserDefinedDataTypeName;
 
         private int lastCompiledDimensionCount;
         private List<int> lastCompiledDimensionList;
@@ -99,6 +99,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private bool operatorIsPrefixUnary;
 
         private bool isCompilingAssignmentTarget;
+
+        private bool selectorsFirstCompile;
 
         private System.Collections.Generic.Stack<Jump> lazyEvaluationJumpStack;
         private System.Collections.Generic.Stack<Jump> jumpStack;
@@ -121,6 +123,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             operatorIsPrefixUnary = false;
 
+            selectorsFirstCompile = true;
+
             lazyEvaluationJumpStack = new System.Collections.Generic.Stack<Jump>();
             jumpStack = new System.Collections.Generic.Stack<Jump>();
 
@@ -132,6 +136,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if (s[0] == '\'' || s[0] == '\"')
                 return s.Substring(1, s.Length - 2);
             return s;
+        }
+
+        private string GenerateIteratorName()
+        {
+            return string.Format("iterator_{0}", DateTime.Now.ToShortTimeString().Replace(":", "_").Replace(" ", "_").Replace(".", "_"));
         }
 
         private void SetUpTopJumpInJumpStack(int corrigation)
@@ -500,8 +509,61 @@ namespace VapeTeam.Psimulex.Compiler.AST
             throw new NotImplementedException("PForEach is not implemented yet.");
         }
 
-        public void Visit(ForEachStatementNode node) { VisitChildren(node); }
-        public void Visit(ForEachControlNode node) { VisitChildren(node); }
+        public void Visit(ForEachStatementNode node)
+        {
+            // AddCommand(new PushState());
+
+            // ForEachRunningVariableType
+            node.ForEachRunningVariableType.Accept(this);
+
+            // If this is UserDefined, then use lastCompiledUserDefinedDataTypeName
+            TypeEnum forEachRunningVariableType = lastCompiledDataType;
+            string forEachRunningVariableTypeName = lastCompiledUserDefinedDataTypeName;
+
+            // IteratorVariableName
+            string forEachRunningVariableName = node.ForEachRunningVariableName.Value;
+
+            // IteratorVariableDeclaration
+            AddCommand(new Declare(forEachRunningVariableName, forEachRunningVariableType));
+
+            // ForEachCollectionExpression, IteratorInitialization
+            node.ForEachCollectionExpression.Accept(this);
+            AddCommand(new CallMethod("GetAsEnumerable"));            
+            string iteratorName = GenerateIteratorName();
+            AddCommand(new Initialize(iteratorName, TypeEnum.Iterator));
+
+            int conditionAddress = ProgramSize;
+
+            // ForEachCondition
+            AddCommand(new Push(iteratorName, ValueAccessModes.LocalVariableReference));
+            AddCommand(new CallMethod("MoveNext"));
+
+            RelativeJumpIfFalse rj = new RelativeJumpIfFalse(0);
+            AddCommand(rj);
+            jumpStack.Push(rj);
+
+            // ForEachUpdate
+            AddCommand(new Push(forEachRunningVariableName, ValueAccessModes.LocalVariableReference));
+            AddCommand(new Push(iteratorName, ValueAccessModes.LocalVariable));
+            AddCommand(new CallMethod("Current"));
+            AddCommand(new Assign(false));
+
+            // ForEachCore
+            node.ForEachCore.Accept(this);
+
+            AddCommand(new RelativeJump( conditionAddress - ProgramSize));
+
+            // Pop all Break from the jumpStack and set up it's PC to the end of the block
+            while (jumpStack.Peek().GetType() == (new Break()).GetType())
+                SetUpTopJumpInJumpStack(0);
+
+            SetUpTopJumpInJumpStack(0);
+
+            // AddCommand(new PopState());
+        }
+
+        public void Visit(ForEachInitializationNode node) { VisitChildren(node); }
+        public void Visit(ForEachCollectionExpressionNode node) { VisitChildren(node); }
 
         public void Visit(LoopStatementNode node) 
         {
@@ -598,7 +660,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // If this is UserDefined, than use lastCompiledUserDefinedDataType
             TypeEnum varType = lastCompiledDataType;
 
-            string varTypeName = lastCompiledUserDefinedDataType;
+            string varTypeName = lastCompiledUserDefinedDataTypeName;
             bool varArrayIsDynamic = lastCompiledArrayIsDynamic;
             int varDimensionCount = lastCompiledDimensionCount;
 
@@ -632,10 +694,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Type
             node.VariableType.Accept(this);
 
-            // If this is UserDefined, then use lastCompiledUserDefinedDataType
+            // If this is UserDefined, then use lastCompiledUserDefinedDataTypeName
             TypeEnum varType = lastCompiledDataType;
 
-            string varTypeName = lastCompiledUserDefinedDataType;
+            string varTypeName = lastCompiledUserDefinedDataTypeName;
             bool varArrayIsDynamic = lastCompiledArrayIsDynamic;
             int varDimensionCount = lastCompiledDimensionCount;
 
@@ -1013,34 +1075,50 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(SelectorNode node)
         {
+            // SelectorList Compile Parameters
+            selectorsFirstCompile = true;
+            node.SelectorList.Reverse();
+            foreach (IPsiNode child in node.SelectorList)
+                child.Accept(this);
+
             // SelectorOperand
             node.SelectorOperand.Accept(this);
 
-            // SelectorList
+            // SelectorList Compile Selectors
+            selectorsFirstCompile = false;
+            node.SelectorList.Reverse();
             foreach (IPsiNode child in node.SelectorList)
                 child.Accept(this);
         }
 
         public void Visit(MemberSelectNode node)
         {
-            // MemberName
-            string memberName = node.Left.Value;
+            if (!selectorsFirstCompile)
+            {
+                // MemberName
+                string memberName = node.Left.Value;
 
-            // MemberSelect
-            AddCommand(new Select(memberName));
+                // MemberSelect
+                AddCommand(new Select(memberName));
+            }
         }
 
         public void Visit(MemberFunctionCallNode node)
         {
-            // Name
-            string memberFunctionName = node.MemberFunctionName.Value;
+            if (selectorsFirstCompile)
+            {
+                // Arguments
+                foreach (IPsiNode child in node.MemberFunctionArgumentList)
+                    child.Accept(this);
+            }
+            else
+            {
+                // Name
+                string memberFunctionName = node.MemberFunctionName.Value;
 
-            // Arguments
-            foreach (IPsiNode child in node.MemberFunctionArgumentList)
-                child.Accept(this);
-
-            // MemberFunctionCall
-            AddCommand(new CallMethod(memberFunctionName));
+                // MemberFunctionCall
+                AddCommand(new CallMethod(memberFunctionName));
+            }
         }
 
         public void Visit(FunctionCallNode node)
@@ -1059,17 +1137,22 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(ArgumentsNode node) { VisitChildren(node); }
         public void Visit(IndexingNode node)
         {
-            // Concret Indexis
-            VisitChildren(node);
-
-            // Dimension Number
-            int dim = node.Children.Count;
-
-            // Indexing
-            if(dim > 1)
-                throw new PsiCodeGeneratorVisitorException("More than one dimension array indexing is not supported yet!");
+            if (selectorsFirstCompile)
+            {
+                // Concret Indexis
+                VisitChildren(node);
+            }
             else
-                AddCommand(new Indexing());
+            {
+                // Dimension Number
+                int dim = node.Children.Count;
+
+                // Indexing
+                if (dim > 1)
+                    throw new PsiCodeGeneratorVisitorException("More than one dimension array indexing is not supported yet!");
+                else
+                    AddCommand(new Indexing());
+            }
         }
 
         public void Visit(DimensionsNode node)
@@ -1186,7 +1269,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(DataTypeNode node)
         {
             lastCompiledDataType = TypeEnumFactory.CreateTypeEnum(node.Left.Value);
-            lastCompiledUserDefinedDataType = node.Left.Value;
+            lastCompiledUserDefinedDataTypeName = node.Left.Value;
 
             lastCompiledDimensionCount = 0;
             lastCompiledDimensionList = new List<int>();
