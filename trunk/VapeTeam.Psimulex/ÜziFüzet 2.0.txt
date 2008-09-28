@@ -219,3 +219,35 @@ Erre nem emel sort, mert ugye \r\n kéne.
 Lehet, hogy, felveszem a nyelvtanba a \r -t is, de igazából nincs szerepe.
 
 - Fordul a : VarInit,Vardec,intliteral,charliteral,stringliteral,functionvcall.
+
+
+2008. Szeptember 28. - Vari
+
+Megrendelõ Lista :-)
+( A Fontossági csoportok, csak kb-ra vannak, inkább az egészet egybe nézd. )
+
+Fontosabb :
+-----------
+
+- Szeretnék olyaít, hgoy a reflectionos dolog tudjon referencia szerint mûködni (SWAP fv)
+- A felhasználó álltal definiált FV -ek beröcentése ( Írtam rá pár osztályt )
+
+Közepesen Fontos :
+------------------
+
+- Rekordok Beröccentése
+- Paraméterszám alapján túlterhelhetõ fv -ek
+
+Kevésbé fontos :
+----------------
+
+- Több Dimenziós tömb, Asszociatív tömb
+
+
+Egyéb Bug -ok :
+--------------
+
+- Mit lehet csinálni azzal, hogy az ANTLR nemszereti, ha a kulcsszavakat, használjuk fv névnek, vagy változónévnek ?
+  Ha van valami kulturált ötleted rá, akor vesed elõ.
+  Itt pl a Sor -nél találkoztam vele, mert akartam In,Out fv-eket csinálni és az In az fáj neki.
+  De persze ez nem nagy katasztrófa, ezért alacsony fontosságú.

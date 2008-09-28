@@ -39,19 +39,6 @@ namespace VapeTeam.Psimulex.Core.Commands
             this.initializedWithIndex = true;
         }
 
-        /*
-        private int dimension; 
-         
-        public Indexing(int dimension)
-        {
-            this.dimension = dimension;
-            // Annyit jelent, hogy dimension darab indexet kell kivennie a tömbből.
-        }
-        
-        // Csak egy gondolat, milenne, ha lenne asszociatív tömbünk, vagy Dictionary típusunk.
-        // Csak desszertnek :)
-        */
-
         public Indexing()
         {
         }
