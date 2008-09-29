@@ -22,6 +22,11 @@ namespace VapeTeam.Psimulex.Core.Types
         {
         }
 
+        public List(BaseType value)
+        {
+            rep.Add(value);
+        }
+
         #endregion
 
         #region Own Members
