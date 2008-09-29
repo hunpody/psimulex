@@ -172,7 +172,6 @@ namespace VapeTeam.Psimulex.Core.Types
             return this;
         }
 
-
         public override string ToString()
         {
             object obj = ToObject();
@@ -236,6 +235,72 @@ namespace VapeTeam.Psimulex.Core.Types
             if (obj != null)
                 return Convert.ToChar(obj);
             else return default(char);
+        }
+
+
+        public virtual Array ToArray()
+        {
+            return new Array(this.Clone());
+        }
+
+        public virtual List ToList()
+        {
+            return new List(this.Clone());
+        }
+
+        public virtual LinkedList ToLinkedList()
+        {
+            throw new PsimulexCoreException("Invalid operation");
+        }
+
+        public virtual Set ToSet()
+        {
+            throw new PsimulexCoreException("Invalid operation");
+        }
+
+        public virtual Stack ToStack()
+        {
+            return new Stack(this.Clone());
+        }
+
+        public virtual Queue ToQueue()
+        {
+            return new Queue(this.Clone());
+        }
+
+        public virtual PriorityQueue ToPriorityQueue()
+        {
+            throw new PsimulexCoreException("Invalid operation");
+        }
+
+        public virtual Graph ToGraph()
+        {
+            throw new PsimulexCoreException("Invalid operation");
+        }
+
+        public virtual GraphEdge ToGraphEdge()
+        {
+            throw new PsimulexCoreException("Invalid operation");
+        }
+
+        public virtual GraphNode ToGraphNode()
+        {
+            throw new PsimulexCoreException("Invalid operation");
+        }
+
+        public virtual Tree ToTree()
+        {
+            throw new PsimulexCoreException("Invalid operation");
+        }
+
+        public virtual BinaryTree ToBinaryTree()
+        {
+            throw new PsimulexCoreException("Invalid operation");
+        }
+
+        public virtual Iterator ToIterator()
+        {
+            throw new PsimulexCoreException(string.Format("Type {0} can't convert to Iterator!", TypeEnum.ToString()));
         }
 
         #endregion

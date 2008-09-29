@@ -35,6 +35,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public Array(BaseType value)
             : this(value.TypeEnum, 1)
         {
+            rep[0] = value;
         }
 
         public override TypeEnum TypeEnum
