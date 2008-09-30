@@ -21,7 +21,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public Set(BaseType value)
         {
-            rep.Add(value);
+            rep.Add(value.Clone());
         }
 
         public Set(BaseTypeList rep)
@@ -69,6 +69,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public override BaseType Index(int index) { return ListIndexing(rep, index); }
         public override int Size { get { return rep.Count; } }
         public override void Clear() { rep.Clear(); }
+        //public override BaseType Clone() { return new Set(rep); }
 
         #endregion
 

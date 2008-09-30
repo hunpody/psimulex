@@ -14,9 +14,13 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <returns></returns>
         public static BaseType Create(object value)
         {
-            if (value.GetType() == typeof(BaseType) || value.GetType().IsSubclassOf(typeof(BaseType)))
+            if (value == null)
             {
-                return (BaseType) value;
+                return new Null();
+            }
+            else if (value.GetType() == typeof(BaseType) || value.GetType().IsSubclassOf(typeof(BaseType)))
+            {
+                return (BaseType)value;
             }
             else if (value.GetType() == typeof(long))
             {
@@ -157,6 +161,11 @@ namespace VapeTeam.Psimulex.Core.Types
                     return new Queue();
                 case TypeEnum.PriorityQueue:
                     return new PriorityQueue();
+
+                case TypeEnum.Tree:
+                    return new Tree();
+                case TypeEnum.Null:
+                    return new Null();
                 default:
                     throw new Exceptions.PsimulexCoreException(string.Format("Cannot create value of type {0}.", type));
             }

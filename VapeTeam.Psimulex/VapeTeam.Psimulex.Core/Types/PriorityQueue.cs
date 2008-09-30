@@ -39,13 +39,13 @@ namespace VapeTeam.Psimulex.Core.Types
         public PriorityQueue(BaseType value)
         {
             rep.Clear();
-            Insert(new Integer(0), value);
+            Insert(new Integer(0), value.Clone());
         }
 
         public PriorityQueue(BaseTypeList rep)
         {
             this.rep.Clear();
-            rep.ForEach(item => this.Insert(new Integer(0), item ));
+            rep.ForEach(item => this.Insert(new Integer(0), item.Clone() ));
         }
 
         #endregion
@@ -145,6 +145,12 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override int Size { get { return rep.Count; } }
         public override void Clear() { rep.Clear(); }
+        //public override BaseType Clone()
+        //{
+        //    PriorityQueue pq = new PriorityQueue();
+        //    rep.ForEach(item => pq.Insert(item.Key.Clone(), item.Value.Clone()));
+        //    return pq;
+        //}
 
         #endregion
 
@@ -181,7 +187,7 @@ namespace VapeTeam.Psimulex.Core.Types
                 ); 
         }
         //public override void Negate() {}
-        /* Whit negate can change that Remove is GetMax or GetMin. Not necessary yet. */
+        /* With negate can change that Remove is GetMax or GetMin. Not necessary yet. */
 
         #endregion
 
@@ -189,7 +195,9 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override string ToString()
         {
-            return "< " + rep.ToString() + ">";
+            string str = "< ";
+            rep.ForEach(item => str += item.ToString() + (item == rep.Last<Pair>() ? " " : ", "));
+            str += ">";
             return str;
         }
 

@@ -289,7 +289,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual Tree ToTree()
         {
-            throw new PsimulexCoreException("Invalid operation");
+            return new Tree(this);
         }
 
         public virtual BinaryTree ToBinaryTree()
@@ -300,6 +300,11 @@ namespace VapeTeam.Psimulex.Core.Types
         public virtual Iterator ToIterator()
         {
             throw new PsimulexCoreException(string.Format("Type {0} can't convert to Iterator!", TypeEnum.ToString()));
+        }
+
+        public virtual Null ToNull()
+        {
+            return new Null { IsNull = false };
         }
 
         #endregion
