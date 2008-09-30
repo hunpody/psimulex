@@ -263,21 +263,21 @@ writeline(a<b);
 
 ");
 
-            Assert.AreEqual(@">In> 3, 2, 1 >Out>
->In> 1, 2, 3 >Out>
->In> 1, 2, 3, 1, 2, 3 >Out>
+            Assert.AreEqual(@"> 3, 2, 1 >
+> 1, 2, 3 >
+> 1, 2, 3, 1, 2, 3 >
 3 1 3 
->In> 1, 2, 3, 1, 2 >Out>
+> 1, 2, 3, 1, 2 >
 5
 False
->In> 1, 2, 3, 1 >Out>
->Max> ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ) >Min>
+> 1, 2, 3, 1 >
+< ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ) >
 Min: 1
 Max: 2
->Max> ( Key: 10, Value: 9 ), ( Key: 10, Value: 10 ), ( Key: 5, Value: 100 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ) >Min>
+< ( Key: 10, Value: 9 ), ( Key: 10, Value: 10 ), ( Key: 5, Value: 100 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ) >
 GetMax: 9
 GetMin: 1
->Max> ( Key: 10, Value: 10 ), ( Key: 5, Value: 100 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ) >Min>
+< ( Key: 10, Value: 10 ), ( Key: 5, Value: 100 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ) >
 6
 False
 True
@@ -351,9 +351,9 @@ writeline(d/e);
 ");
 
             Assert.AreEqual(@"True True
-(First( 10 )Last)
-[Bottom[ 10, 100 >Top>
-{ 10, 100 } [Bottom[ 10, 100, 10 >Top> (First( 10 )Last) { 10, 20, 200 }
+( 10 )
+[ 10, 100 >
+{ 10, 100 } [ 10, 100, 10 > ( 10 ) { 10, 20, 200 }
 { 20, 100, 1 }
 { 10, 20, 200, 100, 1 }
 { 1, 7, 3, 2 }

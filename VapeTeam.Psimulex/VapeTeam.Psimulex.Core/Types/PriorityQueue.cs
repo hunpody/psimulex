@@ -189,9 +189,9 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override string ToString()
         {
-            string str = ">Max> ";
+            string str = "< ";
             rep.ForEach(item => str += (item.ToString() + (item == rep.Last<Pair>() ? " " : ", ")));
-            str += ">Min>";
+            str += ">";
             return str;
         }
 
