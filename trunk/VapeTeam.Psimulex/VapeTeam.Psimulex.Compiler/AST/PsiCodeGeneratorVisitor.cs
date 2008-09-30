@@ -1252,8 +1252,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(NullLiteralNode node)
         {
-            // ???
-            VisitChildren(node);
+            AddCommand(new Push(new Null()));
         }
 
         public void Visit(InfinityLiteralNode node)

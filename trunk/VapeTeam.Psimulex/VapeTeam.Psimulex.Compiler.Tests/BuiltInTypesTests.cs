@@ -253,14 +253,6 @@ queue a;
 queue b;
 writeline(a==b);
 
-pqueue c;
-c.enqueue(0,1);
-pqueue d;
-d.enqueue(1,10);
-writeline(a==b);
-writeline(a<=b);
-writeline(a<b);
-
 ");
 
             Assert.AreEqual(@"> 3, 2, 1 >
@@ -281,9 +273,6 @@ GetMin: 1
 6
 False
 True
-True
-True
-False
 ", result);
         }
 

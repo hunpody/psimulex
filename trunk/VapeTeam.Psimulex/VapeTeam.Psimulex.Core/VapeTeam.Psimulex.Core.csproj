@@ -124,6 +124,7 @@
     <Compile Include="Types\Iterator.cs" />
     <Compile Include="Types\LinkedList.cs" />
     <Compile Include="Types\List.cs" />
+    <Compile Include="Types\Null.cs" />
     <Compile Include="Types\PriorityQueue.cs" />
     <Compile Include="Types\PropertyWrapper.cs" />
     <Compile Include="Types\Queue.cs" />

@@ -44,7 +44,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public Array(BaseType value)
             : this(value.TypeEnum, 1)
         {
-            rep[0] = value;
+            rep[0] = value.Clone();
         }
 
         /// <summary>
@@ -81,6 +81,8 @@ namespace VapeTeam.Psimulex.Core.Types
             rep = new BaseTypeList(size);
             InitializeArray();
         }
+
+        //public override BaseType Clone() { return new Array(rep); }
 
         #endregion
 
@@ -152,7 +154,6 @@ namespace VapeTeam.Psimulex.Core.Types
         public override string ToString()
         {
             return "[ " + rep.ToString() + "]";
-            return str;
         }
 
         #endregion

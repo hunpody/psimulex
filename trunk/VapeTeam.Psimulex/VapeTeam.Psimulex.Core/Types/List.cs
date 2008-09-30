@@ -24,7 +24,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public List(BaseType value)
         {
-            rep.Add(value);
+            rep.Add(value.Clone());
         }
 
         public List(BaseTypeList rep)
@@ -107,6 +107,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public override BaseType Index(int index) { return ListIndexing(rep, index); }
         public override int Size { get { return rep.Count; } }
         public override void Clear() { rep.Clear(); }
+        //public override BaseType Clone() { return new List(rep); }
 
         #endregion
 
@@ -114,6 +115,27 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override bool EqualsTo(BaseType value)
         {
+            /*
+            List l = value.ToList();
+            if (Count != l.Count)
+                return false;
+            for (int i = 0; i < Count; i++)
+                if (Index(i).NotEqualsTo(l.Index(i)))
+                    return false;
+            return true;
+            */
+
+            /*
+            if(Count != value.ToList().Count)
+                return false;
+            Iterator it1 = GetIterator();
+            Iterator it2 = value.ToList().GetIterator();
+            while (it1.MoveNext() && it2.MoveNext())
+                if (it1.Current().NotEqualsTo(it2.Current()))
+                    return false;
+            return true;
+            */
+                
             return rep.IsEqualTo(value.ToList().GetRepresentation() as BaseTypeList);
         }
 
