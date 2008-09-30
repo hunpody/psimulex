@@ -40,5 +40,12 @@ namespace VapeTeam.Psimulex.Core.Types
                         return false;
             return true;
         }
+
+        public override string ToString()
+        {
+            string str = "";
+            this.ForEach(item => str += (item.ToString() + (item == this.Last<BaseType>() ? " " : ", ")));
+            return str;
+        }
     }
 }

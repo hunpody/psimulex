@@ -68,10 +68,13 @@ namespace VapeTeam.Psimulex.Core.Types
         public override float ToFloat() { return Size; }
 
         public override bool EqualsTo(BaseType value) { return ToInt() == value.ToInt(); }
+
+        /*
         public override bool IsLessThan(BaseType value) { return ToInt() < value.ToInt(); }
         public override bool IsLessThanOrEqual(BaseType value) { return ToInt() <= value.ToInt(); }
         public override bool IsGreaterThan(BaseType value) { return ToInt() > value.ToInt(); }
         public override bool IsGreaterThanOrEqual(BaseType value) { return ToInt() >= value.ToInt(); }
+        */
 
         #endregion
 
