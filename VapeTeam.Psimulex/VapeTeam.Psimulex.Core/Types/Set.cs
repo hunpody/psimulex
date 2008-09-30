@@ -133,10 +133,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override string ToString()
         {
-            string str = "{ ";
-            rep.ForEach(item => str += (item.ToString() + (item == rep.Last<BaseType>() ? " " : ", ")));
-            str += "}";
-            return str;
+            return "{ " + rep.ToString() + "}";
         }
 
         #endregion
