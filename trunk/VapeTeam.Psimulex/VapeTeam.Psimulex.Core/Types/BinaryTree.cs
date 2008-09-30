@@ -62,7 +62,7 @@ namespace VapeTeam.Psimulex.Core.Types
             }
         }
 
-        public void Insert(Tree value)
+        public void Insert(BinaryTree value)
         {
             if (Left == null)
                 Left = value;
@@ -133,8 +133,8 @@ namespace VapeTeam.Psimulex.Core.Types
         public override void Assign(BaseType value)
         {
             Value = value.ToBinaryTree().Value.Clone();
-            Left = value.ToBinaryTree().Left.Clone();
-            Right = value.ToBinaryTree().Right.Clone();
+            Left = value.Clone().ToBinaryTree().Left;
+            Right = value.Clone().ToBinaryTree().Right;
         }
 
         /*
