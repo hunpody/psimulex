@@ -96,9 +96,9 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override string ToString()
         {
-            string str = "[Bottom[ ";
+            string str = "[ ";
             rep.ForEach(item => str += (item.ToString() + (item == rep.Last<BaseType>() ? " " : ", ")));
-            str += ">Top>";
+            str += ">";
             return str;
         }
 

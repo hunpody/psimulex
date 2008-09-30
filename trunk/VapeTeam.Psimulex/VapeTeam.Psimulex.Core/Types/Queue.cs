@@ -108,9 +108,9 @@ namespace VapeTeam.Psimulex.Core.Types
         public override string ToString()
         {
             rep.Reverse();
-            string str = ">In> ";
+            string str = "> ";
             rep.ForEach(item => str += (item.ToString() + (item == rep.Last<BaseType>() ? " " : ", ")));
-            str += ">Out>";
+            str += ">";
             rep.Reverse();
             return str;
         }
