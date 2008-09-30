@@ -203,6 +203,167 @@ while( s.size != 0)
         }
 
 
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_30_13_46_15()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+queue q;
+q.insert(1);
+q.insert(2);
+q.insert(3);
+writeline(q);
+queue z = -q;
+writeline(z);
+queue p = z + z;
+writeline(p);
+
+write(p.first);
+write(p.last);
+write(p.dequeue());
+writeline("""");
+writeline(p);
+writeline(p.size);
+writeline(p.isempty);
+
+pqueue pq;
+pq = q;
+
+q.dequeue();
+writeline(q);
+
+writeline(pq);
+writeline(""Min: "" + pq.min);
+writeline(""Max: "" + pq.max);
+
+pq.insert(10,10);
+pq.insert(10,9);
+pq.insert(5,100);
+
+writeline(pq);
+writeline(""GetMax: "" + pq.getmax());
+writeline(""GetMin: "" + pq.getmin());
+
+
+writeline(pq);
+writeline(pq.count);
+writeline(pq.isEmpty);
+
+
+queue a;
+queue b;
+writeline(a==b);
+
+pqueue c;
+c.enqueue(0,1);
+pqueue d;
+d.enqueue(1,10);
+writeline(a==b);
+writeline(a<=b);
+writeline(a<b);
+
+");
+
+            Assert.AreEqual(@">In> 3, 2, 1 >Out>
+>In> 1, 2, 3 >Out>
+>In> 1, 2, 3, 1, 2, 3 >Out>
+3 1 3 
+>In> 1, 2, 3, 1, 2 >Out>
+5
+False
+>In> 1, 2, 3, 1 >Out>
+>Max> ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ) >Min>
+Min: 1
+Max: 2
+>Max> ( Key: 10, Value: 9 ), ( Key: 10, Value: 10 ), ( Key: 5, Value: 100 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ) >Min>
+GetMax: 9
+GetMin: 1
+>Max> ( Key: 10, Value: 10 ), ( Key: 5, Value: 100 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ) >Min>
+6
+False
+True
+True
+True
+False
+", result);
+        }
+
+
+
+
+        [TestMethod]
+        public void TestGenAt_2008__szeptember_30_15_37_34()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+list l;
+stack s;
+write(s.isempty);
+writeline(l.isempty);
+
+l.insert(10);
+s = l;
+writeline(l);
+s.push(100);
+writeline(s);
+
+set h;
+s.push(10);
+h = s;
+write(h);
+write(s);
+write(l);
+
+set a;
+set b;
+a.insert(10);
+a.insert(10);
+a.insert(20);
+a.insert(20);
+a.insert(200);
+
+b.insert(20);
+b.insert(100);
+b.insert(1);
+
+writeLine(a);
+writeLine(b);
+
+writeline(a+b);
+
+set d;
+set e;
+
+d.insert(1);
+d.insert(7);
+d.insert(3);
+d.insert(2);
+
+writeline(d);
+d.remove(7);
+writeline(d);
+
+e.insert(2);
+e.insert(5);
+e.insert(4);
+
+writeline(d/e);
+
+
+");
+
+            Assert.AreEqual(@"True True
+(First( 10 )Last)
+[Bottom[ 10, 100 >Top>
+{ 10, 100 } [Bottom[ 10, 100, 10 >Top> (First( 10 )Last) { 10, 20, 200 }
+{ 20, 100, 1 }
+{ 10, 20, 200, 100, 1 }
+{ 1, 7, 3, 2 }
+{ 1, 3, 2 }
+{ 1, 3 }
+", result);
+        }
+
+
+
 
         #endregion
     }

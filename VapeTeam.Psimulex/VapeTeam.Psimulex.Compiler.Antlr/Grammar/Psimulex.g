@@ -258,11 +258,12 @@ builtInType
 	|	Stack
 	|	Queue
 	|	PQueue
-	|	Thread
-	|	Timer
 	|	Graph
 	|	Node
 	|	Edge
+	|	Thread
+	|	Timer
+	|	Iterator
 	// ...
 	;
 
@@ -590,11 +591,14 @@ List	:	'list'|'List'|'LIST'			;
 Stack	:	'stack'|'Stack'|'STACK'			;
 Queue	:	'queue'|'Queue'|'QUEUE'			;
 PQueue	:	'pqueue'|'PQueue'|'PQUEUE'		;
-Thread	:	'thread'|'Thread'|'THREAD'		;
-Timer	:	'timer'|'Timer'|'TIMER'			;
 Graph	:	'graph'|'Graph'|'GRAPH'			;
 Edge	:	'edge'|'Edge'|'EDGE'			;
 Node	:	'node'|'Node'|'NODE'			;
+
+/*Other*/
+Thread	:	'thread'|'Thread'|'THREAD'		;
+Timer	:	'timer'|'Timer'|'TIMER'			;
+Iterator:	'iterator'|'Iterator'|'ITERATOR';
 
 // ...
 

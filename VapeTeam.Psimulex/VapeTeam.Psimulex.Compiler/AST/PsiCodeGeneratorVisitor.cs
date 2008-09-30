@@ -123,6 +123,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             operatorIsPrefixUnary = false;
 
+            isCompilingAssignmentTarget = false;
+
             selectorsFirstCompile = true;
 
             lazyEvaluationJumpStack = new System.Collections.Generic.Stack<Jump>();

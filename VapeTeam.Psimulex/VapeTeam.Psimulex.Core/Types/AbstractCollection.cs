@@ -28,6 +28,15 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
+        #region Representation
+
+        protected virtual object GetRepresentation()
+        {
+            throw new Exceptions.PsimulexCoreException(string.Format("Can no get representation of type {0}", TypeEnum));
+        }
+
+        #endregion
+
         #region Size
 
         public virtual int Size
@@ -53,15 +62,36 @@ namespace VapeTeam.Psimulex.Core.Types
             get { return Size; }
         }
 
+        public override long ToInt() { return Size; }
+        public override int ToInt32() { return Size; }
+        public override decimal ToDecimal() { return Size; }
+        public override float ToFloat() { return Size; }
+
+        public override bool EqualsTo(BaseType value) { return ToInt() == value.ToInt(); }
+        public override bool IsLessThan(BaseType value) { return ToInt() < value.ToInt(); }
+        public override bool IsLessThanOrEqual(BaseType value) { return ToInt() <= value.ToInt(); }
+        public override bool IsGreaterThan(BaseType value) { return ToInt() > value.ToInt(); }
+        public override bool IsGreaterThanOrEqual(BaseType value) { return ToInt() >= value.ToInt(); }
+
         #endregion
 
         #region Iterator
 
         protected abstract System.Collections.IEnumerable GetAsEnumerable();
 
-        public Iterator GetIterator()
+        public Iterator GetIterator() { return new Iterator(GetAsEnumerable()); }
+        public override Iterator ToIterator() { return GetIterator(); }
+
+        public override string  ToString()
         {
-            return new Iterator(GetAsEnumerable());
+            string ret = "{ ";
+
+            Iterator it = GetIterator();
+            while (it.MoveNext())
+                ret += it.Current().ToString() + " ";
+
+            ret += "}";
+            return ret;
         }
 
         #endregion

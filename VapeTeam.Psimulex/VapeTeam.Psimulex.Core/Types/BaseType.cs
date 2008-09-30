@@ -237,38 +237,37 @@ namespace VapeTeam.Psimulex.Core.Types
             else return default(char);
         }
 
-
         public virtual Array ToArray()
         {
-            return new Array(this.Clone());
+            return new Array(this);
         }
 
         public virtual List ToList()
         {
-            return new List(this.Clone());
-        }
-
-        public virtual LinkedList ToLinkedList()
-        {
-            throw new PsimulexCoreException("Invalid operation");
+            return new List(this);
         }
 
         public virtual Set ToSet()
         {
-            throw new PsimulexCoreException("Invalid operation");
+            return new Set(this);
         }
 
         public virtual Stack ToStack()
         {
-            return new Stack(this.Clone());
+            return new Stack(this);
         }
 
         public virtual Queue ToQueue()
         {
-            return new Queue(this.Clone());
+            return new Queue(this);
         }
 
         public virtual PriorityQueue ToPriorityQueue()
+        {
+            return new PriorityQueue(this);
+        }
+
+        public virtual LinkedList ToLinkedList()
         {
             throw new PsimulexCoreException("Invalid operation");
         }

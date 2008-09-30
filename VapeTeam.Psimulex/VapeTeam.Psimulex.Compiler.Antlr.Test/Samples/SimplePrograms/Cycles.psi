@@ -23,3 +23,19 @@ print("\n");
 
 loop( int i = 0 to 9 )
 	print(i);
+	
+list L;
+for(int i = 0; i < 10; ++i)
+	L.Insert(i);
+
+foreach( int i in L )
+	print(i);
+
+print("\n");
+
+iterator it=L.getiterator();
+while(it.movenext())
+{
+	int i=it.current();
+	print(i);
+}
