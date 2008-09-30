@@ -12,7 +12,7 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         #region Represenation
 
-        private List<BaseType> rep = new List<BaseType>();
+        private BaseTypeList rep = new BaseTypeList();
 
         #endregion
 
@@ -25,6 +25,12 @@ namespace VapeTeam.Psimulex.Core.Types
         public List(BaseType value)
         {
             rep.Add(value);
+        }
+
+        public List(BaseTypeList rep)
+        {
+            this.rep.Clear();
+            this.rep.AddRange(rep.Clone());
         }
 
         #endregion
@@ -93,14 +99,61 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
-        #region Overridden Members
+        #region Implemented Members
 
         public override TypeEnum TypeEnum { get { return TypeEnum.List; } }
         protected override System.Collections.IEnumerable GetAsEnumerable() { return rep; }
+        protected override object GetRepresentation() { return rep; }
         public override BaseType Index(int index) { return ListIndexing(rep, index); }
         public override int Size { get { return rep.Count; } }
         public override void Clear() { rep.Clear(); }
 
         #endregion
+
+        #region Relational comparison operators
+
+        public override bool EqualsTo(BaseType value)
+        {
+            return rep.IsEqualTo(value.ToList().GetRepresentation() as BaseTypeList);
+        }
+
+        #endregion
+
+        #region Operator Members
+
+        public override void Assign(BaseType value)
+        {
+            rep.Clear();
+            rep.AddRange((value.ToList().GetRepresentation() as BaseTypeList).Clone());
+        }
+
+        public override void Add(BaseType value) { rep.AddRange((value.ToList().GetRepresentation() as BaseTypeList).Clone()); }
+        public override void Negate() { rep.Reverse(); }
+
+        #endregion
+
+        #region Conversion To Primitive Type Members
+
+        public override string ToString()
+        {
+            string str = "(First( ";
+            rep.ForEach(item => str += (item.ToString() + (item == rep.Last<BaseType>() ? " " : ", ")));
+            str += ")Last)";
+            return str;
+        }
+
+        #endregion
+
+        #region Conversion To BuiltIn Type Members
+
+        public override Array ToArray() { return new Array(rep); }
+        public override List ToList() { return this; }
+        public override Set ToSet() { return new Set(rep); }
+        public override Stack ToStack() { return new Stack(rep); }
+        public override Queue ToQueue() { return new Queue(rep); }
+        public override PriorityQueue ToPriorityQueue() { return new PriorityQueue(rep); }
+
+        #endregion
+
     }
 }

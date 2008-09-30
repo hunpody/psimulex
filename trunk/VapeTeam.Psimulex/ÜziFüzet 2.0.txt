@@ -251,3 +251,27 @@ Egyéb Bug -ok :
   Ha van valami kulturált ötleted rá, akor vesed elõ.
   Itt pl a Sor -nél találkoztam vele, mert akartam In,Out fv-eket csinálni és az In az fáj neki.
   De persze ez nem nagy katasztrófa, ezért alacsony fontosságú.
+  
+  
+Egyéb :
+-------
+
+- Lehetne Attribútumokkal megjelölni, hogy melyik tagfüggvény reflektálódjon kifele, márha van olyan, amit nem akarunk "kiengedni".
+  Egyébként meg nem tudom mire gondoltál, hogy az Add() menjen, de azt is meglehet Attribútumokkal barkácsolni valahogy.
+  Jah kiengedni pl az Add() Substract() meg ezeket lenne felesleges lényegében, persze ártani nem ártó.
+  Csak a 5 tag : Add,Remove,Clear,IsEmpty,Count azt ugye mindenhova beletenném, emg legyne már következetes.
+  Most Az Add helyett mindenhol Insertet írok, hogy könnyebb elygen utólag refaktorálni.
+  
+- Clone téma:
+  A Clone() most úgy mûködik, hgoyaz érték típusokat másolja, a referencia típusokat nem.
+  Viszont van pár eset, amikor meg szûkség lenne arra, hgoy másoljuk õket. Pl.
+  Queue q; Queue p;
+  p + q; // Ez már megy, konkatenál.
+  Itt a p-n végrehajtódi ka mósosulás mintha p = p + q; lenne.
+  Mert a Clone() csak az érték típusokat Klónozza.
+  
+  Javaslatom, hogy belsõ ahsználatra legyen 2 féle Clone() az egyik mindet klónoz ( Ezt használják a parancsobjektumok )
+  A másik pedig csak az érték típusokat, ahgoy eddig.
+  
+  Illetve legyen lehetõség rá, PSimulex kódból is klónozni, ahol ere szûkség van.
+  

@@ -5,18 +5,27 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
+    /// <summary>
+    /// Advenced Array Type.
+    /// It can be resize and it will be have more built in function.
+    /// </summary>
     public class Array : AbstractCollection
     {
+        #region Represenation
+
         protected TypeEnum initializatorType;
         protected int size;
+        protected BaseTypeList rep;
 
-        protected List<BaseType> rep;
+        #endregion
+
+        #region Constructors
 
         public Array(TypeEnum initializatorType, int size)
         {
             this.initializatorType = initializatorType;
             this.size = size;
-            rep = new List<BaseType>(size);
+            rep = new BaseTypeList(size);
             InitializeArray();
         }
 
@@ -38,20 +47,44 @@ namespace VapeTeam.Psimulex.Core.Types
             rep[0] = value;
         }
 
-        public override TypeEnum TypeEnum
+        /// <summary>
+        /// For conversions from other collections.
+        /// It clones the parameter.
+        /// </summary>
+        /// <param name="value"></param>
+        public Array(BaseTypeList rep)
+            :this(rep.Count != 0 ? rep[0].TypeEnum : TypeEnum.Void, rep.Count)
         {
-            get { return TypeEnum.Array; }
+            for (int i = 0; i < Count; i++)
+                this.rep[i] = rep[i].Clone();
         }
 
-        public override BaseType Index(int index)
+        #endregion
+
+        #region Implemented Members
+
+        public override TypeEnum TypeEnum { get { return TypeEnum.Array; } }
+        protected override System.Collections.IEnumerable GetAsEnumerable() { return rep; }
+        protected override object GetRepresentation() { return rep; }
+        public override BaseType Index(int index) { return ListIndexing(rep, index); }
+        public override int Size
         {
-            return ListIndexing(rep, index);
+            get { return size; }
+            set
+            {
+                Resize(value);
+            }
         }
 
-        protected override System.Collections.IEnumerable GetAsEnumerable()
+        public override void Clear() 
         {
-            return rep;
+            rep = new BaseTypeList(size);
+            InitializeArray();
         }
+
+        #endregion
+
+        #region Own Members
 
         /// <summary>
         /// Resizes the array. Inserts new baseTypes or removes from the end.
@@ -81,13 +114,60 @@ namespace VapeTeam.Psimulex.Core.Types
             size = newSize;
         }
 
-        public override int Size
+        #endregion
+
+        #region Relational comparison operators
+
+        public override bool EqualsTo(BaseType value)
         {
-            get { return size; }
-            set 
-            {
-                Resize(value);
-            }
+            return rep.IsEqualTo(value.ToArray().GetRepresentation() as BaseTypeList);
         }
+
+        #endregion
+
+        #region Operator Members
+
+        public override void Assign(BaseType value)
+        {
+            rep.Clear();
+            rep.AddRange((value.ToArray().GetRepresentation() as BaseTypeList).Clone());
+
+            size = rep.Count;
+            if (size != 0)
+                initializatorType = rep[0].TypeEnum;
+        }
+
+        public override void Add(BaseType value)
+        {
+            rep.AddRange((value.ToArray().GetRepresentation() as BaseTypeList).Clone());
+            size = rep.Count;
+        }
+
+        public override void Negate() { rep.Reverse(); }
+
+        #endregion
+
+        #region Conversion To Primitive Type Members
+
+        public override string ToString()
+        {
+            string str = "[ ";
+            rep.ForEach(item => str += (item.ToString() + (item == rep.Last<BaseType>() ? " " : ", ")));
+            str += " ]";
+            return str;
+        }
+
+        #endregion
+
+        #region Conversion To BuiltIn Type Members
+
+        public override Array ToArray() { return this; }
+        public override List ToList() { return new List(rep); }
+        public override Set ToSet() { return new Set(rep); }
+        public override Stack ToStack() { return new Stack(rep); }
+        public override Queue ToQueue() { return new Queue(rep); }
+        public override PriorityQueue ToPriorityQueue() { return new PriorityQueue(rep); }
+
+        #endregion
     }
 }
