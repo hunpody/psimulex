@@ -53,6 +53,7 @@
     <Compile Include="Commands\Indexing.cs" />
     <Compile Include="Commands\Initialize.cs" />
     <Compile Include="Commands\Jump.cs" />
+    <Compile Include="Commands\KeyValuePair.cs" />
     <Compile Include="Commands\Pop.cs" />
     <Compile Include="Commands\Push.cs" />
     <Compile Include="Commands\Return.cs" />
