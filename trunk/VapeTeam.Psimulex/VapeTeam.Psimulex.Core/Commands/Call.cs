@@ -13,6 +13,7 @@ namespace VapeTeam.Psimulex.Core.Commands
     public class Call : CommandBase
     {
         private string functionName;
+        private int parametersCount = -1;
         private int functionAddress;
 
         protected bool IsCallingByName
@@ -43,12 +44,22 @@ namespace VapeTeam.Psimulex.Core.Commands
         private void CallByName(ICommandContext context)
         {
             // It has to look up the availabe function names
-            // IFunctionLookup?
-            var function = context.FunctionLookup.GetFunctionByName(functionName);
-
-            if (function == null)
+            Function function = null;
+            if (parametersCount >= 0)
             {
-                throw new PsimulexCoreException("Call to an undefined function: " + functionName);
+                function = context.FunctionLookup.GetFunctionByNameAndParameterCount(functionName, parametersCount);
+                if (function == null)
+                {
+                    throw new PsimulexCoreException(string.Format("Call to an undefined function: {0} with {1} parameters.", functionName, parametersCount));
+                }
+            }
+            else
+            {
+                function = context.FunctionLookup.GetFunctionByName(functionName);
+                if (function == null)
+                {
+                    throw new PsimulexCoreException("Call to an undefined function: " + functionName);
+                }
             }
 
             if (function.IsUserDefined)
@@ -70,7 +81,6 @@ namespace VapeTeam.Psimulex.Core.Commands
                 {
                     context.AddVariable(param.Name, parameters[udf.Parameters.IndexOf(param)]);
                 }       
-
 
                 // Just jump to its entry point.
                 context.PC = udf.EntryPoint;
@@ -102,6 +112,12 @@ namespace VapeTeam.Psimulex.Core.Commands
         public Call(string procedureName)
         {
             this.functionName = procedureName;
+        }
+
+        public Call(string procedureName, int paramCount)
+        {
+            this.functionName = procedureName;
+            this.parametersCount = paramCount;
         }
 
         public Call(int address)
