@@ -275,3 +275,21 @@ Egyéb :
   
   Illetve legyen lehetõség rá, PSimulex kódból is klónozni, ahol ere szûkség van.
   
+
+
+
+2008 Október 2. - Vari
+
+Van egy ötletem ehhez a referencia nem referencia témára. Mi lenne ha bevezetnénk 2 kulcs szót. Lehetne & jel is, vagy mind akettõ is a jelölésére. Most én elnevezem ref és val  -nak a két kulcs szót. Semmi mást nem csinálnak, mint az így megjelölt változót a jelölt módon dobnéá a verembe.
+Ugye érték típust mint int , char stb defaultból érték szeritn míg a referencia típusokat referencia szerint. Persze ezt sem teljesen, emrt az értékadás mindenhol érték szerint menne, mert ez az amire a legtöbb helyen szûkség van. Viszont nagyon kényelmes lenne, ha ezt ezzel a 2 kulcs szóva (vagy más ugyanezen célú jellel) ezt felül lehetne bírálni.
+
+Konkrétan amikor pl a szintfolytonos bejáráûsnál akarun kegy sorbapakolni akor referencia szerint akarunk pakolni.
+De mondjuk ha mi másolni akarnánk akkor csak annyi kéne ínri hogy (val Tree.Left)
+
+Most végiggondolva értelmesebbnek tûnik egy Psimulex kódból hívható .Clone() fv :)
+
+De azért itthagyom hátha ihlet más felhasználást is.
+
+Jah a másik dolog a & jel mellé bevezetem a nyelvtanba a ref kulcsszót is.
+Ilyen feketefélék nagyon idegenkednek az ilyen operátoroktól és a ref egy kicsit bizalomgerjesztõbb lehet számukra.
+Ugyan arra fordulna, csak egy kis szöszsenet.
