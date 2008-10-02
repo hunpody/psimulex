@@ -8,6 +8,10 @@ using VapeTeam.Psimulex.Core.Commands;
 
 namespace VapeTeam.Psimulex.Compiler.AST
 {
+    /// <summary>
+    /// Help class for Struct Members and
+    /// for function formal parameters.
+    /// </summary>
     public class Member
     {
         public TypeEnum Type { get; set; }
@@ -15,8 +19,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public int DimensionCount { get; set; }
         public List<int> DimensionList { get; set; }
         public string Name { get; set; }
+
+        // For struct Members
         public BaseType Value { get; set; }
-        public bool IsInitialised { get; set; }
+        public bool IsInitialized { get; set; }
+
+        // For Function Parameter
+        public bool IsDynamicArray { get; set; }
+        public bool IsReference { get; set; }
 
         public Member()
         {
@@ -26,18 +36,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
             DimensionList = new List<int>();
             Name = "";
             Value = null;
-            IsInitialised = false;
-        }
-
-        public Member(TypeEnum type, string typeName, int dimensionCount, List<int> dimensionList, string name, BaseType value, bool isInitialised)
-        {
-            Type = type;
-            TypeName = typeName;
-            DimensionCount = dimensionCount;
-            DimensionList = dimensionList;
-            Name = name;
-            Value = value;
-            IsInitialised = isInitialised;
+            IsInitialized = false;
+            IsDynamicArray = false;
+            IsReference = false;
         }
 
         public override string ToString()
@@ -57,6 +58,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     member += ", ";
             }
             member += "] ) ";
+            member += IsReference ? "& " : "";
             member += Name + " ";
             member += Value;
 

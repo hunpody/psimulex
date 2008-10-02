@@ -92,15 +92,15 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private bool addToProgram;
         private BaseType lastCompiledConstantValue;
 
-        private bool lastCompiledArrayIsDynamic;
+        private bool isLastCompiledArrayDynamic;
 
         private Assign lastCompiledAssign;
 
-        private bool operatorIsPrefixUnary;
+        private bool isOperatorUnaryPrefix;
 
         private bool isCompilingAssignmentTarget;
 
-        private bool selectorsFirstCompile;
+        private bool isSelectorsFirstCompile;
 
         private System.Collections.Generic.Stack<Jump> lazyEvaluationJumpStack;
         private System.Collections.Generic.Stack<Jump> jumpStack;
@@ -118,14 +118,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
             addToProgram = true;
             lastCompiledConstantValue = null;
 
-            lastCompiledArrayIsDynamic = false;
+            isLastCompiledArrayDynamic = false;
             lastCompiledAssign = null;
 
-            operatorIsPrefixUnary = false;
+            isOperatorUnaryPrefix = false;
 
             isCompilingAssignmentTarget = false;
 
-            selectorsFirstCompile = true;
+            isSelectorsFirstCompile = true;
 
             lazyEvaluationJumpStack = new System.Collections.Generic.Stack<Jump>();
             jumpStack = new System.Collections.Generic.Stack<Jump>();
@@ -166,10 +166,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         #region Unknow Nodes
 
-        /*Common Tree Node*/    // Igazából ilyennek nem szabad lennie a végén ! //
+        /*Common Tree Node*/
         public void Visit(PsiNode node) { AddMessage("PsiNode Found : " + node.ToString()); VisitChildren(node); }
 
-        /*Undefined Tree Node*/     // És ilyennek sem ! //
+        /*Undefined Tree Node*/
         public void Visit(XNode node) { AddMessage("XNode Found : " + node.ToString()); VisitChildren(node); }
 
         #endregion
@@ -185,7 +185,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Majd meg kell csinálni az importálást
             /* A) Dictionary -be FV név, Parancsobjektum Párok
              * B) Importolási sorrendben végigfordítjuk és egy tömbbe pakoljuk.
-             * C) ???
              */
 
             // Message
@@ -244,7 +243,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // MemberName
             string memberName = node.MemberName.Value;
-            bool memberIsInitialised = false;
+            bool memberIsInitialized = false;
 
             // MemberInitiaValue
             BaseType memberValue = null;
@@ -253,18 +252,20 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 addToProgram = false;
                 node.MemberInitialValue.Accept(this);
                 memberValue = lastCompiledConstantValue;
-                memberIsInitialised = true;
+                memberIsInitialized = true;
             }
 
-            lastCompiledMember = new Member(
-                memberType,
-                memberTypeName,
-                memberDimensionCount,
-                memberDimensionList,
-                memberName,
-                memberValue,
-                memberIsInitialised
-                );
+            lastCompiledMember = new Member{
+                Type = memberType,
+                TypeName = memberTypeName,
+                DimensionCount = memberDimensionCount,
+                DimensionList = memberDimensionList,
+                Name = memberName,
+                Value = memberValue,
+                IsInitialized = memberIsInitialized,
+                IsDynamicArray = false,
+                IsReference = false               
+            };
 
             lastCompiledDimensionList = new List<int>();
             lastCompiledDimensionCount = 1;
@@ -663,7 +664,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             TypeEnum varType = lastCompiledDataType;
 
             string varTypeName = lastCompiledUserDefinedDataTypeName;
-            bool varArrayIsDynamic = lastCompiledArrayIsDynamic;
+            bool varArrayIsDynamic = isLastCompiledArrayDynamic;
             int varDimensionCount = lastCompiledDimensionCount;
 
             // Reference
@@ -700,7 +701,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             TypeEnum varType = lastCompiledDataType;
 
             string varTypeName = lastCompiledUserDefinedDataTypeName;
-            bool varArrayIsDynamic = lastCompiledArrayIsDynamic;
+            bool varArrayIsDynamic = isLastCompiledArrayDynamic;
             int varDimensionCount = lastCompiledDimensionCount;
 
             // Name
@@ -851,8 +852,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(AdditiveOpNode node)
         {
-            bool isUnary = operatorIsPrefixUnary;
-            operatorIsPrefixUnary = false;
+            bool isUnary = isOperatorUnaryPrefix;
+            isOperatorUnaryPrefix = false;
 
             // Left Operand
             node.Left.Accept(this);
@@ -913,7 +914,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 // 02 LogicalNot Operation
                 AddCommand(new UnaryOperation(UnaryOperation.Operations.LogicalNot));
             }
-            else if (operatorIsPrefixUnary)
+            else if (isOperatorUnaryPrefix)
             {
                 /*
                 --++--i;
@@ -1070,15 +1071,15 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(PrefixUnaryOperationNode node)
         {
-            operatorIsPrefixUnary = true;
+            isOperatorUnaryPrefix = true;
             VisitChildren(node);
-            operatorIsPrefixUnary = false;
+            isOperatorUnaryPrefix = false;
         }
 
         public void Visit(SelectorNode node)
         {
             // SelectorList Compile Parameters
-            selectorsFirstCompile = true;
+            isSelectorsFirstCompile = true;
             node.SelectorList.Reverse();
             foreach (IPsiNode child in node.SelectorList)
                 child.Accept(this);
@@ -1087,7 +1088,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.SelectorOperand.Accept(this);
 
             // SelectorList Compile Selectors
-            selectorsFirstCompile = false;
+            isSelectorsFirstCompile = false;
             node.SelectorList.Reverse();
             foreach (IPsiNode child in node.SelectorList)
                 child.Accept(this);
@@ -1095,7 +1096,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(MemberSelectNode node)
         {
-            if (!selectorsFirstCompile)
+            if (!isSelectorsFirstCompile)
             {
                 // MemberName
                 string memberName = node.Left.Value;
@@ -1107,7 +1108,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(MemberFunctionCallNode node)
         {
-            if (selectorsFirstCompile)
+            if (isSelectorsFirstCompile)
             {
                 // Arguments
                 foreach (IPsiNode child in node.MemberFunctionArgumentList)
@@ -1139,7 +1140,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(ArgumentsNode node) { VisitChildren(node); }
         public void Visit(IndexingNode node)
         {
-            if (selectorsFirstCompile)
+            if (isSelectorsFirstCompile)
             {
                 // Concret Indexis
                 VisitChildren(node);
@@ -1163,7 +1164,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             for (int i = 0; i < node.ChildrenCount; i++)
                 node.Children[i].Accept(this);
 
-            lastCompiledArrayIsDynamic = false;
+            isLastCompiledArrayDynamic = false;
         }
 
         public void Visit(ConstantDimensionsNode node)
@@ -1178,7 +1179,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             lastCompiledDimensionCount = node.ChildrenCount - 2;
             lastCompiledDimensionList = new List<int>();
-            lastCompiledArrayIsDynamic = true;
+            isLastCompiledArrayDynamic = true;
         }
 
         #endregion
