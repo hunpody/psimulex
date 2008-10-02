@@ -270,10 +270,27 @@ namespace VapeTeam.Psimulex.Core
 
         public Function GetFunctionByName(string name)
         {
-            Function function = systemFunctions.GetFunction(name);
-            if (function == null)
+            return GetFunctionByNameAndParameterCount(name, -1);
+        }
+
+        public Function GetFunctionByNameAndParameterCount(string name, int paramCount)
+        {
+            Function function = null;
+
+            // User can override system functions
+            if (paramCount >= 0)
+            {
+                function = CallingThread.HostProcess.Program.GetFunction(name, paramCount);
+            }
+            else
             {
                 function = CallingThread.HostProcess.Program.GetFunction(name);
+            }
+
+            // Try system function
+            if (function == null)
+            {
+                function = systemFunctions.GetFunction(name);
             }
             return function;
         }

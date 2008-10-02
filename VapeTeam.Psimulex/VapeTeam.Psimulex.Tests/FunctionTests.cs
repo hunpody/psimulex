@@ -269,5 +269,92 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("-1", process.StandardOutput);
         }
+
+        [TestMethod]
+        public void UserDefinedFunctions3()
+        {
+            Program program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push(2),
+                new Push(3),
+                new Call("multiply", 2),
+                new Call("print"),
+                new Push(2),
+                new Push(3),
+                new Push(4),
+                new Call("multiply", 3),
+                new Call("print")
+                );
+
+            UserDefinedFunction mulFunction1 = new UserDefinedFunction
+            {
+                Name = "multiply",
+                Parameters = new List<VariableDescriptor> { 
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "a" 
+                    },
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "b" 
+                    }
+                },
+                ReturnValue = new VariableDescriptor
+                {
+                    Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
+                },
+                Commands = new CommandList 
+                {
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Push("b", ValueAccessModes.LocalVariable),
+                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
+                    new Return(true),
+                }
+            };
+
+            UserDefinedFunction mulFunction2 = new UserDefinedFunction
+            {
+                Name = "multiply",
+                Parameters = new List<VariableDescriptor> { 
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "a" 
+                    },
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "b" 
+                    },
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "c" 
+                    }
+                },
+                ReturnValue = new VariableDescriptor
+                {
+                    Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
+                },
+                Commands = new CommandList 
+                {
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Push("b", ValueAccessModes.LocalVariable),
+                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
+                    new Push("c", ValueAccessModes.LocalVariable),
+                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
+                    new Return(true),
+                }
+            };
+
+            program.AddFunction(mulFunction1);
+            program.AddFunction(mulFunction2);
+
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(program);
+
+            Assert.AreEqual("624", process.StandardOutput);
+        }
+
     }
 }

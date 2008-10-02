@@ -9,5 +9,6 @@ namespace VapeTeam.Psimulex.Core
     {
 //        bool IsDefined(string name);
         Function GetFunctionByName(string name);
+        Function GetFunctionByNameAndParameterCount(string name, int paramCount);
     }
 }
