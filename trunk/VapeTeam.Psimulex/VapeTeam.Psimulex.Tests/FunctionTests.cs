@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VapeTeam.Psimulex.Core.Commands;
 using VapeTeam.Psimulex.Core.Types;
+using VapeTeam.Psimulex.Core;
 
 namespace VapeTeam.Psimulex.Tests
 {
@@ -110,6 +111,8 @@ namespace VapeTeam.Psimulex.Tests
             Assert.AreEqual(19, process.MainThread.PC);
         }
 
+        #region Fibonacci-test
+
         private long Fibonacci(long n)
         {
             if (n <= 0) return 0;
@@ -173,6 +176,98 @@ namespace VapeTeam.Psimulex.Tests
             {
                 Assert.AreEqual(Fibonacci(i).ToString(), CreateAndRunFibonacci(i).StandardOutput);
             }
+        }
+
+        #endregion
+
+        [TestMethod]
+        public void UserDefinedFunctions1()
+        {
+            Program program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push(2),
+                new Push(3),
+                new Call("add"),
+                new Call("print")
+                );
+
+            UserDefinedFunction addFunction = new UserDefinedFunction 
+            { 
+                Name = "add", 
+                Parameters = new List<VariableDescriptor> { 
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "a" 
+                    },
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "b" 
+                    }
+                },
+                ReturnValue = new VariableDescriptor 
+                {
+                    Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
+                },
+                Commands = new CommandList 
+                {
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Push("b", ValueAccessModes.LocalVariable),
+                    new BinaryOperation(BinaryOperation.Operations.Addition),
+                    new Return(true),
+                }
+            };
+
+            program.AddFunction(addFunction);
+
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(program);
+
+            Assert.AreEqual("5", process.StandardOutput);
+        }
+
+        [TestMethod]
+        public void UserDefinedFunctions2()
+        {
+            Program program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push(2),
+                new Push(3),
+                new Call("subtract"),
+                new Call("print")
+                );
+
+            UserDefinedFunction addFunction = new UserDefinedFunction
+            {
+                Name = "subtract",
+                Parameters = new List<VariableDescriptor> { 
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "a" 
+                    },
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "b" 
+                    }
+                },
+                ReturnValue = new VariableDescriptor
+                {
+                    Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
+                },
+                Commands = new CommandList 
+                {
+                    new Push("a", ValueAccessModes.LocalVariable),
+                    new Push("b", ValueAccessModes.LocalVariable),
+                    new BinaryOperation(BinaryOperation.Operations.Subtraction),
+                    new Return(true),
+                }
+            };
+
+            program.AddFunction(addFunction);
+
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(program);
+
+            Assert.AreEqual("-1", process.StandardOutput);
         }
     }
 }

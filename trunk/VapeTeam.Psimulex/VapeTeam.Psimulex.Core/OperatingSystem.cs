@@ -61,7 +61,7 @@ namespace VapeTeam.Psimulex.Core
         /// <returns></returns>
         public BaseType SystemCall(Function function, IEnumerable<BaseType> parameters)
         {
-            var systemFunction = systemFunctions.GetFunction(function);
+            var systemFunction = systemFunctions.GetFunction(function.Name);
 
             ParameterInfo[] parameterInfoCollection = systemFunction.MethodInfo.GetParameters();
 
@@ -134,6 +134,8 @@ namespace VapeTeam.Psimulex.Core
             process.Threads.Add(thread);
             Processes.Add(process);
             AddThread(thread);
+            // Join commands of the program
+            program.JoinCommands();
             return process;
         }
 
@@ -235,22 +237,45 @@ namespace VapeTeam.Psimulex.Core
 
             foreach (var method in methodsOfLibrary)
             {
-                systemFunctions.Add(new SystemFunction
+                var systemFunction = new SystemFunction
                 {
                     Name = method.Name.ToLower(),
                     HostObject = library,
                     MethodInfo = method,
-                    HasReturnValue = method.ReturnType != typeof(void),
-                    ParametersCount = method.GetParameters().Length
-                });
+                };
+                if (method.ReturnType != typeof(void))
+                {
+                    systemFunction.ReturnValue = new VariableDescriptor { Name = null, Type = CreateTypeIdFromSystemType(method.ReturnType) };
+                }
+
+                foreach(var parameter in method.GetParameters())
+                {
+                    systemFunction.Parameters.Add(new VariableDescriptor 
+                    { 
+                        Name = parameter.Name, 
+                        Type = CreateTypeIdFromSystemType(parameter.ParameterType)
+                    });
+                }
+
+                systemFunctions.Add(systemFunction);
             }
+        }
+
+        private static TypeIdentifier CreateTypeIdFromSystemType(Type type)
+        {
+            return new TypeIdentifier { TypeName = type.FullName, TypeEnum = TypeEnum.DotNetType };
         }
 
         #region IFunctionLookup Members
 
         public Function GetFunctionByName(string name)
         {
-            return systemFunctions.GetFunction(new Function { Name = name });
+            Function function = systemFunctions.GetFunction(name);
+            if (function == null)
+            {
+                function = CallingThread.HostProcess.Program.GetFunction(name);
+            }
+            return function;
         }
 
         #endregion

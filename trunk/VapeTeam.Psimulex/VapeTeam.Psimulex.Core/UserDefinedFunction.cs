@@ -12,29 +12,16 @@ namespace VapeTeam.Psimulex.Core
     /// User defined function.
     /// The Function Object Contains the CommandList.
     /// </summary>
-    public class UserDefinedFunction
+    public class UserDefinedFunction : Function
     {
-        public class Parameter
+        public override bool IsUserDefined
         {
-            public string Name { get; set; }
-
-            public TypeEnum Type { get; set; }
-            public string TypeName { get; set; }    // If the type is Userdefined, we need TypeName
-            public bool IsReference { get; set; }
-            public bool IsDynamicArray { get; set; }
-            public int ArrayDimension { get; set; }
+            get
+            {
+                return true;
+            }
         }
-
-        public string Name { get; set; }
-
-        public List<Parameter> ParameterList { get; set; }
-
-        public TypeEnum ReturnType { get; set; }
-        public string ReturnTypeName { get; set; }  // If the type is Userdefined, we need TypeName
-        public bool ReturnTypeIsReference { get; set; }
-        public bool ReturnTypeIsDynamicArray { get; set; }
-        public int ReturnTypeArrayDimension { get; set; }
-
-        public CommandList Code { get; set; }
+        public CommandList Commands { get; set; }
+        public int EntryPoint { get; set; }
     }
 }

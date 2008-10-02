@@ -23,9 +23,9 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
-        public SystemFunction GetFunction(Function function)
+        public SystemFunction GetFunction(string functionName)
         {
-            string functionName = function.Name.ToLower();
+            functionName = functionName.ToLower();
             if (map.ContainsKey(functionName))
             {
                 return map[functionName];
