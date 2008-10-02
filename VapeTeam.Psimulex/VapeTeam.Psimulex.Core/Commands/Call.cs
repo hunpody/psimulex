@@ -53,7 +53,27 @@ namespace VapeTeam.Psimulex.Core.Commands
 
             if (function.IsUserDefined)
             {
+                UserDefinedFunction udf = function as UserDefinedFunction;
+
+                Stack<BaseType> parameters = new Stack<BaseType>();
+
+                foreach (var param in udf.Parameters)
+                {
+                    parameters.Push(context.RunStack.Pop());
+                }
+
+                parameters = parameters.Reverse();
+
+                context.PushState();
+
+                foreach (var param in udf.Parameters)
+                {
+                    context.AddVariable(param.Name, parameters[udf.Parameters.IndexOf(param)]);
+                }       
+
+
                 // Just jump to its entry point.
+                context.PC = udf.EntryPoint;
             }
             else
             {

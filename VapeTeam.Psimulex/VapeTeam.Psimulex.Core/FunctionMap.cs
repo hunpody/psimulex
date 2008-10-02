@@ -13,7 +13,7 @@ namespace VapeTeam.Psimulex.Core
     {
         public void Add(UserDefinedFunction func)
         {
-            Add(CreateFunctionID(func.Name, func.ParameterList.Count), func);
+            Add(CreateFunctionID(func.Name, func.Parameters.Count), func);
         }
 
         public UserDefinedFunction this[string functionName, int parameterCount]

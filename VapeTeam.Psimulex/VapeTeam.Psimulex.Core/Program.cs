@@ -9,12 +9,41 @@ namespace VapeTeam.Psimulex.Core
     public class Program
     {
         public string Name { get; set; }
+
+        private CommandList originalCommandList;
         public CommandList CommandList { get; private set; }
+        protected List<UserDefinedFunction> Functions { get; private set; }
+
+        //protected Dictionary<UserDefinedFunction, int> EntryPoints { get; private set; }
 
         public Program()
         {
             Name = "";
             CommandList = new CommandList();
+            Functions = new List<UserDefinedFunction>();
+            //EntryPoints = new Dictionary<UserDefinedFunction, int>();
+        }
+
+        /// <summary>
+        /// Joins every user-defined function to the end of the command list.
+        /// After calling this function you should NOT change the command list.
+        /// </summary>
+        public void JoinCommands()
+        {
+            originalCommandList = CommandList;
+            CommandList = new CommandList();
+            CommandList.AddRange(originalCommandList);
+            if (CommandList.Count > 0 && !(CommandList.Last() is Return))
+            {
+                CommandList.Add(new Return());
+            }
+            //EntryPoints.Clear();
+            foreach (var udf in Functions)
+            {
+                //EntryPoints.Add(udf, CommandList.Count);
+                udf.EntryPoint = CommandList.Count;
+                CommandList.AddRange(udf.Commands);
+            }
         }
 
         public ICommand this[int index]
@@ -26,12 +55,32 @@ namespace VapeTeam.Psimulex.Core
         }
 
         /// <summary>
-        /// Add a Command at the end of the Program
+        /// Adds a Command at the end of the CommandList
         /// </summary>
         /// <param name="command">The command</param>
-        public void Add(ICommand command)
+        public void AddCommand(ICommand command)
         {
             CommandList.Add(command);
+        }
+
+        public void AddFunction(UserDefinedFunction function)
+        {
+            if (GetFunction(function.Name, function.ParametersCount) != null)
+            {
+                throw new Exceptions.PsimulexCoreException(string.Format("There is already a user defined function with name \"{0}\" and having {1} parameters.",
+                    function.Name, function.ParametersCount));
+            }
+            Functions.Add(function);
+        }
+
+        public UserDefinedFunction GetFunction(string name)
+        {
+            return Functions.FirstOrDefault(f => f.Name.ToLower() == name.ToLower());
+        }
+
+        public UserDefinedFunction GetFunction(string name, int parametersCount)
+        {
+            return Functions.FirstOrDefault(f => f.Name.ToLower() == name.ToLower() && f.ParametersCount == parametersCount);
         }
 
         public override string ToString()

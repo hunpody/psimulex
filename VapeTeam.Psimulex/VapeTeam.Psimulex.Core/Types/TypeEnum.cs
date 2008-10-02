@@ -38,6 +38,7 @@ namespace VapeTeam.Psimulex.Core.Types
         Thread,
         FunctionPointerType,
         UserDefinedType,
+        DotNetType,
         Null,
     }
 }
