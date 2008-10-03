@@ -73,6 +73,12 @@ namespace VapeTeam.Psimulex.Core
             Functions.Add(function);
         }
 
+        public void AddFunction(List<UserDefinedFunction> functionList)
+        {
+            foreach (var func in functionList)
+                AddFunction(func);
+        }
+
         public UserDefinedFunction GetFunction(string name)
         {
             return Functions.FirstOrDefault(f => f.Name.ToLower() == name.ToLower());
