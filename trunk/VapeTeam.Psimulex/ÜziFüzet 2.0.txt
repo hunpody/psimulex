@@ -293,3 +293,44 @@ De azért itthagyom hátha ihlet más felhasználást is.
 Jah a másik dolog a & jel mellé bevezetem a nyelvtanba a ref kulcsszót is.
 Ilyen feketefélék nagyon idegenkednek az ilyen operátoroktól és a ref egy kicsit bizalomgerjesztõbb lehet számukra.
 Ugyan arra fordulna, csak egy kis szöszsenet.
+
+2008.10.03. - Vari
+
+Ezzel teszteltem. Referencia nememgy, de gondolom, ez normális még.
+És a rekurzió sem.
+Vagy én szúrtam el valamit. Ki fogom vizsgálni. Azért írom ide, hogyha nem beszélnénk tudd.
+
+void main()
+{
+	writeLine(add(10,10));
+	itn j = 10;
+	inc(j);
+	writeLine(j);
+	writeline(factor(10));
+}
+
+int add(int a, int b)
+{
+	return a + b;
+}
+
+void inc( int & i)
+{
+	i++;
+}
+
+int factor(int n)
+{
+	writeline(n);
+	if( n == 0 )
+		return 1;
+	else
+		return n * factor(n-1);
+}
+
+
+Output :
+20
+10
+10
+1

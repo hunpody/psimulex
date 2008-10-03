@@ -14,6 +14,11 @@ namespace VapeTeam.Psimulex.Core
     /// </summary>
     public class UserDefinedFunction : Function
     {
+        public UserDefinedFunction()
+        {
+            Commands = new CommandList();
+        }
+
         public override bool IsUserDefined
         {
             get
@@ -21,6 +26,7 @@ namespace VapeTeam.Psimulex.Core
                 return true;
             }
         }
+
         public CommandList Commands { get; set; }
         public int EntryPoint { get; set; }
     }

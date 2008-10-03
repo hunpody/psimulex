@@ -46,23 +46,32 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public ProgramBuilder Program { get; set; }
         public int ProgramSize { get { return Program.Program.CommandList.Count; } }
         public StringBuilder CompilerMessages { get; private set; }
+        public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
         
         public PsiCodeGeneratorVisitor()
         {
             Program = ProgramBuilder.Create();
             CompilerMessages = new StringBuilder();
+            UserDefinedFunctionList = new List<UserDefinedFunction>();
 
             InitHelpers();
         }
 
         public void AddCommand(ICommand command)
         {
-            Program.Add(command);
+            if (isCurrentCompiledTheMainProgram)
+                Program.Add(command);
+            else
+                lastCompiledUserDefinedFunction.Commands.Add(command);
         }
 
         public void AddCommand(params ICommand[] commands)
         {
-            Program.Add(commands);
+            if (isCurrentCompiledTheMainProgram)
+                Program.Add(commands);
+            else
+                foreach (var cmd in commands)
+                    lastCompiledUserDefinedFunction.Commands.Add(cmd);
         }
 
         public int GetCommandIndex(CommandBase cmd)
@@ -102,10 +111,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         private bool isSelectorsFirstCompile;
 
+        private bool isCurrentCompiledTheMainProgram;
+
         private System.Collections.Generic.Stack<Jump> lazyEvaluationJumpStack;
         private System.Collections.Generic.Stack<Jump> jumpStack;
 
         private int conditionCount;
+
+        private UserDefinedFunction lastCompiledUserDefinedFunction;
 
         private void InitHelpers()
         {
@@ -127,10 +140,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             isSelectorsFirstCompile = true;
 
+            isCurrentCompiledTheMainProgram = true;
+
             lazyEvaluationJumpStack = new System.Collections.Generic.Stack<Jump>();
             jumpStack = new System.Collections.Generic.Stack<Jump>();
 
             conditionCount = 0;
+
+            lastCompiledUserDefinedFunction = new UserDefinedFunction();
         }
 
         private string SplitQuotes(string s)
@@ -178,8 +195,23 @@ namespace VapeTeam.Psimulex.Compiler.AST
         #region High Level Tree Nodes
 
         public void Visit(CompilationUnitNode node) { VisitChildren(node); }
-        public void Visit(SimpleProgramNode node) { VisitChildren(node); }
-        public void Visit(MultiFuncionalProgramNode node) { VisitChildren(node); }
+        public void Visit(SimpleProgramNode node) 
+        {
+            isCurrentCompiledTheMainProgram = true;
+            VisitChildren(node); 
+        }
+
+        public void Visit(MultiFuncionalProgramNode node)
+        {
+            // Compile the Functions
+            isCurrentCompiledTheMainProgram = false;
+            VisitChildren(node);
+            isCurrentCompiledTheMainProgram = true;
+
+            // Generate a main Program
+            AddCommand(new Call("main", 0));
+            AddCommand(new Return(false));
+        }
         public void Visit(ImportDeclarationNode node)
         {
             // Majd meg kell csinálni az importálást
@@ -268,8 +300,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
             };
 
             lastCompiledDimensionList = new List<int>();
-            lastCompiledDimensionCount = 1;
+            lastCompiledDimensionCount = 0;
             lastCompiledDataType = TypeEnum.Undefined;
+            lastCompiledUserDefinedDataTypeName = "Undefined";
         }
 
         public void Visit(GlobalVariableDeclarationsNode node)
@@ -287,16 +320,20 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(FunctionDeclarationsNode node) { VisitChildren(node); }
+        public void Visit(FunctionDeclarationsNode node){ VisitChildren(node); }
         public void Visit(FunctionDeclarationNode node)
         {
-            // Új függvény kezdése -> név felvétele és mellé egy üres parancsobjektum tömb
+            // Start Compile a new function
+            lastCompiledUserDefinedFunction = new UserDefinedFunction();
 
             // FunctionType
             node.FunctionType.Accept(this);
             TypeEnum functionType = lastCompiledDataType;
-            string functionTypeName = node.Left.Left.Left.Value;
-            // lastCompiledDimensionCount, Dimensions, IsDynamic
+            string functionTypeName = lastCompiledUserDefinedDataTypeName;
+
+            int functionDimensionCount = lastCompiledDimensionCount;
+            List<int> functionDimensionList = lastCompiledDimensionList;
+            bool functionIsDynamic = isLastCompiledArrayDynamic;
 
             // FunctionReference
             bool functionIsReferenceType = false;
@@ -304,11 +341,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 functionIsReferenceType = true;
 
             // FunctionName
-            string functionName = node.GetChild(node.ChildrenCount - 3).Value;
+            string functionName = node.FunctionName.Value;
 
             // Message
-            string global = "Function Found : " + functionType + " " + functionName + " () ";
-            AddMessage(global);
+            string function = "Function Found : " + functionType + " " + functionName + " () ";
+            AddMessage(function);
             // Message
 
             // FunctionParameterList
@@ -316,17 +353,76 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // FunctionBlock
             node.FunctionBlock.Accept(this);
+
+            // Set Up rest of the function property-s.
+            lastCompiledUserDefinedFunction.ReturnValue =
+                new VariableDescriptor
+                    {
+                        Type = new TypeIdentifier
+                            {
+                                TypeEnum = functionType,
+                                TypeName = functionTypeName
+                            },
+                        IsArray = functionDimensionCount == 0 ? false : true,
+                        IsDynamic = functionIsDynamic,
+                        DimensionCount = functionDimensionCount,
+                        DimensionList = functionDimensionList,
+                        IsReference = functionIsReferenceType,
+                        Name = ""                        
+                    };
+
+            lastCompiledUserDefinedFunction.Name = functionName;
             
-            // Függvény felvétele, adatainak rendezése
-            // ...
+            if (lastCompiledUserDefinedFunction.Commands[lastCompiledUserDefinedFunction.Commands.Count - 1].GetType() != typeof(Return))
+                lastCompiledUserDefinedFunction.Commands.Add(new Return(false));
+           
+            // Add new compiled function to the UserDefinedCunctionList
+            UserDefinedFunctionList.Add(lastCompiledUserDefinedFunction);
         }
 
         public void Visit(FormalParameterListNode node) { VisitChildren(node); }
         public void Visit(FormalParameterNode node)
         {
-            // Szépen ki kell gyűjteni. Esetleg Member álltalánosítása és erre is hasznosítása.
-            // Member Átnevezése Variable -ra ...
-            VisitChildren(node);
+             // Parameter Type
+            node.ParameterType.Accept(this);
+
+            TypeEnum parameterType = lastCompiledDataType;
+            string parameterTypeName = lastCompiledUserDefinedDataTypeName;
+            bool parameterArrayIsDynamic = isLastCompiledArrayDynamic;
+
+            int parameterDimensionCount = lastCompiledDimensionCount;
+            List<int> parameterDimensionList = lastCompiledDimensionList;
+
+            // Parameter Reference
+            bool parameterIsReference = false;
+            if (node.ParameterReference != null)
+                parameterIsReference = true;
+
+            // Parameter Name
+            string parameterName = node.ParameterName.Value;
+
+            lastCompiledUserDefinedFunction.Parameters.Add
+                (new VariableDescriptor
+                    {
+                        Type = new TypeIdentifier
+                            {
+                                TypeEnum = parameterType,
+                                TypeName = parameterTypeName
+                            },
+                        Name = parameterName,
+                        IsReference = parameterIsReference,
+                        IsArray = parameterDimensionCount == 0 ? false : true,
+                        DimensionCount = parameterDimensionCount,
+                        DimensionList = parameterDimensionList,
+                        IsDynamic = parameterArrayIsDynamic
+                    }
+                );
+
+            lastCompiledDataType = TypeEnum.Undefined;
+            lastCompiledUserDefinedDataTypeName = "";
+            isLastCompiledArrayDynamic = false;
+            lastCompiledDimensionCount = 0;
+            lastCompiledDimensionList = new List<int>();
         }
 
         #endregion
@@ -1177,7 +1273,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(DimensionMarkerNode node)
         {
-            lastCompiledDimensionCount = node.ChildrenCount - 2;
+            lastCompiledDimensionCount = node.ChildrenCount - 1;
             lastCompiledDimensionList = new List<int>();
             isLastCompiledArrayDynamic = true;
         }

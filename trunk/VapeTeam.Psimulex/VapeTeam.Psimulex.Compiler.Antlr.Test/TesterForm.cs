@@ -47,18 +47,18 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             resultTextBox.Text = compiler.output;
             txtErrors.Text = sb.ToString();
 
-            if (txtErrors.Text == "")
-            {
-                try
-                {
-                    CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
-                    visitor.Visit(cun);
-                }
-                catch(Exception ex)
-                {
-                    txtErrors.Text = ex.ToString();
-                }
-            }
+            //if (txtErrors.Text == "")
+            //{
+            //    try
+            //    {
+            CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
+            visitor.Visit(cun);
+            //    }
+            //    catch(Exception ex)
+            //    {
+            //        txtErrors.Text = ex.ToString();
+            //    }
+            //}
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -151,6 +151,9 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             compileButton_Click(this, new EventArgs());
 
             var machine = MachineBuilder.Instance.CreateMachine(1, 16);
+
+            visitor.Program.Program.AddFunction(visitor.UserDefinedFunctionList);
+
             var process = machine.System.Load(visitor.Program);
 
             try

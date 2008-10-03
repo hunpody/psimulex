@@ -591,13 +591,9 @@ print(i);
         public void TestGenAt_2008__szeptember_25_17_00_03()
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
-void main()
-{
 	int[2] t;
 	t[0] = 111;
 	print(t[0]);
-}
-
 ");
 
             Assert.AreEqual("111", result);
@@ -607,13 +603,10 @@ void main()
         public void TestGenAt_2008__szeptember_25_17_04_32()
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
-void main()
-{
 	int[2] t;
 	t[0] = 111;
 	t[1] = t[0];	
 	print(t[1]);
-}
 
 ");
 
