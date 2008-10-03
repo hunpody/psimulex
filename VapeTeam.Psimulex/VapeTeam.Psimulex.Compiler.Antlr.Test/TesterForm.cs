@@ -47,18 +47,18 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             resultTextBox.Text = compiler.output;
             txtErrors.Text = sb.ToString();
 
-            //if (txtErrors.Text == "")
-            //{
-            //    try
-            //    {
-            CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
-            visitor.Visit(cun);
-            //    }
-            //    catch(Exception ex)
-            //    {
-            //        txtErrors.Text = ex.ToString();
-            //    }
-            //}
+            if (txtErrors.Text == "")
+            {
+                try
+                {
+                    CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
+                    visitor.Visit(cun);
+                }
+                catch (Exception ex)
+                {
+                    txtErrors.Text = ex.ToString();
+                }
+            }
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -131,9 +131,26 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             types += "\t\t\tfor (int i = 0; i < process.Program.CommandList.Count; i++)";
             types += "\r\n\t\t\t\tAssert.IsInstanceOfType(process.Program.CommandList[i], commandObjectTypes[i]);";
             */
+            
+            string funcString = "";
 
+            foreach (var item in visitor.UserDefinedFunctionList)
+            {
+                int lineNumber = visitor.Program.Program.CommandList.Count;
+
+                foreach (ICommand command in item.Commands)
+                {
+                    string line = "";
+                    line = lineNumber.ToString("000") + " " + command.ToString() + "\r\n";
+                    funcString += line;
+                    lineNumber++;
+                }
+            }
+            
             frmProgramString.ProgramString = 
-                "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() +
+                "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() +funcString +
+
+
                 /*"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +*/
                 "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.CompilerMessages;
             frmProgramString.Show();
