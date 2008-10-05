@@ -158,7 +158,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 CorrectSelectionIntervalWithFindingClosingChar(range);
 
             // If lastCompiledUserDefinedFunction == null, than we compile, the main program
-            if (lastCompiledUserDefinedFunction != null)
+            if (!isCurrentCompiledTheMainProgram && lastCompiledUserDefinedFunction != null)
             {
                 CommandPositionChanges[lastCompiledUserDefinedFunction.Name,
                     lastCompiledUserDefinedFunction.Commands.Count] = range;
