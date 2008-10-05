@@ -272,13 +272,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
                                   
 
             // NodeValueInfo Updateing
-            if (/*children.Count == 0 && */!node.IsVirtual)
+            if (!node.IsVirtual)
             {
                 nodeValueInfo.StartLine = nodeValueInfo.Line;
                 nodeValueInfo.StartColumn = nodeValueInfo.CharPositionInLine;
 
-                nodeValueInfo.StopLine = nodeValueInfo.Line;
-                nodeValueInfo.StopColumn = nodeValueInfo.StartColumn + value.Length;
+                nodeValueInfo.EndLine = nodeValueInfo.Line;
+                nodeValueInfo.EndColumn = nodeValueInfo.StartColumn + value.Length;
             }
             else if (children.Count != 0 && node.IsVirtual)
             {
@@ -291,16 +291,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 nodeValueInfo.StartLine = iv.FromLine;
                 nodeValueInfo.StartColumn = iv.FromColumn;
 
-                nodeValueInfo.StopLine = iv.ToLine;
-                nodeValueInfo.StopColumn = iv.ToColumn;
+                nodeValueInfo.EndLine = iv.ToLine;
+                nodeValueInfo.EndColumn = iv.ToColumn;
             }
             else 
             {
                 nodeValueInfo.StartLine = -1;
                 nodeValueInfo.StartColumn = -1;
 
-                nodeValueInfo.StopLine = -1;
-                nodeValueInfo.StopColumn = -1;
+                nodeValueInfo.EndLine = -1;
+                nodeValueInfo.EndColumn = -1;
             }
 
             return node;
@@ -315,15 +315,15 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 {
                     interval.FromLine = node.NodeValueInfo.StartLine;
                     interval.FromColumn = node.NodeValueInfo.StartColumn;
-                    interval.ToLine = node.NodeValueInfo.StopLine;
-                    interval.ToColumn = node.NodeValueInfo.StopColumn;
+                    interval.ToLine = node.NodeValueInfo.EndLine;
+                    interval.ToColumn = node.NodeValueInfo.EndColumn;
                 }
 
-                if (interval.FromLine >= node.NodeValueInfo.StartLine /*&& node.NodeValueInfo.StartLine >= 0*/)
+                if (interval.FromLine >= node.NodeValueInfo.StartLine)
                 {
                     if (interval.FromLine == node.NodeValueInfo.StartLine)
                     {
-                        if (interval.FromColumn > node.NodeValueInfo.StartColumn /*&& node.NodeValueInfo.StartColumn >= 0*/)
+                        if (interval.FromColumn > node.NodeValueInfo.StartColumn)
                         {
                             interval.FromColumn = node.NodeValueInfo.StartColumn;
                         }
@@ -336,21 +336,21 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     interval.FromLine = node.NodeValueInfo.StartLine;
                 }
 
-                if (interval.ToLine <= node.NodeValueInfo.StopLine)
+                if (interval.ToLine <= node.NodeValueInfo.EndLine)
                 {
-                    if (interval.ToLine == node.NodeValueInfo.StopLine)
+                    if (interval.ToLine == node.NodeValueInfo.EndLine)
                     {
-                        if (interval.ToColumn < node.NodeValueInfo.StopColumn)
+                        if (interval.ToColumn < node.NodeValueInfo.EndColumn)
                         {
-                            interval.ToColumn = node.NodeValueInfo.StopColumn;
+                            interval.ToColumn = node.NodeValueInfo.EndColumn;
                         }
                     }
                     else
                     {
-                        interval.ToColumn = node.NodeValueInfo.StopColumn;
+                        interval.ToColumn = node.NodeValueInfo.EndColumn;
                     }
 
-                    interval.ToLine = node.NodeValueInfo.StopLine;
+                    interval.ToLine = node.NodeValueInfo.EndLine;
                 }
             }
 

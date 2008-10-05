@@ -44,33 +44,27 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             CharPositionInLine = -1;
             Line = -1;
-            StartIndex = -1;
-            StopIndex = -1;
-            TokenStartIndex = -1;
-            TokenStopIndex = -1;
+
+            StartLine = -1;
+            StartColumn = -1;
+
+            EndLine = -1;
+            EndColumn = -1;
         }
 
-        public NodeValueInfo(int charPositionInLine, int line, int startIndex, int stopIndex, int tokenStartIndex, int tokenStopIndex)
+        public NodeValueInfo(int charPositionInLine, int line)
         {
             CharPositionInLine = charPositionInLine;
             Line = line;
-            StartIndex = startIndex;
-            StopIndex = stopIndex;
-            TokenStartIndex = tokenStartIndex;
-            TokenStopIndex = tokenStopIndex;
         }
 
         public int CharPositionInLine { get; set; }
         public int Line { get; set; }
-        public int StartIndex { get; set; }
-        public int StopIndex { get; set; }
-        public int TokenStartIndex { get; set; }
-        public int TokenStopIndex { get; set; }
 
         public int StartColumn { get; set; }
         public int StartLine { get; set; }
 
-        public int StopColumn { get; set; }
-        public int StopLine { get; set; }
+        public int EndColumn { get; set; }
+        public int EndLine { get; set; }
     }
 }

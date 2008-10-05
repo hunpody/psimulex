@@ -130,19 +130,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         private void RegisterIntervalChange(IPsiNode node)
         {
-            RegisterIntervalChange(node, true);
-        }
-
-        private void RegisterIntervalChange(IPsiNode node, bool findSemiColon)
-        {
-            if(findSemiColon)
-                RegisterIntervalChange(node, ';');
-            else
-                RegisterIntervalChange(node, ')');
-        }
-
-        private void RegisterIntervalChange(IPsiNode node, char closingChar)
-        {
             Interval range =
                 new Interval
                 {
@@ -150,8 +137,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     
                     FromLine = node.NodeValueInfo.StartLine,
                     FromColumn = node.NodeValueInfo.StartColumn,
-                    ToLine = node.NodeValueInfo.StopLine,
-                    ToColumn = node.NodeValueInfo.StopColumn,
+                    ToLine = node.NodeValueInfo.EndLine,
+                    ToColumn = node.NodeValueInfo.EndColumn,
                 };
 
             range.StartIndex = 0;
@@ -161,14 +148,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
             range.StartIndex += node.NodeValueInfo.StartColumn;
 
             range.EndIndex = 0;
-            for (int i = 1; i < node.NodeValueInfo.StopLine; i++)
+            for (int i = 1; i < node.NodeValueInfo.EndLine; i++)
                 range.EndIndex += lineLengthList[i];
 
-            range.EndIndex += node.NodeValueInfo.StopColumn;
+            range.EndIndex += node.NodeValueInfo.EndColumn;
 
             // Is it a Leaf Virtual Node or not
             if (range.StartIndex != -1 && range.EndIndex != -1)
-                CorrectSelectionIntervalWithFindingClosingChar(range, closingChar);
+                CorrectSelectionIntervalWithFindingClosingChar(range);
 
             // If lastCompiledUserDefinedFunction == null, than we compile, the main program
             if (lastCompiledUserDefinedFunction != null)
@@ -182,7 +169,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        private void CorrectSelectionIntervalWithFindingClosingChar(Interval interval, char closingChar)
+        private void CorrectSelectionIntervalWithFindingClosingChar(Interval interval)
         {
             int start = interval.StartIndex;
             int end = interval.EndIndex;
@@ -705,7 +692,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(ForInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
         public void Visit(ForConditionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
-        public void Visit(ForUpdateNode node) { RegisterIntervalChange(node, false); VisitChildren(node); }
+        public void Visit(ForUpdateNode node) { RegisterIntervalChange(node); VisitChildren(node); }
 
         public void Visit(DoStatementNode node) 
         {
@@ -772,7 +759,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             // AddCommand(new PushState());
 
-            RegisterIntervalChange(node.ForEachInitialization,'i');
+            RegisterIntervalChange(node.ForEachInitialization);
 
             // ForEachRunningVariableType
             node.ForEachRunningVariableType.Accept(this);
@@ -823,8 +810,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // AddCommand(new PopState());
         }
 
-        public void Visit(ForEachInitializationNode node) { RegisterIntervalChange(node, 'i'); VisitChildren(node); }
-        public void Visit(ForEachCollectionExpressionNode node) { RegisterIntervalChange(node, false); VisitChildren(node); }
+        public void Visit(ForEachInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public void Visit(ForEachCollectionExpressionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
 
         public void Visit(LoopStatementNode node) 
         {
@@ -870,10 +857,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // AddCommand(new PopState());
         }
 
-        public void Visit(LoopInitializationNode node) { RegisterIntervalChange(node, 't'); VisitChildren(node); }
-        public void Visit(LoopLimitNode node) { RegisterIntervalChange(node, false); VisitChildren(node); }
+        public void Visit(LoopInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public void Visit(LoopLimitNode node) { RegisterIntervalChange(node); VisitChildren(node); }
 
-        public void Visit(ConditionNode node) { RegisterIntervalChange(node, false); VisitChildren(node); }
+        public void Visit(ConditionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
         public void Visit(CoreNode node) { VisitChildren(node); }
 
         public void Visit(PDoStatementNode node)
