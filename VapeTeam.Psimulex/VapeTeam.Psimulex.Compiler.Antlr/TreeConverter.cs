@@ -51,15 +51,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 root = nodeFactory.CreateNode
                             (
                                 type, value,
-                                new NodeValueInfo
-                                (
-                                    tree.CharPositionInLine,
-                                    tree.Line,
-                                    tree.startIndex,
-                                    tree.stopIndex,
-                                    tree.TokenStartIndex,
-                                    tree.TokenStopIndex
-                                ),
+                                new NodeValueInfo ( tree.CharPositionInLine, tree.Line),
                                 "",
                                 null,
                                 children
@@ -86,7 +78,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                         //text = tree.ToString();
                         text = tree.ToString() + string.Format(" From:[ {0}, {1} ],To:[ {2}, {3} ])",
                             tree.NodeValueInfo.StartLine, tree.NodeValueInfo.StartColumn,
-                            tree.NodeValueInfo.StopLine, tree.NodeValueInfo.StopColumn);
+                            tree.NodeValueInfo.EndLine, tree.NodeValueInfo.EndColumn);
                         break;
                     case ViewMode.Values:
                         text = tree.Value;
