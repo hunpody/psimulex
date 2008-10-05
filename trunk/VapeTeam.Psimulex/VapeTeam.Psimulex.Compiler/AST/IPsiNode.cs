@@ -66,5 +66,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public int StopIndex { get; set; }
         public int TokenStartIndex { get; set; }
         public int TokenStopIndex { get; set; }
+
+        public int StartColumn { get; set; }
+        public int StartLine { get; set; }
+
+        public int StopColumn { get; set; }
+        public int StopLine { get; set; }
     }
 }

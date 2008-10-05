@@ -44,17 +44,31 @@ namespace VapeTeam.Psimulex.Compiler.AST
         #region PsiBuilderVisitor Members
         
         public ProgramBuilder Program { get; set; }
+
+        public string Source { get; set; }
+        public string FileName { get; set; }
+
         public int ProgramSize { get { return Program.Program.CommandList.Count; } }
         public StringBuilder CompilerMessages { get; private set; }
         public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
+
+        public CommandPositionChanges CommandPositionChanges { get; set; }
         
-        public PsiCodeGeneratorVisitor()
+        public PsiCodeGeneratorVisitor(string source, string fileName)
         {
             Program = ProgramBuilder.Create();
+
+            Source = source;
+            FileName = fileName;
+
             CompilerMessages = new StringBuilder();
             UserDefinedFunctionList = new List<UserDefinedFunction>();
 
+            CommandPositionChanges = new CommandPositionChanges();
+
             InitHelpers();
+
+            FindLineLengths();
         }
 
         public void AddCommand(ICommand command)
@@ -83,6 +97,133 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             CompilerMessages.AppendLine(msg);
         }
+
+        /*Highlighter, Stepping Helpers*/
+        #region Highlighter, Stepping Helpers
+
+        private List<int> lineLengthList;
+        private void FindLineLengths()
+        {
+            lineLengthList = new List<int>();
+            lineLengthList.Add(0);
+
+            int len = 0;
+            for (int i = 0; i < Source.Length; ++i)
+            {
+                if (Source[i] == '\n')
+                {
+                    lineLengthList.Add(len + 1);
+                    len = -1;
+                }
+                len++;
+            }
+        }
+
+        private int CountEndOfLines(string src)
+        {
+            int count = 0;
+            foreach (var ch in src)
+                if (ch == '\n')
+                    count++;
+            return count;
+        }
+
+        private void RegisterIntervalChange(IPsiNode node)
+        {
+            RegisterIntervalChange(node, true);
+        }
+
+        private void RegisterIntervalChange(IPsiNode node, bool findSemiColon)
+        {
+            if(findSemiColon)
+                RegisterIntervalChange(node, ';');
+            else
+                RegisterIntervalChange(node, ')');
+        }
+
+        private void RegisterIntervalChange(IPsiNode node, char closingChar)
+        {
+            Interval range =
+                new Interval
+                {
+                    FileName = this.FileName,
+                };
+
+            range.FromIndex = 0;
+            for (int i = 1; i < node.NodeValueInfo.StartLine; i++)
+			    range.FromIndex += lineLengthList[i];
+
+            range.FromIndex += node.NodeValueInfo.StartColumn;
+
+            range.ToIndex = 0;
+            for (int i = 1; i < node.NodeValueInfo.StopLine; i++)
+                range.ToIndex += lineLengthList[i];
+
+            range.ToIndex += node.NodeValueInfo.StopColumn;
+
+            // Is it a Leaf Virtual Node or not
+            if (range.FromIndex != -1 && range.ToIndex != -1)
+                CorrectSelectionIntervalWithFindingClosingChar(range, closingChar);
+
+            // If lastCompiledUserDefinedFunction == null, than we compile, the main program
+            if (lastCompiledUserDefinedFunction != null)
+            {
+                CommandPositionChanges[lastCompiledUserDefinedFunction.Name,
+                    lastCompiledUserDefinedFunction.Commands.Count] = range;
+            }
+            else
+            {
+                CommandPositionChanges["", ProgramSize] = range;
+            }
+        }
+
+        private void CorrectSelectionIntervalWithFindingClosingChar(Interval interval, char closingChar)
+        {
+            int start = interval.FromIndex;
+            int end = interval.ToIndex;
+
+            int parenthesises = 0;		// ()
+            int brackets = 0;			// []
+
+            int i = start;
+            while ((i < Source.Length) && (i < end || parenthesises > 0 || brackets > 0))
+            {
+                switch (Source[i])
+                {
+                    case '(':
+                        ++parenthesises;
+                        break;
+                    case ')':
+                        if (parenthesises > 0)
+                            --parenthesises;
+                        break;
+                    case '[':
+                        ++brackets;
+                        break;
+                    case ']':
+                        if (brackets > 0)
+                            --brackets;
+                        break;
+                }
+                ++i;
+            }
+
+            while (i < Source.Length && Source[i].ToString().ToLower() != closingChar.ToString().ToLower())
+                ++i;
+
+            interval.ToIndex = i;
+        }
+
+        private void CorrectSelectionIntervalWithFindingSemiColon(Interval interval)
+        {
+            int i = interval.FromIndex;
+            while (i < Source.Length && Source[i] != ';')
+                ++i;
+
+            interval.ToIndex = i + 1;
+        }
+
+        #endregion
 
         /*Compile Helpers*/
         #region Compiler Helpers
@@ -307,6 +448,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(GlobalVariableDeclarationsNode node)
         {
+            RegisterIntervalChange(node);
+
             foreach (IPsiNode child in node.Children)
             {
                 child.Accept(this);
@@ -348,6 +491,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddMessage(function);
             // Message
 
+            lastCompiledUserDefinedFunction.Name = functionName;
+
             // FunctionParameterList
             node.FunctionParameterList.Accept(this);
 
@@ -370,8 +515,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
                         IsReference = functionIsReferenceType,
                         Name = ""                        
                     };
-
-            lastCompiledUserDefinedFunction.Name = functionName;
             
             if (lastCompiledUserDefinedFunction.Commands[lastCompiledUserDefinedFunction.Commands.Count - 1].GetType() != typeof(Return))
                 lastCompiledUserDefinedFunction.Commands.Add(new Return(false));
@@ -542,10 +685,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             
             // AddCommand(new PopState());
         }
-        
-        public void Visit(ForInitializationNode node) { VisitChildren(node); }
-        public void Visit(ForConditionNode node) { VisitChildren(node); }
-        public void Visit(ForUpdateNode node) { VisitChildren(node); }
+
+        public void Visit(ForInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public void Visit(ForConditionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public void Visit(ForUpdateNode node) { RegisterIntervalChange(node, false); VisitChildren(node); }
 
         public void Visit(DoStatementNode node) 
         {
@@ -612,6 +755,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             // AddCommand(new PushState());
 
+            RegisterIntervalChange(node.ForEachInitialization,'i');
+
             // ForEachRunningVariableType
             node.ForEachRunningVariableType.Accept(this);
 
@@ -661,8 +806,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // AddCommand(new PopState());
         }
 
-        public void Visit(ForEachInitializationNode node) { VisitChildren(node); }
-        public void Visit(ForEachCollectionExpressionNode node) { VisitChildren(node); }
+        public void Visit(ForEachInitializationNode node) { RegisterIntervalChange(node, 'i'); VisitChildren(node); }
+        public void Visit(ForEachCollectionExpressionNode node) { RegisterIntervalChange(node, false); VisitChildren(node); }
 
         public void Visit(LoopStatementNode node) 
         {
@@ -708,10 +853,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // AddCommand(new PopState());
         }
 
-        public void Visit(LoopInitializationNode node) { VisitChildren(node); }
-        public void Visit(LoopLimitNode node) { VisitChildren(node); }
+        public void Visit(LoopInitializationNode node) { RegisterIntervalChange(node, 't'); VisitChildren(node); }
+        public void Visit(LoopLimitNode node) { RegisterIntervalChange(node, false); VisitChildren(node); }
 
-        public void Visit(ConditionNode node) { VisitChildren(node); }
+        public void Visit(ConditionNode node) { RegisterIntervalChange(node, false); VisitChildren(node); }
         public void Visit(CoreNode node) { VisitChildren(node); }
 
         public void Visit(PDoStatementNode node)
@@ -729,27 +874,45 @@ namespace VapeTeam.Psimulex.Compiler.AST
             throw new NotImplementedException("Lock is not implemented yet.");
         }
 
-        public void Visit(ReturnNode node) 
-        {
+        public void Visit(ReturnStatementNode node)
+        {             
+            RegisterIntervalChange(node);
+
             // Has or Not Has Return Value
             bool hasReturnValue = false;
-            if(node.Left != null)
+            if(node.ReturnValue != null)
             {
-                node.Left.Accept(this);
+                node.ReturnValue.Accept(this);
                 hasReturnValue = true;
             }
 
             AddCommand(new Return(hasReturnValue));
         }
 
+        public void Visit(ReturnNode node) { VisitChildren(node); }
+
         public void Visit(BreakNode node) 
         {
+            RegisterIntervalChange(node);
+
             Break b = new Break();
             AddCommand(b);
             jumpStack.Push(b);
         }
 
         //public void Visit(ContinueNode node) { VisitChildren(node); }
+
+        public void Visit(ExpressionStatementNode node) 
+        {
+            RegisterIntervalChange(node);
+            VisitChildren(node); 
+        }
+
+        public void Visit(VariableDeclarationStatementNode node)
+        {
+            RegisterIntervalChange(node);
+            VisitChildren(node);
+        }
 
         public void Visit(VariableInitializationNode node)
         {
@@ -789,7 +952,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         public void Visit(VariableDeclarationNode node)
-        {            
+        {
+            RegisterIntervalChange(node);
+
             // Type
             node.VariableType.Accept(this);
 

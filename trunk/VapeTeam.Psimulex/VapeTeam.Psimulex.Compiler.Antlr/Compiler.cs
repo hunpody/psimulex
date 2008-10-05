@@ -52,7 +52,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
 
                 #region Added by pody, for temporary use (2008.09.21. 18:40)
 
-                var visitor = new Psimulex.Compiler.AST.PsiCodeGeneratorVisitor();
+                var visitor = new Psimulex.Compiler.AST.PsiCodeGeneratorVisitor(source, "teszt.psi");
                 visitor.Visit(TreeConverter.FromCommonTreeToPsiNode(SintaxTree) as AST.CompilationUnitNode);
                 result.CompiledProgram = visitor.Program;
 

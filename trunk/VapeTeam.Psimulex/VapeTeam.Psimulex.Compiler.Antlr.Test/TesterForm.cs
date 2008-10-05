@@ -18,7 +18,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
     public partial class TesterForm : Form
     {
         private Compiler compiler = new Compiler();
-        PsiCodeGeneratorVisitor visitor = new PsiCodeGeneratorVisitor();
+        PsiCodeGeneratorVisitor visitor;
         
         public TesterForm()
         {
@@ -26,12 +26,16 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             if (!Directory.Exists("Teszt"))
                 Directory.CreateDirectory("Teszt");
             if (File.Exists("Teszt\\teszt.psi"))
-                sourceCodeTextEditorControl.LoadFile("Teszt\\teszt.psi");            
+                sourceCodeTextEditorControl.LoadFile("Teszt\\teszt.psi");
+
+           
         }
 
         private void compileButton_Click(object sender, EventArgs e)
         {
-            visitor = new PsiCodeGeneratorVisitor();
+            currentCommandToHighLight = 0;
+
+            visitor = new PsiCodeGeneratorVisitor(sourceCodeTextEditorControl.Text,"teszt.psi");
 
             var result = compiler.Compile(sourceCodeTextEditorControl.Text);
 
@@ -207,6 +211,89 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             sw.WriteLine();
             sw.WriteLine(testCase);
             sw.Close();
+        }
+
+        int currentCommandToHighLight = 0;
+        private void StepButton_Click(object sender, EventArgs e)
+        {
+            if (visitor != null)
+            {
+                if (currentCommandToHighLight < visitor.CommandPositionChanges.CommandInfoList.Count)
+                {
+                    Interval iv = visitor.CommandPositionChanges.CommandInfoList[currentCommandToHighLight].Interval;
+
+                    sourceCodeTextEditorControl.Document.MarkerStrategy.RemoveAll(x => x.Color == Color.Red);
+                    sourceCodeTextEditorControl.Refresh();
+
+                    sourceCodeTextEditorControl.Document.MarkerStrategy.AddMarker
+                       (
+                       new ICSharpCode.TextEditor.Document.TextMarker
+                           (
+                           iv.FromIndex, iv.ToIndex - iv.FromIndex,
+                           ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
+                           Color.Red
+                           )
+                       );
+                    sourceCodeTextEditorControl.Refresh();
+
+                    ++currentCommandToHighLight;
+                }
+                else
+                {
+                    currentCommandToHighLight = 0;
+                    sourceCodeTextEditorControl.Document.MarkerStrategy.RemoveAll(x => x.Color == Color.Red);
+                    sourceCodeTextEditorControl.Refresh();
+                }
+            }
+            /*
+            if (visitor != null)
+            {
+                CommandID cmdid = new CommandID { FunctionName = "main", FunctionParameterCount = 0, CommandIndex = i };
+                while (!visitor.CommandPositionChanges.Contains(cmdid) && i < 1000)
+                {
+                    ++i;
+                    cmdid = new CommandID { FunctionName = "main", FunctionParameterCount = 0, CommandIndex = i };
+                }
+                Interval iv = visitor.CommandPositionChanges[cmdid];
+
+                if (iv != null)
+                {
+                    sourceCodeTextEditorControl.Document.MarkerStrategy.AddMarker
+                       (
+                       new ICSharpCode.TextEditor.Document.TextMarker
+                           (
+                           iv.FromIndex, iv.ToIndex - iv.FromIndex,
+                           ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
+                           Color.Red
+                           )
+                       );
+                    sourceCodeTextEditorControl.Refresh();
+                }
+                ++i;
+            }
+            */
+        }
+
+        private void HighLightButton_Click(object sender, EventArgs e)
+        {
+           sourceCodeTextEditorControl.Document.MarkerStrategy.AddMarker
+           (
+           new ICSharpCode.TextEditor.Document.TextMarker
+               (
+               Convert.ToInt32(StartTextBox.Text), Convert.ToInt32( StopTextBox.Text),
+               ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
+               Color.Red
+               )
+           );
+
+           sourceCodeTextEditorControl.Refresh();
+        }
+
+        private void RemoveHighLightButton_Click(object sender, EventArgs e)
+        {
+            sourceCodeTextEditorControl.Document.MarkerStrategy.RemoveAll(x => x.Color == Color.Red);
+
+            sourceCodeTextEditorControl.Refresh();
         }
     }
 }

@@ -75,10 +75,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 case PsimulexLexer.ASYNCSTATEMENT: type = NodeType.AsynStatement; break;
                 case PsimulexLexer.LOCKSTATEMENT: type = NodeType.LockStatement; break;
 
-                case PsimulexLexer.RETURN: type = NodeType.Return; break;
+                case PsimulexLexer.RETURN_STATEMENT: type = NodeType.ReturnStatement; break;
+                case PsimulexLexer.Return: type = NodeType.Return; break;
                 case PsimulexLexer.Break: type = NodeType.Break; break;
                 //case PsimulexLexer.Continue: type = NodeType.Continue; break;
+                case PsimulexLexer.EXPRESSION_STATEMENT: type = NodeType.ExpressionStatement; break;
 
+                case PsimulexLexer.VARIABLE_DECLARATION_STATEMENT: type = NodeType.VariableDeclarationStatement; break;
                 case PsimulexLexer.VARINIT: type = NodeType.VariableInitialization; break;
                 case PsimulexLexer.VARDECLARE: type = NodeType.VariableDeclaration; break;
 

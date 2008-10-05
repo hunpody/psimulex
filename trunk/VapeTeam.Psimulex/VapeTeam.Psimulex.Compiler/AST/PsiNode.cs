@@ -317,9 +317,19 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Accept(IPsiVisitor v) { v.Visit(this); }
     }
 
+    public class ReturnStatementNode : PsiNode
+    {
+        public IPsiNode ReturnValue { get; set; }
+
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
     public class ReturnNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class BreakNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     //public class ContinueNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class ExpressionStatementNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+
+    public class VariableDeclarationStatementNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
     public class VariableInitializationNode : PsiNode
     {

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AST\CommandPositionChanges.cs" />
     <Compile Include="AST\INodeTypeFactory.cs" />
     <Compile Include="AST\IPsiNode.cs" />
     <Compile Include="AST\IPsiNodeFactory.cs" />

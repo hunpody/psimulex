@@ -63,9 +63,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(PDoStatementNode node);
         void Visit(AsynStatementNode node);
         void Visit(LockStatementNode node);
+        void Visit(ReturnStatementNode node);
         void Visit(ReturnNode node);
         void Visit(BreakNode node);
         //void Visit(ContinueNode node);
+        void Visit(ExpressionStatementNode node);
+        void Visit(VariableDeclarationStatementNode node);
         void Visit(VariableInitializationNode node);
         void Visit(VariableDeclarationNode node);
 
