@@ -62,10 +62,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
 	    AsynStatement,
 	    LockStatement,
 	
+        ReturnStatement,
 	    Return,
         Break,
 //        Continue,
+        ExpressionStatement,
 
+        VariableDeclarationStatement,
         VariableInitialization,
         VariableDeclaration,        	
 

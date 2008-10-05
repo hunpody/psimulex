@@ -21,7 +21,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /// <param name="children">The children of the node</param>
         /// <returns>The new node</returns>
         public IPsiNode CreateNode(NodeType type, string value, NodeValueInfo nodeValueInfo, string viewComment, IPsiNode parent, List<IPsiNode> children)
-        {
+        {           
             // Default nod is Non Virtual Node
             bool v = false;
 
@@ -163,9 +163,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
                         LockVariableName = children[0],
                         LockCore = children[1]
                     }; v = true; break;
-                case NodeType.Return: node = new ReturnNode(); v = true; break;
+                case NodeType.ReturnStatement:
+                    node = new ReturnStatementNode 
+                    {
+                        ReturnValue = children.Count == 2 ? children[1] : null
+                    }; v = true; break;
+                case NodeType.Return: node = new ReturnNode(); break;
                 case NodeType.Break: node = new BreakNode(); break;
                 //case NodeType.Continue: node = new ContinueNode(); break;
+                case NodeType.ExpressionStatement: node = new ExpressionStatementNode(); v = true; break;
+                case NodeType.VariableDeclarationStatement: node = new VariableDeclarationStatementNode(); v = true; break;
                 case NodeType.VariableInitialization:
                     node = new VariableInitializationNode
                     {
@@ -262,6 +269,80 @@ namespace VapeTeam.Psimulex.Compiler.AST
             
             // Init Datas in treeNode and Return
             node.Init(parent, children, value, type, v, viewComment, nodeValueInfo);
+                                  
+
+            // NodeValueInfo Updateing
+            if (children.Count == 0 && !node.IsVirtual)
+            {
+                nodeValueInfo.StartLine = nodeValueInfo.Line;
+                nodeValueInfo.StartColumn = nodeValueInfo.CharPositionInLine;
+
+                nodeValueInfo.StopLine = nodeValueInfo.Line;
+                nodeValueInfo.StopColumn = nodeValueInfo.StartColumn + value.Length;
+            }
+            else if (children.Count != 0)
+            {
+                // MaxKer, MinKer
+                // MinStart, MaxStop
+
+                int minStartLine = children[0].NodeValueInfo.StartLine;
+                int minStartCol = children[0].NodeValueInfo.StartColumn;
+
+                int maxStopLine = children[0].NodeValueInfo.StopLine;
+                int maxStopCol = children[0].NodeValueInfo.StopColumn;
+
+                foreach (var child in children)
+                {
+                    if (minStartLine >= child.NodeValueInfo.StartLine && child.NodeValueInfo.StartLine > 0)
+                    {
+                        if (minStartLine == child.NodeValueInfo.StartLine)
+                        {
+                            if (minStartCol > child.NodeValueInfo.StartColumn && child.NodeValueInfo.StartColumn > 0)
+                            {
+                                minStartCol = child.NodeValueInfo.StartColumn;
+                            }
+                        }
+                        else
+                        {
+                            minStartCol = child.NodeValueInfo.StartColumn;
+                        }
+
+                        minStartLine = child.NodeValueInfo.StartLine;
+                    }
+
+                    if (maxStopLine <= child.NodeValueInfo.StopLine)
+                    {
+                        if (maxStopLine == child.NodeValueInfo.StopLine)
+                        {
+                            if (maxStopCol < child.NodeValueInfo.StopColumn)
+                            {
+                                maxStopCol = child.NodeValueInfo.StopColumn;
+                            }
+                        }
+                        else
+                        {
+                            maxStopCol = child.NodeValueInfo.StopColumn;
+                        }
+
+                        maxStopLine = child.NodeValueInfo.StopLine;
+                    }
+                }
+
+                nodeValueInfo.StartLine = minStartLine;
+                nodeValueInfo.StartColumn = minStartCol;
+
+                nodeValueInfo.StopLine = maxStopLine;
+                nodeValueInfo.StopColumn = maxStopCol;
+            }
+            else 
+            {
+                nodeValueInfo.StartLine = -1;
+                nodeValueInfo.StartColumn = -1;
+
+                nodeValueInfo.StopLine = -1;
+                nodeValueInfo.StopColumn = -1;
+            }
+
             return node;
         }
 
