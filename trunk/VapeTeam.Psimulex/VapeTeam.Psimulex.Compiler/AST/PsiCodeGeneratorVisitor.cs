@@ -147,22 +147,27 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 new Interval
                 {
                     FileName = this.FileName,
+                    
+                    FromLine = node.NodeValueInfo.StartLine,
+                    FromColumn = node.NodeValueInfo.StartColumn,
+                    ToLine = node.NodeValueInfo.StopLine,
+                    ToColumn = node.NodeValueInfo.StopColumn,
                 };
 
-            range.FromIndex = 0;
+            range.StartIndex = 0;
             for (int i = 1; i < node.NodeValueInfo.StartLine; i++)
-			    range.FromIndex += lineLengthList[i];
+			    range.StartIndex += lineLengthList[i];
 
-            range.FromIndex += node.NodeValueInfo.StartColumn;
+            range.StartIndex += node.NodeValueInfo.StartColumn;
 
-            range.ToIndex = 0;
+            range.EndIndex = 0;
             for (int i = 1; i < node.NodeValueInfo.StopLine; i++)
-                range.ToIndex += lineLengthList[i];
+                range.EndIndex += lineLengthList[i];
 
-            range.ToIndex += node.NodeValueInfo.StopColumn;
+            range.EndIndex += node.NodeValueInfo.StopColumn;
 
             // Is it a Leaf Virtual Node or not
-            if (range.FromIndex != -1 && range.ToIndex != -1)
+            if (range.StartIndex != -1 && range.EndIndex != -1)
                 CorrectSelectionIntervalWithFindingClosingChar(range, closingChar);
 
             // If lastCompiledUserDefinedFunction == null, than we compile, the main program
@@ -179,8 +184,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         private void CorrectSelectionIntervalWithFindingClosingChar(Interval interval, char closingChar)
         {
-            int start = interval.FromIndex;
-            int end = interval.ToIndex;
+            int start = interval.StartIndex;
+            int end = interval.EndIndex;
+
+            // Just For Try
+            end += FindCharPositionExpceptedChars(end, '(', ";)tTiI");
+
 
             int parenthesises = 0;		// ()
             int brackets = 0;			// []
@@ -208,19 +217,27 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 ++i;
             }
 
-            while (i < Source.Length && Source[i].ToString().ToLower() != closingChar.ToString().ToLower())
-                ++i;
+           //while (i < Source.Length && Source[i].ToString().ToLower() != closingChar.ToString().ToLower())
+           //    ++i;
 
-            interval.ToIndex = i;
+            interval.EndIndex = i;
         }
 
-        private void CorrectSelectionIntervalWithFindingSemiColon(Interval interval)
+        private int FindCharPositionExpceptedChars(int from, char findChar, string excepts)
         {
-            int i = interval.FromIndex;
-            while (i < Source.Length && Source[i] != ';')
-                ++i;
+            int ind = 0;
+            while (from + ind < Source.Length)
+            {
+                if (excepts.Contains(Source[from + ind].ToString()))
+                    return 0;
 
-            interval.ToIndex = i + 1;
+                char ch = Source[from + ind];
+                if (ch == findChar)
+                    return ind + 1;
+
+                ind++;
+            }
+            return 0;
         }
 
         #endregion

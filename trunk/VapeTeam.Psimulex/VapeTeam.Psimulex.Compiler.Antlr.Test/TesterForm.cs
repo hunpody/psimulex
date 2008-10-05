@@ -229,7 +229,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                        (
                        new ICSharpCode.TextEditor.Document.TextMarker
                            (
-                           iv.FromIndex, iv.ToIndex - iv.FromIndex,
+                           iv.StartIndex, iv.EndIndex - iv.StartIndex,
                            ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
                            Color.Red
                            )

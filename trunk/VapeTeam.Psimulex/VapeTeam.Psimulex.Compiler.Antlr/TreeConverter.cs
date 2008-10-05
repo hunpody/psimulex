@@ -83,7 +83,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                 switch (vm)
                 {
                     case ViewMode.All:
-                        text = tree.ToString();
+                        //text = tree.ToString();
+                        text = tree.ToString() + string.Format(" From:[ {0}, {1} ],To:[ {2}, {3} ])",
+                            tree.NodeValueInfo.StartLine, tree.NodeValueInfo.StartColumn,
+                            tree.NodeValueInfo.StopLine, tree.NodeValueInfo.StopColumn);
                         break;
                     case ViewMode.Values:
                         text = tree.Value;
