@@ -58,9 +58,10 @@ tokens {
 	ASYNCSTATEMENT;
 	LOCKSTATEMENT;
 	
-	RETURN;
-
+	RETURN_STATEMENT;
+	EXPRESSION_STATEMENT;
 	
+	VARIABLE_DECLARATION_STATEMENT;
 	VARINIT;
 	VARDECLARE;	
 
@@ -496,12 +497,12 @@ statement
     |   PDo block -> ^( PDOSTATEMENT block )									// PDO { STATEMENT(n) } n db Statement n db Thread
     |   Async block -> ^( ASYNCSTATEMENT block )								// A blockot Assinkron futtatja
     |   Lock '(' Identifier ')' block -> ^( LOCKSTATEMENT Identifier block )	// Egy változót zárol kizárólagos hozzáférésre
-    |   Return expression? ';' -> ^( RETURN expression? )
+    |   Return expression? ';' -> ^( RETURN_STATEMENT Return expression? )
     |   Break ';'!
 //    |   Continue ';'!
     |   ';'!
-    |   expression ';'!
-    |	localVariableDeclaration ';'!
+    |   expression ';' -> ^( EXPRESSION_STATEMENT expression )
+    |	localVariableDeclaration ';' -> ^( VARIABLE_DECLARATION_STATEMENT localVariableDeclaration )
     ;
     
 ifStatement			:	ifBranch ( ( elseIfBranches elseBranch ) | elseBranch? );
