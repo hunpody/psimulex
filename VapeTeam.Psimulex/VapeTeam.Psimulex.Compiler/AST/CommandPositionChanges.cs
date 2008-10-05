@@ -88,15 +88,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
     {
         public string FileName { get; set; }
 
-        /*
         public int FromLine { get; set; }
         public int FromColumn { get; set; }
         public int ToLine { get; set; }
         public int ToColumn { get; set; }
-        */
 
-        public int FromIndex { get; set; }
-        public int ToIndex { get; set; }
+        public int StartIndex { get; set; }
+        public int EndIndex { get; set; }
     }
 
     /// <summary>

@@ -272,7 +272,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                                   
 
             // NodeValueInfo Updateing
-            if (children.Count == 0 && !node.IsVirtual)
+            if (/*children.Count == 0 && */!node.IsVirtual)
             {
                 nodeValueInfo.StartLine = nodeValueInfo.Line;
                 nodeValueInfo.StartColumn = nodeValueInfo.CharPositionInLine;
@@ -280,59 +280,19 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 nodeValueInfo.StopLine = nodeValueInfo.Line;
                 nodeValueInfo.StopColumn = nodeValueInfo.StartColumn + value.Length;
             }
-            else if (children.Count != 0)
+            else if (children.Count != 0 && node.IsVirtual)
             {
                 // MaxKer, MinKer
                 // MinStart, MaxStop
 
-                int minStartLine = children[0].NodeValueInfo.StartLine;
-                int minStartCol = children[0].NodeValueInfo.StartColumn;
+                Interval iv = new Interval { FromLine = -1, FromColumn = -1, ToLine = -1, ToColumn = -1 };
+                PreOrderIntervalSearch(node, iv);
+                
+                nodeValueInfo.StartLine = iv.FromLine;
+                nodeValueInfo.StartColumn = iv.FromColumn;
 
-                int maxStopLine = children[0].NodeValueInfo.StopLine;
-                int maxStopCol = children[0].NodeValueInfo.StopColumn;
-
-                foreach (var child in children)
-                {
-                    if (minStartLine >= child.NodeValueInfo.StartLine && child.NodeValueInfo.StartLine > 0)
-                    {
-                        if (minStartLine == child.NodeValueInfo.StartLine)
-                        {
-                            if (minStartCol > child.NodeValueInfo.StartColumn && child.NodeValueInfo.StartColumn > 0)
-                            {
-                                minStartCol = child.NodeValueInfo.StartColumn;
-                            }
-                        }
-                        else
-                        {
-                            minStartCol = child.NodeValueInfo.StartColumn;
-                        }
-
-                        minStartLine = child.NodeValueInfo.StartLine;
-                    }
-
-                    if (maxStopLine <= child.NodeValueInfo.StopLine)
-                    {
-                        if (maxStopLine == child.NodeValueInfo.StopLine)
-                        {
-                            if (maxStopCol < child.NodeValueInfo.StopColumn)
-                            {
-                                maxStopCol = child.NodeValueInfo.StopColumn;
-                            }
-                        }
-                        else
-                        {
-                            maxStopCol = child.NodeValueInfo.StopColumn;
-                        }
-
-                        maxStopLine = child.NodeValueInfo.StopLine;
-                    }
-                }
-
-                nodeValueInfo.StartLine = minStartLine;
-                nodeValueInfo.StartColumn = minStartCol;
-
-                nodeValueInfo.StopLine = maxStopLine;
-                nodeValueInfo.StopColumn = maxStopCol;
+                nodeValueInfo.StopLine = iv.ToLine;
+                nodeValueInfo.StopColumn = iv.ToColumn;
             }
             else 
             {
@@ -344,6 +304,58 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
 
             return node;
+        }
+
+        private void PreOrderIntervalSearch(IPsiNode node, Interval interval)
+        {
+            if (!node.IsVirtual)
+            {
+                // FirsTime Init
+                if (interval.FromLine == -1 || interval.FromColumn == -1 || interval.ToLine == -1 || interval.ToColumn == -1)
+                {
+                    interval.FromLine = node.NodeValueInfo.StartLine;
+                    interval.FromColumn = node.NodeValueInfo.StartColumn;
+                    interval.ToLine = node.NodeValueInfo.StopLine;
+                    interval.ToColumn = node.NodeValueInfo.StopColumn;
+                }
+
+                if (interval.FromLine >= node.NodeValueInfo.StartLine /*&& node.NodeValueInfo.StartLine >= 0*/)
+                {
+                    if (interval.FromLine == node.NodeValueInfo.StartLine)
+                    {
+                        if (interval.FromColumn > node.NodeValueInfo.StartColumn /*&& node.NodeValueInfo.StartColumn >= 0*/)
+                        {
+                            interval.FromColumn = node.NodeValueInfo.StartColumn;
+                        }
+                    }
+                    else
+                    {
+                        interval.FromColumn = node.NodeValueInfo.StartColumn;
+                    }
+
+                    interval.FromLine = node.NodeValueInfo.StartLine;
+                }
+
+                if (interval.ToLine <= node.NodeValueInfo.StopLine)
+                {
+                    if (interval.ToLine == node.NodeValueInfo.StopLine)
+                    {
+                        if (interval.ToColumn < node.NodeValueInfo.StopColumn)
+                        {
+                            interval.ToColumn = node.NodeValueInfo.StopColumn;
+                        }
+                    }
+                    else
+                    {
+                        interval.ToColumn = node.NodeValueInfo.StopColumn;
+                    }
+
+                    interval.ToLine = node.NodeValueInfo.StopLine;
+                }
+            }
+
+            foreach (var child in node.Children)
+                PreOrderIntervalSearch ( child, interval );
         }
 
         public IPsiNode CreateNode(NodeType type, string value, NodeValueInfo nodeValueInfo, List<IPsiNode> children)
