@@ -19,6 +19,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
     {
         private Compiler compiler = new Compiler();
         public PsiCodeGeneratorVisitor visitor { get; set; }
+        public PsiNode PsiNode { get; set; }
         
         public TesterForm()
         {
@@ -62,8 +63,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             {
                 try
                 {
-                    CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SyntaxTree) as CompilationUnitNode;
-                    visitor.Visit(cun);
+                    PsiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SyntaxTree) as CompilationUnitNode;
+                    visitor.Visit(PsiNode);
                 }
                 catch (Exception ex)
                 {
