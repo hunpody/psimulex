@@ -26,6 +26,11 @@ namespace VapeTeam.Psimulex.Core.Types
             return list[index];
         }
 
+        public override BaseType ToReference()
+        {
+            return this;
+        }
+
         #endregion
 
         #region Representation

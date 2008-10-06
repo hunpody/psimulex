@@ -32,6 +32,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             first = first.ConvertTo(biggerType);
             second = second.ConvertTo(biggerType);
 
+            // Note: Dereference has no effect on tests.
             BaseType result = first.Dereference().Clone();
 
             switch (operation)

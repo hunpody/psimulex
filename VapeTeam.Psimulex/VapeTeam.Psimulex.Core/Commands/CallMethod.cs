@@ -22,7 +22,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             // It has to look up the availabe function names
             // IFunctionLookup
 
-            BaseType value = context.RunStack.Pop();
+            BaseType value = context.RunStack.Pop().Dereference();
 
             var method = value.GetType().GetMethod(methodName,
                 System.Reflection.BindingFlags.IgnoreCase |
@@ -33,7 +33,15 @@ namespace VapeTeam.Psimulex.Core.Commands
             if (method != null)
             {
                 var methodParameterInfos = method.GetParameters();
-                var poppedValues = context.RunStack.Pop(methodParameterInfos.Length).Reverse();
+
+                var poppedValues = new List<BaseType>(methodParameterInfos.Length);
+
+                for (int i = 0; i < methodParameterInfos.Length; ++i)
+                {
+                    poppedValues.Add(context.RunStack.Pop().Dereference().Clone());
+                }
+
+                poppedValues.Reverse();
 
                 object[] convertedParameters =
                     ValueFactory.TransformBaseTypeArrayToDotnetType(poppedValues, methodParameterInfos.Select(pi => pi.ParameterType).ToArray());

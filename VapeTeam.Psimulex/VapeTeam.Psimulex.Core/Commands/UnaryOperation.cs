@@ -30,7 +30,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             switch (operation)
             {
                 case Operations.Negate:
-                    result = value.Clone();
+                    result = value.Dereference().Clone();
                     result.Negate();
                     break;
                 case Operations.Plus:
@@ -43,11 +43,11 @@ namespace VapeTeam.Psimulex.Core.Commands
                     value.Add(ValueFactory.Create(1));
                     break;
                 case Operations.PostfixDecrement:
-                    result = value.Clone();
+                    result = value.Dereference().Clone();
                     value.Subtract(ValueFactory.Create(1));
                     break;
                 case Operations.PostfixIncrement:
-                    result = value.Clone();
+                    result = value.Dereference().Clone();
                     value.Add(ValueFactory.Create(1));
                     break;
                 case Operations.LogicalNot:
