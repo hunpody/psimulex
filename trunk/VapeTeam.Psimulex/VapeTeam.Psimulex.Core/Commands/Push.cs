@@ -51,20 +51,16 @@ namespace VapeTeam.Psimulex.Core.Commands
                     break;
             }
 
-            if (AccessMode == ValueAccessModes.Constant)
+            if (AccessMode == ValueAccessModes.Constant || AccessMode == ValueAccessModes.Register)
             {
-                valueToPush.Clone();
+                valueToPush = valueToPush.Dereference().Clone();
             }
 
-            else if (AccessMode == ValueAccessModes.Register || AccessMode == ValueAccessModes.LocalVariable)
+            // To revise: this code snippet has no effect on the tests.
+            else if (AccessMode == ValueAccessModes.LocalVariableReference || AccessMode == ValueAccessModes.RegisterByReference)
             {
-                valueToPush.PreClone();
+                valueToPush = valueToPush.ToReference();
             }
-
-            //if (AccessMode == ValueAccessModes.Constant)
-            //{
-            //    valueToPush = valueToPush.Clone();
-            //}
 
             if (valueToPush == null)
             {

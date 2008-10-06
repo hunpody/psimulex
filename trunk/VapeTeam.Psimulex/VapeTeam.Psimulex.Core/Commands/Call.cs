@@ -98,7 +98,7 @@ namespace VapeTeam.Psimulex.Core.Commands
                 var parameters = new List<BaseType>(function.ParametersCount);
                 for (int i = 0; i < function.ParametersCount; ++i)
                 {
-                    poppedValues.Push(context.RunStack.Pop());
+                    poppedValues.Push(context.RunStack.Pop().Clone());
                 }
 
                 parameters.AddRange(poppedValues.AsEnumerable());
