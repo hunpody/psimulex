@@ -79,7 +79,7 @@ namespace VapeTeam.Psimulex.Core
                 {
                     CurrentThread.System.CallingThread = CurrentThread;
                     int oldPC = CurrentThread.PC;
-                    Logger.Log(CurrentThread.Program[CurrentThread.PC].ToString());
+                    //Logger.Log(CurrentThread.Program[CurrentThread.PC].ToString());
                     CurrentThread.Program[CurrentThread.PC].Do(CurrentThread);
                     // If there was no jump, then increse the program counter
                     if (oldPC == CurrentThread.PC && CurrentThread.State == ThreadStates.Running)

@@ -8,20 +8,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
 {
     public class Compiler : VapeTeam.Psimulex.Compiler.ICompiler
     {
-        private List<string> _errorMessages = new List<string>();
-        public List<string> ErrorMessages
-        {
-            get
-            {
-                return _errorMessages; 
-            }
-        }
-
         #region Compiler TempMembers
 
-        public string output;
-        public string exception;
-        public global::Antlr.Runtime.Tree.CommonTree SintaxTree;
+        public List<string> ErrorMessages { get; set; }
+
+        public string OutputString { get; set; }
+        public string ExceptionMessages { get; set; }
+        public global::Antlr.Runtime.Tree.CommonTree SyntaxTree { get; set; }
 
         #endregion
 
@@ -43,25 +36,28 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
 
                 var treeAdaptor = p.TreeAdaptor;
 
-                _errorMessages = p.ErrorMessages;                
+                ErrorMessages = p.ErrorMessages;                
 
-                //...
-
-                output = ((global::Antlr.Runtime.Tree.CommonTree)tree.Tree).ToStringTree();
-                SintaxTree = (global::Antlr.Runtime.Tree.CommonTree)tree.Tree;
+                OutputString = ((global::Antlr.Runtime.Tree.CommonTree)tree.Tree).ToStringTree();
+                SyntaxTree = (global::Antlr.Runtime.Tree.CommonTree)tree.Tree;
 
                 #region Added by pody, for temporary use (2008.09.21. 18:40)
 
                 var visitor = new Psimulex.Compiler.AST.PsiCodeGeneratorVisitor(source, "teszt.psi");
-                visitor.Visit(TreeConverter.FromCommonTreeToPsiNode(SintaxTree) as AST.CompilationUnitNode);
+                visitor.Visit(TreeConverter.FromCommonTreeToPsiNode(SyntaxTree) as AST.CompilationUnitNode);
                 result.CompiledProgram = visitor.Program;
 
+                #endregion
+
+                #region Added by pody, for temporary use (2008.10.06. 11:48)
+
+                visitor.Program.Program.AddFunctions(visitor.UserDefinedFunctionList);
+                
                 #endregion
             }
             catch (Exception e)
             {
-
-                exception = e.ToString();
+                ExceptionMessages = e.ToString();
             }
             
             return result;

@@ -73,7 +73,7 @@ namespace VapeTeam.Psimulex.Core
             Functions.Add(function);
         }
 
-        public void AddFunction(List<UserDefinedFunction> functionList)
+        public void AddFunctions(List<UserDefinedFunction> functionList)
         {
             foreach (var func in functionList)
                 AddFunction(func);
@@ -87,6 +87,22 @@ namespace VapeTeam.Psimulex.Core
         public UserDefinedFunction GetFunction(string name, int parametersCount)
         {
             return Functions.FirstOrDefault(f => f.Name.ToLower() == name.ToLower() && f.ParametersCount == parametersCount);
+        }
+
+        public int GetCommandIndex(ICommand cmd)
+        {
+            return CommandList.GetCommandIndex(cmd);
+        }
+
+        /// <summary>
+        /// The overall program size with the main (unnamed) method and all the functions.
+        /// </summary>
+        public int OverallProgramSize
+        {
+            get
+            {
+                return CommandList.Count + Functions.Sum(f => f.Commands.Count);
+            }
         }
 
         public override string ToString()

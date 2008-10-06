@@ -62,7 +62,7 @@ namespace VapeTeam.Psimulex.Core.Libraries
             return Convert.ToDecimal(Random.NextDouble());
         }
 
-        public void Swap( ref int a, ref int b)
+        public void Swap(ref int a, ref int b)
         {
             int tmp = a;
             a = b;
@@ -76,6 +76,11 @@ namespace VapeTeam.Psimulex.Core.Libraries
                 array[i] = Random.Next(min, max);
 
             return array;
+        }
+
+        public int GetOutputLength()
+        {
+            return System.CallingThread.HostProcess.StandardOutput.Length;
         }
 
         public void Write(string s)
