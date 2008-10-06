@@ -32,27 +32,27 @@ namespace VapeTeam.Psimulex.Core.Commands
             first = first.ConvertTo(biggerType);
             second = second.ConvertTo(biggerType);
 
-            BaseType result = first;
+            BaseType result = first.Dereference().Clone();
 
             switch (operation)
             {
                 case Operations.Addition:
-                    first.Add(second);
+                    result.Add(second);
                     break;
                 case Operations.Subtraction:
-                    first.Subtract(second);
+                    result.Subtract(second);
                     break;
                 case Operations.Multiplication:
-                    first.Multiply(second);
+                    result.Multiply(second);
                     break;
                 case Operations.Division:
-                    first.Divide(second);
+                    result.Divide(second);
                     break;
                 case Operations.Power:
-                    first.Power(second);
+                    result.Power(second);
                     break;
                 case Operations.Modulo:
-                    first.Modulo(second);
+                    result.Modulo(second);
                     break;
                 case Operations.LogicalXor:
                     result = ValueFactory.Create(first && !second || !first && second);

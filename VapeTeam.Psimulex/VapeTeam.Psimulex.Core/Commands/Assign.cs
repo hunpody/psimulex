@@ -15,7 +15,7 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public override void Do(ICommandContext context)
         {
-            BaseType valueToAssign = context.RunStack.Pop();
+            BaseType valueToAssign = context.RunStack.Pop().Clone();
             BaseType targetValue = context.RunStack.Pop();
 
             targetValue.Assign(valueToAssign);

@@ -69,13 +69,36 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Clone and reference operators
 
+        private BaseType _preCloned;
+
         /// <summary>
         /// Copies the value.
         /// </summary>
         /// <returns></returns>
         public virtual BaseType Clone()
         {
+            if (_preCloned != null)
+            {
+                var clone = _preCloned;
+                //_preCloned = null;
+                return clone.Clone();
+            }
             return ValueFactory.Create(ToObject());
+        }
+
+        /// <summary>
+        /// Performs the cloning but not doesn't return the clone.
+        /// When pushing a value-by-ref (not a ReferencedValue!) then the clone method should return its value when it was pushed.
+        /// Using PreClone it is possible.
+        /// </summary>
+        public void PreClone()
+        {
+            _preCloned = null;
+            _preCloned = Clone();
+            if (_preCloned == this)
+            {
+                _preCloned = null;
+            }
         }
 
         /// <summary>

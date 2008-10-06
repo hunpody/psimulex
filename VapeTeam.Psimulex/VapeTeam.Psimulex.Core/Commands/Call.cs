@@ -70,7 +70,12 @@ namespace VapeTeam.Psimulex.Core.Commands
 
                 foreach (var param in udf.Parameters)
                 {
-                    parameters.Push(context.RunStack.Pop());
+                    var value = context.RunStack.Pop();
+                    if (param.IsReference)
+                    {
+                        value = value.ToReference();
+                    }
+                    parameters.Push(value.Clone());
                 }
 
                 parameters = parameters.Reverse();

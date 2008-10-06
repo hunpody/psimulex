@@ -82,7 +82,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
     }
 
     /// <summary>
-    /// It identify an interval in a file.
+    /// It identifies an interval in a file.
     /// </summary>
     public class Interval
     {
@@ -98,7 +98,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
     }
 
     /// <summary>
-    /// It identify an Command object.
+    /// It identifies an Command object.
     /// If the Function Name is "", than it is the main program.
     /// </summary>
     public class CommandID

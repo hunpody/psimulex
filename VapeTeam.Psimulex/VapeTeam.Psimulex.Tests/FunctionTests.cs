@@ -356,5 +356,66 @@ namespace VapeTeam.Psimulex.Tests
             Assert.AreEqual("624", process.StandardOutput);
         }
 
+        private string GetPsimulexFactorial(int n)
+        {
+            Program program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push(n),
+                new Call("factor"),
+                new Call("print")
+                );
+
+            UserDefinedFunction factor = new UserDefinedFunction
+            {
+                Name = "factor",
+                Parameters = new List<VariableDescriptor> { 
+                    new VariableDescriptor 
+                    { 
+                        Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }, 
+                        Name = "n" 
+                    }
+                },
+                ReturnValue = new VariableDescriptor
+                {
+                    Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
+                },
+                Commands = new CommandList 
+                {
+                    new Push("n", ValueAccessModes.LocalVariable),
+                    new Push(1),
+                    new Compare(Compare.ComparisonModes.LessThanOrEqual),
+                    new RelativeJumpIfFalse(3),
+                    new Push(1),
+                    new Return(true),
+                    new Push("n", ValueAccessModes.LocalVariable),
+                    new Push("n", ValueAccessModes.LocalVariable),
+                    new Push(1),
+                    new BinaryOperation(BinaryOperation.Operations.Subtraction),
+                    new Call("factor"),
+                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
+                    new Return(true),
+                }
+            };
+
+            program.AddFunction(factor);
+
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(program);
+
+            return process.StandardOutput;
+        }
+
+        private int GetFactorial(int n)
+        {
+            if (n <= 1) return 1;
+            else return n * GetFactorial(n - 1);
+        }
+
+        [TestMethod]
+        public void UserDefinedFunctions4_Factorial()
+        {
+            for (int i = 0; i < 10; ++i)
+                Assert.AreEqual(GetFactorial(i).ToString(), GetPsimulexFactorial(i));
+        }
+
+
     }
 }

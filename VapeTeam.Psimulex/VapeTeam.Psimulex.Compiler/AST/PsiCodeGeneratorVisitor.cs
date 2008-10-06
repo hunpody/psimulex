@@ -49,6 +49,23 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public string FileName { get; set; }
 
         public int ProgramSize { get { return Program.Program.CommandList.Count; } }
+
+        protected int CurrentFunctionSize
+        {
+            get
+            {
+                if (isCurrentCompiledTheMainProgram)
+                {
+                    return ProgramSize;
+                }
+                else
+                {
+                    return lastCompiledUserDefinedFunction.Commands.Count;
+                }
+            }
+        }
+
+        //public int ProgramSize { get { return Program.Program.OverallProgramSize; } }
         public StringBuilder CompilerMessages { get; private set; }
         public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
 
@@ -90,7 +107,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public int GetCommandIndex(CommandBase cmd)
         {
-            return Program.GetCommandIndex(cmd);
+            if (isCurrentCompiledTheMainProgram)
+            {
+                return Program.GetCommandIndex(cmd);
+            }
+            else
+            {
+                return lastCompiledUserDefinedFunction.Commands.GetCommandIndex(cmd);
+            }
         }
 
         public void AddMessage(string msg)
@@ -310,7 +334,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private void SetUpTopJumpInJumpStack(int corrigation)
         {
             Jump jmp = jumpStack.Pop();
-            jmp.PC = ProgramSize - GetCommandIndex(jmp) + corrigation;
+            jmp.PC = CurrentFunctionSize - GetCommandIndex(jmp) + corrigation;
         }
 
         #endregion
@@ -662,7 +686,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // ForInitialization
             node.ForInitialization.Accept(this);
 
-            int conditionAddress = ProgramSize;
+            int conditionAddress = CurrentFunctionSize;
 
             // ForCondition
             node.ForCondition.Accept(this);
@@ -679,7 +703,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.ForUpdate.Accept(this);
 
             // Jump To The ForCondition
-            AddCommand(new RelativeJump(conditionAddress - ProgramSize));
+            AddCommand(new RelativeJump(conditionAddress - CurrentFunctionSize));
 
             // Pop all Break from the jumpStack and set up it's PC to the end of the block
             while (jumpStack.Peek().GetType() == (new Break()).GetType() )
@@ -698,7 +722,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             // AddCommand(new PushState());
 
-            int beginingAddress = ProgramSize;
+            int beginingAddress = CurrentFunctionSize;
 
             // This is just a Fake jump, to "cover" the Break Jumps on the upper level
             RelativeJumpIfTrue rj = new RelativeJumpIfTrue(0);
@@ -715,7 +739,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             while (jumpStack.Peek().GetType() == (new Break()).GetType())
                 SetUpTopJumpInJumpStack(1);
 
-            rj.PC = beginingAddress - ProgramSize;
+            rj.PC = beginingAddress - CurrentFunctionSize;
             AddCommand(rj);
 
             // AddCommand(new PopState());
@@ -725,7 +749,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             // AddCommand(new PushState());
 
-            int conditionAddress = ProgramSize;
+            int conditionAddress = CurrentFunctionSize;
 
             // WhileCondition
             node.WhileCondition.Accept(this);
@@ -739,7 +763,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.WhileCore.Accept(this);
 
             // Jump to the while condition
-            AddCommand(new RelativeJump(conditionAddress - ProgramSize));
+            AddCommand(new RelativeJump(conditionAddress - CurrentFunctionSize));
 
             // Pop all Break from the jumpStack and set up it's PC to the end of the block
             while (jumpStack.Peek().GetType() == (new Break()).GetType())
@@ -780,7 +804,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             string iteratorName = GenerateIteratorName();
             AddCommand(new Initialize(iteratorName, TypeEnum.Iterator));
 
-            int conditionAddress = ProgramSize;
+            int conditionAddress = CurrentFunctionSize;
 
             // ForEachCondition
             AddCommand(new Push(iteratorName, ValueAccessModes.LocalVariableReference));
@@ -799,7 +823,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // ForEachCore
             node.ForEachCore.Accept(this);
 
-            AddCommand(new RelativeJump( conditionAddress - ProgramSize));
+            AddCommand(new RelativeJump( conditionAddress - CurrentFunctionSize));
 
             // Pop all Break from the jumpStack and set up it's PC to the end of the block
             while (jumpStack.Peek().GetType() == (new Break()).GetType())
@@ -820,7 +844,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // LoopIteratorInitialization
             node.LoopIteratorInitialization.Accept(this);
 
-            int conditionAddress = ProgramSize;
+            int conditionAddress = CurrentFunctionSize;
 
             // LoopCondition //
             string loopIteratorName = node.LoopIteratorName.Value;
@@ -846,7 +870,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(new BinaryOperation(BinaryOperation.Operations.Addition));
             AddCommand(new Assign(false));
 
-            AddCommand(new RelativeJump(conditionAddress - ProgramSize));
+            AddCommand(new RelativeJump(conditionAddress - CurrentFunctionSize));
 
             // Pop all Break from the jumpStack and set up it's PC to the end of the block
             while (jumpStack.Peek().GetType() == (new Break()).GetType())
@@ -951,7 +975,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             else
             {
-                throw new PsiCodeGeneratorVisitorException(string.Format("User defined types is not supported yet! ({0})", varTypeName));
+                throw new PsiCodeGeneratorVisitorException(string.Format("User defined types are not supported yet! ({0})", varTypeName));
             }
         }
 
@@ -1041,7 +1065,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.Left.Accept(this);
             
             // Lazy Jump
-            int address = ProgramSize;
+            int address = CurrentFunctionSize;
             SilentRelativeJumpIfTrue jmp = new SilentRelativeJumpIfTrue(0);
             AddCommand(jmp);
             lazyEvaluationJumpStack.Push(jmp);
@@ -1052,7 +1076,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Logical Or Operator
             AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalOr));
 
-            lazyEvaluationJumpStack.Pop().PC = ProgramSize - address;
+            lazyEvaluationJumpStack.Pop().PC = CurrentFunctionSize - address;
         }
 
         public void Visit(LogicalAndOpNode node)
@@ -1061,7 +1085,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.Left.Accept(this);
 
             // Lazy Jump
-            int address = ProgramSize;
+            int address = CurrentFunctionSize;
             SilentRelativeJumpIfFalse jmp = new SilentRelativeJumpIfFalse(0);
             AddCommand(jmp);
             lazyEvaluationJumpStack.Push(jmp);
@@ -1072,7 +1096,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Logical And Operator
             AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalAnd));
 
-            lazyEvaluationJumpStack.Pop().PC = ProgramSize - address;
+            lazyEvaluationJumpStack.Pop().PC = CurrentFunctionSize - address;
         }
 
         public void Visit(EqualityOpNode node)

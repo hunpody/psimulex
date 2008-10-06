@@ -44,18 +44,18 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             {
                 sb.AppendLine(message);
             }
-            sb.Append(compiler.exception);
+            sb.Append(compiler.ExceptionMessages);
 
             //resultTextBox.Text = sb.ToString();
             //resultTextBox.Text = compiler.treeAdaptor.ToString();
-            resultTextBox.Text = compiler.output;
+            resultTextBox.Text = compiler.OutputString;
             txtErrors.Text = sb.ToString();
 
             if (txtErrors.Text == "")
             {
                 try
                 {
-                    CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
+                    CompilationUnitNode cun = TreeConverter.FromCommonTreeToPsiNode(compiler.SyntaxTree) as CompilationUnitNode;
                     visitor.Visit(cun);
                 }
                 catch (Exception ex)
@@ -109,7 +109,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void btnViewTree_Click(object sender, EventArgs e)
         {
             frmTree frmTree = new frmTree();
-            frmTree.PsiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode;
+            frmTree.PsiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SyntaxTree) as CompilationUnitNode;
             frmTree.Show();
         }
 
@@ -171,9 +171,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         {
             compileButton_Click(this, new EventArgs());
 
-            var machine = MachineBuilder.Instance.CreateMachine(1, 16);
-
-            visitor.Program.Program.AddFunction(visitor.UserDefinedFunctionList);
+            var machine = MachineBuilder.Instance.CreateMachine(1, 16);            
 
             var process = machine.System.Load(visitor.Program);
 
