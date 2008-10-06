@@ -1,4 +1,4 @@
-// $ANTLR 3.1 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2008-10-05 21:12:48
+// $ANTLR 3.1 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2008-10-06 18:35:01
 
 using System;
 using Antlr.Runtime;
@@ -912,13 +912,83 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = Reference;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:576:13: ( '&' )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:576:15: '&'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:576:12: ( '&' | 'ref' | 'Ref' | 'REF' )
+            int alt1 = 4;
+            switch ( input.LA(1) ) 
             {
-            	Match('&'); 
+            case '&':
+            	{
+                alt1 = 1;
+                }
+                break;
+            case 'r':
+            	{
+                alt1 = 2;
+                }
+                break;
+            case 'R':
+            	{
+                int LA1_3 = input.LA(2);
 
+                if ( (LA1_3 == 'e') )
+                {
+                    alt1 = 3;
+                }
+                else if ( (LA1_3 == 'E') )
+                {
+                    alt1 = 4;
+                }
+                else 
+                {
+                    NoViableAltException nvae_d1s3 =
+                        new NoViableAltException("", 1, 3, input);
+
+                    throw nvae_d1s3;
+                }
+                }
+                break;
+            	default:
+            	    NoViableAltException nvae_d1s0 =
+            	        new NoViableAltException("", 1, 0, input);
+
+            	    throw nvae_d1s0;
             }
 
+            switch (alt1) 
+            {
+                case 1 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:576:14: '&'
+                    {
+                    	Match('&'); 
+
+                    }
+                    break;
+                case 2 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:576:18: 'ref'
+                    {
+                    	Match("ref"); 
+
+
+                    }
+                    break;
+                case 3 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:576:24: 'Ref'
+                    {
+                    	Match("Ref"); 
+
+
+                    }
+                    break;
+                case 4 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:576:30: 'REF'
+                    {
+                    	Match("REF"); 
+
+
+                    }
+                    break;
+
+            }
             state.type = _type;
             state.channel = _channel;
         }
@@ -936,9 +1006,9 @@ public partial class PsimulexLexer : Lexer {
             int _type = Bool;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:579:9: ( 'bool' | 'Bool' | 'BOOL' | 'boolean' | 'Boolean' | 'BOOLEAN' )
-            int alt1 = 6;
-            alt1 = dfa1.Predict(input);
-            switch (alt1) 
+            int alt2 = 6;
+            alt2 = dfa2.Predict(input);
+            switch (alt2) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:579:13: 'bool'
@@ -1007,9 +1077,9 @@ public partial class PsimulexLexer : Lexer {
             int _type = Char;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:580:6: ( 'char' | 'Char' | 'CHAR' | 'character' | 'Character' | 'CHARACTER' )
-            int alt2 = 6;
-            alt2 = dfa2.Predict(input);
-            switch (alt2) 
+            int alt3 = 6;
+            alt3 = dfa3.Predict(input);
+            switch (alt3) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:580:8: 'char'
@@ -1078,9 +1148,9 @@ public partial class PsimulexLexer : Lexer {
             int _type = Int;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:581:6: ( 'int' | 'Int' | 'INT' | 'integer' | 'Integer' | 'INTEGER' )
-            int alt3 = 6;
-            alt3 = dfa3.Predict(input);
-            switch (alt3) 
+            int alt4 = 6;
+            alt4 = dfa4.Predict(input);
+            switch (alt4) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:581:8: 'int'
@@ -1149,41 +1219,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Decimal;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:582:9: ( 'decimal' | 'Decimal' | 'DECIMAL' )
-            int alt4 = 3;
-            int LA4_0 = input.LA(1);
+            int alt5 = 3;
+            int LA5_0 = input.LA(1);
 
-            if ( (LA4_0 == 'd') )
+            if ( (LA5_0 == 'd') )
             {
-                alt4 = 1;
+                alt5 = 1;
             }
-            else if ( (LA4_0 == 'D') )
+            else if ( (LA5_0 == 'D') )
             {
-                int LA4_2 = input.LA(2);
+                int LA5_2 = input.LA(2);
 
-                if ( (LA4_2 == 'e') )
+                if ( (LA5_2 == 'e') )
                 {
-                    alt4 = 2;
+                    alt5 = 2;
                 }
-                else if ( (LA4_2 == 'E') )
+                else if ( (LA5_2 == 'E') )
                 {
-                    alt4 = 3;
+                    alt5 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d4s2 =
-                        new NoViableAltException("", 4, 2, input);
+                    NoViableAltException nvae_d5s2 =
+                        new NoViableAltException("", 5, 2, input);
 
-                    throw nvae_d4s2;
+                    throw nvae_d5s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d4s0 =
-                    new NoViableAltException("", 4, 0, input);
+                NoViableAltException nvae_d5s0 =
+                    new NoViableAltException("", 5, 0, input);
 
-                throw nvae_d4s0;
+                throw nvae_d5s0;
             }
-            switch (alt4) 
+            switch (alt5) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:582:11: 'decimal'
@@ -1228,41 +1298,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = String;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:583:8: ( 'string' | 'String' | 'STRING' )
-            int alt5 = 3;
-            int LA5_0 = input.LA(1);
+            int alt6 = 3;
+            int LA6_0 = input.LA(1);
 
-            if ( (LA5_0 == 's') )
+            if ( (LA6_0 == 's') )
             {
-                alt5 = 1;
+                alt6 = 1;
             }
-            else if ( (LA5_0 == 'S') )
+            else if ( (LA6_0 == 'S') )
             {
-                int LA5_2 = input.LA(2);
+                int LA6_2 = input.LA(2);
 
-                if ( (LA5_2 == 't') )
+                if ( (LA6_2 == 't') )
                 {
-                    alt5 = 2;
+                    alt6 = 2;
                 }
-                else if ( (LA5_2 == 'T') )
+                else if ( (LA6_2 == 'T') )
                 {
-                    alt5 = 3;
+                    alt6 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d5s2 =
-                        new NoViableAltException("", 5, 2, input);
+                    NoViableAltException nvae_d6s2 =
+                        new NoViableAltException("", 6, 2, input);
 
-                    throw nvae_d5s2;
+                    throw nvae_d6s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d5s0 =
-                    new NoViableAltException("", 5, 0, input);
+                NoViableAltException nvae_d6s0 =
+                    new NoViableAltException("", 6, 0, input);
 
-                throw nvae_d5s0;
+                throw nvae_d6s0;
             }
-            switch (alt5) 
+            switch (alt6) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:583:10: 'string'
@@ -1307,41 +1377,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Void;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:584:6: ( 'void' | 'Void' | 'VOID' )
-            int alt6 = 3;
-            int LA6_0 = input.LA(1);
+            int alt7 = 3;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA6_0 == 'v') )
+            if ( (LA7_0 == 'v') )
             {
-                alt6 = 1;
+                alt7 = 1;
             }
-            else if ( (LA6_0 == 'V') )
+            else if ( (LA7_0 == 'V') )
             {
-                int LA6_2 = input.LA(2);
+                int LA7_2 = input.LA(2);
 
-                if ( (LA6_2 == 'o') )
+                if ( (LA7_2 == 'o') )
                 {
-                    alt6 = 2;
+                    alt7 = 2;
                 }
-                else if ( (LA6_2 == 'O') )
+                else if ( (LA7_2 == 'O') )
                 {
-                    alt6 = 3;
+                    alt7 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d6s2 =
-                        new NoViableAltException("", 6, 2, input);
+                    NoViableAltException nvae_d7s2 =
+                        new NoViableAltException("", 7, 2, input);
 
-                    throw nvae_d6s2;
+                    throw nvae_d7s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d6s0 =
-                    new NoViableAltException("", 6, 0, input);
+                NoViableAltException nvae_d7s0 =
+                    new NoViableAltException("", 7, 0, input);
 
-                throw nvae_d6s0;
+                throw nvae_d7s0;
             }
-            switch (alt6) 
+            switch (alt7) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:584:8: 'void'
@@ -1386,41 +1456,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Tree;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:588:9: ( 'tree' | 'Tree' | 'TREE' )
-            int alt7 = 3;
-            int LA7_0 = input.LA(1);
+            int alt8 = 3;
+            int LA8_0 = input.LA(1);
 
-            if ( (LA7_0 == 't') )
+            if ( (LA8_0 == 't') )
             {
-                alt7 = 1;
+                alt8 = 1;
             }
-            else if ( (LA7_0 == 'T') )
+            else if ( (LA8_0 == 'T') )
             {
-                int LA7_2 = input.LA(2);
+                int LA8_2 = input.LA(2);
 
-                if ( (LA7_2 == 'r') )
+                if ( (LA8_2 == 'r') )
                 {
-                    alt7 = 2;
+                    alt8 = 2;
                 }
-                else if ( (LA7_2 == 'R') )
+                else if ( (LA8_2 == 'R') )
                 {
-                    alt7 = 3;
+                    alt8 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d7s2 =
-                        new NoViableAltException("", 7, 2, input);
+                    NoViableAltException nvae_d8s2 =
+                        new NoViableAltException("", 8, 2, input);
 
-                    throw nvae_d7s2;
+                    throw nvae_d8s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d7s0 =
-                    new NoViableAltException("", 7, 0, input);
+                NoViableAltException nvae_d8s0 =
+                    new NoViableAltException("", 8, 0, input);
 
-                throw nvae_d7s0;
+                throw nvae_d8s0;
             }
-            switch (alt7) 
+            switch (alt8) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:588:11: 'tree'
@@ -1465,41 +1535,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = BinTree;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:589:9: ( 'bintree' | 'BinTree' | 'BINTREE' )
-            int alt8 = 3;
-            int LA8_0 = input.LA(1);
+            int alt9 = 3;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA8_0 == 'b') )
+            if ( (LA9_0 == 'b') )
             {
-                alt8 = 1;
+                alt9 = 1;
             }
-            else if ( (LA8_0 == 'B') )
+            else if ( (LA9_0 == 'B') )
             {
-                int LA8_2 = input.LA(2);
+                int LA9_2 = input.LA(2);
 
-                if ( (LA8_2 == 'i') )
+                if ( (LA9_2 == 'i') )
                 {
-                    alt8 = 2;
+                    alt9 = 2;
                 }
-                else if ( (LA8_2 == 'I') )
+                else if ( (LA9_2 == 'I') )
                 {
-                    alt8 = 3;
+                    alt9 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d8s2 =
-                        new NoViableAltException("", 8, 2, input);
+                    NoViableAltException nvae_d9s2 =
+                        new NoViableAltException("", 9, 2, input);
 
-                    throw nvae_d8s2;
+                    throw nvae_d9s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d8s0 =
-                    new NoViableAltException("", 8, 0, input);
+                NoViableAltException nvae_d9s0 =
+                    new NoViableAltException("", 9, 0, input);
 
-                throw nvae_d8s0;
+                throw nvae_d9s0;
             }
-            switch (alt8) 
+            switch (alt9) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:589:11: 'bintree'
@@ -1544,41 +1614,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Set;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:590:6: ( 'set' | 'Set' | 'SET' )
-            int alt9 = 3;
-            int LA9_0 = input.LA(1);
+            int alt10 = 3;
+            int LA10_0 = input.LA(1);
 
-            if ( (LA9_0 == 's') )
+            if ( (LA10_0 == 's') )
             {
-                alt9 = 1;
+                alt10 = 1;
             }
-            else if ( (LA9_0 == 'S') )
+            else if ( (LA10_0 == 'S') )
             {
-                int LA9_2 = input.LA(2);
+                int LA10_2 = input.LA(2);
 
-                if ( (LA9_2 == 'e') )
+                if ( (LA10_2 == 'e') )
                 {
-                    alt9 = 2;
+                    alt10 = 2;
                 }
-                else if ( (LA9_2 == 'E') )
+                else if ( (LA10_2 == 'E') )
                 {
-                    alt9 = 3;
+                    alt10 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d9s2 =
-                        new NoViableAltException("", 9, 2, input);
+                    NoViableAltException nvae_d10s2 =
+                        new NoViableAltException("", 10, 2, input);
 
-                    throw nvae_d9s2;
+                    throw nvae_d10s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d9s0 =
-                    new NoViableAltException("", 9, 0, input);
+                NoViableAltException nvae_d10s0 =
+                    new NoViableAltException("", 10, 0, input);
 
-                throw nvae_d9s0;
+                throw nvae_d10s0;
             }
-            switch (alt9) 
+            switch (alt10) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:590:8: 'set'
@@ -1623,41 +1693,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = List;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:591:6: ( 'list' | 'List' | 'LIST' )
-            int alt10 = 3;
-            int LA10_0 = input.LA(1);
+            int alt11 = 3;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0 == 'l') )
+            if ( (LA11_0 == 'l') )
             {
-                alt10 = 1;
+                alt11 = 1;
             }
-            else if ( (LA10_0 == 'L') )
+            else if ( (LA11_0 == 'L') )
             {
-                int LA10_2 = input.LA(2);
+                int LA11_2 = input.LA(2);
 
-                if ( (LA10_2 == 'i') )
+                if ( (LA11_2 == 'i') )
                 {
-                    alt10 = 2;
+                    alt11 = 2;
                 }
-                else if ( (LA10_2 == 'I') )
+                else if ( (LA11_2 == 'I') )
                 {
-                    alt10 = 3;
+                    alt11 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d10s2 =
-                        new NoViableAltException("", 10, 2, input);
+                    NoViableAltException nvae_d11s2 =
+                        new NoViableAltException("", 11, 2, input);
 
-                    throw nvae_d10s2;
+                    throw nvae_d11s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d10s0 =
-                    new NoViableAltException("", 10, 0, input);
+                NoViableAltException nvae_d11s0 =
+                    new NoViableAltException("", 11, 0, input);
 
-                throw nvae_d10s0;
+                throw nvae_d11s0;
             }
-            switch (alt10) 
+            switch (alt11) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:591:8: 'list'
@@ -1702,41 +1772,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Stack;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:592:7: ( 'stack' | 'Stack' | 'STACK' )
-            int alt11 = 3;
-            int LA11_0 = input.LA(1);
+            int alt12 = 3;
+            int LA12_0 = input.LA(1);
 
-            if ( (LA11_0 == 's') )
+            if ( (LA12_0 == 's') )
             {
-                alt11 = 1;
+                alt12 = 1;
             }
-            else if ( (LA11_0 == 'S') )
+            else if ( (LA12_0 == 'S') )
             {
-                int LA11_2 = input.LA(2);
+                int LA12_2 = input.LA(2);
 
-                if ( (LA11_2 == 't') )
+                if ( (LA12_2 == 't') )
                 {
-                    alt11 = 2;
+                    alt12 = 2;
                 }
-                else if ( (LA11_2 == 'T') )
+                else if ( (LA12_2 == 'T') )
                 {
-                    alt11 = 3;
+                    alt12 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d11s2 =
-                        new NoViableAltException("", 11, 2, input);
+                    NoViableAltException nvae_d12s2 =
+                        new NoViableAltException("", 12, 2, input);
 
-                    throw nvae_d11s2;
+                    throw nvae_d12s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d11s0 =
-                    new NoViableAltException("", 11, 0, input);
+                NoViableAltException nvae_d12s0 =
+                    new NoViableAltException("", 12, 0, input);
 
-                throw nvae_d11s0;
+                throw nvae_d12s0;
             }
-            switch (alt11) 
+            switch (alt12) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:592:9: 'stack'
@@ -1781,41 +1851,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Queue;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:593:7: ( 'queue' | 'Queue' | 'QUEUE' )
-            int alt12 = 3;
-            int LA12_0 = input.LA(1);
+            int alt13 = 3;
+            int LA13_0 = input.LA(1);
 
-            if ( (LA12_0 == 'q') )
+            if ( (LA13_0 == 'q') )
             {
-                alt12 = 1;
+                alt13 = 1;
             }
-            else if ( (LA12_0 == 'Q') )
+            else if ( (LA13_0 == 'Q') )
             {
-                int LA12_2 = input.LA(2);
+                int LA13_2 = input.LA(2);
 
-                if ( (LA12_2 == 'u') )
+                if ( (LA13_2 == 'u') )
                 {
-                    alt12 = 2;
+                    alt13 = 2;
                 }
-                else if ( (LA12_2 == 'U') )
+                else if ( (LA13_2 == 'U') )
                 {
-                    alt12 = 3;
+                    alt13 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d12s2 =
-                        new NoViableAltException("", 12, 2, input);
+                    NoViableAltException nvae_d13s2 =
+                        new NoViableAltException("", 13, 2, input);
 
-                    throw nvae_d12s2;
+                    throw nvae_d13s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d12s0 =
-                    new NoViableAltException("", 12, 0, input);
+                NoViableAltException nvae_d13s0 =
+                    new NoViableAltException("", 13, 0, input);
 
-                throw nvae_d12s0;
+                throw nvae_d13s0;
             }
-            switch (alt12) 
+            switch (alt13) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:593:9: 'queue'
@@ -1860,53 +1930,53 @@ public partial class PsimulexLexer : Lexer {
             int _type = PQueue;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:594:8: ( 'pqueue' | 'PQueue' | 'PQUEUE' )
-            int alt13 = 3;
-            int LA13_0 = input.LA(1);
+            int alt14 = 3;
+            int LA14_0 = input.LA(1);
 
-            if ( (LA13_0 == 'p') )
+            if ( (LA14_0 == 'p') )
             {
-                alt13 = 1;
+                alt14 = 1;
             }
-            else if ( (LA13_0 == 'P') )
+            else if ( (LA14_0 == 'P') )
             {
-                int LA13_2 = input.LA(2);
+                int LA14_2 = input.LA(2);
 
-                if ( (LA13_2 == 'Q') )
+                if ( (LA14_2 == 'Q') )
                 {
-                    int LA13_3 = input.LA(3);
+                    int LA14_3 = input.LA(3);
 
-                    if ( (LA13_3 == 'u') )
+                    if ( (LA14_3 == 'u') )
                     {
-                        alt13 = 2;
+                        alt14 = 2;
                     }
-                    else if ( (LA13_3 == 'U') )
+                    else if ( (LA14_3 == 'U') )
                     {
-                        alt13 = 3;
+                        alt14 = 3;
                     }
                     else 
                     {
-                        NoViableAltException nvae_d13s3 =
-                            new NoViableAltException("", 13, 3, input);
+                        NoViableAltException nvae_d14s3 =
+                            new NoViableAltException("", 14, 3, input);
 
-                        throw nvae_d13s3;
+                        throw nvae_d14s3;
                     }
                 }
                 else 
                 {
-                    NoViableAltException nvae_d13s2 =
-                        new NoViableAltException("", 13, 2, input);
+                    NoViableAltException nvae_d14s2 =
+                        new NoViableAltException("", 14, 2, input);
 
-                    throw nvae_d13s2;
+                    throw nvae_d14s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d13s0 =
-                    new NoViableAltException("", 13, 0, input);
+                NoViableAltException nvae_d14s0 =
+                    new NoViableAltException("", 14, 0, input);
 
-                throw nvae_d13s0;
+                throw nvae_d14s0;
             }
-            switch (alt13) 
+            switch (alt14) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:594:10: 'pqueue'
@@ -1951,41 +2021,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Graph;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:595:7: ( 'graph' | 'Graph' | 'GRAPH' )
-            int alt14 = 3;
-            int LA14_0 = input.LA(1);
+            int alt15 = 3;
+            int LA15_0 = input.LA(1);
 
-            if ( (LA14_0 == 'g') )
+            if ( (LA15_0 == 'g') )
             {
-                alt14 = 1;
+                alt15 = 1;
             }
-            else if ( (LA14_0 == 'G') )
+            else if ( (LA15_0 == 'G') )
             {
-                int LA14_2 = input.LA(2);
+                int LA15_2 = input.LA(2);
 
-                if ( (LA14_2 == 'r') )
+                if ( (LA15_2 == 'r') )
                 {
-                    alt14 = 2;
+                    alt15 = 2;
                 }
-                else if ( (LA14_2 == 'R') )
+                else if ( (LA15_2 == 'R') )
                 {
-                    alt14 = 3;
+                    alt15 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d14s2 =
-                        new NoViableAltException("", 14, 2, input);
+                    NoViableAltException nvae_d15s2 =
+                        new NoViableAltException("", 15, 2, input);
 
-                    throw nvae_d14s2;
+                    throw nvae_d15s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d14s0 =
-                    new NoViableAltException("", 14, 0, input);
+                NoViableAltException nvae_d15s0 =
+                    new NoViableAltException("", 15, 0, input);
 
-                throw nvae_d14s0;
+                throw nvae_d15s0;
             }
-            switch (alt14) 
+            switch (alt15) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:595:9: 'graph'
@@ -2030,41 +2100,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Edge;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:596:6: ( 'edge' | 'Edge' | 'EDGE' )
-            int alt15 = 3;
-            int LA15_0 = input.LA(1);
+            int alt16 = 3;
+            int LA16_0 = input.LA(1);
 
-            if ( (LA15_0 == 'e') )
+            if ( (LA16_0 == 'e') )
             {
-                alt15 = 1;
+                alt16 = 1;
             }
-            else if ( (LA15_0 == 'E') )
+            else if ( (LA16_0 == 'E') )
             {
-                int LA15_2 = input.LA(2);
+                int LA16_2 = input.LA(2);
 
-                if ( (LA15_2 == 'd') )
+                if ( (LA16_2 == 'd') )
                 {
-                    alt15 = 2;
+                    alt16 = 2;
                 }
-                else if ( (LA15_2 == 'D') )
+                else if ( (LA16_2 == 'D') )
                 {
-                    alt15 = 3;
+                    alt16 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d15s2 =
-                        new NoViableAltException("", 15, 2, input);
+                    NoViableAltException nvae_d16s2 =
+                        new NoViableAltException("", 16, 2, input);
 
-                    throw nvae_d15s2;
+                    throw nvae_d16s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d15s0 =
-                    new NoViableAltException("", 15, 0, input);
+                NoViableAltException nvae_d16s0 =
+                    new NoViableAltException("", 16, 0, input);
 
-                throw nvae_d15s0;
+                throw nvae_d16s0;
             }
-            switch (alt15) 
+            switch (alt16) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:596:8: 'edge'
@@ -2109,41 +2179,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Node;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:597:6: ( 'node' | 'Node' | 'NODE' )
-            int alt16 = 3;
-            int LA16_0 = input.LA(1);
+            int alt17 = 3;
+            int LA17_0 = input.LA(1);
 
-            if ( (LA16_0 == 'n') )
+            if ( (LA17_0 == 'n') )
             {
-                alt16 = 1;
+                alt17 = 1;
             }
-            else if ( (LA16_0 == 'N') )
+            else if ( (LA17_0 == 'N') )
             {
-                int LA16_2 = input.LA(2);
+                int LA17_2 = input.LA(2);
 
-                if ( (LA16_2 == 'o') )
+                if ( (LA17_2 == 'o') )
                 {
-                    alt16 = 2;
+                    alt17 = 2;
                 }
-                else if ( (LA16_2 == 'O') )
+                else if ( (LA17_2 == 'O') )
                 {
-                    alt16 = 3;
+                    alt17 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d16s2 =
-                        new NoViableAltException("", 16, 2, input);
+                    NoViableAltException nvae_d17s2 =
+                        new NoViableAltException("", 17, 2, input);
 
-                    throw nvae_d16s2;
+                    throw nvae_d17s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d16s0 =
-                    new NoViableAltException("", 16, 0, input);
+                NoViableAltException nvae_d17s0 =
+                    new NoViableAltException("", 17, 0, input);
 
-                throw nvae_d16s0;
+                throw nvae_d17s0;
             }
-            switch (alt16) 
+            switch (alt17) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:597:8: 'node'
@@ -2188,41 +2258,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Thread;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:600:8: ( 'thread' | 'Thread' | 'THREAD' )
-            int alt17 = 3;
-            int LA17_0 = input.LA(1);
+            int alt18 = 3;
+            int LA18_0 = input.LA(1);
 
-            if ( (LA17_0 == 't') )
+            if ( (LA18_0 == 't') )
             {
-                alt17 = 1;
+                alt18 = 1;
             }
-            else if ( (LA17_0 == 'T') )
+            else if ( (LA18_0 == 'T') )
             {
-                int LA17_2 = input.LA(2);
+                int LA18_2 = input.LA(2);
 
-                if ( (LA17_2 == 'h') )
+                if ( (LA18_2 == 'h') )
                 {
-                    alt17 = 2;
+                    alt18 = 2;
                 }
-                else if ( (LA17_2 == 'H') )
+                else if ( (LA18_2 == 'H') )
                 {
-                    alt17 = 3;
+                    alt18 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d17s2 =
-                        new NoViableAltException("", 17, 2, input);
+                    NoViableAltException nvae_d18s2 =
+                        new NoViableAltException("", 18, 2, input);
 
-                    throw nvae_d17s2;
+                    throw nvae_d18s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d17s0 =
-                    new NoViableAltException("", 17, 0, input);
+                NoViableAltException nvae_d18s0 =
+                    new NoViableAltException("", 18, 0, input);
 
-                throw nvae_d17s0;
+                throw nvae_d18s0;
             }
-            switch (alt17) 
+            switch (alt18) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:600:10: 'thread'
@@ -2267,41 +2337,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Timer;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:601:7: ( 'timer' | 'Timer' | 'TIMER' )
-            int alt18 = 3;
-            int LA18_0 = input.LA(1);
+            int alt19 = 3;
+            int LA19_0 = input.LA(1);
 
-            if ( (LA18_0 == 't') )
+            if ( (LA19_0 == 't') )
             {
-                alt18 = 1;
+                alt19 = 1;
             }
-            else if ( (LA18_0 == 'T') )
+            else if ( (LA19_0 == 'T') )
             {
-                int LA18_2 = input.LA(2);
+                int LA19_2 = input.LA(2);
 
-                if ( (LA18_2 == 'i') )
+                if ( (LA19_2 == 'i') )
                 {
-                    alt18 = 2;
+                    alt19 = 2;
                 }
-                else if ( (LA18_2 == 'I') )
+                else if ( (LA19_2 == 'I') )
                 {
-                    alt18 = 3;
+                    alt19 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d18s2 =
-                        new NoViableAltException("", 18, 2, input);
+                    NoViableAltException nvae_d19s2 =
+                        new NoViableAltException("", 19, 2, input);
 
-                    throw nvae_d18s2;
+                    throw nvae_d19s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d18s0 =
-                    new NoViableAltException("", 18, 0, input);
+                NoViableAltException nvae_d19s0 =
+                    new NoViableAltException("", 19, 0, input);
 
-                throw nvae_d18s0;
+                throw nvae_d19s0;
             }
-            switch (alt18) 
+            switch (alt19) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:601:9: 'timer'
@@ -2346,41 +2416,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Iterator;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:602:9: ( 'iterator' | 'Iterator' | 'ITERATOR' )
-            int alt19 = 3;
-            int LA19_0 = input.LA(1);
+            int alt20 = 3;
+            int LA20_0 = input.LA(1);
 
-            if ( (LA19_0 == 'i') )
+            if ( (LA20_0 == 'i') )
             {
-                alt19 = 1;
+                alt20 = 1;
             }
-            else if ( (LA19_0 == 'I') )
+            else if ( (LA20_0 == 'I') )
             {
-                int LA19_2 = input.LA(2);
+                int LA20_2 = input.LA(2);
 
-                if ( (LA19_2 == 't') )
+                if ( (LA20_2 == 't') )
                 {
-                    alt19 = 2;
+                    alt20 = 2;
                 }
-                else if ( (LA19_2 == 'T') )
+                else if ( (LA20_2 == 'T') )
                 {
-                    alt19 = 3;
+                    alt20 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d19s2 =
-                        new NoViableAltException("", 19, 2, input);
+                    NoViableAltException nvae_d20s2 =
+                        new NoViableAltException("", 20, 2, input);
 
-                    throw nvae_d19s2;
+                    throw nvae_d20s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d19s0 =
-                    new NoViableAltException("", 19, 0, input);
+                NoViableAltException nvae_d20s0 =
+                    new NoViableAltException("", 20, 0, input);
 
-                throw nvae_d19s0;
+                throw nvae_d20s0;
             }
-            switch (alt19) 
+            switch (alt20) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:602:11: 'iterator'
@@ -2425,41 +2495,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Struct;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:607:8: ( 'struct' | 'Struct' | 'STRUCT' )
-            int alt20 = 3;
-            int LA20_0 = input.LA(1);
+            int alt21 = 3;
+            int LA21_0 = input.LA(1);
 
-            if ( (LA20_0 == 's') )
+            if ( (LA21_0 == 's') )
             {
-                alt20 = 1;
+                alt21 = 1;
             }
-            else if ( (LA20_0 == 'S') )
+            else if ( (LA21_0 == 'S') )
             {
-                int LA20_2 = input.LA(2);
+                int LA21_2 = input.LA(2);
 
-                if ( (LA20_2 == 't') )
+                if ( (LA21_2 == 't') )
                 {
-                    alt20 = 2;
+                    alt21 = 2;
                 }
-                else if ( (LA20_2 == 'T') )
+                else if ( (LA21_2 == 'T') )
                 {
-                    alt20 = 3;
+                    alt21 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d20s2 =
-                        new NoViableAltException("", 20, 2, input);
+                    NoViableAltException nvae_d21s2 =
+                        new NoViableAltException("", 21, 2, input);
 
-                    throw nvae_d20s2;
+                    throw nvae_d21s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d20s0 =
-                    new NoViableAltException("", 20, 0, input);
+                NoViableAltException nvae_d21s0 =
+                    new NoViableAltException("", 21, 0, input);
 
-                throw nvae_d20s0;
+                throw nvae_d21s0;
             }
-            switch (alt20) 
+            switch (alt21) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:607:10: 'struct'
@@ -2504,41 +2574,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Import;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:608:8: ( 'import' | 'Import' | 'IMPORT' )
-            int alt21 = 3;
-            int LA21_0 = input.LA(1);
+            int alt22 = 3;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA21_0 == 'i') )
+            if ( (LA22_0 == 'i') )
             {
-                alt21 = 1;
+                alt22 = 1;
             }
-            else if ( (LA21_0 == 'I') )
+            else if ( (LA22_0 == 'I') )
             {
-                int LA21_2 = input.LA(2);
+                int LA22_2 = input.LA(2);
 
-                if ( (LA21_2 == 'm') )
+                if ( (LA22_2 == 'm') )
                 {
-                    alt21 = 2;
+                    alt22 = 2;
                 }
-                else if ( (LA21_2 == 'M') )
+                else if ( (LA22_2 == 'M') )
                 {
-                    alt21 = 3;
+                    alt22 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d21s2 =
-                        new NoViableAltException("", 21, 2, input);
+                    NoViableAltException nvae_d22s2 =
+                        new NoViableAltException("", 22, 2, input);
 
-                    throw nvae_d21s2;
+                    throw nvae_d22s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d21s0 =
-                    new NoViableAltException("", 21, 0, input);
+                NoViableAltException nvae_d22s0 =
+                    new NoViableAltException("", 22, 0, input);
 
-                throw nvae_d21s0;
+                throw nvae_d22s0;
             }
-            switch (alt21) 
+            switch (alt22) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:608:10: 'import'
@@ -2583,41 +2653,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Break;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:610:7: ( 'break' | 'Break' | 'BREAK' )
-            int alt22 = 3;
-            int LA22_0 = input.LA(1);
+            int alt23 = 3;
+            int LA23_0 = input.LA(1);
 
-            if ( (LA22_0 == 'b') )
+            if ( (LA23_0 == 'b') )
             {
-                alt22 = 1;
+                alt23 = 1;
             }
-            else if ( (LA22_0 == 'B') )
+            else if ( (LA23_0 == 'B') )
             {
-                int LA22_2 = input.LA(2);
+                int LA23_2 = input.LA(2);
 
-                if ( (LA22_2 == 'r') )
+                if ( (LA23_2 == 'r') )
                 {
-                    alt22 = 2;
+                    alt23 = 2;
                 }
-                else if ( (LA22_2 == 'R') )
+                else if ( (LA23_2 == 'R') )
                 {
-                    alt22 = 3;
+                    alt23 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d22s2 =
-                        new NoViableAltException("", 22, 2, input);
+                    NoViableAltException nvae_d23s2 =
+                        new NoViableAltException("", 23, 2, input);
 
-                    throw nvae_d22s2;
+                    throw nvae_d23s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d22s0 =
-                    new NoViableAltException("", 22, 0, input);
+                NoViableAltException nvae_d23s0 =
+                    new NoViableAltException("", 23, 0, input);
 
-                throw nvae_d22s0;
+                throw nvae_d23s0;
             }
-            switch (alt22) 
+            switch (alt23) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:610:9: 'break'
@@ -2662,41 +2732,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Continue;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:611:9: ( 'continue' | 'Continue' | 'CONTINUE' )
-            int alt23 = 3;
-            int LA23_0 = input.LA(1);
+            int alt24 = 3;
+            int LA24_0 = input.LA(1);
 
-            if ( (LA23_0 == 'c') )
+            if ( (LA24_0 == 'c') )
             {
-                alt23 = 1;
+                alt24 = 1;
             }
-            else if ( (LA23_0 == 'C') )
+            else if ( (LA24_0 == 'C') )
             {
-                int LA23_2 = input.LA(2);
+                int LA24_2 = input.LA(2);
 
-                if ( (LA23_2 == 'o') )
+                if ( (LA24_2 == 'o') )
                 {
-                    alt23 = 2;
+                    alt24 = 2;
                 }
-                else if ( (LA23_2 == 'O') )
+                else if ( (LA24_2 == 'O') )
                 {
-                    alt23 = 3;
+                    alt24 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d23s2 =
-                        new NoViableAltException("", 23, 2, input);
+                    NoViableAltException nvae_d24s2 =
+                        new NoViableAltException("", 24, 2, input);
 
-                    throw nvae_d23s2;
+                    throw nvae_d24s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d23s0 =
-                    new NoViableAltException("", 23, 0, input);
+                NoViableAltException nvae_d24s0 =
+                    new NoViableAltException("", 24, 0, input);
 
-                throw nvae_d23s0;
+                throw nvae_d24s0;
             }
-            switch (alt23) 
+            switch (alt24) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:611:11: 'continue'
@@ -2741,9 +2811,9 @@ public partial class PsimulexLexer : Lexer {
             int _type = Return;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:612:8: ( 'ret' | 'Ret' | 'RET' | 'return' | 'Return' | 'RETURN' )
-            int alt24 = 6;
-            alt24 = dfa24.Predict(input);
-            switch (alt24) 
+            int alt25 = 6;
+            alt25 = dfa25.Predict(input);
+            switch (alt25) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:612:10: 'ret'
@@ -2812,41 +2882,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = If;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:614:5: ( 'if' | 'If' | 'IF' )
-            int alt25 = 3;
-            int LA25_0 = input.LA(1);
+            int alt26 = 3;
+            int LA26_0 = input.LA(1);
 
-            if ( (LA25_0 == 'i') )
+            if ( (LA26_0 == 'i') )
             {
-                alt25 = 1;
+                alt26 = 1;
             }
-            else if ( (LA25_0 == 'I') )
+            else if ( (LA26_0 == 'I') )
             {
-                int LA25_2 = input.LA(2);
+                int LA26_2 = input.LA(2);
 
-                if ( (LA25_2 == 'f') )
+                if ( (LA26_2 == 'f') )
                 {
-                    alt25 = 2;
+                    alt26 = 2;
                 }
-                else if ( (LA25_2 == 'F') )
+                else if ( (LA26_2 == 'F') )
                 {
-                    alt25 = 3;
+                    alt26 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d25s2 =
-                        new NoViableAltException("", 25, 2, input);
+                    NoViableAltException nvae_d26s2 =
+                        new NoViableAltException("", 26, 2, input);
 
-                    throw nvae_d25s2;
+                    throw nvae_d26s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d25s0 =
-                    new NoViableAltException("", 25, 0, input);
+                NoViableAltException nvae_d26s0 =
+                    new NoViableAltException("", 26, 0, input);
 
-                throw nvae_d25s0;
+                throw nvae_d26s0;
             }
-            switch (alt25) 
+            switch (alt26) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:614:7: 'if'
@@ -2891,41 +2961,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Else;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:615:6: ( 'else' | 'Else' | 'ELSE' )
-            int alt26 = 3;
-            int LA26_0 = input.LA(1);
+            int alt27 = 3;
+            int LA27_0 = input.LA(1);
 
-            if ( (LA26_0 == 'e') )
+            if ( (LA27_0 == 'e') )
             {
-                alt26 = 1;
+                alt27 = 1;
             }
-            else if ( (LA26_0 == 'E') )
+            else if ( (LA27_0 == 'E') )
             {
-                int LA26_2 = input.LA(2);
+                int LA27_2 = input.LA(2);
 
-                if ( (LA26_2 == 'l') )
+                if ( (LA27_2 == 'l') )
                 {
-                    alt26 = 2;
+                    alt27 = 2;
                 }
-                else if ( (LA26_2 == 'L') )
+                else if ( (LA27_2 == 'L') )
                 {
-                    alt26 = 3;
+                    alt27 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d26s2 =
-                        new NoViableAltException("", 26, 2, input);
+                    NoViableAltException nvae_d27s2 =
+                        new NoViableAltException("", 27, 2, input);
 
-                    throw nvae_d26s2;
+                    throw nvae_d27s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d26s0 =
-                    new NoViableAltException("", 26, 0, input);
+                NoViableAltException nvae_d27s0 =
+                    new NoViableAltException("", 27, 0, input);
 
-                throw nvae_d26s0;
+                throw nvae_d27s0;
             }
-            switch (alt26) 
+            switch (alt27) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:615:8: 'else'
@@ -2970,41 +3040,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = ElseIf;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:616:8: ( 'elseif' | 'ElseIf' | 'ELSEIF' )
-            int alt27 = 3;
-            int LA27_0 = input.LA(1);
+            int alt28 = 3;
+            int LA28_0 = input.LA(1);
 
-            if ( (LA27_0 == 'e') )
+            if ( (LA28_0 == 'e') )
             {
-                alt27 = 1;
+                alt28 = 1;
             }
-            else if ( (LA27_0 == 'E') )
+            else if ( (LA28_0 == 'E') )
             {
-                int LA27_2 = input.LA(2);
+                int LA28_2 = input.LA(2);
 
-                if ( (LA27_2 == 'l') )
+                if ( (LA28_2 == 'l') )
                 {
-                    alt27 = 2;
+                    alt28 = 2;
                 }
-                else if ( (LA27_2 == 'L') )
+                else if ( (LA28_2 == 'L') )
                 {
-                    alt27 = 3;
+                    alt28 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d27s2 =
-                        new NoViableAltException("", 27, 2, input);
+                    NoViableAltException nvae_d28s2 =
+                        new NoViableAltException("", 28, 2, input);
 
-                    throw nvae_d27s2;
+                    throw nvae_d28s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d27s0 =
-                    new NoViableAltException("", 27, 0, input);
+                NoViableAltException nvae_d28s0 =
+                    new NoViableAltException("", 28, 0, input);
 
-                throw nvae_d27s0;
+                throw nvae_d28s0;
             }
-            switch (alt27) 
+            switch (alt28) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:616:10: 'elseif'
@@ -3049,41 +3119,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = For;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:617:6: ( 'for' | 'For' | 'FOR' )
-            int alt28 = 3;
-            int LA28_0 = input.LA(1);
+            int alt29 = 3;
+            int LA29_0 = input.LA(1);
 
-            if ( (LA28_0 == 'f') )
+            if ( (LA29_0 == 'f') )
             {
-                alt28 = 1;
+                alt29 = 1;
             }
-            else if ( (LA28_0 == 'F') )
+            else if ( (LA29_0 == 'F') )
             {
-                int LA28_2 = input.LA(2);
+                int LA29_2 = input.LA(2);
 
-                if ( (LA28_2 == 'o') )
+                if ( (LA29_2 == 'o') )
                 {
-                    alt28 = 2;
+                    alt29 = 2;
                 }
-                else if ( (LA28_2 == 'O') )
+                else if ( (LA29_2 == 'O') )
                 {
-                    alt28 = 3;
+                    alt29 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d28s2 =
-                        new NoViableAltException("", 28, 2, input);
+                    NoViableAltException nvae_d29s2 =
+                        new NoViableAltException("", 29, 2, input);
 
-                    throw nvae_d28s2;
+                    throw nvae_d29s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d28s0 =
-                    new NoViableAltException("", 28, 0, input);
+                NoViableAltException nvae_d29s0 =
+                    new NoViableAltException("", 29, 0, input);
 
-                throw nvae_d28s0;
+                throw nvae_d29s0;
             }
-            switch (alt28) 
+            switch (alt29) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:617:8: 'for'
@@ -3128,41 +3198,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = ForEach;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:618:9: ( 'foreach' | 'ForEach' | 'FOREACH' )
-            int alt29 = 3;
-            int LA29_0 = input.LA(1);
+            int alt30 = 3;
+            int LA30_0 = input.LA(1);
 
-            if ( (LA29_0 == 'f') )
+            if ( (LA30_0 == 'f') )
             {
-                alt29 = 1;
+                alt30 = 1;
             }
-            else if ( (LA29_0 == 'F') )
+            else if ( (LA30_0 == 'F') )
             {
-                int LA29_2 = input.LA(2);
+                int LA30_2 = input.LA(2);
 
-                if ( (LA29_2 == 'o') )
+                if ( (LA30_2 == 'o') )
                 {
-                    alt29 = 2;
+                    alt30 = 2;
                 }
-                else if ( (LA29_2 == 'O') )
+                else if ( (LA30_2 == 'O') )
                 {
-                    alt29 = 3;
+                    alt30 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d29s2 =
-                        new NoViableAltException("", 29, 2, input);
+                    NoViableAltException nvae_d30s2 =
+                        new NoViableAltException("", 30, 2, input);
 
-                    throw nvae_d29s2;
+                    throw nvae_d30s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d29s0 =
-                    new NoViableAltException("", 29, 0, input);
+                NoViableAltException nvae_d30s0 =
+                    new NoViableAltException("", 30, 0, input);
 
-                throw nvae_d29s0;
+                throw nvae_d30s0;
             }
-            switch (alt29) 
+            switch (alt30) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:618:11: 'foreach'
@@ -3207,97 +3277,6 @@ public partial class PsimulexLexer : Lexer {
             int _type = PFor;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:619:6: ( 'pfor' | 'PFor' | 'PFOR' )
-            int alt30 = 3;
-            int LA30_0 = input.LA(1);
-
-            if ( (LA30_0 == 'p') )
-            {
-                alt30 = 1;
-            }
-            else if ( (LA30_0 == 'P') )
-            {
-                int LA30_2 = input.LA(2);
-
-                if ( (LA30_2 == 'F') )
-                {
-                    int LA30_3 = input.LA(3);
-
-                    if ( (LA30_3 == 'o') )
-                    {
-                        alt30 = 2;
-                    }
-                    else if ( (LA30_3 == 'O') )
-                    {
-                        alt30 = 3;
-                    }
-                    else 
-                    {
-                        NoViableAltException nvae_d30s3 =
-                            new NoViableAltException("", 30, 3, input);
-
-                        throw nvae_d30s3;
-                    }
-                }
-                else 
-                {
-                    NoViableAltException nvae_d30s2 =
-                        new NoViableAltException("", 30, 2, input);
-
-                    throw nvae_d30s2;
-                }
-            }
-            else 
-            {
-                NoViableAltException nvae_d30s0 =
-                    new NoViableAltException("", 30, 0, input);
-
-                throw nvae_d30s0;
-            }
-            switch (alt30) 
-            {
-                case 1 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:619:8: 'pfor'
-                    {
-                    	Match("pfor"); 
-
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:619:15: 'PFor'
-                    {
-                    	Match("PFor"); 
-
-
-                    }
-                    break;
-                case 3 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:619:22: 'PFOR'
-                    {
-                    	Match("PFOR"); 
-
-
-                    }
-                    break;
-
-            }
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "PFor"
-
-    // $ANTLR start "PForEach"
-    public void mPForEach() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = PForEach;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:620:9: ( 'pforeach' | 'PForEach' | 'PFOREACH' )
             int alt31 = 3;
             int LA31_0 = input.LA(1);
 
@@ -3347,6 +3326,97 @@ public partial class PsimulexLexer : Lexer {
             switch (alt31) 
             {
                 case 1 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:619:8: 'pfor'
+                    {
+                    	Match("pfor"); 
+
+
+                    }
+                    break;
+                case 2 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:619:15: 'PFor'
+                    {
+                    	Match("PFor"); 
+
+
+                    }
+                    break;
+                case 3 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:619:22: 'PFOR'
+                    {
+                    	Match("PFOR"); 
+
+
+                    }
+                    break;
+
+            }
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "PFor"
+
+    // $ANTLR start "PForEach"
+    public void mPForEach() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = PForEach;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:620:9: ( 'pforeach' | 'PForEach' | 'PFOREACH' )
+            int alt32 = 3;
+            int LA32_0 = input.LA(1);
+
+            if ( (LA32_0 == 'p') )
+            {
+                alt32 = 1;
+            }
+            else if ( (LA32_0 == 'P') )
+            {
+                int LA32_2 = input.LA(2);
+
+                if ( (LA32_2 == 'F') )
+                {
+                    int LA32_3 = input.LA(3);
+
+                    if ( (LA32_3 == 'o') )
+                    {
+                        alt32 = 2;
+                    }
+                    else if ( (LA32_3 == 'O') )
+                    {
+                        alt32 = 3;
+                    }
+                    else 
+                    {
+                        NoViableAltException nvae_d32s3 =
+                            new NoViableAltException("", 32, 3, input);
+
+                        throw nvae_d32s3;
+                    }
+                }
+                else 
+                {
+                    NoViableAltException nvae_d32s2 =
+                        new NoViableAltException("", 32, 2, input);
+
+                    throw nvae_d32s2;
+                }
+            }
+            else 
+            {
+                NoViableAltException nvae_d32s0 =
+                    new NoViableAltException("", 32, 0, input);
+
+                throw nvae_d32s0;
+            }
+            switch (alt32) 
+            {
+                case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:620:11: 'pforeach'
                     {
                     	Match("pforeach"); 
@@ -3389,41 +3459,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Do;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:621:5: ( 'do' | 'Do' | 'DO' )
-            int alt32 = 3;
-            int LA32_0 = input.LA(1);
+            int alt33 = 3;
+            int LA33_0 = input.LA(1);
 
-            if ( (LA32_0 == 'd') )
+            if ( (LA33_0 == 'd') )
             {
-                alt32 = 1;
+                alt33 = 1;
             }
-            else if ( (LA32_0 == 'D') )
+            else if ( (LA33_0 == 'D') )
             {
-                int LA32_2 = input.LA(2);
+                int LA33_2 = input.LA(2);
 
-                if ( (LA32_2 == 'o') )
+                if ( (LA33_2 == 'o') )
                 {
-                    alt32 = 2;
+                    alt33 = 2;
                 }
-                else if ( (LA32_2 == 'O') )
+                else if ( (LA33_2 == 'O') )
                 {
-                    alt32 = 3;
+                    alt33 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d32s2 =
-                        new NoViableAltException("", 32, 2, input);
+                    NoViableAltException nvae_d33s2 =
+                        new NoViableAltException("", 33, 2, input);
 
-                    throw nvae_d32s2;
+                    throw nvae_d33s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d32s0 =
-                    new NoViableAltException("", 32, 0, input);
+                NoViableAltException nvae_d33s0 =
+                    new NoViableAltException("", 33, 0, input);
 
-                throw nvae_d32s0;
+                throw nvae_d33s0;
             }
-            switch (alt32) 
+            switch (alt33) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:621:7: 'do'
@@ -3468,53 +3538,53 @@ public partial class PsimulexLexer : Lexer {
             int _type = PDo;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:622:6: ( 'pdo' | 'PDo' | 'PDO' )
-            int alt33 = 3;
-            int LA33_0 = input.LA(1);
+            int alt34 = 3;
+            int LA34_0 = input.LA(1);
 
-            if ( (LA33_0 == 'p') )
+            if ( (LA34_0 == 'p') )
             {
-                alt33 = 1;
+                alt34 = 1;
             }
-            else if ( (LA33_0 == 'P') )
+            else if ( (LA34_0 == 'P') )
             {
-                int LA33_2 = input.LA(2);
+                int LA34_2 = input.LA(2);
 
-                if ( (LA33_2 == 'D') )
+                if ( (LA34_2 == 'D') )
                 {
-                    int LA33_3 = input.LA(3);
+                    int LA34_3 = input.LA(3);
 
-                    if ( (LA33_3 == 'o') )
+                    if ( (LA34_3 == 'o') )
                     {
-                        alt33 = 2;
+                        alt34 = 2;
                     }
-                    else if ( (LA33_3 == 'O') )
+                    else if ( (LA34_3 == 'O') )
                     {
-                        alt33 = 3;
+                        alt34 = 3;
                     }
                     else 
                     {
-                        NoViableAltException nvae_d33s3 =
-                            new NoViableAltException("", 33, 3, input);
+                        NoViableAltException nvae_d34s3 =
+                            new NoViableAltException("", 34, 3, input);
 
-                        throw nvae_d33s3;
+                        throw nvae_d34s3;
                     }
                 }
                 else 
                 {
-                    NoViableAltException nvae_d33s2 =
-                        new NoViableAltException("", 33, 2, input);
+                    NoViableAltException nvae_d34s2 =
+                        new NoViableAltException("", 34, 2, input);
 
-                    throw nvae_d33s2;
+                    throw nvae_d34s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d33s0 =
-                    new NoViableAltException("", 33, 0, input);
+                NoViableAltException nvae_d34s0 =
+                    new NoViableAltException("", 34, 0, input);
 
-                throw nvae_d33s0;
+                throw nvae_d34s0;
             }
-            switch (alt33) 
+            switch (alt34) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:622:8: 'pdo'
@@ -3559,41 +3629,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = While;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:623:7: ( 'while' | 'While' | 'WHILE' )
-            int alt34 = 3;
-            int LA34_0 = input.LA(1);
+            int alt35 = 3;
+            int LA35_0 = input.LA(1);
 
-            if ( (LA34_0 == 'w') )
+            if ( (LA35_0 == 'w') )
             {
-                alt34 = 1;
+                alt35 = 1;
             }
-            else if ( (LA34_0 == 'W') )
+            else if ( (LA35_0 == 'W') )
             {
-                int LA34_2 = input.LA(2);
+                int LA35_2 = input.LA(2);
 
-                if ( (LA34_2 == 'h') )
+                if ( (LA35_2 == 'h') )
                 {
-                    alt34 = 2;
+                    alt35 = 2;
                 }
-                else if ( (LA34_2 == 'H') )
+                else if ( (LA35_2 == 'H') )
                 {
-                    alt34 = 3;
+                    alt35 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d34s2 =
-                        new NoViableAltException("", 34, 2, input);
+                    NoViableAltException nvae_d35s2 =
+                        new NoViableAltException("", 35, 2, input);
 
-                    throw nvae_d34s2;
+                    throw nvae_d35s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d34s0 =
-                    new NoViableAltException("", 34, 0, input);
+                NoViableAltException nvae_d35s0 =
+                    new NoViableAltException("", 35, 0, input);
 
-                throw nvae_d34s0;
+                throw nvae_d35s0;
             }
-            switch (alt34) 
+            switch (alt35) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:623:9: 'while'
@@ -3638,41 +3708,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Loop;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:624:6: ( 'loop' | 'Loop' | 'LOOP' )
-            int alt35 = 3;
-            int LA35_0 = input.LA(1);
+            int alt36 = 3;
+            int LA36_0 = input.LA(1);
 
-            if ( (LA35_0 == 'l') )
+            if ( (LA36_0 == 'l') )
             {
-                alt35 = 1;
+                alt36 = 1;
             }
-            else if ( (LA35_0 == 'L') )
+            else if ( (LA36_0 == 'L') )
             {
-                int LA35_2 = input.LA(2);
+                int LA36_2 = input.LA(2);
 
-                if ( (LA35_2 == 'o') )
+                if ( (LA36_2 == 'o') )
                 {
-                    alt35 = 2;
+                    alt36 = 2;
                 }
-                else if ( (LA35_2 == 'O') )
+                else if ( (LA36_2 == 'O') )
                 {
-                    alt35 = 3;
+                    alt36 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d35s2 =
-                        new NoViableAltException("", 35, 2, input);
+                    NoViableAltException nvae_d36s2 =
+                        new NoViableAltException("", 36, 2, input);
 
-                    throw nvae_d35s2;
+                    throw nvae_d36s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d35s0 =
-                    new NoViableAltException("", 35, 0, input);
+                NoViableAltException nvae_d36s0 =
+                    new NoViableAltException("", 36, 0, input);
 
-                throw nvae_d35s0;
+                throw nvae_d36s0;
             }
-            switch (alt35) 
+            switch (alt36) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:624:8: 'loop'
@@ -3717,69 +3787,69 @@ public partial class PsimulexLexer : Lexer {
             int _type = To;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:625:5: ( 'to' | 'To' | 'TO' | 'until' | 'Until' | 'UNTIL' )
-            int alt36 = 6;
+            int alt37 = 6;
             switch ( input.LA(1) ) 
             {
             case 't':
             	{
-                alt36 = 1;
+                alt37 = 1;
                 }
                 break;
             case 'T':
             	{
-                int LA36_2 = input.LA(2);
+                int LA37_2 = input.LA(2);
 
-                if ( (LA36_2 == 'o') )
+                if ( (LA37_2 == 'o') )
                 {
-                    alt36 = 2;
+                    alt37 = 2;
                 }
-                else if ( (LA36_2 == 'O') )
+                else if ( (LA37_2 == 'O') )
                 {
-                    alt36 = 3;
+                    alt37 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d36s2 =
-                        new NoViableAltException("", 36, 2, input);
+                    NoViableAltException nvae_d37s2 =
+                        new NoViableAltException("", 37, 2, input);
 
-                    throw nvae_d36s2;
+                    throw nvae_d37s2;
                 }
                 }
                 break;
             case 'u':
             	{
-                alt36 = 4;
+                alt37 = 4;
                 }
                 break;
             case 'U':
             	{
-                int LA36_4 = input.LA(2);
+                int LA37_4 = input.LA(2);
 
-                if ( (LA36_4 == 'n') )
+                if ( (LA37_4 == 'n') )
                 {
-                    alt36 = 5;
+                    alt37 = 5;
                 }
-                else if ( (LA36_4 == 'N') )
+                else if ( (LA37_4 == 'N') )
                 {
-                    alt36 = 6;
+                    alt37 = 6;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d36s4 =
-                        new NoViableAltException("", 36, 4, input);
+                    NoViableAltException nvae_d37s4 =
+                        new NoViableAltException("", 37, 4, input);
 
-                    throw nvae_d36s4;
+                    throw nvae_d37s4;
                 }
                 }
                 break;
             	default:
-            	    NoViableAltException nvae_d36s0 =
-            	        new NoViableAltException("", 36, 0, input);
+            	    NoViableAltException nvae_d37s0 =
+            	        new NoViableAltException("", 37, 0, input);
 
-            	    throw nvae_d36s0;
+            	    throw nvae_d37s0;
             }
 
-            switch (alt36) 
+            switch (alt37) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:625:7: 'to'
@@ -3848,41 +3918,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = In;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:626:5: ( 'in' | 'In' | 'IN' )
-            int alt37 = 3;
-            int LA37_0 = input.LA(1);
+            int alt38 = 3;
+            int LA38_0 = input.LA(1);
 
-            if ( (LA37_0 == 'i') )
+            if ( (LA38_0 == 'i') )
             {
-                alt37 = 1;
+                alt38 = 1;
             }
-            else if ( (LA37_0 == 'I') )
+            else if ( (LA38_0 == 'I') )
             {
-                int LA37_2 = input.LA(2);
+                int LA38_2 = input.LA(2);
 
-                if ( (LA37_2 == 'n') )
+                if ( (LA38_2 == 'n') )
                 {
-                    alt37 = 2;
+                    alt38 = 2;
                 }
-                else if ( (LA37_2 == 'N') )
+                else if ( (LA38_2 == 'N') )
                 {
-                    alt37 = 3;
+                    alt38 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d37s2 =
-                        new NoViableAltException("", 37, 2, input);
+                    NoViableAltException nvae_d38s2 =
+                        new NoViableAltException("", 38, 2, input);
 
-                    throw nvae_d37s2;
+                    throw nvae_d38s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d37s0 =
-                    new NoViableAltException("", 37, 0, input);
+                NoViableAltException nvae_d38s0 =
+                    new NoViableAltException("", 38, 0, input);
 
-                throw nvae_d37s0;
+                throw nvae_d38s0;
             }
-            switch (alt37) 
+            switch (alt38) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:626:7: 'in'
@@ -3927,41 +3997,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Async;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:627:7: ( 'async' | 'Async' | 'ASYNC' )
-            int alt38 = 3;
-            int LA38_0 = input.LA(1);
+            int alt39 = 3;
+            int LA39_0 = input.LA(1);
 
-            if ( (LA38_0 == 'a') )
+            if ( (LA39_0 == 'a') )
             {
-                alt38 = 1;
+                alt39 = 1;
             }
-            else if ( (LA38_0 == 'A') )
+            else if ( (LA39_0 == 'A') )
             {
-                int LA38_2 = input.LA(2);
+                int LA39_2 = input.LA(2);
 
-                if ( (LA38_2 == 's') )
+                if ( (LA39_2 == 's') )
                 {
-                    alt38 = 2;
+                    alt39 = 2;
                 }
-                else if ( (LA38_2 == 'S') )
+                else if ( (LA39_2 == 'S') )
                 {
-                    alt38 = 3;
+                    alt39 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d38s2 =
-                        new NoViableAltException("", 38, 2, input);
+                    NoViableAltException nvae_d39s2 =
+                        new NoViableAltException("", 39, 2, input);
 
-                    throw nvae_d38s2;
+                    throw nvae_d39s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d38s0 =
-                    new NoViableAltException("", 38, 0, input);
+                NoViableAltException nvae_d39s0 =
+                    new NoViableAltException("", 39, 0, input);
 
-                throw nvae_d38s0;
+                throw nvae_d39s0;
             }
-            switch (alt38) 
+            switch (alt39) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:627:9: 'async'
@@ -4006,41 +4076,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Atomic;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:628:8: ( 'atomic' | 'Atomic' | 'ATOMIC' )
-            int alt39 = 3;
-            int LA39_0 = input.LA(1);
+            int alt40 = 3;
+            int LA40_0 = input.LA(1);
 
-            if ( (LA39_0 == 'a') )
+            if ( (LA40_0 == 'a') )
             {
-                alt39 = 1;
+                alt40 = 1;
             }
-            else if ( (LA39_0 == 'A') )
+            else if ( (LA40_0 == 'A') )
             {
-                int LA39_2 = input.LA(2);
+                int LA40_2 = input.LA(2);
 
-                if ( (LA39_2 == 't') )
+                if ( (LA40_2 == 't') )
                 {
-                    alt39 = 2;
+                    alt40 = 2;
                 }
-                else if ( (LA39_2 == 'T') )
+                else if ( (LA40_2 == 'T') )
                 {
-                    alt39 = 3;
+                    alt40 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d39s2 =
-                        new NoViableAltException("", 39, 2, input);
+                    NoViableAltException nvae_d40s2 =
+                        new NoViableAltException("", 40, 2, input);
 
-                    throw nvae_d39s2;
+                    throw nvae_d40s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d39s0 =
-                    new NoViableAltException("", 39, 0, input);
+                NoViableAltException nvae_d40s0 =
+                    new NoViableAltException("", 40, 0, input);
 
-                throw nvae_d39s0;
+                throw nvae_d40s0;
             }
-            switch (alt39) 
+            switch (alt40) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:628:10: 'atomic'
@@ -4085,41 +4155,41 @@ public partial class PsimulexLexer : Lexer {
             int _type = Lock;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:629:6: ( 'lock' | 'Lock' | 'LOCK' )
-            int alt40 = 3;
-            int LA40_0 = input.LA(1);
+            int alt41 = 3;
+            int LA41_0 = input.LA(1);
 
-            if ( (LA40_0 == 'l') )
+            if ( (LA41_0 == 'l') )
             {
-                alt40 = 1;
+                alt41 = 1;
             }
-            else if ( (LA40_0 == 'L') )
+            else if ( (LA41_0 == 'L') )
             {
-                int LA40_2 = input.LA(2);
+                int LA41_2 = input.LA(2);
 
-                if ( (LA40_2 == 'o') )
+                if ( (LA41_2 == 'o') )
                 {
-                    alt40 = 2;
+                    alt41 = 2;
                 }
-                else if ( (LA40_2 == 'O') )
+                else if ( (LA41_2 == 'O') )
                 {
-                    alt40 = 3;
+                    alt41 = 3;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d40s2 =
-                        new NoViableAltException("", 40, 2, input);
+                    NoViableAltException nvae_d41s2 =
+                        new NoViableAltException("", 41, 2, input);
 
-                    throw nvae_d40s2;
+                    throw nvae_d41s2;
                 }
             }
             else 
             {
-                NoViableAltException nvae_d40s0 =
-                    new NoViableAltException("", 40, 0, input);
+                NoViableAltException nvae_d41s0 =
+                    new NoViableAltException("", 41, 0, input);
 
-                throw nvae_d40s0;
+                throw nvae_d41s0;
             }
-            switch (alt40) 
+            switch (alt41) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:629:8: 'lock'
@@ -4263,25 +4333,25 @@ public partial class PsimulexLexer : Lexer {
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:669:18: ( '0' | NotNullDigit ( Digit )* )
             {
             	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:669:18: ( '0' | NotNullDigit ( Digit )* )
-            	int alt42 = 2;
-            	int LA42_0 = input.LA(1);
+            	int alt43 = 2;
+            	int LA43_0 = input.LA(1);
 
-            	if ( (LA42_0 == '0') )
+            	if ( (LA43_0 == '0') )
             	{
-            	    alt42 = 1;
+            	    alt43 = 1;
             	}
-            	else if ( ((LA42_0 >= '1' && LA42_0 <= '9')) )
+            	else if ( ((LA43_0 >= '1' && LA43_0 <= '9')) )
             	{
-            	    alt42 = 2;
+            	    alt43 = 2;
             	}
             	else 
             	{
-            	    NoViableAltException nvae_d42s0 =
-            	        new NoViableAltException("", 42, 0, input);
+            	    NoViableAltException nvae_d43s0 =
+            	        new NoViableAltException("", 43, 0, input);
 
-            	    throw nvae_d42s0;
+            	    throw nvae_d43s0;
             	}
-            	switch (alt42) 
+            	switch (alt43) 
             	{
             	    case 1 :
             	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:669:19: '0'
@@ -4297,16 +4367,16 @@ public partial class PsimulexLexer : Lexer {
             	        	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:669:38: ( Digit )*
             	        	do 
             	        	{
-            	        	    int alt41 = 2;
-            	        	    int LA41_0 = input.LA(1);
+            	        	    int alt42 = 2;
+            	        	    int LA42_0 = input.LA(1);
 
-            	        	    if ( ((LA41_0 >= '0' && LA41_0 <= '9')) )
+            	        	    if ( ((LA42_0 >= '0' && LA42_0 <= '9')) )
             	        	    {
-            	        	        alt41 = 1;
+            	        	        alt42 = 1;
             	        	    }
 
 
-            	        	    switch (alt41) 
+            	        	    switch (alt42) 
             	        		{
             	        			case 1 :
             	        			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:669:38: Digit
@@ -4317,12 +4387,12 @@ public partial class PsimulexLexer : Lexer {
             	        			    break;
 
             	        			default:
-            	        			    goto loop41;
+            	        			    goto loop42;
             	        	    }
             	        	} while (true);
 
-            	        	loop41:
-            	        		;	// Stops C# compiler whining that label 'loop41' has no statements
+            	        	loop42:
+            	        		;	// Stops C# compiler whining that label 'loop42' has no statements
 
 
             	        }
@@ -4379,50 +4449,15 @@ public partial class PsimulexLexer : Lexer {
             int _type = DecimalLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:675:5: ( ( Digit )+ '.' ( Digit )* | '.' ( Digit )+ | ( Digit )+ DecimalTypeSuffix )
-            int alt47 = 3;
-            alt47 = dfa47.Predict(input);
-            switch (alt47) 
+            int alt48 = 3;
+            alt48 = dfa48.Predict(input);
+            switch (alt48) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:675:9: ( Digit )+ '.' ( Digit )*
                     {
                     	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:675:9: ( Digit )+
-                    	int cnt43 = 0;
-                    	do 
-                    	{
-                    	    int alt43 = 2;
-                    	    int LA43_0 = input.LA(1);
-
-                    	    if ( ((LA43_0 >= '0' && LA43_0 <= '9')) )
-                    	    {
-                    	        alt43 = 1;
-                    	    }
-
-
-                    	    switch (alt43) 
-                    		{
-                    			case 1 :
-                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:675:9: Digit
-                    			    {
-                    			    	mDigit(); 
-
-                    			    }
-                    			    break;
-
-                    			default:
-                    			    if ( cnt43 >= 1 ) goto loop43;
-                    		            EarlyExitException eee =
-                    		                new EarlyExitException(43, input);
-                    		            throw eee;
-                    	    }
-                    	    cnt43++;
-                    	} while (true);
-
-                    	loop43:
-                    		;	// Stops C# compiler whinging that label 'loop43' has no statements
-
-                    	Match('.'); 
-                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:675:20: ( Digit )*
+                    	int cnt44 = 0;
                     	do 
                     	{
                     	    int alt44 = 2;
@@ -4437,7 +4472,7 @@ public partial class PsimulexLexer : Lexer {
                     	    switch (alt44) 
                     		{
                     			case 1 :
-                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:675:20: Digit
+                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:675:9: Digit
                     			    {
                     			    	mDigit(); 
 
@@ -4445,22 +4480,19 @@ public partial class PsimulexLexer : Lexer {
                     			    break;
 
                     			default:
-                    			    goto loop44;
+                    			    if ( cnt44 >= 1 ) goto loop44;
+                    		            EarlyExitException eee =
+                    		                new EarlyExitException(44, input);
+                    		            throw eee;
                     	    }
+                    	    cnt44++;
                     	} while (true);
 
                     	loop44:
-                    		;	// Stops C# compiler whining that label 'loop44' has no statements
+                    		;	// Stops C# compiler whinging that label 'loop44' has no statements
 
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:676:9: '.' ( Digit )+
-                    {
                     	Match('.'); 
-                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:676:13: ( Digit )+
-                    	int cnt45 = 0;
+                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:675:20: ( Digit )*
                     	do 
                     	{
                     	    int alt45 = 2;
@@ -4475,7 +4507,7 @@ public partial class PsimulexLexer : Lexer {
                     	    switch (alt45) 
                     		{
                     			case 1 :
-                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:676:13: Digit
+                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:675:20: Digit
                     			    {
                     			    	mDigit(); 
 
@@ -4483,24 +4515,21 @@ public partial class PsimulexLexer : Lexer {
                     			    break;
 
                     			default:
-                    			    if ( cnt45 >= 1 ) goto loop45;
-                    		            EarlyExitException eee =
-                    		                new EarlyExitException(45, input);
-                    		            throw eee;
+                    			    goto loop45;
                     	    }
-                    	    cnt45++;
                     	} while (true);
 
                     	loop45:
-                    		;	// Stops C# compiler whinging that label 'loop45' has no statements
+                    		;	// Stops C# compiler whining that label 'loop45' has no statements
 
 
                     }
                     break;
-                case 3 :
-                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:677:9: ( Digit )+ DecimalTypeSuffix
+                case 2 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:676:9: '.' ( Digit )+
                     {
-                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:677:9: ( Digit )+
+                    	Match('.'); 
+                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:676:13: ( Digit )+
                     	int cnt46 = 0;
                     	do 
                     	{
@@ -4516,7 +4545,7 @@ public partial class PsimulexLexer : Lexer {
                     	    switch (alt46) 
                     		{
                     			case 1 :
-                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:677:9: Digit
+                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:676:13: Digit
                     			    {
                     			    	mDigit(); 
 
@@ -4534,6 +4563,47 @@ public partial class PsimulexLexer : Lexer {
 
                     	loop46:
                     		;	// Stops C# compiler whinging that label 'loop46' has no statements
+
+
+                    }
+                    break;
+                case 3 :
+                    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:677:9: ( Digit )+ DecimalTypeSuffix
+                    {
+                    	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:677:9: ( Digit )+
+                    	int cnt47 = 0;
+                    	do 
+                    	{
+                    	    int alt47 = 2;
+                    	    int LA47_0 = input.LA(1);
+
+                    	    if ( ((LA47_0 >= '0' && LA47_0 <= '9')) )
+                    	    {
+                    	        alt47 = 1;
+                    	    }
+
+
+                    	    switch (alt47) 
+                    		{
+                    			case 1 :
+                    			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:677:9: Digit
+                    			    {
+                    			    	mDigit(); 
+
+                    			    }
+                    			    break;
+
+                    			default:
+                    			    if ( cnt47 >= 1 ) goto loop47;
+                    		            EarlyExitException eee =
+                    		                new EarlyExitException(47, input);
+                    		            throw eee;
+                    	    }
+                    	    cnt47++;
+                    	} while (true);
+
+                    	loop47:
+                    		;	// Stops C# compiler whinging that label 'loop47' has no statements
 
                     	mDecimalTypeSuffix(); 
 
@@ -4592,18 +4662,18 @@ public partial class PsimulexLexer : Lexer {
             {
             	Match('\''); 
             	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:686:14: ( EscapeSequence | ~ ( '\\'' | '\\\\' ) )?
-            	int alt48 = 3;
-            	int LA48_0 = input.LA(1);
+            	int alt49 = 3;
+            	int LA49_0 = input.LA(1);
 
-            	if ( (LA48_0 == '\\') )
+            	if ( (LA49_0 == '\\') )
             	{
-            	    alt48 = 1;
+            	    alt49 = 1;
             	}
-            	else if ( ((LA48_0 >= '\u0000' && LA48_0 <= '&') || (LA48_0 >= '(' && LA48_0 <= '[') || (LA48_0 >= ']' && LA48_0 <= '\uFFFE')) )
+            	else if ( ((LA49_0 >= '\u0000' && LA49_0 <= '&') || (LA49_0 >= '(' && LA49_0 <= '[') || (LA49_0 >= ']' && LA49_0 <= '\uFFFE')) )
             	{
-            	    alt48 = 2;
+            	    alt49 = 2;
             	}
-            	switch (alt48) 
+            	switch (alt49) 
             	{
             	    case 1 :
             	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:686:16: EscapeSequence
@@ -4659,20 +4729,20 @@ public partial class PsimulexLexer : Lexer {
             	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:690:11: ( EscapeSequence | ~ ( '\"' | '\\\\' ) )*
             	do 
             	{
-            	    int alt49 = 3;
-            	    int LA49_0 = input.LA(1);
+            	    int alt50 = 3;
+            	    int LA50_0 = input.LA(1);
 
-            	    if ( (LA49_0 == '\\') )
+            	    if ( (LA50_0 == '\\') )
             	    {
-            	        alt49 = 1;
+            	        alt50 = 1;
             	    }
-            	    else if ( ((LA49_0 >= '\u0000' && LA49_0 <= '!') || (LA49_0 >= '#' && LA49_0 <= '[') || (LA49_0 >= ']' && LA49_0 <= '\uFFFE')) )
+            	    else if ( ((LA50_0 >= '\u0000' && LA50_0 <= '!') || (LA50_0 >= '#' && LA50_0 <= '[') || (LA50_0 >= ']' && LA50_0 <= '\uFFFE')) )
             	    {
-            	        alt49 = 2;
+            	        alt50 = 2;
             	    }
 
 
-            	    switch (alt49) 
+            	    switch (alt50) 
             		{
             			case 1 :
             			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:690:13: EscapeSequence
@@ -4700,12 +4770,12 @@ public partial class PsimulexLexer : Lexer {
             			    break;
 
             			default:
-            			    goto loop49;
+            			    goto loop50;
             	    }
             	} while (true);
 
-            	loop49:
-            		;	// Stops C# compiler whining that label 'loop49' has no statements
+            	loop50:
+            		;	// Stops C# compiler whining that label 'loop50' has no statements
 
             	Match('\"'); 
 
@@ -4728,69 +4798,69 @@ public partial class PsimulexLexer : Lexer {
             int _type = BooleanLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:694:5: ( 'true' | 'false' | 'True' | 'False' | 'TRUE' | 'FALSE' )
-            int alt50 = 6;
+            int alt51 = 6;
             switch ( input.LA(1) ) 
             {
             case 't':
             	{
-                alt50 = 1;
+                alt51 = 1;
                 }
                 break;
             case 'f':
             	{
-                alt50 = 2;
+                alt51 = 2;
                 }
                 break;
             case 'T':
             	{
-                int LA50_3 = input.LA(2);
+                int LA51_3 = input.LA(2);
 
-                if ( (LA50_3 == 'r') )
+                if ( (LA51_3 == 'r') )
                 {
-                    alt50 = 3;
+                    alt51 = 3;
                 }
-                else if ( (LA50_3 == 'R') )
+                else if ( (LA51_3 == 'R') )
                 {
-                    alt50 = 5;
+                    alt51 = 5;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d50s3 =
-                        new NoViableAltException("", 50, 3, input);
+                    NoViableAltException nvae_d51s3 =
+                        new NoViableAltException("", 51, 3, input);
 
-                    throw nvae_d50s3;
+                    throw nvae_d51s3;
                 }
                 }
                 break;
             case 'F':
             	{
-                int LA50_4 = input.LA(2);
+                int LA51_4 = input.LA(2);
 
-                if ( (LA50_4 == 'a') )
+                if ( (LA51_4 == 'a') )
                 {
-                    alt50 = 4;
+                    alt51 = 4;
                 }
-                else if ( (LA50_4 == 'A') )
+                else if ( (LA51_4 == 'A') )
                 {
-                    alt50 = 6;
+                    alt51 = 6;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d50s4 =
-                        new NoViableAltException("", 50, 4, input);
+                    NoViableAltException nvae_d51s4 =
+                        new NoViableAltException("", 51, 4, input);
 
-                    throw nvae_d50s4;
+                    throw nvae_d51s4;
                 }
                 }
                 break;
             	default:
-            	    NoViableAltException nvae_d50s0 =
-            	        new NoViableAltException("", 50, 0, input);
+            	    NoViableAltException nvae_d51s0 =
+            	        new NoViableAltException("", 51, 0, input);
 
-            	    throw nvae_d50s0;
+            	    throw nvae_d51s0;
             }
 
-            switch (alt50) 
+            switch (alt51) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:694:7: 'true'
@@ -4859,69 +4929,69 @@ public partial class PsimulexLexer : Lexer {
             int _type = NullLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:700:5: ( 'null' | 'nil' | 'Null' | 'Nil' | 'NULL' | 'NIL' )
-            int alt51 = 6;
-            int LA51_0 = input.LA(1);
+            int alt52 = 6;
+            int LA52_0 = input.LA(1);
 
-            if ( (LA51_0 == 'n') )
+            if ( (LA52_0 == 'n') )
             {
-                int LA51_1 = input.LA(2);
+                int LA52_1 = input.LA(2);
 
-                if ( (LA51_1 == 'u') )
+                if ( (LA52_1 == 'u') )
                 {
-                    alt51 = 1;
+                    alt52 = 1;
                 }
-                else if ( (LA51_1 == 'i') )
+                else if ( (LA52_1 == 'i') )
                 {
-                    alt51 = 2;
+                    alt52 = 2;
                 }
                 else 
                 {
-                    NoViableAltException nvae_d51s1 =
-                        new NoViableAltException("", 51, 1, input);
+                    NoViableAltException nvae_d52s1 =
+                        new NoViableAltException("", 52, 1, input);
 
-                    throw nvae_d51s1;
+                    throw nvae_d52s1;
                 }
             }
-            else if ( (LA51_0 == 'N') )
+            else if ( (LA52_0 == 'N') )
             {
                 switch ( input.LA(2) ) 
                 {
                 case 'u':
                 	{
-                    alt51 = 3;
+                    alt52 = 3;
                     }
                     break;
                 case 'i':
                 	{
-                    alt51 = 4;
+                    alt52 = 4;
                     }
                     break;
                 case 'U':
                 	{
-                    alt51 = 5;
+                    alt52 = 5;
                     }
                     break;
                 case 'I':
                 	{
-                    alt51 = 6;
+                    alt52 = 6;
                     }
                     break;
                 	default:
-                	    NoViableAltException nvae_d51s2 =
-                	        new NoViableAltException("", 51, 2, input);
+                	    NoViableAltException nvae_d52s2 =
+                	        new NoViableAltException("", 52, 2, input);
 
-                	    throw nvae_d51s2;
+                	    throw nvae_d52s2;
                 }
 
             }
             else 
             {
-                NoViableAltException nvae_d51s0 =
-                    new NoViableAltException("", 51, 0, input);
+                NoViableAltException nvae_d52s0 =
+                    new NoViableAltException("", 52, 0, input);
 
-                throw nvae_d51s0;
+                throw nvae_d52s0;
             }
-            switch (alt51) 
+            switch (alt52) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:700:7: 'null'
@@ -4990,9 +5060,9 @@ public partial class PsimulexLexer : Lexer {
             int _type = InfinityLiteral;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:706:5: ( 'inf' | 'infinity' | 'Inf' | 'Infinity' | 'INF' | 'INFINITY' )
-            int alt52 = 6;
-            alt52 = dfa52.Predict(input);
-            switch (alt52) 
+            int alt53 = 6;
+            alt53 = dfa53.Predict(input);
+            switch (alt53) 
             {
                 case 1 :
                     // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:706:7: 'inf'
@@ -5067,16 +5137,16 @@ public partial class PsimulexLexer : Lexer {
             	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:712:18: ( IDLetter | Digit )*
             	do 
             	{
-            	    int alt53 = 2;
-            	    int LA53_0 = input.LA(1);
+            	    int alt54 = 2;
+            	    int LA54_0 = input.LA(1);
 
-            	    if ( ((LA53_0 >= '0' && LA53_0 <= '9') || (LA53_0 >= 'A' && LA53_0 <= 'Z') || LA53_0 == '_' || (LA53_0 >= 'a' && LA53_0 <= 'z')) )
+            	    if ( ((LA54_0 >= '0' && LA54_0 <= '9') || (LA54_0 >= 'A' && LA54_0 <= 'Z') || LA54_0 == '_' || (LA54_0 >= 'a' && LA54_0 <= 'z')) )
             	    {
-            	        alt53 = 1;
+            	        alt54 = 1;
             	    }
 
 
-            	    switch (alt53) 
+            	    switch (alt54) 
             		{
             			case 1 :
             			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:
@@ -5097,12 +5167,12 @@ public partial class PsimulexLexer : Lexer {
             			    break;
 
             			default:
-            			    goto loop53;
+            			    goto loop54;
             	    }
             	} while (true);
 
-            	loop53:
-            		;	// Stops C# compiler whining that label 'loop53' has no statements
+            	loop54:
+            		;	// Stops C# compiler whining that label 'loop54' has no statements
 
 
             }
@@ -5165,16 +5235,16 @@ public partial class PsimulexLexer : Lexer {
             	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:721:12: (~ ( '\\n' | '\\r' ) )*
             	do 
             	{
-            	    int alt54 = 2;
-            	    int LA54_0 = input.LA(1);
+            	    int alt55 = 2;
+            	    int LA55_0 = input.LA(1);
 
-            	    if ( ((LA54_0 >= '\u0000' && LA54_0 <= '\t') || (LA54_0 >= '\u000B' && LA54_0 <= '\f') || (LA54_0 >= '\u000E' && LA54_0 <= '\uFFFE')) )
+            	    if ( ((LA55_0 >= '\u0000' && LA55_0 <= '\t') || (LA55_0 >= '\u000B' && LA55_0 <= '\f') || (LA55_0 >= '\u000E' && LA55_0 <= '\uFFFE')) )
             	    {
-            	        alt54 = 1;
+            	        alt55 = 1;
             	    }
 
 
-            	    switch (alt54) 
+            	    switch (alt55) 
             		{
             			case 1 :
             			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:721:12: ~ ( '\\n' | '\\r' )
@@ -5195,22 +5265,22 @@ public partial class PsimulexLexer : Lexer {
             			    break;
 
             			default:
-            			    goto loop54;
+            			    goto loop55;
             	    }
             	} while (true);
 
-            	loop54:
-            		;	// Stops C# compiler whining that label 'loop54' has no statements
+            	loop55:
+            		;	// Stops C# compiler whining that label 'loop55' has no statements
 
             	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:721:26: ( '\\r' )?
-            	int alt55 = 2;
-            	int LA55_0 = input.LA(1);
+            	int alt56 = 2;
+            	int LA56_0 = input.LA(1);
 
-            	if ( (LA55_0 == '\r') )
+            	if ( (LA56_0 == '\r') )
             	{
-            	    alt55 = 1;
+            	    alt56 = 1;
             	}
-            	switch (alt55) 
+            	switch (alt56) 
             	{
             	    case 1 :
             	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:721:26: '\\r'
@@ -5223,14 +5293,14 @@ public partial class PsimulexLexer : Lexer {
             	}
 
             	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:721:32: ( '\\n' )?
-            	int alt56 = 2;
-            	int LA56_0 = input.LA(1);
+            	int alt57 = 2;
+            	int LA57_0 = input.LA(1);
 
-            	if ( (LA56_0 == '\n') )
+            	if ( (LA57_0 == '\n') )
             	{
-            	    alt56 = 1;
+            	    alt57 = 1;
             	}
-            	switch (alt56) 
+            	switch (alt57) 
             	{
             	    case 1 :
             	        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:721:32: '\\n'
@@ -5270,31 +5340,31 @@ public partial class PsimulexLexer : Lexer {
             	// C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:725:14: ( options {greedy=false; } : . )*
             	do 
             	{
-            	    int alt57 = 2;
-            	    int LA57_0 = input.LA(1);
+            	    int alt58 = 2;
+            	    int LA58_0 = input.LA(1);
 
-            	    if ( (LA57_0 == '*') )
+            	    if ( (LA58_0 == '*') )
             	    {
-            	        int LA57_1 = input.LA(2);
+            	        int LA58_1 = input.LA(2);
 
-            	        if ( (LA57_1 == '/') )
+            	        if ( (LA58_1 == '/') )
             	        {
-            	            alt57 = 2;
+            	            alt58 = 2;
             	        }
-            	        else if ( ((LA57_1 >= '\u0000' && LA57_1 <= '.') || (LA57_1 >= '0' && LA57_1 <= '\uFFFE')) )
+            	        else if ( ((LA58_1 >= '\u0000' && LA58_1 <= '.') || (LA58_1 >= '0' && LA58_1 <= '\uFFFE')) )
             	        {
-            	            alt57 = 1;
+            	            alt58 = 1;
             	        }
 
 
             	    }
-            	    else if ( ((LA57_0 >= '\u0000' && LA57_0 <= ')') || (LA57_0 >= '+' && LA57_0 <= '\uFFFE')) )
+            	    else if ( ((LA58_0 >= '\u0000' && LA58_0 <= ')') || (LA58_0 >= '+' && LA58_0 <= '\uFFFE')) )
             	    {
-            	        alt57 = 1;
+            	        alt58 = 1;
             	    }
 
 
-            	    switch (alt57) 
+            	    switch (alt58) 
             		{
             			case 1 :
             			    // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:725:42: .
@@ -5305,12 +5375,12 @@ public partial class PsimulexLexer : Lexer {
             			    break;
 
             			default:
-            			    goto loop57;
+            			    goto loop58;
             	    }
             	} while (true);
 
-            	loop57:
-            		;	// Stops C# compiler whining that label 'loop57' has no statements
+            	loop58:
+            		;	// Stops C# compiler whining that label 'loop58' has no statements
 
             	Match("*/"); 
 
@@ -5330,9 +5400,9 @@ public partial class PsimulexLexer : Lexer {
     override public void mTokens() // throws RecognitionException 
     {
         // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:8: ( T__143 | T__144 | T__145 | T__146 | T__147 | T__148 | T__149 | T__150 | T__151 | LogicalAnd | LogicalOr | LogicalNot | RelEqual | RelNotEqual | RelLessThan | RelLessThanOrEqual | RelGreaterThan | RelGreaterThanOrEqual | Assign | AssignAndAdd | AssignAndSubstract | AssignAndMultiply | AssignAndDivide | AssignAndModulo | Plus | Minus | Star | Divide | Modulo | PlusPlus | MinusMinus | Reference | Bool | Char | Int | Decimal | String | Void | Tree | BinTree | Set | List | Stack | Queue | PQueue | Graph | Edge | Node | Thread | Timer | Iterator | Struct | Import | Break | Continue | Return | If | Else | ElseIf | For | ForEach | PFor | PForEach | Do | PDo | While | Loop | To | In | Async | Atomic | Lock | IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral | Identifier | WS | SingleLineComment | MultiLineComment )
-        int alt58 = 83;
-        alt58 = dfa58.Predict(input);
-        switch (alt58) 
+        int alt59 = 83;
+        alt59 = dfa59.Predict(input);
+        switch (alt59) 
         {
             case 1 :
                 // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:10: T__143
@@ -5921,22 +5991,22 @@ public partial class PsimulexLexer : Lexer {
     }
 
 
-    protected DFA1 dfa1;
     protected DFA2 dfa2;
     protected DFA3 dfa3;
-    protected DFA24 dfa24;
-    protected DFA47 dfa47;
-    protected DFA52 dfa52;
-    protected DFA58 dfa58;
+    protected DFA4 dfa4;
+    protected DFA25 dfa25;
+    protected DFA48 dfa48;
+    protected DFA53 dfa53;
+    protected DFA59 dfa59;
 	private void InitializeCyclicDFAs()
 	{
-	    this.dfa1 = new DFA1(this);
 	    this.dfa2 = new DFA2(this);
 	    this.dfa3 = new DFA3(this);
-	    this.dfa24 = new DFA24(this);
-	    this.dfa47 = new DFA47(this);
-	    this.dfa52 = new DFA52(this);
-	    this.dfa58 = new DFA58(this);
+	    this.dfa4 = new DFA4(this);
+	    this.dfa25 = new DFA25(this);
+	    this.dfa48 = new DFA48(this);
+	    this.dfa53 = new DFA53(this);
+	    this.dfa59 = new DFA59(this);
 
 
 
@@ -5946,81 +6016,15 @@ public partial class PsimulexLexer : Lexer {
 
 	}
 
-    const string DFA1_eotS =
-        "\x09\uffff\x01\x0d\x01\x0f\x01\x11\x06\uffff";
-    const string DFA1_eofS =
-        "\x12\uffff";
-    const string DFA1_minS =
-        "\x01\x42\x01\x6f\x01\x4f\x02\x6f\x01\x4f\x02\x6c\x01\x4c\x02\x65"+
-        "\x01\x45\x06\uffff";
-    const string DFA1_maxS =
-        "\x01\x62\x04\x6f\x01\x4f\x02\x6c\x01\x4c\x02\x65\x01\x45\x06\uffff";
-    const string DFA1_acceptS =
-        "\x0c\uffff\x01\x04\x01\x01\x01\x05\x01\x02\x01\x06\x01\x03";
-    const string DFA1_specialS =
-        "\x12\uffff}>";
-    static readonly string[] DFA1_transitionS = {
-            "\x01\x02\x1f\uffff\x01\x01",
-            "\x01\x03",
-            "\x01\x05\x1f\uffff\x01\x04",
-            "\x01\x06",
-            "\x01\x07",
-            "\x01\x08",
-            "\x01\x09",
-            "\x01\x0a",
-            "\x01\x0b",
-            "\x01\x0c",
-            "\x01\x0e",
-            "\x01\x10",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
-
-    static readonly short[] DFA1_eot = DFA.UnpackEncodedString(DFA1_eotS);
-    static readonly short[] DFA1_eof = DFA.UnpackEncodedString(DFA1_eofS);
-    static readonly char[] DFA1_min = DFA.UnpackEncodedStringToUnsignedChars(DFA1_minS);
-    static readonly char[] DFA1_max = DFA.UnpackEncodedStringToUnsignedChars(DFA1_maxS);
-    static readonly short[] DFA1_accept = DFA.UnpackEncodedString(DFA1_acceptS);
-    static readonly short[] DFA1_special = DFA.UnpackEncodedString(DFA1_specialS);
-    static readonly short[][] DFA1_transition = DFA.UnpackEncodedStringArray(DFA1_transitionS);
-
-    protected class DFA1 : DFA
-    {
-        public DFA1(BaseRecognizer recognizer)
-        {
-            this.recognizer = recognizer;
-            this.decisionNumber = 1;
-            this.eot = DFA1_eot;
-            this.eof = DFA1_eof;
-            this.min = DFA1_min;
-            this.max = DFA1_max;
-            this.accept = DFA1_accept;
-            this.special = DFA1_special;
-            this.transition = DFA1_transition;
-
-        }
-
-        override public string Description
-        {
-            get { return "579:1: Bool : ( 'bool' | 'Bool' | 'BOOL' | 'boolean' | 'Boolean' | 'BOOLEAN' );"; }
-        }
-
-    }
-
     const string DFA2_eotS =
         "\x09\uffff\x01\x0d\x01\x0f\x01\x11\x06\uffff";
     const string DFA2_eofS =
         "\x12\uffff";
     const string DFA2_minS =
-        "\x01\x43\x01\x68\x01\x48\x02\x61\x01\x41\x02\x72\x01\x52\x02\x61"+
-        "\x01\x41\x06\uffff";
+        "\x01\x42\x01\x6f\x01\x4f\x02\x6f\x01\x4f\x02\x6c\x01\x4c\x02\x65"+
+        "\x01\x45\x06\uffff";
     const string DFA2_maxS =
-        "\x01\x63\x02\x68\x02\x61\x01\x41\x02\x72\x01\x52\x02\x61\x01\x41"+
-        "\x06\uffff";
+        "\x01\x62\x04\x6f\x01\x4f\x02\x6c\x01\x4c\x02\x65\x01\x45\x06\uffff";
     const string DFA2_acceptS =
         "\x0c\uffff\x01\x04\x01\x01\x01\x05\x01\x02\x01\x06\x01\x03";
     const string DFA2_specialS =
@@ -6072,23 +6076,25 @@ public partial class PsimulexLexer : Lexer {
 
         override public string Description
         {
-            get { return "580:1: Char : ( 'char' | 'Char' | 'CHAR' | 'character' | 'Character' | 'CHARACTER' );"; }
+            get { return "579:1: Bool : ( 'bool' | 'Bool' | 'BOOL' | 'boolean' | 'Boolean' | 'BOOLEAN' );"; }
         }
 
     }
 
     const string DFA3_eotS =
-        "\x06\uffff\x01\x0a\x01\x0c\x01\x0e\x06\uffff";
+        "\x09\uffff\x01\x0d\x01\x0f\x01\x11\x06\uffff";
     const string DFA3_eofS =
-        "\x0f\uffff";
+        "\x12\uffff";
     const string DFA3_minS =
-        "\x01\x49\x01\x6e\x01\x4e\x02\x74\x01\x54\x02\x65\x01\x45\x06\uffff";
+        "\x01\x43\x01\x68\x01\x48\x02\x61\x01\x41\x02\x72\x01\x52\x02\x61"+
+        "\x01\x41\x06\uffff";
     const string DFA3_maxS =
-        "\x01\x69\x02\x6e\x02\x74\x01\x54\x02\x65\x01\x45\x06\uffff";
+        "\x01\x63\x02\x68\x02\x61\x01\x41\x02\x72\x01\x52\x02\x61\x01\x41"+
+        "\x06\uffff";
     const string DFA3_acceptS =
-        "\x09\uffff\x01\x04\x01\x01\x01\x05\x01\x02\x01\x06\x01\x03";
+        "\x0c\uffff\x01\x04\x01\x01\x01\x05\x01\x02\x01\x06\x01\x03";
     const string DFA3_specialS =
-        "\x0f\uffff}>";
+        "\x12\uffff}>";
     static readonly string[] DFA3_transitionS = {
             "\x01\x02\x1f\uffff\x01\x01",
             "\x01\x03",
@@ -6097,8 +6103,11 @@ public partial class PsimulexLexer : Lexer {
             "\x01\x07",
             "\x01\x08",
             "\x01\x09",
+            "\x01\x0a",
             "\x01\x0b",
-            "\x01\x0d",
+            "\x01\x0c",
+            "\x01\x0e",
+            "\x01\x10",
             "",
             "",
             "",
@@ -6133,24 +6142,24 @@ public partial class PsimulexLexer : Lexer {
 
         override public string Description
         {
-            get { return "581:1: Int : ( 'int' | 'Int' | 'INT' | 'integer' | 'Integer' | 'INTEGER' );"; }
+            get { return "580:1: Char : ( 'char' | 'Char' | 'CHAR' | 'character' | 'Character' | 'CHARACTER' );"; }
         }
 
     }
 
-    const string DFA24_eotS =
+    const string DFA4_eotS =
         "\x06\uffff\x01\x0a\x01\x0c\x01\x0e\x06\uffff";
-    const string DFA24_eofS =
+    const string DFA4_eofS =
         "\x0f\uffff";
-    const string DFA24_minS =
-        "\x01\x52\x01\x65\x01\x45\x02\x74\x01\x54\x02\x75\x01\x55\x06\uffff";
-    const string DFA24_maxS =
-        "\x01\x72\x02\x65\x02\x74\x01\x54\x02\x75\x01\x55\x06\uffff";
-    const string DFA24_acceptS =
+    const string DFA4_minS =
+        "\x01\x49\x01\x6e\x01\x4e\x02\x74\x01\x54\x02\x65\x01\x45\x06\uffff";
+    const string DFA4_maxS =
+        "\x01\x69\x02\x6e\x02\x74\x01\x54\x02\x65\x01\x45\x06\uffff";
+    const string DFA4_acceptS =
         "\x09\uffff\x01\x04\x01\x01\x01\x05\x01\x02\x01\x06\x01\x03";
-    const string DFA24_specialS =
+    const string DFA4_specialS =
         "\x0f\uffff}>";
-    static readonly string[] DFA24_transitionS = {
+    static readonly string[] DFA4_transitionS = {
             "\x01\x02\x1f\uffff\x01\x01",
             "\x01\x03",
             "\x01\x05\x1f\uffff\x01\x04",
@@ -6168,27 +6177,88 @@ public partial class PsimulexLexer : Lexer {
             ""
     };
 
-    static readonly short[] DFA24_eot = DFA.UnpackEncodedString(DFA24_eotS);
-    static readonly short[] DFA24_eof = DFA.UnpackEncodedString(DFA24_eofS);
-    static readonly char[] DFA24_min = DFA.UnpackEncodedStringToUnsignedChars(DFA24_minS);
-    static readonly char[] DFA24_max = DFA.UnpackEncodedStringToUnsignedChars(DFA24_maxS);
-    static readonly short[] DFA24_accept = DFA.UnpackEncodedString(DFA24_acceptS);
-    static readonly short[] DFA24_special = DFA.UnpackEncodedString(DFA24_specialS);
-    static readonly short[][] DFA24_transition = DFA.UnpackEncodedStringArray(DFA24_transitionS);
+    static readonly short[] DFA4_eot = DFA.UnpackEncodedString(DFA4_eotS);
+    static readonly short[] DFA4_eof = DFA.UnpackEncodedString(DFA4_eofS);
+    static readonly char[] DFA4_min = DFA.UnpackEncodedStringToUnsignedChars(DFA4_minS);
+    static readonly char[] DFA4_max = DFA.UnpackEncodedStringToUnsignedChars(DFA4_maxS);
+    static readonly short[] DFA4_accept = DFA.UnpackEncodedString(DFA4_acceptS);
+    static readonly short[] DFA4_special = DFA.UnpackEncodedString(DFA4_specialS);
+    static readonly short[][] DFA4_transition = DFA.UnpackEncodedStringArray(DFA4_transitionS);
 
-    protected class DFA24 : DFA
+    protected class DFA4 : DFA
     {
-        public DFA24(BaseRecognizer recognizer)
+        public DFA4(BaseRecognizer recognizer)
         {
             this.recognizer = recognizer;
-            this.decisionNumber = 24;
-            this.eot = DFA24_eot;
-            this.eof = DFA24_eof;
-            this.min = DFA24_min;
-            this.max = DFA24_max;
-            this.accept = DFA24_accept;
-            this.special = DFA24_special;
-            this.transition = DFA24_transition;
+            this.decisionNumber = 4;
+            this.eot = DFA4_eot;
+            this.eof = DFA4_eof;
+            this.min = DFA4_min;
+            this.max = DFA4_max;
+            this.accept = DFA4_accept;
+            this.special = DFA4_special;
+            this.transition = DFA4_transition;
+
+        }
+
+        override public string Description
+        {
+            get { return "581:1: Int : ( 'int' | 'Int' | 'INT' | 'integer' | 'Integer' | 'INTEGER' );"; }
+        }
+
+    }
+
+    const string DFA25_eotS =
+        "\x06\uffff\x01\x0a\x01\x0c\x01\x0e\x06\uffff";
+    const string DFA25_eofS =
+        "\x0f\uffff";
+    const string DFA25_minS =
+        "\x01\x52\x01\x65\x01\x45\x02\x74\x01\x54\x02\x75\x01\x55\x06\uffff";
+    const string DFA25_maxS =
+        "\x01\x72\x02\x65\x02\x74\x01\x54\x02\x75\x01\x55\x06\uffff";
+    const string DFA25_acceptS =
+        "\x09\uffff\x01\x04\x01\x01\x01\x05\x01\x02\x01\x06\x01\x03";
+    const string DFA25_specialS =
+        "\x0f\uffff}>";
+    static readonly string[] DFA25_transitionS = {
+            "\x01\x02\x1f\uffff\x01\x01",
+            "\x01\x03",
+            "\x01\x05\x1f\uffff\x01\x04",
+            "\x01\x06",
+            "\x01\x07",
+            "\x01\x08",
+            "\x01\x09",
+            "\x01\x0b",
+            "\x01\x0d",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static readonly short[] DFA25_eot = DFA.UnpackEncodedString(DFA25_eotS);
+    static readonly short[] DFA25_eof = DFA.UnpackEncodedString(DFA25_eofS);
+    static readonly char[] DFA25_min = DFA.UnpackEncodedStringToUnsignedChars(DFA25_minS);
+    static readonly char[] DFA25_max = DFA.UnpackEncodedStringToUnsignedChars(DFA25_maxS);
+    static readonly short[] DFA25_accept = DFA.UnpackEncodedString(DFA25_acceptS);
+    static readonly short[] DFA25_special = DFA.UnpackEncodedString(DFA25_specialS);
+    static readonly short[][] DFA25_transition = DFA.UnpackEncodedStringArray(DFA25_transitionS);
+
+    protected class DFA25 : DFA
+    {
+        public DFA25(BaseRecognizer recognizer)
+        {
+            this.recognizer = recognizer;
+            this.decisionNumber = 25;
+            this.eot = DFA25_eot;
+            this.eof = DFA25_eof;
+            this.min = DFA25_min;
+            this.max = DFA25_max;
+            this.accept = DFA25_accept;
+            this.special = DFA25_special;
+            this.transition = DFA25_transition;
 
         }
 
@@ -6199,19 +6269,19 @@ public partial class PsimulexLexer : Lexer {
 
     }
 
-    const string DFA47_eotS =
+    const string DFA48_eotS =
         "\x05\uffff";
-    const string DFA47_eofS =
+    const string DFA48_eofS =
         "\x05\uffff";
-    const string DFA47_minS =
+    const string DFA48_minS =
         "\x02\x2e\x03\uffff";
-    const string DFA47_maxS =
+    const string DFA48_maxS =
         "\x01\x39\x01\x6d\x03\uffff";
-    const string DFA47_acceptS =
+    const string DFA48_acceptS =
         "\x02\uffff\x01\x02\x01\x03\x01\x01";
-    const string DFA47_specialS =
+    const string DFA48_specialS =
         "\x05\uffff}>";
-    static readonly string[] DFA47_transitionS = {
+    static readonly string[] DFA48_transitionS = {
             "\x01\x02\x01\uffff\x0a\x01",
             "\x01\x04\x01\uffff\x0a\x01\x0a\uffff\x01\x03\x08\uffff\x01"+
             "\x03\x16\uffff\x01\x03\x08\uffff\x01\x03",
@@ -6220,27 +6290,27 @@ public partial class PsimulexLexer : Lexer {
             ""
     };
 
-    static readonly short[] DFA47_eot = DFA.UnpackEncodedString(DFA47_eotS);
-    static readonly short[] DFA47_eof = DFA.UnpackEncodedString(DFA47_eofS);
-    static readonly char[] DFA47_min = DFA.UnpackEncodedStringToUnsignedChars(DFA47_minS);
-    static readonly char[] DFA47_max = DFA.UnpackEncodedStringToUnsignedChars(DFA47_maxS);
-    static readonly short[] DFA47_accept = DFA.UnpackEncodedString(DFA47_acceptS);
-    static readonly short[] DFA47_special = DFA.UnpackEncodedString(DFA47_specialS);
-    static readonly short[][] DFA47_transition = DFA.UnpackEncodedStringArray(DFA47_transitionS);
+    static readonly short[] DFA48_eot = DFA.UnpackEncodedString(DFA48_eotS);
+    static readonly short[] DFA48_eof = DFA.UnpackEncodedString(DFA48_eofS);
+    static readonly char[] DFA48_min = DFA.UnpackEncodedStringToUnsignedChars(DFA48_minS);
+    static readonly char[] DFA48_max = DFA.UnpackEncodedStringToUnsignedChars(DFA48_maxS);
+    static readonly short[] DFA48_accept = DFA.UnpackEncodedString(DFA48_acceptS);
+    static readonly short[] DFA48_special = DFA.UnpackEncodedString(DFA48_specialS);
+    static readonly short[][] DFA48_transition = DFA.UnpackEncodedStringArray(DFA48_transitionS);
 
-    protected class DFA47 : DFA
+    protected class DFA48 : DFA
     {
-        public DFA47(BaseRecognizer recognizer)
+        public DFA48(BaseRecognizer recognizer)
         {
             this.recognizer = recognizer;
-            this.decisionNumber = 47;
-            this.eot = DFA47_eot;
-            this.eof = DFA47_eof;
-            this.min = DFA47_min;
-            this.max = DFA47_max;
-            this.accept = DFA47_accept;
-            this.special = DFA47_special;
-            this.transition = DFA47_transition;
+            this.decisionNumber = 48;
+            this.eot = DFA48_eot;
+            this.eof = DFA48_eof;
+            this.min = DFA48_min;
+            this.max = DFA48_max;
+            this.accept = DFA48_accept;
+            this.special = DFA48_special;
+            this.transition = DFA48_transition;
 
         }
 
@@ -6251,19 +6321,19 @@ public partial class PsimulexLexer : Lexer {
 
     }
 
-    const string DFA52_eotS =
+    const string DFA53_eotS =
         "\x06\uffff\x01\x0a\x01\x0c\x01\x0e\x06\uffff";
-    const string DFA52_eofS =
+    const string DFA53_eofS =
         "\x0f\uffff";
-    const string DFA52_minS =
+    const string DFA53_minS =
         "\x01\x49\x01\x6e\x01\x4e\x02\x66\x01\x46\x02\x69\x01\x49\x06\uffff";
-    const string DFA52_maxS =
+    const string DFA53_maxS =
         "\x01\x69\x02\x6e\x02\x66\x01\x46\x02\x69\x01\x49\x06\uffff";
-    const string DFA52_acceptS =
+    const string DFA53_acceptS =
         "\x09\uffff\x01\x02\x01\x01\x01\x04\x01\x03\x01\x06\x01\x05";
-    const string DFA52_specialS =
+    const string DFA53_specialS =
         "\x0f\uffff}>";
-    static readonly string[] DFA52_transitionS = {
+    static readonly string[] DFA53_transitionS = {
             "\x01\x02\x1f\uffff\x01\x01",
             "\x01\x03",
             "\x01\x05\x1f\uffff\x01\x04",
@@ -6281,27 +6351,27 @@ public partial class PsimulexLexer : Lexer {
             ""
     };
 
-    static readonly short[] DFA52_eot = DFA.UnpackEncodedString(DFA52_eotS);
-    static readonly short[] DFA52_eof = DFA.UnpackEncodedString(DFA52_eofS);
-    static readonly char[] DFA52_min = DFA.UnpackEncodedStringToUnsignedChars(DFA52_minS);
-    static readonly char[] DFA52_max = DFA.UnpackEncodedStringToUnsignedChars(DFA52_maxS);
-    static readonly short[] DFA52_accept = DFA.UnpackEncodedString(DFA52_acceptS);
-    static readonly short[] DFA52_special = DFA.UnpackEncodedString(DFA52_specialS);
-    static readonly short[][] DFA52_transition = DFA.UnpackEncodedStringArray(DFA52_transitionS);
+    static readonly short[] DFA53_eot = DFA.UnpackEncodedString(DFA53_eotS);
+    static readonly short[] DFA53_eof = DFA.UnpackEncodedString(DFA53_eofS);
+    static readonly char[] DFA53_min = DFA.UnpackEncodedStringToUnsignedChars(DFA53_minS);
+    static readonly char[] DFA53_max = DFA.UnpackEncodedStringToUnsignedChars(DFA53_maxS);
+    static readonly short[] DFA53_accept = DFA.UnpackEncodedString(DFA53_acceptS);
+    static readonly short[] DFA53_special = DFA.UnpackEncodedString(DFA53_specialS);
+    static readonly short[][] DFA53_transition = DFA.UnpackEncodedStringArray(DFA53_transitionS);
 
-    protected class DFA52 : DFA
+    protected class DFA53 : DFA
     {
-        public DFA52(BaseRecognizer recognizer)
+        public DFA53(BaseRecognizer recognizer)
         {
             this.recognizer = recognizer;
-            this.decisionNumber = 52;
-            this.eot = DFA52_eot;
-            this.eof = DFA52_eof;
-            this.min = DFA52_min;
-            this.max = DFA52_max;
-            this.accept = DFA52_accept;
-            this.special = DFA52_special;
-            this.transition = DFA52_transition;
+            this.decisionNumber = 53;
+            this.eot = DFA53_eot;
+            this.eof = DFA53_eof;
+            this.min = DFA53_min;
+            this.max = DFA53_max;
+            this.accept = DFA53_accept;
+            this.special = DFA53_special;
+            this.transition = DFA53_transition;
 
         }
 
@@ -6312,189 +6382,191 @@ public partial class PsimulexLexer : Lexer {
 
     }
 
-    const string DFA58_eotS =
+    const string DFA59_eotS =
         "\x09\uffff\x01\x40\x01\x42\x01\uffff\x01\x44\x01\x46\x01\x48\x01"+
         "\x4a\x01\x4d\x01\x50\x01\x52\x01\x56\x01\x58\x24\x3d\x02\u00c5\x1e"+
-        "\uffff\x0f\x3d\x01\u00d8\x02\x3d\x01\u00db\x02\u00d8\x04\x3d\x02"+
-        "\u00db\x01\x3d\x01\u00e5\x02\x3d\x02\u00e5\x0c\x3d\x01\u00f8\x06"+
-        "\x3d\x02\u00f8\x36\x3d\x01\uffff\x01\u00c5\x0f\x3d\x01\u014d\x01"+
-        "\u014f\x01\uffff\x02\x3d\x01\uffff\x01\u014d\x01\u014f\x01\u014d"+
-        "\x01\u014f\x05\x3d\x01\uffff\x04\x3d\x01\u0160\x04\x3d\x02\u0160"+
-        "\x07\x3d\x01\uffff\x16\x3d\x01\u0184\x04\x3d\x02\u0184\x0b\x3d\x01"+
-        "\u0194\x03\x3d\x01\u0194\x01\x3d\x01\u0194\x03\u019a\x01\u019e\x01"+
-        "\x3d\x02\u019e\x0e\x3d\x01\u01b1\x02\x3d\x02\u01b1\x04\x3d\x01\u01bb"+
-        "\x01\x3d\x02\u01bb\x03\x3d\x01\uffff\x01\x3d\x01\uffff\x10\x3d\x01"+
-        "\uffff\x06\x3d\x03\u01d9\x01\u01da\x01\u01db\x02\x3d\x01\u01da\x01"+
-        "\u01db\x01\u01da\x01\u01db\x04\x3d\x01\u01e2\x01\u01e3\x01\u01e4"+
-        "\x02\u01e2\x01\u01e3\x01\u01e4\x01\u01e3\x01\u01e4\x04\x3d\x01\u01ea"+
-        "\x01\uffff\x02\x3d\x02\u01ea\x03\x3d\x01\u01f2\x01\u01f4\x02\u01f2"+
-        "\x02\u01f4\x01\u01f7\x01\u0194\x01\uffff\x02\u01f7\x02\u0194\x01"+
-        "\x3d\x01\uffff\x03\x3d\x01\uffff\x12\x3d\x01\uffff\x01\x3d\x01\u020f"+
-        "\x04\x3d\x02\u020f\x01\x3d\x01\uffff\x16\x3d\x01\u022b\x02\x3d\x01"+
-        "\u022b\x02\x3d\x01\u022b\x03\uffff\x01\x3d\x01\u0231\x02\x3d\x02"+
-        "\u0231\x03\uffff\x03\u0234\x02\x3d\x01\uffff\x04\x3d\x03\u023b\x01"+
-        "\uffff\x01\x3d\x01\uffff\x02\x3d\x01\uffff\x04\x3d\x01\u01db\x02"+
-        "\x3d\x02\u01db\x03\u0245\x03\u00f8\x01\u0246\x01\x3d\x02\u0246\x04"+
-        "\x3d\x01\uffff\x0d\x3d\x01\u0259\x06\x3d\x02\u0259\x03\x3d\x01\u0263"+
-        "\x01\u0264\x01\uffff\x01\u0263\x01\u0264\x01\u0263\x01\u0264\x01"+
-        "\u0265\x01\uffff\x02\u0265\x01\uffff\x01\u0266\x01\x3d\x02\u0266"+
-        "\x02\x3d\x01\uffff\x03\u026a\x03\u019a\x03\x3d\x02\uffff\x03\u026e"+
-        "\x01\u01b1\x01\u026f\x02\u01b1\x02\u026f\x06\x3d\x01\u014d\x02\x3d"+
-        "\x01\uffff\x01\u014d\x01\x3d\x01\u014d\x03\x3d\x03\u027c\x04\uffff"+
-        "\x03\x3d\x01\uffff\x03\u0280\x02\uffff\x01\x3d\x01\u0282\x02\x3d"+
-        "\x02\u0282\x01\u014f\x01\u0285\x02\u014f\x02\u0285\x01\uffff\x03"+
-        "\u0286\x01\uffff\x01\u01bb\x01\uffff\x02\u01bb\x02\uffff";
-    const string DFA58_eofS =
-        "\u0287\uffff";
-    const string DFA58_minS =
+        "\uffff\x12\x3d\x01\u00de\x02\x3d\x01\u00e1\x02\u00de\x04\x3d\x02"+
+        "\u00e1\x01\x3d\x01\u00eb\x02\x3d\x02\u00eb\x0c\x3d\x01\u00fe\x06"+
+        "\x3d\x02\u00fe\x33\x3d\x01\uffff\x01\u00c5\x01\x42\x01\u0141\x01"+
+        "\x42\x01\u0141\x01\x42\x01\u0141\x0f\x3d\x01\u0154\x01\u0156\x01"+
+        "\uffff\x02\x3d\x01\uffff\x01\u0154\x01\u0156\x01\u0154\x01\u0156"+
+        "\x05\x3d\x01\uffff\x04\x3d\x01\u0167\x04\x3d\x02\u0167\x07\x3d\x01"+
+        "\uffff\x16\x3d\x01\u018b\x04\x3d\x02\u018b\x0b\x3d\x01\u019b\x03"+
+        "\x3d\x01\u019b\x01\x3d\x01\u019b\x01\u01a1\x01\x3d\x02\u01a1\x0f"+
+        "\x3d\x01\uffff\x02\x3d\x01\u01b7\x02\x3d\x02\u01b7\x04\x3d\x01\u01c1"+
+        "\x01\x3d\x02\u01c1\x03\x3d\x01\uffff\x01\x3d\x01\uffff\x10\x3d\x01"+
+        "\uffff\x06\x3d\x03\u01df\x01\u01e0\x01\u01e1\x02\x3d\x01\u01e0\x01"+
+        "\u01e1\x01\u01e0\x01\u01e1\x04\x3d\x01\u01e8\x01\u01e9\x01\u01ea"+
+        "\x02\u01e8\x01\u01e9\x01\u01ea\x01\u01e9\x01\u01ea\x04\x3d\x01\u01f0"+
+        "\x01\uffff\x02\x3d\x02\u01f0\x03\x3d\x01\u01f8\x01\u01fa\x02\u01f8"+
+        "\x02\u01fa\x01\u01fd\x01\u019b\x01\uffff\x02\u01fd\x02\u019b\x01"+
+        "\x3d\x01\uffff\x15\x3d\x01\uffff\x01\x3d\x01\u0215\x04\x3d\x02\u0215"+
+        "\x01\x3d\x01\uffff\x16\x3d\x01\u0231\x02\x3d\x01\u0231\x02\x3d\x01"+
+        "\u0231\x03\uffff\x01\x3d\x01\u0237\x02\x3d\x02\u0237\x03\uffff\x03"+
+        "\u023a\x02\x3d\x01\uffff\x04\x3d\x03\u0241\x01\uffff\x01\x3d\x01"+
+        "\uffff\x02\x3d\x01\uffff\x01\x3d\x01\u01e1\x02\x3d\x02\u01e1\x03"+
+        "\u0248\x03\u00fe\x01\u0249\x01\x3d\x02\u0249\x02\x3d\x03\u0141\x02"+
+        "\x3d\x01\uffff\x0d\x3d\x01\u025c\x06\x3d\x02\u025c\x03\x3d\x01\u0266"+
+        "\x01\u0267\x01\uffff\x01\u0266\x01\u0267\x01\u0266\x01\u0267\x01"+
+        "\u0268\x01\uffff\x02\u0268\x01\uffff\x01\u0269\x01\x3d\x02\u0269"+
+        "\x02\x3d\x01\uffff\x03\u026d\x03\x3d\x02\uffff\x03\u0271\x01\u01b7"+
+        "\x01\u0272\x02\u01b7\x02\u0272\x06\x3d\x01\u0154\x02\x3d\x01\uffff"+
+        "\x01\u0154\x01\x3d\x01\u0154\x03\x3d\x03\u027f\x04\uffff\x03\x3d"+
+        "\x01\uffff\x03\u0283\x02\uffff\x01\x3d\x01\u0285\x02\x3d\x02\u0285"+
+        "\x01\u0156\x01\u0288\x02\u0156\x02\u0288\x01\uffff\x03\u0289\x01"+
+        "\uffff\x01\u01c1\x01\uffff\x02\u01c1\x02\uffff";
+    const string DFA59_eofS =
+        "\u028a\uffff";
+    const string DFA59_minS =
         "\x01\x09\x08\uffff\x01\x30\x01\x26\x01\uffff\x04\x3d\x01\x2b\x01"+
-        "\x2d\x01\x3d\x01\x2a\x01\x3d\x01\x69\x01\x49\x01\x68\x01\x48\x01"+
-        "\x66\x01\x46\x01\x65\x01\x45\x01\x65\x01\x45\x01\x6f\x01\x4f\x01"+
-        "\x68\x01\x48\x01\x69\x01\x49\x01\x75\x01\x55\x01\x64\x01\x44\x01"+
-        "\x72\x01\x52\x01\x64\x01\x44\x01\x69\x01\x49\x01\x65\x01\x45\x01"+
+        "\x2d\x01\x3d\x01\x2a\x01\x3d\x01\x65\x01\x45\x01\x69\x01\x49\x01"+
+        "\x68\x01\x48\x01\x66\x01\x46\x01\x65\x01\x45\x01\x65\x01\x45\x01"+
+        "\x6f\x01\x4f\x01\x68\x01\x48\x01\x69\x01\x49\x01\x75\x01\x55\x01"+
+        "\x64\x01\x44\x01\x72\x01\x52\x01\x64\x01\x44\x01\x69\x01\x49\x01"+
         "\x61\x01\x41\x01\x68\x01\x48\x01\x6e\x01\x4e\x01\x73\x01\x53\x02"+
-        "\x2e\x1e\uffff\x01\x6f\x01\x6e\x01\x65\x01\x6f\x01\x4f\x01\x6e\x01"+
-        "\x4e\x01\x65\x01\x45\x01\x61\x01\x6e\x01\x61\x01\x41\x01\x6e\x01"+
-        "\x4e\x01\x30\x01\x65\x01\x70\x03\x30\x01\x65\x01\x45\x01\x70\x01"+
-        "\x50\x02\x30\x01\x63\x01\x30\x01\x63\x01\x43\x02\x30\x01\x61\x01"+
-        "\x74\x01\x61\x01\x41\x01\x74\x01\x54\x02\x69\x01\x49\x01\x65\x01"+
-        "\x72\x01\x6d\x01\x30\x01\x65\x01\x45\x01\x72\x01\x52\x01\x6d\x01"+
-        "\x4d\x02\x30\x01\x73\x01\x63\x01\x73\x01\x53\x01\x63\x01\x43\x02"+
-        "\x65\x01\x45\x01\x75\x02\x6f\x01\x55\x02\x4f\x02\x61\x01\x41\x01"+
-        "\x67\x01\x73\x01\x67\x01\x47\x01\x73\x01\x53\x01\x64\x02\x6c\x01"+
-        "\x64\x01\x44\x02\x6c\x02\x4c\x02\x74\x01\x54\x01\x72\x01\x6c\x01"+
-        "\x72\x01\x52\x01\x6c\x01\x4c\x02\x69\x01\x49\x02\x74\x01\x54\x01"+
-        "\x79\x01\x6f\x01\x79\x01\x59\x01\x6f\x01\x4f\x01\uffff\x01\x2e\x01"+
-        "\x6c\x01\x74\x01\x61\x01\x6c\x01\x4c\x02\x54\x01\x61\x01\x41\x01"+
-        "\x72\x01\x74\x01\x72\x01\x52\x01\x74\x01\x54\x02\x30\x01\uffff\x01"+
-        "\x72\x01\x6f\x01\uffff\x04\x30\x01\x72\x01\x52\x01\x6f\x01\x4f\x01"+
-        "\x69\x01\uffff\x01\x69\x01\x49\x01\x69\x01\x63\x01\x30\x01\x69\x01"+
-        "\x63\x01\x49\x01\x43\x02\x30\x02\x64\x01\x44\x04\x65\x01\uffff\x02"+
-        "\x65\x02\x45\x01\x65\x01\x45\x01\x65\x01\x45\x01\x74\x01\x70\x01"+
-        "\x6b\x01\x74\x01\x54\x01\x70\x01\x6b\x01\x50\x01\x4b\x02\x75\x01"+
-        "\x55\x01\x65\x01\x72\x01\x30\x01\x65\x01\x45\x01\x72\x01\x52\x02"+
-        "\x30\x02\x70\x01\x50\x03\x65\x01\x45\x01\x65\x01\x45\x01\x65\x01"+
-        "\x6c\x01\x30\x01\x65\x01\x45\x01\x6c\x01\x30\x01\x4c\x05\x30\x01"+
-        "\x73\x02\x30\x01\x73\x01\x53\x02\x6c\x01\x4c\x02\x69\x01\x49\x01"+
-        "\x6e\x01\x6d\x01\x6e\x01\x4e\x01\x6d\x01\x4d\x01\x30\x01\x72\x01"+
-        "\x6b\x02\x30\x01\x72\x01\x52\x01\x6b\x01\x4b\x01\x30\x01\x69\x02"+
-        "\x30\x01\x69\x01\x49\x01\x67\x01\uffff\x01\x6e\x01\uffff\x01\x61"+
-        "\x01\x72\x01\x67\x01\x6e\x01\x47\x01\x4e\x01\x61\x01\x41\x01\x72"+
-        "\x01\x52\x02\x6d\x01\x4d\x01\x6e\x01\x63\x01\x6b\x01\uffff\x01\x6e"+
-        "\x01\x63\x01\x6b\x01\x4e\x01\x43\x01\x4b\x05\x30\x01\x61\x01\x72"+
-        "\x04\x30\x01\x61\x01\x41\x01\x72\x01\x52\x09\x30\x02\x65\x01\x45"+
-        "\x01\x75\x01\x30\x01\uffff\x01\x75\x01\x55\x02\x30\x02\x68\x01\x48"+
-        "\x08\x30\x01\uffff\x04\x30\x01\x72\x01\uffff\x01\x72\x01\x52\x01"+
-        "\x61\x01\uffff\x01\x65\x01\x61\x01\x41\x01\x65\x01\x45\x02\x65\x01"+
-        "\x45\x02\x6c\x01\x4c\x01\x63\x01\x69\x01\x63\x01\x43\x01\x69\x01"+
-        "\x49\x01\x61\x01\uffff\x01\x65\x01\x30\x01\x61\x01\x41\x01\x65\x01"+
-        "\x45\x02\x30\x01\x63\x01\uffff\x01\x6e\x01\x63\x01\x43\x01\x6e\x01"+
-        "\x4e\x01\x65\x01\x69\x02\x74\x01\x65\x01\x69\x01\x45\x01\x49\x01"+
-        "\x74\x01\x54\x01\x74\x01\x54\x02\x61\x01\x41\x01\x67\x01\x74\x01"+
-        "\x30\x01\x67\x01\x74\x01\x30\x01\x47\x01\x54\x01\x30\x03\uffff\x01"+
-        "\x64\x01\x30\x01\x64\x01\x44\x02\x30\x03\uffff\x03\x30\x01\x65\x01"+
-        "\x61\x01\uffff\x01\x65\x01\x45\x01\x61\x01\x41\x03\x30\x01\uffff"+
-        "\x01\x66\x01\uffff\x01\x66\x01\x46\x01\uffff\x02\x6e\x01\x4e\x01"+
-        "\x63\x01\x30\x01\x63\x01\x43\x09\x30\x01\x63\x02\x30\x01\x63\x01"+
-        "\x43\x01\x6e\x01\x65\x01\uffff\x01\x6e\x01\x4e\x01\x65\x01\x45\x01"+
-        "\x74\x01\x75\x01\x74\x01\x54\x01\x75\x01\x55\x01\x72\x01\x74\x01"+
-        "\x6f\x01\x30\x01\x72\x01\x74\x01\x52\x01\x54\x01\x6f\x01\x4f\x02"+
-        "\x30\x02\x6c\x01\x4c\x02\x30\x01\uffff\x05\x30\x01\uffff\x02\x30"+
-        "\x01\uffff\x01\x30\x01\x63\x02\x30\x01\x63\x01\x43\x01\uffff\x06"+
-        "\x30\x02\x68\x01\x48\x02\uffff\x09\x30\x03\x65\x01\x45\x01\x65\x01"+
-        "\x45\x01\x30\x01\x79\x01\x72\x01\uffff\x01\x30\x01\x79\x01\x30\x01"+
-        "\x59\x01\x72\x01\x52\x03\x30\x04\uffff\x02\x68\x01\x48\x01\uffff"+
-        "\x03\x30\x02\uffff\x01\x72\x01\x30\x01\x72\x01\x52\x08\x30\x01\uffff"+
-        "\x03\x30\x01\uffff\x01\x30\x01\uffff\x02\x30\x02\uffff";
-    const string DFA58_maxS =
-        "\x01\x7d\x08\uffff\x01\x39\x01\x26\x01\uffff\x09\x3d\x02\x72\x02"+
-        "\x6f\x02\x74\x02\x6f\x02\x74\x02\x6f\x02\x72\x02\x6f\x02\x75\x01"+
-        "\x71\x01\x51\x02\x72\x02\x6c\x02\x75\x02\x65\x02\x6f\x02\x68\x02"+
-        "\x6e\x02\x74\x02\x6d\x1e\uffff\x01\x6f\x01\x6e\x01\x65\x01\x6f\x01"+
+        "\x2e\x1e\uffff\x02\x66\x01\x46\x01\x6f\x01\x6e\x01\x65\x01\x6f\x01"+
         "\x4f\x01\x6e\x01\x4e\x01\x65\x01\x45\x01\x61\x01\x6e\x01\x61\x01"+
-        "\x41\x01\x6e\x01\x4e\x01\x7a\x01\x65\x01\x70\x03\x7a\x01\x65\x01"+
-        "\x45\x01\x70\x01\x50\x02\x7a\x01\x63\x01\x7a\x01\x63\x01\x43\x02"+
-        "\x7a\x01\x72\x01\x74\x01\x72\x01\x52\x01\x74\x01\x54\x02\x69\x01"+
-        "\x49\x01\x75\x01\x72\x01\x6d\x01\x7a\x01\x75\x01\x55\x01\x72\x01"+
-        "\x52\x01\x6d\x01\x4d\x02\x7a\x01\x73\x01\x6f\x01\x73\x01\x53\x01"+
-        "\x6f\x01\x4f\x02\x65\x01\x45\x01\x75\x02\x6f\x01\x75\x02\x6f\x02"+
+        "\x41\x01\x6e\x01\x4e\x01\x30\x01\x65\x01\x70\x03\x30\x01\x65\x01"+
+        "\x45\x01\x70\x01\x50\x02\x30\x01\x63\x01\x30\x01\x63\x01\x43\x02"+
+        "\x30\x01\x61\x01\x74\x01\x61\x01\x41\x01\x74\x01\x54\x02\x69\x01"+
+        "\x49\x01\x65\x01\x72\x01\x6d\x01\x30\x01\x65\x01\x45\x01\x72\x01"+
+        "\x52\x01\x6d\x01\x4d\x02\x30\x01\x73\x01\x63\x01\x73\x01\x53\x01"+
+        "\x63\x01\x43\x02\x65\x01\x45\x01\x75\x02\x6f\x01\x55\x02\x4f\x02"+
         "\x61\x01\x41\x01\x67\x01\x73\x01\x67\x01\x47\x01\x73\x01\x53\x01"+
-        "\x64\x02\x6c\x01\x64\x01\x44\x02\x6c\x02\x4c\x02\x74\x01\x54\x01"+
+        "\x64\x02\x6c\x01\x64\x01\x44\x02\x6c\x02\x4c\x01\x72\x01\x6c\x01"+
+        "\x72\x01\x52\x01\x6c\x01\x4c\x02\x69\x01\x49\x02\x74\x01\x54\x01"+
+        "\x79\x01\x6f\x01\x79\x01\x59\x01\x6f\x01\x4f\x01\uffff\x01\x2e\x06"+
+        "\x30\x01\x6c\x01\x74\x01\x61\x01\x6c\x01\x4c\x02\x54\x01\x61\x01"+
+        "\x41\x01\x72\x01\x74\x01\x72\x01\x52\x01\x74\x01\x54\x02\x30\x01"+
+        "\uffff\x01\x72\x01\x6f\x01\uffff\x04\x30\x01\x72\x01\x52\x01\x6f"+
+        "\x01\x4f\x01\x69\x01\uffff\x01\x69\x01\x49\x01\x69\x01\x63\x01\x30"+
+        "\x01\x69\x01\x63\x01\x49\x01\x43\x02\x30\x02\x64\x01\x44\x04\x65"+
+        "\x01\uffff\x02\x65\x02\x45\x01\x65\x01\x45\x01\x65\x01\x45\x01\x74"+
+        "\x01\x70\x01\x6b\x01\x74\x01\x54\x01\x70\x01\x6b\x01\x50\x01\x4b"+
+        "\x02\x75\x01\x55\x01\x65\x01\x72\x01\x30\x01\x65\x01\x45\x01\x72"+
+        "\x01\x52\x02\x30\x02\x70\x01\x50\x03\x65\x01\x45\x01\x65\x01\x45"+
+        "\x01\x65\x01\x6c\x01\x30\x01\x65\x01\x45\x01\x6c\x01\x30\x01\x4c"+
+        "\x02\x30\x01\x73\x02\x30\x01\x73\x01\x53\x02\x6c\x01\x4c\x02\x69"+
+        "\x01\x49\x01\x6e\x01\x6d\x01\x6e\x01\x4e\x01\x6d\x01\x4d\x01\x72"+
+        "\x01\uffff\x01\x72\x01\x52\x01\x30\x01\x72\x01\x6b\x02\x30\x01\x72"+
+        "\x01\x52\x01\x6b\x01\x4b\x01\x30\x01\x69\x02\x30\x01\x69\x01\x49"+
+        "\x01\x67\x01\uffff\x01\x6e\x01\uffff\x01\x61\x01\x72\x01\x67\x01"+
+        "\x6e\x01\x47\x01\x4e\x01\x61\x01\x41\x01\x72\x01\x52\x02\x6d\x01"+
+        "\x4d\x01\x6e\x01\x63\x01\x6b\x01\uffff\x01\x6e\x01\x63\x01\x6b\x01"+
+        "\x4e\x01\x43\x01\x4b\x05\x30\x01\x61\x01\x72\x04\x30\x01\x61\x01"+
+        "\x41\x01\x72\x01\x52\x09\x30\x02\x65\x01\x45\x01\x75\x01\x30\x01"+
+        "\uffff\x01\x75\x01\x55\x02\x30\x02\x68\x01\x48\x08\x30\x01\uffff"+
+        "\x04\x30\x01\x61\x01\uffff\x01\x65\x01\x61\x01\x41\x01\x65\x01\x45"+
+        "\x02\x65\x01\x45\x02\x6c\x01\x4c\x01\x63\x01\x69\x01\x63\x01\x43"+
+        "\x01\x69\x01\x49\x02\x6e\x01\x4e\x01\x61\x01\uffff\x01\x65\x01\x30"+
+        "\x01\x61\x01\x41\x01\x65\x01\x45\x02\x30\x01\x63\x01\uffff\x01\x6e"+
+        "\x01\x63\x01\x43\x01\x6e\x01\x4e\x01\x65\x01\x69\x02\x74\x01\x65"+
+        "\x01\x69\x01\x45\x01\x49\x01\x74\x01\x54\x01\x74\x01\x54\x02\x61"+
+        "\x01\x41\x01\x67\x01\x74\x01\x30\x01\x67\x01\x74\x01\x30\x01\x47"+
+        "\x01\x54\x01\x30\x03\uffff\x01\x64\x01\x30\x01\x64\x01\x44\x02\x30"+
+        "\x03\uffff\x03\x30\x01\x65\x01\x61\x01\uffff\x01\x65\x01\x45\x01"+
+        "\x61\x01\x41\x03\x30\x01\uffff\x01\x66\x01\uffff\x01\x66\x01\x46"+
+        "\x01\uffff\x01\x63\x01\x30\x01\x63\x01\x43\x09\x30\x01\x63\x02\x30"+
+        "\x01\x63\x01\x43\x03\x30\x01\x6e\x01\x65\x01\uffff\x01\x6e\x01\x4e"+
+        "\x01\x65\x01\x45\x01\x74\x01\x75\x01\x74\x01\x54\x01\x75\x01\x55"+
+        "\x01\x72\x01\x74\x01\x6f\x01\x30\x01\x72\x01\x74\x01\x52\x01\x54"+
+        "\x01\x6f\x01\x4f\x02\x30\x02\x6c\x01\x4c\x02\x30\x01\uffff\x05\x30"+
+        "\x01\uffff\x02\x30\x01\uffff\x01\x30\x01\x63\x02\x30\x01\x63\x01"+
+        "\x43\x01\uffff\x03\x30\x02\x68\x01\x48\x02\uffff\x09\x30\x03\x65"+
+        "\x01\x45\x01\x65\x01\x45\x01\x30\x01\x79\x01\x72\x01\uffff\x01\x30"+
+        "\x01\x79\x01\x30\x01\x59\x01\x72\x01\x52\x03\x30\x04\uffff\x02\x68"+
+        "\x01\x48\x01\uffff\x03\x30\x02\uffff\x01\x72\x01\x30\x01\x72\x01"+
+        "\x52\x08\x30\x01\uffff\x03\x30\x01\uffff\x01\x30\x01\uffff\x02\x30"+
+        "\x02\uffff";
+    const string DFA59_maxS =
+        "\x01\x7d\x08\uffff\x01\x39\x01\x26\x01\uffff\x09\x3d\x02\x65\x02"+
+        "\x72\x02\x6f\x02\x74\x02\x6f\x02\x74\x02\x6f\x02\x72\x02\x6f\x02"+
+        "\x75\x01\x71\x01\x51\x02\x72\x02\x6c\x02\x75\x02\x6f\x02\x68\x02"+
+        "\x6e\x02\x74\x02\x6d\x1e\uffff\x02\x74\x01\x54\x01\x6f\x01\x6e\x01"+
+        "\x65\x01\x6f\x01\x4f\x01\x6e\x01\x4e\x01\x65\x01\x45\x01\x61\x01"+
+        "\x6e\x01\x61\x01\x41\x01\x6e\x01\x4e\x01\x7a\x01\x65\x01\x70\x03"+
+        "\x7a\x01\x65\x01\x45\x01\x70\x01\x50\x02\x7a\x01\x63\x01\x7a\x01"+
+        "\x63\x01\x43\x02\x7a\x01\x72\x01\x74\x01\x72\x01\x52\x01\x74\x01"+
+        "\x54\x02\x69\x01\x49\x01\x75\x01\x72\x01\x6d\x01\x7a\x01\x75\x01"+
+        "\x55\x01\x72\x01\x52\x01\x6d\x01\x4d\x02\x7a\x01\x73\x01\x6f\x01"+
+        "\x73\x01\x53\x01\x6f\x01\x4f\x02\x65\x01\x45\x01\x75\x02\x6f\x01"+
+        "\x75\x02\x6f\x02\x61\x01\x41\x01\x67\x01\x73\x01\x67\x01\x47\x01"+
+        "\x73\x01\x53\x01\x64\x02\x6c\x01\x64\x01\x44\x02\x6c\x02\x4c\x01"+
         "\x72\x01\x6c\x01\x72\x01\x52\x01\x6c\x01\x4c\x02\x69\x01\x49\x02"+
         "\x74\x01\x54\x01\x79\x01\x6f\x01\x79\x01\x59\x01\x6f\x01\x4f\x01"+
-        "\uffff\x01\x6d\x01\x6c\x01\x74\x01\x61\x01\x6c\x01\x4c\x02\x54\x01"+
-        "\x61\x01\x41\x01\x72\x01\x74\x01\x72\x01\x52\x01\x74\x01\x54\x02"+
-        "\x7a\x01\uffff\x01\x72\x01\x6f\x01\uffff\x04\x7a\x01\x72\x01\x52"+
-        "\x01\x6f\x01\x4f\x01\x69\x01\uffff\x01\x69\x01\x49\x01\x75\x01\x63"+
-        "\x01\x7a\x01\x75\x01\x63\x01\x55\x01\x43\x02\x7a\x02\x64\x01\x44"+
-        "\x04\x65\x01\uffff\x02\x65\x02\x45\x01\x65\x01\x45\x01\x65\x01\x45"+
-        "\x01\x74\x01\x70\x01\x6b\x01\x74\x01\x54\x01\x70\x01\x6b\x01\x50"+
-        "\x01\x4b\x02\x75\x01\x55\x01\x65\x01\x72\x01\x7a\x01\x65\x01\x45"+
-        "\x01\x72\x01\x52\x02\x7a\x02\x70\x01\x50\x03\x65\x01\x45\x01\x65"+
-        "\x01\x45\x01\x65\x01\x6c\x01\x7a\x01\x65\x01\x45\x01\x6c\x01\x7a"+
-        "\x01\x4c\x05\x7a\x01\x73\x02\x7a\x01\x73\x01\x53\x02\x6c\x01\x4c"+
-        "\x02\x69\x01\x49\x01\x6e\x01\x6d\x01\x6e\x01\x4e\x01\x6d\x01\x4d"+
-        "\x01\x7a\x01\x72\x01\x6b\x02\x7a\x01\x72\x01\x52\x01\x6b\x01\x4b"+
-        "\x01\x7a\x01\x69\x02\x7a\x01\x69\x01\x49\x01\x67\x01\uffff\x01\x6e"+
-        "\x01\uffff\x01\x61\x01\x72\x01\x67\x01\x6e\x01\x47\x01\x4e\x01\x61"+
-        "\x01\x41\x01\x72\x01\x52\x02\x6d\x01\x4d\x01\x6e\x01\x63\x01\x6b"+
-        "\x01\uffff\x01\x6e\x01\x63\x01\x6b\x01\x4e\x01\x43\x01\x4b\x05\x7a"+
-        "\x01\x61\x01\x72\x04\x7a\x01\x61\x01\x41\x01\x72\x01\x52\x09\x7a"+
-        "\x02\x65\x01\x45\x01\x75\x01\x7a\x01\uffff\x01\x75\x01\x55\x02\x7a"+
-        "\x02\x68\x01\x48\x08\x7a\x01\uffff\x04\x7a\x01\x72\x01\uffff\x01"+
-        "\x72\x01\x52\x01\x61\x01\uffff\x01\x65\x01\x61\x01\x41\x01\x65\x01"+
-        "\x45\x02\x65\x01\x45\x02\x6c\x01\x4c\x01\x63\x01\x69\x01\x63\x01"+
-        "\x43\x01\x69\x01\x49\x01\x61\x01\uffff\x01\x65\x01\x7a\x01\x61\x01"+
-        "\x41\x01\x65\x01\x45\x02\x7a\x01\x63\x01\uffff\x01\x6e\x01\x63\x01"+
-        "\x43\x01\x6e\x01\x4e\x01\x65\x01\x69\x02\x74\x01\x65\x01\x69\x01"+
-        "\x45\x01\x49\x01\x74\x01\x54\x01\x74\x01\x54\x02\x61\x01\x41\x01"+
-        "\x67\x01\x74\x01\x7a\x01\x67\x01\x74\x01\x7a\x01\x47\x01\x54\x01"+
-        "\x7a\x03\uffff\x01\x64\x01\x7a\x01\x64\x01\x44\x02\x7a\x03\uffff"+
-        "\x03\x7a\x01\x65\x01\x61\x01\uffff\x01\x65\x01\x45\x01\x61\x01\x41"+
-        "\x03\x7a\x01\uffff\x01\x66\x01\uffff\x01\x66\x01\x46\x01\uffff\x02"+
-        "\x6e\x01\x4e\x01\x63\x01\x7a\x01\x63\x01\x43\x09\x7a\x01\x63\x02"+
-        "\x7a\x01\x63\x01\x43\x01\x6e\x01\x65\x01\uffff\x01\x6e\x01\x4e\x01"+
-        "\x65\x01\x45\x01\x74\x01\x75\x01\x74\x01\x54\x01\x75\x01\x55\x01"+
-        "\x72\x01\x74\x01\x6f\x01\x7a\x01\x72\x01\x74\x01\x52\x01\x54\x01"+
-        "\x6f\x01\x4f\x02\x7a\x02\x6c\x01\x4c\x02\x7a\x01\uffff\x05\x7a\x01"+
-        "\uffff\x02\x7a\x01\uffff\x01\x7a\x01\x63\x02\x7a\x01\x63\x01\x43"+
-        "\x01\uffff\x06\x7a\x02\x68\x01\x48\x02\uffff\x09\x7a\x03\x65\x01"+
-        "\x45\x01\x65\x01\x45\x01\x7a\x01\x79\x01\x72\x01\uffff\x01\x7a\x01"+
-        "\x79\x01\x7a\x01\x59\x01\x72\x01\x52\x03\x7a\x04\uffff\x02\x68\x01"+
-        "\x48\x01\uffff\x03\x7a\x02\uffff\x01\x72\x01\x7a\x01\x72\x01\x52"+
-        "\x08\x7a\x01\uffff\x03\x7a\x01\uffff\x01\x7a\x01\uffff\x02\x7a\x02"+
-        "\uffff";
-    const string DFA58_acceptS =
+        "\uffff\x01\x6d\x06\x7a\x01\x6c\x01\x74\x01\x61\x01\x6c\x01\x4c\x02"+
+        "\x54\x01\x61\x01\x41\x01\x72\x01\x74\x01\x72\x01\x52\x01\x74\x01"+
+        "\x54\x02\x7a\x01\uffff\x01\x72\x01\x6f\x01\uffff\x04\x7a\x01\x72"+
+        "\x01\x52\x01\x6f\x01\x4f\x01\x69\x01\uffff\x01\x69\x01\x49\x01\x75"+
+        "\x01\x63\x01\x7a\x01\x75\x01\x63\x01\x55\x01\x43\x02\x7a\x02\x64"+
+        "\x01\x44\x04\x65\x01\uffff\x02\x65\x02\x45\x01\x65\x01\x45\x01\x65"+
+        "\x01\x45\x01\x74\x01\x70\x01\x6b\x01\x74\x01\x54\x01\x70\x01\x6b"+
+        "\x01\x50\x01\x4b\x02\x75\x01\x55\x01\x65\x01\x72\x01\x7a\x01\x65"+
+        "\x01\x45\x01\x72\x01\x52\x02\x7a\x02\x70\x01\x50\x03\x65\x01\x45"+
+        "\x01\x65\x01\x45\x01\x65\x01\x6c\x01\x7a\x01\x65\x01\x45\x01\x6c"+
+        "\x01\x7a\x01\x4c\x02\x7a\x01\x73\x02\x7a\x01\x73\x01\x53\x02\x6c"+
+        "\x01\x4c\x02\x69\x01\x49\x01\x6e\x01\x6d\x01\x6e\x01\x4e\x01\x6d"+
+        "\x01\x4d\x01\x72\x01\uffff\x01\x72\x01\x52\x01\x7a\x01\x72\x01\x6b"+
+        "\x02\x7a\x01\x72\x01\x52\x01\x6b\x01\x4b\x01\x7a\x01\x69\x02\x7a"+
+        "\x01\x69\x01\x49\x01\x67\x01\uffff\x01\x6e\x01\uffff\x01\x61\x01"+
+        "\x72\x01\x67\x01\x6e\x01\x47\x01\x4e\x01\x61\x01\x41\x01\x72\x01"+
+        "\x52\x02\x6d\x01\x4d\x01\x6e\x01\x63\x01\x6b\x01\uffff\x01\x6e\x01"+
+        "\x63\x01\x6b\x01\x4e\x01\x43\x01\x4b\x05\x7a\x01\x61\x01\x72\x04"+
+        "\x7a\x01\x61\x01\x41\x01\x72\x01\x52\x09\x7a\x02\x65\x01\x45\x01"+
+        "\x75\x01\x7a\x01\uffff\x01\x75\x01\x55\x02\x7a\x02\x68\x01\x48\x08"+
+        "\x7a\x01\uffff\x04\x7a\x01\x61\x01\uffff\x01\x65\x01\x61\x01\x41"+
+        "\x01\x65\x01\x45\x02\x65\x01\x45\x02\x6c\x01\x4c\x01\x63\x01\x69"+
+        "\x01\x63\x01\x43\x01\x69\x01\x49\x02\x6e\x01\x4e\x01\x61\x01\uffff"+
+        "\x01\x65\x01\x7a\x01\x61\x01\x41\x01\x65\x01\x45\x02\x7a\x01\x63"+
+        "\x01\uffff\x01\x6e\x01\x63\x01\x43\x01\x6e\x01\x4e\x01\x65\x01\x69"+
+        "\x02\x74\x01\x65\x01\x69\x01\x45\x01\x49\x01\x74\x01\x54\x01\x74"+
+        "\x01\x54\x02\x61\x01\x41\x01\x67\x01\x74\x01\x7a\x01\x67\x01\x74"+
+        "\x01\x7a\x01\x47\x01\x54\x01\x7a\x03\uffff\x01\x64\x01\x7a\x01\x64"+
+        "\x01\x44\x02\x7a\x03\uffff\x03\x7a\x01\x65\x01\x61\x01\uffff\x01"+
+        "\x65\x01\x45\x01\x61\x01\x41\x03\x7a\x01\uffff\x01\x66\x01\uffff"+
+        "\x01\x66\x01\x46\x01\uffff\x01\x63\x01\x7a\x01\x63\x01\x43\x09\x7a"+
+        "\x01\x63\x02\x7a\x01\x63\x01\x43\x03\x7a\x01\x6e\x01\x65\x01\uffff"+
+        "\x01\x6e\x01\x4e\x01\x65\x01\x45\x01\x74\x01\x75\x01\x74\x01\x54"+
+        "\x01\x75\x01\x55\x01\x72\x01\x74\x01\x6f\x01\x7a\x01\x72\x01\x74"+
+        "\x01\x52\x01\x54\x01\x6f\x01\x4f\x02\x7a\x02\x6c\x01\x4c\x02\x7a"+
+        "\x01\uffff\x05\x7a\x01\uffff\x02\x7a\x01\uffff\x01\x7a\x01\x63\x02"+
+        "\x7a\x01\x63\x01\x43\x01\uffff\x03\x7a\x02\x68\x01\x48\x02\uffff"+
+        "\x09\x7a\x03\x65\x01\x45\x01\x65\x01\x45\x01\x7a\x01\x79\x01\x72"+
+        "\x01\uffff\x01\x7a\x01\x79\x01\x7a\x01\x59\x01\x72\x01\x52\x03\x7a"+
+        "\x04\uffff\x02\x68\x01\x48\x01\uffff\x03\x7a\x02\uffff\x01\x72\x01"+
+        "\x7a\x01\x72\x01\x52\x08\x7a\x01\uffff\x03\x7a\x01\uffff\x01\x7a"+
+        "\x01\uffff\x02\x7a\x02\uffff";
+    const string DFA59_acceptS =
         "\x01\uffff\x01\x01\x01\x02\x01\x03\x01\x04\x01\x05\x01\x06\x01"+
         "\x07\x01\x08\x02\uffff\x01\x0b\x2f\uffff\x01\x4b\x01\x4c\x01\x50"+
         "\x01\x51\x01\x4a\x01\x09\x01\x0a\x01\x20\x01\x0e\x01\x0c\x01\x0d"+
         "\x01\x13\x01\x10\x01\x0f\x01\x12\x01\x11\x01\x14\x01\x1e\x01\x19"+
         "\x01\x15\x01\x1f\x01\x1a\x01\x16\x01\x1b\x01\x17\x01\x52\x01\x53"+
-        "\x01\x1c\x01\x18\x01\x1d\x6c\uffff\x01\x49\x12\uffff\x01\x45\x02"+
-        "\uffff\x01\x39\x09\uffff\x01\x40\x12\uffff\x01\x44\x54\uffff\x01"+
-        "\x23\x01\uffff\x01\x4f\x10\uffff\x01\x29\x23\uffff\x01\x41\x0f\uffff"+
-        "\x01\x4e\x05\uffff\x01\x38\x03\uffff\x01\x3c\x12\uffff\x01\x21\x09"+
+        "\x01\x1c\x01\x18\x01\x1d\x6c\uffff\x01\x49\x18\uffff\x01\x45\x02"+
+        "\uffff\x01\x39\x09\uffff\x01\x40\x12\uffff\x01\x44\x42\uffff\x01"+
+        "\x38\x12\uffff\x01\x23\x01\uffff\x01\x4f\x10\uffff\x01\x29\x23\uffff"+
+        "\x01\x41\x0f\uffff\x01\x4e\x05\uffff\x01\x3c\x15\uffff\x01\x21\x09"+
         "\uffff\x01\x22\x1d\uffff\x01\x26\x01\x27\x01\x4d\x06\uffff\x01\x2a"+
         "\x01\x43\x01\x48\x05\uffff\x01\x3e\x07\uffff\x01\x2f\x01\uffff\x01"+
         "\x3a\x02\uffff\x01\x30\x17\uffff\x01\x36\x1b\uffff\x01\x2b\x05\uffff"+
-        "\x01\x32\x02\uffff\x01\x2c\x06\uffff\x01\x2e\x09\uffff\x01\x42\x01"+
+        "\x01\x32\x02\uffff\x01\x2c\x06\uffff\x01\x2e\x06\uffff\x01\x42\x01"+
         "\x46\x12\uffff\x01\x35\x09\uffff\x01\x25\x01\x34\x01\x31\x01\x2d"+
         "\x03\uffff\x01\x3b\x03\uffff\x01\x47\x01\x28\x0c\uffff\x01\x24\x03"+
         "\uffff\x01\x3d\x01\uffff\x01\x37\x02\uffff\x01\x33\x01\x3f";
-    const string DFA58_specialS =
-        "\u0287\uffff}>";
-    static readonly string[] DFA58_transitionS = {
+    const string DFA59_specialS =
+        "\u028a\uffff}>";
+    static readonly string[] DFA59_transitionS = {
             "\x02\x3e\x02\uffff\x01\x3e\x12\uffff\x01\x3e\x01\x0c\x01\x3c"+
             "\x02\uffff\x01\x14\x01\x0a\x01\x3b\x01\x07\x01\x08\x01\x12\x01"+
             "\x10\x01\x05\x01\x11\x01\x09\x01\x13\x01\x39\x09\x3a\x01\uffff"+
-            "\x01\x01\x01\x0e\x01\x0d\x01\x0f\x02\uffff\x01\x38\x01\x16\x01"+
-            "\x18\x01\x1c\x01\x2c\x01\x32\x01\x2a\x01\x3d\x01\x1a\x02\x3d"+
-            "\x01\x24\x01\x3d\x01\x2e\x01\x3d\x01\x28\x01\x26\x01\x30\x01"+
-            "\x1e\x01\x22\x01\x36\x01\x20\x01\x34\x03\x3d\x01\x04\x01\uffff"+
-            "\x01\x06\x01\uffff\x01\x3d\x01\uffff\x01\x37\x01\x15\x01\x17"+
-            "\x01\x1b\x01\x2b\x01\x31\x01\x29\x01\x3d\x01\x19\x02\x3d\x01"+
-            "\x23\x01\x3d\x01\x2d\x01\x3d\x01\x27\x01\x25\x01\x2f\x01\x1d"+
-            "\x01\x21\x01\x35\x01\x1f\x01\x33\x03\x3d\x01\x02\x01\x0b\x01"+
+            "\x01\x01\x01\x0e\x01\x0d\x01\x0f\x02\uffff\x01\x38\x01\x18\x01"+
+            "\x1a\x01\x1e\x01\x2e\x01\x32\x01\x2c\x01\x3d\x01\x1c\x02\x3d"+
+            "\x01\x26\x01\x3d\x01\x30\x01\x3d\x01\x2a\x01\x28\x01\x16\x01"+
+            "\x20\x01\x24\x01\x36\x01\x22\x01\x34\x03\x3d\x01\x04\x01\uffff"+
+            "\x01\x06\x01\uffff\x01\x3d\x01\uffff\x01\x37\x01\x17\x01\x19"+
+            "\x01\x1d\x01\x2d\x01\x31\x01\x2b\x01\x3d\x01\x1b\x02\x3d\x01"+
+            "\x25\x01\x3d\x01\x2f\x01\x3d\x01\x29\x01\x27\x01\x15\x01\x1f"+
+            "\x01\x23\x01\x35\x01\x21\x01\x33\x03\x3d\x01\x02\x01\x0b\x01"+
             "\x03",
             "",
             "",
@@ -6516,44 +6588,44 @@ public partial class PsimulexLexer : Lexer {
             "\x01\x51",
             "\x01\x55\x04\uffff\x01\x54\x0d\uffff\x01\x53",
             "\x01\x57",
-            "\x01\x5a\x05\uffff\x01\x59\x02\uffff\x01\x5b",
-            "\x01\x5f\x05\uffff\x01\x5d\x02\uffff\x01\x61\x16\uffff\x01"+
-            "\x5e\x05\uffff\x01\x5c\x02\uffff\x01\x60",
-            "\x01\x62\x06\uffff\x01\x63",
-            "\x01\x65\x06\uffff\x01\x67\x18\uffff\x01\x64\x06\uffff\x01"+
-            "\x66",
-            "\x01\x6b\x06\uffff\x01\x6a\x01\x68\x05\uffff\x01\x69",
-            "\x01\x73\x06\uffff\x01\x71\x01\x6d\x05\uffff\x01\x6f\x11\uffff"+
-            "\x01\x72\x06\uffff\x01\x70\x01\x6c\x05\uffff\x01\x6e",
-            "\x01\x74\x09\uffff\x01\x75",
-            "\x01\x77\x09\uffff\x01\x79\x15\uffff\x01\x76\x09\uffff\x01"+
-            "\x78",
-            "\x01\x7b\x0e\uffff\x01\x7a",
-            "\x01\x7f\x0e\uffff\x01\x7d\x10\uffff\x01\x7e\x0e\uffff\x01"+
-            "\x7c",
-            "\x01\u0080",
-            "\x01\u0082\x1f\uffff\x01\u0081",
-            "\x01\u0084\x01\u0085\x05\uffff\x01\u0086\x02\uffff\x01\u0083",
-            "\x01\u008a\x01\u008c\x05\uffff\x01\u008e\x02\uffff\x01\u0088"+
-            "\x15\uffff\x01\u0089\x01\u008b\x05\uffff\x01\u008d\x02\uffff"+
-            "\x01\u0087",
-            "\x01\u008f\x05\uffff\x01\u0090",
-            "\x01\u0092\x05\uffff\x01\u0094\x19\uffff\x01\u0091\x05\uffff"+
-            "\x01\u0093",
-            "\x01\u0095",
-            "\x01\u0097\x1f\uffff\x01\u0096",
-            "\x01\u009a\x01\uffff\x01\u0099\x0a\uffff\x01\u0098",
+            "\x01\x59",
+            "\x01\x5b\x1f\uffff\x01\x5a",
+            "\x01\x5d\x05\uffff\x01\x5c\x02\uffff\x01\x5e",
+            "\x01\x62\x05\uffff\x01\x60\x02\uffff\x01\x64\x16\uffff\x01"+
+            "\x61\x05\uffff\x01\x5f\x02\uffff\x01\x63",
+            "\x01\x65\x06\uffff\x01\x66",
+            "\x01\x68\x06\uffff\x01\x6a\x18\uffff\x01\x67\x06\uffff\x01"+
+            "\x69",
+            "\x01\x6e\x06\uffff\x01\x6d\x01\x6b\x05\uffff\x01\x6c",
+            "\x01\x76\x06\uffff\x01\x74\x01\x70\x05\uffff\x01\x72\x11\uffff"+
+            "\x01\x75\x06\uffff\x01\x73\x01\x6f\x05\uffff\x01\x71",
+            "\x01\x77\x09\uffff\x01\x78",
+            "\x01\x7a\x09\uffff\x01\x7c\x15\uffff\x01\x79\x09\uffff\x01"+
+            "\x7b",
+            "\x01\x7e\x0e\uffff\x01\x7d",
+            "\x01\u0082\x0e\uffff\x01\u0080\x10\uffff\x01\u0081\x0e\uffff"+
+            "\x01\x7f",
+            "\x01\u0083",
+            "\x01\u0085\x1f\uffff\x01\u0084",
+            "\x01\u0087\x01\u0088\x05\uffff\x01\u0089\x02\uffff\x01\u0086",
+            "\x01\u008d\x01\u008f\x05\uffff\x01\u0091\x02\uffff\x01\u008b"+
+            "\x15\uffff\x01\u008c\x01\u008e\x05\uffff\x01\u0090\x02\uffff"+
+            "\x01\u008a",
+            "\x01\u0092\x05\uffff\x01\u0093",
+            "\x01\u0095\x05\uffff\x01\u0097\x19\uffff\x01\u0094\x05\uffff"+
+            "\x01\u0096",
+            "\x01\u0098",
+            "\x01\u009a\x1f\uffff\x01\u0099",
             "\x01\u009d\x01\uffff\x01\u009c\x0a\uffff\x01\u009b",
-            "\x01\u009e",
-            "\x01\u00a0\x1f\uffff\x01\u009f",
-            "\x01\u00a1\x07\uffff\x01\u00a2",
-            "\x01\u00a4\x07\uffff\x01\u00a6\x17\uffff\x01\u00a3\x07\uffff"+
-            "\x01\u00a5",
-            "\x01\u00a9\x05\uffff\x01\u00a7\x05\uffff\x01\u00a8",
-            "\x01\u00af\x05\uffff\x01\u00ab\x05\uffff\x01\u00ae\x13\uffff"+
-            "\x01\u00ad\x05\uffff\x01\u00aa\x05\uffff\x01\u00ac",
-            "\x01\u00b0",
-            "\x01\u00b2\x1f\uffff\x01\u00b1",
+            "\x01\u00a0\x01\uffff\x01\u009f\x0a\uffff\x01\u009e",
+            "\x01\u00a1",
+            "\x01\u00a3\x1f\uffff\x01\u00a2",
+            "\x01\u00a4\x07\uffff\x01\u00a5",
+            "\x01\u00a7\x07\uffff\x01\u00a9\x17\uffff\x01\u00a6\x07\uffff"+
+            "\x01\u00a8",
+            "\x01\u00ac\x05\uffff\x01\u00aa\x05\uffff\x01\u00ab",
+            "\x01\u00b2\x05\uffff\x01\u00ae\x05\uffff\x01\u00b1\x13\uffff"+
+            "\x01\u00b0\x05\uffff\x01\u00ad\x05\uffff\x01\u00af",
             "\x01\u00b4\x0d\uffff\x01\u00b3",
             "\x01\u00b8\x0d\uffff\x01\u00b6\x11\uffff\x01\u00b7\x0d\uffff"+
             "\x01\u00b5",
@@ -6597,12 +6669,9 @@ public partial class PsimulexLexer : Lexer {
             "",
             "",
             "",
-            "\x01\u00c7",
-            "\x01\u00c8",
-            "\x01\u00c9",
-            "\x01\u00ca",
-            "\x01\u00cb",
-            "\x01\u00cc",
+            "\x01\u00c7\x0d\uffff\x01\u00c8",
+            "\x01\u00c9\x0d\uffff\x01\u00ca",
+            "\x01\u00cb\x0d\uffff\x01\u00cc",
             "\x01\u00cd",
             "\x01\u00ce",
             "\x01\u00cf",
@@ -6612,78 +6681,78 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u00d3",
             "\x01\u00d4",
             "\x01\u00d5",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x05"+
-            "\x3d\x01\u00d7\x0d\x3d\x01\u00d6\x06\x3d",
+            "\x01\u00d6",
+            "\x01\u00d7",
+            "\x01\u00d8",
             "\x01\u00d9",
             "\x01\u00da",
+            "\x01\u00db",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x05"+
+            "\x3d\x01\u00dd\x0d\x3d\x01\u00dc\x06\x3d",
+            "\x01\u00df",
+            "\x01\u00e0",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x05"+
-            "\x3d\x01\u00dd\x0d\x3d\x01\u00dc\x06\x3d",
-            "\x0a\x3d\x07\uffff\x05\x3d\x01\u00df\x0d\x3d\x01\u00de\x06"+
+            "\x3d\x01\u00e3\x0d\x3d\x01\u00e2\x06\x3d",
+            "\x0a\x3d\x07\uffff\x05\x3d\x01\u00e5\x0d\x3d\x01\u00e4\x06"+
             "\x3d\x04\uffff\x01\x3d\x01\uffff\x1a\x3d",
-            "\x01\u00e0",
-            "\x01\u00e1",
-            "\x01\u00e2",
-            "\x01\u00e3",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x01\u00e4",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
             "\x01\u00e6",
             "\x01\u00e7",
+            "\x01\u00e8",
+            "\x01\u00e9",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x01\u00e9\x10\uffff\x01\u00e8",
             "\x01\u00ea",
-            "\x01\u00ec\x10\uffff\x01\u00eb",
-            "\x01\u00ee\x10\uffff\x01\u00ed",
-            "\x01\u00ef",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x01\u00ec",
+            "\x01\u00ed",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x01\u00ef\x10\uffff\x01\u00ee",
             "\x01\u00f0",
-            "\x01\u00f1",
-            "\x01\u00f2",
-            "\x01\u00f3",
-            "\x01\u00f4\x0f\uffff\x01\u00f5",
+            "\x01\u00f2\x10\uffff\x01\u00f1",
+            "\x01\u00f4\x10\uffff\x01\u00f3",
+            "\x01\u00f5",
             "\x01\u00f6",
             "\x01\u00f7",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x01\u00f9\x0f\uffff\x01\u00fa",
-            "\x01\u00fb\x0f\uffff\x01\u00fc",
+            "\x01\u00f8",
+            "\x01\u00f9",
+            "\x01\u00fa\x0f\uffff\x01\u00fb",
+            "\x01\u00fc",
             "\x01\u00fd",
-            "\x01\u00fe",
-            "\x01\u00ff",
-            "\x01\u0100",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x01\u0101",
-            "\x01\u0103\x0b\uffff\x01\u0102",
+            "\x01\u00ff\x0f\uffff\x01\u0100",
+            "\x01\u0101\x0f\uffff\x01\u0102",
+            "\x01\u0103",
             "\x01\u0104",
             "\x01\u0105",
-            "\x01\u0107\x0b\uffff\x01\u0106",
+            "\x01\u0106",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x01\u0107",
             "\x01\u0109\x0b\uffff\x01\u0108",
             "\x01\u010a",
             "\x01\u010b",
-            "\x01\u010c",
-            "\x01\u010d",
-            "\x01\u010e",
-            "\x01\u010f",
-            "\x01\u0111\x1f\uffff\x01\u0110",
-            "\x01\u0113\x1f\uffff\x01\u0112",
-            "\x01\u0115\x1f\uffff\x01\u0114",
-            "\x01\u0116",
-            "\x01\u0117",
-            "\x01\u0118",
-            "\x01\u0119",
-            "\x01\u011a",
-            "\x01\u011b",
+            "\x01\u010d\x0b\uffff\x01\u010c",
+            "\x01\u010f\x0b\uffff\x01\u010e",
+            "\x01\u0110",
+            "\x01\u0111",
+            "\x01\u0112",
+            "\x01\u0113",
+            "\x01\u0114",
+            "\x01\u0115",
+            "\x01\u0117\x1f\uffff\x01\u0116",
+            "\x01\u0119\x1f\uffff\x01\u0118",
+            "\x01\u011b\x1f\uffff\x01\u011a",
             "\x01\u011c",
             "\x01\u011d",
             "\x01\u011e",
@@ -6717,16 +6786,24 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u013a",
             "\x01\u013b",
             "\x01\u013c",
-            "",
-            "\x01\x3f\x01\uffff\x0a\u00c6\x0a\uffff\x01\x3f\x08\uffff\x01"+
-            "\x3f\x16\uffff\x01\x3f\x08\uffff\x01\x3f",
             "\x01\u013d",
             "\x01\u013e",
             "\x01\u013f",
-            "\x01\u0140",
-            "\x01\u0141",
-            "\x01\u0142",
-            "\x01\u0143",
+            "",
+            "\x01\x3f\x01\uffff\x0a\u00c6\x0a\uffff\x01\x3f\x08\uffff\x01"+
+            "\x3f\x16\uffff\x01\x3f\x08\uffff\x01\x3f",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x14"+
+            "\x3d\x01\u0140\x05\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x14"+
+            "\x3d\x01\u0142\x05\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x14\x3d\x01\u0143\x05\x3d\x04\uffff\x01"+
+            "\x3d\x01\uffff\x1a\x3d",
             "\x01\u0144",
             "\x01\u0145",
             "\x01\u0146",
@@ -6735,50 +6812,49 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u0149",
             "\x01\u014a",
             "\x01\u014b",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
-            "\x3d\x01\u014c\x15\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x08"+
-            "\x3d\x01\u014e\x11\x3d",
-            "",
+            "\x01\u014c",
+            "\x01\u014d",
+            "\x01\u014e",
+            "\x01\u014f",
             "\x01\u0150",
             "\x01\u0151",
-            "",
+            "\x01\u0152",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
-            "\x3d\x01\u0152\x15\x3d",
+            "\x3d\x01\u0153\x15\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x08"+
-            "\x3d\x01\u0153\x11\x3d",
-            "\x0a\x3d\x07\uffff\x04\x3d\x01\u0154\x15\x3d\x04\uffff\x01"+
-            "\x3d\x01\uffff\x1a\x3d",
-            "\x0a\x3d\x07\uffff\x08\x3d\x01\u0155\x11\x3d\x04\uffff\x01"+
-            "\x3d\x01\uffff\x1a\x3d",
-            "\x01\u0156",
+            "\x3d\x01\u0155\x11\x3d",
+            "",
             "\x01\u0157",
             "\x01\u0158",
-            "\x01\u0159",
-            "\x01\u015a",
             "",
-            "\x01\u015b",
-            "\x01\u015c",
-            "\x01\u015d\x0b\uffff\x01\u015e",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
+            "\x3d\x01\u0159\x15\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x08"+
+            "\x3d\x01\u015a\x11\x3d",
+            "\x0a\x3d\x07\uffff\x04\x3d\x01\u015b\x15\x3d\x04\uffff\x01"+
+            "\x3d\x01\uffff\x1a\x3d",
+            "\x0a\x3d\x07\uffff\x08\x3d\x01\u015c\x11\x3d\x04\uffff\x01"+
+            "\x3d\x01\uffff\x1a\x3d",
+            "\x01\u015d",
+            "\x01\u015e",
             "\x01\u015f",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x01\u0161\x0b\uffff\x01\u0162",
+            "\x01\u0160",
+            "\x01\u0161",
+            "",
+            "\x01\u0162",
             "\x01\u0163",
             "\x01\u0164\x0b\uffff\x01\u0165",
             "\x01\u0166",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
+            "\x01\u0168\x0b\uffff\x01\u0169",
+            "\x01\u016a",
+            "\x01\u016b\x0b\uffff\x01\u016c",
+            "\x01\u016d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x01\u0167",
-            "\x01\u0168",
-            "\x01\u0169",
-            "\x01\u016a",
-            "\x01\u016b",
-            "\x01\u016c",
-            "\x01\u016d",
-            "",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u016e",
             "\x01\u016f",
             "\x01\u0170",
@@ -6786,6 +6862,7 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u0172",
             "\x01\u0173",
             "\x01\u0174",
+            "",
             "\x01\u0175",
             "\x01\u0176",
             "\x01\u0177",
@@ -6801,53 +6878,51 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u0181",
             "\x01\u0182",
             "\x01\u0183",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "\x01\u0184",
             "\x01\u0185",
             "\x01\u0186",
             "\x01\u0187",
             "\x01\u0188",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
             "\x01\u0189",
             "\x01\u018a",
-            "\x01\u018b",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u018c",
             "\x01\u018d",
             "\x01\u018e",
             "\x01\u018f",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u0190",
             "\x01\u0191",
             "\x01\u0192",
             "\x01\u0193",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "\x01\u0194",
             "\x01\u0195",
             "\x01\u0196",
             "\x01\u0197",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
             "\x01\u0198",
+            "\x01\u0199",
+            "\x01\u019a",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x14"+
-            "\x3d\x01\u0199\x05\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x14"+
-            "\x3d\x01\u019b\x05\x3d",
-            "\x0a\x3d\x07\uffff\x14\x3d\x01\u019c\x05\x3d\x04\uffff\x01"+
-            "\x3d\x01\uffff\x1a\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
-            "\x3d\x01\u019d\x15\x3d",
+            "\x01\u019c",
+            "\x01\u019d",
+            "\x01\u019e",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u019f",
-            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01a0\x15\x3d\x04\uffff\x01"+
-            "\x3d\x01\uffff\x1a\x3d",
-            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01a1\x15\x3d\x04\uffff\x01"+
-            "\x3d\x01\uffff\x1a\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
+            "\x3d\x01\u01a0\x15\x3d",
             "\x01\u01a2",
-            "\x01\u01a3",
-            "\x01\u01a4",
+            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01a3\x15\x3d\x04\uffff\x01"+
+            "\x3d\x01\uffff\x1a\x3d",
+            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01a4\x15\x3d\x04\uffff\x01"+
+            "\x3d\x01\uffff\x1a\x3d",
             "\x01\u01a5",
             "\x01\u01a6",
             "\x01\u01a7",
@@ -6859,37 +6934,38 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u01ad",
             "\x01\u01ae",
             "\x01\u01af",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
-            "\x3d\x01\u01b0\x15\x3d",
+            "\x01\u01b0",
+            "\x01\u01b1",
             "\x01\u01b2",
             "\x01\u01b3",
+            "",
+            "\x01\u01b4",
+            "\x01\u01b5",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
-            "\x3d\x01\u01b4\x15\x3d",
-            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01b5\x15\x3d\x04\uffff\x01"+
-            "\x3d\x01\uffff\x1a\x3d",
-            "\x01\u01b6",
-            "\x01\u01b7",
+            "\x3d\x01\u01b6\x15\x3d",
             "\x01\u01b8",
             "\x01\u01b9",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x01"+
-            "\u01ba\x19\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
+            "\x3d\x01\u01ba\x15\x3d",
+            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01bb\x15\x3d\x04\uffff\x01"+
+            "\x3d\x01\uffff\x1a\x3d",
             "\x01\u01bc",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x01"+
-            "\u01bd\x19\x3d",
-            "\x0a\x3d\x07\uffff\x01\u01be\x19\x3d\x04\uffff\x01\x3d\x01"+
-            "\uffff\x1a\x3d",
+            "\x01\u01bd",
+            "\x01\u01be",
             "\x01\u01bf",
-            "\x01\u01c0",
-            "\x01\u01c1",
-            "",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x01"+
+            "\u01c0\x19\x3d",
             "\x01\u01c2",
-            "",
-            "\x01\u01c3",
-            "\x01\u01c4",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x01"+
+            "\u01c3\x19\x3d",
+            "\x0a\x3d\x07\uffff\x01\u01c4\x19\x3d\x04\uffff\x01\x3d\x01"+
+            "\uffff\x1a\x3d",
             "\x01\u01c5",
             "\x01\u01c6",
             "\x01\u01c7",
+            "",
             "\x01\u01c8",
+            "",
             "\x01\u01c9",
             "\x01\u01ca",
             "\x01\u01cb",
@@ -6900,37 +6976,19 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u01d0",
             "\x01\u01d1",
             "\x01\u01d2",
-            "",
             "\x01\u01d3",
             "\x01\u01d4",
             "\x01\u01d5",
             "\x01\u01d6",
             "\x01\u01d7",
             "\x01\u01d8",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "",
+            "\x01\u01d9",
+            "\x01\u01da",
+            "\x01\u01db",
             "\x01\u01dc",
             "\x01\u01dd",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
             "\x01\u01de",
-            "\x01\u01df",
-            "\x01\u01e0",
-            "\x01\u01e1",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
@@ -6941,6 +6999,8 @@ public partial class PsimulexLexer : Lexer {
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
+            "\x01\u01e2",
+            "\x01\u01e3",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
@@ -6949,33 +7009,55 @@ public partial class PsimulexLexer : Lexer {
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
+            "\x01\u01e4",
             "\x01\u01e5",
             "\x01\u01e6",
             "\x01\u01e7",
-            "\x01\u01e8",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
-            "\x3d\x01\u01e9\x15\x3d",
-            "",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u01eb",
             "\x01\u01ec",
-            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01ed\x15\x3d\x04\uffff\x01"+
-            "\x3d\x01\uffff\x1a\x3d",
-            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01ee\x15\x3d\x04\uffff\x01"+
-            "\x3d\x01\uffff\x1a\x3d",
-            "\x01\u01ef",
-            "\x01\u01f0",
+            "\x01\u01ed",
+            "\x01\u01ee",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x04"+
+            "\x3d\x01\u01ef\x15\x3d",
+            "",
             "\x01\u01f1",
+            "\x01\u01f2",
+            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01f3\x15\x3d\x04\uffff\x01"+
+            "\x3d\x01\uffff\x1a\x3d",
+            "\x0a\x3d\x07\uffff\x04\x3d\x01\u01f4\x15\x3d\x04\uffff\x01"+
+            "\x3d\x01\uffff\x1a\x3d",
+            "\x01\u01f5",
+            "\x01\u01f6",
+            "\x01\u01f7",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x08"+
-            "\x3d\x01\u01f3\x11\x3d",
+            "\x3d\x01\u01f9\x11\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x0a\x3d\x07\uffff\x08\x3d\x01\u01f5\x11\x3d\x04\uffff\x01"+
+            "\x0a\x3d\x07\uffff\x08\x3d\x01\u01fb\x11\x3d\x04\uffff\x01"+
             "\x3d\x01\uffff\x1a\x3d",
-            "\x0a\x3d\x07\uffff\x08\x3d\x01\u01f6\x11\x3d\x04\uffff\x01"+
+            "\x0a\x3d\x07\uffff\x08\x3d\x01\u01fc\x11\x3d\x04\uffff\x01"+
             "\x3d\x01\uffff\x1a\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
@@ -6990,15 +7072,8 @@ public partial class PsimulexLexer : Lexer {
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x01\u01f8",
-            "",
-            "\x01\u01f9",
-            "\x01\u01fa",
-            "\x01\u01fb",
-            "",
-            "\x01\u01fc",
-            "\x01\u01fd",
             "\x01\u01fe",
+            "",
             "\x01\u01ff",
             "\x01\u0200",
             "\x01\u0201",
@@ -7014,26 +7089,26 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u020b",
             "\x01\u020c",
             "\x01\u020d",
-            "",
             "\x01\u020e",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "\x01\u020f",
             "\x01\u0210",
             "\x01\u0211",
             "\x01\u0212",
             "\x01\u0213",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x01\u0214",
             "",
-            "\x01\u0215",
+            "\x01\u0214",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u0216",
             "\x01\u0217",
             "\x01\u0218",
             "\x01\u0219",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u021a",
+            "",
             "\x01\u021b",
             "\x01\u021c",
             "\x01\u021d",
@@ -7050,19 +7125,11 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u0228",
             "\x01\u0229",
             "\x01\u022a",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "\x01\u022b",
             "\x01\u022c",
             "\x01\u022d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
             "\x01\u022e",
             "\x01\u022f",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "",
-            "",
-            "",
             "\x01\u0230",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
@@ -7070,75 +7137,89 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u0233",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "",
-            "",
-            "",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "\x01\u0234",
             "\x01\u0235",
-            "\x01\u0236",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "",
-            "\x01\u0237",
+            "",
+            "",
+            "\x01\u0236",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u0238",
             "\x01\u0239",
-            "\x01\u023a",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "",
+            "",
+            "",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x01\u023b",
             "\x01\u023c",
             "",
             "\x01\u023d",
             "\x01\u023e",
-            "",
             "\x01\u023f",
             "\x01\u0240",
-            "\x01\u0241",
-            "\x01\u0242",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "",
+            "\x01\u0242",
+            "",
             "\x01\u0243",
             "\x01\u0244",
+            "",
+            "\x01\u0245",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "\x01\u0246",
             "\x01\u0247",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x01\u0248",
-            "\x01\u0249",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u024a",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u024b",
-            "",
             "\x01\u024c",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u024d",
             "\x01\u024e",
+            "",
             "\x01\u024f",
             "\x01\u0250",
             "\x01\u0251",
@@ -7149,18 +7230,14 @@ public partial class PsimulexLexer : Lexer {
             "\x01\u0256",
             "\x01\u0257",
             "\x01\u0258",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "\x01\u0259",
             "\x01\u025a",
             "\x01\u025b",
-            "\x01\u025c",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u025d",
             "\x01\u025e",
             "\x01\u025f",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
             "\x01\u0260",
             "\x01\u0261",
             "\x01\u0262",
@@ -7168,18 +7245,9 @@ public partial class PsimulexLexer : Lexer {
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "",
+            "\x01\u0263",
+            "\x01\u0264",
+            "\x01\u0265",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
@@ -7187,30 +7255,29 @@ public partial class PsimulexLexer : Lexer {
             "",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x01\u0267",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x01\u0268",
-            "\x01\u0269",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
+            "",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "\x01\u026a",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x01\u026b",
             "\x01\u026c",
-            "\x01\u026d",
-            "",
             "",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
@@ -7218,51 +7285,48 @@ public partial class PsimulexLexer : Lexer {
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
+            "\x01\u026e",
+            "\x01\u026f",
             "\x01\u0270",
-            "\x01\u0271",
-            "\x01\u0272",
+            "",
+            "",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u0273",
             "\x01\u0274",
             "\x01\u0275",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
             "\x01\u0276",
             "\x01\u0277",
-            "",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
             "\x01\u0278",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x01\u0279",
             "\x01\u027a",
+            "",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
             "\x01\u027b",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
-            "\x3d",
-            "",
-            "",
-            "",
-            "",
+            "\x01\u027c",
             "\x01\u027d",
             "\x01\u027e",
-            "\x01\u027f",
-            "",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
@@ -7271,11 +7335,25 @@ public partial class PsimulexLexer : Lexer {
             "\x3d",
             "",
             "",
+            "",
+            "",
+            "\x01\u0280",
             "\x01\u0281",
+            "\x01\u0282",
+            "",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
-            "\x01\u0283",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "",
+            "",
             "\x01\u0284",
+            "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
+            "\x3d",
+            "\x01\u0286",
+            "\x01\u0287",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
             "\x3d",
             "\x0a\x3d\x07\uffff\x1a\x3d\x04\uffff\x01\x3d\x01\uffff\x1a"+
@@ -7311,27 +7389,27 @@ public partial class PsimulexLexer : Lexer {
             ""
     };
 
-    static readonly short[] DFA58_eot = DFA.UnpackEncodedString(DFA58_eotS);
-    static readonly short[] DFA58_eof = DFA.UnpackEncodedString(DFA58_eofS);
-    static readonly char[] DFA58_min = DFA.UnpackEncodedStringToUnsignedChars(DFA58_minS);
-    static readonly char[] DFA58_max = DFA.UnpackEncodedStringToUnsignedChars(DFA58_maxS);
-    static readonly short[] DFA58_accept = DFA.UnpackEncodedString(DFA58_acceptS);
-    static readonly short[] DFA58_special = DFA.UnpackEncodedString(DFA58_specialS);
-    static readonly short[][] DFA58_transition = DFA.UnpackEncodedStringArray(DFA58_transitionS);
+    static readonly short[] DFA59_eot = DFA.UnpackEncodedString(DFA59_eotS);
+    static readonly short[] DFA59_eof = DFA.UnpackEncodedString(DFA59_eofS);
+    static readonly char[] DFA59_min = DFA.UnpackEncodedStringToUnsignedChars(DFA59_minS);
+    static readonly char[] DFA59_max = DFA.UnpackEncodedStringToUnsignedChars(DFA59_maxS);
+    static readonly short[] DFA59_accept = DFA.UnpackEncodedString(DFA59_acceptS);
+    static readonly short[] DFA59_special = DFA.UnpackEncodedString(DFA59_specialS);
+    static readonly short[][] DFA59_transition = DFA.UnpackEncodedStringArray(DFA59_transitionS);
 
-    protected class DFA58 : DFA
+    protected class DFA59 : DFA
     {
-        public DFA58(BaseRecognizer recognizer)
+        public DFA59(BaseRecognizer recognizer)
         {
             this.recognizer = recognizer;
-            this.decisionNumber = 58;
-            this.eot = DFA58_eot;
-            this.eof = DFA58_eof;
-            this.min = DFA58_min;
-            this.max = DFA58_max;
-            this.accept = DFA58_accept;
-            this.special = DFA58_special;
-            this.transition = DFA58_transition;
+            this.decisionNumber = 59;
+            this.eot = DFA59_eot;
+            this.eof = DFA59_eof;
+            this.min = DFA59_min;
+            this.max = DFA59_max;
+            this.accept = DFA59_accept;
+            this.special = DFA59_special;
+            this.transition = DFA59_transition;
 
         }
 
