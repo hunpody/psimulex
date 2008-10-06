@@ -1,4 +1,4 @@
-// $ANTLR 3.1 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2008-10-06 18:35:00
+// $ANTLR 3.1 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2008-10-06 22:37:06
 
 using System;
 using Antlr.Runtime;
@@ -652,7 +652,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          typeDeclarations, importDeclarations, globalVariableDeclarations, functionDeclarations
+            	// elements:          globalVariableDeclarations, typeDeclarations, importDeclarations, functionDeclarations
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -1557,7 +1557,7 @@ public partial class PsimulexParser : Parser
 
 
                     	// AST REWRITE
-                    	// elements:          typedIdentifierNonRef, variableInitializer
+                    	// elements:          variableInitializer, typedIdentifierNonRef
                     	// token labels:      
                     	// rule labels:       retval
                     	// token list labels: 
@@ -2204,7 +2204,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          147, 148, 146
+            	// elements:          148, 147, 146
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -2331,7 +2331,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          memberArrayType, type
+            	// elements:          type, memberArrayType
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -3271,7 +3271,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          typedIdentifier, formalParameterList, block
+            	// elements:          formalParameterList, typedIdentifier, block
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -6073,7 +6073,7 @@ public partial class PsimulexParser : Parser
 
 
                     	// AST REWRITE
-                    	// elements:          leftValueExpression, unaryPrefixAssignerOp
+                    	// elements:          unaryPrefixAssignerOp, leftValueExpression
                     	// token labels:      
                     	// rule labels:       retval
                     	// token list labels: 
@@ -6195,7 +6195,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          unaryExpression, dataType
+            	// elements:          dataType, unaryExpression
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -7431,7 +7431,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          arguments, Identifier
+            	// elements:          Identifier, arguments
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -9161,7 +9161,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          core, condition
+            	// elements:          condition, core
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -9537,7 +9537,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          forControl, core
+            	// elements:          core, forControl
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -9833,7 +9833,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          forCondition, forUpdate, forInit
+            	// elements:          forCondition, forInit, forUpdate
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -10295,7 +10295,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          condition, core
+            	// elements:          core, condition
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -10812,7 +10812,7 @@ public partial class PsimulexParser : Parser
 
 
             	// AST REWRITE
-            	// elements:          loopControl, core
+            	// elements:          core, loopControl
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 

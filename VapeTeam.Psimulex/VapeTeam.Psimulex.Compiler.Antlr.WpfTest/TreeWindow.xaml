@@ -1,0 +1,17 @@
+﻿<Window x:Class="VapeTeam.Psimulex.Compiler.Antlr.WpfTest.TreeWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="TreeView" Height="394" Width="569" Name="MainWindow">
+    <Grid>
+        <TreeView Name="TreeView" Margin="0,23,0,0"></TreeView>
+        <Menu Height="22" Name="Menu" VerticalAlignment="Top">
+            <MenuItem Name="File" Header="File" >
+                <MenuItem Name="SearchVarAndFunc" Header="SearchVarAndFunc" Click="SearchVarAndFunc_Click" />
+                <MenuItem Name="AllVisible" Header="AllVisible" Click="AllVisible_Click" />
+                <MenuItem Name="Hibrid" Header="Hibrid" Click="Hibrid_Click" />
+                <MenuItem Name="Value" Header="Value" Click="Value_Click" />
+                <MenuItem Name="Reduce" Header="Reduce" Click="Reduce_Click" />
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>

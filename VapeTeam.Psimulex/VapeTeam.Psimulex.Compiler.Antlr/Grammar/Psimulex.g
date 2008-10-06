@@ -581,8 +581,8 @@ Char	:	'char'|'Char'|'CHAR'|'character'|'Character'|'CHARACTER'		;
 Int		:	'int'|'Int'|'INT'|'integer'|'Integer'|'INTEGER'					;
 Decimal	:	'decimal'|'Decimal'|'DECIMAL'	/*|'float'|'Float'|'FLOAT'*/	;
 String	:	'string'|'String'|'STRING'										;
-Void	:	'void'|'Void'|'VOID'			;
-// ...
+Void	:	'void'|'Void'|'VOID'											;
+//Var		:	'var'|'Var'|'VAR'												;
 
 /*BuiltIn Types*/
 Tree    :	'tree'|'Tree'|'TREE'			;
@@ -598,7 +598,7 @@ Node	:	'node'|'Node'|'NODE'			;
 
 /*Other*/
 Thread	:	'thread'|'Thread'|'THREAD'		;
-Timer	:	'timer'|'Timer'|'TIMER'			;
+//Timer	:	'timer'|'Timer'|'TIMER'			;
 Iterator:	'iterator'|'Iterator'|'ITERATOR';
 
 // ...
