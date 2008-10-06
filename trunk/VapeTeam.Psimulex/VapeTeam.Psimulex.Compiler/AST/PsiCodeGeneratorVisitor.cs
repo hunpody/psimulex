@@ -1478,7 +1478,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(IdentifierNode node) 
         {
-            AddCommand(new Push(node.Value, isCompilingAssignmentTarget ? ValueAccessModes.LocalVariableReference : ValueAccessModes.LocalVariable));
+            AddCommand(new Push(node.Value, isCompilingAssignmentTarget || node.ChildrenCount != 0 ? ValueAccessModes.LocalVariableReference : ValueAccessModes.LocalVariable));
         }
 
         #endregion

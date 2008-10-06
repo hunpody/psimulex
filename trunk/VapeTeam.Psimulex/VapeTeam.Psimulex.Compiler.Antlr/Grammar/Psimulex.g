@@ -81,7 +81,7 @@ tokens {
 	ARGUMENTS;
 	MEMBER_SELECT;
 	INDEXING;
-	
+
 	/*
 	LAMBDAPARAM;
 	LAMBDA_STATEMENT;
@@ -399,7 +399,7 @@ leftValue
 	;
 
 variable
-	:	Identifier
+	:	Reference? Identifier -> ^( Identifier Reference? )
 	;
 
 selecting
@@ -573,7 +573,7 @@ PlusPlus	:	'++'	;
 MinusMinus	:	'--'	;
 
 /*Reference*/
-Reference 		:	'&'		;
+Reference 	:	'&'|'ref'|'Ref'|'REF'		;
 
 /*Primitive Types*/
 Bool    :   'bool'|'Bool'|'BOOL'|'boolean'|'Boolean'|'BOOLEAN'				;
