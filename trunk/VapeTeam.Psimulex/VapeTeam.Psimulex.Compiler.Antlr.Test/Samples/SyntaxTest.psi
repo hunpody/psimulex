@@ -1,0 +1,32 @@
+﻿lock Lock LOCK async Async ASYNC atomic Atomic ATOMIC
+import Import IMPORT struct Struct STRUCT
+
+void Void VOID var Var VAR
+bool Bool BOOL char Char CHAR int Int INT string String STRING decimal Decimal DECIMAL
+
+list List LIST set Set SET stack Stack STACK tree Tree TREE bintree BinTree BINTREE
+queue Queue QUEUE pqueue PQueue PQUEUE graph Graph edge Edge node Node NODE
+thread Thread THREAD iterator Iterator ITERATOR
+
+goto GoTo GOTO continue Continue CONTINUE
+break Break BREAK ret Ret RET return Return RETURN
+
+pdo PDo PDO while While WHILE pfor PFor PFOR pforeach PForEach PFOREACH
+do Do DO while While WHILE for For FOR foreach ForEach FOREACH
+loop Loop LOOP to To TO until Until UNTIL in In IN
+
+if If IF elseif ElseIf ELSEIF else Else ELSE
+
+true TRUE True false False FALSE null Null NULL nil Nil NIL
+inf Inf INF infinity Infinity INFINITY
+
+fv();
+"string"
+'char'
+10;
+
+// Comment
+/* 
+MultiLineComment
+*/
+?&,.+!%/=()[]<>{}-^*|

@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<!-- syntaxdefinition for Psimulex 2008 by Varázsló -->
+
+<SyntaxDefinition name = "Psimulex" extensions = ".psi">
+
+  <Environment>
+    <Custom name="TypeReference" bold="false" italic="false" color="#04ABAB" />
+    <Custom name="UnknownEntity" bold="false" italic="false" color="#AB0404" />
+  </Environment>
+
+  <Properties>
+    <Property name="LineComment" value="//"/>
+  </Properties>
+
+  <Digits name = "Digits" bold = "false" italic = "false" color = "DarkBlue"/>
+
+  <RuleSets>
+    <RuleSet ignorecase="false">
+      <Delimiters>&amp;&lt;&gt;~!%^*()-+=|\#/{}[]:;"' ,	.?</Delimiters>
+
+      <Span name = "LineComment" rule = "CommentMarkerSet" bold = "false" italic = "false" color = "Green" stopateol = "true">
+        <Begin>//@!/@</Begin>
+      </Span>
+      <Span name = "LineComment2" rule = "CommentMarkerSet" bold = "false" italic = "false" color = "Green" stopateol = "true">
+        <Begin>////</Begin>
+      </Span>
+
+      <Span name = "BlockComment" rule = "CommentMarkerSet" bold = "false" italic = "false" color = "Green" stopateol = "false">
+        <Begin>/*</Begin>
+        <End>*/</End>
+      </Span>
+
+      <Span name = "String" bold = "false" italic = "false" color = "Brown" stopateol = "true" escapecharacter="\">
+        <Begin>"</Begin>
+        <End>"</End>
+      </Span>
+
+      <Span name = "Char" bold = "false" italic = "false" color = "Brown" stopateol = "true" escapecharacter="\">
+        <Begin>&apos;</Begin>
+        <End>&apos;</End>
+      </Span>
+
+      <MarkPrevious bold = "true" italic = "true" color = "DarkGreen">(</MarkPrevious>
+
+      <KeyWords name = "Punctuation" bold = "false" italic = "false" color = "DarkGreen">
+        <Key word = "?" />
+        <Key word = "," />
+        <Key word = "." />
+        <Key word = ";" />
+        <Key word = "(" />
+        <Key word = ")" />
+        <Key word = "[" />
+        <Key word = "]" />
+        <Key word = "{" />
+        <Key word = "}" />
+        <Key word = "+" />
+        <Key word = "-" />
+        <Key word = "/" />
+        <Key word = "%" />
+        <Key word = "*" />
+        <Key word = "&lt;" />
+        <Key word = "&gt;" />
+        <Key word = "^" />
+        <Key word = "=" />
+        <Key word = "~" />
+        <Key word = "!" />
+        <Key word = "|" />
+        <Key word = "&amp;" />
+      </KeyWords>
+      
+      <KeyWords name = "SelectionStatements" bold="true" italic="false" color="Blue">
+        <Key word = "else" />
+        <Key word = "Else" />
+        <Key word = "ELSE" />
+        
+        <Key word = "elseif" />
+        <Key word = "ElseIf" />
+        <Key word = "ELSEIF" />
+        
+        <Key word = "if" />
+        <Key word = "If" />
+        <Key word = "IF" />
+      </KeyWords>
+
+      <KeyWords name = "IterationStatements" bold="true" italic="false" color="Blue">
+        <Key word = "do" />
+        <Key word = "Do" />
+        <Key word = "DO" />
+
+        <Key word = "for" />
+        <Key word = "For" />
+        <Key word = "FOR" />
+                
+        <Key word = "foreach" />
+        <Key word = "ForEach" />
+        <Key word = "FOREACH" />
+
+        <Key word = "pdo" />
+        <Key word = "PDo" />
+        <Key word = "PDO" />
+
+        <Key word = "pfor" />
+        <Key word = "PFor" />
+        <Key word = "PFOR" />
+
+        <Key word = "pforeach" />
+        <Key word = "PForEach" />
+        <Key word = "PFOREACH" />
+
+        <Key word = "loop" />
+        <Key word = "Loop" />
+        <Key word = "LOOP" />
+        
+        <Key word = "while" />
+        <Key word = "While" />
+        <Key word = "WHILE" />
+        
+        <Key word = "in" />
+        <Key word = "In" />
+        <Key word = "IN" />
+        
+        <Key word = "to" />
+        <Key word = "To" />
+        <Key word = "TO" />
+
+        <Key word = "until" />
+        <Key word = "Until" />
+        <Key word = "UNTIL" />
+      </KeyWords>
+
+      <KeyWords name = "JumpStatements" bold="true" italic="false" color="Blue">
+        <Key word = "break" />
+        <Key word = "Break" />
+        <Key word = "BREAK" />
+        
+        <!--
+        <Key word = "continue" />
+        <Key word = "Continue" />
+        <Key word = "CONTINUE" />
+        -->
+                
+        <Key word = "return" />
+        <Key word = "Return" />
+        <Key word = "RETURN" />
+
+        <Key word = "ret" />
+        <Key word = "Ret" />
+        <Key word = "RET" />
+      </KeyWords>
+
+      <KeyWords name = "ValueTypes" bold="true" italic="false" color="Blue">
+        <Key word = "bool" />
+        <Key word = "Bool" />
+        <Key word = "BOOL" />
+        
+        <Key word = "char" />
+        <Key word = "Char" />
+        <Key word = "CHAR" />
+        
+        <Key word = "decimal" />
+        <Key word = "Decimal" />
+        <Key word = "DECIMAL" />
+        
+        <Key word = "int" />
+        <Key word = "Int" />
+        <Key word = "INT" />
+        
+        <Key word = "string" />
+        <Key word = "String" />
+        <Key word = "STRING" />
+
+        <Key word = "void" />
+        <Key word = "Void" />
+        <Key word = "VOID" />
+        
+        <!--
+        <Key word = "var" />
+        <Key word = "Var" />
+        <Key word = "VAR" />
+        -->
+      </KeyWords>
+
+      <KeyWords name = "ReferenceTypes" bold="false" italic="false" color="DarkCyan">
+        <Key word = "bintree" />
+        <Key word = "BinTree" />
+        <Key word = "BINTREE" />
+
+        <Key word = "tree" />
+        <Key word = "Tree" />
+        <Key word = "TREE" />
+
+        <Key word = "graph" />
+        <Key word = "Graph" />
+        <Key word = "GRAPH" />
+
+        <Key word = "edge" />
+        <Key word = "Edge" />
+        <Key word = "EDGE" />
+        
+        <Key word = "node" />
+        <Key word = "Node" />
+        <Key word = "NODE" />
+
+        <Key word = "list" />
+        <Key word = "List" />
+        <Key word = "LIST" />
+
+        <Key word = "pqueue" />
+        <Key word = "PQueue" />
+        <Key word = "PQUEUE" />
+
+        <Key word = "queue" />
+        <Key word = "Queue" />
+        <Key word = "QUEUE" />
+
+        <Key word = "set" />
+        <Key word = "Set" />
+        <Key word = "SET" />
+
+        <Key word = "stack" />
+        <Key word = "Stack" />
+        <Key word = "STACK" />
+
+        <Key word = "iterator" />
+        <Key word = "Iterator" />
+        <Key word = "ITERATOR" />
+
+        <Key word = "thread" />
+        <Key word = "Thread" />
+        <Key word = "THREAD" />
+      </KeyWords>
+      
+      <KeyWords name = "NameSpaces" bold="true" italic="false" color="Blue">
+        <Key word = "import" />
+        <Key word = "Import" />
+        <Key word = "IMPORT" />
+        
+        <Key word = "struct" />
+        <Key word = "Struct" />
+        <Key word = "STRUCT" />
+      </KeyWords>
+
+      <KeyWords name = "ParalellKeyWords" bold="true" italic="false" color="Blue">
+        <Key word = "lock" />
+        <Key word = "Lock" />
+        <Key word = "LOCK" />
+
+        <Key word = "atomic" />
+        <Key word = "Atomic" />
+        <Key word = "ATOMIC" />
+
+        <Key word = "async" />
+        <Key word = "Async" />
+        <Key word = "ASYNC" />
+      </KeyWords>
+
+      <KeyWords name = "Literals" bold="true" italic="false" color="Blue">
+        <Key word = "true" />
+        <Key word = "True" />
+        <Key word = "TRUE" />
+
+        <Key word = "false" />
+        <Key word = "False" />
+        <Key word = "FALSE" />
+        
+        <Key word = "null" />
+        <Key word = "Null" />
+        <Key word = "NULL" />
+        
+        <Key word = "nil" />
+        <Key word = "Nil" />
+        <Key word = "NIL" />
+
+        <Key word = "inf" />
+        <Key word = "Inf" />
+        <Key word = "INF" />
+
+        <Key word = "infinity" />
+        <Key word = "Infinity" />
+        <Key word = "INFINITY" />
+      </KeyWords>
+
+      <KeyWords name = "Other" bold="true" italic="true" color="Blue">
+        <Key word = "ref" />
+        <Key word = "Ref" />
+        <Key word = "REF" />
+      </KeyWords>
+
+      <KeyWords name = "IgnoredKeyWords" bold="true" italic="true" color="Red">
+        <Key word = "goto" />
+        <Key word = "GoTo" />
+        <Key word = "GOTO" />
+      </KeyWords>
+
+    </RuleSet>
+
+    <RuleSet name = "CommentMarkerSet" ignorecase = "false"></RuleSet>
+    <RuleSet name = "DocCommentSet" ignorecase = "false"></RuleSet>
+    <RuleSet name = "PreprocessorSet" ignorecase="false"></RuleSet>
+    <RuleSet name = "XmlDocSet" ignorecase = "false"></RuleSet>
+    
+  </RuleSets>
+</SyntaxDefinition>
+

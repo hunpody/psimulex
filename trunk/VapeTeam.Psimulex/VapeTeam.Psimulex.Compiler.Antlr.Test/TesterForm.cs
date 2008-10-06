@@ -18,17 +18,24 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
     public partial class TesterForm : Form
     {
         private Compiler compiler = new Compiler();
-        PsiCodeGeneratorVisitor visitor;
+        public PsiCodeGeneratorVisitor visitor { get; set; }
         
         public TesterForm()
         {
             InitializeComponent();
+
             if (!Directory.Exists("Teszt"))
                 Directory.CreateDirectory("Teszt");
             if (File.Exists("Teszt\\teszt.psi"))
                 sourceCodeTextEditorControl.LoadFile("Teszt\\teszt.psi");
 
-           
+            // DynamicHighLight Settings
+            ICSharpCode.TextEditor.Document.HighlightingManager.Manager.AddSyntaxModeFileProvider(
+                new ICSharpCode.TextEditor.Document.FileSyntaxModeProvider(@"References\SyntaxRes\"));
+
+            // HighLightting Strategy Name is Psimulex
+            sourceCodeTextEditorControl.Document.HighlightingStrategy =
+                ICSharpCode.TextEditor.Document.HighlightingStrategyFactory.CreateHighlightingStrategy("Psimulex");
         }
 
         private void compileButton_Click(object sender, EventArgs e)
@@ -171,7 +178,9 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         {
             compileButton_Click(this, new EventArgs());
 
-            var machine = MachineBuilder.Instance.CreateMachine(1, 16);            
+            var machine = MachineBuilder.Instance.CreateMachine(1, 16);
+
+            visitor.Program.Program.AddFunctions(visitor.UserDefinedFunctionList);
 
             var process = machine.System.Load(visitor.Program);
 

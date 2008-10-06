@@ -94,12 +94,23 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="References\SyntaxRes\CSharp-Mode.xshd" />
+    <None Include="References\SyntaxRes\ICSharpCode.TextEditor.snk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="References\SyntaxRes\Mode.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="References\SyntaxRes\Psimulex-Mode.xshd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Samples\SequentialAlgorithms\BubbleSort 1.0.psi" />
     <None Include="Samples\SimplePrograms\Abc.psi" />
     <None Include="Samples\SimplePrograms\Branches.psi" />
     <None Include="Samples\SimplePrograms\Characters from 1 to 1000.psi" />
     <None Include="Samples\SimplePrograms\Cycles.psi" />
     <None Include="Samples\SimplePrograms\Hello World.psi" />
+    <None Include="Samples\SyntaxTest.psi" />
     <None Include="Samples\Tutorial\01. Sample %28 Hello World %29.psi" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -122,7 +133,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="References\ICSharpCode.TextEditor.dll" />
+    <Content Include="References\ICSharpCode.TextEditor.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="References\SyntaxRes\RightArrow.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="References\SyntaxRes\SyntaxModes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="References\SyntaxRes\TextEditorControl.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Samples\HelpFunctions\" />
