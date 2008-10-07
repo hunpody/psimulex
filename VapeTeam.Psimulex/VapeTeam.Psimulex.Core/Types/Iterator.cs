@@ -10,7 +10,7 @@ namespace VapeTeam.Psimulex.Core.Types
     /// </summary>
     public class Iterator : BaseType
     {
-        private System.Collections.IEnumerator enumerator;
+        private System.Collections.Generic.IEnumerator<BaseType> enumerator;
 
         public override TypeEnum TypeEnum
         {
@@ -24,10 +24,10 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public BaseType Current()
         {
-            return (BaseType) enumerator.Current;
+            return enumerator.Current;
         }
 
-        public Iterator(System.Collections.IEnumerable enumerable)
+        public Iterator(System.Collections.Generic.IEnumerable<BaseType> enumerable)
         {
             this.enumerator = enumerable.GetEnumerator();
         }

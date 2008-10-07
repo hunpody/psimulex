@@ -888,6 +888,7 @@ namespace VapeTeam.Psimulex.Tests
                     new Push(2),
                     new Push("L", ValueAccessModes.LocalVariableReference),
                     new CallMethod("RemoveAt"),
+                    new Pop(),
 
                     // print(L.First);
                     new Push("L", ValueAccessModes.LocalVariableReference),
