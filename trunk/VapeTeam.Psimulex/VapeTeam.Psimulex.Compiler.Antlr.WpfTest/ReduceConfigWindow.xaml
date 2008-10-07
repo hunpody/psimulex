@@ -1,0 +1,25 @@
+﻿<Window x:Class="VapeTeam.Psimulex.Compiler.Antlr.WpfTest.ReduceConfigWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="ReduceConfigWindow" Height="370" Width="460" FlowDirection="LeftToRight" HorizontalAlignment="Left" VerticalAlignment="Top">    
+    <Grid Name="MainGrid" >        
+        <!--<ScrollViewer Name="MainScrolViewer" CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">-->
+            <WrapPanel Name="MainStackPanel">
+                <GroupBox Header="GroupBox" Name="groupBox1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel Name="stackPanel1">
+                        <TextBox>x</TextBox>
+                        <TextBox>xfghjghjkghjkghjkghjkghjf</TextBox>
+                        <TextBox>x</TextBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="GroupBox" Name="groupBox2" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel Name="stackPanel2">
+                        <TextBox>x</TextBox>
+                        <TextBox>xfghjghjkghjkghjkghjkghjf</TextBox>
+                        <TextBox>x</TextBox>
+                    </StackPanel>
+                </GroupBox>
+            </WrapPanel>
+        <!--</ScrollViewer>-->
+    </Grid>
+</Window>

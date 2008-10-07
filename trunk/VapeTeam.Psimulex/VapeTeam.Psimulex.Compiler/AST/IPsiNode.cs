@@ -9,6 +9,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
     {
         IPsiNode Parent { get; set; }
         List<IPsiNode> Children { get; set; }
+        List<IPsiNode> Siblings { get; }
 
         NodeType Type { get; set; }
         string Value { get; set; }
@@ -33,6 +34,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         IPsiNode BottomLeft { get; }
         IPsiNode BottomRight { get; }
+
+        string ToString(bool showType, bool showValue, bool showInterval);
     }
 
     /// <summary>

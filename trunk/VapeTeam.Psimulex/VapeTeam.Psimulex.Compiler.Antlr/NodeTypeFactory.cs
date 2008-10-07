@@ -6,20 +6,9 @@ using VapeTeam.Psimulex.Compiler.AST;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr
 {
-    public class NodeTypeFactory : INodeTypeFactory
+    public class NodeTypeFactory
     {
-        public NodeTypeFactory()
-        { }
-
-        public NodeType CreateNodeType(string s)
-        {
-            // String Szeritn szétválogatjuk és legyártjuk a nodeokat
-            // ...
-
-            return NodeType.X;
-        }
-
-        public NodeType CreateNodeType(int t)
+        public static NodeType CreateNodeType(int t)
         {
             NodeType type = NodeType.X;
 
@@ -168,9 +157,6 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
                     type = NodeType.X;
                     break;
             }
-
-            // Int azaz típus szeritn szétválasztás.
-            // ...
 
             return type;
         }

@@ -32,6 +32,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public IPsiNode Parent { get; set; }
         public List<IPsiNode> Children { get; set; }
+        public List<IPsiNode> Siblings
+        {
+            get
+            {
+                if (Parent != null)
+                    return Parent.Children;
+                else
+                    return new List<IPsiNode>();
+            } 
+        }
 
         public NodeType Type { get; set; }
         public string Value { get; set; }
@@ -53,7 +63,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Init(IPsiNode parent, string value, NodeType type, bool isVirtual, string viewComment, NodeValueInfo nodeValueInfo)
         {
-            Init(parent, new List<IPsiNode>(), value, type, false, "", nodeValueInfo);
+            Init(parent, new List<IPsiNode>(), value, type, isVirtual, "", nodeValueInfo);
         }
 
         public void Init(IPsiNode parent, List<IPsiNode> children, string value, NodeType type, bool isVirtual, string viewComment, NodeValueInfo nodeValueInfo)
@@ -147,6 +157,22 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
+        public string ToString(bool showType, bool showValue, bool showInterval)
+        {
+            string ret = "";
+            string type = "( " + Type.ToString() + " ) ";
+            string value = Value != null ? Value : "null";
+            string interval = string.Format(" From:[ {0}, {1} ], To:[ {2}, {3} ]",
+                            NodeValueInfo.StartLine, NodeValueInfo.StartColumn,
+                            NodeValueInfo.EndLine, NodeValueInfo.EndColumn);
+
+            if (showType) ret += type;
+            if (showValue) ret += value;
+            if (showInterval) ret += interval;
+
+            return ret;
+        }
+
         #endregion
 
         #region PsiNode Members
@@ -158,8 +184,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public override string ToString()
         {
-            if (Value == null || Value == "") throw new PsiNodeException("Value not initialised!");
-            return "( " + Type.ToString() + " ) " + Value.ToString();
+            return "( " + Type.ToString() + " ) " + ( Value != null ? Value : "null");
         }
 
         #endregion

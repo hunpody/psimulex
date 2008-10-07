@@ -16,6 +16,7 @@ using VapeTeam.Psimulex.Core;
 using VapeTeam.Psimulex.Core.Commands;
 using VapeTeam.Psimulex.Core.Factories;
 using VapeTeam.Psimulex.Compiler.Antlr.Test;
+using VapeTeam.Psimulex.Compiler.AST;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 {
@@ -34,47 +35,95 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             TesterForm.Show();            
         }
 
+        private void Everything_Click(object sender, RoutedEventArgs e)
+        {
+            TreeView.Items.Clear();
+            if (TesterForm.PsiNode != null)
+                TreeView.Items.Add(
+                    VapeTeam.Psimulex.Compiler.AST.PsiNodeConverter.ToWPFTreeViewItem(
+                        TesterForm.PsiNode, ViewMode.Everything));
+        }
+
         private void AllVisible_Click(object sender, RoutedEventArgs e)
         {
-            var twi = new TreeViewItem();
-            var twi1 = new TreeViewItem();
-            var twi2 = new TreeViewItem();
-
-            var cb = new CheckBox();
-            cb.Content = "Egy";
-            twi.Header = cb;
-
-            var cb1 = new CheckBox();
-            cb1.Content = "Child1";
-            twi1.Header = cb1;
-
-            var cb2 = new CheckBox();
-            cb2.Content = "Child2";
-            twi2.Header = cb2;
-
-            TreeView.Items.Add(twi);
-            (TreeView.Items[0] as TreeViewItem).Items.Add(twi1);
-            (TreeView.Items[0] as TreeViewItem).Items.Add(twi2);
+            TreeView.Items.Clear();
+            if (TesterForm.PsiNode != null)
+                TreeView.Items.Add(
+                    VapeTeam.Psimulex.Compiler.AST.PsiNodeConverter.ToWPFTreeViewItem(
+                        TesterForm.PsiNode, ViewMode.All));
+            
         }
 
         private void Hibrid_Click(object sender, RoutedEventArgs e)
         {
-
+            TreeView.Items.Clear();
+            if (TesterForm.PsiNode != null)
+                TreeView.Items.Add(
+                    VapeTeam.Psimulex.Compiler.AST.PsiNodeConverter.ToWPFTreeViewItem(
+                        TesterForm.PsiNode, ViewMode.Hibrid));
+            
         }
 
         private void Value_Click(object sender, RoutedEventArgs e)
         {
+            TreeView.Items.Clear();
+            if (TesterForm.PsiNode != null)
+                TreeView.Items.Add(
+                    TesterForm.PsiNode.ToWPFTreeViewItem(ViewMode.Values));
+            
+        }
 
+        private void Interval_Click(object sender, RoutedEventArgs e)
+        {
+            TreeView.Items.Clear();
+            if (TesterForm.PsiNode != null)
+                TreeView.Items.Add(TesterForm.PsiNode.ToWPFTreeViewItem(ViewMode.Interval));
         }
 
         private void Reduce_Click(object sender, RoutedEventArgs e)
         {
-
+            ReduceConfigWindow rcw = new ReduceConfigWindow();
+            rcw.ShowDialog();
+            /*
+            TreeView.Items.Clear();
+            if (TesterForm.PsiNode != null)
+            {
+                TreeView.Items.Add(
+                    TesterForm.PsiNode.Clone()
+                    .ReducePsiNode( new List<NodeType> { NodeType.CompilationUnit })
+                    .ToWPFTreeViewItem(ViewMode.Hibrid));
+            }*/
         }
+
+
 
         private void SearchVarAndFunc_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new SyntaxTreeWindow();
+
+            if (TesterForm.PsiNode != null)
+            {
+                window.PsiNode = TesterForm.PsiNode;
+                window.ConfigFilePath = "config.cgf";
+                window.ShowDialog();
+            }
+            else
+                MessageBox.Show("Először fordíts a Másik tesztprojektbe le vlamit, aztán tudod ezt megnézni.");
+
+
+
+            /*SyntaxTreeConfiguration stc = new SyntaxTreeConfiguration();
+            stc.Load("confi.cgf");
+            stc.Save("confi.cgf");*/
+        }
+
+
+
+
     }
 }
