@@ -113,35 +113,46 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /// <returns>The reduced PsiNode</returns>
         public static List<IPsiNode> ReducePsiNode(this IPsiNode tree, List<NodeType> nodeTypeList)
         {
-            return new List<IPsiNode>{tree};
-            /*
-            List<IPsiNode> nodeList = new List<IPsiNode>();
+            return new List<IPsiNode>();
+        }
 
-            tree.Children.ForEach(child => nodeList.AddRange(ReducePsiNode(child, nodeTypeList)));
 
-            if (nodeTypeList.Contains(tree.Type))
+
+        public static List<TreeViewItem> ToWPFTreeViewItemWithReduction(this IPsiNode tree, ViewMode vm, List<NodeType> nodeTypeList)
+        {
+            bool[] viewConfig = ToStringConfig(tree, vm);
+
+            List<TreeViewItem> list = new List<TreeViewItem>();
+
+            if (tree != null)
             {
-                if (tree.Parent != null)
+                TreeViewItem twi;
+                if (nodeTypeList.Contains(tree.Type))
                 {
-                    foreach (var child in nodeList)
+                    foreach (var child in tree.Children)
                     {
-                        int index = tree.Siblings.FindIndex(node => node == tree);
+                        list.AddRange(ToWPFTreeViewItemWithReduction(child,vm,nodeTypeList));
+                    }
+                }
+                else
+                {
+                    twi = new TreeViewItem();
+                    twi.IsExpanded = true;
+                    twi.Header = tree.ToString(viewConfig[0], viewConfig[1], viewConfig[2]);
 
-                        tree.Siblings.Insert(index, child);
-                        child.Parent = tree.Parent;
+                    foreach (var child in tree.Children)
+                    {
+                        foreach (var item in ToWPFTreeViewItemWithReduction(child, vm, nodeTypeList))
+                        {
+                            twi.Items.Add(item);
+                        }                        
                     }
 
-                    tree.Siblings.Remove(tree);
-                    tree.Parent = null;
+                    list.Add(twi);
                 }
             }
-            else
-            {
-                nodeList.Add(tree);
-            }
 
-            return nodeList;
-            */
+            return list;
         }
     }
 }
