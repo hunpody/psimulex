@@ -171,7 +171,7 @@ print(q.size);
         [TestMethod]
         public void TestGenAt_2008__szeptember_29_0_33_08()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+             var result = Helpers.SystemHelper.CompileAndRun(@"
 stack s;
 
 for( int i = 0; i < 10; ++i )
@@ -197,7 +197,7 @@ while( s.size != 0)
 }
 ");
 
-            Assert.AreEqual(@"10 20 30 40 50 60 70 80 90 100 
+            Assert.AreEqual(@"100 90 80 70 60 50 40 30 20 10 
 100 90 80 70 60 50 40 30 20 10 
 10 20 30 40 50 60 70 80 90 100 ", result);
         }

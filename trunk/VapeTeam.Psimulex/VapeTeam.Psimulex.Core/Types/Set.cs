@@ -5,14 +5,8 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    public class Set : AbstractCollection
+    public class Set : AbstractList
     {
-        #region Represenation
-
-        private BaseTypeList rep = new BaseTypeList();
-
-        #endregion
-
         #region Constructors
 
         public Set()
@@ -20,28 +14,32 @@ namespace VapeTeam.Psimulex.Core.Types
         }
 
         public Set(BaseType value)
+            : base(value)
         {
-            rep.Add(value.Clone());
         }
 
-        public Set(BaseTypeList rep)
+        public Set(IEnumerable<BaseType> rep)
+            : base(rep.Distinct())
         {
-            this.rep.Clear();
-            rep.ForEach(item => Insert(item.Clone()));
         }
 
         #endregion
 
         #region Own Members
 
-        //public void In(BaseType value) { Insert(value); }
-        public void Insert(BaseType value)
+        public override void Insert(BaseType value)
         {
             if (!Contains(value))
-                rep.Add(value);
+            {
+                base.Insert(value);
+            }
         }
 
-        //public BaseType Out(BaseType value) { return Remove(value); }
+        /// <summary>
+        /// Removes the value from the set that is equal to the parameter.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public BaseType Remove(BaseType value)
         {
             BaseType ret = rep.Find(item => item.EqualsTo(value));
@@ -50,104 +48,79 @@ namespace VapeTeam.Psimulex.Core.Types
             return ret;
         }
 
-        public bool IsIn(BaseType value) { return Contains(value); }
+        public bool Has(BaseType value)
+        {
+            return Contains(value);
+        }
+
         public bool Contains(BaseType value)
         {
-            foreach (var item in rep)
-                if (item.EqualsTo(value))
-                    return true;
-            return false;
+            return rep.Exists(x => x.EqualsTo(value));
         }
 
         #endregion
 
         #region Implemented Members
 
-        public override TypeEnum TypeEnum { get { return TypeEnum.Set; } }
-        protected override System.Collections.IEnumerable GetAsEnumerable() { return rep; }
-        protected override object GetRepresentation() { return rep; }
-        public override BaseType Index(int index) { return ListIndexing(rep, index); }
-        public override int Size { get { return rep.Count; } }
-        public override void Clear() { rep.Clear(); }
-        //public override BaseType Clone() { return new Set(rep); }
+        public override TypeEnum TypeEnum
+        {
+            get
+            {
+                return TypeEnum.Set;
+            }
+        }
 
         #endregion
 
         #region Relational comparison operators
 
-        public override bool EqualsTo(BaseType value)
-        {
-            return rep.IsEqualTo(value.ToSet().GetRepresentation() as BaseTypeList);
-        }
-
         #endregion
 
         #region Operator Members
 
-        public override void Assign(BaseType value)
-        {
-            rep.Clear();
-            rep.AddRange((value.ToSet().GetRepresentation() as BaseTypeList).Clone());
-        }
-
         /// <summary>
-        /// Unio
+        /// Union
         /// </summary>
         /// <param name="value"></param>
         public override void Add(BaseType value)
         {
-            (value.ToSet().GetRepresentation() as BaseTypeList).ForEach(
-                item => Insert(item)
-                );
+            rep.AddRange(value.ToSet().GetAsEnumerable().Where(x => !Contains(x)));
         }
 
         /// <summary>
-        /// Cutting
+        /// Intersection
         /// </summary>
         /// <param name="value"></param>
         public override void Multiply(BaseType value)
         {
-            BaseTypeList removables = new BaseTypeList();
-            foreach (var item in rep)
-                if (!value.ToSet().Contains(item))
-                    removables.Add(item);
-
-            foreach (var item in removables)
-                Remove(item);
+            var valueSet = value.ToSet();
+            rep.RemoveAll(x => !valueSet.Contains(x));
         }
 
         /// <summary>
-        /// Substracion
+        /// Subtraction
         /// </summary>
         /// <param name="value"></param>
-        public override void Subtract(BaseType value) { Divide(value); }
+        public override void Subtract(BaseType value)
+        {
+            Divide(value);
+        }
+
+        /// <summary>
+        /// Division
+        /// </summary>
+        /// <param name="value"></param>
         public override void Divide(BaseType value)
         {
-            (value.ToSet().GetRepresentation() as BaseTypeList).ForEach(
-                item => Remove(item)
-                );
-        }       
-
-        #endregion
-
-        #region Conversion To Primitive Type Members
-
-        public override string ToString()
-        {
-            return "{ " + rep.ToString() + "}";
+            var valueSet = value.ToSet();
+            rep.RemoveAll(x => valueSet.Contains(x));
         }
 
         #endregion
 
-        #region Conversion To BuiltIn Type Members
-
-        public override Array ToArray() { return new Array(rep); }
-        public override List ToList() { return new List(rep); }
-        public override Set ToSet() { return this; }
-        public override Stack ToStack() { return new Stack(rep); }
-        public override Queue ToQueue() { return new Queue(rep); }
-        public override PriorityQueue ToPriorityQueue() { return new PriorityQueue(rep); }
-
-        #endregion
+        protected override string DecorateToString(string s)
+        {
+            return string.Format("{{ {0} }}", s);
+        }
     }
 }

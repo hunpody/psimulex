@@ -109,6 +109,7 @@
     <Compile Include="TransactionalStack.cs" />
     <Compile Include="TransactionStates.cs" />
     <Compile Include="Types\AbstractCollection.cs" />
+    <Compile Include="Types\AbstractList.cs" />
     <Compile Include="Types\Array.cs" />
     <Compile Include="Types\BaseType.cs" />
     <Compile Include="Types\BinaryTree.cs" />

@@ -132,7 +132,7 @@ namespace VapeTeam.Psimulex.Core.Types
         #region Implemented Members
 
         public override TypeEnum TypeEnum { get { return TypeEnum.PriorityQueue; } }
-        protected override System.Collections.IEnumerable GetAsEnumerable() { return rep; }
+        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable() { return null; }//rep; }
         protected override object GetRepresentation() { return rep; }
         public override BaseType Index(int index)
         {

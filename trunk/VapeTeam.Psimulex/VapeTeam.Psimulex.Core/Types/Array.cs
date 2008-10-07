@@ -9,13 +9,12 @@ namespace VapeTeam.Psimulex.Core.Types
     /// Advenced Array Type.
     /// It can be resize and it will be have more built in function.
     /// </summary>
-    public class Array : AbstractCollection
+    public class Array : AbstractList
     {
         #region Represenation
 
         protected TypeEnum initializatorType;
         protected int size;
-        protected BaseTypeList rep;
 
         #endregion
 
@@ -25,7 +24,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             this.initializatorType = initializatorType;
             this.size = size;
-            rep = new BaseTypeList(size);
+            rep = new List<BaseType>(size);
             InitializeArray();
         }
 
@@ -38,7 +37,7 @@ namespace VapeTeam.Psimulex.Core.Types
         }
 
         /// <summary>
-        /// For conversions.
+        /// Converting from scalar.
         /// </summary>
         /// <param name="value"></param>
         public Array(BaseType value)
@@ -52,31 +51,47 @@ namespace VapeTeam.Psimulex.Core.Types
         /// It clones the parameter.
         /// </summary>
         /// <param name="value"></param>
-        public Array(BaseTypeList rep)
-            :this(rep.Count != 0 ? rep[0].TypeEnum : TypeEnum.Void, rep.Count)
+        public Array(IEnumerable<BaseType> rep)
+            : base(rep)
+        //:this(rep.Count != 0 ? rep[0].TypeEnum : TypeEnum.Undefined, rep.Count)
         {
-            for (int i = 0; i < Count; i++)
-                this.rep[i] = rep[i].Clone();
+            if (rep.Count() > 0)
+            {
+                initializatorType = rep.First().TypeEnum;
+            }
+            else
+            {
+                initializatorType = TypeEnum.Undefined;
+            }
+
+            //for (int i = 0; i < Count; i++)
+            //    this.rep[i] = rep[i].Clone();
         }
 
         #endregion
 
-        #region Implemented Members
 
-        public override TypeEnum TypeEnum { get { return TypeEnum.Array; } }
-        protected override System.Collections.IEnumerable GetAsEnumerable() { return rep; }
-        protected override object GetRepresentation() { return rep; }
-        public override BaseType Index(int index) { return ListIndexing(rep, index); }
-        public override int Size
+        public override TypeEnum TypeEnum
         {
-            get { return size; }
-            set
-            {
-                Resize(value);
-            }
+            get { return TypeEnum.Array; }
         }
 
-        public override void Clear() 
+        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable()
+        {
+            return rep;
+        }
+
+        protected override object GetRepresentation()
+        {
+            return rep;
+        }
+
+        public override BaseType Index(int index)
+        {
+            return ListIndexing(rep, index);
+        }
+
+        public override void Clear()
         {
             rep = new BaseTypeList(size);
             InitializeArray();
@@ -84,9 +99,20 @@ namespace VapeTeam.Psimulex.Core.Types
 
         //public override BaseType Clone() { return new Array(rep); }
 
-        #endregion
+        #region Size and Resize
 
-        #region Own Members
+        public override int Size
+        {
+            get
+            {
+                return size;
+            }
+
+            set
+            {
+                Resize(value);
+            }
+        }
 
         /// <summary>
         /// Resizes the array. Inserts new baseTypes or removes from the end.
@@ -118,55 +144,10 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
-        #region Relational comparison operators
-
-        public override bool EqualsTo(BaseType value)
+        protected override string DecorateToString(string s)
         {
-            return rep.IsEqualTo(value.ToArray().GetRepresentation() as BaseTypeList);
+            return string.Format("[ {0} ]", s);
         }
 
-        #endregion
-
-        #region Operator Members
-
-        public override void Assign(BaseType value)
-        {
-            rep.Clear();
-            rep.AddRange((value.ToArray().GetRepresentation() as BaseTypeList).Clone());
-
-            size = rep.Count;
-            if (size != 0)
-                initializatorType = rep[0].TypeEnum;
-        }
-
-        public override void Add(BaseType value)
-        {
-            rep.AddRange((value.ToArray().GetRepresentation() as BaseTypeList).Clone());
-            size = rep.Count;
-        }
-
-        public override void Negate() { rep.Reverse(); }
-
-        #endregion
-
-        #region Conversion To Primitive Type Members
-
-        public override string ToString()
-        {
-            return "[ " + rep.ToString() + "]";
-        }
-
-        #endregion
-
-        #region Conversion To BuiltIn Type Members
-
-        public override Array ToArray() { return this; }
-        public override List ToList() { return new List(rep); }
-        public override Set ToSet() { return new Set(rep); }
-        public override Stack ToStack() { return new Stack(rep); }
-        public override Queue ToQueue() { return new Queue(rep); }
-        public override PriorityQueue ToPriorityQueue() { return new PriorityQueue(rep); }
-
-        #endregion
     }
 }

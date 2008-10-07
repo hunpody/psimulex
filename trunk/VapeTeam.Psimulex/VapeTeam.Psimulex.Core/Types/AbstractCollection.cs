@@ -67,57 +67,115 @@ namespace VapeTeam.Psimulex.Core.Types
             get { return Size; }
         }
 
-        public override long ToInt() { return Size; }
-        public override int ToInt32() { return Size; }
-        public override decimal ToDecimal() { return Size; }
-        public override float ToFloat() { return Size; }
+        public override long ToInt()
+        {
+            return Size;
+        }
 
-        public override bool EqualsTo(BaseType value) { return ToInt() == value.ToInt(); }
+        public override int ToInt32()
+        {
+            return Size;
+        }
 
-        /*
-        public override bool IsLessThan(BaseType value) { return ToInt() < value.ToInt(); }
-        public override bool IsLessThanOrEqual(BaseType value) { return ToInt() <= value.ToInt(); }
-        public override bool IsGreaterThan(BaseType value) { return ToInt() > value.ToInt(); }
-        public override bool IsGreaterThanOrEqual(BaseType value) { return ToInt() >= value.ToInt(); }
-        */
+        public override decimal ToDecimal()
+        {
+            return Size;
+        }
+
+        public override float ToFloat()
+        {
+            return Size;
+        }
+
+        public override bool EqualsTo(BaseType value)
+        {
+            // If collection, compare each element
+            if (value is AbstractCollection)
+            {
+                var thisList = GetAsEnumerable().ToList();
+                var valueList = (value as AbstractCollection).GetAsEnumerable().ToList();
+                if (thisList.Count != valueList.Count)
+                {
+                    return false;
+                }
+                for (int i = 0; i < thisList.Count; ++i)
+                {
+                    if (thisList[i].NotEqualsTo(valueList[i]))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            // else compare by integer (which will mean size)
+            return ToInt() == value.ToInt();
+        }
+
+
+        //public override bool IsLessThan(BaseType value) { return ToInt() < value.ToInt(); }
+        //public override bool IsLessThanOrEqual(BaseType value) { return ToInt() <= value.ToInt(); }
+        //public override bool IsGreaterThan(BaseType value) { return ToInt() > value.ToInt(); }
+        //public override bool IsGreaterThanOrEqual(BaseType value) { return ToInt() >= value.ToInt(); }
+
 
         #endregion
 
         #region Iterator
 
-        protected abstract System.Collections.IEnumerable GetAsEnumerable();
+        public abstract System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable();
 
-        public Iterator GetIterator() { return new Iterator(GetAsEnumerable()); }
-        public override Iterator ToIterator() { return GetIterator(); }
-
-        public override string  ToString()
+        public Iterator GetIterator()
         {
-            string ret = "{ ";
+            return new Iterator(GetAsEnumerable());
+        }
 
-            Iterator it = GetIterator();
-            while (it.MoveNext())
-                ret += it.Current().ToString() + " ";
+        public override Iterator ToIterator()
+        {
+            return GetIterator();
+        }
 
-            ret += "}";
-            return ret;
+        protected virtual string DecorateToString(string s)
+        {
+            return s;
+        }
+
+        public override string ToString()
+        {
+            string csv = string.Join(", ", GetAsEnumerable().Select(x => x.ToString()).ToArray());
+            return DecorateToString(csv);
         }
 
         #endregion
 
         #region Clear
 
-        public void Delete() { Clear(); }
-        public void Empty() { Clear(); }
-        public virtual void Clear() 
+        public void Delete()
         {
-            throw new Exceptions.InvalidOperationException(); 
-        }        
+            Clear();
+        }
+
+        public void Empty()
+        {
+            Clear();
+        }
+
+        public virtual void Clear()
+        {
+            throw new Exceptions.InvalidOperationException(string.Format("Cannot clear collection {0}.", TypeEnum));
+        }
 
         #endregion
 
         #region IsEmpty
 
-        public bool IsEmpty { get { return Size == 0 ? true : false; } }
+        public bool IsEmpty
+        {
+            get
+            {
+                return Size == 0 ? true : false;
+            }
+        }
 
         #endregion
     }
