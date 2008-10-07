@@ -22,7 +22,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void Init()
         {
             // AST -> TreeView
-            treeView.Nodes.Add(TreeConverter.FromPsiNodeToTreeNode(PsiNode, ViewMode.All));
+            treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.All));
             treeView.SelectedNode = treeView.Nodes[0];
             treeView.ExpandAll();
             treeView.Nodes[0].EnsureVisible();
@@ -44,7 +44,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(TreeConverter.FromPsiNodeToTreeNode(PsiNode, ViewMode.All));
+            treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.All));
             treeView.SelectedNode = treeView.Nodes[0];
             treeView.ExpandAll();
         }
@@ -52,7 +52,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void valuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(TreeConverter.FromPsiNodeToTreeNode(PsiNode, ViewMode.Values));
+            treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.Values));
             treeView.SelectedNode = treeView.Nodes[0];
             treeView.ExpandAll();
         }
@@ -60,7 +60,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         private void hibridToolStripMenuItem_Click(object sender, EventArgs e)
         {
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(TreeConverter.FromPsiNodeToTreeNode(PsiNode, ViewMode.Hibrid));
+            treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.Hibrid));
             treeView.SelectedNode = treeView.Nodes[0];
             treeView.ExpandAll();
         }
