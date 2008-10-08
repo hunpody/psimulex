@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73AA0DBA-DC77-45EA-AA57-2D67FD13E690}"
 	ProjectSection(SolutionItems) = preProject
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		ToDo.txt = ToDo.txt
 		VapeTeam.Psimulex.vsmdi = VapeTeam.Psimulex.vsmdi
 		ÜziFüzet 2.0.txt = ÜziFüzet 2.0.txt
 	EndProjectSection
