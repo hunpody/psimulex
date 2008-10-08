@@ -63,7 +63,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             bool[] viewConfig = ToStringConfig(tree, vm);
 
             TreeViewItem twi = new TreeViewItem();
-            twi.Header = "#";
             twi.IsExpanded = true;
 
             if (tree != null)
@@ -81,7 +80,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /// </summary>
         /// <param name="tree">Tree</param>
         /// <param name="vm">ViewMode</param>
-        /// <returns></returns>
+        /// <returns>Config Bool Array</returns>
         private static bool[] ToStringConfig(IPsiNode tree, ViewMode vm)
         {
             bool[] config = new bool[3] { false, false, false };
@@ -108,16 +107,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /// Reduce the PsiNode tree.
         /// It removes the specified types nodes.
         /// </summary>
-        /// <param name="tree">The PsiNode to reduce</param>
-        /// <param name="nodeTypeList">The list of types to remove</param>
-        /// <returns>The reduced PsiNode</returns>
-        public static List<IPsiNode> ReducePsiNode(this IPsiNode tree, List<NodeType> nodeTypeList)
-        {
-            return new List<IPsiNode>();
-        }
-
-
-
+        /// <param name="tree">Psi Node To Reduce</param>
+        /// <param name="vm">ViewMode</param>
+        /// <param name="nodeTypeList">NodeTypes to remove</param>
+        /// <returns>The Reduced TreView</returns>
         public static List<TreeViewItem> ToWPFTreeViewItemWithReduction(this IPsiNode tree, ViewMode vm, List<NodeType> nodeTypeList)
         {
             bool[] viewConfig = ToStringConfig(tree, vm);
@@ -130,9 +123,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 if (nodeTypeList.Contains(tree.Type))
                 {
                     foreach (var child in tree.Children)
-                    {
                         list.AddRange(ToWPFTreeViewItemWithReduction(child,vm,nodeTypeList));
-                    }
                 }
                 else
                 {
@@ -141,12 +132,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     twi.Header = tree.ToString(viewConfig[0], viewConfig[1], viewConfig[2]);
 
                     foreach (var child in tree.Children)
-                    {
                         foreach (var item in ToWPFTreeViewItemWithReduction(child, vm, nodeTypeList))
-                        {
                             twi.Items.Add(item);
-                        }                        
-                    }
 
                     list.Add(twi);
                 }

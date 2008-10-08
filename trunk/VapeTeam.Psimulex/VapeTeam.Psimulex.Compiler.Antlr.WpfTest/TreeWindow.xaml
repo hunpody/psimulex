@@ -5,10 +5,26 @@
     Title="TreeView" Height="394" Width="569" Name="MainWindow">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70*" />
-            <ColumnDefinition Width="477*" />
+            <ColumnDefinition Width="222*" />
+            <ColumnDefinition Width="325*" />
         </Grid.ColumnDefinitions>
-        <TreeView Name="TreeView" Margin="0,23,0,0" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2"></TreeView>
+        <TreeView Name="TreeView" Margin="0,23,0,0" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2">
+            <TreeViewItem>
+                <CheckBox>a</CheckBox>
+                <TreeViewItem>
+                    <CheckBox>a</CheckBox>
+                    <TreeViewItem>
+                        <CheckBox>a</CheckBox>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem>
+                <CheckBox>a</CheckBox>
+                <TreeViewItem>
+                    <CheckBox>a</CheckBox>
+                </TreeViewItem>
+            </TreeViewItem>
+        </TreeView>
         <Menu Height="22" Name="Menu" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <MenuItem Name="File" Header="File" >
                 <MenuItem Name="SearchVarAndFunc" Header="SearchVarAndFunc" Click="SearchVarAndFunc_Click" />
@@ -22,7 +38,8 @@
                 <MenuItem Name="Reduce" Header="Reduce" Click="Reduce_Click" />
             </MenuItem>
         </Menu>
-        <Button Grid.Column="1" Height="77" Name="button1" VerticalAlignment="Bottom" Click="button1_Click" Margin="166,0,0,0">SyntaxTree Before click Compile in the other Window</Button>
-        <CheckBox Grid.Column="1" Height="16" Margin="166,0,191,124" Name="checkBox1" VerticalAlignment="Bottom" IsChecked="False">CheckBox</CheckBox>
+        <Button Grid.Column="1" Height="77" Name="button1" VerticalAlignment="Bottom" Click="button1_Click" Margin="14,0,0,0">SyntaxTree Before click Compile in the other Window</Button>
+        <CheckBox Grid.Column="1" Height="16" Margin="14,0,0,124" Name="checkBox1" VerticalAlignment="Bottom" IsChecked="False" HorizontalAlignment="Left" Width="120">CheckBox</CheckBox>
+        <Button Margin="24,216,93,95" Name="button2" Click="button2_Click">Button</Button>
     </Grid>
 </Window>
