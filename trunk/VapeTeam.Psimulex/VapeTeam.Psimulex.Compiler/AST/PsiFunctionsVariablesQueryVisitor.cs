@@ -83,72 +83,84 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         #region Helper Functions Variables
 
-        private void AddNewNodeToList(string value, BlockType type, Interval interval)
+        private void PushVisitCreate(string value, BlockType type, IPsiNode node, bool[] viewConfig)
         {
-            AddNewNodeToList(value, type, interval, new bool[2] { true, true });
+            PushNewList();
+            VisitChildren(node);
+            CreateNewNode(value, type, CreateInterval(node));
         }
 
-        private void AddNewNodeToList(string value, BlockType type, Interval interval, bool[] viewConfig)
+        private void PushVisitCreate(string value, BlockType type, IPsiNode node)
+        {
+            PushVisitCreate(value, type, node, new bool[2] { true, true });
+        }
+
+        private void CreateNewNode(string value, BlockType type, Interval interval, bool[] viewConfig)
+        {
+            PushVisitCreate(value, type, node, new bool[2] { true, true }, false); 
+        }
+
+        private void CreateNewNode(string value, BlockType type, Interval interval, bool[] viewConfig, bool pop)
         {
             var node = new PsiFunctionsVariablesNode();
             node.Value = value;
             node.Interval = interval;
             node.BlockType = type;
             node.ViewConfig = viewConfig;
+            
+            if(pop) lastCreatedNodeListStack.Pop().ForEach(item => node.Add(item));
 
-            lastCreatedNodeList.ForEach(item => node.Children.Add(item));
-            node.Children.ForEach(child => child.Parent = node);
-            lastCreatedNodeList.Clear();
-            lastCreatedNodeList.Add(node);
+            lastCreatedNodeListStack.Peek().Add(node);
         }
 
-        private void CreateNewNodeFromListAndPushBack()
-        { }
+        private void CreateNewNode(string value, BlockType type, Interval interval)
+        {
+            CreateNewNode(value, type, interval, new bool[2] { true, true });
+        }
 
-        private void CreateNewNodeAndPush()
-        { }
+        private void PushNewList()
+        {
+            lastCreatedNodeListStack.Push(new List<PsiFunctionsVariablesNode>());
+        }
 
         private Interval CreateInterval(IPsiNode node)
         {
-                Interval range = new Interval
-                {
-                    FromLine = node.NodeValueInfo.StartLine,
-                    FromColumn = node.NodeValueInfo.StartColumn,
-                    ToLine = node.NodeValueInfo.EndLine,
-                    ToColumn = node.NodeValueInfo.EndColumn
-                };
+            Interval range = new Interval
+            {
+                FromLine = node.NodeValueInfo.StartLine,
+                FromColumn = node.NodeValueInfo.StartColumn,
+                ToLine = node.NodeValueInfo.EndLine,
+                ToColumn = node.NodeValueInfo.EndColumn
+            };
 
-                range.StartIndex = 0;
-                for (int i = 1; i < node.NodeValueInfo.StartLine; i++)
-                    range.StartIndex += lineLengthList[i];
+            range.StartIndex = 0;
+            for (int i = 1; i < node.NodeValueInfo.StartLine; i++)
+                range.StartIndex += lineLengthList[i];
 
-                range.StartIndex += node.NodeValueInfo.StartColumn;
+            range.StartIndex += node.NodeValueInfo.StartColumn;
 
-                range.EndIndex = 0;
-                for (int i = 1; i < node.NodeValueInfo.EndLine; i++)
-                    range.EndIndex += lineLengthList[i];
+            range.EndIndex = 0;
+            for (int i = 1; i < node.NodeValueInfo.EndLine; i++)
+                range.EndIndex += lineLengthList[i];
 
-                range.EndIndex += node.NodeValueInfo.EndColumn;
+            range.EndIndex += node.NodeValueInfo.EndColumn;
 
-                // Is it a Leaf Virtual Node or not
-                if (range.StartIndex != -1 && range.EndIndex != -1)
-                    CorrectSelectionIntervalWithFindingClosingChar(range);
+            // Is it a Leaf Virtual Node or not
+            if (range.StartIndex != -1 && range.EndIndex != -1)
+                CorrectSelectionIntervalWithFindingClosingChar(range);
 
-                return range;
+            return range;
         }
 
-        private List<PsiFunctionsVariablesNode> lastCreatedNodeList;
-
-        // ToDo
-        private List<List<PsiFunctionsVariablesNode>> lastCreatedNodeListList;
+        private Stack<List<PsiFunctionsVariablesNode>> lastCreatedNodeListStack;
 
         private void InitHelperVariables()
         {
-            lastCreatedNodeList = new List<PsiFunctionsVariablesNode>();
+            lastCreatedNodeListStack = new Stack<List<PsiFunctionsVariablesNode>>();
         }
 
 
-        // Ideiglenes Kopi Paszta valamin tökölök
+        // Ideiglenes Kopi Paszta valamin törpölök
 
         private List<int> lineLengthList;
         private void FindLineLengths()
@@ -250,17 +262,22 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*High Level Tree Nodes*/
         public void Visit(CompilationUnitNode node)
         {
-            VisitChildren(node);
+            PushNewList();
 
-            AddNewNodeToList(FileName, BlockType.CompilationUnitBlock, CreateInterval(node));
-            
-            PsiNodeList.AddRange(lastCreatedNodeList);
-            lastCreatedNodeList.Clear();
+            PushVisitCreate(FileName, BlockType.CompilationUnitBlock, node);
+
+            PsiNodeList.AddRange(lastCreatedNodeListStack.Pop());
         }
 
         public void Visit(SimpleProgramNode node) { VisitChildren(node); }
         public void Visit(MultiFuncionalProgramNode node) { VisitChildren(node); }
-        public void Visit(ImportDeclarationNode node) { VisitChildren(node); }
+        public void Visit(ImportDeclarationNode node)
+        {
+            // Here will be Query the Variable and Function names in the imported files
+            // Start for each Fiel a new visitor
+            VisitChildren(node); 
+        }
+
         public void Visit(TypeDeclarationNode node) { VisitChildren(node); }
         public void Visit(StructDeclarationNode node) { VisitChildren(node); }
         public void Visit(MemberDeclarationNode node) { VisitChildren(node); }
@@ -268,11 +285,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(FunctionDeclarationsNode node) { VisitChildren(node); }
         public void Visit(FunctionDeclarationNode node)
         {
-            VisitChildren(node);
-
-            AddNewNodeToList(
+            PushVisitCreate(
                 node.FunctionName.Value + " ParameterCount: " + node.FunctionParameterList.Children.Count(),
-                BlockType.FunctionBlock, CreateInterval(node));
+                BlockType.FunctionBlock, node);
         }
 
         public void Visit(FormalParameterListNode node) { VisitChildren(node); }
@@ -284,37 +299,61 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(IfStatementNode node) { VisitChildren(node); }
         public void Visit(IfBranchNode node) 
         {
-            VisitChildren(node);
-            AddNewNodeToList("If", BlockType.IfBlock, CreateInterval(node), new bool[2] { true, false });
+            PushVisitCreate("If", BlockType.IfBlock, node, new bool[2] { true, false });
         }
 
         public void Visit(ElseIfBranchNode node) 
         {
-            VisitChildren(node);
-            AddNewNodeToList("ElseIf", BlockType.ElseIfBlock, CreateInterval(node), new bool[2] { true, false });
+            PushVisitCreate("ElseIf", BlockType.ElseIfBlock, node, new bool[2] { true, false });
         }
 
         public void Visit(ConditionalBranchNode node) { VisitChildren(node); }
         public void Visit(ElseBranchNode node) 
-        { 
-            VisitChildren(node);
-            AddNewNodeToList("Else", BlockType.IfBlock, CreateInterval(node), new bool[2] { true, false });
+        {
+            PushVisitCreate("Else", BlockType.ElseBlock, node, new bool[2] { true, false });
         }
 
         public void Visit(PForStatementNode node) { VisitChildren(node); }
-        public void Visit(ForStatementNode node) { VisitChildren(node); }
+        public void Visit(ForStatementNode node)
+        {
+            PushVisitCreate("For", BlockType.ForBlock, node, new bool[2] { true, false });
+        }
+
         public void Visit(ForInitializationNode node) { VisitChildren(node); }
         public void Visit(ForConditionNode node) { VisitChildren(node); }
         public void Visit(ForUpdateNode node) { VisitChildren(node); }
-        public void Visit(DoStatementNode node) { VisitChildren(node); }
-        public void Visit(WhileStatementNode node) { VisitChildren(node); }
+
+        public void Visit(DoStatementNode node)
+        {
+            PushVisitCreate("Do", BlockType.DoBlock, node, new bool[2] { true, false });
+        }
+
+        public void Visit(WhileStatementNode node)
+        {
+            PushVisitCreate("While", BlockType.WhileBlock, node, new bool[2] { true, false });
+        }
+
         public void Visit(PForEachStatementNode node) { VisitChildren(node); }
-        public void Visit(ForEachStatementNode node) { VisitChildren(node); }
+        public void Visit(ForEachStatementNode node)
+        {
+            PushNewList();
+            CreateNewNode(node.ForEachRunningVariableName.Value,
+                BlockType.VariableBlock, node, new bool[2] { true, false }, false);
+
+            PushVisitCreate("ForEach", BlockType.ForEachBlock, node, new bool[2] { true, false });
+        }
+
         public void Visit(ForEachInitializationNode node) { VisitChildren(node); }
         public void Visit(ForEachCollectionExpressionNode node) { VisitChildren(node); }
-        public void Visit(LoopStatementNode node) { VisitChildren(node); }
+
+        public void Visit(LoopStatementNode node)
+        {
+            PushVisitCreate("Loop", BlockType.LoopBlock, node, new bool[2] { true, false });
+        }
+
         public void Visit(LoopInitializationNode node) { VisitChildren(node); }
         public void Visit(LoopLimitNode node) { VisitChildren(node); }
+
         public void Visit(ConditionNode node) { VisitChildren(node); }
         public void Visit(CoreNode node) { VisitChildren(node); }
         public void Visit(PDoStatementNode node) { VisitChildren(node); }
@@ -328,13 +367,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(VariableDeclarationStatementNode node) { VisitChildren(node); }
         public void Visit(VariableInitializationNode node)
         {
-            VisitChildren(node);
-            AddNewNodeToList(node.VariableName.Value, BlockType.VariableBlock, CreateInterval(node));
+            PushVisitCreate(node.VariableName.Value, BlockType.VariableBlock, node);
         }
         public void Visit(VariableDeclarationNode node)
         {
-            VisitChildren(node);
-            AddNewNodeToList(node.VariableName.Value, BlockType.VariableBlock, CreateInterval(node));
+            PushVisitCreate(node.VariableName.Value, BlockType.VariableBlock, node);
         }
 
         /*Operators*/

@@ -5,8 +5,8 @@
     Title="TreeView" Height="394" Width="569" Name="MainWindow">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="222*" />
-            <ColumnDefinition Width="325*" />
+            <ColumnDefinition Width="276*" />
+            <ColumnDefinition Width="271*" />
         </Grid.ColumnDefinitions>
         <TreeView Name="TreeView" Margin="0,23,0,0" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2">
             <TreeViewItem>
@@ -38,8 +38,8 @@
                 <MenuItem Name="Reduce" Header="Reduce" Click="Reduce_Click" />
             </MenuItem>
         </Menu>
-        <Button Grid.Column="1" Height="77" Name="button1" VerticalAlignment="Bottom" Click="button1_Click" Margin="14,0,0,0">SyntaxTree Before click Compile in the other Window</Button>
-        <CheckBox Grid.Column="1" Height="16" Margin="14,0,0,124" Name="checkBox1" VerticalAlignment="Bottom" IsChecked="False" HorizontalAlignment="Left" Width="120">CheckBox</CheckBox>
-        <Button Margin="24,216,93,95" Name="button2" Click="button2_Click">FunctionVariable</Button>
+        <Button Name="button1" Click="button1_Click" Grid.Column="1" Margin="0,279,0,0">SyntaxTree Before click Compile in the other Window</Button>
+        <CheckBox Grid.Column="1" Height="16" Margin="0,149,0,0" Name="checkBox1" VerticalAlignment="Top" IsChecked="False" HorizontalAlignment="Right" Width="120">CheckBox</CheckBox>
+        <Button Margin="0,90,0,221" Name="button2" Click="button2_Click" Grid.Column="1">FunctionVariable</Button>
     </Grid>
 </Window>
