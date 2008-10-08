@@ -16,7 +16,6 @@ using VapeTeam.Psimulex.Core;
 using VapeTeam.Psimulex.Core.Commands;
 using VapeTeam.Psimulex.Core.Factories;
 using VapeTeam.Psimulex.Compiler.Antlr.Test;
-using VapeTeam.Psimulex.Compiler.AST;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 {
@@ -123,9 +122,16 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
-        {
+        {   /*
             var w = new FunctionVariableVisibleConfigurationWindow();
             w.ShowDialog();
+            */
+            var q = new PsiFunctionsVariablesQueryVisitor(TesterForm.visitor.Source,TesterForm.visitor.FileName);
+
+            q.Visit(TesterForm.PsiNode as CompilationUnitNode);
+
+            TreeView.Items.Clear();
+            q.PsiNodeList.ForEach(item => TreeView.Items.Add(item.ToTreeView()));
         }
 
 
