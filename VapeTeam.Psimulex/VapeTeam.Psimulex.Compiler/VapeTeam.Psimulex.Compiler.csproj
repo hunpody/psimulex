@@ -60,6 +60,7 @@
     <Compile Include="AST\Member.cs" />
     <Compile Include="AST\NodeType.cs" />
     <Compile Include="AST\PsiCodeGeneratorVisitor.cs" />
+    <Compile Include="AST\PsiFunctionsVariablesQueryVisitor.cs" />
     <Compile Include="AST\PsiNode.cs" />
     <Compile Include="AST\PsiNodeConverter.cs" />
     <Compile Include="AST\PsiNodeFactory.cs" />

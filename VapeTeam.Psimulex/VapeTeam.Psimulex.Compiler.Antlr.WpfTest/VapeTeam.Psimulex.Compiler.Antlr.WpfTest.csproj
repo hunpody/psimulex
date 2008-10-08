@@ -73,6 +73,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfiguration.cs" />
+    <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfigurationWindow.xaml.cs">
+      <DependentUpon>FunctionVariableVisibleConfigurationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -90,12 +94,12 @@
     <Compile Include="ReduceConfigWindow.xaml.cs">
       <DependentUpon>ReduceConfigWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SerializationUtil.cs" />
-    <Compile Include="SyntaxTreeConfiguration.cs" />
-    <Compile Include="SyntaxTreeConfigurationWindow.xaml.cs">
+    <Compile Include="FinishedComponents\SerializationUtil.cs" />
+    <Compile Include="FinishedComponents\SyntaxTreeConfiguration.cs" />
+    <Compile Include="FinishedComponents\SyntaxTreeConfigurationWindow.xaml.cs">
       <DependentUpon>SyntaxTreeConfigurationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SyntaxTreeWindow.xaml.cs">
+    <Compile Include="FinishedComponents\SyntaxTreeWindow.xaml.cs">
       <DependentUpon>SyntaxTreeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TreeWindow.xaml.cs">
@@ -114,6 +118,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="UnderConstructionComponents\FunctionVariableVisibleConfigurationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OrgChartTreeViewItemStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -122,11 +130,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SyntaxTreeConfigurationWindow.xaml">
+    <Page Include="FinishedComponents\SyntaxTreeConfigurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SyntaxTreeWindow.xaml">
+    <Page Include="FinishedComponents\SyntaxTreeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

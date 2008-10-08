@@ -122,6 +122,12 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             stc.Save("confi.cgf");*/
         }
 
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            var w = new FunctionVariableVisibleConfigurationWindow();
+            w.ShowDialog();
+        }
+
 
 
 
