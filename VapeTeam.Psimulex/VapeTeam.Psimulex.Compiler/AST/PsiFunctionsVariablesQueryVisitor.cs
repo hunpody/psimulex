@@ -87,7 +87,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             PushNewList();
             VisitChildren(node);
-            CreateNewNode(value, type, CreateInterval(node));
+            CreateNewNode(value, type, CreateInterval(node), viewConfig,true);
         }
 
         private void PushVisitCreate(string value, BlockType type, IPsiNode node)
@@ -95,9 +95,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
             PushVisitCreate(value, type, node, new bool[2] { true, true });
         }
 
+        private void CreateNewNode(string value, BlockType type, Interval interval)
+        {
+            CreateNewNode(value, type, interval, new bool[2] { true, true });
+        }
+
         private void CreateNewNode(string value, BlockType type, Interval interval, bool[] viewConfig)
         {
-            PushVisitCreate(value, type, node, new bool[2] { true, true }, false); 
+            CreateNewNode(value, type, interval, new bool[2] { true, true }, false); 
         }
 
         private void CreateNewNode(string value, BlockType type, Interval interval, bool[] viewConfig, bool pop)
@@ -111,11 +116,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if(pop) lastCreatedNodeListStack.Pop().ForEach(item => node.Add(item));
 
             lastCreatedNodeListStack.Peek().Add(node);
-        }
-
-        private void CreateNewNode(string value, BlockType type, Interval interval)
-        {
-            CreateNewNode(value, type, interval, new bool[2] { true, true });
         }
 
         private void PushNewList()
@@ -338,7 +338,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             PushNewList();
             CreateNewNode(node.ForEachRunningVariableName.Value,
-                BlockType.VariableBlock, node, new bool[2] { true, false }, false);
+                BlockType.VariableBlock, CreateInterval(node), new bool[2] { true, false }, false);
 
             PushVisitCreate("ForEach", BlockType.ForEachBlock, node, new bool[2] { true, false });
         }

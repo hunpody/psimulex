@@ -87,7 +87,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             {
                 case Keys.F1:
                     compileButton_Click(this, new EventArgs());
-                    btnViewProgramString_Click(this, new EventArgs());
+                    viewProgramStringButton_Click(this, new EventArgs());
                     return true;
                 case Keys.F5:
                     btnRun_Click(this, new EventArgs());
@@ -99,7 +99,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                     compileButton_Click(this, new EventArgs());
                     return true;
                 case Keys.F8:
-                    btnViewTree_Click(this, new EventArgs());
+                    viewTreeButton_Click(this, new EventArgs());
                     return true;
 
             }
@@ -112,60 +112,6 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                 return true;
             else
                 return base.ProcessCmdKey(ref msg, keyData);
-        }
-
-        private void btnViewTree_Click(object sender, EventArgs e)
-        {
-            frmTree frmTree = new frmTree();
-            frmTree.PsiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SyntaxTree) as CompilationUnitNode;
-            frmTree.Show();
-        }
-
-        private void btnViewProgramString_Click(object sender, EventArgs e)
-        {
-            frmProgramString frmProgramString = new frmProgramString();
-
-            //PsiProgramStringBuilderVisitor v = new PsiProgramStringBuilderVisitor();
-            //v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);      
-            /*
-            string src = sourceCodeTextEditorControl.Text;
-            string types = "\t\t\tvar process = Helpers.SystemHelper.CompileAndRunGetProcess(@\"" +
-                src.Replace("\"", "\"\"").Replace("\r\n", "") + "\");\r\n";
-            types += "Assert.AreEqual(" + visitor.Program.Program.CommandList.Count + ", process.Program.CommandList.Count);\r\n";
-            types += "\t\t\tType[] commandObjectTypes =\r\n\t\t\t{\r\n";
-            foreach (ICommand cmd in visitor.Program.Program.CommandList)
-            {
-                types += "\t\t\t\ttypeof(" + cmd.GetType().ToString() + ")";
-                if (cmd != visitor.Program.Program[visitor.Program.Program.CommandList.Count - 1])
-                    types += ",\r\n";
-            }
-            types += "\r\n\t\t\t};\r\n";
-            types += "\t\t\tfor (int i = 0; i < process.Program.CommandList.Count; i++)";
-            types += "\r\n\t\t\t\tAssert.IsInstanceOfType(process.Program.CommandList[i], commandObjectTypes[i]);";
-            */
-            
-            string funcString = "";
-
-            foreach (var item in visitor.UserDefinedFunctionList)
-            {
-                int lineNumber = visitor.Program.Program.CommandList.Count;
-
-                foreach (ICommand command in item.Commands)
-                {
-                    string line = "";
-                    line = lineNumber.ToString("000") + " " + command.ToString() + "\r\n";
-                    funcString += line;
-                    lineNumber++;
-                }
-            }
-            
-            frmProgramString.ProgramString = 
-                "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() +funcString +
-
-
-                /*"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +*/
-                "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.CompilerMessages;
-            frmProgramString.Show();
         }
 
         private void TesterForm_Load(object sender, EventArgs e)
@@ -221,8 +167,56 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             sw.Close();
         }
 
+        private void viewProgramStringButton_Click(object sender, EventArgs e)
+        {
+            frmProgramString frmProgramString = new frmProgramString();
+
+            //PsiProgramStringBuilderVisitor v = new PsiProgramStringBuilderVisitor();
+            //v.Visit(TreeConverter.FromCommonTreeToPsiNode(compiler.SintaxTree) as CompilationUnitNode);      
+            /*
+            string src = sourceCodeTextEditorControl.Text;
+            string types = "\t\t\tvar process = Helpers.SystemHelper.CompileAndRunGetProcess(@\"" +
+                src.Replace("\"", "\"\"").Replace("\r\n", "") + "\");\r\n";
+            types += "Assert.AreEqual(" + visitor.Program.Program.CommandList.Count + ", process.Program.CommandList.Count);\r\n";
+            types += "\t\t\tType[] commandObjectTypes =\r\n\t\t\t{\r\n";
+            foreach (ICommand cmd in visitor.Program.Program.CommandList)
+            {
+                types += "\t\t\t\ttypeof(" + cmd.GetType().ToString() + ")";
+                if (cmd != visitor.Program.Program[visitor.Program.Program.CommandList.Count - 1])
+                    types += ",\r\n";
+            }
+            types += "\r\n\t\t\t};\r\n";
+            types += "\t\t\tfor (int i = 0; i < process.Program.CommandList.Count; i++)";
+            types += "\r\n\t\t\t\tAssert.IsInstanceOfType(process.Program.CommandList[i], commandObjectTypes[i]);";
+            */
+            
+            string funcString = "";
+
+            foreach (var item in visitor.UserDefinedFunctionList)
+            {
+                int lineNumber = visitor.Program.Program.CommandList.Count;
+
+                foreach (ICommand command in item.Commands)
+                {
+                    string line = "";
+                    line = lineNumber.ToString("000") + " " + command.ToString() + "\r\n";
+                    funcString += line;
+                    lineNumber++;
+                }
+            }
+            
+            frmProgramString.ProgramString = 
+                "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() +funcString +
+
+
+                /*"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +*/
+                "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.CompilerMessages;
+            frmProgramString.Show();
+        }
+
+
         int currentCommandToHighLight = 0;
-        private void StepButton_Click(object sender, EventArgs e)
+        private void stepButton_Click_1(object sender, EventArgs e)
         {
             if (visitor != null)
             {
@@ -253,55 +247,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                     sourceCodeTextEditorControl.Refresh();
                 }
             }
-            /*
-            if (visitor != null)
-            {
-                CommandID cmdid = new CommandID { FunctionName = "main", FunctionParameterCount = 0, CommandIndex = i };
-                while (!visitor.CommandPositionChanges.Contains(cmdid) && i < 1000)
-                {
-                    ++i;
-                    cmdid = new CommandID { FunctionName = "main", FunctionParameterCount = 0, CommandIndex = i };
-                }
-                Interval iv = visitor.CommandPositionChanges[cmdid];
-
-                if (iv != null)
-                {
-                    sourceCodeTextEditorControl.Document.MarkerStrategy.AddMarker
-                       (
-                       new ICSharpCode.TextEditor.Document.TextMarker
-                           (
-                           iv.FromIndex, iv.ToIndex - iv.FromIndex,
-                           ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
-                           Color.Red
-                           )
-                       );
-                    sourceCodeTextEditorControl.Refresh();
-                }
-                ++i;
-            }
-            */
         }
 
-        private void HighLightButton_Click(object sender, EventArgs e)
+        private void viewTreeButton_Click(object sender, EventArgs e)
         {
-           sourceCodeTextEditorControl.Document.MarkerStrategy.AddMarker
-           (
-           new ICSharpCode.TextEditor.Document.TextMarker
-               (
-               Convert.ToInt32(StartTextBox.Text), Convert.ToInt32( StopTextBox.Text),
-               ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
-               Color.Red
-               )
-           );
-
-           sourceCodeTextEditorControl.Refresh();
-        }
-
-        private void RemoveHighLightButton_Click(object sender, EventArgs e)
-        {
-            sourceCodeTextEditorControl.Document.MarkerStrategy.RemoveAll(x => x.Color == Color.Red);
-
-            sourceCodeTextEditorControl.Refresh();
+            frmTree frmTree = new frmTree();
+            frmTree.PsiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SyntaxTree) as CompilationUnitNode;
+            frmTree.Show();
         }
     }
 }
