@@ -32,74 +32,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             
             TesterForm = new TesterForm();
             TesterForm.Show();            
-        }
-
-        private void Everything_Click(object sender, RoutedEventArgs e)
-        {
-            TreeView.Items.Clear();
-            if (TesterForm.PsiNode != null)
-                TreeView.Items.Add(
-                    VapeTeam.Psimulex.Compiler.AST.PsiNodeConverter.ToWPFTreeViewItem(
-                        TesterForm.PsiNode, ViewMode.Everything));
-        }
-
-        private void AllVisible_Click(object sender, RoutedEventArgs e)
-        {
-            TreeView.Items.Clear();
-            if (TesterForm.PsiNode != null)
-                TreeView.Items.Add(
-                    VapeTeam.Psimulex.Compiler.AST.PsiNodeConverter.ToWPFTreeViewItem(
-                        TesterForm.PsiNode, ViewMode.All));
-            
-        }
-
-        private void Hibrid_Click(object sender, RoutedEventArgs e)
-        {
-            TreeView.Items.Clear();
-            if (TesterForm.PsiNode != null)
-                TreeView.Items.Add(
-                    VapeTeam.Psimulex.Compiler.AST.PsiNodeConverter.ToWPFTreeViewItem(
-                        TesterForm.PsiNode, ViewMode.Hibrid));
-            
-        }
-
-        private void Value_Click(object sender, RoutedEventArgs e)
-        {
-            TreeView.Items.Clear();
-            if (TesterForm.PsiNode != null)
-                TreeView.Items.Add(
-                    TesterForm.PsiNode.ToWPFTreeViewItem(ViewMode.Values));
-            
-        }
-
-        private void Interval_Click(object sender, RoutedEventArgs e)
-        {
-            TreeView.Items.Clear();
-            if (TesterForm.PsiNode != null)
-                TreeView.Items.Add(TesterForm.PsiNode.ToWPFTreeViewItem(ViewMode.Interval));
-        }
-
-        private void Reduce_Click(object sender, RoutedEventArgs e)
-        {
-            ReduceConfigWindow rcw = new ReduceConfigWindow();
-            rcw.ShowDialog();
-            /*
-            TreeView.Items.Clear();
-            if (TesterForm.PsiNode != null)
-            {
-                TreeView.Items.Add(
-                    TesterForm.PsiNode.Clone()
-                    .ReducePsiNode( new List<NodeType> { NodeType.CompilationUnit })
-                    .ToWPFTreeViewItem(ViewMode.Hibrid));
-            }*/
-        }
-
-
-
-        private void SearchVarAndFunc_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        }        
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {

@@ -32,18 +32,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.resultTextBox = new System.Windows.Forms.TextBox();
-            this.closeButton = new System.Windows.Forms.Button();
             this.compileButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtErrors = new System.Windows.Forms.TextBox();
-            this.btnViewTree = new System.Windows.Forms.Button();
-            this.btnViewProgramString = new System.Windows.Forms.Button();
             this.btnRun = new System.Windows.Forms.Button();
-            this.StepButton = new System.Windows.Forms.Button();
-            this.StartTextBox = new System.Windows.Forms.TextBox();
-            this.StopTextBox = new System.Windows.Forms.TextBox();
-            this.HighLightButton = new System.Windows.Forms.Button();
-            this.RemoveHighLightButton = new System.Windows.Forms.Button();
+            this.viewTreeButton = new System.Windows.Forms.Button();
+            this.stepButton = new System.Windows.Forms.Button();
+            this.viewProgramStringButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -94,18 +89,6 @@
             this.resultTextBox.Size = new System.Drawing.Size(899, 149);
             this.resultTextBox.TabIndex = 0;
             // 
-            // closeButton
-            // 
-            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(235, 329);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(95, 33);
-            this.closeButton.TabIndex = 3;
-            this.closeButton.Text = "Close And Save";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-            // 
             // compileButton
             // 
             this.compileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -139,30 +122,6 @@
             this.txtErrors.Size = new System.Drawing.Size(899, 66);
             this.txtErrors.TabIndex = 0;
             // 
-            // btnViewTree
-            // 
-            this.btnViewTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewTree.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnViewTree.Location = new System.Drawing.Point(6, 329);
-            this.btnViewTree.Name = "btnViewTree";
-            this.btnViewTree.Size = new System.Drawing.Size(103, 33);
-            this.btnViewTree.TabIndex = 5;
-            this.btnViewTree.Text = "View Tree";
-            this.btnViewTree.UseVisualStyleBackColor = true;
-            this.btnViewTree.Click += new System.EventHandler(this.btnViewTree_Click);
-            // 
-            // btnViewProgramString
-            // 
-            this.btnViewProgramString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewProgramString.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnViewProgramString.Location = new System.Drawing.Point(618, 333);
-            this.btnViewProgramString.Name = "btnViewProgramString";
-            this.btnViewProgramString.Size = new System.Drawing.Size(117, 33);
-            this.btnViewProgramString.TabIndex = 6;
-            this.btnViewProgramString.Text = "View Program String";
-            this.btnViewProgramString.UseVisualStyleBackColor = true;
-            this.btnViewProgramString.Click += new System.EventHandler(this.btnViewProgramString_Click);
-            // 
             // btnRun
             // 
             this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -174,74 +133,50 @@
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
-            // StepButton
+            // viewTreeButton
             // 
-            this.StepButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.StepButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.StepButton.Location = new System.Drawing.Point(126, 329);
-            this.StepButton.Name = "StepButton";
-            this.StepButton.Size = new System.Drawing.Size(103, 33);
-            this.StepButton.TabIndex = 8;
-            this.StepButton.Text = "Step";
-            this.StepButton.UseVisualStyleBackColor = true;
-            this.StepButton.Click += new System.EventHandler(this.StepButton_Click);
+            this.viewTreeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.viewTreeButton.Location = new System.Drawing.Point(435, 333);
+            this.viewTreeButton.Name = "viewTreeButton";
+            this.viewTreeButton.Size = new System.Drawing.Size(80, 31);
+            this.viewTreeButton.TabIndex = 9;
+            this.viewTreeButton.Text = "ViewTree";
+            this.viewTreeButton.UseVisualStyleBackColor = true;
+            this.viewTreeButton.Click += new System.EventHandler(this.viewTreeButton_Click);
             // 
-            // StartTextBox
+            // stepButton
             // 
-            this.StartTextBox.Location = new System.Drawing.Point(403, 333);
-            this.StartTextBox.Name = "StartTextBox";
-            this.StartTextBox.Size = new System.Drawing.Size(59, 20);
-            this.StartTextBox.TabIndex = 9;
-            this.StartTextBox.Text = "10";
+            this.stepButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.stepButton.Location = new System.Drawing.Point(521, 333);
+            this.stepButton.Name = "stepButton";
+            this.stepButton.Size = new System.Drawing.Size(80, 31);
+            this.stepButton.TabIndex = 10;
+            this.stepButton.Text = "Step";
+            this.stepButton.UseVisualStyleBackColor = true;
+            this.stepButton.Click += new System.EventHandler(this.stepButton_Click_1);
             // 
-            // StopTextBox
+            // viewProgramStringButton
             // 
-            this.StopTextBox.Location = new System.Drawing.Point(468, 334);
-            this.StopTextBox.Name = "StopTextBox";
-            this.StopTextBox.Size = new System.Drawing.Size(60, 20);
-            this.StopTextBox.TabIndex = 10;
-            this.StopTextBox.Text = "20";
-            // 
-            // HighLightButton
-            // 
-            this.HighLightButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.HighLightButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.HighLightButton.Location = new System.Drawing.Point(336, 327);
-            this.HighLightButton.Name = "HighLightButton";
-            this.HighLightButton.Size = new System.Drawing.Size(61, 33);
-            this.HighLightButton.TabIndex = 11;
-            this.HighLightButton.Text = "HL";
-            this.HighLightButton.UseVisualStyleBackColor = true;
-            this.HighLightButton.Click += new System.EventHandler(this.HighLightButton_Click);
-            // 
-            // RemoveHighLightButton
-            // 
-            this.RemoveHighLightButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemoveHighLightButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.RemoveHighLightButton.Location = new System.Drawing.Point(534, 330);
-            this.RemoveHighLightButton.Name = "RemoveHighLightButton";
-            this.RemoveHighLightButton.Size = new System.Drawing.Size(40, 36);
-            this.RemoveHighLightButton.TabIndex = 12;
-            this.RemoveHighLightButton.Text = "RemHL";
-            this.RemoveHighLightButton.UseVisualStyleBackColor = true;
-            this.RemoveHighLightButton.Click += new System.EventHandler(this.RemoveHighLightButton_Click);
+            this.viewProgramStringButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.viewProgramStringButton.Location = new System.Drawing.Point(607, 333);
+            this.viewProgramStringButton.Name = "viewProgramStringButton";
+            this.viewProgramStringButton.Size = new System.Drawing.Size(128, 31);
+            this.viewProgramStringButton.TabIndex = 12;
+            this.viewProgramStringButton.Text = "View Prgram String";
+            this.viewProgramStringButton.UseVisualStyleBackColor = true;
+            this.viewProgramStringButton.Click += new System.EventHandler(this.viewProgramStringButton_Click);
             // 
             // TesterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 632);
-            this.Controls.Add(this.RemoveHighLightButton);
-            this.Controls.Add(this.HighLightButton);
-            this.Controls.Add(this.StopTextBox);
-            this.Controls.Add(this.StartTextBox);
-            this.Controls.Add(this.StepButton);
+            this.Controls.Add(this.viewProgramStringButton);
+            this.Controls.Add(this.stepButton);
+            this.Controls.Add(this.viewTreeButton);
             this.Controls.Add(this.btnRun);
-            this.Controls.Add(this.btnViewProgramString);
-            this.Controls.Add(this.btnViewTree);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.compileButton);
-            this.Controls.Add(this.closeButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "TesterForm";
@@ -253,7 +188,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -261,20 +195,15 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button compileButton;
         private System.Windows.Forms.TextBox resultTextBox;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtErrors;
-        private System.Windows.Forms.Button btnViewTree;
         public ICSharpCode.TextEditor.TextEditorControl sourceCodeTextEditorControl;
-        private System.Windows.Forms.Button btnViewProgramString;
         private System.Windows.Forms.Button btnRun;
-        private System.Windows.Forms.Button StepButton;
-        private System.Windows.Forms.TextBox StartTextBox;
-        private System.Windows.Forms.TextBox StopTextBox;
-        private System.Windows.Forms.Button HighLightButton;
-        private System.Windows.Forms.Button RemoveHighLightButton;
+        private System.Windows.Forms.Button viewTreeButton;
+        private System.Windows.Forms.Button stepButton;
+        private System.Windows.Forms.Button viewProgramStringButton;
     }
 }
 

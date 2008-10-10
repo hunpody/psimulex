@@ -5,41 +5,14 @@
     Title="TreeView" Height="394" Width="569" Name="MainWindow">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="276*" />
-            <ColumnDefinition Width="271*" />
+            <ColumnDefinition Width="434*" />
+            <ColumnDefinition Width="113*" />
         </Grid.ColumnDefinitions>
-        <TreeView Name="TreeView" Margin="0,23,0,0" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2">
-            <TreeViewItem>
-                <CheckBox>a</CheckBox>
-                <TreeViewItem>
-                    <CheckBox>a</CheckBox>
-                    <TreeViewItem>
-                        <CheckBox>a</CheckBox>
-                    </TreeViewItem>
-                </TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem>
-                <CheckBox>a</CheckBox>
-                <TreeViewItem>
-                    <CheckBox>a</CheckBox>
-                </TreeViewItem>
-            </TreeViewItem>
-        </TreeView>
+        <TreeView Name="TreeView" Margin="0,23,0,0" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2"></TreeView>
         <Menu Height="22" Name="Menu" VerticalAlignment="Top" Grid.ColumnSpan="2">
-            <MenuItem Name="File" Header="File" >
-                <MenuItem Name="SearchVarAndFunc" Header="SearchVarAndFunc" Click="SearchVarAndFunc_Click" />
-                <Separator />
-                <MenuItem Name="AllVisible" Header="AllVisible" Click="AllVisible_Click" />
-                <MenuItem Name="Everything" Header="Everything" Click="Everything_Click" />
-                <MenuItem Name="Hibrid" Header="Hibrid" Click="Hibrid_Click" />
-                <MenuItem Name="Value" Header="Value" Click="Value_Click" />
-                <MenuItem Name="Interval" Header="Interval" Click="Interval_Click" />
-                <Separator />
-                <MenuItem Name="Reduce" Header="Reduce" Click="Reduce_Click" />
-            </MenuItem>
+            
         </Menu>
-        <Button Name="button1" Click="button1_Click" Grid.Column="1" Margin="0,279,0,0">SyntaxTree Before click Compile in the other Window</Button>
-        <CheckBox Grid.Column="1" Height="16" Margin="0,149,0,0" Name="checkBox1" VerticalAlignment="Top" IsChecked="False" HorizontalAlignment="Right" Width="120">CheckBox</CheckBox>
-        <Button Margin="0,90,0,221" Name="button2" Click="button2_Click" Grid.Column="1">FunctionVariable</Button>
+        <Button Name="button1" Click="button1_Click" Grid.Column="1" Height="77" VerticalAlignment="Bottom">SyntaxTree</Button>
+        <Button Margin="0,0,0,78" Name="button2" Click="button2_Click" Grid.Column="1" Height="45" VerticalAlignment="Bottom">FunctionVariable</Button>
     </Grid>
 </Window>

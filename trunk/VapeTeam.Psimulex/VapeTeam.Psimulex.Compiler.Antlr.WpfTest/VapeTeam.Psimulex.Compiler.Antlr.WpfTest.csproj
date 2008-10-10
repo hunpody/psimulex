@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3437, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\VapeTeam.Psimulex.Compiler.Antlr.Test\References\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -73,6 +77,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TeszterMainWindow.xaml.cs">
+      <DependentUpon>TeszterMainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfiguration.cs" />
     <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfigurationWindow.xaml.cs">
       <DependentUpon>FunctionVariableVisibleConfigurationWindow.xaml</DependentUpon>
@@ -118,6 +125,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="TeszterMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UnderConstructionComponents\FunctionVariableVisibleConfigurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
