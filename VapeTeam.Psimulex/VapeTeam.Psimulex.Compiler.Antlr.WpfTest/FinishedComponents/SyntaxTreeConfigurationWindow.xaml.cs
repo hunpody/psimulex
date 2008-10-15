@@ -25,8 +25,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
     /// Interaction logic for SyntaxTreeConfigurationWindow.xaml
     /// </summary>
     public partial class SyntaxTreeConfigurationWindow : Window
-    {       
-
+    {
         public string ConfigFilePath { get; set; }
 
         private SyntaxTreeConfiguration config;
