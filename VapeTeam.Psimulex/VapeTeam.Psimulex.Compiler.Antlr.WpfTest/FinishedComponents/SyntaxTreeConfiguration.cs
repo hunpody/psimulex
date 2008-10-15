@@ -7,31 +7,15 @@ using VapeTeam.Psimulex.Compiler.AST;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 {
-    using Pair = Pair<NodeType, bool>;
+    using NodeBoolPair = Pair<NodeType, bool>;
     using ConfigSerializer = SerializationUtil<List<NodeTypeGroup>>;
     using NodeTypeGoupList = List<NodeTypeGroup>;
-
-    [Serializable]
-    public class Pair<TypeLeft,TypeRight>
-    {
-        public Pair()
-        { }
-
-        public Pair(TypeLeft left, TypeRight right)
-        {
-            Left = left;
-            Right = right;
-        }
-
-        public TypeLeft Left { get; set; }
-        public TypeRight Right { get; set; }
-    }
 
     [Serializable]
     public class NodeTypeGroup
     {
         public string Name { get; set; }
-        public List<Pair> NodeTypeList { get; set; }
+        public List<NodeBoolPair> NodeTypeList { get; set; }
     }
 
     /// <summary>
@@ -86,133 +70,133 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                 { 
                     Name = "High Level Node Types", 
                     NodeTypeList = 
-                    new List<Pair>
+                    new List<NodeBoolPair>
                     {
-                         new Pair(NodeType.CompilationUnit,  true),
-                         new Pair(NodeType.SimpleProgram,  true),
-                         new Pair(NodeType.MultiFunctionalProgram, true),
-                         new Pair(NodeType.ImportDeclarations, true),
-                         new Pair(NodeType.TypeDeclarations, true),
-                         new Pair(NodeType.GlobalVariableDeclarations, true),
-                         new Pair(NodeType.StructDeclaration, true),
-                         new Pair(NodeType.MemberDeclaration, true),
-                         new Pair(NodeType.FunctionDeclarations, true),
-                         new Pair(NodeType.FunctionDeclaration, true),
-                         new Pair(NodeType.FormalParameterList, true),
-                         new Pair(NodeType.FormalParameter, true)
+                         new NodeBoolPair(NodeType.CompilationUnit,  true),
+                         new NodeBoolPair(NodeType.SimpleProgram,  true),
+                         new NodeBoolPair(NodeType.MultiFunctionalProgram, true),
+                         new NodeBoolPair(NodeType.ImportDeclarations, true),
+                         new NodeBoolPair(NodeType.TypeDeclarations, true),
+                         new NodeBoolPair(NodeType.GlobalVariableDeclarations, true),
+                         new NodeBoolPair(NodeType.StructDeclaration, true),
+                         new NodeBoolPair(NodeType.MemberDeclaration, true),
+                         new NodeBoolPair(NodeType.FunctionDeclarations, true),
+                         new NodeBoolPair(NodeType.FunctionDeclaration, true),
+                         new NodeBoolPair(NodeType.FormalParameterList, true),
+                         new NodeBoolPair(NodeType.FormalParameter, true)
                     }
                 },                
                 new NodeTypeGroup
                 { 
                     Name = "LoopStatements", 
                     NodeTypeList = 
-                    new List<Pair>
+                    new List<NodeBoolPair>
                     {
-                         new Pair(NodeType.PForStatement, true),
-                         new Pair(NodeType.ForStatement, true),
-                         new Pair(NodeType.ForCondition, true),
-                         new Pair(NodeType.ForInitialization, true),
-                         new Pair(NodeType.ForUpdate, true),
-    	                 new Pair(NodeType.DoStatement, true),
-    	                 new Pair(NodeType.WhileStatement, true),
-    	                 new Pair(NodeType.PForEachStatement, true),
-                         new Pair(NodeType.ForEachStatement, true),
-                         new Pair(NodeType.ForEachInitialization, true),
-                         new Pair(NodeType.ForEachCollectionExpression, true),
-    	                 new Pair(NodeType.LoopStatement, true),
-                         new Pair(NodeType.LoopInitialization, true),
-                         new Pair(NodeType.LoopLimit, true),
-                         new Pair(NodeType.Condition, true),
-                         new Pair(NodeType.Core, true)
+                         new NodeBoolPair(NodeType.PForStatement, true),
+                         new NodeBoolPair(NodeType.ForStatement, true),
+                         new NodeBoolPair(NodeType.ForCondition, true),
+                         new NodeBoolPair(NodeType.ForInitialization, true),
+                         new NodeBoolPair(NodeType.ForUpdate, true),
+    	                 new NodeBoolPair(NodeType.DoStatement, true),
+    	                 new NodeBoolPair(NodeType.WhileStatement, true),
+    	                 new NodeBoolPair(NodeType.PForEachStatement, true),
+                         new NodeBoolPair(NodeType.ForEachStatement, true),
+                         new NodeBoolPair(NodeType.ForEachInitialization, true),
+                         new NodeBoolPair(NodeType.ForEachCollectionExpression, true),
+    	                 new NodeBoolPair(NodeType.LoopStatement, true),
+                         new NodeBoolPair(NodeType.LoopInitialization, true),
+                         new NodeBoolPair(NodeType.LoopLimit, true),
+                         new NodeBoolPair(NodeType.Condition, true),
+                         new NodeBoolPair(NodeType.Core, true)
                     }
                 },                
                 new NodeTypeGroup
                 { 
                     Name = "OtherStatements", 
                     NodeTypeList = 
-                    new List<Pair>
+                    new List<NodeBoolPair>
                     {
-                         new Pair(NodeType.Block, true),
-                         new Pair(NodeType.Statement, true),                        
-                         new Pair(NodeType.IfStatement, true),
-                         new Pair(NodeType.IfBranch, true),
-                         new Pair(NodeType.ElseIfBranches, true),
-                         new Pair(NodeType.ConditionalBranch, true),
-                         new Pair(NodeType.ElseBranch, true),                         
-                         new Pair(NodeType.PDoStatement, true),
-                         new Pair(NodeType.AsynStatement, true),
-                         new Pair(NodeType.LockStatement, true),
-                         new Pair(NodeType.ReturnStatement, true),
-                         new Pair(NodeType.Return, true),
-                         new Pair(NodeType.Break, true),                        
-                         new Pair(NodeType.ExpressionStatement, true),
-                         new Pair(NodeType.VariableDeclarationStatement, true),
-                         new Pair(NodeType.VariableInitialization, true),
-                         new Pair(NodeType.VariableDeclaration, true)
+                         new NodeBoolPair(NodeType.Block, true),
+                         new NodeBoolPair(NodeType.Statement, true),                        
+                         new NodeBoolPair(NodeType.IfStatement, true),
+                         new NodeBoolPair(NodeType.IfBranch, true),
+                         new NodeBoolPair(NodeType.ElseIfBranches, true),
+                         new NodeBoolPair(NodeType.ConditionalBranch, true),
+                         new NodeBoolPair(NodeType.ElseBranch, true),                         
+                         new NodeBoolPair(NodeType.PDoStatement, true),
+                         new NodeBoolPair(NodeType.AsynStatement, true),
+                         new NodeBoolPair(NodeType.LockStatement, true),
+                         new NodeBoolPair(NodeType.ReturnStatement, true),
+                         new NodeBoolPair(NodeType.Return, true),
+                         new NodeBoolPair(NodeType.Break, true),                        
+                         new NodeBoolPair(NodeType.ExpressionStatement, true),
+                         new NodeBoolPair(NodeType.VariableDeclarationStatement, true),
+                         new NodeBoolPair(NodeType.VariableInitialization, true),
+                         new NodeBoolPair(NodeType.VariableDeclaration, true)
                     }
                 },                
                 new NodeTypeGroup
                 { 
                     Name = "Literals", 
                     NodeTypeList = 
-                    new List<Pair>
+                    new List<NodeBoolPair>
                     {
-                         new Pair(NodeType.CharLiteral, true),
-                         new Pair(NodeType.StringLiteral, true),
-                         new Pair(NodeType.IntLiteral, true),
-                         new Pair(NodeType.DecimalLiteral, true),
-                         new Pair(NodeType.BoolLiteral, true),
-                         new Pair(NodeType.NullLiteral, true),
-                         new Pair(NodeType.InfinityLiteral, true)
+                         new NodeBoolPair(NodeType.CharLiteral, true),
+                         new NodeBoolPair(NodeType.StringLiteral, true),
+                         new NodeBoolPair(NodeType.IntLiteral, true),
+                         new NodeBoolPair(NodeType.DecimalLiteral, true),
+                         new NodeBoolPair(NodeType.BoolLiteral, true),
+                         new NodeBoolPair(NodeType.NullLiteral, true),
+                         new NodeBoolPair(NodeType.InfinityLiteral, true)
                     }
                 },                
                 new NodeTypeGroup
                 { 
                     Name = "Operators", 
                     NodeTypeList = 
-                    new List<Pair>
+                    new List<NodeBoolPair>
                     {
-                         new Pair(NodeType.AssignmentOp, true),
-                         new Pair(NodeType.LogicalOrOp, true),
-                         new Pair(NodeType.LogicalAndOp, true),
-                         new Pair(NodeType.EqualityOp, true),
-                         new Pair(NodeType.RelationOp, true),
-                         new Pair(NodeType.AdditiveOp, true),
-                         new Pair(NodeType.MultiplicativeOp, true),
-                         new Pair(NodeType.UnaryOp, true)
+                         new NodeBoolPair(NodeType.AssignmentOp, true),
+                         new NodeBoolPair(NodeType.LogicalOrOp, true),
+                         new NodeBoolPair(NodeType.LogicalAndOp, true),
+                         new NodeBoolPair(NodeType.EqualityOp, true),
+                         new NodeBoolPair(NodeType.RelationOp, true),
+                         new NodeBoolPair(NodeType.AdditiveOp, true),
+                         new NodeBoolPair(NodeType.MultiplicativeOp, true),
+                         new NodeBoolPair(NodeType.UnaryOp, true)
                     }
                 },                
                 new NodeTypeGroup
                 { 
                     Name = "Expressions", 
                     NodeTypeList = 
-                    new List<Pair>
+                    new List<NodeBoolPair>
                     {
-                         new Pair(NodeType.Expression, true),
-                         new Pair(NodeType.Cast, true),
-                         new Pair(NodeType.PrefixUnaryOperation, true),
-                         new Pair(NodeType.Selector, true),
-                         new Pair(NodeType.MemberSelect, true),
-                         new Pair(NodeType.FunctionCall, true),
-                         new Pair(NodeType.MemberFunctionCall, true),
-                         new Pair(NodeType.Arguments, true),
-                         new Pair(NodeType.Indexing, true),
-                         new Pair(NodeType.Dimensions, true),
-                         new Pair(NodeType.ConstantDimensions, true),
-                         new Pair(NodeType.DimensionMarker, true)
+                         new NodeBoolPair(NodeType.Expression, true),
+                         new NodeBoolPair(NodeType.Cast, true),
+                         new NodeBoolPair(NodeType.PrefixUnaryOperation, true),
+                         new NodeBoolPair(NodeType.Selector, true),
+                         new NodeBoolPair(NodeType.MemberSelect, true),
+                         new NodeBoolPair(NodeType.FunctionCall, true),
+                         new NodeBoolPair(NodeType.MemberFunctionCall, true),
+                         new NodeBoolPair(NodeType.Arguments, true),
+                         new NodeBoolPair(NodeType.Indexing, true),
+                         new NodeBoolPair(NodeType.Dimensions, true),
+                         new NodeBoolPair(NodeType.ConstantDimensions, true),
+                         new NodeBoolPair(NodeType.DimensionMarker, true)
                     }
                 },                
                 new NodeTypeGroup
                 { 
                     Name = "Other", 
                     NodeTypeList = 
-                    new List<Pair>
+                    new List<NodeBoolPair>
                     {
-                         new Pair(NodeType.Identifier, true),
-                         new Pair(NodeType.DataTypeName, true),
-                         new Pair(NodeType.DataType, true),
-                         new Pair(NodeType.Type, true),
-                         new Pair(NodeType.Reference, true)
+                         new NodeBoolPair(NodeType.Identifier, true),
+                         new NodeBoolPair(NodeType.DataTypeName, true),
+                         new NodeBoolPair(NodeType.DataType, true),
+                         new NodeBoolPair(NodeType.Type, true),
+                         new NodeBoolPair(NodeType.Reference, true)
                     }
                 }
             };

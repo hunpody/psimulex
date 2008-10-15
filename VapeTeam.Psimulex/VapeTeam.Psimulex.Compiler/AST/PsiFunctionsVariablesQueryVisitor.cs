@@ -5,66 +5,7 @@ using System.Text;
 using System.Windows.Controls;
 
 namespace VapeTeam.Psimulex.Compiler.AST
-{
-    public enum BlockType
-    {
-        CompilationUnitBlock,
-
-        FunctionBlock,
-
-        ForBlock,
-        WhileBlock,
-        DoBlock,
-        ForEachBlock,
-        LoopBlock,
-        PDoBlock,
-        PForBlock,
-        PForEchBlock,
-        IfBlock,
-        ElseIfBlock,
-        ElseBlock,
-
-        VariableBlock
-    }
-
-    public class PsiFunctionsVariablesNode : PsiNode
-    {
-        public BlockType BlockType { get; set; }
-        public Interval Interval { get; set; }
-        public bool IsMarked { get; set; }
-        public bool[] ViewConfig { get; set; }
-
-        public PsiFunctionsVariablesNode()            
-        {
-            Init();
-            IsMarked = true;
-        }
-
-        public TreeViewItem ToTreeView()
-        {
-            TreeViewItem twi = new TreeViewItem();
-            twi.IsExpanded = true;
-
-            CheckBox cb = new CheckBox();
-            cb.IsChecked = IsMarked;
-            cb.Content = ToString(ViewConfig[0], ViewConfig[1]);
-
-            twi.Header = cb;
-
-            if (Children != null)
-                Children.ForEach(item => twi.Items.Add((item as PsiFunctionsVariablesNode).ToTreeView()));
-
-            return twi;
-        }
-
-        public string ToString(bool showType, bool showValue)
-        {
-            string type = showType ? "( " + BlockType.ToString() + " )" : "";
-            string value = showValue ? Value : "";
-            return string.Format("{0} {1}", type, value);
-        }
-    }
-
+{  
     public class PsiFunctionsVariablesQueryVisitor : IPsiVisitor
     {
         public List<PsiFunctionsVariablesNode> PsiNodeList { get; set; }

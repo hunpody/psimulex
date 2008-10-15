@@ -41,6 +41,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
     /// <summary>
     /// Informations about the token text localisation in the source code.
     /// </summary>
+    [Serializable]
     public class NodeValueInfo
     {
         public NodeValueInfo()

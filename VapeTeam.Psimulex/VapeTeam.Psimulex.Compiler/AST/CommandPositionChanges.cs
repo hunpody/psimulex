@@ -84,6 +84,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
     /// <summary>
     /// It identifies an interval in a file.
     /// </summary>
+    [Serializable]
     public class Interval
     {
         public string FileName { get; set; }

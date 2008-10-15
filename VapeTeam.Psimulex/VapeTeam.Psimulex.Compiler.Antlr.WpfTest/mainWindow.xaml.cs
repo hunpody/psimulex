@@ -255,16 +255,22 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private void syntaxTreeButton_Click(object sender, RoutedEventArgs e)
         {
+            if (visitor == null || psiNode == null)
+                Bulid("teszt.psi");
             ShowSyntaxTree();
         }
 
         private void programStringButton_Click(object sender, RoutedEventArgs e)
         {
+            if (visitor == null || psiNode == null)
+                Bulid("teszt.psi"); 
             ShowProgramString();
         }
 
         private void variableFunctionTreeButton_Click(object sender, RoutedEventArgs e)
         {
+            if (visitor == null || psiNode == null)
+                Bulid("teszt.psi"); 
             ShowFunctionsVariablesTree();
         }
 
