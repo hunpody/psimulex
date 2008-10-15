@@ -41,6 +41,12 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             Init();
         }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            checkBoxList.ForEach(item => item.Left.Right = (bool)item.Right.IsChecked);
+            config.Save(ConfigFilePath);
+        }
+
         private void Init()
         {
             config = new SyntaxTreeConfiguration(ConfigFilePath);
@@ -88,12 +94,6 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            checkBoxList.ForEach(item => item.Left.Right = (bool)item.Right.IsChecked);
-            config.Save(ConfigFilePath);
         }
     }
 }

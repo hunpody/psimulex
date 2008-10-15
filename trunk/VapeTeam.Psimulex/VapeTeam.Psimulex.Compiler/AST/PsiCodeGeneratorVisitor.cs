@@ -543,9 +543,15 @@ namespace VapeTeam.Psimulex.Compiler.AST
                         IsReference = functionIsReferenceType,
                         Name = ""                        
                     };
-            
-            if (lastCompiledUserDefinedFunction.Commands[lastCompiledUserDefinedFunction.Commands.Count - 1].GetType() != typeof(Return))
-                lastCompiledUserDefinedFunction.Commands.Add(new Return(false));
+                        
+            if (lastCompiledUserDefinedFunction.Commands.Count == 0
+                ||
+                lastCompiledUserDefinedFunction.Commands
+                [
+                    lastCompiledUserDefinedFunction.Commands.Count - 1
+                ].GetType() != typeof(Return))            
+                
+                    lastCompiledUserDefinedFunction.Commands.Add(new Return(false));
            
             // Add new compiled function to the UserDefinedCunctionList
             UserDefinedFunctionList.Add(lastCompiledUserDefinedFunction);

@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections;
 
 using VapeTeam.Psimulex.Compiler.AST;
 
@@ -25,25 +26,34 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         public PsiCodeGeneratorVisitor Visitor { get; set; }
 
         private FunctionVariableVisibleConfiguration config;
+        private List<KeyValuePair<PsiFunctionsVariablesNode,CheckBox>> list;
 
         public FunctionVariableVisibleConfigurationWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void Init()
         {
-            config = new FunctionVariableVisibleConfiguration(ConfigFilePath);
-            var q = new PsiFunctionsVariablesQueryVisitor(Visitor.Source, Visitor.FileName);
-            q.Visit(PsiNode as CompilationUnitNode);
+            list = new List<KeyValuePair<PsiFunctionsVariablesNode, CheckBox>>();
 
+            config = new FunctionVariableVisibleConfiguration(ConfigFilePath, Visitor.Source, Visitor.FileName, PsiNode);
             functionVariableTreeView.Items.Clear();
-            q.PsiNodeList.ForEach(item => functionVariableTreeView.Items.Add(item.ToTreeView()));
+            config.PsiFunctionsVariablesNodeList.ForEach
+                (
+                    item => functionVariableTreeView.Items.Add(item.ToTreeView(list))
+                );
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Init();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            list.ForEach(item => item.Key.IsMarked = (bool)item.Value.IsChecked);
+            config.Save(ConfigFilePath);
         }
     }
 }
