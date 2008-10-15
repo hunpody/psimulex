@@ -68,7 +68,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         //public int ProgramSize { get { return Program.Program.OverallProgramSize; } }
         public StringBuilder CompilerMessages { get; private set; }
         public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
-
         public CommandPositionChanges CommandPositionChanges { get; set; }
         
         public PsiCodeGeneratorVisitor(string source, string fileName)
@@ -84,8 +83,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             CommandPositionChanges = new CommandPositionChanges();
 
             InitHelpers();
-
-            FindLineLengths();
         }
 
         public void AddCommand(ICommand command)
@@ -125,61 +122,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Highlighter, Stepping Helpers*/
         #region Highlighter, Stepping Helpers
 
-        private List<int> lineLengthList;
-        private void FindLineLengths()
-        {
-            lineLengthList = new List<int>();
-            lineLengthList.Add(0);
-
-            int len = 0;
-            for (int i = 0; i < Source.Length; ++i)
-            {
-                if (Source[i] == '\n')
-                {
-                    lineLengthList.Add(len + 1);
-                    len = -1;
-                }
-                len++;
-            }
-        }
-
-        private int CountEndOfLines(string src)
-        {
-            int count = 0;
-            foreach (var ch in src)
-                if (ch == '\n')
-                    count++;
-            return count;
-        }
-
         private void RegisterIntervalChange(IPsiNode node)
         {
-            Interval range =
-                new Interval
-                {
-                    FileName = this.FileName,
-                    
-                    FromLine = node.NodeValueInfo.StartLine,
-                    FromColumn = node.NodeValueInfo.StartColumn,
-                    ToLine = node.NodeValueInfo.EndLine,
-                    ToColumn = node.NodeValueInfo.EndColumn,
-                };
-
-            range.StartIndex = 0;
-            for (int i = 1; i < node.NodeValueInfo.StartLine; i++)
-			    range.StartIndex += lineLengthList[i];
-
-            range.StartIndex += node.NodeValueInfo.StartColumn;
-
-            range.EndIndex = 0;
-            for (int i = 1; i < node.NodeValueInfo.EndLine; i++)
-                range.EndIndex += lineLengthList[i];
-
-            range.EndIndex += node.NodeValueInfo.EndColumn;
-
-            // Is it a Leaf Virtual Node or not
-            if (range.StartIndex != -1 && range.EndIndex != -1)
-                CorrectSelectionIntervalWithFindingClosingChar(range);
+            Interval range = SourceInfoUtils.CreateInterval(node, Source, lineLengthList, FileName);
 
             // If lastCompiledUserDefinedFunction == null, than we compile, the main program
             if (!isCurrentCompiledTheMainProgram && lastCompiledUserDefinedFunction != null)
@@ -192,65 +137,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 CommandPositionChanges["", ProgramSize] = range;
             }
         }
-
-        private void CorrectSelectionIntervalWithFindingClosingChar(Interval interval)
-        {
-            int start = interval.StartIndex;
-            int end = interval.EndIndex;
-
-            // Just For Try
-            end += FindCharPositionExpceptedChars(end, '(', ";)tTiI");
-
-
-            int parenthesises = 0;		// ()
-            int brackets = 0;			// []
-
-            int i = start;
-            while ((i < Source.Length) && (i < end || parenthesises > 0 || brackets > 0))
-            {
-                switch (Source[i])
-                {
-                    case '(':
-                        ++parenthesises;
-                        break;
-                    case ')':
-                        if (parenthesises > 0)
-                            --parenthesises;
-                        break;
-                    case '[':
-                        ++brackets;
-                        break;
-                    case ']':
-                        if (brackets > 0)
-                            --brackets;
-                        break;
-                }
-                ++i;
-            }
-
-           //while (i < Source.Length && Source[i].ToString().ToLower() != closingChar.ToString().ToLower())
-           //    ++i;
-
-            interval.EndIndex = i;
-        }
-
-        private int FindCharPositionExpceptedChars(int from, char findChar, string excepts)
-        {
-            int ind = 0;
-            while (from + ind < Source.Length)
-            {
-                if (excepts.Contains(Source[from + ind].ToString()))
-                    return 0;
-
-                char ch = Source[from + ind];
-                if (ch == findChar)
-                    return ind + 1;
-
-                ind++;
-            }
-            return 0;
-        }
-
+        
         #endregion
 
         /*Compile Helpers*/
@@ -289,6 +176,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         private UserDefinedFunction lastCompiledUserDefinedFunction;
 
+        private List<int> lineLengthList;
+
         private void InitHelpers()
         {
             lastCompiledMember = new Member();
@@ -317,6 +206,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
             conditionCount = 0;
 
             lastCompiledUserDefinedFunction = new UserDefinedFunction();
+
+            lineLengthList = SourceInfoUtils.FindLineLengths(Source);
         }
 
         private string SplitQuotes(string s)

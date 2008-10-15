@@ -39,8 +39,17 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             {
                 foreach (var loadedCompilationUnit in loaded)
                 {
-                    if (currentCompilationUnit.StructuralEquals(loadedCompilationUnit))
-                        currentCompilationUnit.CopyMarksFrom(loadedCompilationUnit);
+                    if (currentCompilationUnit.Value == loadedCompilationUnit.Value)
+                    {
+                        foreach (var currentFunc in currentCompilationUnit.Children)
+                        {
+                            foreach (var loadedFunc in loadedCompilationUnit.Children)
+                            {
+                                if ((currentFunc as PsiFunctionsVariablesNode).StructuralEquals(loadedFunc as PsiFunctionsVariablesNode))
+                                    (currentFunc as PsiFunctionsVariablesNode).CopyMarksFrom(loadedFunc as PsiFunctionsVariablesNode);
+                            }
+                        }
+                    }
                 }
             }
         }

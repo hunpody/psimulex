@@ -67,6 +67,7 @@
     <Compile Include="AST\PsiNodeFactory.cs" />
     <Compile Include="AST\PsiPrinterVisitor.cs" />
     <Compile Include="AST\PsiProgramStringBuilderVisitor.cs" />
+    <Compile Include="AST\SourceInfoUtils.cs" />
     <Compile Include="AST\TypeEnumFactory.cs" />
     <Compile Include="Configuration\CompilerSettings.cs" />
     <Compile Include="CompileResult.cs" />
