@@ -7,5 +7,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 {
     class FunctionVariableVisibleConfiguration
     {
+        public FunctionVariableVisibleConfiguration()
+        { }
+
+        public FunctionVariableVisibleConfiguration(string fileName)
+        { }
     }
 }

@@ -1,0 +1,32 @@
+﻿<Window x:Class="VapeTeam.Psimulex.Compiler.Antlr.WpfTest.mainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+    xmlns:tec="clr-namespace:ICSharpCode.TextEditor;assembly=ICSharpCode.TextEditor"
+    
+    Title="MainWindow" Height="400" Width="800" Closed="Window_Closed" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
+    
+    <Grid Name="mainGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600*" />
+            <ColumnDefinition Width="100*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250*" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <wfi:WindowsFormsHost Name="winFormHost">
+            <tec:TextEditorControl Name="sourceCodeTextEditorControl" Dock="Fill" Text="print(10)" BorderStyle="Fixed3D">
+            </tec:TextEditorControl>
+        </wfi:WindowsFormsHost>
+        <TextBlock></TextBlock>
+        <TextBox Grid.Row="1" Name="resultTextBox" BorderThickness="2" TextDecorations="None" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" AcceptsTab="True" AcceptsReturn="True" />
+        <Button Grid.Column="1" Height="23" Name="buildButton" VerticalAlignment="Top" Click="buildButton_Click">Build</Button>
+        <Button Height="23" Margin="0,29,0,0" Name="buildAndRunButton" VerticalAlignment="Top" Grid.Column="1" Click="buildAndRunButton_Click">Build &amp; Run</Button>
+        <Button Height="23" Margin="0,58,0,0" Name="stepButton" VerticalAlignment="Top" Grid.Column="1" Click="stepButton_Click">Step</Button>
+        <Button Height="23" Margin="0,87,0,0" Name="syntaxTreeButton" VerticalAlignment="Top" Grid.Column="1" Click="syntaxTreeButton_Click">SyntaxTree</Button>
+        <Button Height="23" Margin="0,116,0,0" Name="programStringButton" VerticalAlignment="Top" Grid.Column="1" Click="programStringButton_Click">Program string</Button>
+        <Button Height="23" Margin="0,145,0,0" Name="variableFunctionTreeButton" VerticalAlignment="Top" Grid.Column="1" Click="variableFunctionTreeButton_Click">Functions, Variables</Button>
+    </Grid>
+</Window>

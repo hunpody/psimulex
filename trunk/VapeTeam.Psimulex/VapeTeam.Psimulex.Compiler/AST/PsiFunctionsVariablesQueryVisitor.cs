@@ -291,7 +291,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         public void Visit(FormalParameterListNode node) { VisitChildren(node); }
-        public void Visit(FormalParameterNode node) { VisitChildren(node); }
+        public void Visit(FormalParameterNode node)
+        {
+            PushVisitCreate(
+                node.ParameterName.Value,
+                BlockType.VariableBlock, node);
+        }
 
         /*Program Structures*/
         public void Visit(BlockNode node) { VisitChildren(node); }

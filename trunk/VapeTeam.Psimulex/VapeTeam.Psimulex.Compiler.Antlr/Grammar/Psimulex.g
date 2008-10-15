@@ -263,7 +263,6 @@ builtInType
 	|	Node
 	|	Edge
 	|	Thread
-	|	Timer
 	|	Iterator
 	// ...
 	;
