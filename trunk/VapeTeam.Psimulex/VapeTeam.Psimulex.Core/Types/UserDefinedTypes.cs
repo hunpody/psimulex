@@ -45,20 +45,51 @@ namespace VapeTeam.Psimulex.Core.Types
     public class Attribute
     {
         public string Name { get; set; }
-            public TypeEnum Type { get; set; }
-            public string TypeName { get; set; }
-            public BaseType Value { get; set; }
+        public TypeEnum Type { get; set; }
+        public string TypeName { get; set; }
+        public List<int> DimensionList { get; set; }
+        public BaseType Value { get; set; }
 
-            public Attribute Clone()
+        public Attribute Clone()
+        {
+            Attribute attr = new Attribute
             {
-                return new Attribute
-                {
-                    Name = this.Name,
-                    Type = this.Type,
-                    TypeName = this.TypeName,
-                    Value = this.Value.Clone()
-                };
-            }
+                Name = this.Name,
+                Type = this.Type,
+                TypeName = this.TypeName,
+                DimensionList = new List<int>(),
+                Value = this.Value.Clone()
+            };
+
+            DimensionList.ForEach(x => attr.DimensionList.Add(x));
+
+            return attr;
+        }
+
+        /// <summary>
+        /// Two Attribute is StructuralEquivalent if they
+        /// have a same type, name and dimension.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool StructuralEquals(Attribute a)
+        {
+            if (Name != a.Name || TypeName != a.TypeName || Type != a.Type || DimensionList.Count != a.DimensionList.Count)
+                return false;
+            
+            for (int i = 0; i < DimensionList.Count; i++)
+                if (DimensionList[i] != a.DimensionList[i])
+                    return false;
+
+            return true;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} [Dim:{1}] {2} = {3}", 
+                TypeName, DimensionList.Count, Name, 
+                Value != null ? Value.ToString() : "null" );
+        }
     }
 
     /// <summary>
@@ -76,7 +107,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override TypeEnum TypeEnum
         {
-            get { return TypeEnum.Undefined; }
+            get { return TypeEnum.UserDefinedType; }
         }
     }
 
@@ -119,6 +150,45 @@ namespace VapeTeam.Psimulex.Core.Types
             foreach (Attribute attr in Attributes.Values)
                 dic.Add(attr.Name, attr.Clone());
             return dic;
+        }
+
+        public override string ToString()
+        {
+            string ret = Name + " { ";
+            foreach (Attribute attr in Attributes.Values)
+                ret += attr.ToString() + ", ";
+            return ret + " }";
+        }
+
+        public bool StructuralEquals(Struct s)
+        {
+            foreach (var attr in Attributes.Values)
+            {
+                bool l = false;
+                foreach (var item in s.Attributes.Values)
+                    if (item.StructuralEquals(attr))
+                        l = true;
+
+                if (!l)
+                    return false;
+            }
+
+            return true;
+        }
+
+        public override void Assign(BaseType value)
+        {
+            if (value.GetType() != typeof(Struct) && StructuralEquals(value as Struct))
+            {
+                foreach (var item in (value as Struct).Attributes.Values)
+                    this[item.Name] = item.Clone();
+            }
+            else
+            {
+                throw new UserDefinedTypeException(
+                    string.Format("Struct {0} is structural unequivalent with struct {1} !", 
+                    Name, (value as Struct).Name));
+            }
         }
     }
 
