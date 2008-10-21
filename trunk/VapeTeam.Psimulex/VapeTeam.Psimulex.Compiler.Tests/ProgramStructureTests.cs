@@ -816,6 +816,20 @@ while(it.movenext())
             Assert.AreEqual(@"0123456789
 0123456789", result);
         }
+
+        [TestMethod]
+        public void TestGenAt_2008__október_21_11_07_26()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+void main()
+{
+}
+
+");
+
+            Assert.AreEqual(@"", result);
+        }
+
         #endregion
     }
 }

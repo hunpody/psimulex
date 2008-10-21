@@ -14,5 +14,12 @@ namespace VapeTeam.Psimulex.Compiler.Tests.Helpers
             var result = compiler.Compile(source);
             return result.CompiledProgram;
         }
+
+        public static CompileResult CompileResult(string source)
+        {
+            var compiler = new VapeTeam.Psimulex.Compiler.Antlr.Compiler();
+            var result = compiler.Compile(source);
+            return result;
+        }
     }
 }
