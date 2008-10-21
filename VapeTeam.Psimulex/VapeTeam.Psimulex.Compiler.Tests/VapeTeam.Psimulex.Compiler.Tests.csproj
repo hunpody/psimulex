@@ -45,9 +45,11 @@
     <Compile Include="ExpressionTests.cs" />
     <Compile Include="HelloWorldTests.cs" />
     <Compile Include="Helpers\CompilerProxy.cs" />
+    <Compile Include="Helpers\PsiNodHelpers.cs" />
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="ProgramStructureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PsiNodeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VapeTeam.Psimulex.Compiler.Antlr\VapeTeam.Psimulex.Compiler.Antlr.csproj">

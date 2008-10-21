@@ -24,19 +24,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
     }
 
-    public class UnknownOperatorException : PsiCodeGeneratorVisitorException
-    {
-        public UnknownOperatorException(string message)
-            : base(message)
-        {
-        }
-
-        public UnknownOperatorException()
-            : this("UnknownOperatorException")
-        {
-        }
-    }
-
     #endregion
 
     public class PsiCodeGeneratorVisitor : IPsiVisitor
@@ -65,8 +52,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        //public int ProgramSize { get { return Program.Program.OverallProgramSize; } }
         public StringBuilder CompilerMessages { get; private set; }
+        public List<string> WarningList { get; set; }
+        public List<string> ErrorList { get; set; }
+
         public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
         public CommandPositionChanges CommandPositionChanges { get; set; }
         
@@ -78,6 +67,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
             FileName = fileName;
 
             CompilerMessages = new StringBuilder();
+            WarningList = new List<string>();
+            ErrorList = new List<string>();
+
             UserDefinedFunctionList = new List<UserDefinedFunction>();
 
             CommandPositionChanges = new CommandPositionChanges();
@@ -119,6 +111,22 @@ namespace VapeTeam.Psimulex.Compiler.AST
             CompilerMessages.AppendLine(msg);
         }
 
+        public void AddWarning(string warning)
+        {
+            WarningList.Add(warning);
+        }
+
+        public void AddError(string error)
+        {
+            ErrorList.Add(error);
+        }
+
+        public void AddError(string error, Exception ex)
+        {
+            ErrorList.Add(error);
+            throw ex;
+        }
+
         /*Highlighter, Stepping Helpers*/
         #region Highlighter, Stepping Helpers
 
@@ -143,71 +151,48 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Compile Helpers*/
         #region Compiler Helpers
 
-        /// <summary>
-        /// Global or Struct Member Variables.
-        /// </summary>
         private Member lastCompiledMember;
-
         private TypeEnum lastCompiledDataType;
         private string lastCompiledUserDefinedDataTypeName;
-
         private int lastCompiledDimensionCount;
         private List<int> lastCompiledDimensionList;
-
         private bool addToProgram;
         private BaseType lastCompiledConstantValue;
-
         private bool isLastCompiledArrayDynamic;
-
         private Assign lastCompiledAssign;
-
         private bool isOperatorUnaryPrefix;
-
         private bool isCompilingAssignmentTarget;
-
         private bool isSelectorsFirstCompile;
-
         private bool isCurrentCompiledTheMainProgram;
-
         private System.Collections.Generic.Stack<Jump> lazyEvaluationJumpStack;
         private System.Collections.Generic.Stack<Jump> jumpStack;
-
         private int conditionCount;
-
         private UserDefinedFunction lastCompiledUserDefinedFunction;
-
         private List<int> lineLengthList;
+        private List<string> globalVariableNameList;
+        private List<string> currentLocalVariableNameList;
 
         private void InitHelpers()
         {
             lastCompiledMember = new Member();
-
             lastCompiledDataType = TypeEnum.Undefined;
             lastCompiledDimensionCount = 0;
             lastCompiledDimensionList = new List<int>();
-
             addToProgram = true;
             lastCompiledConstantValue = null;
-
             isLastCompiledArrayDynamic = false;
             lastCompiledAssign = null;
-
             isOperatorUnaryPrefix = false;
-
             isCompilingAssignmentTarget = false;
-
             isSelectorsFirstCompile = true;
-
             isCurrentCompiledTheMainProgram = true;
-
             lazyEvaluationJumpStack = new System.Collections.Generic.Stack<Jump>();
             jumpStack = new System.Collections.Generic.Stack<Jump>();
-
             conditionCount = 0;
-
             lastCompiledUserDefinedFunction = new UserDefinedFunction();
-
             lineLengthList = SourceInfoUtils.FindLineLengths(Source);
+            globalVariableNameList = new List<string>();
+            currentLocalVariableNameList = new List<string>();
         }
 
         private string SplitQuotes(string s)
@@ -572,8 +557,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         public void Visit(PForStatementNode node)
-        {            
-            throw new NotImplementedException("PFor is not implemented yet.");
+        {
+            AddError("PFor is not implemented yet. It was skipped!");
         }
 
         public void Visit(ForStatementNode node) 
@@ -673,7 +658,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(PForEachStatementNode node)
         {
-            throw new NotImplementedException("PForEach is not implemented yet.");
+            AddError("PForEach is not implemented yet. It was skipped!");
         }
 
         public void Visit(ForEachStatementNode node)
@@ -786,17 +771,17 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(PDoStatementNode node)
         {
-            throw new NotImplementedException("PDo is not implemented yet.");
+            AddError("PDo is not implemented yet. It was skipped!");
         }
 
         public void Visit(AsynStatementNode node) 
         {
-            throw new NotImplementedException("Async is not implemented yet.");
+            AddError("Async is not implemented yet. It was skipped!");
         }
 
         public void Visit(LockStatementNode node)
         {
-            throw new NotImplementedException("Lock is not implemented yet.");
+            AddError("Lock is not implemented yet. It was skipped!");
         }
 
         public void Visit(ReturnStatementNode node)
@@ -863,16 +848,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.VariableInitialValue.Accept(this);
 
             // Initialize
-            if (varIsReference) throw new PsiCodeGeneratorVisitorException("Reference variable definition/initialization is not supported yet!");
-            if (varArrayIsDynamic) throw new PsiCodeGeneratorVisitorException("Dynamic array initialization is not supported yet!");
+            if (varIsReference) AddError("Reference variable definition/initialization is not supported yet!");
+            if (varArrayIsDynamic) AddError("Dynamic array initialization is not supported yet!");
             if (varType != TypeEnum.UserDefinedType)
             {
-                if (varDimensionCount > 0) throw new PsiCodeGeneratorVisitorException("Array initialization is not supported yet!");
+                if (varDimensionCount > 0) AddError("Array initialization is not supported yet!");
                 else AddCommand(new Initialize(varName, varType));
             }
             else
             {
-                throw new PsiCodeGeneratorVisitorException(string.Format("User defined types are not supported yet! ({0})", varTypeName));
+                AddError(string.Format("User defined types are not supported yet! ({0})", varTypeName));
             }
         }
 
@@ -894,7 +879,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             string varName = node.VariableName.Value;
 
             // Declare
-            if (varArrayIsDynamic) throw new PsiCodeGeneratorVisitorException("Dynamic array declaration is not supported yet!");
+            if (varArrayIsDynamic) AddError("Dynamic array declaration is not supported yet!");
             if (varType != TypeEnum.UserDefinedType)
             {
                 if (varDimensionCount > 0)
@@ -908,7 +893,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             else
             {
-                throw new PsiCodeGeneratorVisitorException(string.Format("User defined types is not supported yet! ({0})", varTypeName));
+                AddError(string.Format("User defined types is not supported yet! ({0})", varTypeName));
             }
         }
 
@@ -948,7 +933,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     case '|': AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalOr)); break;
                     case '~': AddCommand(new BinaryOperation(BinaryOperation.Operations.LogicalXor)); break;
                     default:
-                        throw new UnknownOperatorException(string.Format("Unknown Assign Operator : {0}", node.Value));
+                        AddError(string.Format("Unknown Assign Operator : {0}", node.Value));
                         break;
                 }
 
@@ -1010,7 +995,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case "==": AddCommand(new Compare(Compare.ComparisonModes.Equal)); break;
                 case "!=": AddCommand(new Compare(Compare.ComparisonModes.NotEqual)); break;
                 default:
-                    throw new UnknownOperatorException(string.Format("Unknown Compare Operator : {0}", node.Value));
+                    AddError(string.Format("Unknown Compare Operator : {0}", node.Value));
                     break;
             }
         }
@@ -1031,7 +1016,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case ">": AddCommand(new Compare(Compare.ComparisonModes.GreaterThan)); break;
                 case ">=": AddCommand(new Compare(Compare.ComparisonModes.GreaterThanOrEqual)); break;
                 default:
-                    throw new UnknownOperatorException(string.Format("Unknown Compare Operator : {0}", node.Value));
+                    AddError(string.Format("Unknown Compare Operator : {0}", node.Value));
                     break;
             }
         }
@@ -1056,7 +1041,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     else AddCommand(new BinaryOperation(BinaryOperation.Operations.Subtraction));
                     break;
                 default:
-                    throw new UnknownOperatorException(string.Format("Unknown Additive Operator : {0}", node.Value));
+                    AddError(string.Format("Unknown Additive Operator : {0}", node.Value));
                     break;
             }
         }
@@ -1077,7 +1062,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case "%": AddCommand(new BinaryOperation(BinaryOperation.Operations.Modulo)); break;
                 case "^": AddCommand(new BinaryOperation(BinaryOperation.Operations.Power)); break;
                 default:
-                    throw new UnknownOperatorException(string.Format("Unknown Additive Operator : {0}", node.Value));
+                    AddError(string.Format("Unknown Additive Operator : {0}", node.Value));
                     break;
             }
         }
@@ -1157,7 +1142,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 }
                 else
                 {
-                    throw new UnknownOperatorException(string.Format("Unknown UnaryPrefix Operator : {0}", node.Value));
+                    AddError(string.Format("Unknown UnaryPrefix Operator : {0}", node.Value));
                 }
 
                 // 04 Add Operation
@@ -1209,7 +1194,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 }
                 else
                 {
-                    throw new UnknownOperatorException(string.Format("Unknown UnaryPostfix Operator : {0}", node.Value));
+                    AddError(string.Format("Unknown UnaryPostfix Operator : {0}", node.Value));
                 }
 
                 // 06 Add Operation                
@@ -1338,7 +1323,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
                 // Indexing
                 if (dim > 1)
-                    throw new PsiCodeGeneratorVisitorException("More than one dimension array indexing is not supported yet!");
+                    AddError("More than one dimension array indexing is not supported yet!");
                 else
                     AddCommand(new Indexing());
             }

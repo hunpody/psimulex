@@ -13,16 +13,16 @@ ToDo:
 - Configuration Wizard for Projects
 - Command Weight Config Window ( Generated NumericUpAndDown Controls WithLabels same as SyntaxConfig ) (Vari)
 - DynamicSyntaxHiglight Rule Extension (For user def types)
+
 - Compiler Local Variable Declaration collision Check ( Vari )
+
 - Compiler Imports ( Vari )
 - Compiler Result ( Vari )
 - Compiler FunctionCall Parameter Count Check ( Vari )
 - Compiler Warnings, Errors output. ( Vari )
 - Compiler Exceptions -> STD Erors if not needed An abort. ( Vari )
 - Compiler Check if the type name is exists (primary, builtin and user defined type list)
-- CommandPosition Changes Functions to other class. ( Vari )
 - Plugin InterFace for Inputs -> Excel. Plugin and/or Drag And Drop technik with selected area. ( Vari )
-- TesztEnvironment In WPF SandBox (Vari)
 
 - Compiler Consistent Checker
 
@@ -32,9 +32,9 @@ ToDo:
 Finished:
 ---------
 
-
-
-
++ TesztEnvironment In WPF SandBox (Vari)
++ CommandPosition Changes Functions to other class. ( Vari )
++ PsiNodeTests new AutoTestGen
 
 UnderConstruction:
 ------------------

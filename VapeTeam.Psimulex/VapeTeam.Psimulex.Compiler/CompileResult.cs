@@ -10,6 +10,7 @@ namespace VapeTeam.Psimulex.Compiler
     {
         public Program CompiledProgram { get; set; }
         public string SourceText { get; set; }
+        public AST.IPsiNode PsiNodeTree { get; set; }
 
         // Ide még kell :
         /* Fv lista (dictionary)

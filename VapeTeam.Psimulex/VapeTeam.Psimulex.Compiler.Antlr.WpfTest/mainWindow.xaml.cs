@@ -89,10 +89,32 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                 }
                 catch (Exception ex)
                 {
-                    resultTextBox.Text = ex.ToString();
+                    resultTextBox.Text = "";
+
+                    // Warnings
+                    foreach (var item in visitor.WarningList)
+                        resultTextBox.Text += "\n\rWarning: " + item;
+
+                    // Errors
+                    foreach (var item in visitor.ErrorList)
+                        resultTextBox.Text += "\n\rError: " + item;
+
+                    resultTextBox.Text += "\n\r" + ex.ToString();
                     return;
                 }
-                resultTextBox.Text += "Build Finished";
+                finally 
+                {
+                    resultTextBox.Text = "";
+
+                    // Warnings
+                    foreach (var item in visitor.WarningList)
+                        resultTextBox.Text += "\n\rWarning: " + item;
+
+                    // Errors
+                    foreach (var item in visitor.ErrorList)
+                        resultTextBox.Text += "\n\rError: " + item;
+                }
+                resultTextBox.Text += "\n\rBuild Finished";
             }
         }
 
@@ -125,10 +147,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         [TestMethod]
         public void " + testName + @"()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@""
+            string src =
+            @""
 " + editor.Text.Replace("\"", "\"\"") + @"
-"");
-
+"";
+            Helpers.PsiNodHelpers.ParentTestOne(src);
+            Helpers.PsiNodHelpers.ParentTestOne(src);
+            var result = Helpers.SystemHelper.CompileAndRun(src);
             Assert.AreEqual(@""" + resultTextBox.Text + @""", result);
         }
 ";
@@ -202,6 +227,15 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
                 /*"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +*/
                 "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.CompilerMessages;
+
+            // Warnings
+            foreach (var item in visitor.WarningList)
+                window.ProgramString += "\n\rWarning: " + item;
+
+            // Errors
+            foreach (var item in visitor.ErrorList)
+                window.ProgramString += "\n\rError: " + item;
+
             window.Show();
         }
 
