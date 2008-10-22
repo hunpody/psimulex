@@ -17,13 +17,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         public FunctionVariableVisibleConfiguration()
         { }
 
-        public FunctionVariableVisibleConfiguration(string configFileName, string source, string sourceFileName, IPsiNode psiNode)
+        public FunctionVariableVisibleConfiguration(string configFileName, NodeList psiNodeList)
             : this()
         {
-            var q = new PsiFunctionsVariablesQueryVisitor(source, sourceFileName);
-            q.Visit(psiNode as CompilationUnitNode);
-            PsiFunctionsVariablesNodeList = q.PsiNodeList;
-
+            PsiFunctionsVariablesNodeList = psiNodeList;
             Load(configFileName);
         }
 

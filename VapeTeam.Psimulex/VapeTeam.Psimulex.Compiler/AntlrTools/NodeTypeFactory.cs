@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Compiler.AST;
 
-namespace VapeTeam.Psimulex.Compiler.Antlr
+namespace VapeTeam.Psimulex.Compiler.AntlrTools
 {
     public class NodeTypeFactory
     {

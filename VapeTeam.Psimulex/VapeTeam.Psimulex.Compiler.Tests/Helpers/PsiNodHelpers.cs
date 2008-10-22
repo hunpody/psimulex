@@ -11,7 +11,8 @@ namespace VapeTeam.Psimulex.Compiler.Tests.Helpers
     {
         public static void ParentTestOne(string source)
         {
-            ParentTestOne(CompilerProxy.CompileResult(source).PsiNodeTree);
+            CompilerProxy.CompileResult(source).CompilationUnitList.ForEach(
+                x => ParentTestOne(x.PsiNodeSyntaxTree));
         }
 
         public static void ParentTestOne(AST.IPsiNode node)
@@ -33,7 +34,8 @@ namespace VapeTeam.Psimulex.Compiler.Tests.Helpers
 
         public static void ParentTestTwo(string source)
         {
-            ParentTestTwo(CompilerProxy.CompileResult(source).PsiNodeTree);
+            CompilerProxy.CompileResult(source).CompilationUnitList.ForEach(
+                x => ParentTestTwo(x.PsiNodeSyntaxTree));
         }
 
         public static void ParentTestTwo(AST.IPsiNode node)

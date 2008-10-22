@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core.Factories;
 using VapeTeam.Psimulex.Core;
+using VapeTeam.Psimulex.Compiler.AST;
 
-namespace VapeTeam.Psimulex.Compiler.AST
+namespace VapeTeam.Psimulex.Compiler.Result
 {
     public static class SourceInfoUtils
     {

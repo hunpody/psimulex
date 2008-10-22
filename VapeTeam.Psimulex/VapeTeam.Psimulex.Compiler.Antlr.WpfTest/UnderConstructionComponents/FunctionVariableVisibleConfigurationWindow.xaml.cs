@@ -27,6 +27,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private FunctionVariableVisibleConfiguration config;
         private List<KeyValuePair<PsiFunctionsVariablesNode,CheckBox>> list;
+        public List<PsiFunctionsVariablesNode> PsiFunctionsVariablesNodeList { get; set; }
 
         public FunctionVariableVisibleConfigurationWindow()
         {
@@ -37,7 +38,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         {
             list = new List<KeyValuePair<PsiFunctionsVariablesNode, CheckBox>>();
 
-            config = new FunctionVariableVisibleConfiguration(ConfigFilePath, Visitor.Source, Visitor.FileName, PsiNode);
+            config = new FunctionVariableVisibleConfiguration(ConfigFilePath, PsiFunctionsVariablesNodeList);
             functionVariableTreeView.Items.Clear();
             config.PsiFunctionsVariablesNodeList.ForEach
                 (

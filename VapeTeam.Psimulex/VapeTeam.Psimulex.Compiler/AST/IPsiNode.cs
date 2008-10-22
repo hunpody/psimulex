@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VapeTeam.Psimulex.Compiler.Result;
 
 namespace VapeTeam.Psimulex.Compiler.AST
 {
@@ -70,5 +71,17 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public int EndColumn { get; set; }
         public int EndLine { get; set; }
+
+        public Interval ToInterval(string fileName)
+        {
+            return new Interval
+            {
+                FromLine = StartLine,
+                FromColumn = StartColumn,
+                ToLine = EndLine,
+                ToColumn = EndColumn,
+                FileName = fileName
+            };
+        }
     }
 }

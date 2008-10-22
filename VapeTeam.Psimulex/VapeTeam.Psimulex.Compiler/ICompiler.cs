@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VapeTeam.Psimulex.Compiler.Result;
 
 namespace VapeTeam.Psimulex.Compiler
 {
@@ -10,6 +11,6 @@ namespace VapeTeam.Psimulex.Compiler
     /// </summary>
     public interface ICompiler
     {
-        CompileResult Compile(string source);
+        CompileResult Compile(string source, string fileName);
     }
 }

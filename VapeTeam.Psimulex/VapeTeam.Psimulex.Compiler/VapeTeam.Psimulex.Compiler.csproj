@@ -31,11 +31,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.1.0.39723, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\VapeTeam.Psimulex.Compiler.Antlr\Runtime\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Utility, Version=0.1.0.39726, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\VapeTeam.Psimulex.Compiler.Antlr\Runtime\Antlr3.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="StringTemplate, Version=3.0.1.6846, Culture=neutral, PublicKeyToken=beee492b52c41e85, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\VapeTeam.Psimulex.Compiler.Antlr\Runtime\StringTemplate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -53,7 +65,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AST\CommandPositionChanges.cs" />
+    <Compile Include="AntlrTools\ANTLRCompiler.cs" />
+    <Compile Include="AntlrTools\ANTLRCompileResult.cs" />
+    <Compile Include="Compiler.cs" />
+    <Compile Include="AntlrTools\NodeTypeFactory.cs" />
+    <Compile Include="AntlrTools\TreeConverter.cs" />
+    <Compile Include="Result\CommandPositionChanges.cs" />
     <Compile Include="AST\IPsiNode.cs" />
     <Compile Include="AST\IPsiNodeFactory.cs" />
     <Compile Include="AST\IPsiVisitor.cs" />
@@ -67,14 +84,19 @@
     <Compile Include="AST\PsiNodeFactory.cs" />
     <Compile Include="AST\PsiPrinterVisitor.cs" />
     <Compile Include="AST\PsiProgramStringBuilderVisitor.cs" />
-    <Compile Include="AST\SourceInfoUtils.cs" />
+    <Compile Include="Result\MessageList.cs" />
+    <Compile Include="Result\SourceInfoUtils.cs" />
     <Compile Include="AST\TypeEnumFactory.cs" />
     <Compile Include="Configuration\CompilerSettings.cs" />
-    <Compile Include="CompileResult.cs" />
+    <Compile Include="Result\CompileResult.cs" />
     <Compile Include="ICompiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VapeTeam.Psimulex.Compiler.Antlr\VapeTeam.Psimulex.Compiler.Antlr.csproj">
+      <Project>{DA262F79-572F-4CA6-BDF5-39C201BFE72B}</Project>
+      <Name>VapeTeam.Psimulex.Compiler.Antlr</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VapeTeam.Psimulex.Core\VapeTeam.Psimulex.Core.csproj">
       <Project>{64AE91ED-9627-44F2-9CD5-FC04DA7310EC}</Project>
       <Name>VapeTeam.Psimulex.Core</Name>
