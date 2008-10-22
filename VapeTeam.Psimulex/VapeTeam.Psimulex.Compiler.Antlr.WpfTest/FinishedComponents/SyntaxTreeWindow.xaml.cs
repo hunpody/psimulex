@@ -20,7 +20,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
     public partial class SyntaxTreeWindow : Window
     {        
         public string ConfigFilePath { get; set; }
-        public IPsiNode PsiNode { get; set; }
+        public List<IPsiNode> PsiNodeList { get; set; }
 
         private List<NodeType> disabledNodeTypeList = new List<NodeType>();
         private SyntaxTreeConfiguration config = new SyntaxTreeConfiguration();
@@ -44,9 +44,11 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         {
             currentViewMode = vm;
             TreeView.Items.Clear();
-            if (PsiNode != null)
-                foreach (var item in PsiNode.ToWPFTreeViewItemWithReduction(currentViewMode,disabledNodeTypeList))
+            foreach (var psiNode in PsiNodeList)
+            {
+                foreach (var item in psiNode.ToWPFTreeViewItemWithReduction(currentViewMode, disabledNodeTypeList))
                     TreeView.Items.Add(item);
+            }                
         }
 
         private void ReloadConfiguration()

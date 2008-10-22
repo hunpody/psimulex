@@ -346,18 +346,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     }                  
 
                     c.Compile(source, importFileName, CommandPositionChanges, globalVariableNameList,
-                        CompilationUnitList, UserDefinedFunctionList);
+                        CompilationUnitList, UserDefinedFunctionList, false);
 
                     Program.Program.CommandList.AddRange(c.CompileResult.CompiledProgram.CommandList);
                 }
             }
-
-            // Result halmozás, ha kell
-
-            // New Compiler -> Compile() Result add to this results
-            // Spec Compilation, SkipFuncVar Map and others ...
-            // Tényleges Importálás, importált fájlok fordítása
-            // ...
         }
 
         public void Visit(TypeDeclarationNode node) { VisitChildren(node); }

@@ -22,12 +22,11 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
     public partial class FunctionVariableVisibleConfigurationWindow : Window
     {
         public string ConfigFilePath { get; set; }
-        public IPsiNode PsiNode { get; set; }
         public PsiCodeGeneratorVisitor Visitor { get; set; }
+        public List<PsiFunctionsVariablesNode> PsiFunctionsVariablesNodeList { get; set; }
 
         private FunctionVariableVisibleConfiguration config;
         private List<KeyValuePair<PsiFunctionsVariablesNode,CheckBox>> list;
-        public List<PsiFunctionsVariablesNode> PsiFunctionsVariablesNodeList { get; set; }
 
         public FunctionVariableVisibleConfigurationWindow()
         {

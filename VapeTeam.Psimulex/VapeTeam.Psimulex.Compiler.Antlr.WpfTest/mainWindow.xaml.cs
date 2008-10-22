@@ -228,7 +228,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void ShowSyntaxTree()
         {
             var window = new SyntaxTreeWindow();
-            window.PsiNode = psiNode;
+
+            window.PsiNodeList = new List<IPsiNode>();
+            compiler.CompileResult.CompilationUnitList.ForEach(x => window.PsiNodeList.Add(x.PsiNodeSyntaxTree));
+
             window.ConfigFilePath = "config.cgf";
             window.ShowDialog();
         }
@@ -236,7 +239,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void ShowFunctionsVariablesTree()
         {
             var window = new FunctionVariableVisibleConfigurationWindow();
-            window.PsiNode = psiNode;
+            window.PsiFunctionsVariablesNodeList = compiler.CompileResult.PsiFunctionsVariablesNodeList;
             window.Visitor = visitor;
             window.ConfigFilePath = "config.funcvar";
             window.ShowDialog();

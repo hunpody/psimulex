@@ -111,8 +111,8 @@ namespace VapeTeam.Psimulex.Compiler
             GenerateMicrolexCode(source, sourceFileName, commandPositionChanges,
                 globalVariableList, compilationUnitList, userDefinedFunctionList);
 
-            //if(compileFuncVarTree)
-            //    CompileResult.PsiFunctionsVariablesNodeList = GenerateFuncVarTree(CompileResult.CompilationUnitList);
+            if(compileFuncVarTree)
+                CompileResult.PsiFunctionsVariablesNodeList = GenerateFuncVarTree(CompileResult.CompilationUnitList);
 
             return CompileResult;
         }
