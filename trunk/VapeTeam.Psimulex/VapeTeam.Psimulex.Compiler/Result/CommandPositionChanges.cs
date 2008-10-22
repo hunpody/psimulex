@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace VapeTeam.Psimulex.Compiler.AST
+namespace VapeTeam.Psimulex.Compiler.Result
 {
     /// <summary>
     /// It contains a Dictionary about the commandObject, interval pairs.

@@ -21,6 +21,8 @@ using VapeTeam.Psimulex.Core.Commands;
 using VapeTeam.Psimulex.Core.Common;
 using VapeTeam.Psimulex.Core.Factories;
 using VapeTeam.Psimulex.Core.Types;
+using VapeTeam.Psimulex.Compiler.Result;
+using VapeTeam.Psimulex.Compiler;
 
 using ICSharpCode.TextEditor;
 using ICSharpCode.TextEditor.Document;
@@ -68,7 +70,9 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void Bulid(string fileName)
         {
             currentCommandToHighLight = 0;
-            visitor = new PsiCodeGeneratorVisitor(editor.Text, fileName);
+            compiler.Compile(editor.Text, fileName);
+
+            /*
             var result = compiler.Compile(editor.Text);
 
             StringBuilder sb = new StringBuilder();
@@ -85,19 +89,14 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                 try
                 {
                     psiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SyntaxTree) as CompilationUnitNode;
-                    visitor.Visit(psiNode);
+                    visitor.Visit(psiNode as CompilationUnitNode);
                 }
                 catch (Exception ex)
                 {
                     resultTextBox.Text = "";
 
                     // Warnings
-                    foreach (var item in visitor.WarningList)
-                        resultTextBox.Text += "\n\rWarning: " + item;
-
-                    // Errors
-                    foreach (var item in visitor.ErrorList)
-                        resultTextBox.Text += "\n\rError: " + item;
+                    resultTextBox.Text += visitor.Messages.ToString();
 
                     resultTextBox.Text += "\n\r" + ex.ToString();
                     return;
@@ -105,25 +104,18 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                 finally 
                 {
                     resultTextBox.Text = "";
-
-                    // Warnings
-                    foreach (var item in visitor.WarningList)
-                        resultTextBox.Text += "\n\rWarning: " + item;
-
-                    // Errors
-                    foreach (var item in visitor.ErrorList)
-                        resultTextBox.Text += "\n\rError: " + item;
+                    resultTextBox.Text += visitor.Messages.ToString();
                 }
                 resultTextBox.Text += "\n\rBuild Finished";
             }
+            */
         }
 
         private void Run()
         {
             resultTextBox.Text = "";
             var machine = MachineBuilder.Instance.CreateMachine(1, 16);
-            visitor.Program.Program.AddFunctions(visitor.UserDefinedFunctionList);
-            var process = machine.System.Load(visitor.Program);
+            var process = machine.System.Load(compiler.CompileResult.CompiledProgram);
             try
             {
                 machine.System.Run(process);
@@ -204,6 +196,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private void ShowProgramString()
         {
+            /*
             var window = new programStringWindow();
 
             string funcString = "";
@@ -225,18 +218,11 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                 "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() + funcString +
 
 
-                /*"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +*/
-                "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.CompilerMessages;
-
-            // Warnings
-            foreach (var item in visitor.WarningList)
-                window.ProgramString += "\n\rWarning: " + item;
-
-            // Errors
-            foreach (var item in visitor.ErrorList)
-                window.ProgramString += "\n\rError: " + item;
+                //"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +
+                "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.Messages.ToString();
 
             window.Show();
+            */
         }
 
         private void ShowSyntaxTree()

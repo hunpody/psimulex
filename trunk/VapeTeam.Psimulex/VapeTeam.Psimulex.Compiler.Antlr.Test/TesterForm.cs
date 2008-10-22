@@ -12,6 +12,7 @@ using VapeTeam.Psimulex.Compiler.AST;
 using VapeTeam.Psimulex.Core;
 using VapeTeam.Psimulex.Core.Commands;
 using VapeTeam.Psimulex.Core.Factories;
+using VapeTeam.Psimulex.Compiler.Result;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 {
@@ -41,6 +42,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 
         private void compileButton_Click(object sender, EventArgs e)
         {
+            /*
             currentCommandToHighLight = 0;
 
             visitor = new PsiCodeGeneratorVisitor(sourceCodeTextEditorControl.Text,"teszt.psi");
@@ -71,6 +73,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                     txtErrors.Text = ex.ToString();
                 }
             }
+             * */
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -106,7 +109,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             return false;
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
         {
             if (processKey(keyData))
                 return true;
@@ -189,7 +192,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
             types += "\t\t\tfor (int i = 0; i < process.Program.CommandList.Count; i++)";
             types += "\r\n\t\t\t\tAssert.IsInstanceOfType(process.Program.CommandList[i], commandObjectTypes[i]);";
             */
-            
+
+            /*
             string funcString = "";
 
             foreach (var item in visitor.UserDefinedFunctionList)
@@ -209,9 +213,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                 "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() +funcString +
 
 
-                /*"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +*/
-                "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.CompilerMessages;
+                //"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +
+                "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.Messages.ToString();
             frmProgramString.Show();
+            */
         }
 
 
@@ -251,9 +256,11 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 
         private void viewTreeButton_Click(object sender, EventArgs e)
         {
+            /*
             frmTree frmTree = new frmTree();
             frmTree.PsiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SyntaxTree) as CompilationUnitNode;
             frmTree.Show();
+             * */
         }
     }
 }
