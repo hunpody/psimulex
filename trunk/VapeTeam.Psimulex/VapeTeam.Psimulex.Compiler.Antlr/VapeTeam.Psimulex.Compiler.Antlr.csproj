@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\PsimulexParser.extension.cs" />
+    <Compile Include="Generated\PsimulexLexer.cs" />
+    <Compile Include="Generated\PsimulexParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +72,7 @@
   <ItemGroup>
     <None Include="antlr.bat">
     </None>
+    <None Include="Generated\Psimulex.tokens" />
     <None Include="Grammar\Psimulex.g" />
   </ItemGroup>
   <ItemGroup>
