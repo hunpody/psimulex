@@ -108,44 +108,6 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                     resultTextBox.Text += err.ToString() + endl;
                 }
             }
-
-            /*
-            var result = compiler.Compile(editor.Text);
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var message in compiler.ErrorMessages)
-                sb.AppendLine(message);
-            sb.Append(compiler.ExceptionMessages);
-
-            resultTextBox.Text = sb.ToString();
-            resultTextBox.Text = compiler.OutputString;
-            resultTextBox.Text = sb.ToString();
-
-            if (resultTextBox.Text == "")
-            {
-                try
-                {
-                    psiNode = TreeConverter.FromCommonTreeToPsiNode(compiler.SyntaxTree) as CompilationUnitNode;
-                    visitor.Visit(psiNode as CompilationUnitNode);
-                }
-                catch (Exception ex)
-                {
-                    resultTextBox.Text = "";
-
-                    // Warnings
-                    resultTextBox.Text += visitor.Messages.ToString();
-
-                    resultTextBox.Text += "\n\r" + ex.ToString();
-                    return;
-                }
-                finally 
-                {
-                    resultTextBox.Text = "";
-                    resultTextBox.Text += visitor.Messages.ToString();
-                }
-                resultTextBox.Text += "\n\rBuild Finished";
-            }
-            */
         }
 
         private void Run()

@@ -319,7 +319,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if (UserDefinedFunctionList.Find(func =>
                 func.Name == name && func.ParameterCount == parameterCount) != null)
             {
-                AddWarning(string.Format("Function \"{0}\" with {1} parameter is already exist, the compilation of this function will skipped.", name), nvi);
+                AddWarning(string.Format(
+                    "Function \"{0}\" with {1} parameter is already exist, the compilation of this function will skipped.",
+                    name, lastCompiledUserDefinedFunction.ParameterCount), nvi);
                 return true;
             }
             return false;

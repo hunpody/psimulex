@@ -1,0 +1,19 @@
+import "src\\in.psi";
+import "teszt.psi";
+
+int add(int a, int b)
+{
+	return a + b;
+}
+
+void swap(int & a, int & b)
+{
+	int tmp = a;
+	a = b;
+	b = tmp;
+}
+
+void wr(string s)
+{
+	print(s);
+}

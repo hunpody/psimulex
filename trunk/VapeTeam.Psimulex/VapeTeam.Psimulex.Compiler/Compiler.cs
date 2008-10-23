@@ -45,12 +45,25 @@ namespace VapeTeam.Psimulex.Compiler
             if (compileFuncVarTree)
                 CompileResult.PsiFunctionsVariablesNodeList = GenerateFuncVarTree(CompileResult.CompilationUnitList);
 
+            FinalizeTheResult();
+
             return CompileResult;
         }
 
         public void GenerateMicrolexCode(CompilerDTO dto)
         {
             var result = ANTLRCompiler.CompileCompilationUnit(dto.Source, dto.SourceFileName);
+
+            if (result.ANTLRExceptionText != "" || result.ANTLRErrorMessages.Count != 0)
+            {
+                CompileResult.CompilationUnitList.Add(new CompilationUnit
+                {
+                    ANTLRErrorMessages = result.ANTLRErrorMessages,
+                    ANTLRExceptionText = result.ANTLRExceptionText
+                });
+                return;
+            }
+
             var visitor = new PsiCodeGeneratorVisitor(dto, result.ANTLRExceptionText, result.ANTLRErrorMessages);
 
             try
@@ -77,9 +90,7 @@ namespace VapeTeam.Psimulex.Compiler
             CompileResult.CompiledProgram = visitor.Program;
             CompileResult.CommandPositionChanges = visitor.CommandPositionChanges;
             CompileResult.CompilationUnitList = visitor.CompilationUnitList;
-            CompileResult.UserDefinedFunctionsList = visitor.UserDefinedFunctionList;
-            
-            CompileResult.CompiledProgram.AddFunctions(CompileResult.UserDefinedFunctionsList);
+            CompileResult.UserDefinedFunctionsList = visitor.UserDefinedFunctionList;            
         }
 
         public List<PsiFunctionsVariablesNode> GenerateFuncVarTree(List<CompilationUnit> compilationUnitList)
@@ -104,7 +115,12 @@ namespace VapeTeam.Psimulex.Compiler
         /// </summary>
         public void FinalizeTheResult()
         {
-            // AddFunctions, generate some other result etc.
+            // Add functions to the program
+            CompileResult.CompiledProgram.AddFunctions(CompileResult.UserDefinedFunctionsList);
+
+            // Merge The messageLists
+            // ...
+            // Add getters to he result
         }
     }
 }
