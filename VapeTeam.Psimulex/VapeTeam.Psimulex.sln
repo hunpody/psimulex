@@ -15,7 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		ToDo.txt = ToDo.txt
-		VapeTeam.Psimulex.vsmdi = VapeTeam.Psimulex.vsmdi
 		ÜziFüzet 2.0.txt = ÜziFüzet 2.0.txt
 	EndProjectSection
 EndProject
@@ -28,9 +27,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VapeTeam.Psimulex.Compiler.Antlr.WpfTest", "VapeTeam.Psimulex.Compiler.Antlr.WpfTest\VapeTeam.Psimulex.Compiler.Antlr.WpfTest.csproj", "{A3A8DC3D-2D20-4555-BB8F-0D7F8A3189ED}"
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = VapeTeam.Psimulex.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
