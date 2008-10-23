@@ -32,7 +32,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             Type = TypeEnum.Undefined;
             TypeName = "";
-            DimensionCount = 1;
+            DimensionCount = 0;
             DimensionList = new List<int>();
             Name = "";
             Value = null;

@@ -22,7 +22,6 @@ using VapeTeam.Psimulex.Core.Common;
 using VapeTeam.Psimulex.Core.Factories;
 using VapeTeam.Psimulex.Core.Types;
 using VapeTeam.Psimulex.Compiler.Result;
-using VapeTeam.Psimulex.Compiler;
 
 using ICSharpCode.TextEditor;
 using ICSharpCode.TextEditor.Document;
@@ -70,7 +69,45 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void Bulid(string fileName)
         {
             currentCommandToHighLight = 0;
-            compiler.Compile(editor.Text, fileName);
+
+            resultTextBox.Text = "";
+
+            try
+            {
+                compiler.Compile(editor.Text, fileName);
+            }
+            catch (Exception e)
+            {
+                resultTextBox.Text = e.ToString();
+            }
+
+            string endl = "\n";
+
+            foreach (var item in compiler.CompileResult.CompilationUnitList)
+            {
+                foreach (var antlr in item.ANTLRErrorMessages)
+                {
+                    resultTextBox.Text += antlr + endl;
+                }
+
+                if (item.ANTLRExceptionText != "")
+                    resultTextBox.Text += "ANTLR Error : " + item.ANTLRExceptionText + endl;
+
+                foreach (var info in item.CompilerMessages.Informations)
+                {
+                    resultTextBox.Text += info.ToString() + endl;
+                }
+                
+                foreach (var warn in item.CompilerMessages.Warnings)
+                {
+                    resultTextBox.Text += warn.ToString() + endl;
+                }
+
+                foreach (var err in item.CompilerMessages.Errors)
+                {
+                    resultTextBox.Text += err.ToString() + endl;
+                }
+            }
 
             /*
             var result = compiler.Compile(editor.Text);
