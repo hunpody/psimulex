@@ -65,10 +65,10 @@ namespace VapeTeam.Psimulex.Core
 
         public void AddFunction(UserDefinedFunction function)
         {
-            if (GetFunction(function.Name, function.ParametersCount) != null)
+            if (GetFunction(function.Name, function.ParameterCount) != null)
             {
                 throw new Exceptions.PsimulexCoreException(string.Format("There is already a user defined function with name \"{0}\" and having {1} parameters.",
-                    function.Name, function.ParametersCount));
+                    function.Name, function.ParameterCount));
             }
             Functions.Add(function);
         }
@@ -86,7 +86,7 @@ namespace VapeTeam.Psimulex.Core
 
         public UserDefinedFunction GetFunction(string name, int parametersCount)
         {
-            return Functions.FirstOrDefault(f => f.Name.ToLower() == name.ToLower() && f.ParametersCount == parametersCount);
+            return Functions.FirstOrDefault(f => f.Name.ToLower() == name.ToLower() && f.ParameterCount == parametersCount);
         }
 
         public int GetCommandIndex(ICommand cmd)

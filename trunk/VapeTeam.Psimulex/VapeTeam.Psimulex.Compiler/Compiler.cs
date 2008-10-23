@@ -9,8 +9,16 @@ using VapeTeam.Psimulex.Core;
 
 namespace VapeTeam.Psimulex.Compiler
 {
+    /// <summary>
+    /// Psimulex Compiler.
+    /// Generate the Comand Object Array,
+    /// Generate FunctionVariableTree.
+    /// </summary>
     public class Compiler : VapeTeam.Psimulex.Compiler.ICompiler
     {
+        /// <summary>
+        /// The result of, the last compile.
+        /// </summary>
         public CompileResult CompileResult { get; private set; }
 
         public Compiler()
@@ -18,120 +26,32 @@ namespace VapeTeam.Psimulex.Compiler
             CompileResult = new CompileResult();
         }
 
-        /*
-        #region Compiler TempMembers
-
-        public List<string> ErrorMessages { get; set; }
-
-        public string OutputString { get; set; }
-        public string ExceptionMessages { get; set; }
-        public global::Antlr.Runtime.Tree.CommonTree SyntaxTree { get; set; }
-
-        #endregion
-
-        #region ICompiler Members
-
-        public CompileResult Compile(string source)
-        {
-            CompileResult result = new CompileResult();
-
-            try
-            {  
-                var stream = new global::Antlr.Runtime.ANTLRStringStream(source);       
-                PsimulexLexer lexer = new PsimulexLexer(stream);
-                PsimulexParser p = new PsimulexParser(new global::Antlr.Runtime.CommonTokenStream(lexer));
-
-                PsimulexParser.compilationUnit_return tree = p.compilationUnit();
-                //PsimulexParser.block_return tree = p.block();
-                //PsimulexParser.expression_return tree = p.expression();
-
-                var treeAdaptor = p.TreeAdaptor;
-
-                ErrorMessages = p.ErrorMessages;                
-
-                OutputString = ((global::Antlr.Runtime.Tree.CommonTree)tree.Tree).ToStringTree();
-                SyntaxTree = (global::Antlr.Runtime.Tree.CommonTree)tree.Tree;
-
-                #region Added by pody, for temporary use (2008.09.21. 18:40)
-
-                var visitor = new Psimulex.Compiler.AST.PsiCodeGeneratorVisitor(source, "teszt.psi");
-                visitor.Visit(TreeConverter.FromCommonTreeToPsiNode(SyntaxTree) as AST.CompilationUnitNode);
-                result.CompiledProgram = visitor.Program;
-                result.CompilationUnitList = visitor.CompilationUnitList;
-                #endregion
-
-                #region Added by pody, for temporary use (2008.10.06. 11:48)
-
-                visitor.Program.Program.AddFunctions(visitor.UserDefinedFunctionList);
-                
-                #endregion
-            }
-            catch (Exception e)
-            {
-                ExceptionMessages = e.ToString();
-            }
-            
-            return result;
-        }
-
-        #endregion
-        */
-
         public CompileResult Compile(string source, string sourceFileName)
         {
-            return Compile(source, sourceFileName, new CommandPositionChanges(), new List<string>(),
-                new List<CompilationUnit>(), new List<UserDefinedFunction>(), true);
+            return Compile(new CompilerDTO{ Source = source, SourceFileName = sourceFileName }, true);
         }
 
-        public CompileResult Compile
-            (
-            string source, string sourceFileName,
-            CommandPositionChanges commandPositionChanges,
-            List<string> globalVariableList,
-            List<CompilationUnit> compilationUnitList,
-            List<UserDefinedFunction> userDefinedFunctionList
-            )
+        public CompileResult Compile(CompilerDTO dto)
         {
-            return Compile(source, sourceFileName, commandPositionChanges,
-                globalVariableList, compilationUnitList, userDefinedFunctionList, true);
+            return Compile(dto, true);
         }
 
-        public CompileResult Compile
-            (
-            string source, string sourceFileName,
-            CommandPositionChanges commandPositionChanges,
-            List<string> globalVariableList,
-            List<CompilationUnit> compilationUnitList,
-            List<UserDefinedFunction> userDefinedFunctionList,
-            bool compileFuncVarTree
-            )
+        public CompileResult Compile(CompilerDTO dto, bool compileFuncVarTree)
         {
             CompileResult = new CompileResult();
 
-            GenerateMicrolexCode(source, sourceFileName, commandPositionChanges,
-                globalVariableList, compilationUnitList, userDefinedFunctionList);
+            GenerateMicrolexCode(dto);
 
-            if(compileFuncVarTree)
+            if (compileFuncVarTree)
                 CompileResult.PsiFunctionsVariablesNodeList = GenerateFuncVarTree(CompileResult.CompilationUnitList);
 
             return CompileResult;
         }
 
-        public void GenerateMicrolexCode
-            (
-            string source, string sourceFileName,
-            CommandPositionChanges commandPositionChanges,
-            List<string> globalVariableList,
-            List<CompilationUnit> compilationUnitList,
-            List<UserDefinedFunction> userDefinedFunctionList
-            )
+        public void GenerateMicrolexCode(CompilerDTO dto)
         {
-            var result = ANTLRCompiler.CompileCompilationUnit(source, sourceFileName);
-            var visitor = new PsiCodeGeneratorVisitor
-                (
-                source, sourceFileName, result.ANTLRExceptionText, result.ANTLRErrorMessages,
-                commandPositionChanges, globalVariableList, compilationUnitList, userDefinedFunctionList
-                );
+            var result = ANTLRCompiler.CompileCompilationUnit(dto.Source, dto.SourceFileName);
+            var visitor = new PsiCodeGeneratorVisitor(dto, result.ANTLRExceptionText, result.ANTLRErrorMessages);
 
             try
             {
@@ -149,7 +69,7 @@ namespace VapeTeam.Psimulex.Compiler
                         FromColumn = -1,
                         ToLine = -1,
                         ToColumn = -1,
-                        FileName = sourceFileName
+                        FileName = dto.SourceFileName
                     }
                 });
             }
@@ -168,12 +88,23 @@ namespace VapeTeam.Psimulex.Compiler
 
             foreach (var item in compilationUnitList)
             {
-                var q = new PsiFunctionsVariablesQueryVisitor(item.Source, item.FileName);
-                q.Visit(item.PsiNodeSyntaxTree as CompilationUnitNode);
-                list.AddRange(q.PsiNodeList);
+                if (item.PsiNodeSyntaxTree != null)
+                {
+                    var q = new PsiFunctionsVariablesQueryVisitor(item.Source, item.FileName);
+                    q.Visit(item.PsiNodeSyntaxTree as CompilationUnitNode);
+                    list.AddRange(q.PsiNodeList);
+                }
             }           
 
             return list;
+        }
+
+        /// <summary>
+        /// The last steps on the result befor return.
+        /// </summary>
+        public void FinalizeTheResult()
+        {
+            // AddFunctions, generate some other result etc.
         }
     }
 }

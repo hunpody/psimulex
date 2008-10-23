@@ -70,6 +70,7 @@
     <Compile Include="Compiler.cs" />
     <Compile Include="AntlrTools\NodeTypeFactory.cs" />
     <Compile Include="AntlrTools\TreeConverter.cs" />
+    <Compile Include="CompilerDTO.cs" />
     <Compile Include="Result\CommandPositionChanges.cs" />
     <Compile Include="AST\IPsiNode.cs" />
     <Compile Include="AST\IPsiNodeFactory.cs" />

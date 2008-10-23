@@ -88,28 +88,20 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public PsiCodeGeneratorVisitor
-            (
-            string source, string fileName,
-            string antlrExceptionText, List<string> antlrErrorMessages,
-            CommandPositionChanges commandPositionChanges,
-            List<string> globalVariableList,
-            List<CompilationUnit> compilationUnitList,
-            List<UserDefinedFunction> userDefinedFunctionList
-            )
+        public PsiCodeGeneratorVisitor(CompilerDTO dto, string antlrExceptionText, List<string> antlrErrorMessages)
         {
             Program = ProgramBuilder.Create();
 
-            Source = source;
-            FileName = fileName;
+            Source = dto.Source;
+            FileName = dto.SourceFileName;
 
-            UserDefinedFunctionList = userDefinedFunctionList;
-            CommandPositionChanges = commandPositionChanges;
-            CompilationUnitList = compilationUnitList;
+            UserDefinedFunctionList = dto.UserDefinedFunctionList;
+            CommandPositionChanges = dto.CommandPositionChanges;
+            CompilationUnitList = dto.CompilationUnitList;
 
             InitHelpers();
 
-            globalVariableNameList = globalVariableList;
+            globalVariableNameList = dto.GlobalVariableList;
 
             CurrentCompilationUnit = new CompilationUnit
             {
@@ -128,6 +120,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             CompilationUnitList.Add(CurrentCompilationUnit);
         }
+
+        /*Program build Helpers*/
+        #region Program build Helpers
 
         public void AddCommand(ICommand command)
         {
@@ -158,6 +153,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
+        #endregion        
+
+        /*Message generators*/
+        #region Message generators
+
         public void AddInformation(string msg, NodeValueInfo info)
         {
             CurrentCompilationUnit.CompilerMessages.Informations.Add(new Information { MessageText = msg, Interval = info.ToInterval(FileName) });
@@ -178,6 +178,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddError(error, info);
             throw ex;
         }
+
+        #endregion
 
         /*Highlighter, Stepping Helpers*/
         #region Highlighter, Stepping Helpers
@@ -223,7 +225,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private List<int> lineLengthList;
 
         private List<string> globalVariableNameList;
-        private List<string> currentLocalVariableNameList;
+        private List<List<string>> currentLocalVariableNameList;
 
         private void InitHelpers()
         {
@@ -245,7 +247,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             lastCompiledUserDefinedFunction = new UserDefinedFunction();
             lineLengthList = SourceInfoUtils.FindLineLengths(Source);
             globalVariableNameList = new List<string>();
-            currentLocalVariableNameList = new List<string>();
+            currentLocalVariableNameList = new List<List<string>>();
         }
 
         private string SplitQuotes(string s)
@@ -267,7 +269,71 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         #endregion
-        
+
+        /*Name collision checkings helpers*/
+        #region Name collision checkings helpers
+
+        private void NewScope()
+        {
+            currentLocalVariableNameList.Add(new List<string>());
+        }
+
+        private void DeleteScope()
+        {
+            currentLocalVariableNameList.RemoveAt(currentLocalVariableNameList.Count - 1);
+        }
+
+        private bool ExistsLocalVariableName(string name)
+        {
+            foreach (var varList in currentLocalVariableNameList)
+                foreach (var varName in varList)
+                    if (varName == name)
+                        return true;
+
+            return false;
+        }
+
+        private void AddLocalVariableName(string name)
+        {
+            currentLocalVariableNameList.Last<List<string>>().Add(name);
+        }
+
+        private void CheckAndAddLocalVariableName(string name, NodeValueInfo nvi)
+        {
+            if (ExistsLocalVariableName(name))
+                AddWarning(string.Format("Local variable name \"{0}\" is already exist in the current scope.", name), nvi);
+            else
+                AddLocalVariableName(name);
+        }
+
+        private void CheckGlobalVariableName(string name, NodeValueInfo nvi)
+        {
+            if (globalVariableNameList.Contains(name))
+                AddWarning(string.Format("Global variable name \"{0}\" is already exist.", name), nvi);
+            else
+                globalVariableNameList.Add(name);
+        }
+
+        private bool IsCompiledFunction(string name, int parameterCount, NodeValueInfo nvi)
+        {
+            if (UserDefinedFunctionList.Find(func =>
+                func.Name == name && func.ParameterCount == parameterCount) != null)
+            {
+                AddWarning(string.Format("Function \"{0}\" with {1} parameter is already exist, the compilation of this function will skipped.", name), nvi);
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsCompiledCompilationUnit(string name)
+        {
+            if (CompilationUnitList.Find(cu => cu.FileName == name) == null)
+                return false;
+            return true;
+        }
+
+        #endregion
+
         #endregion
 
         #region IPsiVisitor Members
@@ -299,8 +365,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
         public void Visit(SimpleProgramNode node) 
         {
+            NewScope();
+
             isCurrentCompiledTheMainProgram = true;
-            VisitChildren(node); 
+            VisitChildren(node);
+
+            DeleteScope();
         }
 
         public void Visit(MultiFuncionalProgramNode node)
@@ -314,6 +384,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(new Call("main", 0));
             AddCommand(new Return(false));
         }
+
         public void Visit(ImportDeclarationNode node)
         {
             // Message
@@ -329,26 +400,40 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             foreach (IPsiNode child in node.Children)
             {
-                Compiler c = new Compiler();
-                string importFileName = SplitQuotes( child.Value);
+                string importFileName = SplitQuotes(child.Value);
 
-                if (!File.Exists(importFileName))
+                if (!IsCompiledCompilationUnit(importFileName))
                 {
-                    AddError(string.Format("Import file not found \"{0}\" !", importFileName), child.NodeValueInfo);
-                }
-                else
-                {
-                    string source = "";
-                    using (StreamReader sr = new StreamReader(importFileName))
+                    Compiler c = new Compiler();
+
+                    if (!File.Exists(importFileName))
                     {
-                        source = sr.ReadToEnd();
-                        sr.Close();
-                    }                  
+                        AddError(string.Format("Import file not found \"{0}\" !", importFileName), child.NodeValueInfo);
+                    }
+                    else
+                    {
+                        string source = "";
+                        using (StreamReader sr = new StreamReader(importFileName))
+                        {
+                            source = sr.ReadToEnd();
+                            sr.Close();
+                        }
 
-                    c.Compile(source, importFileName, CommandPositionChanges, globalVariableNameList,
-                        CompilationUnitList, UserDefinedFunctionList, false);
+                        c.Compile(
+                                    new CompilerDTO
+                                    {
+                                        Source = source,
+                                        SourceFileName = importFileName,
+                                        CommandPositionChanges = CommandPositionChanges,
+                                        GlobalVariableList = globalVariableNameList,
+                                        CompilationUnitList = CompilationUnitList,
+                                        UserDefinedFunctionList = UserDefinedFunctionList
+                                    }
+                                    , false
+                                 );
 
-                    Program.Program.CommandList.AddRange(c.CompileResult.CompiledProgram.CommandList);
+                        Program.Program.CommandList.AddRange(c.CompileResult.CompiledProgram.CommandList);
+                    }
                 }
             }
         }
@@ -436,14 +521,26 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 string global = "Global Variable Found : " + lastCompiledMember.ToString();
                 AddInformation(global, node.NodeValueInfo);
 
-                // Globális változó felvétele a lastCompiledMember -ból
-                // ...
+                CheckGlobalVariableName(lastCompiledMember.Name, node.NodeValueInfo);
+
+                // Add Global Variable declaration or Initialization to the progrem
+                if(lastCompiledMember.IsInitialized)
+                    AddCommand(new Push(lastCompiledMember.Value),
+                        new Initialize(lastCompiledMember.Name, lastCompiledMember.Type));
+                else
+                    if (lastCompiledMember.DimensionCount > 0)
+                        AddCommand(new ArrayDeclare(lastCompiledMember.Name,
+                            lastCompiledMember.Type, lastCompiledMember.DimensionCount));
+                    else
+                        AddCommand(new Declare(lastCompiledMember.Name, lastCompiledMember.Type));
             }
         }
 
         public void Visit(FunctionDeclarationsNode node){ VisitChildren(node); }
         public void Visit(FunctionDeclarationNode node)
         {
+            NewScope();
+
             // Start Compile a new function
             lastCompiledUserDefinedFunction = new UserDefinedFunction();
 
@@ -474,37 +571,43 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // FunctionParameterList
             node.FunctionParameterList.Accept(this);
 
-            // FunctionBlock
-            node.FunctionBlock.Accept(this);
+            if (!IsCompiledFunction(lastCompiledUserDefinedFunction.Name,
+                lastCompiledUserDefinedFunction.ParameterCount, node.NodeValueInfo))
+            {
+                // FunctionBlock
+                node.FunctionBlock.Accept(this);
 
-            // Set Up rest of the function property-s.
-            lastCompiledUserDefinedFunction.ReturnValue =
-                new VariableDescriptor
-                    {
-                        Type = new TypeIdentifier
-                            {
-                                TypeEnum = functionType,
-                                TypeName = functionTypeName
-                            },
-                        IsArray = functionDimensionCount == 0 ? false : true,
-                        IsDynamic = functionIsDynamic,
-                        DimensionCount = functionDimensionCount,
-                        DimensionList = functionDimensionList,
-                        IsReference = functionIsReferenceType,
-                        Name = ""                        
-                    };
-                        
-            if (lastCompiledUserDefinedFunction.Commands.Count == 0
-                ||
-                lastCompiledUserDefinedFunction.Commands
-                [
-                    lastCompiledUserDefinedFunction.Commands.Count - 1
-                ].GetType() != typeof(Return))            
-                
+                // Set Up rest of the function property-s.
+                lastCompiledUserDefinedFunction.ReturnValue =
+                    new VariableDescriptor
+                        {
+                            Type = new TypeIdentifier
+                                {
+                                    TypeEnum = functionType,
+                                    TypeName = functionTypeName
+                                },
+                            IsArray = functionDimensionCount == 0 ? false : true,
+                            IsDynamic = functionIsDynamic,
+                            DimensionCount = functionDimensionCount,
+                            DimensionList = functionDimensionList,
+                            IsReference = functionIsReferenceType,
+                            Name = ""
+                        };
+
+                if (lastCompiledUserDefinedFunction.Commands.Count == 0
+                    ||
+                    lastCompiledUserDefinedFunction.Commands
+                    [
+                        lastCompiledUserDefinedFunction.Commands.Count - 1
+                    ].GetType() != typeof(Return))
+
                     lastCompiledUserDefinedFunction.Commands.Add(new Return(false));
-           
-            // Add new compiled function to the UserDefinedCunctionList
-            UserDefinedFunctionList.Add(lastCompiledUserDefinedFunction);
+
+                // Add new compiled function to the UserDefinedCunctionList
+                UserDefinedFunctionList.Add(lastCompiledUserDefinedFunction);
+            }
+
+            DeleteScope();
         }
 
         public void Visit(FormalParameterListNode node) { VisitChildren(node); }
@@ -527,6 +630,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // Parameter Name
             string parameterName = node.ParameterName.Value;
+
+            // Check Function Parameter
+            if (ExistsLocalVariableName(parameterName))
+                AddError(string.Format("Function {0} has already a parameter named {1}!",
+                    lastCompiledUserDefinedFunction.Name, parameterName), node.NodeValueInfo);
+            else
+                AddLocalVariableName(parameterName);
 
             lastCompiledUserDefinedFunction.Parameters.Add
                 (new VariableDescriptor
@@ -585,7 +695,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(ConditionalBranchNode node)
         {
             // AddCommand( new PushState() );
-
+            NewScope();
+            
             node.ConditionalBranchCondition.Accept(this);
 
             RelativeJumpIfFalse falseConditionJump = new RelativeJumpIfFalse(0);
@@ -615,6 +726,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             conditionCount++;
 
             // AddCommand( new PopState() );
+            DeleteScope();
         }
         
         public void Visit(IfBranchNode node) { VisitChildren(node); }
@@ -623,11 +735,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(ElseBranchNode node) 
         {
             // AddCommand( new PushState() );
+            NewScope();
 
             // ElseCore
             node.Left.Accept(this);
 
             // AddCommand( new PopState() );
+            DeleteScope();
         }
 
         public void Visit(PForStatementNode node)
@@ -638,6 +752,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(ForStatementNode node) 
         {
             // AddCommand(new PushState());
+            NewScope();
 
             // ForInitialization
             node.ForInitialization.Accept(this);
@@ -668,6 +783,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
             
             // AddCommand(new PopState());
+            DeleteScope();
         }
 
         public void Visit(ForInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
@@ -677,6 +793,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(DoStatementNode node) 
         {
             // AddCommand(new PushState());
+            NewScope();
 
             int beginingAddress = CurrentFunctionSize;
 
@@ -699,11 +816,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(rj);
 
             // AddCommand(new PopState());
+            DeleteScope();
         }
 
         public void Visit(WhileStatementNode node) 
         {
             // AddCommand(new PushState());
+            NewScope();
 
             int conditionAddress = CurrentFunctionSize;
 
@@ -728,6 +847,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             // AddCommand(new PopState());
+            DeleteScope();
         }
 
         public void Visit(PForEachStatementNode node)
@@ -738,6 +858,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(ForEachStatementNode node)
         {
             // AddCommand(new PushState());
+            NewScope();
 
             RegisterIntervalChange(node.ForEachInitialization);
 
@@ -750,6 +871,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // IteratorVariableName
             string forEachRunningVariableName = node.ForEachRunningVariableName.Value;
+
+            // Check variable name
+            CheckAndAddLocalVariableName(forEachRunningVariableName, node.NodeValueInfo);
 
             // IteratorVariableDeclaration
             AddCommand(new Declare(forEachRunningVariableName, forEachRunningVariableType));
@@ -788,6 +912,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             // AddCommand(new PopState());
+            DeleteScope();
         }
 
         public void Visit(ForEachInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
@@ -796,6 +921,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(LoopStatementNode node) 
         {
             // AddCommand(new PushState());
+            NewScope();
 
             // LoopIteratorInitialization
             node.LoopIteratorInitialization.Accept(this);
@@ -835,6 +961,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             // AddCommand(new PopState());
+            DeleteScope();
         }
 
         public void Visit(LoopInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
@@ -918,6 +1045,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Name
             string varName = node.VariableName.Value;
 
+            // Check variable name
+            CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
+
             // Expression
             node.VariableInitialValue.Accept(this);
 
@@ -951,6 +1081,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // Name
             string varName = node.VariableName.Value;
+
+            // Check variable name
+            CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
 
             // Declare
             if (varArrayIsDynamic) AddError("Dynamic array declaration is not supported yet!", node.NodeValueInfo);

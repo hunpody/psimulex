@@ -25,7 +25,7 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
-        public int ParametersCount
+        public int ParameterCount
         {
             get
             {
