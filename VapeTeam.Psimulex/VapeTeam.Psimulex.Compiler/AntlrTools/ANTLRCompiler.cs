@@ -32,7 +32,10 @@ namespace VapeTeam.Psimulex.Compiler.AntlrTools
                 PsimulexParser parser = new PsimulexParser(tokenStreem);
 
                 // Parse Compilation Unit
-                PsimulexParser.compilationUnit_return tree = parser.compilationUnit();            
+                PsimulexParser.compilationUnit_return tree = parser.compilationUnit();
+         
+                // Save Antlr Messages
+                antlrErrorMessages = parser.ErrorMessages;
 
                 // Syntax Tree
                 CommonTree syntaxTree = (CommonTree)tree.Tree;
