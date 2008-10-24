@@ -93,6 +93,11 @@ namespace VapeTeam.Psimulex.Core.Libraries
             Print(s + "\r\n");
         }
 
+        public string Input()
+        {
+            return "Input";
+        }
+
         #endregion
     }
 }

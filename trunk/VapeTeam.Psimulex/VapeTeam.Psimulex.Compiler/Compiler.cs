@@ -69,15 +69,28 @@ namespace VapeTeam.Psimulex.Compiler
 
             if (result.ANTLRExceptionText != "" || result.ANTLRErrorMessages.Count != 0)
             {
-                CompileResult.CompilationUnitList.Add(new CompilationUnit
-                {
-                    ANTLRErrorMessages = result.ANTLRErrorMessages,
-                    ANTLRExceptionText = result.ANTLRExceptionText
-                });
+                var msgList = new MessageList();
+
+                result.ANTLRErrorMessages.ForEach(x =>
+                    msgList.AntlrErrors.Add(new AntlrError
+                    {
+                        Interval = new Interval() { FileName = dto.SourceFileName },
+                        MessageText = x
+                    }));
+
+                if (result.ANTLRExceptionText != "")
+                    msgList.AntlrErrors.Add(new AntlrError
+                    {
+                        Interval = new Interval(),
+                        MessageText = result.ANTLRExceptionText
+                    });
+
+                dto.CompilationUnitList.Add(new CompilationUnit{CompilerMessages = msgList});
+                CompileResult.CompilationUnitList = dto.CompilationUnitList;
                 return;
             }
 
-            var visitor = new PsiCodeGeneratorVisitor(dto, result.ANTLRExceptionText, result.ANTLRErrorMessages);
+            var visitor = new PsiCodeGeneratorVisitor(dto/*, result.ANTLRExceptionText, result.ANTLRErrorMessages*/);
 
             try
             {
@@ -103,7 +116,7 @@ namespace VapeTeam.Psimulex.Compiler
             CompileResult.CompiledProgram = visitor.Program;
             CompileResult.CommandPositionChanges = visitor.CommandPositionChanges;
             CompileResult.CompilationUnitList = visitor.CompilationUnitList;
-            CompileResult.UserDefinedFunctionsList = visitor.UserDefinedFunctionList;            
+            CompileResult.UserDefinedFunctionList = visitor.UserDefinedFunctionList;            
         }
 
         public List<PsiFunctionsVariablesNode> GenerateFuncVarTree(List<CompilationUnit> compilationUnitList)
@@ -129,7 +142,14 @@ namespace VapeTeam.Psimulex.Compiler
         public void FinalizeTheResult()
         {
             // Add functions to the program
-            CompileResult.CompiledProgram.AddFunctions(CompileResult.UserDefinedFunctionsList);
+            CompileResult.CompiledProgram.AddFunctions(CompileResult.UserDefinedFunctionList);
+            foreach (var item in CompileResult.CompilationUnitList)
+            {
+                CompileResult.CompilerMessages.Informations.AddRange(item.CompilerMessages.Informations);
+                CompileResult.CompilerMessages.Warnings.AddRange(item.CompilerMessages.Warnings);
+                CompileResult.CompilerMessages.Errors.AddRange(item.CompilerMessages.Errors);
+            }
+
 
             // Merge The messageLists
             // ...

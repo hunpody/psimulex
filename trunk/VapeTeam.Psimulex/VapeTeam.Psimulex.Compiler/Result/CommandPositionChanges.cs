@@ -96,6 +96,17 @@ namespace VapeTeam.Psimulex.Compiler.Result
 
         public int StartIndex { get; set; }
         public int EndIndex { get; set; }
+
+        public Interval()
+        {
+            FileName = "";
+            FromLine = -1;
+            FromColumn = -1;
+            ToLine = -1;
+            ToColumn = -1;
+            StartIndex = -1;
+            EndIndex = -1;
+        }
     }
 
     /// <summary>

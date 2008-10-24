@@ -29,17 +29,33 @@ namespace VapeTeam.Psimulex.Compiler.AST
     }
 
     [Serializable]
-    public class PsiFunctionsVariablesNode : PsiNode
+    public class PsiFunctionsVariablesNode
     {
         public BlockType BlockType { get; set; }
         public Interval Interval { get; set; }
+
         public bool IsMarked { get; set; }
         public bool[] ViewConfig { get; set; }
 
+        public string Value { get; set; }
+
+        public PsiFunctionsVariablesNode Parent { get; set; }
+        public List<PsiFunctionsVariablesNode> Children { get; set; }
+        public int ChildrenCount { get { return Children.Count; } }
+
         public PsiFunctionsVariablesNode()
         {
-            Init();
+            Children = new List<PsiFunctionsVariablesNode>();
             IsMarked = true;
+        }
+
+        public void Add(PsiFunctionsVariablesNode child)
+        {
+            if (!Children.Contains(child))
+            {
+                child.Parent = this;
+                Children.Add(child);
+            }
         }
 
         public TreeViewItem ToTreeView(List<KeyValuePair<PsiFunctionsVariablesNode,CheckBox>> list)

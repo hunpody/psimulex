@@ -36,8 +36,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public IPsiNode PsiNodeSyntaxTree { get; set; }
 
-        public string ANTLRExceptionText { get; set; }
-        public List<string> ANTLRErrorMessages { get; set; }
+        //public string ANTLRExceptionText { get; set; }
+        //public List<string> ANTLRErrorMessages { get; set; }
         public MessageList CompilerMessages { get; set; }
 
         public CompilationUnit()
@@ -46,8 +46,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
             Source = "";
             CleanedSourceText = "";
             PsiNodeSyntaxTree = null;
-            ANTLRErrorMessages = new List<string>();
-            ANTLRExceptionText = "";
+            //ANTLRErrorMessages = new List<string>();
+            //ANTLRExceptionText = "";
             CompilerMessages = new MessageList();
         }
     }
@@ -89,7 +89,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
         
-        public PsiCodeGeneratorVisitor(CompilerDTO dto, string antlrExceptionText, List<string> antlrErrorMessages)
+        public PsiCodeGeneratorVisitor(CompilerDTO dto/*, string antlrExceptionText, List<string> antlrErrorMessages*/)
         {
             Program = ProgramBuilder.Create();
 
@@ -109,16 +109,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
             {
                 Source = Source,
                 CleanedSourceText = Source,
-                FileName = SourceFileName,
-                ANTLRExceptionText = antlrExceptionText,
-                ANTLRErrorMessages = antlrErrorMessages
+                FileName = SourceFileName
+                //,ANTLRExceptionText = antlrExceptionText,
+                //ANTLRErrorMessages = antlrErrorMessages
             };
 
             CurrentCompilationUnit.Source = Source;
             CurrentCompilationUnit.CleanedSourceText = Source;
             CurrentCompilationUnit.FileName = SourceFileName;
-            CurrentCompilationUnit.ANTLRExceptionText = antlrExceptionText;
-            CurrentCompilationUnit.ANTLRErrorMessages = antlrErrorMessages;
+            //CurrentCompilationUnit.ANTLRExceptionText = antlrExceptionText;
+            //CurrentCompilationUnit.ANTLRErrorMessages = antlrErrorMessages;
 
             CompilationUnitList.Add(CurrentCompilationUnit);
         }
