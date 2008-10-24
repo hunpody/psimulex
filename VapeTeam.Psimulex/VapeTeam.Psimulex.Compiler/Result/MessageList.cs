@@ -10,17 +10,20 @@ namespace VapeTeam.Psimulex.Compiler.Result
         public List<Information> Informations { get; set; }
         public List<Warning> Warnings { get; set; }
         public List<Error> Errors { get; set; }
+        public List<AntlrError> AntlrErrors { get; set; }
 
         public MessageList()
         {
             Informations = new List<Information>();
             Warnings = new List<Warning>();
             Errors = new List<Error>();
+            AntlrErrors = new List<AntlrError>();
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            AntlrErrors.ForEach(item => sb.AppendLine(item.ToString()));
             Informations.ForEach(item => sb.AppendLine(item.ToString()));
             Warnings.ForEach(item => sb.AppendLine(item.ToString()));
             Errors.ForEach(item => sb.AppendLine(item.ToString()));
@@ -32,7 +35,8 @@ namespace VapeTeam.Psimulex.Compiler.Result
     {
         Information,
         Warning,
-        Error
+        Error,
+        Antlr
     }
 
     public class Message
@@ -71,5 +75,10 @@ namespace VapeTeam.Psimulex.Compiler.Result
     {
         public CompilerErrorCode ErrorCode { get; set; }
         public override MessageType Type { get { return MessageType.Error; } }
+    }
+
+    public class AntlrError : Message
+    {
+        public override MessageType Type { get { return MessageType.Antlr; } }
     }
 }

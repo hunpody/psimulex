@@ -85,14 +85,14 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
             foreach (var item in compiler.CompileResult.CompilationUnitList)
             {
-                foreach (var antlr in item.ANTLRErrorMessages)
+                /*foreach (var antlr in item.ANTLRErrorMessages)
                 {
                     resultTextBox.Text += antlr + endl;
                 }
 
                 if (item.ANTLRExceptionText != "")
                     resultTextBox.Text += "ANTLR Error : " + item.ANTLRExceptionText + endl;
-
+                */
                 foreach (var info in item.CompilerMessages.Informations)
                 {
                     resultTextBox.Text += info.ToString() + endl;
@@ -106,6 +106,11 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                 foreach (var err in item.CompilerMessages.Errors)
                 {
                     resultTextBox.Text += err.ToString() + endl;
+                }
+
+                foreach (var an in item.CompilerMessages.AntlrErrors)
+                {
+                    resultTextBox.Text += an.ToString() + endl;
                 }
             }
         }
@@ -162,48 +167,45 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private void Step()
         {
-            if (visitor != null)
+            // Tabbolás , scrolozás jólenne ...
+            if (currentCommandToHighLight < compiler.CompileResult.CommandPositionChanges.CommandInfoList.Count)
             {
-                if (currentCommandToHighLight < visitor.CommandPositionChanges.CommandInfoList.Count)
-                {
-                    Interval iv = visitor.CommandPositionChanges.CommandInfoList[currentCommandToHighLight].Interval;
+                Interval iv = compiler.CompileResult.CommandPositionChanges.CommandInfoList[currentCommandToHighLight].Interval;
 
-                    editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.Red);
-                    editor.Refresh();
+                editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.Red);
+                editor.Refresh();
 
-                    editor.Document.MarkerStrategy.AddMarker
+                editor.Document.MarkerStrategy.AddMarker
+                   (
+                   new ICSharpCode.TextEditor.Document.TextMarker
                        (
-                       new ICSharpCode.TextEditor.Document.TextMarker
-                           (
-                           iv.StartIndex, iv.EndIndex - iv.StartIndex,
-                           ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
-                           System.Drawing.Color.Red
-                           )
-                       );
-                    editor.Refresh();
+                       iv.StartIndex, iv.EndIndex - iv.StartIndex,
+                       ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
+                       System.Drawing.Color.Red
+                       )
+                   );
+                editor.Refresh();
 
-                    ++currentCommandToHighLight;
-                }
-                else
-                {
-                    currentCommandToHighLight = 0;
-                    editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.Red);
-                    editor.Refresh();
-                }
+                ++currentCommandToHighLight;
+            }
+            else
+            {
+                currentCommandToHighLight = 0;
+                editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.Red);
+                editor.Refresh();
             }
         }
 
         private void ShowProgramString()
         {
-            /*
             var window = new programStringWindow();
-
+            
             string funcString = "";
 
-            foreach (var item in visitor.UserDefinedFunctionList)
-            {
-                int lineNumber = visitor.Program.Program.CommandList.Count;
-
+            int lineNumber = compiler.CompileResult.CompiledProgram.CommandList.Count;
+            foreach (var item in compiler.CompileResult.UserDefinedFunctionList)
+            {                
+                funcString += "\r\n" + item.Name + "(ParameterCount : " + item.ParameterCount + ")\r\n";
                 foreach (VapeTeam.Psimulex.Core.Commands.ICommand command in item.Commands)
                 {
                     string line = "";
@@ -214,14 +216,44 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             }
 
             window.ProgramString =
-                "*** Program Microlex Code ***\r\n\r\n" + visitor.Program.ToString() + funcString +
+                "*** Program Microlex Code ***\r\n\r\n" +
+                compiler.CompileResult.CompiledProgram.ToString() + funcString +
+                "\r\n*** Compiler Messages ***\r\n\r\n";
 
+            string endl = "\n";
+            foreach (var item in compiler.CompileResult.CompilationUnitList)
+            {
+                /*
+                foreach (var antlr in item.ANTLRErrorMessages)
+                {
+                    window.ProgramString += antlr + endl;
+                }
 
-                //"\r\n*** TypeOf CommandObjects ***\r\n\r\n" + types +
-                "\r\n*** Compiler Messages ***\r\n\r\n" + visitor.Messages.ToString();
+                if (item.ANTLRExceptionText != "")
+                    window.ProgramString += "ANTLR Error : " + item.ANTLRExceptionText + endl;
+                */
+                foreach (var info in item.CompilerMessages.Informations)
+                {
+                    window.ProgramString += info.ToString() + endl;
+                }
+
+                foreach (var warn in item.CompilerMessages.Warnings)
+                {
+                    window.ProgramString += warn.ToString() + endl;
+                }
+
+                foreach (var err in item.CompilerMessages.Errors)
+                {
+                    window.ProgramString += err.ToString() + endl;
+                }
+
+                foreach (var an in item.CompilerMessages.AntlrErrors)
+                {
+                    window.ProgramString += an.ToString() + endl;
+                }
+            }
 
             window.Show();
-            */
         }
 
         private void ShowSyntaxTree()

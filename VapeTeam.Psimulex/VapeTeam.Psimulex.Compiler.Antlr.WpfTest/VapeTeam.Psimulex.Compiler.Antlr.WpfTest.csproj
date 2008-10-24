@@ -91,12 +91,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FinishedComponents\Pair.cs" />
+    <Compile Include="InputTools\InputConvert.cs" />
     <Compile Include="mainWindow.xaml.cs">
       <DependentUpon>mainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="programStringWindow.xaml.cs">
       <DependentUpon>programStringWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UnderConstructionComponents\DiffUtil.cs" />
     <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfiguration.cs" />
     <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfigurationWindow.xaml.cs">
       <DependentUpon>FunctionVariableVisibleConfigurationWindow.xaml</DependentUpon>
@@ -122,6 +124,7 @@
     <Compile Include="FinishedComponents\SyntaxTreeWindow.xaml.cs">
       <DependentUpon>SyntaxTreeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UnderConstructionComponents\VariableVisualisationConfiguration.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -14,15 +14,9 @@ ToDo:
 - Command Weight Config Window ( Generated NumericUpAndDown Controls WithLabels same as SyntaxConfig ) (Vari)
 - DynamicSyntaxHiglight Rule Extension (For user def types)
 
-- Compiler Local Variable Declaration collision Check ( Vari )
 
-- Compiler Imports ( Vari )
-- Compiler FunctionCall Parameter Count Check ( Vari )
-- Compiler Warnings, Errors output. ( Vari )
-- Compiler Exceptions -> STD Erors if not needed An abort. ( Vari )
 - Compiler Check if the type name is exists (primary, builtin and user defined type list)
 - Compiler Interval corrections in higher levels ( Brackts, keywords, etc )
-- FuncVArCompileNode To Own Node not IPsiNode
 - Plugin InterFace for Inputs -> Excel. Plugin and/or Drag And Drop technik with selected area. ( Vari )
 
 - Compiler Consistent Checker
@@ -33,10 +27,15 @@ ToDo:
 Finished:
 ---------
 
++ FuncVArCompileNode To Own Node not IPsiNode
 + TesztEnvironment In WPF SandBox (Vari)
 + CommandPosition Changes Functions to other class. ( Vari )
 + PsiNodeTests new AutoTestGen
 + Compiler Result ( Vari )
++ Compiler Exceptions -> STD Erors if not needed An abort. ( Vari )
++ Compiler Local Variable Declaration collision Check ( Vari )
++ Compiler Warnings, Errors output. ( Vari )
++ Compiler Imports ( Vari )
 
 UnderConstruction:
 ------------------

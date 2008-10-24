@@ -32,19 +32,26 @@ namespace VapeTeam.Psimulex.Compiler.Result
         /// <summary>
         /// User defined functions list.
         /// </summary>
-        public List<UserDefinedFunction> UserDefinedFunctionsList { get; set; }
-
-        
+        public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
+                
         // public UserDefinedTypesList ...
 
-        // Additional Getter on teh list unions Example Warnings etc
+
+        // Additional Properties //
+
+        public MessageList CompilerMessages { get; set; }
+        public List<Information> Informations { get { return CompilerMessages.Informations; } }
+        public List<Warning> Warnings { get { return CompilerMessages.Warnings; } }
+        public List<Error> Errors { get { return CompilerMessages.Errors; } }
 
         public CompileResult()
         {
             CompiledProgram = new Program();
             CompilationUnitList = new List<CompilationUnit>();
             CommandPositionChanges = new CommandPositionChanges();
-            UserDefinedFunctionsList = new List<UserDefinedFunction>();
+            UserDefinedFunctionList = new List<UserDefinedFunction>();
+
+            CompilerMessages = new MessageList();
         }
     }
 }

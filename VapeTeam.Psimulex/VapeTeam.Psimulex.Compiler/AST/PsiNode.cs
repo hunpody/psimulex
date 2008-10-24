@@ -26,7 +26,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
     /// <summary>
     /// Common PsiAST Tree Node
     /// </summary>
-    [Serializable]
     public class PsiNode : IPsiNode
     {
         #region IPsiNode Members
