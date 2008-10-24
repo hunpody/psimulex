@@ -60,6 +60,106 @@ namespace VapeTeam.Psimulex.Compiler.Tests
         //
         #endregion
 
+
+        [TestMethod]
+        public void PriorityQueue_1()
+        {
+            string src =
+            @"
+pqueue p;
+p.Insert(1,2);
+p.Insert(4,5);
+pqueue q;
+q.Insert(4,5);
+q.Insert(1,2);
+write(p==q);
+q.Insert(9,0);
+write(p==q);
+q.Clear();
+q = p;
+write(q==p);
+p.removemax();
+writeline(q==p);
+write((list)(p + 5 + 6 + 7));
+";
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"True False True False
+(2, 5, 6, 7) ", result);
+        }
+
+
+
+        [TestMethod]
+        public void PriorityQueue_2()
+        {
+            string src =
+            @"
+pqueue p;
+p.enqueue(2,5);
+p.enqueue(5,9);
+p.enqueue(-3,155);
+write(p[0] + "" "" + p[2]);
+write(p.min == 155);
+write(p.max == 9);
+write(p.size == 3);
+p.removemax();
+write(p);
+p.removemin();
+write(p);
+write(p[0]);
+
+";
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"9 155 True True True <(Priority: 2, Value: 5), (Priority: -3, Value: 155)> <(Priority: 2, Value: 5)> 5 ", result);
+        }
+
+        
+        [TestMethod]
+        public void PriorityQueue_3()
+        {
+            string src =
+            @"
+pqueue p;
+p.Insert(1,2);
+p.Insert(3,4);
+pqueue q = p;
+q.removemin();
+write(p==q);
+q = q + p;
+writeline(q);
+write(p);
+";
+
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"False <(Priority: 3, Value: 4), (Priority: 3, Value: 4), (Priority: 1, Value: 2)>
+<(Priority: 3, Value: 4), (Priority: 1, Value: 2)> ", result);
+        }
+
+        [TestMethod]
+        public void Tree_01()
+        {
+            string src =
+            @"
+tree t;
+t.Add(5);
+print(t.Children.Size);
+print(t.Children[0].Value);
+t.Children[0].Value = 4;
+print(t.Children[0].Value);
+t.Add(15);
+t.Children.Insert(9);
+t.Children[1].Add(12);
+t.Value = ""8"";
+print(""\n"");
+print(t);
+
+";
+
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"154
+8 (4, 15 (12), 9)", result);
+        }
+
         #region Generated Tests
 
 
@@ -240,14 +340,13 @@ pq.insert(10,9);
 pq.insert(5,100);
 
 writeline(pq);
-writeline(""GetMax: "" + pq.getmax());
-writeline(""GetMin: "" + pq.getmin());
+writeline(""GetMax: "" + pq.removemax());
+writeline(""GetMin: "" + pq.removemin());
 
 
 writeline(pq);
 writeline(pq.count);
 writeline(pq.isEmpty);
-
 
 queue a;
 queue b;
@@ -255,101 +354,98 @@ writeline(a==b);
 
 ");
 
-            Assert.AreEqual(@"> 3, 2, 1 >
-> 1, 2, 3 >
-> 1, 2, 3, 1, 2, 3 >
+            Assert.AreEqual(@">1, 2, 3>
+>3, 2, 1>
+>3, 2, 1, 3, 2, 1>
 3 1 3 
-> 1, 2, 3, 1, 2 >
+>2, 1, 3, 2, 1>
 5
 False
-> 1, 2, 3, 1 >
-< ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ) >
-Min: 1
-Max: 2
-< ( Key: 10, Value: 9 ), ( Key: 10, Value: 10 ), ( Key: 5, Value: 100 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ) >
-GetMax: 9
-GetMin: 1
-< ( Key: 10, Value: 10 ), ( Key: 5, Value: 100 ), ( Key: 0, Value: 2 ), ( Key: 0, Value: 1 ), ( Key: 0, Value: 3 ), ( Key: 0, Value: 2 ) >
-6
+>2, 3>
+<(Priority: 0, Value: 1), (Priority: 0, Value: 2), (Priority: 0, Value: 3)>
+Min: 3
+Max: 1
+<(Priority: 10, Value: 10), (Priority: 10, Value: 9), (Priority: 5, Value: 100), (Priority: 0, Value: 1), (Priority: 0, Value: 2), (Priority: 0, Value: 3)>
+GetMax: 10
+GetMin: 3
+<(Priority: 10, Value: 9), (Priority: 5, Value: 100), (Priority: 0, Value: 1), (Priority: 0, Value: 2)>
+4
 False
 True
 ", result);
         }
 
+//        [TestMethod]
+//        public void TestGenAt_2008__szeptember_30_15_37_34()
+//        {
+//            var result = Helpers.SystemHelper.CompileAndRun(@"
+//list l;
+//stack s;
+//write(s.isempty);
+//writeline(l.isempty);
+//
+//l.insert(10);
+//s = l;
+//writeline(l);
+//s.push(100);
+//writeline(s);
+//
+//set h;
+//s.push(10);
+//h = s;
+//write(h);
+//write(s);
+//write(l);
+//
+//set a;
+//set b;
+//a.insert(10);
+//a.insert(10);
+//a.insert(20);
+//a.insert(20);
+//a.insert(200);
+//
+//b.insert(20);
+//b.insert(100);
+//b.insert(1);
+//
+//writeLine(a);
+//writeLine(b);
+//
+//writeline(a+b);
+//
+//set d;
+//set e;
+//
+//d.insert(1);
+//d.insert(7);
+//d.insert(3);
+//d.insert(2);
+//
+//writeline(d);
+//d.remove(7);
+//writeline(d);
+//
+//e.insert(2);
+//e.insert(5);
+//e.insert(4);
+//
+//writeline(d/e);
+//
+//
+//");
 
-
-
-        [TestMethod]
-        public void TestGenAt_2008__szeptember_30_15_37_34()
-        {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
-list l;
-stack s;
-write(s.isempty);
-writeline(l.isempty);
-
-l.insert(10);
-s = l;
-writeline(l);
-s.push(100);
-writeline(s);
-
-set h;
-s.push(10);
-h = s;
-write(h);
-write(s);
-write(l);
-
-set a;
-set b;
-a.insert(10);
-a.insert(10);
-a.insert(20);
-a.insert(20);
-a.insert(200);
-
-b.insert(20);
-b.insert(100);
-b.insert(1);
-
-writeLine(a);
-writeLine(b);
-
-writeline(a+b);
-
-set d;
-set e;
-
-d.insert(1);
-d.insert(7);
-d.insert(3);
-d.insert(2);
-
-writeline(d);
-d.remove(7);
-writeline(d);
-
-e.insert(2);
-e.insert(5);
-e.insert(4);
-
-writeline(d/e);
-
-
-");
-
-            Assert.AreEqual(@"True True
-( 10 )
-[ 10, 100 >
-{ 10, 100 } [ 10, 100, 10 > ( 10 ) { 10, 20, 200 }
-{ 20, 100, 1 }
-{ 10, 20, 200, 100, 1 }
-{ 1, 7, 3, 2 }
-{ 1, 3, 2 }
-{ 1, 3 }
-", result);
-        }
+//            Assert.AreEqual(@"True True
+//( 10 )
+//[ 10, 100 >
+//{ 10, 100 } [ 10, 100, 10 > ( 10 ) { 10, 20, 200 }
+//{ 20, 100, 1 }
+//{ 10, 20, 200, 100, 1 }
+//{ 1, 7, 3, 2 }
+//{ 1, 3, 2 }
+//{ 1, 3 }
+//", result);
+//        }
 
 
 

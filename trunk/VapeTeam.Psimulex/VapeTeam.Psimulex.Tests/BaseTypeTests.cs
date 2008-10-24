@@ -932,6 +932,24 @@ namespace VapeTeam.Psimulex.Tests
         }
 
         [TestMethod]
+        public void PriorityQueueErrors_1()
+        {
+            var program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Declare("p", TypeEnum.PriorityQueue),
+                new CallMethod("dequeue"));
+
+            Helpers.AssertionHelpers.AssertThrows<Psimulex.Core.Exceptions.PsimulexCoreException>(
+                () => Helpers.SystemHelper.CreateMachineAndRunProgram(program));
+
+            program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Declare("p", TypeEnum.PriorityQueue),
+                new Indexing(0));
+
+            Helpers.AssertionHelpers.AssertThrows<Psimulex.Core.Exceptions.PsimulexCoreException>(
+                () => Helpers.SystemHelper.CreateMachineAndRunProgram(program));
+        }
+
+        [TestMethod]
         public void Iterators1()
         {
             // Testing array indexing with bad index

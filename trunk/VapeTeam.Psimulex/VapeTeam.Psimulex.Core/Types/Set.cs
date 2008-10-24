@@ -118,9 +118,14 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
+        public override BaseType Clone()
+        {
+            return new Set(rep);
+        }
+
         protected override string DecorateToString(string s)
         {
-            return string.Format("{{ {0} }}", s);
+            return string.Format("{{{0}}}", s);
         }
     }
 }

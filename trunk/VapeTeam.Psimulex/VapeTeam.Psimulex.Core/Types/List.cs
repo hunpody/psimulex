@@ -28,12 +28,22 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
+        public override BaseType Clone()
+        {
+            return new List(rep);
+        }
+
         public override TypeEnum TypeEnum
         {
             get
             {
                 return TypeEnum.List;
             }
+        }
+
+        protected override string DecorateToString(string s)
+        {
+            return string.Format("({0})", s);
         }
     }
 }
