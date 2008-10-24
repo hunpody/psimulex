@@ -59,5 +59,10 @@ namespace VapeTeam.Psimulex.Core.Types
         }
 
         #endregion
+
+        public BaseType Clone()
+        {
+            return new Stack(rep);
+        }
     }
 }

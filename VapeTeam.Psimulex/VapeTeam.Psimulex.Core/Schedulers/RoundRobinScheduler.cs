@@ -82,7 +82,7 @@ namespace VapeTeam.Psimulex.Core.Schedulers
 
         public int SwitchTime
         {
-            get { return 1; }
+            get { return 5; }
         }
 
         public void Initialize(ProcessorList processors)

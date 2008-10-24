@@ -53,9 +53,14 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Overridden methods
 
+        public override BaseType Clone()
+        {
+            return new Queue(rep);
+        }
+
         protected override string DecorateToString(string s)
         {
-            return string.Format("> {0} >", s);
+            return string.Format(">{0}>", s);
         }
 
         public override TypeEnum TypeEnum

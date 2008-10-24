@@ -14,7 +14,7 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public override void Do(ICommandContext context)
         {
-            var value = context.RunStack.Pop();
+            var value = context.RunStack.Pop().Dereference();
 
             var propertiesOfValue = value.GetType().GetProperties();
             var property = propertiesOfValue.FirstOrDefault(prop => prop.Name.ToLower() == name.ToLower());
@@ -25,19 +25,27 @@ namespace VapeTeam.Psimulex.Core.Commands
                     value.GetTypeName(), name));
             }
 
-            Types.PropertyWrapper propertyWrapper;
+            Types.BaseType selectionResult;
+            object currentValue = property.GetValue(value, null);
 
-            try
+            if (currentValue != null && (property.PropertyType.IsSubclassOf(typeof(Types.BaseType)) || property.PropertyType == typeof(Types.BaseType)))
             {
-                propertyWrapper = new VapeTeam.Psimulex.Core.Types.PropertyWrapper(value, property);
+                selectionResult = currentValue as Types.BaseType;
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exceptions.PsimulexCoreException(string.Format("Couldn't create a property wrapper for {0}.{1}.",
-                    value.GetTypeName(), name), ex);
+                try
+                {
+                    selectionResult = new VapeTeam.Psimulex.Core.Types.PropertyWrapper(value, property);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exceptions.PsimulexCoreException(string.Format("Couldn't create a property wrapper for {0}.{1}.",
+                        value.GetTypeName(), name), ex);
+                }
             }
 
-            context.RunStack.Push(propertyWrapper);
+            context.RunStack.Push(selectionResult);
         }
 
         public Select(string name)

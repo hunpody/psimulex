@@ -194,7 +194,6 @@ namespace VapeTeam.Psimulex.Core.Types
             rep.Clear();
         }
 
-        //public override BaseType Clone() { return new AbstractList(rep); }
 
         #endregion
 
@@ -206,15 +205,12 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override void Assign(BaseType value)
         {
-            Clear();
-            Add(value);
-            //rep.AddRange((value.ToList().GetRepresentation() as BaseTypeList).Clone());
+            rep = value.ToList().rep.Select(v => v.Clone()).ToList();
         }
 
         public override void Add(BaseType value)
         {
             rep.AddRange(value.ToList().GetAsEnumerable());
-            //rep.AddRange((value.ToList().GetRepresentation() as BaseTypeList).Clone());
         }
 
         public override void Negate()
@@ -224,46 +220,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
-        #region ToString
-
-        public override string ToString()
-        {
-            return "( " + rep.ToString() + ")";
-        }
-
-        #endregion
-
         #region Conversion to collections
-
-        public override Array ToArray()
-        {
-            return new Array(rep);
-        }
-
-        public override List ToList()
-        {
-            return new List(rep);
-        }
-
-        public override Set ToSet()
-        {
-            return new Set(rep);
-        }
-
-        public override Stack ToStack()
-        {
-            return new Stack(rep);
-        }
-
-        public override Queue ToQueue()
-        {
-            return new Queue(rep);
-        }
-
-        public override PriorityQueue ToPriorityQueue()
-        {
-            return null; // new PriorityQueue(rep);
-        }
 
         #endregion
     }

@@ -48,12 +48,10 @@ namespace VapeTeam.Psimulex.Core.Types
 
         /// <summary>
         /// For conversions from other collections.
-        /// It clones the parameter.
         /// </summary>
         /// <param name="value"></param>
         public Array(IEnumerable<BaseType> rep)
             : base(rep)
-        //:this(rep.Count != 0 ? rep[0].TypeEnum : TypeEnum.Undefined, rep.Count)
         {
             if (rep.Count() > 0)
             {
@@ -63,9 +61,6 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 initializatorType = TypeEnum.Undefined;
             }
-
-            //for (int i = 0; i < Count; i++)
-            //    this.rep[i] = rep[i].Clone();
         }
 
         #endregion
@@ -81,11 +76,6 @@ namespace VapeTeam.Psimulex.Core.Types
             return rep;
         }
 
-        protected override object GetRepresentation()
-        {
-            return rep;
-        }
-
         public override BaseType Index(int index)
         {
             return ListIndexing(rep, index);
@@ -97,7 +87,10 @@ namespace VapeTeam.Psimulex.Core.Types
             InitializeArray();
         }
 
-        //public override BaseType Clone() { return new Array(rep); }
+        public override BaseType Clone() 
+        {
+            return new Array(rep); 
+        }
 
         #region Size and Resize
 
@@ -105,7 +98,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             get
             {
-                return size;
+                return rep.Count;
             }
 
             set
@@ -124,29 +117,29 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 throw new Exceptions.InvalidOperationException(string.Format("Cannot resize array to {0}. Please provide a non-negative size.", newSize));
             }
-
-            if (newSize > size)
+            int oldSize = Size;
+            if (newSize > oldSize)
             {
-                for (int i = size; i < newSize; ++i)
+                for (int i = oldSize; i < newSize; ++i)
                 {
                     rep.Add(ValueFactory.CreateValue(initializatorType));
                 }
             }
             else
             {
-                while (newSize < size--)
+                while (newSize < oldSize--)
                 {
                     rep.RemoveAt(rep.Count - 1);
                 }
             }
-            size = newSize;
+            //size = newSize;
         }
 
         #endregion
 
         protected override string DecorateToString(string s)
         {
-            return string.Format("[ {0} ]", s);
+            return string.Format("[{0}]", s);
         }
 
     }

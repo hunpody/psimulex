@@ -1,187 +1,244 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="VapeTeam.Psimulex.Core.CallStack">
-    <Position X="20" Y="40" Width="1.5" />
+    <Position X="43.5" Y="29.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CallStack.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Delayer">
-    <Position X="71.5" Y="12.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Delayer" Collapsed="true">
+    <Position X="104" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAACAAAAEA=</HashCode>
       <FileName>Delayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Function">
-    <Position X="28" Y="12.5" Width="1.5" />
+    <Position X="48.75" Y="21.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIBAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAEABAAAAAAAAAAAAAQAAgAAAAAAAIAAAAAAABA=</HashCode>
       <FileName>Function.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.FunctionRegistry">
-    <Position X="75" Y="12.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.FunctionMap" Collapsed="true">
+    <Position X="107.5" Y="21.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FunctionMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.FunctionRegistry" Collapsed="true">
+    <Position X="109.25" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAEAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>FunctionRegistry.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.HardwareElement">
-    <Position X="23" Y="21.5" Width="1.5" />
+    <Position X="35.5" Y="31.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>HardwareElement.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.InterruptRequest">
-    <Position X="76.75" Y="12.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.InterruptRequest" Collapsed="true">
+    <Position X="98.75" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>InterruptRequest.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.InterruptRequestEventArgs">
-    <Position X="20" Y="21.5" Width="1.5" />
+    <Position X="35.5" Y="27.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>InterruptRequest.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Machine">
-    <Position X="69.75" Y="15.75" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Logger" Collapsed="true">
+    <Position X="102.25" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Machine" Collapsed="true">
+    <Position X="104" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAAAKAAAAAEAAAAAgAAAAIAAQCAIAAAAAAAAAI=</HashCode>
       <FileName>Machine.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Memory">
-    <Position X="73.25" Y="15.75" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Memory" Collapsed="true">
+    <Position X="107.5" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Memory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.OperatingSystem" BaseTypeListCollapsed="true">
-    <Position X="75" Y="15.75" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.OperatingSystem" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="109.25" Y="22.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAgTBACCAoAAAAAAAABAgAAcCCAAABAABABAAQAAI=</HashCode>
+      <HashCode>AIAAgTBACCAoAAAAAAAABAgAAcDCAAEBAABABAAQAAI=</HashCode>
       <FileName>OperatingSystem.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Process" BaseTypeListCollapsed="true">
-    <Position X="78.5" Y="15.75" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Process" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="100.5" Y="23.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gABCAQAAAKAIAACGEAAAgAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Process.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.ProcessList">
-    <Position X="69.75" Y="26.25" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.ProcessList" Collapsed="true">
+    <Position X="102.25" Y="23.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Process.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Processor">
-    <Position X="23" Y="23" Width="1.5" />
+    <Position X="35.5" Y="33.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAEAACAACAAgAAAEAAAAAAQCAAAAAgAAAAAACA=</HashCode>
+      <HashCode>AAAAgAQEAACABCAAgAAAEAAAAAAQBAAAAAwAAAAAACA=</HashCode>
       <FileName>Processor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.ProcessorInterruptRequestEventArgs">
-    <Position X="20" Y="23.25" Width="1.5" />
+    <Position X="35.5" Y="29.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Processor.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.ProcessorList">
-    <Position X="73.25" Y="26.25" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.ProcessorList" Collapsed="true">
+    <Position X="105.75" Y="23.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Processor.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.ProcessorInterruptInformation">
-    <Position X="71.5" Y="22.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.ProcessorInterruptInformation" Collapsed="true">
+    <Position X="104" Y="23.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAIAEAAAAAAAAAAACQAA=</HashCode>
       <FileName>ProcessorInterruptInformation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Program">
-    <Position X="75" Y="22.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Program" Collapsed="true">
+    <Position X="107.5" Y="23.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAECAAAAAQAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <HashCode>AAAAAAAQAAAAAABGCCAAAAYAAAAABAQAAAAACAAACAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Registry" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="100.5" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAACAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Registry.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
   <Class Name="VapeTeam.Psimulex.Core.RunStack">
-    <Position X="22.25" Y="40" Width="1.5" />
+    <Position X="45.75" Y="29.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RunStack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Stack&lt;T&gt;">
-    <Position X="21.25" Y="32.5" Width="1.5" />
+    <Position X="44.75" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAACAAAECAAAQAQAAACIAIAAAAACAABACAA=</HashCode>
       <FileName>Stack.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="VapeTeam.Psimulex.Core.State" Collapsed="true">
+    <Position X="107.5" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAIAAEAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="VapeTeam.Psimulex.Core.SystemFunction">
-    <Position X="28" Y="15.5" Width="1.5" />
+    <Position X="49.75" Y="25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAABAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SystemFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Thread" BaseTypeListCollapsed="true">
-    <Position X="75" Y="26.25" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Thread" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="109.25" Y="24.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QACSAQAAAKAAIAAEgAAgEAQABAAAAAAAAIAARAAAQAA=</HashCode>
+      <HashCode>QACSAYQAAKAAIAAEAAAiEAQABAAAAAAAAIAARAAAQAA=</HashCode>
       <FileName>Thread.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.ThreadList">
-    <Position X="76.75" Y="26.25" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.ThreadList" Collapsed="true">
+    <Position X="98.75" Y="25.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Thread.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.TransactionalStack&lt;T&gt;">
-    <Position X="21.25" Y="37.25" Width="1.5" />
+    <Position X="44.75" Y="26.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAA=</HashCode>
       <FileName>TransactionalStack.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.StackTransaction&lt;T&gt;" BaseTypeListCollapsed="true">
-    <Position X="71.5" Y="26.25" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.StackTransaction&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="104" Y="24.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAJAAEAkAAAAQAACAAAAAAAAAQCIAAAAAAAAAABFCAA=</HashCode>
       <FileName>TransactionalStack.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Commands.Assign">
-    <Position X="26.25" Y="29.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.UserDefinedFunction">
+    <Position X="47.5" Y="25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAgAABAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>UserDefinedFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.VariableLocator" Collapsed="true">
+    <Position X="100.5" Y="26.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VariableLocator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.VariableMap" Collapsed="true">
+    <Position X="102.25" Y="26.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VariableMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.ArrayDeclare">
+    <Position X="69.5" Y="55.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAABACAAFAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\ArrayDeclare.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.Assign">
+    <Position X="71.75" Y="55.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Commands\Assign.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.BinaryOperation">
-    <Position X="30.75" Y="29.5" Width="1.5" />
+    <Position X="76.25" Y="55.75" Width="1.5" />
     <NestedTypes>
       <Enum Name="VapeTeam.Psimulex.Core.Commands.BinaryOperation.Operations" Collapsed="true">
         <TypeIdentifier>
@@ -190,26 +247,33 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAABAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>Commands\BinaryOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.Call">
-    <Position X="33" Y="29.5" Width="1.5" />
+    <Position X="85.25" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAIAAAAAAAAEAAAAABAACgAAAAACACAAAAAAAAA=</HashCode>
       <FileName>Commands\Call.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.CallMethod">
-    <Position X="35.25" Y="29.5" Width="1.5" />
+    <Position X="87.5" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\CallMethod.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.Cast">
+    <Position X="38" Y="55.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAEAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Cast.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.CommandBase">
-    <Position X="39.75" Y="26.5" Width="1.5" />
+    <Position X="63.75" Y="52.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAAAAAAAIACAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\CommandBase.cs</FileName>
@@ -217,7 +281,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.Compare">
-    <Position X="42" Y="29.5" Width="1.5" />
+    <Position X="42.5" Y="55.75" Width="1.5" />
     <NestedTypes>
       <Enum Name="VapeTeam.Psimulex.Core.Commands.Compare.ComparisonModes" Collapsed="true">
         <TypeIdentifier>
@@ -226,117 +290,166 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAACEAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\Compare.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.ConditionalJump">
-    <Position X="47.5" Y="32.5" Width="1.5" />
+    <Position X="59.25" Y="59" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAACAAAAEAAAAAAAACgAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ConditionalJump.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.RelativeConditionalJump">
-    <Position X="49.75" Y="35" Width="1.5" />
+    <Position X="57" Y="62" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ConditionalJump.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.RelativeJumpIfFalse">
-    <Position X="51" Y="37" Width="1.5" />
+    <Position X="53.75" Y="64" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ConditionalJump.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.RelativeJumpIfTrue">
-    <Position X="48.75" Y="37" Width="1.5" />
+    <Position X="56" Y="64" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\ConditionalJump.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.SilentRelativeJumpIfFalse">
+    <Position X="58.25" Y="64" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\ConditionalJump.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.SilentRelativeJumpIfTrue">
+    <Position X="60.5" Y="64" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ConditionalJump.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.JumpIfFalse">
-    <Position X="44.25" Y="35" Width="1.5" />
+    <Position X="62.75" Y="62" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ConditionalJump.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.JumpIfTrue">
-    <Position X="46.5" Y="35" Width="1.5" />
+    <Position X="65" Y="62" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ConditionalJump.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Commands.CommandList">
-    <Position X="69.75" Y="12.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Commands.Declare">
+    <Position X="89.75" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAFAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Declare.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.CommandList" Collapsed="true">
+    <Position X="102.25" Y="21.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ICommand.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.Indexing">
-    <Position X="37.5" Y="29.5" Width="1.5" />
+    <Position X="44.75" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAABAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAAAAAAAAgAAAABAAA=</HashCode>
       <FileName>Commands\Indexing.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.Initialize">
-    <Position X="39.75" Y="29.5" Width="1.5" />
+    <Position X="49.25" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAFAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAEAAAAACAAFAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\Initialize.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.Jump">
-    <Position X="48.75" Y="29.5" Width="1.5" />
+    <Position X="60.5" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAIIBAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAIIBEAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\Jump.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.RelativeJump">
-    <Position X="53.25" Y="32.5" Width="1.5" />
+    <Position X="67.25" Y="59" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Jump.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.Break">
+    <Position X="67.25" Y="61" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\Jump.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.Pop">
-    <Position X="55.5" Y="29.5" Width="1.5" />
+    <Position X="74" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAKAAAAAAAAAQABAAAAAA=</HashCode>
       <FileName>Commands\Pop.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.Push">
-    <Position X="57.75" Y="29.5" Width="1.5" />
+    <Position X="80.75" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAACAAFACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAIAAAAAAAEAAAAAAEACAAFBCAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Push.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.PushByValue">
+    <Position X="80.75" Y="59.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Push.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.PushByReference">
+    <Position X="83" Y="59.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Push.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Commands.PushRegister">
+    <Position X="78.5" Y="59.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\Push.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.Return">
-    <Position X="21.75" Y="29.5" Width="1.5" />
+    <Position X="40.25" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Commands\Return.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.Select">
-    <Position X="24" Y="29.5" Width="1.5" />
+    <Position X="47" Y="55.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAEAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\Select.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Commands.UnaryOperation">
-    <Position X="28.5" Y="29.5" Width="1.5" />
+    <Position X="51.5" Y="55.75" Width="1.5" />
     <NestedTypes>
       <Enum Name="VapeTeam.Psimulex.Core.Commands.UnaryOperation.Operations" Collapsed="true">
         <TypeIdentifier>
@@ -345,105 +458,105 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAABAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>Commands\UnaryOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Commands.ValueAccessor">
-    <Position X="69.75" Y="31.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Commands.ValueAccessor" Collapsed="true">
+    <Position X="107.5" Y="25.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ValueAccessor.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Common.DictionaryExtension">
-    <Position X="73.25" Y="12.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Common.DictionaryExtension" Collapsed="true">
+    <Position X="105.75" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Common\DictionaryExtension.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Common.Invocator">
-    <Position X="78.5" Y="12.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Common.Invocator" Collapsed="true">
+    <Position X="100.5" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Common\Invocator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Exceptions.IndexOutOfRangeException">
-    <Position X="20.25" Y="16.5" Width="1.5" />
+    <Position X="35.75" Y="25.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Exceptions\IndexOutOfRangeException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Exceptions.InvalidOperationException">
-    <Position X="22.5" Y="16.5" Width="1.5" />
+    <Position X="38" Y="25.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Exceptions\InvalidOperationException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Exceptions.InvalidTransactionException">
-    <Position X="24.75" Y="16.5" Width="1.5" />
+    <Position X="40.25" Y="25.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Exceptions\InvalidTransactionException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Exceptions.PsimulexCoreException">
-    <Position X="22.5" Y="14.5" Width="1.5" />
+    <Position X="38" Y="23.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Exceptions\PsimulexCoreException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Exceptions.PsimulexException">
-    <Position X="22.5" Y="12.5" Width="1.5" />
+    <Position X="38" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Exceptions\PsimulexException.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Factories.MachineBuilder">
-    <Position X="71.5" Y="15.75" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Factories.MachineBuilder" Collapsed="true">
+    <Position X="105.75" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>Factories\MachineBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Factories.OperatingSystemBuilder">
-    <Position X="76.75" Y="15.75" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Factories.OperatingSystemBuilder" Collapsed="true">
+    <Position X="98.75" Y="23.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Factories\OperatingSystemBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Factories.ProgramBuilder">
-    <Position X="76.75" Y="22.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Factories.ProgramBuilder" Collapsed="true">
+    <Position X="109.25" Y="23.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAQAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAACAAAA=</HashCode>
+      <HashCode>AAIAAQAAAAAAAAAEAAAAAAAAAAAABEAAAAAAAACAAAA=</HashCode>
       <FileName>Factories\ProgramBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Libraries.StandardLibrary" BaseTypeListCollapsed="true">
-    <Position X="73.25" Y="22.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Libraries.StandardLibrary" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="105.75" Y="24.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAEAAA=</HashCode>
+      <HashCode>ECAAAAAAAIAACAAIAEAAAAAABAABBQAAAAAAAAEEAAA=</HashCode>
       <FileName>Libraries\StandardLibrary.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Schedulers.RandomScheduler" BaseTypeListCollapsed="true">
-    <Position X="78.5" Y="22.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Schedulers.RandomScheduler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="98.75" Y="24.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAgAACAACQAAEAAAAgAAAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Schedulers\RandomScheduler.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Schedulers.RoundRobinScheduler" BaseTypeListCollapsed="true">
-    <Position X="69.75" Y="22.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Schedulers.RoundRobinScheduler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="102.25" Y="24.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAKCAACQAAEAAAAgAAAEAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Schedulers\RoundRobinScheduler.cs</FileName>
@@ -451,297 +564,409 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.AbstractCollection">
-    <Position X="56" Y="19.5" Width="1.5" />
+    <Position X="76.5" Y="32.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <HashCode>AABAQAIACAAAkACMAAYAgARAAAEAAABBAAlAIABAAAI=</HashCode>
       <FileName>Types\AbstractCollection.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Types.Array">
-    <Position X="56" Y="22" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Types.AbstractList">
+    <Position X="79" Y="39.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIgAAIAIIAAAAAAAAAAAAEAAEAAAAAAAA=</HashCode>
+      <HashCode>IQYJWEQAAAAAgQAAEAKAAAEAAAAQEAAACAEGAIBgAAA=</HashCode>
+      <FileName>Types\AbstractList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.Array">
+    <Position X="84.5" Y="48" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAIgAAIAIAAgAAAAAAAAAAEAAEAAAFAABA=</HashCode>
       <FileName>Types\Array.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.BaseType">
-    <Position X="44.75" Y="12.5" Width="1.5" />
+    <Position X="67.25" Y="21.75" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>ABMBAAYAAQAAIACMADADAAAABAQAQABBAIgEKAAAABA=</HashCode>
+      <HashCode>ABMBQAZACRAAMAOMCDADAAAABAQEQChBAIhUKABABRA=</HashCode>
       <FileName>Types\BaseType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.BinaryTree">
-    <Position X="22.25" Y="19.5" Width="1.5" />
+    <Position X="68" Y="39.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAQEQACAAAkAAMAAAAQAAAAAAAwAABCAngAABAARA=</HashCode>
       <FileName>Types\BinaryTree.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Boolean">
-    <Position X="26.75" Y="19.5" Width="1.5" />
+    <Position X="40.5" Y="32.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIABAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAAAAAAAIABAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\Boolean.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Character">
-    <Position X="31.25" Y="19.5" Width="1.5" />
+    <Position X="42.75" Y="32.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABIAAAQAAAAAAAAIABAAAAAAAAAAACAAAAgAAAAAAAA=</HashCode>
       <FileName>Types\Character.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Decimal">
-    <Position X="35.75" Y="19.5" Width="1.5" />
+    <Position X="47.25" Y="32.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABIAAAQAAQAAAAAIABADAAAAAAAAACABAAAECAAAAAA=</HashCode>
       <FileName>Types\Decimal.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Float">
-    <Position X="40.25" Y="19.5" Width="1.5" />
+    <Position X="49.5" Y="32.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABIAAAQAAQAAAAAIABADAAAAAAAAACABAAAECAAAAAA=</HashCode>
       <FileName>Types\Float.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.FunctionPointer">
-    <Position X="44.75" Y="19.5" Width="1.5" />
+    <Position X="54" Y="32.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\FunctionPointer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Graph">
-    <Position X="49.25" Y="19.5" Width="1.5" />
+    <Position X="56.25" Y="32.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\Graph.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.GraphEdge">
-    <Position X="49.25" Y="21.5" Width="1.5" />
+    <Position X="56.25" Y="34.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\GraphEdge.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.GraphNode">
-    <Position X="58.25" Y="19.5" Width="1.5" />
+    <Position X="87.25" Y="32.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\GraphNode.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Integer">
-    <Position X="65" Y="19.5" Width="1.5" />
+    <Position X="89.5" Y="32.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABIAAAQAAQAAAAAIABADAAAAAAAAACABAAAECAAAAAA=</HashCode>
       <FileName>Types\Integer.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.Iterator">
+    <Position X="96.25" Y="32.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAIAACAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Types\Iterator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.LinkedList">
-    <Position X="24.5" Y="19.5" Width="1.5" />
+    <Position X="38.25" Y="32.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\LinkedList.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.List">
-    <Position X="29" Y="19.5" Width="1.5" />
+    <Position X="73.5" Y="48" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Types\List.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Types.PriorityQueue">
-    <Position X="33.5" Y="19.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Types.Null">
+    <Position X="45" Y="32.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAEAAAJAAAAAAAAABA=</HashCode>
+      <FileName>Types\Null.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.PriorityQueue">
+    <Position X="70.75" Y="39.75" Width="2" />
+    <NestedTypes>
+      <Class Name="VapeTeam.Psimulex.Core.Types.PriorityQueue.Pair" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Types\PriorityQueue.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAJAQEQACBAAgAAMEAIAgAAAAAAABBABAAEBAABAABE=</HashCode>
       <FileName>Types\PriorityQueue.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.PropertyWrapper">
-    <Position X="38" Y="19.5" Width="1.5" />
+    <Position X="51.75" Y="32.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAAAAAAAIABAAAAAAAAAAAAAQAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAUAIAAAAgAIABAAAAAAAAAAAAAQAAAAAAAEAAA=</HashCode>
       <FileName>Types\PropertyWrapper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Queue">
-    <Position X="42.5" Y="19.5" Width="1.5" />
+    <Position X="76.25" Y="48" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAIAAAAhAAAAAAABAAAAAAAAAAAABA=</HashCode>
       <FileName>Types\Queue.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.ReferenceType">
-    <Position X="47" Y="19.5" Width="1.5" />
+    <Position X="58.5" Y="32.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>ABABAAQAAAAAIACMgDAAAAAABAQAAAABAIgEAAAAABA=</HashCode>
+      <HashCode>ABMBAAYAAQAAIAGMgDADAAAABAQAACBBAIgEKAAAABA=</HashCode>
       <FileName>Types\ReferenceType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Types.Set">
-    <Position X="51.5" Y="19.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Types.BaseTypeList" Collapsed="true">
+    <Position X="100.5" Y="21.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAABAAABA=</HashCode>
+      <FileName>Types\Representations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.Set">
+    <Position X="79" Y="48" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAEAAAQACAAAIAAADhAAAAAAAAAAAAAAAAAAQABA=</HashCode>
       <FileName>Types\Set.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Stack">
-    <Position X="53.75" Y="19.5" Width="1.5" />
+    <Position X="81.75" Y="48" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAEAAAIAAAAAAAAAACIAAAAAAAAAAAACBA=</HashCode>
       <FileName>Types\Stack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.String">
-    <Position X="60.5" Y="19.5" Width="1.5" />
+    <Position X="91.75" Y="32.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAMABAAAAAAAAAAACAAAAAAAAAQAAA=</HashCode>
+      <HashCode>AAIgAAQAAAAAAAEMABAAAAAAAAAAACAAAAAAAAAQAAA=</HashCode>
       <FileName>Types\String.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Thread">
-    <Position X="62.75" Y="19.5" Width="1.5" />
+    <Position X="94" Y="32.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\Thread.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Tree">
-    <Position X="67.25" Y="19.5" Width="1.5" />
+    <Position X="65.25" Y="32.75" Width="2" />
+    <NestedTypes>
+      <Class Name="VapeTeam.Psimulex.Core.Types.Tree.TreeNodeCollection" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Types\Tree.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQIAAAEQAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>Types\Tree.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Types.TypeHierarchy">
-    <Position X="78.5" Y="26.25" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Types.TypeHierarchy" Collapsed="true">
+    <Position X="100.5" Y="25.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\TypeHierarchy.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Types.ValueFactory">
-    <Position X="71.5" Y="31.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Types.TypeIdentifier" Collapsed="true">
+    <Position X="102.25" Y="25.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAAAAAAAAAAIAAQAAAAEAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAABAAAAAAIgAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Types\TypeIdentifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.UserDefinedTypeException" Collapsed="true">
+    <Position X="104" Y="25.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Types\UserDefinedTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.UserDefinedTypes" Collapsed="true">
+    <Position X="105.75" Y="25.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Types\UserDefinedTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.Attribute" Collapsed="true">
+    <Position X="98.75" Y="21.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAEAAAAAAQAAAAAABAAAQAhAAAAABA=</HashCode>
+      <FileName>Types\UserDefinedTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.UserDefinedType">
+    <Position X="62" Y="32.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAICAAAAAQAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Types\UserDefinedTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.Struct">
+    <Position X="61" Y="35.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAECAAAAAAQAAAQAAAAAAABAAAAABA=</HashCode>
+      <FileName>Types\UserDefinedTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.Class">
+    <Position X="63" Y="35.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="VapeTeam.Psimulex.Core.Types.Class.ClassFunction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Types\UserDefinedTypes.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAACAAAAAIQAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Types\UserDefinedTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.ValueFactory" Collapsed="true">
+    <Position X="109.25" Y="25.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAIAAAIAAQAAAAEAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\ValueFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="VapeTeam.Psimulex.Core.ICommandContext">
-    <Position X="71.5" Y="34" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Types.VariableDescriptor" Collapsed="true">
+    <Position X="98.75" Y="26.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAIAAAAAAgAAAABAAAAAAAAIAAQAAAQAA=</HashCode>
+      <HashCode>ACAAAAAAAAAAAgAAAAEAAAQAAAgAAAAAAUAAAAAAAAA=</HashCode>
+      <FileName>Types\VariableDescriptor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="VapeTeam.Psimulex.Core.ICommandContext" Collapsed="true">
+    <Position X="100.5" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIQAAIAAIAAAAAAiAAAABAAAAAAAAIAAQAAAQAA=</HashCode>
       <FileName>ICommandContext.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.IFunctionLookup">
-    <Position X="73.25" Y="34" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.IFunctionLookup" Collapsed="true">
+    <Position X="102.25" Y="28" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>IFunctionLookup.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.IProcessorContext">
-    <Position X="78.5" Y="34" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.IProcessorContext" Collapsed="true">
+    <Position X="107.5" Y="28" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IProcessorContext.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.IRunningContext">
-    <Position X="69.75" Y="37.75" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.IRegistry" Collapsed="true">
+    <Position X="109.25" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IRegistry.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VapeTeam.Psimulex.Core.IRunningContext" Collapsed="true">
+    <Position X="98.75" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IRunningContext.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.IScheduler">
-    <Position X="71.5" Y="37.75" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.IScheduler" Collapsed="true">
+    <Position X="100.5" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAACQAAEAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IScheduler.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.IStack&lt;T&gt;">
-    <Position X="73.25" Y="37.75" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.IStack&lt;T&gt;" Collapsed="true">
+    <Position X="102.25" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAABACAA=</HashCode>
       <FileName>IStack.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.ISystemContext">
-    <Position X="75" Y="37.75" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.ISystemContext" Collapsed="true">
+    <Position X="104" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>ISystemContext.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.ISystemItem">
-    <Position X="76.75" Y="37.75" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.ISystemItem" Collapsed="true">
+    <Position X="105.75" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ISystemItem.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.ITransaction">
-    <Position X="78.5" Y="37.75" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.ITransaction" Collapsed="true">
+    <Position X="107.5" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAEAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ITransaction.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.Commands.ICommand">
-    <Position X="69.75" Y="34" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.Commands.ICommand" Collapsed="true">
+    <Position X="98.75" Y="28" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ICommand.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.Libraries.ILibrary">
-    <Position X="76.75" Y="34" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.Libraries.ILibrary" Collapsed="true">
+    <Position X="105.75" Y="28" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Libraries\ILibrary.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.Types.IIndexable">
-    <Position X="75" Y="34" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.Types.IIndexable" Collapsed="true">
+    <Position X="104" Y="28" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>Types\IIndexable.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="VapeTeam.Psimulex.Core.ThreadStates">
-    <Position X="69.75" Y="40.5" Width="1.5" />
+  <Enum Name="VapeTeam.Psimulex.Core.ThreadStates" Collapsed="true">
+    <Position X="98.75" Y="29.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAAQAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
       <FileName>Thread.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="VapeTeam.Psimulex.Core.TransactionStates">
-    <Position X="71.5" Y="40.5" Width="1.5" />
+  <Enum Name="VapeTeam.Psimulex.Core.TransactionStates" Collapsed="true">
+    <Position X="100.5" Y="29.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAQgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>TransactionStates.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="VapeTeam.Psimulex.Core.Commands.ValueAccessModes">
-    <Position X="75" Y="40.5" Width="1.5" />
+  <Enum Name="VapeTeam.Psimulex.Core.Commands.ValueAccessModes" Collapsed="true">
+    <Position X="104" Y="29.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAEAAABAAgAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAABAEgAAAAAEAAAAAA=</HashCode>
       <FileName>Commands\ValueAccessor.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="VapeTeam.Psimulex.Core.Types.TypeEnum">
-    <Position X="73.25" Y="40.5" Width="1.5" />
+  <Enum Name="VapeTeam.Psimulex.Core.Types.TypeEnum" Collapsed="true">
+    <Position X="102.25" Y="29.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAACIAAQCgDAgAQAAABAAAwCAgBggAAQIAAAEmCCI=</HashCode>
+      <HashCode>IBAAACIAAQCgDAgAQAAABAAAwCAgBggAAQIAAAUmCCI=</HashCode>
       <FileName>Types\TypeEnum.cs</FileName>
     </TypeIdentifier>
   </Enum>

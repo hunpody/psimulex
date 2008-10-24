@@ -35,10 +35,10 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Representation
 
-        protected virtual object GetRepresentation()
-        {
-            throw new Exceptions.PsimulexCoreException(string.Format("Can no get representation of type {0}", TypeEnum));
-        }
+        //protected virtual object GetRepresentation()
+        //{
+        //    throw new Exceptions.PsimulexCoreException(string.Format("Can no get representation of type {0}", TypeEnum));
+        //}
 
         #endregion
 
@@ -175,6 +175,40 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 return Size == 0 ? true : false;
             }
+        }
+
+        #endregion
+
+        #region Covnersions
+
+        public override Array ToArray()
+        {
+            return new Array(GetAsEnumerable());
+        }
+
+        public override List ToList()
+        {
+            return new List(GetAsEnumerable());
+        }
+
+        public override Set ToSet()
+        {
+            return new Set(GetAsEnumerable());
+        }
+
+        public override Stack ToStack()
+        {
+            return new Stack(GetAsEnumerable());
+        }
+
+        public override Queue ToQueue()
+        {
+            return new Queue(GetAsEnumerable());
+        }
+
+        public override PriorityQueue ToPriorityQueue()
+        {
+            return new PriorityQueue(GetAsEnumerable());
         }
 
         #endregion

@@ -25,7 +25,7 @@ namespace VapeTeam.Psimulex.Core.Commands
                 value = value.ToReference();
             else
                 value = value.Dereference();
-            context.AddVariable(name, value.Clone());
+            context.AddVariable(name, ValueFactory.Convert(value.Clone(), type));
         }
 
         #endregion

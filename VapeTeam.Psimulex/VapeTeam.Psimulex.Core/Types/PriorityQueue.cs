@@ -6,23 +6,39 @@ using System.Text;
 namespace VapeTeam.Psimulex.Core.Types
 {
     /// <summary>
-    /// Simple indexable Priority Queue.
-    /// It insert elements sorted.
-    /// (Rightest is the smallest key. Leftest is the oldest and biggest key)
-    /// It get the oldest( Min,Max ) elemen.
+    /// Priority queue where the priority is represented with an integer.
     /// </summary>
     public class PriorityQueue : AbstractCollection
     {
-        #region Represenation
+        #region Representation
 
         public class Pair
         {
-            public BaseType Key { get; set; }
+            public long Priority { get; set; }
             public BaseType Value { get; set; }
 
             public override string ToString()
             {
-                return string.Format("( Key: {0}, Value: {1} )", Key.ToString(), Value.ToString());
+                return string.Format("(Priority: {0}, Value: {1})", Priority.ToString(), Value.ToString());
+            }
+
+            public override bool Equals(object obj)
+            {
+                var otherPair = obj as Pair;
+                if (otherPair != null)
+                {
+                    return Priority == otherPair.Priority && Value.EqualsTo(otherPair.Value);
+                }
+                return base.Equals(obj);
+            }
+
+            public Pair Clone()
+            {
+                return new Pair
+                {
+                    Priority = this.Priority,
+                    Value = Value.Clone()
+                };
             }
         }
 
@@ -39,13 +55,17 @@ namespace VapeTeam.Psimulex.Core.Types
         public PriorityQueue(BaseType value)
         {
             rep.Clear();
-            Insert(new Integer(0), value.Clone());
+            Insert(0, value);
         }
 
-        public PriorityQueue(BaseTypeList rep)
+        public PriorityQueue(IEnumerable<BaseType> list)
         {
-            this.rep.Clear();
-            rep.ForEach(item => this.Insert(new Integer(0), item.Clone() ));
+            rep.AddRange(list.Select(item => new Pair { Priority = 0, Value = item }));
+        }
+
+        public PriorityQueue(IEnumerable<Pair> list)
+        {
+            rep.AddRange(list.Select(item => item.Clone()));
         }
 
         #endregion
@@ -53,66 +73,64 @@ namespace VapeTeam.Psimulex.Core.Types
         #region Own Members
 
         //public void In(BaseType key, BaseType value) { Insert(key, value); }
-        public void EnQueue(BaseType key, BaseType value) { Insert(key, value); }
-        public void Insert(BaseType key, BaseType value)
+        public void Enqueue(long key, BaseType value) { Insert(key, value); }
+        public void Insert(long key, BaseType value)
         {
-            if (Count == 0)
-            {
-                rep.Add(new Pair { Key = key, Value = value });
-            }
-            else
-            {
-                for (int i = 0; i < Count; i++)
-                {
-                    if (rep[i].Key.IsLessThanOrEqual(key))
-                    {
-                        rep.Insert(i, new Pair { Key = key, Value = value });
-                        return;
-                    }
-                }
-            }
-        }
-        
-        //public BaseType Out() { return Remove(); }
-        public BaseType DeQueue() { return Remove(); }
-        public BaseType GetMax() { return Remove(); }
-        public BaseType Remove()
-        {
-            if (Count == 0)
-            {
-                throw new Exceptions.PsimulexCoreException(string.Format("Priority Queue is empty. Can not get Max element. "));
-            }
-            else
-            {
-                BaseType ret = rep[0].Value;
-                ret = rep[0].Value;
-                rep.RemoveAt(0);
-                return ret;
-            }
+            int index = rep.FindIndex(item => item.Priority < key);
+
+            if (index == -1)
+                index = rep.Count;
+
+            rep.Insert(index, new Pair { Priority = key, Value = value });
+            //if (Count == 0)
+            //{
+            //    rep.Add(new Pair { Priority = key, Value = value });
+            //}
+            //else
+            //{
+            //    for (int i = 0; i < Count; i++)
+            //    {
+            //        if (rep[i].Priority < key)
+            //        {
+            //            rep.Insert(i, new Pair { Priority = key, Value = value });
+            //            return;
+            //        }
+            //    }
+            //}
         }
 
-        public BaseType GetMin()
+        private void EnsureQueueIsNotEmpty(string message)
         {
             if (rep.Count == 0)
             {
-                throw new Exceptions.PsimulexCoreException(string.Format("Priority Queue is empty. Can not get Min element. "));
+                throw new Exceptions.PsimulexCoreException(string.Format("PriorityQueue is empty. Cannot perform operation: {0}.", message));
             }
-            else
-            {
-                BaseType ret = rep[Count - 1].Value;
-                rep.RemoveAt(Count - 1);
-                return ret;
-            }
+        }
+
+        public BaseType Dequeue() { return RemoveMax(); }
+
+        public BaseType RemoveMax()
+        {
+            EnsureQueueIsNotEmpty("get maximal element");
+            BaseType ret = rep.First().Value;
+            rep.RemoveAt(0);
+            return ret;
+        }
+
+        public BaseType RemoveMin()
+        {
+            EnsureQueueIsNotEmpty("get minimal element");
+            BaseType ret = rep[Count - 1].Value;
+            rep.RemoveAt(Count - 1);
+            return ret;
         }
 
         public BaseType Max
         {
             get
             {
-                if (Count == 0)
-                    throw new Exceptions.PsimulexCoreException(string.Format("Priority Queue is empty. Can not get Max element. "));
-                else
-                    return rep[0].Value;
+                EnsureQueueIsNotEmpty("get maximal element");
+                return rep[0].Value;
             }
         }
 
@@ -120,10 +138,8 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             get
             {
-                if (rep.Count == 0)
-                    throw new Exceptions.PsimulexCoreException(string.Format("Priority Queue is empty. Can not get Min element. "));
-                else
-                    return rep[Count - 1].Value;
+                EnsureQueueIsNotEmpty("get minimal element");
+                return rep[Count - 1].Value;
             }
         }
 
@@ -132,25 +148,24 @@ namespace VapeTeam.Psimulex.Core.Types
         #region Implemented Members
 
         public override TypeEnum TypeEnum { get { return TypeEnum.PriorityQueue; } }
-        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable() { return null; }//rep; }
-        protected override object GetRepresentation() { return rep; }
+        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable() { return rep.Select(pair => pair.Value); }
+
         public override BaseType Index(int index)
         {
             if (index < 0 || index >= Count)
             {
                 throw new Core.Exceptions.IndexOutOfRangeException(index, 0, Count - 1);
             }
-            return rep[index].Value;    // Temporary solution. I want to create a Pair as BaseType
+            return rep[index].Value;
         }
 
         public override int Size { get { return rep.Count; } }
         public override void Clear() { rep.Clear(); }
-        //public override BaseType Clone()
-        //{
-        //    PriorityQueue pq = new PriorityQueue();
-        //    rep.ForEach(item => pq.Insert(item.Key.Clone(), item.Value.Clone()));
-        //    return pq;
-        //}
+
+        public override BaseType Clone()
+        {
+            return new PriorityQueue(this.rep);
+        }
 
         #endregion
 
@@ -158,13 +173,27 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override bool EqualsTo(BaseType value)
         {
-            var list = value.ToPriorityQueue().GetRepresentation() as List<Pair>;
-            if (Count != list.Count)
+            var otherQueueRep = value.ToPriorityQueue().rep;
+
+            var leftIter = rep.GetEnumerator();
+            var rightIter = otherQueueRep.GetEnumerator();
+
+            bool leftOver = false;
+            bool rightOver = false;
+
+            while ((leftOver = leftIter.MoveNext()) && (rightOver = rightIter.MoveNext()))
+            {
+                if (!leftIter.Current.Equals(rightIter.Current))
+                {
+                    return false;
+                }
+                leftOver = rightOver = false;
+            }
+
+            if (leftOver || rightOver)
+            {
                 return false;
-            else
-                for (int i = 0; i < Count; i++)
-                    if (rep[i].Key.NotEqualsTo(list[i].Key) || rep[i].Value.NotEqualsTo(list[i].Value))
-                        return false;
+            }
             return true;
         }
 
@@ -174,49 +203,35 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override void Assign(BaseType value)
         {
-            rep.Clear();
-            (value.ToPriorityQueue().GetRepresentation() as List<Pair>).ForEach(
-                item => Insert(item.Key.Clone(), item.Value.Clone())
-                );
+            this.rep = value.ToPriorityQueue().rep.Select(pair => pair.Clone()).ToList();
         }
 
-        public override void Add(BaseType value) 
-        { 
-            (value.ToPriorityQueue().GetRepresentation() as List<Pair>).ForEach(
-                item => Insert(item.Key.Clone(), item.Value.Clone())
-                ); 
+        public override void Add(BaseType value)
+        {
+            foreach (var pair in value.ToPriorityQueue().rep)
+            {
+                Insert(pair.Priority, pair.Value.Clone());
+            }
         }
-        //public override void Negate() {}
-        /* With negate can change that Remove is GetMax or GetMin. Not necessary yet. */
 
         #endregion
 
-        #region Conversion To Primitive Type Members
+        #region Conversion to String
 
         public override string ToString()
         {
-            string str = "< ";
-            rep.ForEach(item => str += item.ToString() + (item == rep.Last<Pair>() ? " " : ", "));
-            str += ">";
-            return str;
+            return DecorateToString(string.Join(", ", rep.Select(item => item.ToString()).ToArray()));
+        }
+
+        protected override string DecorateToString(string s)
+        {
+            return string.Format("<{0}>", s);
         }
 
         #endregion
 
-        #region Conversion To BuiltIn Type Members
+        #region Conversion
 
-        private BaseTypeList ToBaseTypeList()
-        {
-            BaseTypeList btl = new BaseTypeList();
-            rep.ForEach(item => btl.Add(item.Value.Clone()));
-            return btl;
-        }
-
-        public override Array ToArray() { return new Array(ToBaseTypeList()); }
-        public override List ToList() { return new List(ToBaseTypeList()); }
-        public override Set ToSet() { return new Set(ToBaseTypeList()); }
-        public override Stack ToStack() { return new Stack(ToBaseTypeList()); }
-        public override Queue ToQueue() { return new Queue(ToBaseTypeList()); }
         public override PriorityQueue ToPriorityQueue() { return this; }
 
         #endregion

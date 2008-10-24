@@ -134,7 +134,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             switch (type)
             {
-                /*Primitive Types*/
+                // Primitive Types
                 case TypeEnum.Void:
                     return null;
                 case TypeEnum.Integer:
@@ -150,7 +150,7 @@ namespace VapeTeam.Psimulex.Core.Types
                 case TypeEnum.Boolean:
                     return new Boolean();
 
-                /*BuiltIn Types*/
+                // Complex Types
                 case TypeEnum.List:
                     return new List();
                 case TypeEnum.Set:
@@ -161,6 +161,9 @@ namespace VapeTeam.Psimulex.Core.Types
                     return new Queue();
                 case TypeEnum.PriorityQueue:
                     return new PriorityQueue();
+
+                //case TypeEnum.Iterator:
+                //    return new Iterator(
 
                 case TypeEnum.Tree:
                     return new Tree();
@@ -179,6 +182,10 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <returns></returns>
         public static BaseType Convert(BaseType value, TypeEnum targetType)
         {
+            if (targetType == TypeEnum.Undefined || targetType == value.TypeEnum)
+            {
+                return value;
+            }
             var target = CreateValue(targetType);
             target.Assign(value);
             return target;

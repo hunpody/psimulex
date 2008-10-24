@@ -101,5 +101,34 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("3", process.StandardOutput);
         }
+        [TestMethod]
+        public void PerformanceTest1()
+        {
+            var program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
+                new Push(0),
+                new Initialize("i"),
+                new Push("i", ValueAccessModes.LocalVariableReference),
+                new Push("i", ValueAccessModes.LocalVariable),
+                new Push(1),
+                new BinaryOperation(BinaryOperation.Operations.Addition),
+                new Assign(true),
+                new Push(30000),
+                new Compare(Compare.ComparisonModes.LessThan),
+                new JumpIfTrue(2));
+
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            
+            sw.Start();
+
+            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(program);
+
+            sw.Stop();
+
+            int numberOfCycles = process.Machine.Processors[0].Cycles;
+
+            double cyclesPerSecond = (double)numberOfCycles / sw.Elapsed.TotalSeconds;
+
+            Assert.IsTrue(cyclesPerSecond > 500000, string.Format("The virtual machine is too slow: only {0:0.00} MHz.", cyclesPerSecond / 1000000));
+        }
     }
 }
