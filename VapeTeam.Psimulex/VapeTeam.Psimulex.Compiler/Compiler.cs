@@ -6,6 +6,7 @@ using VapeTeam.Psimulex.Compiler.Result;
 using VapeTeam.Psimulex.Compiler.AST;
 using VapeTeam.Psimulex.Compiler.AntlrTools;
 using VapeTeam.Psimulex.Core;
+using System.IO;
 
 namespace VapeTeam.Psimulex.Compiler
 {
@@ -28,7 +29,19 @@ namespace VapeTeam.Psimulex.Compiler
 
         public CompileResult Compile(string source, string sourceFileName)
         {
-            return Compile(new CompilerDTO{ Source = source, SourceFileName = sourceFileName }, true);
+            // SourceFilePath is the path of the main source file.
+            // All other relative imports calculated from this path.
+
+            string fullPath = Path.GetFullPath(sourceFileName);
+            sourceFileName = Path.GetFileName(fullPath);
+            string sourceFilePath = Path.GetDirectoryName(fullPath);
+
+            return Compile(new CompilerDTO
+            {
+                Source = source,
+                SourceFileName = sourceFileName,
+                ProgramPath = sourceFilePath
+            }, true);
         }
 
         public CompileResult Compile(CompilerDTO dto)

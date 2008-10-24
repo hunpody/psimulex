@@ -7,9 +7,21 @@ namespace VapeTeam.Psimulex.Compiler.Result
 {
     public enum CompilerErrorCode
     {
+        Custom,
+        FormalParameterNameCollision,
         LocalVariableNameCollision,
         GlobalVariableNameCollision,
-        FunctionCollison
+        FunctionCollison,
+        ImportFileNotFound,
+        NotImplemented
         // ...
+    }
+
+    public static class CompilerMessageText
+    {
+        public static string MesageText(CompilerErrorCode code)
+        {
+            return "";
+        }
     }
 }

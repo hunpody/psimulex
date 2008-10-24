@@ -37,7 +37,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 /*High Level Node Types*/
                 case NodeType.CompilationUnit: node = new CompilationUnitNode(); v = true; break;
                 case NodeType.SimpleProgram: node = new SimpleProgramNode(); v = true; break;
-                case NodeType.MultiFunctionalProgram: node = new MultiFuncionalProgramNode(); v = true; break;
+                case NodeType.MultiFunctionalProgram:
+                    node = new MultiFuncionalProgramNode 
+                    {
+                        ProgramImports = children[0],
+                        ProgramTypeDeclarations = children[1],
+                        ProgramGlobalVariableDeclarations = children[2],
+                        ProgramFunctionDeclarations = children[3]
+                    }; v = true; break;
                 case NodeType.ImportDeclarations: node = new ImportDeclarationNode(); v = true; break;
                 case NodeType.TypeDeclarations: node = new TypeDeclarationNode(); v = true; break;
                 case NodeType.StructDeclaration:

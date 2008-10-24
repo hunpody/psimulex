@@ -201,7 +201,15 @@ namespace VapeTeam.Psimulex.Compiler.AST
     /*High Level Tree Nodes*/
     public class CompilationUnitNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class SimpleProgramNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class MultiFuncionalProgramNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
+    public class MultiFuncionalProgramNode : PsiNode
+    {
+        public IPsiNode ProgramImports { get; set; }
+        public IPsiNode ProgramTypeDeclarations { get; set; }
+        public IPsiNode ProgramGlobalVariableDeclarations { get; set; }
+        public IPsiNode ProgramFunctionDeclarations { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
     public class ImportDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class TypeDeclarationNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class StructDeclarationNode : PsiNode 

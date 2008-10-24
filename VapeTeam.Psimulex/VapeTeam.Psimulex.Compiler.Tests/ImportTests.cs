@@ -60,7 +60,9 @@ namespace VapeTeam.Psimulex.Compiler.Tests
 
         [TestMethod]
         public void ExistingCircuitImport()
-        {/*
+        {
+            TestFileHandler.CreateTestFiles();
+
             string src =
             @"
 import ""src\\in.psi"";
@@ -74,12 +76,68 @@ void fv(int a)
 	return;
 }
 ";
-            var r = Directory.GetCurrentDirectory();
 
             var result = Helpers.CompilerProxy.CompileResult(src);
             Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Warnings.Count, 0);
             Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Errors.Count, 0);
-          * */
+            Assert.AreEqual(result.CompilationUnitList[1].CompilerMessages.Warnings.Count, 0);
+            Assert.AreEqual(result.CompilationUnitList[1].CompilerMessages.Errors.Count, 0);
+
+            TestFileHandler.DeleteTestFiles();
+        }
+
+        [TestMethod]
+        public void NotExistingImport()
+        {
+            TestFileHandler.CreateTestFiles();
+
+            string src =
+            @"
+import ""nixez.psi"";
+void main()
+{
+wr(""almacsek"");
+}
+
+void fv(int a)
+{
+	return;
+}
+";
+
+            var result = Helpers.CompilerProxy.CompileResult(src);
+            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Warnings.Count, 0);
+            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Errors.Count, 1);
+
+            TestFileHandler.DeleteTestFiles();
+        }
+
+        [TestMethod]
+        public void ImportFunctionNameCollision()
+        {
+            TestFileHandler.CreateTestFiles();
+
+            string src =
+            @"
+import ""src\\in1.psi"";
+void main()
+{
+wr(""almacsek"");
+}
+
+void fv(int a)
+{
+	return;
+}
+";
+
+            var result = Helpers.CompilerProxy.CompileResult(src);
+            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Warnings.Count, 0);
+            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Errors.Count, 0);
+            Assert.AreEqual(result.CompilationUnitList[1].CompilerMessages.Warnings.Count, 1);
+            Assert.AreEqual(result.CompilationUnitList[1].CompilerMessages.Errors.Count, 0);
+
+            TestFileHandler.DeleteTestFiles();
         }
         
     }
