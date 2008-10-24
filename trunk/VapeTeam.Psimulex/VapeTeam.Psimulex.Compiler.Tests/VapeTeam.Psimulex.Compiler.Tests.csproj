@@ -47,6 +47,7 @@
     <Compile Include="Helpers\CompilerProxy.cs" />
     <Compile Include="Helpers\PsiNodHelpers.cs" />
     <Compile Include="Helpers\SystemHelper.cs" />
+    <Compile Include="Helpers\TestFileHandler.cs" />
     <Compile Include="ImportTests.cs" />
     <Compile Include="ProgramStructureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

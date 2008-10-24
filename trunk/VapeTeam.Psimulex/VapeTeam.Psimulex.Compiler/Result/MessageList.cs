@@ -63,11 +63,13 @@ namespace VapeTeam.Psimulex.Compiler.Result
 
     public class Warning : Message
     {
+        public CompilerErrorCode ErrorCode { get; set; }
         public override MessageType Type { get { return MessageType.Warning; } }
     }
 
     public class Error : Message
     {
+        public CompilerErrorCode ErrorCode { get; set; }
         public override MessageType Type { get { return MessageType.Error; } }
     }
 }
