@@ -26,7 +26,19 @@ namespace VapeTeam.Psimulex.Core.Commands
             }
 
             Types.BaseType selectionResult;
-            object currentValue = property.GetValue(value, null);
+            object currentValue = null;
+
+            // Try to get current value
+
+            try
+            {
+                currentValue = property.GetValue(value, null);
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                throw new Exceptions.PsimulexCoreException(string.Format("Error selecting member {0} of type {1}.",
+                    name, value.TypeEnum), ex.InnerException);
+            }
 
             if (currentValue != null && (property.PropertyType.IsSubclassOf(typeof(Types.BaseType)) || property.PropertyType == typeof(Types.BaseType)))
             {

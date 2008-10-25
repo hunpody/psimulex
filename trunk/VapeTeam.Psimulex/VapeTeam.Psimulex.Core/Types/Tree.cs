@@ -101,13 +101,78 @@ namespace VapeTeam.Psimulex.Core.Types
         public Tree(IEnumerable<BaseType> collection)
             : this()
         {
-            children.AddRange(collection.Select(item => new Tree { Value = item }));
+            children.AddRange(collection.Select(item => new Tree { Parent = this, Value = item }));
         }
+
+        #region Operators
 
         public override void Add(BaseType value)
         {
-            children.Add(value.ToTree());
+            Tree childTree = value.ToTree();
+            childTree.Parent = this;
+            children.Add(childTree);
         }
+
+        public override void Assign(BaseType value)
+        {
+            var otherTree = value.ToTree();
+            Parent = otherTree.Parent;
+            Value = otherTree.Value;
+            children = otherTree.children;
+        }
+
+        public override BaseType Clone()
+        {
+            return new Tree
+            {
+                // Should we set here the parent?
+                Value = this.Value.Clone(),
+                children = this.children.Select(child => child.Clone() as Tree).ToList()
+            };
+        }
+
+        private Tree GetNextSibling(int position)
+        {
+            if (this.Parent == null)
+            {
+                throw new Exceptions.InvalidOperationException(string.Format("Can't get next sibling because the tree has no parent."));
+            }
+            int siblingIndex = Parent.children.IndexOf(this);
+            if (Parent.children.Count <= siblingIndex + position)
+            {
+                throw new Exceptions.InvalidOperationException(string.Format("Can't get next sibling because this tree is the last child of its parent."));
+            }
+            if (siblingIndex + position < 0)
+            {
+                throw new Exceptions.InvalidOperationException(string.Format("Can't get previous sibling because this tree is the first child of its parent."));
+            }
+
+            return Parent.children[siblingIndex + position];
+        }
+
+        /// <summary>
+        /// The next child of its parent.
+        /// </summary>
+        public Tree NextSibling
+        {
+            get
+            {
+                return GetNextSibling(1);
+            }
+        }
+
+        /// <summary>
+        /// The previous child of its parent.
+        /// </summary>
+        public Tree PreviousSibling
+        {
+            get
+            {
+                return GetNextSibling(-1);
+            }
+        }
+
+        #endregion
 
         public override string ToString()
         {

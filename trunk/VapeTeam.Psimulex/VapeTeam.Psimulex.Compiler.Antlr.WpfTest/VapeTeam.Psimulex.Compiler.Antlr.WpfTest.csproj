@@ -98,6 +98,7 @@
     <Compile Include="programStringWindow.xaml.cs">
       <DependentUpon>programStringWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UnderConstructionComponents\Diff.cs" />
     <Compile Include="UnderConstructionComponents\DiffUtil.cs" />
     <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfiguration.cs" />
     <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfigurationWindow.xaml.cs">
