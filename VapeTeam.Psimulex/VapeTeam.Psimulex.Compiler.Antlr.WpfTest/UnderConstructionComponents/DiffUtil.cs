@@ -14,5 +14,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest.UnderConstructionComponents
          * Azaz a mentett fából mit kell visszatölteni, mit eldobni és
          * mi az ahova default adatokat kell generálni.
          */
+
+        // Added a diff utility in diff.cs. It looks to be fast. 
     }
 }
