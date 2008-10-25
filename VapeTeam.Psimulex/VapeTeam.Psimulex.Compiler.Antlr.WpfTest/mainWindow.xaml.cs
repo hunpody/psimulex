@@ -299,6 +299,15 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void buildAndRunButton_Click(object sender, RoutedEventArgs e)
         {
             Bulid("teszt.psi");
+            if (compiler.CompileResult.Errors.Count + compiler.CompileResult.Warnings.Count != 0)
+            {
+                MessageBoxResult result =
+                MessageBox.Show(string.Format("There is {0} warning and {1} error are you sure to run ?",
+                    compiler.CompileResult.Warnings.Count, compiler.CompileResult.Errors.Count), "Warning"
+                   , MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                    return;
+            }
             Run();
         }
 
