@@ -1069,12 +1069,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.VariableInitialValue.Accept(this);
 
             // Initialize
-            if (varIsReference) AddError(CompilerErrorCode.Custom, "Reference variable definition/initialization is not supported yet!", node.NodeValueInfo);
             if (varArrayIsDynamic) AddError(CompilerErrorCode.Custom, "Dynamic array initialization is not supported yet!", node.NodeValueInfo);
             if (varType != TypeEnum.UserDefinedType)
             {
                 if (varDimensionCount > 0) AddError(CompilerErrorCode.Custom, "Array initialization is not supported yet!", node.NodeValueInfo);
-                else AddCommand(new Initialize(varName, varType));
+                else
+                {
+                    var init = new Initialize(varName, varType);
+                    //init.IsReference = varIsReference;
+                    AddCommand(init);
+                }
             }
             else
             {

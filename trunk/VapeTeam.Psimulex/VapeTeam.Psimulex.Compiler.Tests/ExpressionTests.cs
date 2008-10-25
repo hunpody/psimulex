@@ -613,6 +613,35 @@ print(i);
             Assert.AreEqual("111", result);
         }
 
+        [TestMethod]
+        public void TestGenAt_2008__október_25_13_07_58()
+        {
+            string src =
+            @"
+import ""in.psi"";
+void main()
+{
+	int i = 10;	
+	write(i);
+	int &a = i;	
+	write(a);
+	write(i);
+	i = 1;
+	write(a);
+	write(i);
+}
+
+void fv(int a)
+{
+	return;
+}
+";
+            Helpers.PsiNodHelpers.ParentTestOne(src);
+            Helpers.PsiNodHelpers.ParentTestOne(src);
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"10 10 10 10 1 ", result);
+        }
+
 
 
         #endregion
