@@ -1076,7 +1076,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 else
                 {
                     var init = new Initialize(varName, varType);
-                    //init.IsReference = varIsReference;
+                    init.IsReference = varIsReference;
                     AddCommand(init);
                 }
             }

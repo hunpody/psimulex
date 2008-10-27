@@ -126,7 +126,7 @@ namespace VapeTeam.Psimulex.Core.Types
             return new Tree
             {
                 // Should we set here the parent?
-                Value = this.Value.Clone(),
+                Value = Value == null ? null : this.Value.Clone(),
                 children = this.children.Select(child => child.Clone() as Tree).ToList()
             };
         }

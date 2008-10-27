@@ -93,6 +93,85 @@ print(a.Size);
             Assert.AreEqual("024", result);
         }
 
+        [TestMethod]
+        public void Reference_01()
+        {
+            string src =
+            @"
+void main()
+{
+	int i = 10;	
+	write(i);
+	int &a = i;	
+	write(a);
+	write(i);
+	i = 1;
+	write(a);
+	write(i);
+}
+
+";
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"10 10 10 1 1 ", result);
+        }
+
+        [TestMethod]
+        public void Reference_02()
+        {
+            string src =
+            @"
+import ""in.psi"";
+void main()
+{
+	int[5] a;
+    int& a3 = a[3];
+    a3 = 5;
+    write(a3 == a[3]);
+    a[3] = 7;
+    write(a3 == a[3]);
+    ++a[3];
+    write(a3 == a[3]);  
+    ++a3; 
+    write(a3 == a[3]);  
+    write(a3);
+    write(a[3]);
+}
+
+";
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"True True True True 9 9 ", result);
+        }
+
+        [TestMethod]
+        public void Reference_03_Chain()
+        {
+            string src =
+            @"
+import ""in.psi"";
+void main()
+{
+	int[5] a;
+    int& a3 = a[3];
+    int& ra3 = a3;
+    ra3 = 5;
+    write(a3 == a[3] && a[3] == ra3);
+    a[3] = 7;
+    write(a3 == a[3] && a[3] == ra3);
+    ++a[3];
+    write(a3 == a[3] && a[3] == ra3);  
+    ++a3; 
+    write(a3 == a[3] && a[3] == ra3);  
+    ++ra3; 
+    write(a3 == a[3] && a[3] == ra3);  
+    write(a3);
+    write(a[3]);
+    write(ra3);
+}
+
+";
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"True True True True True 10 10 10 ", result);
+        }
 
         #region Generated Tests
 
@@ -612,37 +691,6 @@ print(i);
 
             Assert.AreEqual("111", result);
         }
-
-        [TestMethod]
-        public void TestGenAt_2008__október_25_13_07_58()
-        {
-            string src =
-            @"
-import ""in.psi"";
-void main()
-{
-	int i = 10;	
-	write(i);
-	int &a = i;	
-	write(a);
-	write(i);
-	i = 1;
-	write(a);
-	write(i);
-}
-
-void fv(int a)
-{
-	return;
-}
-";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            var result = Helpers.SystemHelper.CompileAndRun(src);
-            Assert.AreEqual(@"10 10 10 10 1 ", result);
-        }
-
-
 
         #endregion
     }

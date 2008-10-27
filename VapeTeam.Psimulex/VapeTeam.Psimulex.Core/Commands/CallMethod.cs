@@ -38,7 +38,7 @@ namespace VapeTeam.Psimulex.Core.Commands
 
                 for (int i = 0; i < methodParameterInfos.Length; ++i)
                 {
-                    poppedValues.Add(context.RunStack.Pop().Dereference().Clone());
+                    poppedValues.Add(context.RunStack.Pop().Clone());
                 }
 
                 poppedValues.Reverse();

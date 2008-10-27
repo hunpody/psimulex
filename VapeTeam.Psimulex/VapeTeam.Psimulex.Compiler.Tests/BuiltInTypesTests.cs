@@ -113,7 +113,7 @@ write(p[0]);
             Assert.AreEqual(@"9 155 True True True <(Priority: 2, Value: 5), (Priority: -3, Value: 155)> <(Priority: 2, Value: 5)> 5 ", result);
         }
 
-        
+
         [TestMethod]
         public void PriorityQueue_3()
         {
@@ -160,10 +160,54 @@ print(t);
 8 (4, 15 (12), 9)", result);
         }
 
+        [TestMethod]
+        public void Tree_02()
+        {
+            string src =
+            @"
+tree t;
+t.Add(5);
+t.Add(15);
+t.Children[1].Add(12);
+t.Value = 8;
+tree k = t;
+t.Value = 10;
+print(t.Value != k.Value);
+tree &r = t;
+t.Value = 5;
+print(r.Value == t.Value);
+
+";
+
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"TrueTrue", result);
+        }
+
+        [TestMethod]
+        public void Tree_03()
+        {
+            string src =
+            @"
+tree t;
+t.Add(5);
+t.Add(15);
+t.Children[1].Add(12);
+t.Value = 8;
+tree k = t;
+t.Value = 10;
+print(t.Value != k.Value);
+tree &r = t;
+t.Value = 5;
+print(r.Value == t.Value);
+
+";
+
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"TrueTrue", result);
+        }
+
+
         #region Generated Tests
-
-
-
 
         [TestMethod]
         public void TestGenAt_2008__szeptember_28_23_28_17()
@@ -271,7 +315,7 @@ print(q.size);
         [TestMethod]
         public void TestGenAt_2008__szeptember_29_0_33_08()
         {
-             var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(@"
 stack s;
 
 for( int i = 0; i < 10; ++i )
@@ -375,77 +419,77 @@ True
 ", result);
         }
 
-//        [TestMethod]
-//        public void TestGenAt_2008__szeptember_30_15_37_34()
-//        {
-//            var result = Helpers.SystemHelper.CompileAndRun(@"
-//list l;
-//stack s;
-//write(s.isempty);
-//writeline(l.isempty);
-//
-//l.insert(10);
-//s = l;
-//writeline(l);
-//s.push(100);
-//writeline(s);
-//
-//set h;
-//s.push(10);
-//h = s;
-//write(h);
-//write(s);
-//write(l);
-//
-//set a;
-//set b;
-//a.insert(10);
-//a.insert(10);
-//a.insert(20);
-//a.insert(20);
-//a.insert(200);
-//
-//b.insert(20);
-//b.insert(100);
-//b.insert(1);
-//
-//writeLine(a);
-//writeLine(b);
-//
-//writeline(a+b);
-//
-//set d;
-//set e;
-//
-//d.insert(1);
-//d.insert(7);
-//d.insert(3);
-//d.insert(2);
-//
-//writeline(d);
-//d.remove(7);
-//writeline(d);
-//
-//e.insert(2);
-//e.insert(5);
-//e.insert(4);
-//
-//writeline(d/e);
-//
-//
-//");
+        //        [TestMethod]
+        //        public void TestGenAt_2008__szeptember_30_15_37_34()
+        //        {
+        //            var result = Helpers.SystemHelper.CompileAndRun(@"
+        //list l;
+        //stack s;
+        //write(s.isempty);
+        //writeline(l.isempty);
+        //
+        //l.insert(10);
+        //s = l;
+        //writeline(l);
+        //s.push(100);
+        //writeline(s);
+        //
+        //set h;
+        //s.push(10);
+        //h = s;
+        //write(h);
+        //write(s);
+        //write(l);
+        //
+        //set a;
+        //set b;
+        //a.insert(10);
+        //a.insert(10);
+        //a.insert(20);
+        //a.insert(20);
+        //a.insert(200);
+        //
+        //b.insert(20);
+        //b.insert(100);
+        //b.insert(1);
+        //
+        //writeLine(a);
+        //writeLine(b);
+        //
+        //writeline(a+b);
+        //
+        //set d;
+        //set e;
+        //
+        //d.insert(1);
+        //d.insert(7);
+        //d.insert(3);
+        //d.insert(2);
+        //
+        //writeline(d);
+        //d.remove(7);
+        //writeline(d);
+        //
+        //e.insert(2);
+        //e.insert(5);
+        //e.insert(4);
+        //
+        //writeline(d/e);
+        //
+        //
+        //");
 
-//            Assert.AreEqual(@"True True
-//( 10 )
-//[ 10, 100 >
-//{ 10, 100 } [ 10, 100, 10 > ( 10 ) { 10, 20, 200 }
-//{ 20, 100, 1 }
-//{ 10, 20, 200, 100, 1 }
-//{ 1, 7, 3, 2 }
-//{ 1, 3, 2 }
-//{ 1, 3 }
-//", result);
-//        }
+        //            Assert.AreEqual(@"True True
+        //( 10 )
+        //[ 10, 100 >
+        //{ 10, 100 } [ 10, 100, 10 > ( 10 ) { 10, 20, 200 }
+        //{ 20, 100, 1 }
+        //{ 10, 20, 200, 100, 1 }
+        //{ 1, 7, 3, 2 }
+        //{ 1, 3, 2 }
+        //{ 1, 3 }
+        //", result);
+        //        }
 
 
 
