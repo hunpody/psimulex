@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdvancedTests.cs" />
+    <Compile Include="BugFixTests.cs" />
     <Compile Include="BuiltInTypesTests.cs" />
     <Compile Include="ExpressionTests.cs" />
     <Compile Include="HelloWorldTests.cs" />
