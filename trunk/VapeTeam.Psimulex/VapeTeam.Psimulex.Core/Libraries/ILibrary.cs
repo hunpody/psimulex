@@ -5,8 +5,10 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Libraries
 {
+    /// <summary>
+    /// A very thin interface for libraries.
+    /// </summary>
     public interface ILibrary
     {
-        ISystemContext System { get; set;  }
     }
 }

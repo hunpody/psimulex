@@ -7,12 +7,18 @@ namespace VapeTeam.Psimulex.Core.Libraries
 {
     public class StandardLibrary : ILibrary
     {
-        public ISystemContext System { get; set; }
+        public ISystemContext System
+        {
+            get
+            {
+                return OperatingSystem.CurrentContext;
+            }
+        }
+
         public Random Random { get; set; }
 
-        public StandardLibrary(ISystemContext context)
+        public StandardLibrary()
         {
-            System = context;
             Random = new Random();
         }
 

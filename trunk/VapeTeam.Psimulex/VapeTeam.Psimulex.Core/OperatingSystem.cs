@@ -10,6 +10,12 @@ namespace VapeTeam.Psimulex.Core
 {
     public class OperatingSystem : ISystemContext, IFunctionLookup
     {
+        public static ISystemContext CurrentContext
+        {
+            get;
+            private set;
+        }
+
         private Machine machine;
 
         private int _nextProcessId = 0;
@@ -61,6 +67,7 @@ namespace VapeTeam.Psimulex.Core
         /// <returns></returns>
         public BaseType SystemCall(Function function, IEnumerable<BaseType> parameters)
         {
+            CurrentContext = this;
             var systemFunction = systemFunctions.GetFunction(function.Name);
 
             ParameterInfo[] parameterInfoCollection = systemFunction.MethodInfo.GetParameters();
@@ -220,7 +227,6 @@ namespace VapeTeam.Psimulex.Core
 
         public void InstallLibrary(ILibrary library)
         {
-            library.System = this;
             libraries.Add(library);
             Explore(library);
         }

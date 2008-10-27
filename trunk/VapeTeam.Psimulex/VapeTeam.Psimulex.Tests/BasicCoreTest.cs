@@ -74,8 +74,6 @@ namespace VapeTeam.Psimulex.Tests
 
         private class TestLibrary : VapeTeam.Psimulex.Core.Libraries.ILibrary
         {
-            public ISystemContext System { get; set; }
-
             public int Add(int a, int b)
             {
                 return a + b;
