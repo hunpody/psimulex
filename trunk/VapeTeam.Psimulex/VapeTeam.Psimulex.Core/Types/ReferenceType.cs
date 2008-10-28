@@ -150,6 +150,11 @@ namespace VapeTeam.Psimulex.Core.Types
             return referencedValue.ToString();
         }
 
+        public override Tree ToTree()
+        {
+            return referencedValue.ToTree();
+        }
+
         public override void Assign(BaseType value)
         {
             this.referencedValue.Assign(value);

@@ -56,7 +56,7 @@ namespace VapeTeam.Psimulex.Core.Commands
                 catch (Exception ex)
                 {
                     throw new Exceptions.PsimulexCoreException(string.Format("The invocation of method {0} of type {1} has thrown an exception.",
-                        methodName, value.GetTypeName()), ex);
+                        methodName, value.GetTypeName()), ex.InnerException);
                 }
 
                 // Push the returned value

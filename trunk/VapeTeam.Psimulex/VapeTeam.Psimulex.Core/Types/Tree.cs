@@ -5,13 +5,17 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    public class Tree : BaseType
+    public class Tree : TreeBase
     {        
         #region Custom collections for children
 
+        /// <summary>
+        /// Returns the children collection in a Psimulex-friendly format
+        /// </summary>
         public class TreeNodeCollection : List
         {
             private Tree tree;
+
             public TreeNodeCollection(Tree tree)
             {
                 this.tree = tree;
@@ -68,14 +72,17 @@ namespace VapeTeam.Psimulex.Core.Types
             }
         }
 
-        private List<Tree> children;
+        public Tree this[int index]
+        {
+            get
+            {
+                return children[index];
+            }
+        }
 
-        /// <summary>
-        /// The value being stored inside the tree.
-        /// </summary>
-        public BaseType Value { get; set; }
+        protected List<Tree> children;
 
-        public Tree Parent { get; private set; }
+        public Tree Parent { get; set; }
 
         #endregion
 
@@ -104,13 +111,40 @@ namespace VapeTeam.Psimulex.Core.Types
             children.AddRange(collection.Select(item => new Tree { Parent = this, Value = item }));
         }
 
+        protected override IEnumerable<TreeBase> GetChildren()
+        {
+            return children.Cast<TreeBase>();
+        }
+
         #region Operators
 
         public override void Add(BaseType value)
         {
-            Tree childTree = value.ToTree();
+            AddChild(value, -1);
+        }
+
+        protected virtual Tree CopyTree(BaseType value)
+        {
+            return value.ToTree().CopyReferenced();
+        }
+
+        public virtual void AddChild(BaseType value, int index)
+        {
+            Tree childTree = CopyTree(value);
             childTree.Parent = this;
-            children.Add(childTree);
+
+            if (index == -1)
+            {
+                index = children.Count;
+            }
+
+            if (index < 0 || index > children.Count)
+            {
+                throw new Exceptions.InvalidOperationException("Cannot add child to the tree.",
+                    new Exceptions.IndexOutOfRangeException(index, 0, children.Count));
+            }
+
+            children.Insert(index, childTree);
         }
 
         public override void Assign(BaseType value)
@@ -128,6 +162,21 @@ namespace VapeTeam.Psimulex.Core.Types
                 // Should we set here the parent?
                 Value = Value == null ? null : this.Value.Clone(),
                 children = this.children.Select(child => child.Clone() as Tree).ToList()
+            };
+        }
+    
+        /// <summary>
+        /// Copies the tree but keeps the values of each node referenced. 
+        /// </summary>
+        /// <param name="tree"></param>
+        /// <returns></returns>
+        public virtual Tree CopyReferenced()
+        {
+            return new Tree
+            {
+                // Parent?
+                Value = BaseType.NullsafeReference(Value),
+                children = children.Select(child => child.CopyReferenced()).ToList()
             };
         }
 
@@ -176,18 +225,21 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override string ToString()
         {
-            // PostOrder
-
-            string valueString = "null";
-            if (Value != null)
-            {
-                valueString = Value.ToString();
-            }
-
+            string valueString = NullsafeToString(Value);
             if (children.Count == 0)
                 return valueString;
             else
                 return string.Format("{0} ({1})", valueString, string.Join(", ", children.Select(child => child.ToString()).ToArray()));
+        }
+
+        public override Tree ToTree()
+        {
+            return this;
+        }
+
+        public override BinaryTree ToBinaryTree()
+        {
+            return new BinaryTree(this);
         }
 
         //#region Represenation

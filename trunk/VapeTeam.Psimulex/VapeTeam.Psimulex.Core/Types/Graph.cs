@@ -11,5 +11,22 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             get { return TypeEnum.Graph; }
         }
+
+        private bool isDirected;
+
+        public bool IsDirected
+        {
+            get 
+            { 
+                return isDirected; 
+            }
+            set
+            {
+                isDirected = value;
+            }
+        }
+
+        protected List<GraphEdge> _edges = new List<GraphEdge>();
+        protected List<GraphNode> _nodes = new List<GraphNode>();
     }
 }

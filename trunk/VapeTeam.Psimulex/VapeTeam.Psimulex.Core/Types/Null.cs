@@ -29,6 +29,11 @@ namespace VapeTeam.Psimulex.Core.Types
             return new Null();
         }
 
+        public override string ToString()
+        {
+            return "NULL";
+        }
+
         public override TypeEnum TypeEnum
         {
             get { return TypeEnum.Null; }

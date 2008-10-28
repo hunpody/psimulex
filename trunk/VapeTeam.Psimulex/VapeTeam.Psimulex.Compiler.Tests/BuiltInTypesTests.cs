@@ -206,6 +206,43 @@ print(r.Value == t.Value);
             Assert.AreEqual(@"TrueTrue", result);
         }
 
+        [TestMethod]
+        public void Tree_04_AddReferencedTree()
+        {
+            string src =
+            @"
+tree t;
+t.value = 5;
+t.add(1);
+t.add(2);
+t.add(3);
+t.add(&t);
+t.value = 10;
+print(t.value == t.children[3].value);
+t.add(&t);
+t.value = 8;
+print(t.value == t.children[3].value);
+print(t.value == t.children[4].value);
+print(t.value == t.children[4].children[3].value);
+
+tree t;
+t.value = 5;
+t.add(1);
+t.add(2);
+t.add(3);
+t.add(t);
+t.value = 10;
+print(t.value == t.children[3].value);
+t.add(t);
+t.value = 8;
+print(t.value == t.children[3].value);
+print(t.value == t.children[4].value);
+print(t.value == t.children[4].children[3].value);
+
+";
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual(@"TrueTrueTrueTrueFalseFalseFalseFalse", result);
+        }
 
         #region Generated Tests
 
