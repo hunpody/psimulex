@@ -406,7 +406,8 @@ selecting
 	;
 
 selector
-    :   ( Identifier | parExpression ) (memberSelect | memberFunctionCall | indexing)+
+    :   ( Identifier | parExpression | functionCall )
+    	( memberSelect | memberFunctionCall | indexing )+
     ;
 
 memberSelect

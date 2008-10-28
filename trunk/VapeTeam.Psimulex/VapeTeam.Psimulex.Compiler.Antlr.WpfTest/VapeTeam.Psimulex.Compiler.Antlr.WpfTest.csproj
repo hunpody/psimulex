@@ -92,6 +92,10 @@
   <ItemGroup>
     <Compile Include="FinishedComponents\Pair.cs" />
     <Compile Include="InputTools\InputConvert.cs" />
+    <Compile Include="InputTools\RegExpValidator.cs" />
+    <Compile Include="InputTools\ValidatorTester.xaml.cs">
+      <DependentUpon>ValidatorTester.xaml</DependentUpon>
+    </Compile>
     <Compile Include="mainWindow.xaml.cs">
       <DependentUpon>mainWindow.xaml</DependentUpon>
     </Compile>
@@ -143,6 +147,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="InputTools\ValidatorTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="mainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
