@@ -317,7 +317,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual BinaryTree ToBinaryTree()
         {
-            throw new PsimulexCoreException("Invalid operation");
+            return new BinaryTree(this);
         }
 
         public virtual Iterator ToIterator()
@@ -338,6 +338,49 @@ namespace VapeTeam.Psimulex.Core.Types
         public static implicit operator bool(BaseType value)
         {
             return value.ToBoolean();
+        }
+
+        #endregion
+
+        #region Null-safe functions
+
+        /// <summary>
+        /// Clones the value or returns null if it is null.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static BaseType NullsafeClone(BaseType value)
+        {
+            if (value == null)
+                return null;
+            else
+                return value.Clone();
+        }
+
+        /// <summary>
+        /// References the value or returns null if it is null.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>        
+        public static BaseType NullsafeReference(BaseType value)
+        {
+            if (value == null)
+                return null;
+            else
+                return value.ToReference();
+        }
+
+        /// <summary>
+        /// Converts the value to string or returns "NULL" if it is null.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>        
+        public static string NullsafeToString(BaseType value)
+        {
+            if (value == null)
+                return "NULL";
+            else
+                return value.ToString();
         }
 
         #endregion

@@ -74,6 +74,10 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 return value;
             }
+            else if (type.IsSubclassOf(typeof(BaseType)))
+            {
+                return value.ConvertTo(GetTypeEnumOfType(type));
+            }
             else if (type == typeof(string))
             {
                 return value.ToString();
@@ -104,6 +108,55 @@ namespace VapeTeam.Psimulex.Core.Types
             }
             else
                 return null;
+        }
+
+        private static TypeEnum GetTypeEnumOfType(Type type)
+        {
+            if (type == typeof(Integer))
+                return TypeEnum.Integer;
+            if (type == typeof(Character))
+                return TypeEnum.Character;
+            if (type == typeof(Decimal))
+                return TypeEnum.Decimal;
+            if (type == typeof(Array))
+                return TypeEnum.Array;
+            if (type == typeof(BinaryTree))
+                return TypeEnum.BinaryTree;
+            if (type == typeof(Boolean))
+                return TypeEnum.Boolean;
+            if (type == typeof(Float))
+                return TypeEnum.Float;
+            if (type == typeof(Graph))
+                return TypeEnum.Graph;
+            if (type == typeof(GraphEdge))
+                return TypeEnum.Edge;
+            if (type == typeof(GraphNode))
+                return TypeEnum.Node;
+            if (type == typeof(Iterator))
+                return TypeEnum.Iterator;
+            if (type == typeof(LinkedList))
+                return TypeEnum.LinkedList;
+            if (type == typeof(List))
+                return TypeEnum.List;
+            if (type == typeof(Null))
+                return TypeEnum.Null;
+            if (type == typeof(PriorityQueue))
+                return TypeEnum.PriorityQueue;
+            if (type == typeof(Queue))
+                return TypeEnum.Queue;
+            if (type == typeof(Set))
+                return TypeEnum.Set;
+            if (type == typeof(Stack))
+                return TypeEnum.Stack;
+            if (type == typeof(String))
+                return TypeEnum.String;
+            if (type == typeof(Thread))
+                return TypeEnum.Thread;
+            if (type == typeof(Tree))
+                return TypeEnum.Tree;
+
+            throw new Exceptions.PsimulexCoreException(string.Format("Cannot get the Psimulex type of the CLR type \"{0}\"", type));
+
         }
 
         /// <summary>
@@ -167,6 +220,8 @@ namespace VapeTeam.Psimulex.Core.Types
 
                 case TypeEnum.Tree:
                     return new Tree();
+                case TypeEnum.BinaryTree:
+                    return new BinaryTree();
                 case TypeEnum.Null:
                     return new Null();
                 default:

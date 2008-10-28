@@ -5,183 +5,242 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    public class BinaryTree : AbstractCollection    // Tree
+    public class BinaryTree : TreeBase
     {
-        #region Represenation
+        public BinaryTree Parent { get; private set; }
 
-        #endregion
-
-        #region Constructors
+        public override TypeEnum TypeEnum
+        {
+            get
+            {
+                return TypeEnum.BinaryTree;
+            }
+        }
 
         public BinaryTree()
         {
         }
 
         public BinaryTree(BaseType value)
-            :this()
+            : this()
         {
-            Value = value.Clone();
+            this.Value = value;
         }
 
-        /*
-        public BinaryTree(BaseTypeList rep)
-            :this(rep[0])
+        public BinaryTree(Tree tree)
+            : this(tree.Value)
         {
-            // Build a BinTree From a List
-        }
-        */
-
-        #endregion
-
-        #region Own Members
-
-        public BinaryTree Parent { get; set; }
-
-        public BaseType Value { get; set; }
-
-        public BinaryTree Left { get; set; }
-        public BinaryTree Right { get; set; }
-
-        /*
-        public BaseType EdgeToParentValue { get; set; }
-
-        public string EdgeToParentColor { get; set; }
-        public string Color { get; set; }
-        */
-
-        public int ChildrenCount
-        {
-            get
+            if (tree.ChildrenCount >= 1)
             {
-                if (Left == null && Right == null)
-                    return 2;
-                else if (Left == null || Right == null)
-                    return 1;
-                else
-                    return 0;
+                Left = new BinaryTree(tree[0]);
+            }
+            if (tree.ChildrenCount >= 2)
+            {
+                Right = new BinaryTree(tree[1]);
             }
         }
 
-        public void Insert(BinaryTree value)
+        public BinaryTree Left
+        {
+            get;
+            set;
+        }
+
+        public BinaryTree Right
+        {
+            get;
+            set;
+        }
+
+        public override void Add(BaseType value)
         {
             if (Left == null)
-                Left = value;
+            {
+                Left = value.ToBinaryTree();
+            }
             else if (Right == null)
-                Right = value;
+            {
+                Right = value.ToBinaryTree();
+            }
             else
-                throw new Exceptions.PsimulexCoreException("A BinaryTree can have just two child.");
+            {
+                throw new Exceptions.PsimulexCoreException("The binary tree already has two children. You cannot add a third one.");
+            }
         }
-
-        #endregion
-
-        #region Implemented Members
-
-        public override TypeEnum TypeEnum { get { return TypeEnum.BinaryTree; } }
-        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable()
-        {
-            return null;
-            //return ToPostOrderList();
-        }
-
-        private BaseTypeList ToPostOrderList()
-        {
-            var btl = new BaseTypeList();
-            if (Value != null)
-                btl.Add(Value);
-            if (Left != null)
-                btl.AddRange(Left.ToPostOrderList());
-            if (Right != null)
-                btl.AddRange(Right.ToPostOrderList());
-            return btl;
-        }
-
-        // Preorder,Inorder,Szintfolytonos ( Propertivel lehetne állítani, hogy írja ki, hogy járja be )
-
-        public override BaseType Index(int index)
-        {
-            if (index == 0)
-                return Left;
-            else if (index == 1)
-                return Right;
-            else
-                throw new Exceptions.IndexOutOfRangeException(index, 0, 1);
-        }
-
-        public override int Size { get { return ToPostOrderList().Count; } }
-
-        public override BaseType Clone()
-        {
-            BaseTypeList btl = ToPostOrderList();
-            if (btl.Count != 0)
-                return new Tree(btl);
-            else
-                return new Tree();
-        }
-
-        #endregion
-
-        #region Relational comparison operators
-
-        public override bool EqualsTo(BaseType value)
-        {
-            return ToPostOrderList().IsEqualTo(value.ToBinaryTree().ToPostOrderList());
-        }
-
-        #endregion
-
-        #region Operator Members
 
         public override void Assign(BaseType value)
         {
-            Value = value.ToBinaryTree().Value.Clone();
-            Left = value.Clone().ToBinaryTree().Left;
-            Right = value.Clone().ToBinaryTree().Right;
+            BinaryTree otherBinTree = value.ToBinaryTree();
+            this.Value = otherBinTree.Value;
+            this.Left = otherBinTree.Left;
+            this.Right = otherBinTree.Right;
         }
 
-        /*
-        public override void Add(BaseType value) 
+
+        protected BinaryTree CopyTree(BaseType value)
         {
-            // Can make a new node and the left operand will be the Left and the right the Right
+            return value.ToBinaryTree().CopyReferenced();
         }
-        */
 
-        #endregion
+        /// <summary>
+        /// Copies the tree but keeps the values of each node referenced. 
+        /// </summary>
+        /// <param name="tree"></param>
+        /// <returns></returns>
+        private BinaryTree CopyReferenced()
+        {
+            return new BinaryTree(BaseType.NullsafeReference(Value))
+            {
+                Left = Left ?? Left.CopyReferenced(),
+                Right = Right ?? Right.CopyReferenced()
+            };
+        }
 
-        #region Conversion To Primitive Type Members
+        public override BaseType Clone()
+        {
+            return new BinaryTree
+            {
+                // Should we set here the parent?
+                Value = BaseType.NullsafeClone(Value),
+                Left = BaseType.NullsafeClone(Left) as BinaryTree,
+                Right = BaseType.NullsafeClone(Right) as BinaryTree
+            };
+        }
+
+        protected override IEnumerable<TreeBase> GetChildren()
+        {
+            var children = new List<TreeBase>(2);
+            if (Left != null)
+                children.Add(Left);
+            if (Right != null)
+                children.Add(Right);
+            return children;
+        }
 
         public override string ToString()
         {
-            // PostOrderToString
-            string str = "";
-            if(Value != null)
-                str = Value.ToString();            
-            str += "( ";
-            if (Left != null)
-                str += Left.ToString() + ", ";
-            if (Right != null)
-                str += Right.ToString();
-            str += " )";
-            return str;                
+            if (Left == null && Right == null)
+                return NullsafeToString(Value);
+            return string.Format("{0} ({1}, {2})", NullsafeToString(Value), NullsafeToString(Left), NullsafeToString(Right));
         }
-                
-        #endregion
 
-        #region Conversion To BuiltIn Type Members
-
-        public override Array ToArray() { return new Array(ToPostOrderList()); }
-        public override List ToList() { return new List(ToPostOrderList()); }
-        public override Set ToSet() { return new Set(ToPostOrderList()); }
-        public override Stack ToStack() { return new Stack(ToPostOrderList()); }
-        public override Queue ToQueue() { return new Queue(ToPostOrderList()); }
-        public override PriorityQueue ToPriorityQueue() { return new PriorityQueue(ToPostOrderList()); }
-
-        //public override LinkedList ToLinkedList() { throw new PsimulexCoreException("Invalid operation"); }
-        //public override Graph ToGraph() { throw new PsimulexCoreException("Invalid operation"); }
-        //public override GraphEdge ToGraphEdge() { throw new PsimulexCoreException("Invalid operation"); }
-        //public override GraphNode ToGraphNode() { throw new PsimulexCoreException("Invalid operation"); }
-        //public override Tree ToTree() { throw new PsimulexCoreException("Invalid operation"); }
         public override BinaryTree ToBinaryTree() { return this; }
+    
+    }    //public class BinaryTree : Tree
+    //{
+    //    private class EmptyBinaryTree : BinaryTree { }
 
-        #endregion
-    }
+    //    public override TypeEnum TypeEnum
+    //    {
+    //        get
+    //        {
+    //            return TypeEnum.BinaryTree;
+    //        }
+    //    }
+
+    //    public BinaryTree()
+    //    {
+    //    }
+
+    //    public BinaryTree(BaseType value)
+    //        : this()
+    //    {
+    //        this.Value = value;
+    //        children.Add(null);
+    //        children.Add(null);
+    //    }
+
+    //    public BinaryTree(Tree tree)
+    //        : this(tree.Value)
+    //    {
+    //        for (int i=0; i<Math.Min(tree.ChildrenCount, 2); ++i)
+    //            this.children.Add(new BinaryTree(tree[i]));
+    //    }
+
+    //    public BinaryTree Left
+    //    {
+    //        get
+    //        {
+    //            return children[0] as BinaryTree;
+    //        }
+    //        set
+    //        {
+    //            children[0] = value;
+    //        }
+    //    }
+
+    //    public BinaryTree Right
+    //    {
+    //        get
+    //        {
+    //            return children[1] as BinaryTree;
+    //        }
+    //        set
+    //        {
+    //            children[1] = value;
+    //        }
+    //    }
+
+    //    protected override Tree CopyTree(BaseType value)
+    //    {
+    //        return value.ToBinaryTree().CopyReferenced();
+    //    }
+
+    //    /// <summary>
+    //    /// Copies the tree but keeps the values of each node referenced. 
+    //    /// </summary>
+    //    /// <param name="tree"></param>
+    //    /// <returns></returns>
+    //    public override Tree CopyReferenced()
+    //    {
+    //        return new BinaryTree(BaseType.NullsafeReference(Value))
+    //        {
+    //            // Parent?
+    //            children = children.Select(child => {
+    //                if (child == null)
+    //                {
+    //                    return null;
+    //                }
+    //                else
+    //                {
+    //                    return child.CopyReferenced();
+    //                }
+    //            }).ToList()
+    //        };
+    //    }
+
+    //    public override void AddChild(BaseType value, int index)
+    //    {
+    //        if (children.Count(child => child != null) == 2)
+    //        {
+    //            throw new Exceptions.PsimulexCoreException("The binary tree already has two children. You cannot add a third one.");
+    //        }
+    //        if (index == -1)
+    //        {
+    //            index = children.FindIndex(child => child == null);
+    //        }
+    //        if (index < 0 || 2 <= index)
+    //        {
+    //            throw new Exceptions.InvalidOperationException("Cannot add child to the tree.",
+    //                new Exceptions.IndexOutOfRangeException(index, 0, children.Count));
+    //        }
+
+    //        BinaryTree tree = CopyTree(value) as BinaryTree;
+    //        tree.Parent = this;
+
+    //        children[index] = tree;
+    //    }
+
+    //    public override BaseType Clone()
+    //    {
+    //        return new BinaryTree
+    //        {
+    //            // Should we set here the parent?
+    //            Value = Value == null ? null : this.Value.Clone(),
+    //            children = this.children.Select(child => BaseType.NullsafeClone(child) as Tree).ToList()
+    //        };
+    //    }
+
+    //    public override BinaryTree ToBinaryTree() { return this; }
+    //}
 }

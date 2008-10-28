@@ -137,6 +137,7 @@
     <Compile Include="Types\String.cs" />
     <Compile Include="Types\Thread.cs" />
     <Compile Include="Types\Tree.cs" />
+    <Compile Include="Types\TreeBase.cs" />
     <Compile Include="Types\TypeEnum.cs" />
     <Compile Include="Types\TypeHierarchy.cs" />
     <Compile Include="Types\TypeIdentifier.cs" />

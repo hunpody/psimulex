@@ -7,10 +7,14 @@ namespace VapeTeam.Psimulex.Core.Exceptions
 {
     public class InvalidOperationException : PsimulexCoreException
     {
-        public InvalidOperationException(string message)
-            : base(message)
+        public InvalidOperationException(string message, Exception innerException)
+            : base(message, innerException)
         {
+        }
 
+        public InvalidOperationException(string message)
+            : this(message, null)
+        {
         }
 
         public InvalidOperationException()

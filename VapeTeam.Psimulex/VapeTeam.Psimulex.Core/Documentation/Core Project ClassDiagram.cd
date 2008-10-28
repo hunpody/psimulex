@@ -80,7 +80,7 @@
   <Class Name="VapeTeam.Psimulex.Core.OperatingSystem" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="109.25" Y="22.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAgTBACCAoAAAAAAAABAgAAcDCAAEBAABABAAQAAI=</HashCode>
+      <HashCode>AIAAgTBACCAoAAAAAAAABAgAAcDSAAEBAABABAAQAAI=</HashCode>
       <FileName>OperatingSystem.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -542,7 +542,7 @@
   <Class Name="VapeTeam.Psimulex.Core.Libraries.StandardLibrary" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="105.75" Y="24.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ECAAAAAAAIAACAAIAEAAAAAABAABBQAAAAAAAAEEAAA=</HashCode>
+      <HashCode>ECAAAAAAAIAACAAIAEAAAAAAFAABBQAAAAAAAAEEAAA=</HashCode>
       <FileName>Libraries\StandardLibrary.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -588,15 +588,8 @@
   <Class Name="VapeTeam.Psimulex.Core.Types.BaseType">
     <Position X="67.25" Y="21.75" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>ABMBQAZACRAAMAOMCDADAAAABAQEQChBAIhUKABABRA=</HashCode>
+      <HashCode>ABMBQAZACRAAOAOMCDADAAAABAQEQChBAIh0KgBABRA=</HashCode>
       <FileName>Types\BaseType.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Types.BinaryTree">
-    <Position X="68" Y="39.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAQEQACAAAkAAMAAAAQAAAAAAAwAABCAngAABAARA=</HashCode>
-      <FileName>Types\BinaryTree.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Boolean">
@@ -644,7 +637,7 @@
   <Class Name="VapeTeam.Psimulex.Core.Types.GraphEdge">
     <Position X="56.25" Y="34.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\GraphEdge.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -686,7 +679,7 @@
   <Class Name="VapeTeam.Psimulex.Core.Types.Null">
     <Position X="45" Y="32.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAEAAAJAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAMAAAAAAAAAAAEAAAJAAAAAAAAABA=</HashCode>
       <FileName>Types\Null.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -721,7 +714,7 @@
   <Class Name="VapeTeam.Psimulex.Core.Types.ReferenceType">
     <Position X="58.5" Y="32.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>ABMBAAYAAQAAIAGMgDADAAAABAQAACBBAIgEKAAAABA=</HashCode>
+      <HashCode>ABMBAAZAAQAAIAGMgDADAAAABAQAACBBAIgEKAAAABA=</HashCode>
       <FileName>Types\ReferenceType.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -770,7 +763,7 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQIAAAEQAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAIgAARABAAAEAQMCgAEUAQAEAgAQAAIAAAgAAAAARA=</HashCode>
       <FileName>Types\Tree.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -849,6 +842,13 @@
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAAAAgAAAAEAAAQAAAgAAAAAAUAAAAAAAAA=</HashCode>
       <FileName>Types\VariableDescriptor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VapeTeam.Psimulex.Core.Types.BinaryTree">
+    <Position X="68" Y="39.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAIAgAAQAAAEAAAAAAACACgAAAAARA=</HashCode>
+      <FileName>Types\BinaryTree.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="VapeTeam.Psimulex.Core.ICommandContext" Collapsed="true">
@@ -931,7 +931,7 @@
   <Interface Name="VapeTeam.Psimulex.Core.Libraries.ILibrary" Collapsed="true">
     <Position X="105.75" Y="28" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Libraries\ILibrary.cs</FileName>
     </TypeIdentifier>
   </Interface>
