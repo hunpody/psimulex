@@ -101,6 +101,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         ConstantDimensions,
         Dimensions,
         DimensionMarker,        
+        ArrayInitializer,
+        CollectionInitializer,
 
         /*ID*/
         Identifier,        

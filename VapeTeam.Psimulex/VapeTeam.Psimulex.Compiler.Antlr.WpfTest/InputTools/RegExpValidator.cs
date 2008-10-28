@@ -25,8 +25,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest.InputTools
          * Sorrend: isbool, isint, ischar, isdecimal, ha nem -> string
          */
 
-        private static Regex ListValidator = new Regex("^(\\w+\\s*(,\\s*\\w+)*)$", RegexOptions.Compiled);
-
+        private static Regex ListValidator = new Regex("^(([^,\"]+|\\s*\"([^\"]|\\\\\")*\"\\s*)(,([^,\"]+|\\s*\"([^\"]|\\\\\")*\"\\s*))*,?\\s*)$", RegexOptions.Compiled);
 
         public static bool IsInt(string str)
         {
@@ -71,6 +70,35 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest.InputTools
         public static bool IsMatch(string pattern, string text)
         {
             return (new Regex(pattern)).IsMatch(text);
+        }
+    }
+
+    //temp
+    public static class Tokenizer
+    {
+        public static List<string> GetList(string str)
+        {
+            List<string> tokens = new List<string>();
+
+            string current = "";
+            bool isInStrLiteral = false;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] != ',' && !isInStrLiteral)
+                {
+                    current += str[i];
+                }
+                else if (str[i] == ',' && !isInStrLiteral)
+                {
+                    tokens.Add(current.Trim());
+                }
+                else if (isInStrLiteral)
+                {
+                    current += str[i];
+                }
+            }
+
+            return tokens;
         }
     }
 }
