@@ -359,5 +359,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                     break;
             }
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            new InputTools.ValidatorTester().Show();
+        }
     }
 }
