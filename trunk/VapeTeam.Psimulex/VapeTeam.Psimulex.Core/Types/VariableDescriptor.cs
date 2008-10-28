@@ -15,7 +15,6 @@ namespace VapeTeam.Psimulex.Core.Types
         public TypeIdentifier Type { get; set; }
         public bool IsReference { get; set; }
         public bool IsArray { get; set; }
-        public bool IsDynamic { get; set; }
         public int DimensionCount { get; set; }
         public List<int> DimensionList { get; set; }
     }

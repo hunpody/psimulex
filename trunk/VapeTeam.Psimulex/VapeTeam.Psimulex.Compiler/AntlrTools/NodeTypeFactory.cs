@@ -129,6 +129,8 @@ namespace VapeTeam.Psimulex.Compiler.AntlrTools
                 case PsimulexLexer.DIMS: type = NodeType.Dimensions; break;
                 case PsimulexLexer.CONSTANT_DIMS: type = NodeType.ConstantDimensions; break;
                 case PsimulexLexer.DIMMARKER: type = NodeType.DimensionMarker; break;
+                case PsimulexLexer.ARRAY_INITIALIZER: type = NodeType.ArrayInitializer; break;
+                case PsimulexLexer.COLLECTION_INITIALIZER: type = NodeType.CollectionInitializer; break;
                 
                 /*Types*/
                 case PsimulexLexer.Char:

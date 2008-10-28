@@ -214,7 +214,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         private List<int> lastCompiledDimensionList;
         private bool addToProgram;
         private BaseType lastCompiledConstantValue;
-        private bool isLastCompiledArrayDynamic;
         private Assign lastCompiledAssign;
         private bool isOperatorUnaryPrefix;
         private bool isCompilingAssignmentTarget;
@@ -237,7 +236,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             lastCompiledDimensionList = new List<int>();
             addToProgram = true;
             lastCompiledConstantValue = null;
-            isLastCompiledArrayDynamic = false;
             lastCompiledAssign = null;
             isOperatorUnaryPrefix = false;
             isCompilingAssignmentTarget = false;
@@ -516,7 +514,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 Name = memberName,
                 Value = memberValue,
                 IsInitialized = memberIsInitialized,
-                IsDynamicArray = false,
                 IsReference = false               
             };
 
@@ -568,7 +565,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             int functionDimensionCount = lastCompiledDimensionCount;
             List<int> functionDimensionList = lastCompiledDimensionList;
-            bool functionIsDynamic = isLastCompiledArrayDynamic;
 
             // FunctionReference
             bool functionIsReferenceType = false;
@@ -604,7 +600,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
                                     TypeName = functionTypeName
                                 },
                             IsArray = functionDimensionCount == 0 ? false : true,
-                            IsDynamic = functionIsDynamic,
                             DimensionCount = functionDimensionCount,
                             DimensionList = functionDimensionList,
                             IsReference = functionIsReferenceType,
@@ -635,7 +630,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             TypeEnum parameterType = lastCompiledDataType;
             string parameterTypeName = lastCompiledUserDefinedDataTypeName;
-            bool parameterArrayIsDynamic = isLastCompiledArrayDynamic;
 
             int parameterDimensionCount = lastCompiledDimensionCount;
             List<int> parameterDimensionList = lastCompiledDimensionList;
@@ -668,13 +662,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
                         IsArray = parameterDimensionCount == 0 ? false : true,
                         DimensionCount = parameterDimensionCount,
                         DimensionList = parameterDimensionList,
-                        IsDynamic = parameterArrayIsDynamic
                     }
                 );
 
             lastCompiledDataType = TypeEnum.Undefined;
             lastCompiledUserDefinedDataTypeName = "";
-            isLastCompiledArrayDynamic = false;
             lastCompiledDimensionCount = 0;
             lastCompiledDimensionList = new List<int>();
         }
@@ -1051,7 +1043,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             TypeEnum varType = lastCompiledDataType;
 
             string varTypeName = lastCompiledUserDefinedDataTypeName;
-            bool varArrayIsDynamic = isLastCompiledArrayDynamic;
             int varDimensionCount = lastCompiledDimensionCount;
 
             // Reference
@@ -1065,16 +1056,24 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Check variable name
             CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
 
-            // Expression
-            node.VariableInitialValue.Accept(this);
-
             // Initialize
-            if (varArrayIsDynamic) AddError(CompilerErrorCode.Custom, "Dynamic array initialization is not supported yet!", node.NodeValueInfo);
             if (varType != TypeEnum.UserDefinedType)
             {
-                if (varDimensionCount > 0) AddError(CompilerErrorCode.Custom, "Array initialization is not supported yet!", node.NodeValueInfo);
+                if (varDimensionCount > 0)
+                {
+                    AddCommand(new ArrayDeclare(varName, varType, 0));
+                    AddCommand(new Push(varName, ValueAccessModes.LocalVariableReference));
+
+                    // Expression
+                    node.VariableInitialValue.Accept(this);
+                    
+                    AddCommand(new Assign(false));
+                }
                 else
                 {
+                    // Expression
+                    node.VariableInitialValue.Accept(this);
+
                     var init = new Initialize(varName, varType);
                     init.IsReference = varIsReference;
                     AddCommand(init);
@@ -1097,7 +1096,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             TypeEnum varType = lastCompiledDataType;
 
             string varTypeName = lastCompiledUserDefinedDataTypeName;
-            bool varArrayIsDynamic = isLastCompiledArrayDynamic;
             int varDimensionCount = lastCompiledDimensionCount;
 
             // Name
@@ -1107,17 +1105,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
             CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
 
             // Declare
-            if (varArrayIsDynamic) AddError(CompilerErrorCode.Custom, "Dynamic array declaration is not supported yet!", node.NodeValueInfo);
             if (varType != TypeEnum.UserDefinedType)
             {
                 if (varDimensionCount > 0)
-                {
-                    AddCommand(new ArrayDeclare(varName, varType, varDimensionCount));
-                }
+                    AddCommand(new ArrayDeclare(varName,varType,0));
                 else
-                {
                     AddCommand(new Declare(varName, varType));
-                }
             }
             else
             {
@@ -1563,7 +1556,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             for (int i = 0; i < node.ChildrenCount; i++)
                 node.Children[i].Accept(this);
 
-            isLastCompiledArrayDynamic = false;
         }
 
         public void Visit(ConstantDimensionsNode node)
@@ -1578,7 +1570,55 @@ namespace VapeTeam.Psimulex.Compiler.AST
         {
             lastCompiledDimensionCount = node.ChildrenCount - 1;
             lastCompiledDimensionList = new List<int>();
-            isLastCompiledArrayDynamic = true;
+        }
+
+        public void Visit(ArrayInitializatorNode node)
+        {
+            // Array initialize type
+            node.ArrayDataType.Accept(this);
+
+            TypeEnum arrayType = lastCompiledDataType;
+            string arrayTypeName = lastCompiledUserDefinedDataTypeName;
+
+            int arrayDim = node.ArrayDimensionList.Count;            
+
+            // Dimensions
+            foreach (var item in node.ArrayDimensionList)
+                item.Accept(this);
+
+            AddCommand(new ArrayInitializator(arrayType, arrayDim));
+        }
+
+        public void Visit(CollectionInitializatorNode node)
+        {
+            AddError(CompilerErrorCode.NotImplemented, "Initializer not implemented yet", node.NodeValueInfo);
+            /*
+            // Collection Type
+            node.CollectionType.Accept(this);
+
+            // Collection Type
+            TypeEnum colectionType = lastCompiledDataType;
+            string collectionTypeName = lastCompiledUserDefinedDataTypeName;
+
+            // IsArray init
+            bool isArray = false;
+            if (node.CollectionType.Children.Count == 2)
+                isArray = true;
+
+            if (isArray)
+            { 
+
+            }
+            else
+            {
+
+                switch (colectionType)
+                {
+                    //***
+                    case TypeEnum.Undefined:
+                        break;
+                }
+            }*/
         }
 
         #endregion

@@ -244,6 +244,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(DimensionsNode node) { VisitChildren(node); }
         public void Visit(ConstantDimensionsNode node) { VisitChildren(node); }
         public void Visit(DimensionMarkerNode node) { VisitChildren(node); }
+        public void Visit(ArrayInitializatorNode node) { VisitChildren(node); }
+        public void Visit(CollectionInitializatorNode node) { VisitChildren(node); }
 
         /*ID*/
         public void Visit(IdentifierNode node) { VisitChildren(node); }

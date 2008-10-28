@@ -37,7 +37,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             Name = "";
             Value = null;
             IsInitialized = false;
-            IsDynamicArray = false;
             IsReference = false;
         }
 

@@ -452,6 +452,20 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class ConstantDimensionsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class DimensionMarkerNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
+    public class ArrayInitializatorNode : PsiNode
+    {
+        public IPsiNode ArrayDataType { get; set; }
+        public List<IPsiNode> ArrayDimensionList { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
+    public class CollectionInitializatorNode : PsiNode 
+    {
+        public IPsiNode CollectionType { get; set; }
+        public List<IPsiNode> CollectionElementList { get; set; }
+        public override void Accept(IPsiVisitor v) { v.Visit(this); }
+    }
+
     /*ID*/
     public class IdentifierNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 

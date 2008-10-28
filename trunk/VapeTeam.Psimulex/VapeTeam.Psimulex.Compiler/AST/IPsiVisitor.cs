@@ -101,6 +101,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(DimensionsNode node);
         void Visit(ConstantDimensionsNode node);
         void Visit(DimensionMarkerNode node);
+        void Visit(ArrayInitializatorNode node);
+        void Visit(CollectionInitializatorNode node);
 
         /*ID*/
         void Visit(IdentifierNode node);

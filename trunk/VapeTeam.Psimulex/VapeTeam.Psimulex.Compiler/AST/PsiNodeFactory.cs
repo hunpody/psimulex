@@ -248,6 +248,18 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case NodeType.Dimensions: node = new DimensionsNode(); v = true; break;
                 case NodeType.ConstantDimensions: node = new ConstantDimensionsNode(); v = true; break;
                 case NodeType.DimensionMarker: node = new DimensionMarkerNode(); v = true; break;
+                case NodeType.ArrayInitializer:
+                    node = new ArrayInitializatorNode
+                    {
+                        ArrayDataType = children[0],
+                        ArrayDimensionList = children.GetRange(1,children.Count - 1)
+                    }; v = true; break;
+                case NodeType.CollectionInitializer:
+                    node = new CollectionInitializatorNode
+                    {
+                        CollectionType = children[0],
+                        CollectionElementList = children.GetRange(1, children.Count - 1)
+                    }; v = true; break;
 
                 /*Identifier*/
                 case NodeType.Identifier: node = new IdentifierNode(); break;

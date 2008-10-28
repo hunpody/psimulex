@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CallStack.cs" />
     <Compile Include="Commands\ArrayDeclare.cs" />
+    <Compile Include="Commands\ArrayInitializator.cs" />
     <Compile Include="Commands\BinaryOperation.cs" />
     <Compile Include="Commands\Call.cs" />
     <Compile Include="Commands\CallMethod.cs" />

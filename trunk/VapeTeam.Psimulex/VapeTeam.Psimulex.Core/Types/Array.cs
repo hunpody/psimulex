@@ -142,5 +142,29 @@ namespace VapeTeam.Psimulex.Core.Types
             return string.Format("[{0}]", s);
         }
 
+        #region Added By Vari To Try Something
+
+        public override void Assign(BaseType value)
+        {
+            if( size != 0 )
+                base.Assign(value);
+            else
+            {
+                rep.Clear();
+                foreach (var item in value.ToArray().GetAsEnumerable())
+                {
+                    rep.Add(item);                    
+                }
+                this.size = value.ToArray().Size;
+                this.initializatorType = value.ToArray().initializatorType;
+                // Itt lehetne ellenőrizni, hogy az initializator típusuk megegyezik e ...
+                // Illetve size = 0 helyett mehet ugynez -1 re.
+                // Vagy lehet egy IsInitialised, vagy IsEmpty tulajdonsága a tömbnek, ami alapján tudjuk
+                // hogy null pointer e
+            }
+        }
+
+        #endregion
+
     }
 }
