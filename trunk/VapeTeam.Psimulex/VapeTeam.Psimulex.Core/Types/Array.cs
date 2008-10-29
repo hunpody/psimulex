@@ -157,10 +157,6 @@ namespace VapeTeam.Psimulex.Core.Types
                 }
                 this.size = value.ToArray().Size;
                 this.initializatorType = value.ToArray().initializatorType;
-                // Itt lehetne ellenőrizni, hogy az initializator típusuk megegyezik e ...
-                // Illetve size = 0 helyett mehet ugynez -1 re.
-                // Vagy lehet egy IsInitialised, vagy IsEmpty tulajdonsága a tömbnek, ami alapján tudjuk
-                // hogy null pointer e
             }
         }
 

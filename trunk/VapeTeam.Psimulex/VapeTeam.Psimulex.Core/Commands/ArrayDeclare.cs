@@ -25,7 +25,10 @@ namespace VapeTeam.Psimulex.Core.Commands
                 throw new Psimulex.Core.Exceptions.PsimulexException("More than one dimensional array is not implemented yet!");
              */
 
-            context.AddVariable(name, new Types.Array(type, 0));
+            if (dimension == 1)
+                context.AddVariable(name, new Types.Array(type, 0));
+            else
+                throw new Psimulex.Core.Exceptions.PsimulexException("More than one dimensional array is not implemented yet!");
         }
 
         public ArrayDeclare(string name, TypeEnum type, int dimension)

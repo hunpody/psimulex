@@ -86,7 +86,7 @@ print(a);
         public void ArraySizeAsExpression()
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
-int[(7+5)*2] a;
+int[] a = new int[(7+5)*2];
 print(a[0]);
 print(a.Size);
 ");
@@ -123,7 +123,7 @@ void main()
 import ""in.psi"";
 void main()
 {
-	int[5] a;
+	int[] a = new int[5];
     int& a3 = a[3];
     a3 = 5;
     write(a3 == a[3]);
@@ -150,7 +150,7 @@ void main()
 import ""in.psi"";
 void main()
 {
-	int[5] a;
+	int[] a = new int[5];
     int& a3 = a[3];
     int& ra3 = a3;
     ra3 = 5;
@@ -670,7 +670,7 @@ print(i);
         public void TestGenAt_2008__szeptember_25_17_00_03()
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
-	int[2] t;
+	int[] t = new int[2];
 	t[0] = 111;
 	print(t[0]);
 ");
@@ -682,7 +682,7 @@ print(i);
         public void TestGenAt_2008__szeptember_25_17_04_32()
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
-	int[2] t;
+	int[] t = new int[2];
 	t[0] = 111;
 	t[1] = t[0];	
 	print(t[1]);
