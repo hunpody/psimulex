@@ -13,7 +13,8 @@ namespace VapeTeam.Psimulex.Compiler.Result
         GlobalVariableNameCollision,
         FunctionCollison,
         ImportFileNotFound,
-        NotImplemented
+        NotImplemented,
+        NotSupported
         // ...
     }
 

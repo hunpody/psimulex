@@ -117,7 +117,7 @@ return 2;
         public void TestGenAt_2008__szeptember_26_23_59_23()
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
-int[2] t;
+int[] t = new int[2];
 t[0] = 111;
 t[1] = t[0];	
 print(t[1]);

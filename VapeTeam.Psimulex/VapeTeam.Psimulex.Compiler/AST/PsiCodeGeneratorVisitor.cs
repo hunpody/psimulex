@@ -1061,7 +1061,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             {
                 if (varDimensionCount > 0)
                 {
-                    AddCommand(new ArrayDeclare(varName, varType, 0));
+                    AddCommand(new ArrayDeclare(varName, varType, varDimensionCount));
                     AddCommand(new Push(varName, ValueAccessModes.LocalVariableReference));
 
                     // Expression
@@ -1108,7 +1108,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if (varType != TypeEnum.UserDefinedType)
             {
                 if (varDimensionCount > 0)
-                    AddCommand(new ArrayDeclare(varName,varType,0));
+                    AddCommand(new ArrayDeclare(varName, varType, varDimensionCount));
                 else
                     AddCommand(new Declare(varName, varType));
             }
@@ -1590,9 +1590,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         public void Visit(CollectionInitializatorNode node)
-        {
-            AddError(CompilerErrorCode.NotImplemented, "Initializer not implemented yet", node.NodeValueInfo);
-            /*
+        {            
             // Collection Type
             node.CollectionType.Accept(this);
 
@@ -1605,20 +1603,40 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if (node.CollectionType.Children.Count == 2)
                 isArray = true;
 
-            if (isArray)
-            { 
+            // Array Dimension
+            int arrayDim = lastCompiledDimensionCount;
 
+            // Collection Count
+            int collectionCount = node.CollectionElementList.Count;
+
+            if (isArray)
+            {
+                node.CollectionElementList.Reverse();
+                foreach (var item in node.CollectionElementList)
+                    item.Accept(this);
+                node.CollectionElementList.Reverse();
+
+                AddCommand(new ArrayInitializator(colectionType, arrayDim, collectionCount));
             }
             else
             {
-
                 switch (colectionType)
                 {
-                    //***
-                    case TypeEnum.Undefined:
+                    case TypeEnum.List:
+                        node.CollectionElementList.Reverse();
+                        foreach (var item in node.CollectionElementList)
+                            item.Accept(this);
+                        node.CollectionElementList.Reverse();
+
+                        AddCommand(new ArrayInitializator(colectionType, 1, collectionCount));                                              
+                        break;
+                    default:
+                        AddWarning(CompilerErrorCode.NotSupported, string.Format(
+                            "Type {0} does not support initialization.", collectionTypeName), node.NodeValueInfo);
+                        AddCommand(new Push(new Integer(0)));
                         break;
                 }
-            }*/
+            }
         }
 
         #endregion

@@ -91,6 +91,8 @@ tokens {
 	DIMS;
 	CONSTANT_DIMS;
 	DIMMARKER;
+	COLLECTION_INITIALIZER;
+	ARRAY_INITIALIZER;
 }
 
 compilationUnit
@@ -140,70 +142,39 @@ structBody
     ;
 
 memberDeclaration
-    :   memberTypedIdentifierNonRef ( Assign literal )? ';' -> ^( MEMBERDEC memberTypedIdentifierNonRef literal? )
+    :   dataType Identifier ';' -> ^( MEMBERDEC dataType )
+    |   type Identifier Assign constantData ';' -> ^( MEMBERDEC type Identifier constantData )
     ;
 
-localVariableDeclaration
-options {k=3;}
-    :   typedIdentifierNonRef -> ^(VARDECLARE typedIdentifierNonRef)
-    |   typedIdentifierNonRef Assign variableInitializer -> ^(VARINIT typedIdentifierNonRef variableInitializer)
-	|	typedIdentifierRef Assign variableInitializer -> ^(VARINIT typedIdentifierRef variableInitializer)
-    ;
-    
-variableInitializer
-    :   expression	/* arrayInitializer, MatrixInitializer */
-    ;
-    
-scalarOrArrayType
-	:	type staticArrayType? -> ^( TYPE type staticArrayType? )
-	;
+	
+	
+//////////////////
+// Array Types	//
+//////////////////
 
 arrayType
-	:	staticArrayType | dynamicArrayType
-	;
-	
-staticArrayType
-	:	'[' expression (',' expression)* ']' -> ^( DIMS expression ( expression )* )
-	;
-
-dynamicArrayType
 	:	'[' ( ',' )* ']' -> ^( DIMMARKER '[' ( ',' )* ']' )
 	;
-
-memberScalarOrArrayType
-	:	type memberArrayType? -> ^( TYPE type memberArrayType? )
-	;
-
-memberArrayType
-	:	memberStaticArrayType | dynamicArrayType
-	;
-
-memberStaticArrayType
+/*
+constantArraySize
 	:	'[' IntegerLiteral (',' IntegerLiteral)* ']' -> ^( CONSTANT_DIMS IntegerLiteral ( IntegerLiteral )* )
 	;
-	
-memberTypedIdentifierNonRef
-	:	memberScalarOrArrayType Identifier
-	;
 
-typedIdentifierNonRef
-	:	scalarOrArrayType Identifier
+staticArraySize
+	:	'[' expression (',' expression)* ']' -> ^( DIMS expression ( expression )* )
 	;
+*/
 
-typedIdentifierRef
-	:	scalarOrArrayType Reference? Identifier
-	;	
-	
-typedIdentifier
-	:	typedIdentifierNonRef | typedIdentifierRef
-	;
-   
+///////////////////////////
+// Function Declarations //
+///////////////////////////
+
 functionDeclarations
     :	functionDeclaration* -> ^( FUNCTION_DECLARATIONS functionDeclaration* )
     ;
     
 functionDeclaration
-    :	typedIdentifier formalParameterList  block -> ^( FUNCDEC typedIdentifier formalParameterList? block )
+    :	type Reference? Identifier formalParameterList  block -> ^( FUNCDEC type Reference? Identifier formalParameterList? block )
     ;
 
 formalParameterList
@@ -211,8 +182,9 @@ formalParameterList
     ;
 
 formalParameter
-    :   typedIdentifier -> ^( FORMAL_PARAMETER typedIdentifier )
+    :   type Reference? Identifier -> ^( FORMAL_PARAMETER type Reference? Identifier )
     ;
+    
 
     
 ///////////
@@ -220,7 +192,7 @@ formalParameter
 ///////////
 
 type
-    :	dataType /*| functionPointerType*/
+    :	dataType arrayType? -> ^( TYPE dataType arrayType? ) /*| functionPointerType*/
     ;
 
 /*
@@ -266,8 +238,7 @@ builtInType
 	|	Iterator
 	// ...
 	;
-
-
+	
 
 /////////////////
 // EXPRESSIONS //
@@ -386,6 +357,7 @@ primaryExpression
     |	leftValue
     |   literal
     |	functionCall
+    |	initializer
     ;
 
 parExpression
@@ -422,7 +394,6 @@ functionCall
 	:	Identifier arguments -> ^( FUNCTION_CALL Identifier arguments )
 	;
 
-
 indexing
 	:	'[' expression ( ',' expression )* ']' -> ^( INDEXING expression ( expression )* )
 	;
@@ -440,7 +411,49 @@ literal
     |   NullLiteral
     |   InfinityLiteral
     ;
-  
+
+constantData
+	:	literal | constantInitializer
+	;
+
+    
+/////////////////////////
+// INITIALIZER SECTION //
+/////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+collectionType
+	:	type	// Itt meg lehetne még szorítani, hgoy mire írható inicializátor, de a fordító majd szól értelmesebb hibaüzenetet
+	;
+
+initializer
+	:	collectionInitializer | arrayInitializer
+	;
+	
+collectionInitializer
+	:	New collectionType '{' expression ( ',' expression )* '}' -> ^( COLLECTION_INITIALIZER collectionType expression ( expression )* )
+	;
+
+arrayInitializer
+	:	New dataType '[' expression ( ',' expression )* ']' -> ^( ARRAY_INITIALIZER dataType expression ( expression )* )
+	;
+	
+		
+
+constantInitializer
+	:	constantCollectionInitializer | constantArrayInitializer
+	;
+	
+constantCollectionInitializer
+	:	New collectionType '{' constantData ( ',' constantData )* '}' -> ^( COLLECTION_INITIALIZER collectionType constantData ( constantData )* )
+	;
+
+constantArrayInitializer
+	:	New dataType '[' constantData ( ',' constantData )* ']' -> ^( ARRAY_INITIALIZER dataType constantData ( constantData )* )
+	;
+
+ 
 ////////////////////
 // LAMBDA SECTION //
 ////////////////////
@@ -503,6 +516,13 @@ statement
     |   ';'!
     |   expression ';' -> ^( EXPRESSION_STATEMENT expression )
     |	localVariableDeclaration ';' -> ^( VARIABLE_DECLARATION_STATEMENT localVariableDeclaration )
+    ;
+
+localVariableDeclaration
+options {k=5;}
+	:   type Identifier -> ^( VARDECLARE type Identifier )
+    //:   dataType Identifier -> ^( VARDECLARE dataType Identifier )
+	|   type Reference? Identifier Assign expression -> ^( VARINIT type Reference? Identifier expression )
     ;
     
 ifStatement			:	ifBranch ( ( elseIfBranches elseBranch ) | elseBranch? );
@@ -606,6 +626,7 @@ Iterator:	'iterator'|'Iterator'|'ITERATOR';
 /*Key Words*/
 Struct	:	'struct'|'Struct'|'STRUCT'						;
 Import	:	'import'|'Import'|'IMPORT'						;
+New		:	'new'|'New'|'NEW'								;
 
 Break	:	'break'|'Break'|'BREAK'							;
 Continue:	'continue'|'Continue'|'CONTINUE'				;

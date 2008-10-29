@@ -230,10 +230,13 @@ namespace VapeTeam.Psimulex.Tests
             var process = Helpers.SystemHelper.CreateMachineAndRunProgram(
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
 
-                    new Push(4),
-                    new Push(2),
-                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
                     new ArrayDeclare("a", TypeEnum.Integer, 1),
+                    new PushByReference("a"),
+                    new Push(2),
+                    new Push(4),
+                    new BinaryOperation(BinaryOperation.Operations.Multiplication),
+                    new ArrayInitializator(TypeEnum.Integer, 1),
+                    new Assign(),
                     new PushByReference("a"),
                     new Select("size"),
                     new Call("print")
