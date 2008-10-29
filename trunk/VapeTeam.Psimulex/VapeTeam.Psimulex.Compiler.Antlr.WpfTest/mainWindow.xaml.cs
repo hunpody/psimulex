@@ -119,7 +119,11 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         {
             resultTextBox.Text = "";
             var machine = MachineBuilder.Instance.CreateMachine(1, 16);
+
             machine.System.InstallLibrary(new SampleInputLibrary());
+            machine.System.InstallLibrary(new InputTools.PrimaryInputLibrary());
+            machine.System.InstallLibrary(new InputTools.CollectionInputLibrary());
+
             var process = machine.System.Load(compiler.CompileResult.CompiledProgram);
             try
             {

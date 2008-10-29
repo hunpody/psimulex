@@ -24,11 +24,11 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest.InputTools
         }
 
         private void intValidatorButton_Click(object sender, RoutedEventArgs e)
-        {
+        {/*
             resultTextBox.Text += "Pattern: IntValidator Text: " + textTextBox.Text
             + " IsMatch: "
             + RegExpValidator.IsInt(textTextBox.Text).ToString();
-            resultTextBox.Text += "\n";
+            resultTextBox.Text += "\n";*/
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)

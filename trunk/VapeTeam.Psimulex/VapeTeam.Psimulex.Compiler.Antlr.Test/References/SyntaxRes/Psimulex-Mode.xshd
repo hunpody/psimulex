@@ -280,10 +280,14 @@
         <Key word = "INFINITY" />
       </KeyWords>
 
-      <KeyWords name = "Other" bold="true" italic="true" color="Blue">
+      <KeyWords name = "Other" bold="true" italic="false" color="Blue">
         <Key word = "ref" />
         <Key word = "Ref" />
         <Key word = "REF" />
+
+        <Key word = "new" />
+        <Key word = "New" />
+        <Key word = "NEW" />
       </KeyWords>
 
       <KeyWords name = "IgnoredKeyWords" bold="true" italic="true" color="Red">

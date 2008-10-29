@@ -91,10 +91,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FinishedComponents\Pair.cs" />
-    <Compile Include="InputTools\InputConvert.cs" />
+    <Compile Include="InputTools\CollectionInput\CollectionInputLibrary.cs" />
+    <Compile Include="InputTools\CollectionInput\CollectionInputValidator.cs" />
+    <Compile Include="InputTools\CollectionInput\CommonCollectionInputBox.xaml.cs">
+      <DependentUpon>CommonCollectionInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputTools\InputLibrary.cs" />
+    <Compile Include="InputTools\InputType.cs" />
+    <Compile Include="InputTools\PrimaryInput\PrimaryInputValidator.cs" />
+    <Compile Include="InputTools\PrimaryInput\CommonPrimaryInputBox.xaml.cs">
+      <DependentUpon>CommonPrimaryInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputTools\PrimaryInput\PrimaryInputLibrary.cs" />
+    <Compile Include="InputTools\Randomizer.cs" />
     <Compile Include="InputTools\RegExpValidator.cs" />
-    <Compile Include="InputTools\ValidatorTester.xaml.cs">
+    <Compile Include="InputTools\InputValidator.cs" />
+    <Compile Include="SandBox\ValidatorTester.xaml.cs">
       <DependentUpon>ValidatorTester.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputTools\PrimaryInput\YesNoInputBox.xaml.cs">
+      <DependentUpon>YesNoInputBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="mainWindow.xaml.cs">
       <DependentUpon>mainWindow.xaml</DependentUpon>
@@ -102,10 +118,10 @@
     <Compile Include="programStringWindow.xaml.cs">
       <DependentUpon>programStringWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleInputBox.xaml.cs">
+    <Compile Include="SandBox\SampleInputBox.xaml.cs">
       <DependentUpon>SampleInputBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleInputLibrary.cs" />
+    <Compile Include="SandBox\SampleInputLibrary.cs" />
     <Compile Include="UnderConstructionComponents\Diff.cs" />
     <Compile Include="UnderConstructionComponents\DiffUtil.cs" />
     <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfiguration.cs" />
@@ -147,7 +163,19 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="InputTools\ValidatorTester.xaml">
+    <Page Include="InputTools\CollectionInput\CommonCollectionInputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputTools\PrimaryInput\CommonPrimaryInputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SandBox\ValidatorTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputTools\PrimaryInput\YesNoInputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,7 +187,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleInputBox.xaml">
+    <Page Include="SandBox\SampleInputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,9 +221,6 @@
       <Project>{64AE91ED-9627-44F2-9CD5-FC04DA7310EC}</Project>
       <Name>VapeTeam.Psimulex.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SandBox\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

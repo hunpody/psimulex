@@ -3,49 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using VapeTeam.Psimulex.Core.Types;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest.InputTools
 {
     public static class RegExpValidator
     {
-        private static Regex IntValidator = new Regex("^(0|[1-9][0-9]*)$", RegexOptions.Compiled);
-        private static Regex DecimalValidator = new Regex("^((0|[1-9][0-9]*)[\\.,][0-9]+)$", RegexOptions.Compiled);
-        private static Regex BoolValidator = new Regex("^(true|false)$", RegexOptions.Compiled);
-        private static Regex CharValidator = new Regex("^(.|\\.)$", RegexOptions.Compiled);
+        public static Regex IntValidator = new Regex("^(0|(-?|\\+?)[1-9][0-9]*)$", RegexOptions.Compiled);
+        public static Regex DecimalValidator = new Regex("^(((-|\\+)?0([\\.][0-9]+)?|(-|\\+)?[1-9][0-9]*)([\\.][0-9]+)?)$", RegexOptions.Compiled);
+        public static Regex BoolValidator = new Regex("^(true|false)|(igaz|hamis)|(t|f)|(i|h)|(1|0)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-        // Legyne külön jelölés lista, halamaz stb -re ? vagy elgé csak a felsorolást csekkolni
-        /* Utóbbi tűnik nyerőnek.
-         * lista elemei mik lehetnek ? int, decimal, char, string Kelljen külön jelölni ?
-         * {almastring , 123 , d , 1.0 , true} Ez tűnik a nyerőnek.
-         * Szavakban whitespace nem megengedett vagy kelel a macskaköröm, vagy csak vesszővel elválasztás lehet.
-         * 
-         * Csekk : if van vessző, akor vesszővel elválasztásról van szó, ha nincs vessző,
-         * akkor whitespacevel van a felsorolás.
-         * 
-         * Sorrend: isbool, isint, ischar, isdecimal, ha nem -> string
-         */
+        //public static Regex CharValidator = new Regex("^([^\\\\']|\\\\.)$", RegexOptions.Compiled);
+        public static Regex CharValidator = new Regex("^(.)$", RegexOptions.Compiled);
 
-        private static Regex ListValidator = new Regex("^(([^,\"]+|\\s*\"([^\"]|\\\\\")*\"\\s*)(,([^,\"]+|\\s*\"([^\"]|\\\\\")*\"\\s*))*,?\\s*)$", RegexOptions.Compiled);
+        //public static Regex StringValidator = new Regex("^([^\\\\\"]|\\\\.)*$", RegexOptions.Compiled);
+        public static Regex StringValidator = new Regex("^(.)*$", RegexOptions.Compiled);
 
-        public static bool IsInt(string str)
-        {
-            return IntValidator.IsMatch(str);
-        }
 
-        public static bool IsDecimal(string str)
-        {
-            return DecimalValidator.IsMatch(str);
-        }
-
-        public static bool IsBool(string str)
-        {
-            return DecimalValidator.IsMatch(str.ToLower());
-        }
-
-        public static bool IsChar(string str)
-        {
-            return IntValidator.IsMatch(str);
-        }
+        //public static Regex ListValidator = new Regex("^(([^,\"]+|\\s*\"([^\"]|\\\\\")*\"\\s*)(,([^,\"]+|\\s*\"([^\"]|\\\\\")*\"\\s*))*,?\\s*)$", RegexOptions.Compiled);
 
         public static string GetValue(string pattern, string text)
         {
@@ -72,6 +47,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest.InputTools
             return (new Regex(pattern)).IsMatch(text);
         }
     }
+
+
+
+    
+
+    // ... :)
+
 
     //temp
     public static class Tokenizer
