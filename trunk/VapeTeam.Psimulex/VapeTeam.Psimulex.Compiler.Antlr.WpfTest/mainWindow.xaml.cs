@@ -151,13 +151,16 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             string src =
             @""
 " + editor.Text.Replace("\"", "\"\"") + @"
-"";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
+"";            
             var result = Helpers.SystemHelper.CompileAndRun(src);
             Assert.AreEqual(@""" + resultTextBox.Text + @""", result);
         }
 ";
+            /*
+            Helpers.PsiNodHelpers.ParentTestOne(src);
+            Helpers.PsiNodHelpers.ParentTestTwo(src);
+             */
+
             StreamWriter sw;
             string file = "Teszt\\testCase.cs";
             if (!File.Exists(file))
