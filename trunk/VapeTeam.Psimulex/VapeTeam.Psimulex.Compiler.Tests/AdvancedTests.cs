@@ -151,6 +151,23 @@ void myprint(string s)
             Assert.AreEqual(@"2, 2, 2, 3", result);
         }
 
+        [TestMethod]
+        public void Swap_01()
+        {
+            var result = Helpers.SystemHelper.CompileAndRun(@"
+void main()
+{
+  int a = 2;
+  int b = 3;
+  swap(&a, &b);
+  write(a); write(b);
+}
+");
+
+            Assert.AreEqual(@"3 2 ", result);
+        }
+
+
         #region Generated Tests
 
         [TestMethod]

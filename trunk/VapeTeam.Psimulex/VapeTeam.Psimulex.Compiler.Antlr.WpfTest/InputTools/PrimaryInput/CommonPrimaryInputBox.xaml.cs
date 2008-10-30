@@ -59,5 +59,11 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest.InputTools
             enterLabel.Content = Validator.EnterMessage;
             exampleLabel.Content = Validator.ExampleMessage;
         }
+
+        private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            Canvas.SetLeft(this, Canvas.GetLeft(this) + e.HorizontalChange);
+            Canvas.SetTop(this, Canvas.GetTop(this) + e.VerticalChange);
+        }
     }
 }

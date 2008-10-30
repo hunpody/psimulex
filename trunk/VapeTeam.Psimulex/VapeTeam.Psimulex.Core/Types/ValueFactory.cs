@@ -61,6 +61,11 @@ namespace VapeTeam.Psimulex.Core.Types
             }
         }
 
+        private static bool TypeEquals(Type type, Type type2)
+        {
+            return type.Name.StartsWith(type2.Name);
+        }
+
         /// <summary>
         /// Transforms a Psimulex type to its closest .NET equivalent.
         /// It is mainly utilized by the SystemCall mechanism.
@@ -70,7 +75,7 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <returns></returns>
         public static object TransformToDotnetType(BaseType value, Type type)
         {
-            if (type == typeof(BaseType))
+            if (TypeEquals(type, typeof(BaseType)))
             {
                 return value;
             }
@@ -78,31 +83,31 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 return value.ConvertTo(GetTypeEnumOfType(type));
             }
-            else if (type == typeof(string))
+            else if (TypeEquals(type, typeof(string)))
             {
                 return value.ToString();
             }
-            else if (type == typeof(int))
+            else if (TypeEquals(type, typeof(int)))
             {
                 return (int) value.ToInt();
             }
-            else if (type == typeof(long))
+            else if (TypeEquals(type, typeof(long)))
             {
                 return value.ToInt();
             }
-            else if (type == typeof(decimal))
+            else if (TypeEquals(type, typeof(decimal)))
             {
                 return value.ToDecimal();
             }
-            else if (type == typeof(float))
+            else if (TypeEquals(type, typeof(float)))
             {
                 return value.ToFloat();
             }
-            else if (type == typeof(bool))
+            else if (TypeEquals(type, typeof(bool)))
             {
                 return value.ToBoolean();
             }
-            else if (type == typeof(char))
+            else if (TypeEquals(type, typeof(char)))
             {
                 return value.ToChar();
             }

@@ -67,15 +67,28 @@ namespace VapeTeam.Psimulex.Core
         /// <returns></returns>
         public BaseType SystemCall(Function function, IEnumerable<BaseType> parameters)
         {
+            // Set the static current context 
             CurrentContext = this;
-            var systemFunction = systemFunctions.GetFunction(function.Name);
+            var systemFunction = systemFunctions.GetFunction(Function.CreateId(function.Name, parameters.Count()));
 
             ParameterInfo[] parameterInfoCollection = systemFunction.MethodInfo.GetParameters();
 
-            object returnValue = systemFunction.MethodInfo.Invoke(systemFunction.HostObject, 
-                ValueFactory.TransformBaseTypeArrayToDotnetType(parameters, 
-                    parameterInfoCollection.Select(par => par.ParameterType).ToArray()));
+            // Convert psimulex types to .net types
+            var convertedTypes =  ValueFactory.TransformBaseTypeArrayToDotnetType(parameters, 
+                    parameterInfoCollection.Select(par => par.ParameterType).ToArray());
 
+            // Call the function
+            object returnValue = systemFunction.MethodInfo.Invoke(systemFunction.HostObject, convertedTypes);
+
+            var parametersList = parameters.ToList();
+
+            // Map back .net types to psimulex types (this makes possible to keep track of a pass-by-ref parameter)
+            for (int i=0; i<parametersList.Count(); ++i)
+            {
+                parametersList[i].Assign(ValueFactory.Create(convertedTypes[i]));
+            }
+
+            // If the type of return value is not void, then push it back
             if (systemFunction.HasReturnValue)
             {
                 return ValueFactory.Create(returnValue);
@@ -259,7 +272,8 @@ namespace VapeTeam.Psimulex.Core
                     systemFunction.Parameters.Add(new VariableDescriptor 
                     { 
                         Name = parameter.Name, 
-                        Type = CreateTypeIdFromSystemType(parameter.ParameterType)
+                        Type = CreateTypeIdFromSystemType(parameter.ParameterType),
+                        IsReference = parameter.ParameterType.IsByRef || parameter.IsOut
                     });
                 }
 
@@ -296,7 +310,14 @@ namespace VapeTeam.Psimulex.Core
             // Try system function
             if (function == null)
             {
-                function = systemFunctions.GetFunction(name);
+                if (paramCount >= 0)
+                {
+                    function = systemFunctions.GetFunction(Function.CreateId(name, paramCount));
+                }
+                else
+                {
+                    function = systemFunctions.GetFunctionByName(name);
+                }
             }
             return function;
         }
