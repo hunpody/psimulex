@@ -1526,7 +1526,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 child.Accept(this);
 
             // FunctionCall
-            AddCommand(new Call(functionName));
+            AddCommand(new Call(functionName, node.FunctionArgumentList.Count));
         }
 
         public void Visit(ArgumentsNode node) { VisitChildren(node); }
