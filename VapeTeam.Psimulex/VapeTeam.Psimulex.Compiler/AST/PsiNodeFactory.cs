@@ -235,13 +235,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     node = new MemberFunctionCallNode
                     {
                         MemberFunctionName = children[0],
-                        MemberFunctionArgumentList = children.GetRange(1, children.Count - 1)
+                        MemberFunctionArgumentList = children[1].Children
                     }; v = true; break;
                 case NodeType.FunctionCall:
                     node = new FunctionCallNode
                     {
                         FunctionName = children[0],
-                        FunctionArgumentList = children.GetRange(1, children.Count - 1)
+                        FunctionArgumentList = children[1].Children
                     }; v = true; break;
                 case NodeType.Arguments: node = new ArgumentsNode(); v = true; break;
                 case NodeType.Indexing: node = new IndexingNode(); v = true; break;

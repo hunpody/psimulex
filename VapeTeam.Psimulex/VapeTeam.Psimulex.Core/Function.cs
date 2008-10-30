@@ -41,6 +41,19 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
+        public string Id
+        {
+            get
+            {
+                return CreateId(Name, ParameterCount);
+            }
+        }
+
+        public static string CreateId(string name, int parameterCount)
+        {
+            return string.Format("{0}_{1}", name, parameterCount.ToString()).ToLower();
+        }
+
         public Function()
         {
             Parameters = new List<VariableDescriptor>();
