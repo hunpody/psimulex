@@ -118,16 +118,16 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void Run()
         {
             resultTextBox.Text = "";
-            var machine = MachineBuilder.Instance.CreateMachine(1, 16);
+            var maschine = MachineBuilder.Instance.CreateMachine(1, 16);
 
-            machine.System.InstallLibrary(new SampleInputLibrary());
-            machine.System.InstallLibrary(new InputTools.PrimaryInputLibrary());
-            machine.System.InstallLibrary(new InputTools.CollectionInputLibrary());
+            maschine.System.InstallLibrary(new SampleInputLibrary());
+            maschine.System.InstallLibrary(new InputTools.PrimaryInputLibrary());
+            maschine.System.InstallLibrary(new InputTools.CollectionInputLibrary());
 
-            var process = machine.System.Load(compiler.CompileResult.CompiledProgram);
+            var process = maschine.System.Load(compiler.CompileResult.CompiledProgram);
             try
             {
-                machine.System.Run(process);
+                maschine.System.Run(process);
             }
             catch (Exception ex)
             {
@@ -370,6 +370,12 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             new InputTools.ValidatorTester().Show();
+        }
+
+        private void immediateWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            var w = new SandBox.ImmediateWondow();
+            w.ShowDialog();
         }
     }
 }

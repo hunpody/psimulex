@@ -35,9 +35,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public string CleanedSourceText { get; set; }
 
         public IPsiNode PsiNodeSyntaxTree { get; set; }
-
-        //public string ANTLRExceptionText { get; set; }
-        //public List<string> ANTLRErrorMessages { get; set; }
         public MessageList CompilerMessages { get; set; }
 
         public CompilationUnit()
@@ -46,8 +43,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             Source = "";
             CleanedSourceText = "";
             PsiNodeSyntaxTree = null;
-            //ANTLRErrorMessages = new List<string>();
-            //ANTLRExceptionText = "";
             CompilerMessages = new MessageList();
         }
     }
@@ -89,7 +84,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
         
-        public PsiCodeGeneratorVisitor(CompilerDTO dto/*, string antlrExceptionText, List<string> antlrErrorMessages*/)
+        public PsiCodeGeneratorVisitor(CompilerDTO dto)
         {
             Program = ProgramBuilder.Create();
 
@@ -110,15 +105,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 Source = Source,
                 CleanedSourceText = Source,
                 FileName = SourceFileName
-                //,ANTLRExceptionText = antlrExceptionText,
-                //ANTLRErrorMessages = antlrErrorMessages
             };
 
             CurrentCompilationUnit.Source = Source;
             CurrentCompilationUnit.CleanedSourceText = Source;
             CurrentCompilationUnit.FileName = SourceFileName;
-            //CurrentCompilationUnit.ANTLRExceptionText = antlrExceptionText;
-            //CurrentCompilationUnit.ANTLRErrorMessages = antlrErrorMessages;
 
             CompilationUnitList.Add(CurrentCompilationUnit);
         }
@@ -295,6 +286,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         private void AddLocalVariableName(string name)
         {
+            if (currentLocalVariableNameList.Count == 0)
+                NewScope();
             currentLocalVariableNameList.Last<List<string>>().Add(name);
         }
 
@@ -337,7 +330,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         #endregion
 
         #endregion
-
         #region IPsiVisitor Members
 
         /*Children Visiting*/
@@ -444,7 +436,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                                         CompilationUnitList = CompilationUnitList,
                                         UserDefinedFunctionList = UserDefinedFunctionList
                                     }
-                                    , false
+                                    , false, ProgramPart.CompilationUnit
                                  );
 
                         Program.Program.CommandList.AddRange(c.CompileResult.CompiledProgram.CommandList);
