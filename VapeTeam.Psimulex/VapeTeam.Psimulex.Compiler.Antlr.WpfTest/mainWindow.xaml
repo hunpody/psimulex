@@ -5,7 +5,7 @@
     xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
     xmlns:tec="clr-namespace:ICSharpCode.TextEditor;assembly=ICSharpCode.TextEditor"
     
-    Title="MainWindow" Height="400" Width="800" Closed="Window_Closed" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
+    Title="MainWindow" Height="380" Width="799" Closed="Window_Closed" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
     
     <Grid Name="mainGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
@@ -28,6 +28,7 @@
         <Button Height="23" Margin="0,87,0,0" Name="syntaxTreeButton" VerticalAlignment="Top" Grid.Column="1" Click="syntaxTreeButton_Click">SyntaxTree</Button>
         <Button Height="23" Margin="0,116,0,0" Name="programStringButton" VerticalAlignment="Top" Grid.Column="1" Click="programStringButton_Click">Program string</Button>
         <Button Height="23" Margin="0,145,0,0" Name="variableFunctionTreeButton" VerticalAlignment="Top" Grid.Column="1" Click="variableFunctionTreeButton_Click">Functions, Variables</Button>
-        <Button Grid.Column="1" Margin="0,174,0,62" Name="button1" Click="button1_Click">Validator</Button>
+        <Button Grid.Column="1" Margin="0,174,0,0" Name="button1" Click="button1_Click" Height="22.571" VerticalAlignment="Top">Validator</Button>
+        <Button Grid.Column="1" Margin="0,202.571,0,0" Name="immediateWindowButton" Height="23" VerticalAlignment="Top" Click="immediateWindowButton_Click">Immediate</Button>
     </Grid>
 </Window>

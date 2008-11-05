@@ -29,6 +29,11 @@ namespace VapeTeam.Psimulex.Compiler
 
         public CompileResult Compile(string source, string sourceFileName)
         {
+            return Compile(source, sourceFileName, ProgramPart.CompilationUnit);
+        }
+
+        public CompileResult Compile(string source, string sourceFileName, ProgramPart part)
+        {
             // SourceFilePath is the path of the main source file.
             // All other relative imports calculated from this path.
 
@@ -41,21 +46,21 @@ namespace VapeTeam.Psimulex.Compiler
                 Source = source,
                 SourceFileName = sourceFileName,
                 ProgramPath = sourceFilePath
-            }, true);
+            }, true, part);
         }
 
-        public CompileResult Compile(CompilerDTO dto)
+        public CompileResult Compile(CompilerDTO dto, ProgramPart part)
         {
-            return Compile(dto, true);
+            return Compile(dto, true, part);
         }
 
-        public CompileResult Compile(CompilerDTO dto, bool compileFuncVarTree)
+        public CompileResult Compile(CompilerDTO dto, bool compileFuncVarTree, ProgramPart part)
         {
             CompileResult = new CompileResult();
 
-            GenerateMicrolexCode(dto);
+            GenerateMicrolexCode(dto, part);
 
-            if (compileFuncVarTree)
+            if (compileFuncVarTree && part == ProgramPart.CompilationUnit)
                 CompileResult.PsiFunctionsVariablesNodeList = GenerateFuncVarTree(CompileResult.CompilationUnitList);
 
             FinalizeTheResult();
@@ -63,9 +68,9 @@ namespace VapeTeam.Psimulex.Compiler
             return CompileResult;
         }
 
-        public void GenerateMicrolexCode(CompilerDTO dto)
+        public void GenerateMicrolexCode(CompilerDTO dto, ProgramPart part)
         {
-            var result = ANTLRCompiler.CompileCompilationUnit(dto.Source, dto.SourceFileName);
+            var result = ANTLRCompiler.Compile(dto.Source, dto.SourceFileName, part);
 
             if (result.ANTLRExceptionText != "" || result.ANTLRErrorMessages.Count != 0)
             {
@@ -90,12 +95,29 @@ namespace VapeTeam.Psimulex.Compiler
                 return;
             }
 
-            var visitor = new PsiCodeGeneratorVisitor(dto/*, result.ANTLRExceptionText, result.ANTLRErrorMessages*/);
+            var visitor = new PsiCodeGeneratorVisitor(dto);
 
             try
             {
-                visitor.Visit(result.PsiNode as CompilationUnitNode);
+                switch (part)
+                {
+                    case ProgramPart.CompilationUnit:
+                        visitor.Visit(result.PsiNode as CompilationUnitNode);
+                        break;
+                    case ProgramPart.Statement:
+                        var node = new StatementNode();
+                        node.Init();
+                        node.Type = NodeType.Statement;
+
+                        node.Add(result.PsiNode);
+                        visitor.Visit(node);
+                        break;
+                    default:
+                        visitor.Visit(result.PsiNode as CompilationUnitNode);
+                        break;
+                }
                 visitor.CurrentCompilationUnit.PsiNodeSyntaxTree = result.PsiNode as CompilationUnitNode;
+
             }
             catch (Exception e)
             {
@@ -149,11 +171,6 @@ namespace VapeTeam.Psimulex.Compiler
                 CompileResult.CompilerMessages.Warnings.AddRange(item.CompilerMessages.Warnings);
                 CompileResult.CompilerMessages.Errors.AddRange(item.CompilerMessages.Errors);
             }
-
-
-            // Merge The messageLists
-            // ...
-            // Add getters to he result
         }
     }
 }

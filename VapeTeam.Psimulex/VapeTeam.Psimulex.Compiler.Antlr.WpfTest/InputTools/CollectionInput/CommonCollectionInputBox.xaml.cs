@@ -36,7 +36,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest.InputTools
             switch (InputType)
             {
                 case InputType.CommaSeparated:
-                    mainBorder.Child = new TextBox();
+                    //mainBorder.Child = new TextBox();
                     break;
                 case InputType.EndLineSeparated:
                     break;

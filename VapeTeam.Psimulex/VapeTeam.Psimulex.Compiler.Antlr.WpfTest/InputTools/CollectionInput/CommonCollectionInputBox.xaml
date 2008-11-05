@@ -9,15 +9,11 @@
             <RowDefinition Height="71" />
         </Grid.RowDefinitions>
         <Label Margin="12,12,0,36" Name="enterLabel" HorizontalAlignment="Left" Width="180">Enter the value:</Label>
-        <Border Name="mainBorder" Grid.Row="1" Grid.RowSpan="2" Margin="0,0,0,68">
-            
-        </Border>
-        <Button Margin="298,17,0,36" Name="okButton" IsDefault="True" Click="okButton_Click"  HorizontalAlignment="Left" Width="75">OK</Button>
-        <Button IsDefault="True" Margin="198,17,0,36" Name="randomizeButton" Click="randomizeButton_Click"  HorizontalAlignment="Left" Width="86">Randomize</Button>
+        <TextBox Name="textBox1" Grid.Row="1" Grid.RowSpan="2" Margin="0,0,0,68"/>
+        <Button Margin="0,7.48,44,0" Name="okButton" IsDefault="True" Click="okButton_Click"  HorizontalAlignment="Right" Width="86" Height="25" VerticalAlignment="Top">OK</Button>
+        <Button IsDefault="True" Margin="0,39,44,14" Name="randomizeButton" Click="randomizeButton_Click"  HorizontalAlignment="Right" Width="86">Randomize</Button>
         <Label Margin="12,9,12,12" Name="exampleLabel" Grid.Row="2">Examples:</Label>
-        <RadioButton Height="16" HorizontalAlignment="Left" Margin="12,0,0,14" Name="radioButton1" VerticalAlignment="Bottom" Width="120" IsChecked="True">Comma separated</RadioButton>
-        <RadioButton Height="16" Margin="138,0,0,14" Name="radioButton2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="127">EndLine separated</RadioButton>
-        <RadioButton Height="16" Margin="271,0,0,14" Name="radioButton3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="52">Table</RadioButton>
-        <RadioButton Height="16" Margin="329,0,0,14" Name="radioButton4" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="44">List</RadioButton>
+        <RadioButton Height="16" Margin="198,12,0,0" Name="radioButton1" VerticalAlignment="Top" IsChecked="True" HorizontalAlignment="Left" Width="120">Comma separated</RadioButton>
+        <RadioButton Margin="198,34,129,28" Name="radioButton2">EndLine separated</RadioButton>
     </Grid>
 </Window>

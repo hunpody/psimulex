@@ -67,10 +67,12 @@
   <ItemGroup>
     <Compile Include="AntlrTools\ANTLRCompiler.cs" />
     <Compile Include="AntlrTools\ANTLRCompileResult.cs" />
+    <Compile Include="AST\PsiSemanticAnaliserVisitor.cs" />
     <Compile Include="Compiler.cs" />
     <Compile Include="AntlrTools\NodeTypeFactory.cs" />
     <Compile Include="AntlrTools\TreeConverter.cs" />
     <Compile Include="CompilerDTO.cs" />
+    <Compile Include="ProgramPart.cs" />
     <Compile Include="Result\CommandPositionChanges.cs" />
     <Compile Include="AST\IPsiNode.cs" />
     <Compile Include="AST\IPsiNodeFactory.cs" />
