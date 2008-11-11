@@ -47,7 +47,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public string Name { get; set; }
         public TypeEnum Type { get; set; }
         public string TypeName { get; set; }
-        public List<int> DimensionList { get; set; }
+        public int DimensionCount { get; set; }
         public BaseType Value { get; set; }
 
         public Attribute Clone()
@@ -57,11 +57,9 @@ namespace VapeTeam.Psimulex.Core.Types
                 Name = this.Name,
                 Type = this.Type,
                 TypeName = this.TypeName,
-                DimensionList = new List<int>(),
-                Value = this.Value.Clone()
+                DimensionCount = 0,
+                Value = this.Value != null ? this.Value.Clone() : ValueFactory.CreateValue(this.Type)
             };
-
-            DimensionList.ForEach(x => attr.DimensionList.Add(x));
 
             return attr;
         }
@@ -74,20 +72,23 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <returns></returns>
         public bool StructuralEquals(Attribute a)
         {
-            if (Name != a.Name || TypeName != a.TypeName || Type != a.Type || DimensionList.Count != a.DimensionList.Count)
+            if (Name != a.Name || TypeName != a.TypeName || Type != a.Type || DimensionCount != a.DimensionCount)
                 return false;
-            
-            for (int i = 0; i < DimensionList.Count; i++)
-                if (DimensionList[i] != a.DimensionList[i])
-                    return false;
-
             return true;
         }
 
         public override string ToString()
         {
-            return string.Format("{0} [Dim:{1}] {2} = {3}", 
-                TypeName, DimensionList.Count, Name, 
+            string dimmarker = "";
+            if(DimensionCount > 0)
+            {
+                dimmarker += "[";
+                for (int i = 0; i < DimensionCount; i++)
+                    dimmarker += ",";
+                dimmarker += "]";
+            }
+            return string.Format("{0} {1} {2} = {3}",
+                TypeName, dimmarker, Name, 
                 Value != null ? Value.ToString() : "null" );
         }
     }
@@ -117,6 +118,11 @@ namespace VapeTeam.Psimulex.Core.Types
     public class Struct : UserDefinedType
     {
         public Dictionary<string,Attribute> Attributes { get; set; }
+
+        public Struct()
+        {
+            Attributes = new Dictionary<string, Attribute>();
+        }
 
         public override Attribute this[string name]
         {
@@ -178,7 +184,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override void Assign(BaseType value)
         {
-            if (value.GetType() != typeof(Struct) && StructuralEquals(value as Struct))
+            if (value.GetType() == typeof(Struct) && StructuralEquals(value as Struct))
             {
                 foreach (var item in (value as Struct).Attributes.Values)
                     this[item.Name] = item.Clone();
@@ -189,6 +195,24 @@ namespace VapeTeam.Psimulex.Core.Types
                     string.Format("Struct {0} is structural unequivalent with struct {1} !", 
                     Name, (value as Struct).Name));
             }
+        }
+
+        public override bool EqualsTo(BaseType value)
+        {
+            if (value == null)
+                return false;
+
+            if (value.GetType() != typeof(Struct))
+                return false;
+
+            if (!StructuralEquals(value as Struct))
+                return false;
+
+            foreach (var item in (value as Struct).Attributes)
+                if (!item.Value.Value.EqualsTo(Attributes[item.Key].Value))
+                    return false;
+
+            return true;
         }
     }
 

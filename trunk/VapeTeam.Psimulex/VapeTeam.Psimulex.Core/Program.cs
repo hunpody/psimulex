@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core.Commands;
+using VapeTeam.Psimulex.Core.Types;
 
 namespace VapeTeam.Psimulex.Core
 {
@@ -12,7 +13,9 @@ namespace VapeTeam.Psimulex.Core
 
         private CommandList originalCommandList;
         public CommandList CommandList { get; private set; }
+
         protected List<UserDefinedFunction> Functions { get; private set; }
+        protected UserDefinedTypes UserDefinedTypes { get; private set; }
 
         //protected Dictionary<UserDefinedFunction, int> EntryPoints { get; private set; }
 
@@ -21,6 +24,7 @@ namespace VapeTeam.Psimulex.Core
             Name = "";
             CommandList = new CommandList();
             Functions = new List<UserDefinedFunction>();
+            UserDefinedTypes = new UserDefinedTypes();
             //EntryPoints = new Dictionary<UserDefinedFunction, int>();
         }
 
@@ -119,6 +123,16 @@ namespace VapeTeam.Psimulex.Core
             }
 
             return sb.ToString();
+        }
+
+        public void AddUserDefinedType(UserDefinedType udt)
+        {
+            UserDefinedTypes.Add(udt.Name, udt);
+        }
+
+        public UserDefinedType CreataAnInstanceOfUserDefinedType(string name)
+        {
+            return UserDefinedTypes.CreatAnInstanceOf(name);
         }
     }
 }
