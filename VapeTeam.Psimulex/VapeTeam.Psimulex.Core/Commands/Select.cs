@@ -16,48 +16,56 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             var value = context.RunStack.Pop().Dereference();
 
-            var propertiesOfValue = value.GetType().GetProperties();
-            var property = propertiesOfValue.FirstOrDefault(prop => prop.Name.ToLower() == name.ToLower());
-
-            if (property == null)
+            if (value.TypeEnum == VapeTeam.Psimulex.Core.Types.TypeEnum.UserDefinedType)
             {
-                throw new Psimulex.Core.Exceptions.PsimulexCoreException(string.Format("{0} has no member \"{1}\".",
-                    value.GetTypeName(), name));
-            }
-
-            Types.BaseType selectionResult;
-            object currentValue = null;
-
-            // Try to get current value
-
-            try
-            {
-                currentValue = property.GetValue(value, null);
-            }
-            catch (System.Reflection.TargetInvocationException ex)
-            {
-                throw new Exceptions.PsimulexCoreException(string.Format("Error selecting member {0} of type {1}.",
-                    name, value.TypeEnum), ex.InnerException);
-            }
-
-            if (currentValue != null && (property.PropertyType.IsSubclassOf(typeof(Types.BaseType)) || property.PropertyType == typeof(Types.BaseType)))
-            {
-                selectionResult = currentValue as Types.BaseType;
+                var val = value as VapeTeam.Psimulex.Core.Types.UserDefinedType;
+                context.RunStack.Push(val[name].Value.ToReference());
             }
             else
             {
+                var propertiesOfValue = value.GetType().GetProperties();
+                var property = propertiesOfValue.FirstOrDefault(prop => prop.Name.ToLower() == name.ToLower());
+
+                if (property == null)
+                {
+                    throw new Psimulex.Core.Exceptions.PsimulexCoreException(string.Format("{0} has no member \"{1}\".",
+                        value.GetTypeName(), name));
+                }
+
+                Types.BaseType selectionResult;
+                object currentValue = null;
+
+                // Try to get current value
+
                 try
                 {
-                    selectionResult = new VapeTeam.Psimulex.Core.Types.PropertyWrapper(value, property);
+                    currentValue = property.GetValue(value, null);
                 }
-                catch (Exception ex)
+                catch (System.Reflection.TargetInvocationException ex)
                 {
-                    throw new Exceptions.PsimulexCoreException(string.Format("Couldn't create a property wrapper for {0}.{1}.",
-                        value.GetTypeName(), name), ex);
+                    throw new Exceptions.PsimulexCoreException(string.Format("Error selecting member {0} of type {1}.",
+                        name, value.TypeEnum), ex.InnerException);
                 }
-            }
 
-            context.RunStack.Push(selectionResult);
+                if (currentValue != null && (property.PropertyType.IsSubclassOf(typeof(Types.BaseType)) || property.PropertyType == typeof(Types.BaseType)))
+                {
+                    selectionResult = currentValue as Types.BaseType;
+                }
+                else
+                {
+                    try
+                    {
+                        selectionResult = new VapeTeam.Psimulex.Core.Types.PropertyWrapper(value, property);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exceptions.PsimulexCoreException(string.Format("Couldn't create a property wrapper for {0}.{1}.",
+                            value.GetTypeName(), name), ex);
+                    }
+                }
+
+                context.RunStack.Push(selectionResult);
+            }
         }
 
         public Select(string name)

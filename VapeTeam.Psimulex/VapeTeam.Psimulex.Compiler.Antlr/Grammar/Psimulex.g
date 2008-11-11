@@ -142,7 +142,8 @@ structBody
     ;
 
 memberDeclaration
-    :   dataType Identifier ';' -> ^( MEMBERDEC dataType )
+options {k=3;}
+    :   type Identifier ';' -> ^( MEMBERDEC type Identifier )
     |   type Identifier Assign constantData ';' -> ^( MEMBERDEC type Identifier constantData )
     ;
 

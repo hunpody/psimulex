@@ -459,19 +459,37 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
 
             // Message
-            string record = "Struct Found : " + structName + " { ";
+            string msg = "Struct Found : " + structName + " { ";
             foreach (Member member in structMembers)
             {
-                record += member.ToString();
+                msg += member.ToString();
 
                 if (member != structMembers[structMembers.Count - 1])
-                    record += ", ";
+                    msg += ", ";
             }
-            record += " }";
-            AddInformation(record, node.NodeValueInfo);
+            msg += " }";
+            AddInformation(msg, node.NodeValueInfo);
 
-            // Struct Hozzáadása az UserDefinedTypes -hoz
-            // ...
+            // Add Struct to UserDefinedTypes
+            var record = new Struct { Name = structName };
+
+            foreach (var member in structMembers)
+            {
+                if (member.Type == TypeEnum.Undefined)
+                    AddWarning(CompilerErrorCode.NotSupported, "User defined types in records is not supported, member will be skipped!", node.NodeValueInfo);
+                else
+                    record.Attributes.Add(member.Name,
+                        new VapeTeam.Psimulex.Core.Types.Attribute
+                        {
+                            Name = member.Name,
+                            Type = member.Type,
+                            TypeName = member.TypeName,
+                            Value = member.Value,
+                            DimensionCount = member.DimensionCount
+                        });
+            }
+
+            Program.Program.AddUserDefinedType(record);
         }
 
         public void Visit(MemberDeclarationNode node)
@@ -492,10 +510,17 @@ namespace VapeTeam.Psimulex.Compiler.AST
             BaseType memberValue = null;
             if (node.MemberInitialValue != null)
             {
-                addToProgram = false;
-                node.MemberInitialValue.Accept(this);
-                memberValue = lastCompiledConstantValue;
-                memberIsInitialized = true;
+                if( node.MemberInitialValue.Children.Count > 1 )
+                {
+                    AddWarning(CompilerErrorCode.NotSupported, "Initializers in struct default values not supported!", node.NodeValueInfo);
+                }
+                else
+                {
+                    addToProgram = false;
+                    node.MemberInitialValue.Accept(this);
+                    memberValue = lastCompiledConstantValue;
+                    memberIsInitialized = true;
+                }
             }
 
             lastCompiledMember = new Member{
@@ -1073,7 +1098,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             else
             {
-                AddError(CompilerErrorCode.Custom, string.Format("User defined types are not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                AddError(CompilerErrorCode.Custom, string.Format("User defined type initialization is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
             }
         }
 
@@ -1097,7 +1122,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
 
             // Declare
-            if (varType != TypeEnum.UserDefinedType)
+            if (varType != TypeEnum.Undefined)
             {
                 if (varDimensionCount > 0)
                     AddCommand(new ArrayDeclare(varName, varType, varDimensionCount));
@@ -1106,7 +1131,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             else
             {
-                AddError(CompilerErrorCode.Custom, string.Format("User defined types is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                //AddError(CompilerErrorCode.Custom, string.Format("User defined types is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                if (varDimensionCount > 0)
+                    //AddCommand(new ArrayDeclare(varName, TypeEnum.UserDefinedType, varDimensionCount));
+                    AddError(CompilerErrorCode.Custom, string.Format("User defined array types is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                else
+                    AddCommand(new Declare(varName, TypeEnum.UserDefinedType, varTypeName));
             }
         }
 

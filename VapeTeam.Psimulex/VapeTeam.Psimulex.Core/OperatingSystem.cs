@@ -74,7 +74,7 @@ namespace VapeTeam.Psimulex.Core
             ParameterInfo[] parameterInfoCollection = systemFunction.MethodInfo.GetParameters();
 
             // Convert psimulex types to .net types
-            var convertedTypes =  ValueFactory.TransformBaseTypeArrayToDotnetType(parameters, 
+            var convertedTypes = ValueFactory.TransformBaseTypeArrayToDotnetType(parameters, 
                     parameterInfoCollection.Select(par => par.ParameterType).ToArray());
 
             // Call the function
