@@ -21,33 +21,12 @@ namespace VapeTeam.Psimulex.Core.Types
     }
 
     /// <summary>
-    /// This is Simpli a List of User Defined Types.
-    /// Create one for each Program.
-    /// </summary>
-    public class UserDefinedTypes : Dictionary<string,UserDefinedType>
-    {
-        /// <summary>
-        /// Created Instance can assigned as a BaseType.
-        /// </summary>
-        /// <param name="typeName">The user defined type name.</param>
-        /// <returns>An "instance" of an user type.</returns>
-        public UserDefinedType CreatAnInstanceOf(string typeName)
-        {
-            if (!this.ContainsKey(typeName))
-                throw new UserDefinedTypeException(string.Format("Type {0} not defined!", typeName));
-            return this[typeName].Clone() as UserDefinedType;
-        }
-    }
-
-    /// <summary>
     /// An attributo of an usertype.
     /// </summary>
     public class Attribute
     {
         public string Name { get; set; }
-        public TypeEnum Type { get; set; }
-        public string TypeName { get; set; }
-        public int DimensionCount { get; set; }
+        public VariableDescriptor Descriptor { get; set; }
         public BaseType Value { get; set; }
 
         public Attribute Clone()
@@ -55,10 +34,8 @@ namespace VapeTeam.Psimulex.Core.Types
             Attribute attr = new Attribute
             {
                 Name = this.Name,
-                Type = this.Type,
-                TypeName = this.TypeName,
-                DimensionCount = 0,
-                Value = this.Value != null ? this.Value.Clone() : ValueFactory.CreateValue(this.Type)
+                Descriptor = this.Descriptor.Clone(),
+                Value = this.Value == null ? null : this.Value.Clone()
             };
 
             return attr;
@@ -72,7 +49,7 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <returns></returns>
         public bool StructuralEquals(Attribute a)
         {
-            if (Name != a.Name || TypeName != a.TypeName || Type != a.Type || DimensionCount != a.DimensionCount)
+            if ( Name != a.Name || Descriptor.Type != a.Descriptor.Type )
                 return false;
             return true;
         }
@@ -80,15 +57,19 @@ namespace VapeTeam.Psimulex.Core.Types
         public override string ToString()
         {
             string dimmarker = "";
-            if(DimensionCount > 0)
+            if (Descriptor.Type.Dimensions.Count > 0)
             {
-                dimmarker += "[";
-                for (int i = 0; i < DimensionCount; i++)
+                dimmarker = "[" + string.Join(",", new string[Descriptor.Type.Dimensions.Count]) + "]";
+                /*dimmarker += "[";
+                for (int i = 0; i < Descriptor.Type.Dimensions.Count; i++)
                     dimmarker += ",";
-                dimmarker += "]";
+                dimmarker += "]";*/
             }
             return string.Format("{0} {1} {2} = {3}",
-                TypeName, dimmarker, Name, 
+                Descriptor.Type.TypeEnum == TypeEnum.UserDefinedType
+                ? Descriptor.Type.TypeName
+                : Descriptor.Type.TypeEnum.ToString(),
+                dimmarker, Name, 
                 Value != null ? Value.ToString() : "null" );
         }
     }
@@ -97,7 +78,7 @@ namespace VapeTeam.Psimulex.Core.Types
     /// The base for structs and classes.
     /// </summary>
     public abstract class UserDefinedType : BaseType
-    {        
+    {
         public abstract Attribute this[string name] { get; set; }
         public string Name { get; set; }
 
@@ -125,6 +106,11 @@ namespace VapeTeam.Psimulex.Core.Types
         public Struct()
         {
             Attributes = new Dictionary<string, Attribute>();
+        }
+
+        public void AddAttribute(Attribute attr)
+        {
+            Attributes.Add(attr.Name, attr);
         }
 
         public override Attribute this[string name]
@@ -217,6 +203,8 @@ namespace VapeTeam.Psimulex.Core.Types
         }
     }
 
+    #region Class Section
+
     /// <summary>
     /// Just for joke/thinking at this time.
     /// </summary>
@@ -267,4 +255,6 @@ namespace VapeTeam.Psimulex.Core.Types
             return base.Clone();
         }
     }
+
+    #endregion
 }

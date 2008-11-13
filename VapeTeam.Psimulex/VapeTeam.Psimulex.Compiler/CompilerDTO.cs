@@ -6,6 +6,7 @@ using VapeTeam.Psimulex.Compiler.Result;
 using VapeTeam.Psimulex.Compiler.AST;
 using VapeTeam.Psimulex.Core;
 using System.IO;
+using VapeTeam.Psimulex.Core.Types;
 
 namespace VapeTeam.Psimulex.Compiler
 {
@@ -19,10 +20,12 @@ namespace VapeTeam.Psimulex.Compiler
             Source = "";
             SourceFileName = "";
             ProgramPath = "";
-            CommandPositionChanges = new CommandPositionChanges();
+            CommandPositionChanges = new CommandPositionChanges();            
             GlobalVariableList = new List<string>();
             CompilationUnitList = new List<CompilationUnit>();
             UserDefinedFunctionList = new List<UserDefinedFunction>();
+
+            TypeIdentifierList = new List<TypeIdentifier>();
         }
 
         /// <summary>
@@ -49,5 +52,7 @@ namespace VapeTeam.Psimulex.Compiler
         public List<string> GlobalVariableList { get; set; }
         public List<CompilationUnit> CompilationUnitList { get; set; }
         public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
+
+        public List<TypeIdentifier> TypeIdentifierList { get; set; }
     }
 }
