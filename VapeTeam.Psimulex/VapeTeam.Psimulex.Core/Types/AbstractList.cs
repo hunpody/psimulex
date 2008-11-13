@@ -34,16 +34,17 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
-        #region ??
+        #region Aliases
 
         public virtual void Insert(BaseType value)
         {
-            rep.Add(value);
+            Add(value);
         }
 
         public virtual void InsertAt(int index, BaseType value)
         {
             rep.Insert(index, value);
+            OnChanged();
         }
 
         public virtual BaseType Begin
@@ -100,7 +101,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual void PushFront(BaseType value)
         {
-            rep.Insert(0, value);
+            InsertAt(0, value);
         }
 
         public virtual void AddToEnd(BaseType value)
@@ -110,7 +111,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual void PushBack(BaseType value)
         {
-            rep.Insert(rep.Count, value);
+            InsertAt(rep.Count, value);
         }
 
         public BaseType RemoveFirst()
@@ -125,9 +126,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public BaseType PopFront()
         {
-            BaseType first = First;
-            rep.RemoveAt(0);
-            return first;
+            return RemoveAt(0);
         }
 
         public BaseType RemoveLast()
@@ -142,9 +141,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public BaseType PopBack()
         {
-            BaseType last = Last;
-            rep.RemoveAt(rep.Count - 1);
-            return last;
+            return RemoveAt(rep.Count - 1);
         }
 
         public BaseType DeleteAt(int index)
@@ -156,6 +153,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             var ret = rep[index];
             rep.RemoveAt(index);
+            OnChanged();
             return ret;
         }
 
@@ -167,6 +165,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public void Reverse()
         {
             rep.Reverse();
+            OnChanged();
         }
 
         #endregion
@@ -192,6 +191,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public override void Clear()
         {
             rep.Clear();
+            OnChanged();
         }
 
 
@@ -206,16 +206,32 @@ namespace VapeTeam.Psimulex.Core.Types
         public override void Assign(BaseType value)
         {
             rep = value.ToList().rep.Select(v => v.Clone()).ToList();
+            OnChanged();
         }
 
         public override void Add(BaseType value)
         {
-            rep.AddRange(value.ToList().GetAsEnumerable());
+            if (value.Type.TypeEnum == this.Type.TypeEnum)
+            {
+                AddRange(value);
+            }
+            else
+            {
+                rep.Add(value.Clone());
+            }
+            OnChanged();
+        }
+
+        public virtual void AddRange(BaseType value)
+        {
+            rep.AddRange(value.Clone().ToList().GetAsEnumerable());
+            OnChanged();
         }
 
         public override void Negate()
         {
             rep.Reverse();
+            OnChanged();
         }
 
         #endregion

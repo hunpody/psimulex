@@ -46,6 +46,7 @@ namespace VapeTeam.Psimulex.Core.Types
         protected void SetValue(object value)
         {
             propertyInfo.SetValue(targetObject, value, null);
+            OnChanged();
         }
 
         public override void Assign(BaseType value)

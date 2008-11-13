@@ -172,6 +172,12 @@ namespace VapeTeam.Psimulex.Core.Types
         public ReferenceType(BaseType value)
         {
             referencedValue = value;
+            value.Changed += new EventHandler<ValueChangedEventsArgs>(value_Changed);
+        }
+
+        void value_Changed(object sender, BaseType.ValueChangedEventsArgs e)
+        {
+            OnChanged();
         }
 
         #endregion

@@ -1608,7 +1608,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             foreach (var item in node.ArrayDimensionList)
                 item.Accept(this);
 
-            AddCommand(new ArrayInitializator(arrayType, arrayDim));
+            AddCommand(new CollectionInitializer(new TypeIdentifier { TypeEnum = TypeEnum.Array, GenericType = arrayType }, arrayDim));
         }
 
         public void Visit(CollectionInitializatorNode node)
@@ -1617,7 +1617,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             node.CollectionType.Accept(this);
 
             // Collection Type
-            TypeEnum colectionType = lastCompiledDataType;
+            TypeIdentifier collectionType = lastCompiledDataType;
             string collectionTypeName = lastCompiledUserDefinedDataTypeName;
 
             // IsArray init
@@ -1631,34 +1631,40 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Collection Count
             int collectionCount = node.CollectionElementList.Count;
 
+            // Set the type identifier
             if (isArray)
             {
+                collectionType = new TypeIdentifier { TypeEnum = TypeEnum.Array, GenericType = collectionType, Dimensions = new List<int> { collectionCount }};
+            }
+
+            //if (isArray)
+            //{
                 node.CollectionElementList.Reverse();
                 foreach (var item in node.CollectionElementList)
                     item.Accept(this);
                 node.CollectionElementList.Reverse();
 
-                AddCommand(new ArrayInitializator(colectionType, arrayDim, collectionCount));
-            }
-            else
-            {
-                switch (colectionType)
-                {
-                    case TypeEnum.List:
-                        node.CollectionElementList.Reverse();
-                        foreach (var item in node.CollectionElementList)
-                            item.Accept(this);
-                        node.CollectionElementList.Reverse();
+                AddCommand(new CollectionInitializer(collectionType, 1, collectionCount));
+            //}
+            //else
+            //{
+            //    switch (collectionType)
+            //    {
+            //        case TypeEnum.List:
+            //            node.CollectionElementList.Reverse();
+            //            foreach (var item in node.CollectionElementList)
+            //                item.Accept(this);
+            //            node.CollectionElementList.Reverse();
 
-                        AddCommand(new ArrayInitializator(colectionType, 1, collectionCount));                                              
-                        break;
-                    default:
-                        AddWarning(CompilerErrorCode.NotSupported, string.Format(
-                            "Type {0} does not support initialization.", collectionTypeName), node.NodeValueInfo);
-                        AddCommand(new Push(new Integer(0)));
-                        break;
-                }
-            }
+            //            AddCommand(new CollectionInitializer(collectionType, 1, collectionCount));                                              
+            //            break;
+            //        default:
+            //            AddWarning(CompilerErrorCode.NotSupported, string.Format(
+            //                "Type {0} does not support initialization.", collectionTypeName), node.NodeValueInfo);
+            //            AddCommand(new Push(new Integer(0)));
+            //            break;
+            //    }
+            //}
         }
 
         #endregion

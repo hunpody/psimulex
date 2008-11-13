@@ -73,7 +73,11 @@ namespace VapeTeam.Psimulex.Core.Types
         #region Own Members
 
         //public void In(BaseType key, BaseType value) { Insert(key, value); }
-        public void Enqueue(long key, BaseType value) { Insert(key, value); }
+        public void Enqueue(long key, BaseType value) 
+        { 
+            Insert(key, value); 
+        }
+
         public void Insert(long key, BaseType value)
         {
             int index = rep.FindIndex(item => item.Priority < key);
@@ -82,6 +86,8 @@ namespace VapeTeam.Psimulex.Core.Types
                 index = rep.Count;
 
             rep.Insert(index, new Pair { Priority = key, Value = value });
+
+            OnChanged();
             //if (Count == 0)
             //{
             //    rep.Add(new Pair { Priority = key, Value = value });
@@ -114,6 +120,7 @@ namespace VapeTeam.Psimulex.Core.Types
             EnsureQueueIsNotEmpty("get maximal element");
             BaseType ret = rep.First().Value;
             rep.RemoveAt(0);
+            OnChanged();
             return ret;
         }
 
@@ -122,6 +129,7 @@ namespace VapeTeam.Psimulex.Core.Types
             EnsureQueueIsNotEmpty("get minimal element");
             BaseType ret = rep[Count - 1].Value;
             rep.RemoveAt(Count - 1);
+            OnChanged();
             return ret;
         }
 
@@ -179,6 +187,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public override void Clear()
         {
             rep.Clear();
+            OnChanged();
         }
 
         public override BaseType Clone()
@@ -223,6 +232,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public override void Assign(BaseType value)
         {
             this.rep = value.ToPriorityQueue().rep.Select(pair => pair.Clone()).ToList();
+            OnChanged();
         }
 
         public override void Add(BaseType value)

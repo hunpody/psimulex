@@ -76,8 +76,6 @@ List fv()
 	return l;
 }
 ";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
             var result = Helpers.SystemHelper.CompileAndRun(src);
             Assert.AreEqual(@"10", result);
         }
@@ -101,8 +99,6 @@ List fv()
 	return l;
 }
 ";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
             var result = Helpers.SystemHelper.CompileAndRun(src);
             Assert.AreEqual(@"(10)", result);
         }
@@ -128,8 +124,6 @@ List fv()
 	return l;
 }
 ";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
             var result = Helpers.SystemHelper.CompileAndRun(src);
             Assert.AreEqual(@"10", result);
         }

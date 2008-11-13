@@ -73,8 +73,6 @@ void main()
 	writeline(t);
 }
 ";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
             var result = Helpers.SystemHelper.CompileAndRun(src);
             Assert.AreEqual(@"(99, 88, asdfasd, a, True, 231,0, [100, 100])
 ", result);
@@ -94,10 +92,14 @@ void main()
 	writeline(t);
 }
 ";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
             var result = Helpers.SystemHelper.CompileAndRun(src);
-            Assert.AreEqual(@"[99, 88, asdfasd, a, True, 231,0, [100, 100]]
+            // The integer array can only have integer values!
+            // The question is: Should we convert the [100,100] smartly or create a new function called flatten instead?
+
+            //            Assert.AreEqual(@"[99, 88, asdfasd, a, True, 231,0, 100, 100]
+            //", result);
+            
+            Assert.AreEqual(@"[99, 88, 0, 97, 1, 231, 2]
 ", result);
         }
 
@@ -114,8 +116,6 @@ void main()
 	print(t.size);
 }
 ";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
             var result = Helpers.SystemHelper.CompileAndRun(src);
             Assert.AreEqual(@"8", result);
         }
@@ -139,8 +139,7 @@ void main()
 	writeline(v);*/
 }
 ";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
+
             var result = Helpers.SystemHelper.CompileAndRun(src);
             Assert.AreEqual(@"[99]
 ", result);
@@ -162,8 +161,7 @@ void main()
 	writeline(v);
 }
 ";
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestOne(src);
+
             var result = Helpers.SystemHelper.CompileAndRun(src);
             Assert.AreEqual(@"[0, 0, 0, 0, 0, 0, 0, 10, 0, 0]
 [0, 999, 0]

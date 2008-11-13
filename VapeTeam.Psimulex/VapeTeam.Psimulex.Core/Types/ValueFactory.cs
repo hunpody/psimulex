@@ -211,6 +211,8 @@ namespace VapeTeam.Psimulex.Core.Types
                     return new Boolean();
 
                 // Complex Types
+                case TypeEnum.Array:
+                    return new Array(type.GenericType, type.Dimensions[0]);
                 case TypeEnum.List:
                     return new List();
                 case TypeEnum.Set:
@@ -233,7 +235,7 @@ namespace VapeTeam.Psimulex.Core.Types
                 case TypeEnum.BinaryTree:
                     return new BinaryTree();
                 case TypeEnum.Null:
-                    return new Null();
+                    return new Null();                    
                 default:
                     throw new Exceptions.PsimulexCoreException(string.Format("Cannot create value of type {0}.", type));
             }

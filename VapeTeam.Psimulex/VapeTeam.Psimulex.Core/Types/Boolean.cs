@@ -24,6 +24,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public override void Assign(BaseType value)
         {
             this.value = value.ToBoolean();
+            OnChanged();
         }
 
         public override object ToObject()
