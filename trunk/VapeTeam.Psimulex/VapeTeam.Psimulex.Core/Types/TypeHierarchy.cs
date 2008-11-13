@@ -43,12 +43,28 @@ namespace VapeTeam.Psimulex.Core.Types
         public static void OrderTypes(ref BaseType first, ref BaseType second)
         {
             BaseType higher;
-            if (IsBiggerThan(second.TypeEnum, first.TypeEnum))
+            if (IsBiggerThan(second.Type, first.Type))
             {
                 higher = second;
                 second = first;
                 first = higher;
             }                
+        }
+
+        /// <summary>
+        /// Returns true if the value is a type of scalar.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsScalar(BaseType value)
+        {
+            TypeEnum type = value.Type;
+            return type == TypeEnum.Boolean ||
+                type == TypeEnum.Character ||
+                type == TypeEnum.Decimal ||
+                type == TypeEnum.Float ||
+                type == TypeEnum.Integer ||
+                type == TypeEnum.String;
         }
     }
 }

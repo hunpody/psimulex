@@ -94,7 +94,7 @@ namespace VapeTeam.Psimulex.Core.Types
     }
 
     /// <summary>
-    /// Types what can define the user.
+    /// The base for structs and classes.
     /// </summary>
     public abstract class UserDefinedType : BaseType
     {        
@@ -106,14 +106,17 @@ namespace VapeTeam.Psimulex.Core.Types
             return base.Clone();
         }
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
-            get { return TypeEnum.UserDefinedType; }
+            get
+            {
+                return new TypeIdentifier { TypeEnum = TypeEnum.UserDefinedType, TypeName = Name };
+            }
         }
     }
 
     /// <summary>
-    /// DataStructure what have attributes.
+    /// Structs have only fields no methods.
     /// </summary>
     public class Struct : UserDefinedType
     {
@@ -129,13 +132,13 @@ namespace VapeTeam.Psimulex.Core.Types
             get
             {
                 if (!Attributes.ContainsKey(name))
-                    throw new UserDefinedTypeException(string.Format("Type {0} has no attribute named : {1} !", Name, name));
+                    throw new UserDefinedTypeException(string.Format("Type {0} has no attribute named: {1} !", Name, name));
                 return Attributes[name];
             }
             set
             {
                 if (!Attributes.ContainsKey(name))
-                    throw new UserDefinedTypeException(string.Format("Type {0} has no attribute named : {1} !", Name, name));
+                    throw new UserDefinedTypeException(string.Format("Type {0} has no attribute named: {1} !", Name, name));
                 Attributes[name] = value;
             }
         }
@@ -160,10 +163,8 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override string ToString()
         {
-            string ret = Name + " { ";
-            foreach (Attribute attr in Attributes.Values)
-                ret += attr.ToString() + ", ";
-            return ret + " }";
+            return string.Format("{{0}}",
+                string.Join(", ", Attributes.Values.Select(value => value.ToString()).ToArray()));
         }
 
         public bool StructuralEquals(Struct s)

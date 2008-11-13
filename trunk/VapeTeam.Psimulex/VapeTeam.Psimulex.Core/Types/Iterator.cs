@@ -12,7 +12,7 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         private System.Collections.Generic.IEnumerator<BaseType> enumerator;
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get { return TypeEnum.Iterator; }
         }

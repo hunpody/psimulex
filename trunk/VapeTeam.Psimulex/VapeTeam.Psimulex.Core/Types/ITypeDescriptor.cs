@@ -5,11 +5,10 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    public class GraphEdge : BaseType
+    /// <summary>
+    /// General interface for defining types.
+    /// </summary>
+    public interface ITypeDescriptor
     {
-        public override TypeIdentifier Type
-        {
-            get { return TypeEnum.Edge; }
-        }
     }
 }

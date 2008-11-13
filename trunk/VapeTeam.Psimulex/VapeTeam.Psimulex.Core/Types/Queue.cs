@@ -63,7 +63,7 @@ namespace VapeTeam.Psimulex.Core.Types
             return string.Format(">{0}>", s);
         }
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get { return TypeEnum.Queue; }
         }

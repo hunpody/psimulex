@@ -115,6 +115,7 @@
     <Compile Include="Types\BinaryTree.cs" />
     <Compile Include="Types\Boolean.cs" />
     <Compile Include="Types\Character.cs" />
+    <Compile Include="Types\Converter.cs" />
     <Compile Include="Types\Decimal.cs" />
     <Compile Include="Types\Float.cs" />
     <Compile Include="Types\FunctionPointer.cs" />
@@ -124,9 +125,11 @@
     <Compile Include="Types\IIndexable.cs" />
     <Compile Include="Types\Integer.cs" />
     <Compile Include="Types\Iterator.cs" />
+    <Compile Include="Types\ITypeDescriptor.cs" />
     <Compile Include="Types\LinkedList.cs" />
     <Compile Include="Types\List.cs" />
     <Compile Include="Types\Null.cs" />
+    <Compile Include="Types\Point.cs" />
     <Compile Include="Types\PriorityQueue.cs" />
     <Compile Include="Types\PropertyWrapper.cs" />
     <Compile Include="Types\Queue.cs" />

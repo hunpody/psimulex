@@ -25,7 +25,7 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <summary>
         /// The psimulex type of the value.
         /// </summary>
-        public abstract TypeEnum TypeEnum
+        public abstract TypeIdentifier Type
         {
             get;
         }
@@ -124,9 +124,9 @@ namespace VapeTeam.Psimulex.Core.Types
             throw new PsimulexCoreException(string.Format("Cannot assign a {0} value to {1}.", value.GetTypeName(), this.GetTypeName())); 
         }
 
-        public virtual BaseType ConvertTo(TypeEnum type)
+        public virtual BaseType ConvertTo(TypeIdentifier type)
         {
-            if (this.TypeEnum == type)
+            if (this.Type.Equals(type))
                 return this;
 
             return ValueFactory.Convert(this, type);
@@ -197,18 +197,12 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override string ToString()
         {
-            object obj = ToObject();
-            if (obj != null && obj != this)
-                return obj.ToString();
-            else return GetTypeName();
+            return Converter.ToString(ToObject());
         }
 
         public virtual long ToInt()
         {
-            object obj = ToObject();
-            if (obj != null)
-                return Convert.ToInt64(obj);
-            else return default(long);
+            return Converter.ToInt64(ToObject());
         }
 
         public virtual int ToInt32()
@@ -216,10 +210,7 @@ namespace VapeTeam.Psimulex.Core.Types
             if (isConversionToScalarBasedOnToInt)
                 return (int)ToInt();
 
-            object obj = ToObject();
-            if (obj != null)
-                return Convert.ToInt32(obj);
-            else return default(int);
+            return Converter.ToInt32(ToObject());
         }
 
         public virtual decimal ToDecimal()
@@ -227,10 +218,7 @@ namespace VapeTeam.Psimulex.Core.Types
             if (isConversionToScalarBasedOnToInt)
                 return (decimal)ToInt();
 
-            object obj = ToObject();
-            if (obj != null)
-                return Convert.ToDecimal(obj);
-            else return default(decimal);
+            return Converter.ToDecimal(ToObject());
         }
 
         public virtual float ToFloat()
@@ -238,26 +226,17 @@ namespace VapeTeam.Psimulex.Core.Types
             if (isConversionToScalarBasedOnToInt)
                 return (float)ToInt();
 
-            object obj = ToObject();
-            if (obj != null)
-                return Convert.ToSingle(obj);
-            else return default(float);
+            return Converter.ToFloat(ToObject());
         }
 
         public virtual bool ToBoolean()
         {
-            object obj = ToObject();
-            if (obj != null)
-                return Convert.ToBoolean(obj);
-            else return default(bool);
+            return Converter.ToBoolean(ToObject());
         }
 
         public virtual char ToChar()
         {
-            object obj = ToObject();
-            if (obj != null)
-                return Convert.ToChar(obj);
-            else return default(char);
+            return Converter.ToChar(ToObject());
         }
 
         public virtual Array ToArray()
@@ -322,7 +301,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual Iterator ToIterator()
         {
-            throw new PsimulexCoreException(string.Format("Type {0} can't convert to Iterator!", TypeEnum.ToString()));
+            throw new PsimulexCoreException(string.Format("Type {0} can't convert to Iterator!", Type.ToString()));
         }
 
         public virtual Null ToNull()
@@ -332,6 +311,36 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
+        #region Events
+
+        public class ValueChangedEventsArgs : EventArgs
+        {
+            public BaseType OldValue { get;set; }
+        }
+
+        public event EventHandler<ValueChangedEventsArgs> Changed;
+
+        /// <summary>
+        /// Fires the Changed event with the given value representing the previous state of it.
+        /// </summary>
+        /// <param name="oldValue"></param>
+        protected void OnChanged(BaseType oldValue)
+        {
+            if (Changed != null)
+            {
+                Changed(this, new ValueChangedEventsArgs{ OldValue = oldValue });
+            }
+        }
+
+        /// <summary>
+        /// Fires the Changed event.
+        /// </summary>
+        protected void OnChanged()
+        {
+            OnChanged(null);
+        }
+
+        #endregion
 
         #region Implicit C# conversion operators
 

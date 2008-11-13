@@ -71,7 +71,7 @@ namespace VapeTeam.Psimulex.Core.Types
             this.value = value.ToFloat();
         }
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get { return TypeEnum.Float; }
         }

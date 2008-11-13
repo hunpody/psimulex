@@ -16,7 +16,7 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             var value = context.RunStack.Pop().Dereference();
 
-            if (value.TypeEnum == VapeTeam.Psimulex.Core.Types.TypeEnum.UserDefinedType)
+            if (value.Type.IsUserDefined)
             {
                 var val = value as VapeTeam.Psimulex.Core.Types.UserDefinedType;
                 context.RunStack.Push(val[name].Value.ToReference());
@@ -44,7 +44,7 @@ namespace VapeTeam.Psimulex.Core.Commands
                 catch (System.Reflection.TargetInvocationException ex)
                 {
                     throw new Exceptions.PsimulexCoreException(string.Format("Error selecting member {0} of type {1}.",
-                        name, value.TypeEnum), ex.InnerException);
+                        name, value.Type), ex.InnerException);
                 }
 
                 if (currentValue != null && (property.PropertyType.IsSubclassOf(typeof(Types.BaseType)) || property.PropertyType == typeof(Types.BaseType)))

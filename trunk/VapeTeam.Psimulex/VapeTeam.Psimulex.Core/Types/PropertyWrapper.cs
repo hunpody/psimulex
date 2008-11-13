@@ -22,7 +22,7 @@ namespace VapeTeam.Psimulex.Core.Types
             this.correspondingPsimulexValue = ValueFactory.Create(GetValue());
         }
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get { return TypeEnum.PropertyWrapper; }
         }

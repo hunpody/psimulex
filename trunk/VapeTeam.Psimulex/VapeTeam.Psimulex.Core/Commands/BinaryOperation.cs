@@ -28,7 +28,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             BaseType second = context.RunStack.Pop().Clone();
             BaseType first = context.RunStack.Pop().Clone();
 
-            TypeEnum biggerType = TypeHierarchy.GetBiggerType(first.TypeEnum, second.TypeEnum);
+            TypeEnum biggerType = TypeHierarchy.GetBiggerType(first.Type, second.Type);
             first = first.ConvertTo(biggerType);
             second = second.ConvertTo(biggerType);
 

@@ -137,6 +137,8 @@ namespace VapeTeam.Psimulex.Core.Types
                 return TypeEnum.Edge;
             if (type == typeof(GraphNode))
                 return TypeEnum.Node;
+            if (type == typeof(Point))
+                return TypeEnum.Point;
             if (type == typeof(Iterator))
                 return TypeEnum.Iterator;
             if (type == typeof(LinkedList))
@@ -188,9 +190,9 @@ namespace VapeTeam.Psimulex.Core.Types
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static BaseType CreateValue(TypeEnum type)
+        public static BaseType CreateValue(TypeIdentifier type)
         {
-            switch (type)
+            switch (type.TypeEnum)
             {
                 // Primitive Types
                 case TypeEnum.Void:
@@ -220,6 +222,9 @@ namespace VapeTeam.Psimulex.Core.Types
                 case TypeEnum.PriorityQueue:
                     return new PriorityQueue();
 
+                case TypeEnum.Point:
+                    return new Point();
+
                 //case TypeEnum.Iterator:
                 //    return new Iterator(
 
@@ -240,9 +245,9 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <param name="value"></param>
         /// <param name="targetType"></param>
         /// <returns></returns>
-        public static BaseType Convert(BaseType value, TypeEnum targetType)
+        public static BaseType Convert(BaseType value, TypeIdentifier targetType)
         {
-            if (targetType == TypeEnum.Undefined || targetType == value.TypeEnum)
+            if (targetType.TypeEnum == TypeEnum.Undefined || targetType == value.Type)
             {
                 return value;
             }

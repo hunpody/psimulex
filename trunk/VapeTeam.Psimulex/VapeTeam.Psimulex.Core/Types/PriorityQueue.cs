@@ -147,8 +147,18 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Implemented Members
 
-        public override TypeEnum TypeEnum { get { return TypeEnum.PriorityQueue; } }
-        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable() { return rep.Select(pair => pair.Value); }
+        public override TypeIdentifier Type
+        {
+            get
+            {
+                return TypeEnum.PriorityQueue;
+            }
+        }
+
+        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable()
+        {
+            return rep.Select(pair => pair.Value);
+        }
 
         public override BaseType Index(int index)
         {
@@ -159,8 +169,17 @@ namespace VapeTeam.Psimulex.Core.Types
             return rep[index].Value;
         }
 
-        public override int Size { get { return rep.Count; } }
-        public override void Clear() { rep.Clear(); }
+        public override int Size
+        {
+            get
+            {
+                return rep.Count;
+            }
+        }
+        public override void Clear()
+        {
+            rep.Clear();
+        }
 
         public override BaseType Clone()
         {
