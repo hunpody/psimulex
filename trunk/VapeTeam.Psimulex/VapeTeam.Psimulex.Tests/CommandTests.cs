@@ -235,7 +235,11 @@ namespace VapeTeam.Psimulex.Tests
                     new Push(2),
                     new Push(4),
                     new BinaryOperation(BinaryOperation.Operations.Multiplication),
-                    new ArrayInitializator(TypeEnum.Integer, 1),
+                    new CollectionInitializer(new TypeIdentifier
+                    {
+                        TypeEnum = TypeEnum.Array,
+                        GenericType = TypeEnum.Integer
+                    }, 1),
                     new Assign(),
                     new PushByReference("a"),
                     new Select("size"),

@@ -41,12 +41,12 @@
   <ItemGroup>
     <Compile Include="CallStack.cs" />
     <Compile Include="Commands\ArrayDeclare.cs" />
-    <Compile Include="Commands\ArrayInitializator.cs" />
     <Compile Include="Commands\BinaryOperation.cs" />
     <Compile Include="Commands\Call.cs" />
     <Compile Include="Commands\CallMethod.cs" />
     <Compile Include="Commands\Assign.cs" />
     <Compile Include="Commands\Cast.cs" />
+    <Compile Include="Commands\CollectionInitializer.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\Compare.cs" />
     <Compile Include="Commands\ConditionalJump.cs" />
@@ -134,7 +134,6 @@
     <Compile Include="Types\PropertyWrapper.cs" />
     <Compile Include="Types\Queue.cs" />
     <Compile Include="Types\ReferenceType.cs" />
-    <Compile Include="Types\Representations.cs" />
     <Compile Include="Types\Set.cs" />
     <Compile Include="Types\Stack.cs" />
     <Compile Include="Types\String.cs" />

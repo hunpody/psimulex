@@ -100,12 +100,6 @@ namespace VapeTeam.Psimulex.Core.Types
             return ListIndexing(rep, index);
         }
 
-        public override void Clear()
-        {
-            rep = new BaseTypeList(size);
-            InitializeArray();
-        }
-
         public override BaseType Clone() 
         {
             return new Array(rep); 
@@ -151,32 +145,57 @@ namespace VapeTeam.Psimulex.Core.Types
                     rep.RemoveAt(rep.Count - 1);
                 }
             }
-            //size = newSize;
+
+            OnChanged();
         }
 
         #endregion
+
+        #region Overridden methods
 
         protected override string DecorateToString(string s)
         {
             return string.Format("[{0}]", s);
         }
 
+        public override void Add(BaseType value)
+        {
+            if (value.Type != this.Type.GenericType)
+            {
+                base.AddRange(value);
+            }
+            else
+            {
+                base.Add(value);
+            }
+        }
+
+        #endregion
+
         #region Added By Vari To Try Something
 
         public override void Assign(BaseType value)
         {
-            if( size != 0 )
-                base.Assign(value);
-            else
+            var otherArray = value.ToArray();
+            if (otherArray.Size > this.Size)
+                Resize(otherArray.Size);
+            for (int i = 0; i < otherArray.Size; ++i)
             {
-                rep.Clear();
-                foreach (var item in value.ToArray().GetAsEnumerable())
-                {
-                    rep.Add(item);                    
-                }
-                this.size = value.ToArray().Size;
-                this.InitializatorType = value.ToArray().InitializatorType;
+                rep[i] = otherArray.rep[i].Clone().ConvertTo(InitializatorType);
             }
+            OnChanged();
+            //if( size != 0 )
+            //    base.Assign(value);
+            //else
+            //{
+            //    rep.Clear();
+            //    foreach (var item in value.ToArray().GetAsEnumerable())
+            //    {
+            //        rep.Add(item);                    
+            //    }
+            //    this.size = value.ToArray().Size;
+            //    this.InitializatorType = value.ToArray().InitializatorType;
+            //}
         }
 
         #endregion

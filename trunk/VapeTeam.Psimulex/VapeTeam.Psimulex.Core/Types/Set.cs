@@ -44,7 +44,10 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             BaseType ret = rep.Find(item => item.EqualsTo(value));
             if (ret != null)
+            {
                 rep.Remove(ret);
+                OnChanged();
+            }
             return ret;
         }
 
@@ -85,6 +88,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public override void Add(BaseType value)
         {
             rep.AddRange(value.ToSet().GetAsEnumerable().Where(x => !Contains(x)));
+            OnChanged();
         }
 
         /// <summary>
@@ -95,6 +99,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             var valueSet = value.ToSet();
             rep.RemoveAll(x => !valueSet.Contains(x));
+            OnChanged();
         }
 
         /// <summary>
@@ -114,6 +119,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             var valueSet = value.ToSet();
             rep.RemoveAll(x => valueSet.Contains(x));
+            OnChanged();
         }
 
         #endregion

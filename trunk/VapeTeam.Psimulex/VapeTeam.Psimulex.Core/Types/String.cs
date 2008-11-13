@@ -22,11 +22,13 @@ namespace VapeTeam.Psimulex.Core.Types
         public override void Assign(BaseType value)
         {
             this.value = value.ToString();
+            OnChanged();
         }
 
         public override void Add(BaseType value)
         {
             this.value += value.ToString();
+            OnChanged();
         }
 
         public override string ToString()

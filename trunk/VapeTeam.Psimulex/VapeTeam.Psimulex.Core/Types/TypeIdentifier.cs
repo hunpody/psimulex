@@ -6,7 +6,8 @@ using System.Text;
 namespace VapeTeam.Psimulex.Core.Types
 {
     /// <summary>
-    /// This object identifies a type. It was necessary to have an identifier that is more complicated than a simple enum
+    /// This object identifies the psimulex types. 
+    /// It was necessary to have an identifier that is more complicated than a simple enum
     /// because the user can define custom types and the arrays are based on having generic types for example.
     /// </summary>
     public class TypeIdentifier
@@ -14,6 +15,8 @@ namespace VapeTeam.Psimulex.Core.Types
         public TypeEnum TypeEnum { get; set; }
         
         public string TypeName { get; set; }
+
+        public List<int> Dimensions { get; set; }
 
         /// <summary>
         /// This is the type that this type is composed of. An int[] will have the generic type of an integer type-id.
@@ -53,10 +56,42 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 TypeIdentifier id = (TypeIdentifier)obj;
                 return id.TypeEnum == this.TypeEnum 
-                    && (string.IsNullOrEmpty(id.TypeName) && string.IsNullOrEmpty(this.TypeName) || id.TypeName == this.TypeName)
+                    && (id.TypeEnum != TypeEnum.UserDefinedType || (string.IsNullOrEmpty(id.TypeName) && string.IsNullOrEmpty(this.TypeName) || id.TypeName == this.TypeName))
+                    && CollectionEquals<int>(id.Dimensions, this.Dimensions)
                     && id.UserDefinedType == this.UserDefinedType;
             }
             else return base.Equals(obj); 
+        }
+
+        private static bool CollectionEquals<T>(IEnumerable<T> first, IEnumerable<T> second)
+        {
+            if (first == null && second == null)
+            {
+                return true;
+            }
+            if ((first == null) != (second == null))
+            {
+                return false;
+            }
+            if (first.Count() != second.Count())
+            {
+                return false;
+            }
+            var it = first.GetEnumerator();
+            var it2 = first.GetEnumerator();
+            while (it.MoveNext() && it2.MoveNext())
+            {
+                if ((it.Current == null) != (it2.Current == null) || !it.Current.Equals(it2.Current))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private static bool IsNullOrEmpty<T>(IEnumerable<T> collection)
+        {
+            return collection == null || collection.Count() == 0;
         }
 
         /// <summary>

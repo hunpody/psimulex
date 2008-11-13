@@ -26,7 +26,7 @@ namespace VapeTeam.Psimulex.Core.Types
                     _value.Changed -= _value_Changed;
                 }
                 _value = value;
-                // Do we really care about the value if it has changed?
+                // Do we really care about the value itself if it has changed?
                 // _value.Changed += new EventHandler<ValueChangedEventsArgs>(_value_Changed);
             }
         }

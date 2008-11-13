@@ -110,7 +110,7 @@ namespace VapeTeam.Psimulex.Tests
                 new Push(1),
                 new BinaryOperation(BinaryOperation.Operations.Addition),
                 new Assign(true),
-                new Push(30000),
+                new Push(3000),
                 new Compare(Compare.ComparisonModes.LessThan),
                 new JumpIfTrue(2));
 
