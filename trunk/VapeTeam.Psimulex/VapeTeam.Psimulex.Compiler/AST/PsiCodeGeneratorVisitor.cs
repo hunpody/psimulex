@@ -61,6 +61,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
         public CommandPositionChanges CommandPositionChanges { get; set; }
 
+        public List<TypeIdentifier> TypeIdentifierList { get; set; }
+
         #endregion        
 
         public string Source { get; set; }
@@ -95,6 +97,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             UserDefinedFunctionList = dto.UserDefinedFunctionList;
             CommandPositionChanges = dto.CommandPositionChanges;
             CompilationUnitList = dto.CompilationUnitList;
+            TypeIdentifierList = dto.TypeIdentifierList;
 
             InitHelpers();
 
@@ -471,25 +474,31 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddInformation(msg, node.NodeValueInfo);
 
             // Add Struct to UserDefinedTypes
-            var record = new Struct { Name = structName };
+            var desc = new StructDescriptor { Name = structName };
 
             foreach (var member in structMembers)
             {
                 if (member.Type == TypeEnum.Undefined)
                     AddWarning(CompilerErrorCode.NotSupported, "User defined types in records is not supported, member will be skipped!", node.NodeValueInfo);
                 else
-                    record.Attributes.Add(member.Name,
-                        new VapeTeam.Psimulex.Core.Types.Attribute
+                desc.Attributes.Add(new AttributeDescriptor
+                {
+                    Value = member.Value,
+                    Descriptor = new VariableDescriptor
+                    {
+                        IsReference = member.IsReference,
+                        Name = member.Name,
+                        Type = new TypeIdentifier
                         {
-                            Name = member.Name,
-                            Type = member.Type,
+                            TypeEnum = member.Type,
                             TypeName = member.TypeName,
-                            Value = member.Value,
-                            DimensionCount = member.DimensionCount
-                        });
+                            Dimensions = new List<int>(member.DimensionCount)
+                        }
+                    }
+                });
             }
 
-            Program.Program.AddUserDefinedType(record);
+            Program.Program.AddUserDefinedType(desc);            
         }
 
         public void Visit(MemberDeclarationNode node)
@@ -614,11 +623,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
                             Type = new TypeIdentifier
                                 {
                                     TypeEnum = functionType,
-                                    TypeName = functionTypeName
+                                    TypeName = functionTypeName,
+                                    Dimensions = new List<int>(functionDimensionCount)
                                 },
-                            IsArray = functionDimensionCount == 0 ? false : true,
-                            DimensionCount = functionDimensionCount,
-                            DimensionList = functionDimensionList,
                             IsReference = functionIsReferenceType,
                             Name = ""
                         };
@@ -672,13 +679,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
                         Type = new TypeIdentifier
                             {
                                 TypeEnum = parameterType,
-                                TypeName = parameterTypeName
+                                TypeName = parameterTypeName,
+                                Dimensions = new List<int>(parameterDimensionCount)
                             },
                         Name = parameterName,
                         IsReference = parameterIsReference,
-                        IsArray = parameterDimensionCount == 0 ? false : true,
-                        DimensionCount = parameterDimensionCount,
-                        DimensionList = parameterDimensionList,
                     }
                 );
 

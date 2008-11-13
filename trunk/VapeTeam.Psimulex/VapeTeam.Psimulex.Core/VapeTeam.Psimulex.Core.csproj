@@ -143,6 +143,7 @@
     <Compile Include="Types\TypeEnum.cs" />
     <Compile Include="Types\TypeHierarchy.cs" />
     <Compile Include="Types\TypeIdentifier.cs" />
+    <Compile Include="Types\UserDefinedTypeDescriptors.cs" />
     <Compile Include="Types\UserDefinedTypes.cs" />
     <Compile Include="Types\ValueFactory.cs" />
     <Compile Include="Types\VariableDescriptor.cs" />

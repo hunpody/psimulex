@@ -63,7 +63,7 @@ namespace VapeTeam.Psimulex.Compiler
             if (compileFuncVarTree && part == ProgramPart.CompilationUnit)
                 CompileResult.PsiFunctionsVariablesNodeList = GenerateFuncVarTree(CompileResult.CompilationUnitList);
 
-            FinalizeTheResult();
+            FinalizeTheResult(dto);
 
             return CompileResult;
         }
@@ -161,7 +161,7 @@ namespace VapeTeam.Psimulex.Compiler
         /// <summary>
         /// The last steps on the result befor return.
         /// </summary>
-        public void FinalizeTheResult()
+        public void FinalizeTheResult(CompilerDTO dto)
         {
             // Add functions to the program
             CompileResult.CompiledProgram.AddFunctions(CompileResult.UserDefinedFunctionList);
@@ -171,6 +171,19 @@ namespace VapeTeam.Psimulex.Compiler
                 CompileResult.CompilerMessages.Warnings.AddRange(item.CompilerMessages.Warnings);
                 CompileResult.CompilerMessages.Errors.AddRange(item.CompilerMessages.Errors);
             }
+
+            // Finalize User Defined Type TypeIdentifiers
+            foreach (var item in dto.TypeIdentifierList)
+	        {
+                try
+                {
+                    item.UserDefinedType = CompileResult.CompiledProgram.GetUserDefinedType(item.TypeName);
+                }
+                catch (Exception)
+                {
+                    // Here can give an error messages "Undeclared type name"
+                } 
+	        }
         }
     }
 }

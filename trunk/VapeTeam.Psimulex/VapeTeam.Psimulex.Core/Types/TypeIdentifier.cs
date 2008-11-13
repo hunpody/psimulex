@@ -13,8 +13,8 @@ namespace VapeTeam.Psimulex.Core.Types
     public class TypeIdentifier
     {
         public TypeEnum TypeEnum { get; set; }
-        
         public string TypeName { get; set; }
+
 
         public List<int> Dimensions { get; set; }
 
@@ -24,6 +24,11 @@ namespace VapeTeam.Psimulex.Core.Types
         public TypeIdentifier GenericType { get; set; }
 
         public ITypeDescriptor UserDefinedType { get; set; }
+
+        public TypeIdentifier()
+        {
+            Dimensions = new List<int>();
+        }
 
         public bool IsUserDefined
         {
@@ -124,6 +129,18 @@ namespace VapeTeam.Psimulex.Core.Types
         public static implicit operator TypeEnum(TypeIdentifier type)
         {
             return type.TypeEnum;
+        }
+
+        public TypeIdentifier Clone()
+        {
+            return new TypeIdentifier
+            {
+                Dimensions = new List<int>(this.Dimensions),
+                GenericType = this.GenericType == null ? null : this.GenericType.Clone(),
+                TypeEnum = this.TypeEnum,
+                TypeName = this.TypeName,
+                UserDefinedType = this.UserDefinedType == null ? null : this.UserDefinedType.Clone()
+            };
         }
     }
 }

@@ -15,7 +15,7 @@ namespace VapeTeam.Psimulex.Core
         public CommandList CommandList { get; private set; }
 
         protected List<UserDefinedFunction> Functions { get; private set; }
-        protected UserDefinedTypes UserDefinedTypes { get; private set; }
+        protected TypeDescriptors UserDefinedTypes { get; private set; }
 
         //protected Dictionary<UserDefinedFunction, int> EntryPoints { get; private set; }
 
@@ -24,7 +24,7 @@ namespace VapeTeam.Psimulex.Core
             Name = "";
             CommandList = new CommandList();
             Functions = new List<UserDefinedFunction>();
-            UserDefinedTypes = new UserDefinedTypes();
+            UserDefinedTypes = new TypeDescriptors();
             //EntryPoints = new Dictionary<UserDefinedFunction, int>();
         }
 
@@ -125,9 +125,14 @@ namespace VapeTeam.Psimulex.Core
             return sb.ToString();
         }
 
-        public void AddUserDefinedType(UserDefinedType udt)
+        public void AddUserDefinedType(ITypeDescriptor td)
         {
-            UserDefinedTypes.Add(udt.Name, udt);
+            UserDefinedTypes.AddDescriptor(td);
+        }
+
+        public ITypeDescriptor GetUserDefinedType(string name)
+        {
+            return UserDefinedTypes[name];
         }
 
         public UserDefinedType CreataAnInstanceOfUserDefinedType(string name)

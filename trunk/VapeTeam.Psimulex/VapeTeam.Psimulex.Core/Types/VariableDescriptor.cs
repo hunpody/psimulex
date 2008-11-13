@@ -13,9 +13,23 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         public string Name { get; set; }
         public TypeIdentifier Type { get; set; }
+
         public bool IsReference { get; set; }
-        public bool IsArray { get; set; }
-        public int DimensionCount { get; set; }
-        public List<int> DimensionList { get; set; }
+
+        public bool IsArray { get { return Type.Dimensions.Count == 1; } }
+        public bool IsMatrix { get { return Type.Dimensions.Count == 2; } }
+        public bool IsMultiDimensional { get { return Type.Dimensions.Count > 2; } }
+
+        //public List<int> DimensionList { get; set; }
+
+        public VariableDescriptor Clone()
+        {
+            return new VariableDescriptor
+            {
+                Type = this.Type.Clone(),
+                Name = this.Name,
+                IsReference = this.IsReference
+            };
+        }
     }
 }
