@@ -62,7 +62,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Implemented Members
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get
             {

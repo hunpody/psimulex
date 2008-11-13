@@ -12,7 +12,7 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         private char value;
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get { return TypeEnum.Character; }
         }

@@ -162,7 +162,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual void Clear()
         {
-            throw new Exceptions.InvalidOperationException(string.Format("Cannot clear collection {0}.", TypeEnum));
+            throw new Exceptions.InvalidOperationException(string.Format("Cannot clear collection {0}.", Type));
         }
 
         #endregion

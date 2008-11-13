@@ -34,7 +34,7 @@ namespace VapeTeam.Psimulex.Core.Types
             return "NULL";
         }
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get { return TypeEnum.Null; }
         }

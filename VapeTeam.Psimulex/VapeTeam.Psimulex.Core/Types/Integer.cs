@@ -74,7 +74,7 @@ namespace VapeTeam.Psimulex.Core.Types
             this.value = value.ToInt();
         }
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get { return TypeEnum.Integer; }
         }

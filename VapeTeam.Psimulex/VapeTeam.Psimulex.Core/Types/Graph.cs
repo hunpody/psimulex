@@ -7,7 +7,7 @@ namespace VapeTeam.Psimulex.Core.Types
 {
     public class Graph : BaseType
     {
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get { return TypeEnum.Graph; }
         }

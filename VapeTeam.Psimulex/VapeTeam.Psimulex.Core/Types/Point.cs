@@ -5,11 +5,14 @@ using System.Text;
 
 namespace VapeTeam.Psimulex.Core.Types
 {
-    public class FunctionPointer : BaseType
+    public class Point : BaseType
     {
+        public float X { get; set; }
+        public float Y { get; set; }
+
         public override TypeIdentifier Type
         {
-            get { return TypeEnum.FunctionPointerType; }
+            get { return TypeEnum.Point; }
         }
     }
 }

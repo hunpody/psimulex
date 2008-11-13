@@ -28,7 +28,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get { return TypeEnum.Set; }
         }
@@ -60,7 +60,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
-        public BaseType Clone()
+        public override BaseType Clone()
         {
             return new Stack(rep);
         }

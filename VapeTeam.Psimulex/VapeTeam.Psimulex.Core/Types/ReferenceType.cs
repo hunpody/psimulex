@@ -70,7 +70,7 @@ namespace VapeTeam.Psimulex.Core.Types
             referencedValue.Add(value);
         }
 
-        public override BaseType ConvertTo(TypeEnum type)
+        public override BaseType ConvertTo(TypeIdentifier type)
         {
             return referencedValue.ConvertTo(type);
         }
@@ -160,9 +160,9 @@ namespace VapeTeam.Psimulex.Core.Types
             this.referencedValue.Assign(value);
         }
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
-            get { return referencedValue.TypeEnum; }
+            get { return referencedValue.Type; }
         }
 
         #endregion

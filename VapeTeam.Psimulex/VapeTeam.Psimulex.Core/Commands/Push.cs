@@ -91,7 +91,7 @@ namespace VapeTeam.Psimulex.Core.Commands
         public Push(BaseType value)
         {
             this.value = value;
-            this.type = value.TypeEnum;
+            this.type = value.Type;
             this.AccessMode = ValueAccessModes.Constant;
         }
 

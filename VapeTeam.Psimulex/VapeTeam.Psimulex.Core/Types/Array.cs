@@ -13,18 +13,35 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         #region Represenation
 
-        protected TypeEnum initializatorType;
+        /// <summary>
+        /// This is the type of the values that the array is composed of.
+        /// </summary>
+        protected TypeIdentifier InitializatorType
+        {
+            get
+            {
+                if (_type.GenericType == null)
+                    return TypeEnum.Undefined;
+                return _type.GenericType;
+            }
+            set
+            {
+                _type.GenericType = value;
+            }
+        }
+
         protected int size;
 
         #endregion
 
         #region Constructors
 
-        public Array(TypeEnum initializatorType, int size)
+        public Array(TypeIdentifier initializatorType, int size)
         {
-            this.initializatorType = initializatorType;
+            this.InitializatorType = initializatorType;
             this.size = size;
             rep = new List<BaseType>(size);
+            this._type = new TypeIdentifier { TypeEnum = TypeEnum.Array, GenericType = initializatorType };
             InitializeArray();
         }
 
@@ -32,7 +49,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             for (int i = 0; i < size; ++i)
             {
-                rep.Add(ValueFactory.CreateValue(initializatorType));
+                rep.Add(ValueFactory.CreateValue(InitializatorType));
             }
         }
 
@@ -41,7 +58,7 @@ namespace VapeTeam.Psimulex.Core.Types
         /// </summary>
         /// <param name="value"></param>
         public Array(BaseType value)
-            : this(value.TypeEnum, 1)
+            : this(value.Type, 1)
         {
             rep[0] = value.Clone();
         }
@@ -55,20 +72,22 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             if (rep.Count() > 0)
             {
-                initializatorType = rep.First().TypeEnum;
+                InitializatorType = rep.First().Type;
             }
             else
             {
-                initializatorType = TypeEnum.Undefined;
+                InitializatorType = TypeEnum.Undefined;
             }
         }
 
         #endregion
 
 
-        public override TypeEnum TypeEnum
+        private TypeIdentifier _type = new TypeIdentifier { TypeEnum = TypeEnum.Array };
+
+        public override TypeIdentifier Type
         {
-            get { return TypeEnum.Array; }
+            get { return _type; }
         }
 
         public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable()
@@ -122,7 +141,7 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 for (int i = oldSize; i < newSize; ++i)
                 {
-                    rep.Add(ValueFactory.CreateValue(initializatorType));
+                    rep.Add(ValueFactory.CreateValue(InitializatorType));
                 }
             }
             else
@@ -156,7 +175,7 @@ namespace VapeTeam.Psimulex.Core.Types
                     rep.Add(item);                    
                 }
                 this.size = value.ToArray().Size;
-                this.initializatorType = value.ToArray().initializatorType;
+                this.InitializatorType = value.ToArray().InitializatorType;
             }
         }
 

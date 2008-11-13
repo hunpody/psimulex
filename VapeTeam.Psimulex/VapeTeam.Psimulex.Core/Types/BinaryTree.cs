@@ -9,7 +9,7 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         public BinaryTree Parent { get; private set; }
 
-        public override TypeEnum TypeEnum
+        public override TypeIdentifier Type
         {
             get
             {
