@@ -1,0 +1,8 @@
+﻿<Window x:Class="VapeTeam.Psimulex.UserInterface.GraphDraw"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="GraphDraw" Height="443" Width="782">
+    <Canvas x:Name="Canvas">
+        
+    </Canvas>
+</Window>

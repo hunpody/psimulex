@@ -33,20 +33,99 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AvalonDock, Version=1.1.1692.0, Culture=neutral, PublicKeyToken=85a1e0ada7ec13e4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3437, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="FinishedComponents\SyntaxTreeConfigurationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FinishedComponents\SyntaxTreeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GraphDraw.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GraphicsComponents\GraphEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GraphicsComponents\Resources\DesignerItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
+    <Page Include="InputTools\CollectionInput\CommonCollectionInputBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InputTools\PrimaryInput\CommonPrimaryInputBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InputTools\PrimaryInput\YesNoInputBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="programStringWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SandBox\ImmediateWondow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SandBox\SampleInputBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SandBox\ValidatorTester.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UnderConstructionComponents\FunctionVariableVisibleConfigurationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -61,6 +140,52 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FinishedComponents\Pair.cs" />
+    <Compile Include="FinishedComponents\SerializationUtil.cs" />
+    <Compile Include="FinishedComponents\SyntaxTreeConfiguration.cs" />
+    <Compile Include="FinishedComponents\SyntaxTreeConfigurationWindow.xaml.cs">
+      <DependentUpon>SyntaxTreeConfigurationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FinishedComponents\SyntaxTreeWindow.xaml.cs">
+      <DependentUpon>SyntaxTreeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GraphDraw.xaml.cs">
+      <DependentUpon>GraphDraw.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsComponents\DesignerItemDecorator.cs" />
+    <Compile Include="GraphicsComponents\Graph.cs" />
+    <Compile Include="GraphicsComponents\GraphEditor.xaml.cs">
+      <DependentUpon>GraphEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsComponents\GraphicsElement.cs" />
+    <Compile Include="GraphicsComponents\ISelectable.cs" />
+    <Compile Include="GraphicsComponents\LabeledGraphics.cs" />
+    <Compile Include="GraphicsComponents\MoveThumb.cs" />
+    <Compile Include="GraphicsComponents\ScalarGraphics.cs" />
+    <Compile Include="InputTools\CollectionInput\CollectionInputLibrary.cs" />
+    <Compile Include="InputTools\CollectionInput\CollectionInputValidator.cs" />
+    <Compile Include="InputTools\CollectionInput\CommonCollectionInputBox.xaml.cs">
+      <DependentUpon>CommonCollectionInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputTools\InputLibrary.cs" />
+    <Compile Include="InputTools\InputType.cs" />
+    <Compile Include="InputTools\InputValidator.cs" />
+    <Compile Include="InputTools\PrimaryInput\CommonPrimaryInputBox.xaml.cs">
+      <DependentUpon>CommonPrimaryInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputTools\PrimaryInput\PrimaryInputLibrary.cs" />
+    <Compile Include="InputTools\PrimaryInput\PrimaryInputValidator.cs" />
+    <Compile Include="InputTools\PrimaryInput\YesNoInputBox.xaml.cs">
+      <DependentUpon>YesNoInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputTools\Randomizer.cs" />
+    <Compile Include="InputTools\RegExpValidator.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="programStringWindow.xaml.cs">
+      <DependentUpon>programStringWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -74,6 +199,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SandBox\ImmediateWondow.xaml.cs">
+      <DependentUpon>ImmediateWondow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SandBox\SampleInputBox.xaml.cs">
+      <DependentUpon>SampleInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SandBox\SampleInputLibrary.cs" />
+    <Compile Include="SandBox\ValidatorTester.xaml.cs">
+      <DependentUpon>ValidatorTester.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UnderConstructionComponents\Diff.cs" />
+    <Compile Include="UnderConstructionComponents\DiffUtil.cs" />
+    <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfiguration.cs" />
+    <Compile Include="UnderConstructionComponents\FunctionVariableVisibleConfigurationWindow.xaml.cs">
+      <DependentUpon>FunctionVariableVisibleConfigurationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UnderConstructionComponents\VariableVisualisationConfiguration.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -83,7 +225,48 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="References\SyntaxRes\CSharp-Mode.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="References\SyntaxRes\ICSharpCode.TextEditor.snk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="References\SyntaxRes\Mode.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="References\SyntaxRes\Psimulex-Mode.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VapeTeam.Psimulex.Compiler.Antlr\VapeTeam.Psimulex.Compiler.Antlr.csproj">
+      <Project>{DA262F79-572F-4CA6-BDF5-39C201BFE72B}</Project>
+      <Name>VapeTeam.Psimulex.Compiler.Antlr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VapeTeam.Psimulex.Compiler\VapeTeam.Psimulex.Compiler.csproj">
+      <Project>{80B9390C-AD41-4F70-922A-823AC740F8C4}</Project>
+      <Name>VapeTeam.Psimulex.Compiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VapeTeam.Psimulex.Core\VapeTeam.Psimulex.Core.csproj">
+      <Project>{64AE91ED-9627-44F2-9CD5-FC04DA7310EC}</Project>
+      <Name>VapeTeam.Psimulex.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VapeTeam.Psimulex.Graphics\VapeTeam.Psimulex.Graphics.csproj">
+      <Project>{752FC692-7769-4309-B300-97072AB91AC4}</Project>
+      <Name>VapeTeam.Psimulex.Graphics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="References\SyntaxRes\RightArrow.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="References\SyntaxRes\SyntaxModes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="References\SyntaxRes\TextEditorControl.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
