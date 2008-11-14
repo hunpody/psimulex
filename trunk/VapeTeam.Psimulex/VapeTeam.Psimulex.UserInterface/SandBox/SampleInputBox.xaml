@@ -1,0 +1,11 @@
+﻿<Window x:Class="VapeTeam.Psimulex.UserInterface.SampleInputBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="InputBox" Height="152" Width="463" WindowStyle="None" WindowStartupLocation="CenterScreen" Activated="Window_Activated">
+    <Grid>
+        <Thumb Opacity="0" DragDelta="Thumb_DragDelta" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" Width="120">Enter the value:</Label>
+        <TextBox Margin="12,46,12,45" Name="inputTextBox" />
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,12,16" Name="okayButton" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="okayButton_Click">OK</Button>
+    </Grid>
+</Window>
