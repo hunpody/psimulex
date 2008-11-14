@@ -1,0 +1,19 @@
+﻿<Window x:Class="VapeTeam.Psimulex.UserInterface.InputTools.CommonCollectionInputBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="InputBox" Height="366" Width="476" WindowStyle="None" WindowStartupLocation="CenterScreen" Activated="Window_Activated" Loaded="Window_Loaded" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="78" />
+            <RowDefinition Height="155*" />
+            <RowDefinition Height="71" />
+        </Grid.RowDefinitions>
+        <Label Margin="12,12,0,36" Name="enterLabel" HorizontalAlignment="Left" Width="180">Enter the value:</Label>
+        <TextBox Name="textBox1" Grid.Row="1" Grid.RowSpan="2" Margin="0,0,0,68"/>
+        <Button Margin="0,7.48,44,0" Name="okButton" IsDefault="True" Click="okButton_Click"  HorizontalAlignment="Right" Width="86" Height="25" VerticalAlignment="Top">OK</Button>
+        <Button IsDefault="True" Margin="0,39,44,14" Name="randomizeButton" Click="randomizeButton_Click"  HorizontalAlignment="Right" Width="86">Randomize</Button>
+        <Label Margin="12,9,12,12" Name="exampleLabel" Grid.Row="2">Examples:</Label>
+        <RadioButton Height="16" Margin="198,12,0,0" Name="radioButton1" VerticalAlignment="Top" IsChecked="True" HorizontalAlignment="Left" Width="120">Comma separated</RadioButton>
+        <RadioButton Margin="198,34,129,28" Name="radioButton2">EndLine separated</RadioButton>
+    </Grid>
+</Window>

@@ -1,0 +1,13 @@
+﻿<Window x:Class="VapeTeam.Psimulex.UserInterface.InputTools.ValidatorTester"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="ValidatorTester" Height="378" Width="597">
+    <Grid>
+        <Button HorizontalAlignment="Left" Margin="12,41,0,0" Name="intValidatorButton" Width="75" Height="23" VerticalAlignment="Top" Click="intValidatorButton_Click">IntValidator
+        </Button>
+        <TextBox Height="23" Margin="12,12,106,0" Name="textTextBox" VerticalAlignment="Top" />
+        <Button Height="23" HorizontalAlignment="Left" Margin="12,70,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click">IsMatch</Button>
+        <TextBox Height="23" Margin="0,70,106,0" Name="regexTextBox" VerticalAlignment="Top" HorizontalAlignment="Right" Width="376" />
+        <TextBox Margin="12,99,106,12" Name="resultTextBox" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
+    </Grid>
+</Window>
