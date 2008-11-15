@@ -1138,10 +1138,21 @@ namespace VapeTeam.Psimulex.Compiler.AST
             {
                 //AddError(CompilerErrorCode.Custom, string.Format("User defined types is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
                 if (varDimensionCount > 0)
-                    //AddCommand(new ArrayDeclare(varName, TypeEnum.UserDefinedType, varDimensionCount));
+                {    //AddCommand(new ArrayDeclare(varName, TypeEnum.UserDefinedType, varDimensionCount));
                     AddError(CompilerErrorCode.Custom, string.Format("User defined array types is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                }
                 else
-                    AddCommand(new Declare(varName, TypeEnum.UserDefinedType, varTypeName));
+                {
+                    var ti =  new TypeIdentifier
+                    {
+                        TypeEnum = TypeEnum.UserDefinedType,
+                        TypeName = varTypeName
+                    };
+
+                    AddCommand(new Declare(varName, ti));
+
+                    TypeIdentifierList.Add(ti);
+                }
             }
         }
 

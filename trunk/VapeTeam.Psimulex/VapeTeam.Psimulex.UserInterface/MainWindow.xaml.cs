@@ -370,5 +370,19 @@ namespace VapeTeam.Psimulex.UserInterface
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void DocumentContent_Closed(object sender, EventArgs e)
+        {
+            string s = "Teszt\\teszt " + DateTime.Now.ToLongDateString().Replace(':', '-') + " " + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".psi";
+            editor.SaveFile(s);
+            editor.SaveFile("Teszt\\teszt.psi");
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            string s = "Teszt\\teszt " + DateTime.Now.ToLongDateString().Replace(':', '-') + " " + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".psi";
+            editor.SaveFile(s);
+            editor.SaveFile("Teszt\\teszt.psi");
+        }
     }
 }

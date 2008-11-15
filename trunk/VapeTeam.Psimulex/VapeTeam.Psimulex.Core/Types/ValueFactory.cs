@@ -235,7 +235,12 @@ namespace VapeTeam.Psimulex.Core.Types
                 case TypeEnum.BinaryTree:
                     return new BinaryTree();
                 case TypeEnum.Null:
-                    return new Null();                    
+                    return new Null();
+
+                // User Defined Types
+                case TypeEnum.UserDefinedType:
+                    return type.UserDefinedType.CreateAnInstance();
+
                 default:
                     throw new Exceptions.PsimulexCoreException(string.Format("Cannot create value of type {0}.", type));
             }

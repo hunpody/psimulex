@@ -12,34 +12,39 @@ namespace VapeTeam.Psimulex.Core.Commands
     public class Declare : CommandBase
     {
         private string name;
-        private TypeEnum type;
-        private string typeName;    // This is used when a type is UserDefined
+        private TypeIdentifier type;
 
         public override void Do(ICommandContext context)
         {
-            if (type == TypeEnum.UserDefinedType)
-                context.AddVariable(name,
-                    context.System.CallingThread.Program.CreataAnInstanceOfUserDefinedType(typeName));
-            else
-                context.AddVariable(name, ValueFactory.CreateValue(type));
+            context.AddVariable(name, ValueFactory.CreateValue(type));
         }
 
         public Declare(string name, TypeEnum type)
         {
+            this.type = new TypeIdentifier
+            {
+                TypeEnum = type,
+                TypeName = type.ToString() 
+            };
+
             this.name = name;
-            this.type = type;
         }
 
         public Declare(string name, TypeEnum type, string typeName)
+            : this(name, type)
+        {
+            this.type.TypeName = typeName;
+        }
+
+        public Declare(string name, TypeIdentifier ti)
         {
             this.name = name;
-            this.type = type;
-            this.typeName = typeName;
+            type = ti;
         }
 
         public override string ToString()
         {
-            return string.Format("declare {0} {1}", type == TypeEnum.UserDefinedType ? typeName : type.ToString(), name);
+            return string.Format("declare {0} {1}", type == TypeEnum.UserDefinedType ? type.TypeName : type.ToString(), name);
         }
     }
 }
