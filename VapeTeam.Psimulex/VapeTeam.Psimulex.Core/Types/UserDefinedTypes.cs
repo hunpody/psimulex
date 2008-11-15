@@ -108,6 +108,13 @@ namespace VapeTeam.Psimulex.Core.Types
             Attributes = new Dictionary<string, Attribute>();
         }
 
+        public Struct(StructDescriptor sd)
+        {
+            var s = sd.CreateAnInstance() as Struct;
+            Attributes = s.Attributes;
+            Name = s.Name;
+        }
+
         public void AddAttribute(Attribute attr)
         {
             Attributes.Add(attr.Name, attr);

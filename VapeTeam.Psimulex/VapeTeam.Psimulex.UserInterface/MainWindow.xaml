@@ -5,7 +5,7 @@
     xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
     xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
     xmlns:tec="clr-namespace:ICSharpCode.TextEditor;assembly=ICSharpCode.TextEditor"
-    Title="Psimulex Algoritm Simulator" Height="477" Width="923" SnapsToDevicePixels="True">
+    Title="Psimulex Algoritm Simulator" Height="477" Width="923" SnapsToDevicePixels="True" Closed="Window_Closed" >
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -18,7 +18,7 @@
                     <!--<ad:DockablePane ad:ResizingPanel.ResizeWidth="750">
                         <ad:DockableContent  Title="Source editor">-->
                             <ad:DocumentPane>
-                                <ad:DocumentContent Title="Sample">
+                                <ad:DocumentContent Title="Sample" Closed="DocumentContent_Closed">
                                     <wfi:WindowsFormsHost Name="winFormHost">
                                         <tec:TextEditorControl Name="sourceCodeTextEditorControl" Dock="Fill" Text="" BorderStyle="Fixed3D">
                                         </tec:TextEditorControl>
@@ -43,7 +43,7 @@
                         </ad:DockableContent>
                     </ad:DockablePane>
                 </ad:ResizingPanel>
-                <ad:DockablePane>
+                <ad:DockablePane SelectedIndex="0">
                     <ad:DockableContent Title="Output">
                         <TextBox x:Name="resultTextBox"></TextBox>
                     </ad:DockableContent>

@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VapeTeam.Psimulex.Compiler;
 
 namespace VapeTeam.Psimulex.UserInterface.SandBox
 {
@@ -29,7 +30,7 @@ namespace VapeTeam.Psimulex.UserInterface.SandBox
         {
             compiler = new Compiler.Compiler();
 
-            //compiler.Compile(psimulex.Text, "s", ProgramPart.Statement);
+            compiler.Compile(psimulex.Text, "s", ProgramPart.Statement);
 
             ProgramString();
         }
