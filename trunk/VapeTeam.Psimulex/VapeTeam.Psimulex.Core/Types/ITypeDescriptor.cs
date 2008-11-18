@@ -32,4 +32,15 @@ namespace VapeTeam.Psimulex.Core.Types
             };
         }
     }
+
+    /// <summary>
+    /// Describe an attribute of a type.
+    /// </summary>
+    public class FunctionDescriptor
+    {
+        public VariableDescriptor ReturnTypeDescriptor { get; set; }
+        public string Name { get; set; }
+        public List<VariableDescriptor> ParameterDescriptorList { get; set; }
+        public Commands.CommandList Code { get; set; }
+    }
 }

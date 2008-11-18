@@ -212,55 +212,22 @@ namespace VapeTeam.Psimulex.Core.Types
 
     #region Class Section
 
+    public class MemberFunction
+    {
+        public string Name { get; set; }
+        public VariableDescriptor ReturnTypeDescriptor { get; set; }
+        public List<VariableDescriptor> ParameterList { get; set; }
+        public CommandList Code { get; set; }
+    }
+
+
     /// <summary>
-    /// Just for joke/thinking at this time.
+    /// Just plan.
     /// </summary>
-    public class Class : UserDefinedType
-    {     
-        public class ClassFunction
-        {
-            public class FunctionParameter
-            {
-                public string Name { get; set; }
-                public TypeEnum Type { get; set; }
-                public string TypeName { get; set; }
-                public bool IsReference { get; set; }
-            }
-
-            public string Name { get; set; }
-            
-            public List<FunctionParameter> ParameterList { get; set; }
-            public TypeEnum ReturnType { get; set; }
-            public string ReturnTypeName { get; set; }
-            public bool ReturnTypeIsReference { get; set; }
-
-            public CommandList Code { get; set; }
-        }
-
+    public class Class : Struct
+    {       
         public string ParentClassName { get; set; }
-        public Dictionary<string, Attribute> Attributes { get; set; }
-        public Dictionary<string, ClassFunction> Functions { get; set; }
-
-        public override Attribute this[string name]
-        {
-            get
-            {
-                if (!Attributes.ContainsKey(name))
-                    throw new UserDefinedTypeException(string.Format("Type {0} has no attribute named : {1} !", Name, name));
-                return Attributes[name];
-            }
-            set
-            {
-                if (!Attributes.ContainsKey(name))
-                    throw new UserDefinedTypeException(string.Format("Type {0} has no attribute named : {1} !", Name, name));
-                Attributes[name] = value;
-            }
-        }
-
-        public override BaseType Clone()
-        {
-            return base.Clone();
-        }
+        public Dictionary<string, MemberFunction> Functions { get; set; }
     }
 
     #endregion

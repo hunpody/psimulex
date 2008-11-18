@@ -55,6 +55,28 @@ namespace VapeTeam.Psimulex.Core.Types
                 Name = this.Name
             };
         }
+
+        protected Dictionary<string, Attribute> CreateAnInstanceOfAttributes()
+        {
+            var attributes = new Dictionary<string, Attribute>();
+
+            foreach (var item in Attributes)
+                attributes.Add(item.Descriptor.Name,
+                    new Attribute
+                    {
+                        Name = item.Descriptor.Name,
+                        Descriptor = item.Descriptor,
+
+                        // Itt kell madj ügyesen eljárni ha rekord eleme lehet rekord is !!!
+                        // Ha önmagára láncoló adatszerkezetet definiál a felhasználó, akkor ott 
+                        // Végtelen körbe futhat a CreateAnInstance
+                        Value = item.Value == null
+                        ? ValueFactory.CreateValue(item.Descriptor.Type)
+                        : item.Value.Clone()
+                    });
+
+            return attributes;
+        }
     }
 
     /// <summary>
@@ -64,37 +86,46 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         public override BaseType CreateAnInstance()
         {
-            Struct s = new Struct { Name = Name };
-
-            foreach (var item in Attributes)
-                s.AddAttribute(
-                    new Attribute
-                    {
-                        Name = item.Descriptor.Name,
-                        Descriptor = item.Descriptor.Clone(),
-
-                        // Itt kell amdj ügyesen eljárni ha rekord elmee lehet rekord is !!!
-                        Value = item.Value == null
-                        ? ValueFactory.CreateValue(item.Descriptor.Type)
-                        : item.Value.Clone()
-                    });
-
-            return s;
+            return new Struct
+            {
+                Name = Name,
+                Attributes = CreateAnInstanceOfAttributes()
+            };
         }
     }
 
     /// <summary>
-    /// Just for joke/thinking at this time.
+    /// Just plan.
     /// </summary>
     public class ClassDescriptor : UserDefinedTypeDescriptor
     {
-        // FunctionList
-        // Constructor
-        // Destructor ? Esetleg
+        public List<FunctionDescriptor> Functions { get; set; }
+
+        protected Dictionary<string, MemberFunction> CreateAnInstanceOfMemberFunctions()
+        {
+            var functions = new Dictionary<string, MemberFunction>();
+
+            foreach (var item in Functions)
+                functions.Add(item.Name,
+                    new MemberFunction
+                    {
+                        Name = item.Name,
+                        ReturnTypeDescriptor = item.ReturnTypeDescriptor,
+                        Code = item.Code,
+                        ParameterList = item.ParameterDescriptorList
+                    });
+
+            return new Dictionary<string, MemberFunction>();
+        }
 
         public override BaseType CreateAnInstance()
         {
-            throw new NotImplementedException();
+            return new Class
+            {
+                Name = Name,
+                Attributes = CreateAnInstanceOfAttributes(),
+                Functions = CreateAnInstanceOfMemberFunctions()
+            };
         }
     }
 }
