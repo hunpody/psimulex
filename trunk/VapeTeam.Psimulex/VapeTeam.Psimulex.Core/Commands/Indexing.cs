@@ -17,7 +17,7 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public override void Do(ICommandContext context)
         {
-            var value = context.RunStack.Pop();
+            var value = context.RunStack.Pop().Dereference();
             var container = value as IIndexable;
             if (container == null)
             {

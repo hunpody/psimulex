@@ -39,12 +39,32 @@ namespace VapeTeam.Psimulex.Core
             ++pointer;
         }
 
+        #region Events
+
+        public class PopEventArgs : EventArgs
+        {
+            public T PoppedValue { get; set; }
+        }
+
+        public event EventHandler<PopEventArgs> BeingPopped;
+
+        protected virtual void OnBeingPopped(T value)
+        {
+            if (BeingPopped != null)
+            {
+                BeingPopped(this, new Stack<T>.PopEventArgs { PoppedValue = value });
+            }
+        }
+
+        #endregion
+
         public virtual T Pop()
         {
             if (pointer < 0 || pointer >= stack.Count)
                 throw new Exceptions.IndexOutOfRangeException("Stack indexing was out of range.");
 
             var item = stack[pointer];
+            OnBeingPopped(item);
             stack.RemoveAt(pointer);
             pointer = Math.Max(-1, pointer - 1);
             return item;

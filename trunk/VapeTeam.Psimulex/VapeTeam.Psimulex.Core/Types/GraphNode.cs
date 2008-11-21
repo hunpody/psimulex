@@ -31,7 +31,7 @@ namespace VapeTeam.Psimulex.Core.Types
             }
         }
 
-        private void _value_Changed(object sender, BaseType.ValueChangedEventsArgs e)
+        private void _value_Changed(object sender, BaseType.ValueChangedEventArgs e)
         {
         }
 

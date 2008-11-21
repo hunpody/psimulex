@@ -20,9 +20,11 @@ namespace VapeTeam.Psimulex.Core.Commands
 
             targetValue.Assign(valueToAssign);
 
+            valueToAssign.Delete();
+
             if (PushResult)
             {
-                context.RunStack.Push(targetValue);
+                context.RunStack.Push(targetValue.Clone());
             }
         }
 

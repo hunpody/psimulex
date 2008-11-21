@@ -25,12 +25,12 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public override void Do(ICommandContext context)
         {
-            BaseType second = context.RunStack.Pop().Clone();
-            BaseType first = context.RunStack.Pop().Clone();
+            BaseType op2 = context.RunStack.Pop().Clone();
+            BaseType op1 = context.RunStack.Pop().Clone();
 
-            TypeEnum biggerType = TypeHierarchy.GetBiggerType(first.Type, second.Type);
-            first = first.ConvertTo(biggerType);
-            second = second.ConvertTo(biggerType);
+            TypeEnum biggerType = TypeHierarchy.GetBiggerType(op1.Type, op2.Type);
+            BaseType first = op1.ConvertTo(biggerType);
+            BaseType second = op2.ConvertTo(biggerType);
 
             // Note: Dereference has no effect on tests.
             BaseType result = first.Dereference().Clone();
@@ -67,6 +67,9 @@ namespace VapeTeam.Psimulex.Core.Commands
                 default:
                     break;
             }
+
+            op1.Delete();
+            op2.Delete();
 
             context.RunStack.Push(result);
         }

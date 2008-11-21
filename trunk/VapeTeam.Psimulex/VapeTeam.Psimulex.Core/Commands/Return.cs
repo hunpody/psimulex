@@ -27,7 +27,7 @@ namespace VapeTeam.Psimulex.Core.Commands
 
             if (returnValue != null)
             {
-                context.RunStack.Push(returnValue);
+                context.RunStack.Push(returnValue.Clone());
             }
         }
 

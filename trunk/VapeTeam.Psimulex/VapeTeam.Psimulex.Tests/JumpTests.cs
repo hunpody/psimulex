@@ -15,9 +15,7 @@ namespace VapeTeam.Psimulex.Tests
     {
         public JumpTests()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            VapeTeam.Psimulex.Core.Memory.Reset();
         }
 
         private TestContext testContextInstance;

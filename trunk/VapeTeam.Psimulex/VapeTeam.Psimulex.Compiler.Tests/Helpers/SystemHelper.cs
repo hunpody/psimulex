@@ -15,7 +15,7 @@ namespace VapeTeam.Psimulex.Compiler.Tests.Helpers
 
         internal static Process CreateMachineAndRunProgram(int processors, Program program)
         {
-            var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(processors, 16);
+            var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(processors, 65536);
 
             var process = machine.System.Load(program);
 

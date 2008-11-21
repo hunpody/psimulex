@@ -10,5 +10,20 @@ namespace VapeTeam.Psimulex.Core
     /// </summary>
     public class VariableLocator : Dictionary<string, int>
     {
+        public VariableLocator()
+        {
+        }
+
+        /// <summary>
+        /// Creates the new variablemap copying an existing one.
+        /// </summary>
+        /// <param name="locator"></param>
+        public VariableLocator(VariableLocator locator)
+        {
+            foreach (var pair in locator)
+            {
+                this.Add(pair.Key, pair.Value);
+            }
+        }
     }
 }

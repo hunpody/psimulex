@@ -16,9 +16,7 @@ namespace VapeTeam.Psimulex.Tests
     {
         public BaseTypeTests()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            VapeTeam.Psimulex.Core.Memory.Reset();
         }
 
         private TestContext testContextInstance;

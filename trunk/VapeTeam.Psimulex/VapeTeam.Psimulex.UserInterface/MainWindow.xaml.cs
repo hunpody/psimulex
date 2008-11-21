@@ -16,6 +16,7 @@ using System.IO;
 using ICSharpCode.TextEditor.Document;
 using VapeTeam.Psimulex.Core.Factories;
 using VapeTeam.Psimulex.Compiler.Result;
+using VapeTeam.Psimulex.Core.Commands;
 
 namespace VapeTeam.Psimulex.UserInterface
 {
@@ -108,7 +109,7 @@ namespace VapeTeam.Psimulex.UserInterface
         private void Run()
         {
             resultTextBox.Text = "";
-            var maschine = MachineBuilder.Instance.CreateMachine(1, 16);
+            var maschine = MachineBuilder.Instance.CreateMachine(1, 1024);
 
             //maschine.System.InstallLibrary(new SampleInputLibrary());
             maschine.System.InstallLibrary(new InputTools.PrimaryInputLibrary());

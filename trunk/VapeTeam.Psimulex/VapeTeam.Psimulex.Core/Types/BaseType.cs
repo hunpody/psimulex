@@ -11,6 +11,55 @@ namespace VapeTeam.Psimulex.Core.Types
     /// </summary>
     public abstract class BaseType
     {
+        #region Lifecycle - memory operations
+
+        internal int MemoryAddress { get; private set; }
+
+        private bool isAllocated = false;
+
+        protected void DoAllocation()
+        {
+            if (!isAllocated)
+            {
+                MemoryAddress = Memory.Instance.Allocate(this);
+                isAllocated = true;
+            }            
+        }
+
+        public BaseType()
+        {
+            DoAllocation();
+        }
+
+        public BaseType(bool allocate)
+        {
+            if (allocate)
+                DoAllocation();
+        }
+
+        internal void DeAllocate()
+        {
+            Memory.Instance.DeAllocate(this);
+        }
+
+        internal virtual void Delete()
+        {
+            if (isAllocated)
+            {
+                if (Changed != null)
+                {
+                    foreach (var deleg in Changed.GetInvocationList())
+                    {
+                        Changed -= (EventHandler<ValueChangedEventArgs>)deleg;
+                    }
+                }
+                Memory.Instance.DeAllocate(this);
+                isAllocated = false;
+            }
+        }
+
+        #endregion
+
         #region Psimulex type information
 
         /// <summary>
@@ -313,12 +362,12 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Events
 
-        public class ValueChangedEventsArgs : EventArgs
+        public class ValueChangedEventArgs : EventArgs
         {
             public BaseType OldValue { get;set; }
         }
 
-        public event EventHandler<ValueChangedEventsArgs> Changed;
+        public event EventHandler<ValueChangedEventArgs> Changed;
 
         /// <summary>
         /// Fires the Changed event with the given value representing the previous state of it.
@@ -328,7 +377,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             if (Changed != null)
             {
-                Changed(this, new ValueChangedEventsArgs{ OldValue = oldValue });
+                Changed(this, new ValueChangedEventArgs{ OldValue = oldValue });
             }
         }
 

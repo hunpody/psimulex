@@ -30,8 +30,8 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             bool result = false;
 
-            BaseType op2 = context.RunStack.Pop();
-            BaseType op1 = context.RunStack.Pop();
+            BaseType op2 = context.RunStack.Pop().Clone();
+            BaseType op1 = context.RunStack.Pop().Clone();
 
             TypeHierarchy.OrderTypes(ref op1, ref op2);
 
@@ -61,6 +61,9 @@ namespace VapeTeam.Psimulex.Core.Commands
                 default:
                     break;
             }
+
+            op1.Delete();
+            op2.Delete();
 
             context.RunStack.Push(ValueFactory.Create(result));
         }
