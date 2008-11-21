@@ -128,7 +128,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
         {
             compileButton_Click(this, new EventArgs());
 
-            var machine = MachineBuilder.Instance.CreateMachine(1, 16);
+            var machine = MachineBuilder.Instance.CreateMachine(1, 1024);
 
             visitor.Program.Program.AddFunctions(visitor.UserDefinedFunctionList);
 

@@ -55,12 +55,15 @@ namespace VapeTeam.Psimulex.Core.Commands
             {
                 valueToPush = valueToPush.Dereference().Clone();
             }
-
             // To revise: this code snippet has no effect on the tests.
             else if (AccessMode == ValueAccessModes.LocalVariableReference || AccessMode == ValueAccessModes.RegisterByReference)
             {
                 valueToPush = valueToPush.ToReference();
             }
+            //else
+            //{
+            //    valueToPush = valueToPush.Clone();
+            //}
 
             if (valueToPush == null)
             {
@@ -84,8 +87,7 @@ namespace VapeTeam.Psimulex.Core.Commands
                 {
                     this.registerName = name.ToString();
                 }
-            }
-           
+            }           
         }
 
         public Push(BaseType value)

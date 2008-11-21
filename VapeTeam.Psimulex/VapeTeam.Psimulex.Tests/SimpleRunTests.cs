@@ -64,7 +64,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void EmptyRun()
         {
-            //var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(1, 16);
+            //var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(1, 1024);
             //var program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Program;
 
             //machine.System.Run(program);

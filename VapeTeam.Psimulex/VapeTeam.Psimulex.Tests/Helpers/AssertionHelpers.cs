@@ -26,12 +26,20 @@ namespace VapeTeam.Psimulex.Tests.Helpers
             }
             catch (Exception ex)
             {
+                if (HasInnerExceptionOfType<T>(ex))
+                    return;
                 Assert.IsInstanceOfType(ex, typeof(T),
                     string.Format("The exception thrown is not an instance of type '{0}'.", typeof(T).FullName));
                 return;
             }
 
             Assert.Fail("There was no exception thrown.");
+        }
+
+        private static bool HasInnerExceptionOfType<T>(Exception ex)
+        {
+            while ((ex = ex.InnerException) != null && !(ex is T)) {}
+            return ex != null;
         }
     }
 }

@@ -170,14 +170,22 @@ namespace VapeTeam.Psimulex.Core.Types
         #region Lifecycle methods
 
         public ReferenceType(BaseType value)
+            : base(false)
         {
             referencedValue = value;
-            value.Changed += new EventHandler<ValueChangedEventsArgs>(value_Changed);
+            value.Changed += new EventHandler<ValueChangedEventArgs>(value_Changed);
+            DoAllocation();
         }
 
-        void value_Changed(object sender, BaseType.ValueChangedEventsArgs e)
+        void value_Changed(object sender, BaseType.ValueChangedEventArgs e)
         {
             OnChanged();
+        }
+
+        internal override void Delete()
+        {
+            referencedValue.Changed -= value_Changed;
+            base.Delete();
         }
 
         #endregion

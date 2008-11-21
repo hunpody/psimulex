@@ -53,6 +53,16 @@ namespace VapeTeam.Psimulex.Core
             set
             {
                 memorySize = value;
+                _memory = Memory.CreateMemory(value);
+            }
+        }
+
+        private Memory _memory;
+        public Memory Memory
+        {
+            get
+            {
+                return _memory;
             }
         }
 

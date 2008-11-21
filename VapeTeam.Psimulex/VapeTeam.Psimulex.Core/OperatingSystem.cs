@@ -176,8 +176,26 @@ namespace VapeTeam.Psimulex.Core
 
             while (HasActiveProcesses)
             {
-                machine.Step();
+                Step();
             }                        
+        }
+
+        private static object _stepObject = new object();
+
+        private void Step()
+        {
+            lock (_stepObject)
+            {
+                Memory.Instance = machine.Memory;
+                try
+                {
+                    machine.Step();
+                }
+                catch (Exceptions.RuntimeException rex)
+                {
+                    throw new Exceptions.PsimulexCoreException(string.Format("Exception was thrown: {0}.", rex.ToString()), rex);
+                }
+            }
         }
 
         public void Run(Process process)
@@ -193,7 +211,7 @@ namespace VapeTeam.Psimulex.Core
 
             while (HasActiveProcesses)
             {
-                machine.Step();
+                Step();
             }
 
         }

@@ -28,7 +28,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override BaseType ToReference()
         {
-            return this;
+            return new ReferenceType(this);
         }
 
         #endregion

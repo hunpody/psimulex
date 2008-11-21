@@ -81,6 +81,21 @@ namespace VapeTeam.Psimulex.Core
             RunStack = new RunStack();
             GlobalVariables = new VariableMap();
             Registry = new Registry();
+
+            RunStack.BeingPopped += new EventHandler<Stack<BaseType>.PopEventArgs>(RunStack_BeingPopped);
+        }
+
+        void RunStack_BeingPopped(object sender, Stack<BaseType>.PopEventArgs e)
+        {
+            // If a local variable is being popped we don't need to deallocate it.
+            foreach (int stackIndex in _variableMap.Values)
+            {
+                if (RunStack[stackIndex].MemoryAddress == e.PoppedValue.MemoryAddress)
+                {
+                    return;
+                }
+            }
+            e.PoppedValue.Delete();
         }
 
         /// <summary>
@@ -130,6 +145,39 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
+        public void PushScope()
+        {
+            CallStack.Push(new State(PC, RunStack.Count, _variableMap));
+            // Copy local variables
+            _variableMap = new VariableLocator(_variableMap);
+        }
+
+        public void PopScope()
+        {
+            if (CallStack.IsEmpty)
+            {
+                State = ThreadStates.Finished;
+                return;
+            }
+
+            // Not safe!
+
+            State state = CallStack.Pop();
+            _variableMap = state.VariableMap;
+            int itemsToPop = Math.Max(0, RunStack.Count - state.SP);
+            var poppedValues = RunStack.Pop(itemsToPop);
+            foreach (var value in poppedValues)
+            {
+                value.Delete();
+            }
+            
+            //RunStack.Pop(_variableMap.Count - state.VariableMap.Count);
+            
+            //RunStack.Pop(Math.Max(0, RunStack.Count - state.SP));
+
+            //PC = state.PC + 1;
+        }
+
         /// <summary>
         /// Pushes the current state into the callstack.
         /// (PC, SP and VariableMap)
@@ -152,14 +200,18 @@ namespace VapeTeam.Psimulex.Core
                 return;
             }
 
-            // Not safe!
-            RunStack.Pop(_variableMap.Count);
-
+            
             State state = CallStack.Pop();
+            
+            int numberOfLocalVariables = _variableMap.Count;
+
+            _variableMap = state.VariableMap;
+
+            // Not safe!
+            RunStack.Pop(numberOfLocalVariables);
 
             RunStack.Pop(Math.Max(0, RunStack.Count - state.SP));
 
-            _variableMap = state.VariableMap;
             PC = state.PC + 1;
         }
 

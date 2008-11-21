@@ -79,8 +79,21 @@ namespace VapeTeam.Psimulex.Core
                 {
                     CurrentThread.System.CallingThread = CurrentThread;
                     int oldPC = CurrentThread.PC;
+
+                    // The logging should be optional, so read the logging policy from config and uncomment this line.
                     //Logger.Log(CurrentThread.Program[CurrentThread.PC].ToString());
-                    CurrentThread.Program[CurrentThread.PC].Do(CurrentThread);
+
+                    // Error-safe ICommand.Do.
+                    try
+                    {
+                        CurrentThread.Program[CurrentThread.PC].Do(CurrentThread);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exceptions.RuntimeException(string.Format("Runtime error at command #{0} ({1}).",
+                            CurrentThread.PC, CurrentThread.Program[CurrentThread.PC].ToString()), ex, CurrentThread);
+                    }
+
                     // If there was no jump, then increse the program counter
                     if (oldPC == CurrentThread.PC && CurrentThread.State == ThreadStates.Running)
                     {

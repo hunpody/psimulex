@@ -118,7 +118,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void Run()
         {
             resultTextBox.Text = "";
-            var maschine = MachineBuilder.Instance.CreateMachine(1, 16);
+            var maschine = MachineBuilder.Instance.CreateMachine(1, 1024);
 
             maschine.System.InstallLibrary(new SampleInputLibrary());
             maschine.System.InstallLibrary(new InputTools.PrimaryInputLibrary());

@@ -49,7 +49,7 @@ namespace VapeTeam.Psimulex.Core.Commands
         #region Constructors
 
         public ConditionalJump(int pc, bool condition)
-            : this(pc, condition, false,false)
+            : this(pc, condition, false, false)
         {
         }
 

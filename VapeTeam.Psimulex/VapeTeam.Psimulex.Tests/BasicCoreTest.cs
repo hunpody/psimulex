@@ -17,9 +17,7 @@ namespace VapeTeam.Psimulex.Tests
     {
         public BasicCoreTest()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            VapeTeam.Psimulex.Core.Memory.Reset();
         }
 
         private TestContext testContextInstance;
@@ -83,7 +81,7 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void LibraryCall()
         {
-            var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(1, 16);
+            var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(1, 1024);
 
             machine.System.InstallLibrary(new TestLibrary());
 
@@ -105,6 +103,7 @@ namespace VapeTeam.Psimulex.Tests
             var program = VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
                 new Push(0),
                 new Initialize("i"),
+                new PushScope(),
                 new Push("i", ValueAccessModes.LocalVariableReference),
                 new Push("i", ValueAccessModes.LocalVariable),
                 new Push(1),
@@ -112,13 +111,17 @@ namespace VapeTeam.Psimulex.Tests
                 new Assign(true),
                 new Push(3000),
                 new Compare(Compare.ComparisonModes.LessThan),
-                new JumpIfTrue(2));
+                new RelativeJumpIfFalse(3),
+                new PopScope(),
+                new Jump(2),
+                new PopScope());
 
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             
             sw.Start();
 
-            var process = Helpers.SystemHelper.CreateMachineAndRunProgram(program);
+            var machine = VapeTeam.Psimulex.Core.Factories.MachineBuilder.Instance.CreateMachine(1, 64);
+            var process = Helpers.SystemHelper.RunProgram(machine, program);
 
             sw.Stop();
 
@@ -126,7 +129,10 @@ namespace VapeTeam.Psimulex.Tests
 
             double cyclesPerSecond = (double)numberOfCycles / sw.Elapsed.TotalSeconds;
 
-            Assert.IsTrue(cyclesPerSecond > 10000, string.Format("The virtual machine is too slow: only {0:0.00} MHz.", cyclesPerSecond / 1000000));
+            Assert.IsTrue(cyclesPerSecond > 20000, string.Format("The virtual machine is too slow: only {0:0.0000} MHz.", cyclesPerSecond / 1000000));
+            Assert.IsTrue(Memory.Instance.AllocatedBytes <= 64, string.Format("The program took too much memory: {0} bytes.", Memory.Instance.AllocatedBytes));
+            Assert.IsTrue(Memory.Instance.Reserved <= 64, string.Format("The program took too much memory: {0} bytes.", Memory.Instance.Reserved));
+
         }
     }
 }

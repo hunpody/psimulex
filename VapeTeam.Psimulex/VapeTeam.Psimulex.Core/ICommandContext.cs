@@ -18,7 +18,9 @@ namespace VapeTeam.Psimulex.Core
         BaseType GetVariable(string name);
         void AddVariable(string name, BaseType value);
 
-        void PopState();
         void PushState();
+        void PopState();
+        void PushScope();
+        void PopScope();
     }
 }

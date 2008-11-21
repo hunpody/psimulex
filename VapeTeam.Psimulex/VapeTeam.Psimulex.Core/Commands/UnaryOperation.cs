@@ -27,37 +27,40 @@ namespace VapeTeam.Psimulex.Core.Commands
 
             BaseType result = value;
 
-            switch (operation)
+            using (var valueFactory = new ValueFactoryContext())
             {
-                case Operations.Negate:
-                    result = value.Dereference().Clone();
-                    result.Negate();
-                    break;
-                case Operations.Plus:
-                    // It does simply nothing. Completely useless.
-                    break;
-                case Operations.PrefixDecrement:
-                    value.Subtract(ValueFactory.Create(1));
-                    break;
-                case Operations.PrefixIncrement:
-                    value.Add(ValueFactory.Create(1));
-                    break;
-                case Operations.PostfixDecrement:
-                    result = value.Dereference().Clone();
-                    value.Subtract(ValueFactory.Create(1));
-                    break;
-                case Operations.PostfixIncrement:
-                    result = value.Dereference().Clone();
-                    value.Add(ValueFactory.Create(1));
-                    break;
-                case Operations.LogicalNot:
-                    result = new VapeTeam.Psimulex.Core.Types.Boolean(!value.ToBoolean());
-                    break;
-                default:
-                    break;
+                switch (operation)
+                {
+                    case Operations.Negate:
+                        result = value.Dereference().Clone();
+                        result.Negate();
+                        break;
+                    case Operations.Plus:
+                        // It does simply nothing. Completely useless.
+                        break;
+                    case Operations.PrefixDecrement:
+                        value.Subtract(valueFactory.Create(1));
+                        break;
+                    case Operations.PrefixIncrement:
+                        value.Add(valueFactory.Create(1));
+                        break;
+                    case Operations.PostfixDecrement:
+                        result = value.Dereference().Clone();
+                        value.Subtract(valueFactory.Create(1));
+                        break;
+                    case Operations.PostfixIncrement:
+                        result = value.Dereference().Clone();
+                        value.Add(valueFactory.Create(1));
+                        break;
+                    case Operations.LogicalNot:
+                        result = new VapeTeam.Psimulex.Core.Types.Boolean(!value.ToBoolean());
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            context.RunStack.Push(result);
+            context.RunStack.Push(result.Clone());
         }
 
         public UnaryOperation(Operations operation)

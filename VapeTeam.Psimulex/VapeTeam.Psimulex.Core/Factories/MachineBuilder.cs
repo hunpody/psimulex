@@ -26,6 +26,7 @@ namespace VapeTeam.Psimulex.Core.Factories
             machine.MemorySize = sizeOfMemory;
             machine.System = OperatingSystemBuilder.CreateOSWithRoundRobin();
             machine.System.Setup(machine);
+            //Memory.Instance = machine.Memory;
             return machine;
         }
     }
