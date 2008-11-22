@@ -1346,6 +1346,25 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             else if (isOperatorUnaryPrefix)
             {
+                bool pushResult = true;
+                if (node.Parent.Type == NodeType.PrefixUnaryOperation)
+                {
+                    if (node.Parent.Parent.Type == NodeType.Expression)
+                        if (node.Parent.Parent.Parent.Type == NodeType.ForUpdate ||
+                            node.Parent.Parent.Parent.Type == NodeType.ExpressionStatement)
+                            pushResult = false;
+                }
+                else
+                {
+                    if (node.Parent.Type == NodeType.Expression)
+                        if (node.Parent.Parent.Type == NodeType.ForUpdate ||
+                            node.Parent.Parent.Type == NodeType.ExpressionStatement)
+                            pushResult = false;
+                }
+
+
+
+
                 /*
                 --++--i;
                 ->
@@ -1409,7 +1428,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 AddCommand
                     (
                     new BinaryOperation(BinaryOperation.Operations.Addition),
-                    new Assign(true)
+                    new Assign(pushResult)
                     );
             }
             else // Postfix Unary Operation
