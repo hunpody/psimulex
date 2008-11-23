@@ -12,10 +12,18 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         #region Representation
 
-        public class Pair
+        public class Pair //: BaseType
         {
             public long Priority { get; set; }
             public BaseType Value { get; set; }
+
+            //public override int MemorySize
+            //{
+            //    get
+            //    {
+            //        return 8;
+            //    }
+            //}
 
             public override string ToString()
             {
@@ -40,6 +48,11 @@ namespace VapeTeam.Psimulex.Core.Types
                     Value = Value.Clone()
                 };
             }
+
+            //public override TypeIdentifier Type
+            //{
+            //    get { return TypeEnum.Undefined; }
+            //}
         }
 
         private List<Pair> rep = new List<Pair>();
@@ -85,7 +98,7 @@ namespace VapeTeam.Psimulex.Core.Types
             if (index == -1)
                 index = rep.Count;
 
-            rep.Insert(index, new Pair { Priority = key, Value = value });
+            rep.Insert(index, new Pair { Priority = key, Value = value.Clone() });
 
             OnChanged();
             //if (Count == 0)
@@ -119,6 +132,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             EnsureQueueIsNotEmpty("get maximal element");
             BaseType ret = rep.First().Value;
+            //rep.First().Delete();
             rep.RemoveAt(0);
             OnChanged();
             return ret;
@@ -128,6 +142,7 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             EnsureQueueIsNotEmpty("get minimal element");
             BaseType ret = rep[Count - 1].Value;
+            //rep[Count - 1].Delete();
             rep.RemoveAt(Count - 1);
             OnChanged();
             return ret;
@@ -154,6 +169,14 @@ namespace VapeTeam.Psimulex.Core.Types
         #endregion
 
         #region Implemented Members
+
+        public override int MemorySize
+        {
+            get
+            {
+                return rep.Count * 8 + 4;
+            }
+        }
 
         public override TypeIdentifier Type
         {
@@ -186,6 +209,7 @@ namespace VapeTeam.Psimulex.Core.Types
         }
         public override void Clear()
         {
+            //rep.ForEach(p => p.Delete());
             rep.Clear();
             OnChanged();
         }

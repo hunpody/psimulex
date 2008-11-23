@@ -43,11 +43,11 @@ namespace VapeTeam.Psimulex.Core.Types
         {
         }
 
-        protected override void OnChanged()
-        {
-            Memory.Instance.ReAllocate(this);
-            base.OnChanged();
-        }
+        //protected override void OnChanged()
+        //{
+        //    Memory.Instance.ReAllocate(this);
+        //    base.OnChanged();
+        //}
 
         public override void Assign(BaseType value)
         {

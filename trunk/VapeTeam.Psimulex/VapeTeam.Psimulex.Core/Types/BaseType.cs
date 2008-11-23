@@ -429,6 +429,10 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <param name="oldValue"></param>
         protected void OnChanged(BaseType oldValue)
         {
+            if (isAllocated)
+            {
+                Memory.Instance.ReAllocate(this);
+            }
             if (Changed != null)
             {
                 Changed(this, new ValueChangedEventArgs{ OldValue = oldValue });
