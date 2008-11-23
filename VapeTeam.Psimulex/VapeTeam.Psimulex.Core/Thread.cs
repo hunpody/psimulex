@@ -167,7 +167,7 @@ namespace VapeTeam.Psimulex.Core
             int itemsToPop = Math.Max(0, RunStack.Count - state.SP);
             var poppedValues = RunStack.Pop(itemsToPop);
             foreach (var value in poppedValues)
-            {
+            {   
                 value.Delete();
             }
             
@@ -197,10 +197,11 @@ namespace VapeTeam.Psimulex.Core
             if (CallStack.IsEmpty)
             {
                 State = ThreadStates.Finished;
+                _variableMap.Clear();
+                RunStack.Pop(RunStack.Count);
                 return;
             }
 
-            
             State state = CallStack.Pop();
             
             int numberOfLocalVariables = _variableMap.Count;

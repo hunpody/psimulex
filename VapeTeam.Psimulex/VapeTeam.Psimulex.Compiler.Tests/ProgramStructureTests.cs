@@ -109,6 +109,70 @@ return 2;
             Assert.AreEqual("1111", result);
         }
 
+        [TestMethod]
+        public void MemoryTest01()
+        {
+            var result = Helpers.SystemHelper.CompileAndRunGetProcess(@"
+for (int i=0; i<40; i++)
+{
+  string s = ""hello""; 
+}
+");
+            Assert.IsTrue(VapeTeam.Psimulex.Core.Memory.Instance.AllocatedBytes == 0, string.Format("Memory leak: {0} bytes.", VapeTeam.Psimulex.Core.Memory.Instance.AllocatedBytes));
+        }
+
+        [TestMethod]
+        public void MemoryTest02()
+        {
+            var result = Helpers.SystemHelper.CompileAndRunGetProcess(@"
+for (int i=0; i<10; i++)
+{
+  string s = """";
+  int j = intrandom(4,20);
+  for (int k=0; k<j; ++k)
+    s += intrandom(60,70);  
+}
+
+");
+
+            Assert.IsTrue(VapeTeam.Psimulex.Core.Memory.Instance.AllocatedBytes == 0, string.Format("Memory leak: {0} bytes.", VapeTeam.Psimulex.Core.Memory.Instance.AllocatedBytes));
+        }
+
+        [TestMethod]
+        public void MemoryTest03()
+        {
+            var result = Helpers.SystemHelper.CompileAndRunGetProcess(@"
+string a = ""abcdefghijklmnopqrstuvwxyz"";
+string b = ""11111111111111111111111111"";
+string c = a.ToUpper();
+string d = a + b + c;
+print(GetUsedMemory());
+");
+            int mem = int.Parse(result.StandardOutput);
+
+            Assert.IsTrue(mem > 52*6, string.Format("Too low memory usage. ({0} bytes)", mem));
+        }
+
+        [TestMethod]
+        public void MemoryTest04()
+        {
+            var result = Helpers.SystemHelper.CompileAndRunGetProcess(@"
+void main() {
+  f();
+  print(GetUsedMemory());
+}
+
+void f() {
+string a = ""abcdefghijklmnopqrstuvwxyz"";
+string b = ""11111111111111111111111111"";
+string c = a.ToUpper();
+string d = a + b + c;
+}
+");
+            int mem = int.Parse(result.StandardOutput);
+
+            Assert.IsTrue(mem == 0, string.Format("Function call memoryleaked: {0} bytes.", mem));
+        }
 
         #region Generated Tests
 
@@ -126,8 +190,6 @@ print(t[1]);
 
             Assert.AreEqual("111", result);
         }
-
-
 
 
         [TestMethod]

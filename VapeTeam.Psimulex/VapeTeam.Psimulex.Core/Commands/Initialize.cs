@@ -21,11 +21,18 @@ namespace VapeTeam.Psimulex.Core.Commands
         public override void Do(ICommandContext context)
         {
             BaseType value = context.RunStack.Pop();
-            if (IsReference)
-                value = value.ToReference();
-            else
-                value = value.Dereference();
-            context.AddVariable(name, ValueFactory.Convert(value.Clone(), type));
+
+            using (new Memory.AutoCleanup())
+            {
+                if (IsReference)
+                    value = value.ToReference();
+                else
+                    value = value.Dereference();
+
+                value = ValueFactory.Convert(value.Clone(), type);
+            }
+
+            context.AddVariable(name, value.Clone());
         }
 
         #endregion

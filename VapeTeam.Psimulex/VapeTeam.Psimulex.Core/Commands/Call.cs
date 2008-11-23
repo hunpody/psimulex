@@ -116,6 +116,11 @@ namespace VapeTeam.Psimulex.Core.Commands
                 {
                     context.RunStack.Push(returnValue);
                 }
+
+                foreach (var param in parameters)
+                {
+                    param.Delete();
+                }
             }
         }
 

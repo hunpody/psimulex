@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -150,7 +151,6 @@
     <Compile Include="Types\UserDefinedTypeDescriptors.cs" />
     <Compile Include="Types\UserDefinedTypes.cs" />
     <Compile Include="Types\ValueFactory.cs" />
-    <Compile Include="Types\ValueFactoryContext.cs" />
     <Compile Include="Types\VariableDescriptor.cs" />
     <Compile Include="UserDefinedFunction.cs" />
     <Compile Include="VariableLocator.cs" />

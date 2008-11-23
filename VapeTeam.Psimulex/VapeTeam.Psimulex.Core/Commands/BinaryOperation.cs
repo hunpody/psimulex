@@ -25,53 +25,63 @@ namespace VapeTeam.Psimulex.Core.Commands
 
         public override void Do(ICommandContext context)
         {
-            BaseType op2 = context.RunStack.Pop().Clone();
-            BaseType op1 = context.RunStack.Pop().Clone();
+            BaseType op2 = null; //context.RunStack.Pop().Clone();
+            BaseType op1 = null; //context.RunStack.Pop().Clone();
 
-            TypeEnum biggerType = TypeHierarchy.GetBiggerType(op1.Type, op2.Type);
-            BaseType first = op1.ConvertTo(biggerType);
-            BaseType second = op2.ConvertTo(biggerType);
+            BaseType result = null;
+            BaseType first = null;
+            BaseType second = null;
 
-            // Note: Dereference has no effect on tests.
-            BaseType result = first.Dereference().Clone();
-
-            switch (operation)
+            using (var listener = new Memory.AutoCleanup())
             {
-                case Operations.Addition:
-                    result.Add(second);
-                    break;
-                case Operations.Subtraction:
-                    result.Subtract(second);
-                    break;
-                case Operations.Multiplication:
-                    result.Multiply(second);
-                    break;
-                case Operations.Division:
-                    result.Divide(second);
-                    break;
-                case Operations.Power:
-                    result.Power(second);
-                    break;
-                case Operations.Modulo:
-                    result.Modulo(second);
-                    break;
-                case Operations.LogicalXor:
-                    result = ValueFactory.Create(first && !second || !first && second);
-                    break;
-                case Operations.LogicalOr:
-                    result = ValueFactory.Create(first || second);
-                    break;
-                case Operations.LogicalAnd:
-                    result = ValueFactory.Create(first && second);
-                    break;
-                default:
-                    break;
+                op2 = context.RunStack.Pop().Clone();
+                op1 = context.RunStack.Pop().Clone();
+
+                TypeEnum biggerType = TypeHierarchy.GetBiggerType(op1.Type, op2.Type);
+                first = op1.ConvertTo(biggerType);
+                second = op2.ConvertTo(biggerType);
+
+                // Note: Dereference has no effect on tests.
+                result = first.Dereference().Clone();
+
+                switch (operation)
+                {
+                    case Operations.Addition:
+                        result.Add(second);
+                        break;
+                    case Operations.Subtraction:
+                        result.Subtract(second);
+                        break;
+                    case Operations.Multiplication:
+                        result.Multiply(second);
+                        break;
+                    case Operations.Division:
+                        result.Divide(second);
+                        break;
+                    case Operations.Power:
+                        result.Power(second);
+                        break;
+                    case Operations.Modulo:
+                        result.Modulo(second);
+                        break;
+                    case Operations.LogicalXor:
+                        result = ValueFactory.Create(first && !second || !first && second);
+                        break;
+                    case Operations.LogicalOr:
+                        result = ValueFactory.Create(first || second);
+                        break;
+                    case Operations.LogicalAnd:
+                        result = ValueFactory.Create(first && second);
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            op1.Delete();
-            op2.Delete();
+            //op1.Delete();
+            //op2.Delete();
 
-            context.RunStack.Push(result);
+            context.RunStack.Push(result.Clone());
         }
 
         public BinaryOperation(Operations operation)

@@ -36,27 +36,35 @@ namespace VapeTeam.Psimulex.Core.Commands
 
                 var poppedValues = new List<BaseType>(methodParameterInfos.Length);
 
-                for (int i = 0; i < methodParameterInfos.Length; ++i)
-                {
-                    poppedValues.Add(context.RunStack.Pop().Clone());
-                }
-
-                poppedValues.Reverse();
-
-                object[] convertedParameters =
-                    ValueFactory.TransformBaseTypeArrayToDotnetType(poppedValues, methodParameterInfos.Select(pi => pi.ParameterType).ToArray());
-
-                // Make the call
                 object returnValue = null;
 
-                try
+                using (new Memory.AutoCleanup())
                 {
-                    returnValue = method.Invoke(value, convertedParameters);
+                    for (int i = 0; i < methodParameterInfos.Length; ++i)
+                    {
+                        poppedValues.Add(context.RunStack.Pop().Clone());
+                    }
+
+                    poppedValues.Reverse();
+
+                    object[] convertedParameters =
+                        ValueFactory.TransformBaseTypeArrayToDotnetType(poppedValues, methodParameterInfos.Select(pi => pi.ParameterType).ToArray());
+
+                    // Make the call
+                    try
+                    {
+                        returnValue = method.Invoke(value, convertedParameters);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exceptions.PsimulexCoreException(string.Format("The invocation of method {0} of type {1} has thrown an exception.",
+                            methodName, value.GetTypeName()), ex.InnerException);
+                    }
                 }
-                catch (Exception ex)
+
+                if (returnValue is BaseType)
                 {
-                    throw new Exceptions.PsimulexCoreException(string.Format("The invocation of method {0} of type {1} has thrown an exception.",
-                        methodName, value.GetTypeName()), ex.InnerException);
+                    Memory.Instance.Allocate(returnValue as BaseType);
                 }
 
                 // Push the returned value

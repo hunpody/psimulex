@@ -174,7 +174,7 @@ namespace VapeTeam.Psimulex.Tests
                     ));            
 
             Assert.AreEqual("66", process.StandardOutput);
-            Assert.AreEqual(2, process.MainThread.RunStack.Count);
+            Assert.AreEqual(0, process.MainThread.RunStack.Count);
         }
 
         [TestMethod]

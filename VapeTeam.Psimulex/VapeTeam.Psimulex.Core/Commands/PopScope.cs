@@ -11,5 +11,10 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             context.PopScope();
         }
+
+        public override string ToString()
+        {
+            return "pop_scope";
+        }
     }
 }

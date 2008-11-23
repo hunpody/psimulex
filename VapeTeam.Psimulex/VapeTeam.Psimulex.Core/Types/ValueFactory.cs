@@ -20,7 +20,7 @@ namespace VapeTeam.Psimulex.Core.Types
             }
             else if (value.GetType() == typeof(BaseType) || value.GetType().IsSubclassOf(typeof(BaseType)))
             {
-                return (BaseType)value;
+                return (BaseType)value; //((BaseType)value).ToReference();
             }
             else if (value.GetType() == typeof(long))
             {
@@ -223,7 +223,6 @@ namespace VapeTeam.Psimulex.Core.Types
                     return new Queue();
                 case TypeEnum.PriorityQueue:
                     return new PriorityQueue();
-
                 case TypeEnum.Point:
                     return new Point();
 
@@ -240,7 +239,6 @@ namespace VapeTeam.Psimulex.Core.Types
                 // User Defined Types
                 case TypeEnum.UserDefinedType:
                     return type.UserDefinedType.CreateAnInstance();
-
                 default:
                     throw new Exceptions.PsimulexCoreException(string.Format("Cannot create value of type {0}.", type));
             }

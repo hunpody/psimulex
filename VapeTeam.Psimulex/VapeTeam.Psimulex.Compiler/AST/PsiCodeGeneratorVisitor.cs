@@ -120,6 +120,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Program build Helpers*/
         #region Program build Helpers
 
+        public void AddCommandBefore(ICommand commandToAdd, ICommand before)
+        {
+            if (isCurrentCompiledTheMainProgram)
+                Program.Program.CommandList.Insert(Program.Program.CommandList.IndexOf(before), commandToAdd);
+            else
+                lastCompiledUserDefinedFunction.Commands.Insert(lastCompiledUserDefinedFunction.Commands.IndexOf(before), commandToAdd);
+        }
+
         public void AddCommand(ICommand command)
         {
             if (isCurrentCompiledTheMainProgram)
@@ -698,7 +706,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Program Structures*/
         #region Program Structures
 
-        public void Visit(BlockNode node) { VisitChildren(node); }
+        public void Visit(BlockNode node) 
+        {
+            VisitChildren(node);
+        }
+
         public void Visit(StatementNode node) { VisitChildren(node); }
 
         public void Visit(IfStatementNode node)
@@ -782,7 +794,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public void Visit(ForStatementNode node) 
         {
-            // AddCommand(new PushState());
+            AddCommand(new PushScope());
             NewScope();
 
             // ForInitialization
@@ -799,7 +811,9 @@ namespace VapeTeam.Psimulex.Compiler.AST
             jumpStack.Push(rj);
 
             // ForCore
+            AddCommand(new PushScope());
             node.ForCore.Accept(this);
+            AddCommand(new PopScope());
 
             // ForUpdate
             node.ForUpdate.Accept(this);
@@ -808,12 +822,15 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(new RelativeJump(conditionAddress - CurrentFunctionSize));
 
             // Pop all Break from the jumpStack and set up it's PC to the end of the block
-            while (jumpStack.Peek().GetType() == (new Break()).GetType() )
+            while (jumpStack.Peek().GetType() == (typeof(Break)))
+            {
+                AddCommandBefore(new PopScope(), jumpStack.Peek());
                 SetUpTopJumpInJumpStack(0);
+            }
 
             SetUpTopJumpInJumpStack(0);
-            
-            // AddCommand(new PopState());
+
+            AddCommand(new PopScope());
             DeleteScope();
         }
 
@@ -1458,6 +1475,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 // 03 Push ax -> Duplication step 2. Push first
                 AddCommand(new PushRegister("ax"));
 
+                // 2008.11.22. BUG! Leaks the runstack. Should be removed but some tests fail.
                 // 04 Push ax -> Duplication step 3. Push second
                 AddCommand(new PushRegister("ax"));
 

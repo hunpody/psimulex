@@ -11,5 +11,10 @@ namespace VapeTeam.Psimulex.Core.Commands
         {
             context.PushScope();
         }
+
+        public override string ToString()
+        {
+            return "push_scope";
+        }
     }
 }

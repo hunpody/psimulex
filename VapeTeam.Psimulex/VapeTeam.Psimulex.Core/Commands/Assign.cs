@@ -18,7 +18,10 @@ namespace VapeTeam.Psimulex.Core.Commands
             BaseType valueToAssign = context.RunStack.Pop().Clone();
             BaseType targetValue = context.RunStack.Pop();
 
-            targetValue.Assign(valueToAssign);
+            using (new Memory.AutoCleanup())
+            {
+                targetValue.Assign(valueToAssign);
+            }
 
             valueToAssign.Delete();
 
