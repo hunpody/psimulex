@@ -39,7 +39,7 @@ namespace VapeTeam.Psimulex.Core
             CommandList.AddRange(originalCommandList);
             if (CommandList.Count > 0 && !(CommandList.Last() is Return))
             {
-                CommandList.Add(new Return());
+                CommandList.Add(new Return(false));
             }
             //EntryPoints.Clear();
             foreach (var udf in Functions)

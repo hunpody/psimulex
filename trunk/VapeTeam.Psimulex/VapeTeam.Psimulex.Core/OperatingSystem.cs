@@ -85,7 +85,9 @@ namespace VapeTeam.Psimulex.Core
             // Map back .net types to psimulex types (this makes possible to keep track of a pass-by-ref parameter)
             for (int i=0; i<parametersList.Count(); ++i)
             {
-                parametersList[i].Assign(ValueFactory.Create(convertedTypes[i]));
+                var assignedValue = ValueFactory.Create(convertedTypes[i]);
+                parametersList[i].Assign(assignedValue);
+                assignedValue.Delete();
             }
 
             // If the type of return value is not void, then push it back

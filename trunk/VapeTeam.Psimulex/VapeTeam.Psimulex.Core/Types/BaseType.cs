@@ -11,28 +11,82 @@ namespace VapeTeam.Psimulex.Core.Types
     /// </summary>
     public abstract class BaseType
     {
+        #region Universal value accessor
+
+        protected interface IValueAccessor
+        {
+            //object Value;
+        }
+
+        protected class ValueAccessor<T>
+        {
+            private T _value;
+
+            public ValueAccessor(T value)
+            {
+                _value = value;
+            }
+
+            public void Assign(T value)
+            {
+                _value = value;
+            }
+
+            public T Value
+            {
+                get
+                {
+                    return (T)_value;
+                }
+            }
+
+            public static implicit operator ValueAccessor<T>(T value)
+            {
+                return new ValueAccessor<T>(value);
+            }
+
+            public static implicit operator T(ValueAccessor<T> va)
+            {
+                return va.Value;
+            }
+        }
+
+        #endregion
+
         #region Lifecycle - memory operations
 
-        internal int MemoryAddress { get; private set; }
+        internal int MemoryAddress { get; set; }
 
-        private bool isAllocated = false;
+        /// <summary>
+        /// The size of the object in the memory in bytes.
+        /// </summary>
+        public virtual int MemorySize
+        {
+            get
+            {
+                return Memory.Instance.AddressLength;
+            }
+        }
+
+        internal bool isAllocated = false;
 
         protected void DoAllocation()
         {
             if (!isAllocated)
             {
-                MemoryAddress = Memory.Instance.Allocate(this);
+                Memory.Instance.Allocate(this);
                 isAllocated = true;
             }            
         }
 
         public BaseType()
+            : this(true)
         {
-            DoAllocation();
         }
 
         public BaseType(bool allocate)
         {
+            MemoryAddress = -1;
             if (allocate)
                 DoAllocation();
         }
@@ -384,7 +438,7 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <summary>
         /// Fires the Changed event.
         /// </summary>
-        protected void OnChanged()
+        protected virtual void OnChanged()
         {
             OnChanged(null);
         }

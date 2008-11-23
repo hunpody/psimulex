@@ -7,16 +7,46 @@ namespace VapeTeam.Psimulex.Core.Types
 {
     public class String : BaseType
     {
+        // needless
+        //
+        //private ValueAccessor<string> rep;
+        //private string value
+        //{
+        //    get { return rep ?? string.Empty; }
+        //    set { 
+        //        rep.Assign(value);
+        //        Memory.Instance.ReAllocate(this);
+        //    }
+        //}
+
         private string value;
+
+        public override int MemorySize
+        {
+            get
+            {
+                // 4 : the string object
+                // 4 : the virtual character array object
+                return 8 + (value ?? string.Empty).Length * 2;
+            }
+        }
 
         public String(string value)
         {
+            //this.rep = new ValueAccessor<string>(value);
             this.value = value;
+            OnChanged();
         }
 
         public String()
             : this(string.Empty)
         {
+        }
+
+        protected override void OnChanged()
+        {
+            Memory.Instance.ReAllocate(this);
+            base.OnChanged();
         }
 
         public override void Assign(BaseType value)

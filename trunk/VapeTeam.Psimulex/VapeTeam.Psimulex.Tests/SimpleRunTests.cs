@@ -184,7 +184,7 @@ namespace VapeTeam.Psimulex.Tests
 
             Assert.AreEqual("True", process.StandardOutput);
             // Local variables get stored in the runstack, so its size should be 2.
-            Assert.AreEqual(2, process.MainThread.RunStack.Count);
+            Assert.AreEqual(0, process.MainThread.RunStack.Count);
         }
     }
 }

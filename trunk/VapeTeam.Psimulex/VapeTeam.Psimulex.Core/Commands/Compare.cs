@@ -7,7 +7,7 @@ using VapeTeam.Psimulex.Core.Types;
 namespace VapeTeam.Psimulex.Core.Commands
 {
     /// <summary>
-    /// Binary comparison relational and logicals.
+    /// Binary comparison.
     /// </summary>
     public class Compare : CommandBase
     {
@@ -35,31 +35,34 @@ namespace VapeTeam.Psimulex.Core.Commands
 
             TypeHierarchy.OrderTypes(ref op1, ref op2);
 
-            switch (mode)
+            using (new Memory.AutoCleanup())
             {
-                case ComparisonModes.Undefined:
-                    break;
-                case ComparisonModes.Equal:
-                    result = op1.EqualsTo(op2);
-                    break;
-                case ComparisonModes.NotEqual:
-                    result = op1.NotEqualsTo(op2);
-                    break;
-                case ComparisonModes.LessThan:
-                    result = op1.IsLessThan(op2);
-                    break;
-                case ComparisonModes.LessThanOrEqual:
-                    result = op1.IsLessThanOrEqual(op2);
-                    break;
-                case ComparisonModes.GreaterThan:
-                    result = op1.IsGreaterThan(op2);
-                    break;
-                case ComparisonModes.GreaterThanOrEqual:
-                    result = op1.IsGreaterThanOrEqual(op2);
-                    break;
+                switch (mode)
+                {
+                    case ComparisonModes.Undefined:
+                        break;
+                    case ComparisonModes.Equal:
+                        result = op1.EqualsTo(op2);
+                        break;
+                    case ComparisonModes.NotEqual:
+                        result = op1.NotEqualsTo(op2);
+                        break;
+                    case ComparisonModes.LessThan:
+                        result = op1.IsLessThan(op2);
+                        break;
+                    case ComparisonModes.LessThanOrEqual:
+                        result = op1.IsLessThanOrEqual(op2);
+                        break;
+                    case ComparisonModes.GreaterThan:
+                        result = op1.IsGreaterThan(op2);
+                        break;
+                    case ComparisonModes.GreaterThanOrEqual:
+                        result = op1.IsGreaterThanOrEqual(op2);
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
 
             op1.Delete();

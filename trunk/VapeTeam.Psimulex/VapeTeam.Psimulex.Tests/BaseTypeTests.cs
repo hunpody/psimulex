@@ -926,7 +926,7 @@ namespace VapeTeam.Psimulex.Tests
             Assert.AreEqual("True012025-13-10230", process.StandardOutput);
             
             // Test if the run stack is well cleaned
-            Assert.AreEqual(2, process.MainThread.RunStack.Count);
+            Assert.AreEqual(0, process.MainThread.RunStack.Count);
         }
 
         [TestMethod]
@@ -950,7 +950,6 @@ namespace VapeTeam.Psimulex.Tests
         [TestMethod]
         public void Iterators1()
         {
-            // Testing array indexing with bad index
             var program =
                 VapeTeam.Psimulex.Core.Factories.ProgramBuilder.Create().Add(
 

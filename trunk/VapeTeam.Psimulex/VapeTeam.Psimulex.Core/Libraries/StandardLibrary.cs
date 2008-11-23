@@ -56,6 +56,11 @@ namespace VapeTeam.Psimulex.Core.Libraries
             return System.CreateThread(System.CallingThread, entryPoint);
         }
 
+        public int GetUsedMemory()
+        {
+            return Memory.Instance.AllocatedBytes;
+        }
+
         #region Tool Functions
 
         public int IntRandom(int min, int max)

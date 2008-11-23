@@ -18,7 +18,8 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override BaseType ToReference()
         {
-            return this;
+            //return this;
+            return this.Clone();
         }
 
         public override BaseType Dereference()

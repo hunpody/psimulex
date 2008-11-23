@@ -54,6 +54,7 @@ namespace VapeTeam.Psimulex.Core.Commands
             if (AccessMode == ValueAccessModes.Constant || AccessMode == ValueAccessModes.Register)
             {
                 valueToPush = valueToPush.Dereference().Clone();
+                //valueToPush.Delete();
             }
             // To revise: this code snippet has no effect on the tests.
             else if (AccessMode == ValueAccessModes.LocalVariableReference || AccessMode == ValueAccessModes.RegisterByReference)
