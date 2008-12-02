@@ -14,9 +14,13 @@ namespace VapeTeam.Psimulex.Core
     public interface IStack<T>
     {
         T Pop();
+        IEnumerable<T> Pop(int count);
         T Top { get; }
+        int Count { get; }
         void Push(T item);
         void Clear();
         bool IsEmpty { get; }
+        IEnumerable<T> AsEnumerable();
+        //T this[int index] { get; }
     }
 }

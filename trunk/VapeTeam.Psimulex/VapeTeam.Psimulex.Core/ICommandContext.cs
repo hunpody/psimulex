@@ -8,8 +8,8 @@ namespace VapeTeam.Psimulex.Core
 {
     public interface ICommandContext
     {
-        CallStack CallStack { get; }
-        RunStack RunStack { get; }
+        IStack<State> CallStack { get; }
+        IStack<BaseType> RunStack { get; }
         IRegistry Registry { get; }
         IFunctionLookup FunctionLookup { get; }
         ISystemContext System { get; }

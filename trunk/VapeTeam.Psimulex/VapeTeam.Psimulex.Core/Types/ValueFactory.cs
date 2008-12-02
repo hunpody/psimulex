@@ -51,7 +51,7 @@ namespace VapeTeam.Psimulex.Core.Types
             {
                 return new Character((char)value);
             }
-            else if (value.GetType() == typeof(VapeTeam.Psimulex.Core.Thread))
+            else if (value.GetType() == typeof(VapeTeam.Psimulex.Core.Thread) || value.GetType().IsSubclassOf(typeof(VapeTeam.Psimulex.Core.Thread)))
             {
                 return new VapeTeam.Psimulex.Core.Types.Thread((VapeTeam.Psimulex.Core.Thread)value);
             }

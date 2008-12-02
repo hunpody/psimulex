@@ -55,12 +55,25 @@ namespace VapeTeam.Psimulex.Core
             Machine.ScreenContent += message;
         }
 
-        public string StandardOutput { get; internal set; }
+        private Historization.HistoricalValue<string> _stdOut;
+
+        public string StandardOutput
+        {
+            get
+            {
+                return _stdOut;
+            }
+            internal set
+            {
+                _stdOut.Value = value;
+            }
+        }
 
         public Process()
         {
             ChildProcesses = new List<Process>();
             Threads = new ThreadList();
+            _stdOut = new VapeTeam.Psimulex.Core.Historization.HistoricalValue<string>(VapeTeam.Psimulex.Core.Historization.GlobalHistory.Instance);
             StandardOutput = string.Empty;
         }
 

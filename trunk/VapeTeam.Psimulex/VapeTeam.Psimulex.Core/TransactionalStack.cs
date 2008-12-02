@@ -69,6 +69,14 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
+        public int Count
+        {
+            get
+            {
+                return currentPointer + 1;
+            }
+        }
+
         public T Pop()
         {
             // There is no item in the stack
@@ -81,6 +89,7 @@ namespace VapeTeam.Psimulex.Core
             {
                 var ret = originalStackRep[currentPointer];
                 --currentPointer;
+                --originalPointer;
                 return ret;
             }
             // The item is in the new stack
@@ -90,6 +99,16 @@ namespace VapeTeam.Psimulex.Core
                 --currentPointer;
                 return ret;
             }
+        }
+
+        public IEnumerable<T> Pop(int count)
+        {
+            List<T> poppedValues = new List<T>(count);
+            for (int i = 0; i < count; ++i)
+            {
+                poppedValues.Add(Pop());
+            }
+            return poppedValues;
         }
 
         public void Push(T item)
@@ -124,6 +143,17 @@ namespace VapeTeam.Psimulex.Core
         {
             tempStack.Clear();
             currentPointer = -1;
+            originalPointer = -1;
+        }
+
+        public IEnumerable<T> AsEnumerable()
+        {
+            List<T> values = new List<T>();
+
+            values.AddRange(tempStack.AsEnumerable());
+            values.AddRange(originalStackRep.Take(originalPointer + 1).Reverse());
+
+            return values;
         }
 
         #region ITransaction Members
@@ -156,7 +186,8 @@ namespace VapeTeam.Psimulex.Core
         {
             AssertUncommitted("You can only commit an uncommitted transaction");
 
-            int numberOfItemsToDelete = originalPointer - currentPointer + tempStack.Count;
+            //int numberOfItemsToDelete = originalPointer - currentPointer + tempStack.Count;
+            int numberOfItemsToDelete = originalStackRep.Count - originalPointer - 1;
             for (int i = 0; i < numberOfItemsToDelete; ++i)
             {
                 originalStack.Pop();
@@ -182,7 +213,7 @@ namespace VapeTeam.Psimulex.Core
         {
             AssertUncommitted("You can only rollback an uncommitted transaction");
 
-            currentPointer = originalPointer;
+            currentPointer = originalPointer = originalStackRep.Count - 1;
             tempStack.Clear();
 
             Status = TransactionStates.Rolledback;

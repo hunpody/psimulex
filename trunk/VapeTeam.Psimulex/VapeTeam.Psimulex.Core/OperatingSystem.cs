@@ -16,6 +16,8 @@ namespace VapeTeam.Psimulex.Core
             private set;
         }
 
+        internal VapeTeam.Psimulex.Core.Factories.IThreadFactory ThreadFactory { get; set; }
+
         private Machine machine;
 
         private int _nextProcessId = 0;
@@ -116,14 +118,12 @@ namespace VapeTeam.Psimulex.Core
         protected virtual Thread CreateThread(Process process)
         {
             var id = NextThreadId;
-            var thread = new Thread
-            {
-                Program = process.Program,
-                Id = id,
-                Name = string.Format("{0} Thread Id={1}", process.Program.Name, id),
-                State = ThreadStates.Stopped,
-                HostProcess = process
-            };
+            var thread = ThreadFactory.CreateThread();
+            thread.Program = process.Program;
+            thread.Id = id;
+            thread.Name = string.Format("{0} Thread Id={1}", process.Program.Name, id);
+            thread.State = ThreadStates.Stopped;
+            thread.HostProcess = process;
             return thread;
         }
 
