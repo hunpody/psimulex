@@ -110,7 +110,7 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
-        public Stack<T> Reverse()
+        public virtual Stack<T> Reverse()
         {
             return new Stack<T>(stack.ToArray().Reverse());
         }

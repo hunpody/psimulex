@@ -46,7 +46,7 @@ namespace VapeTeam.Psimulex.Core
         /// <summary>
         /// The pointer to the current instruction that the thread is running.
         /// </summary>
-        public int PC { get; set; }
+        public virtual int PC { get; set; }
 
         /// <summary>
         /// The current state of the thread.
@@ -81,8 +81,6 @@ namespace VapeTeam.Psimulex.Core
             RunStack = new RunStack();
             GlobalVariables = new VariableMap();
             Registry = new Registry();
-
-            RunStack.BeingPopped += new EventHandler<Stack<BaseType>.PopEventArgs>(RunStack_BeingPopped);
         }
 
         void RunStack_BeingPopped(object sender, Stack<BaseType>.PopEventArgs e)
@@ -117,16 +115,33 @@ namespace VapeTeam.Psimulex.Core
 
         #region ICommandContext Members
 
-        public CallStack CallStack
+        public IStack<State> CallStack
         {
             get;
-            private set;
+            internal set;
         }
 
-        public RunStack RunStack
+        private Stack<BaseType> _runStack;
+
+        public Stack<BaseType> RunStack
         {
-            get;
-            private set;
+            get
+            {
+                return _runStack;
+            }
+
+            internal set
+            {
+                if (_runStack != null)
+                    _runStack.BeingPopped -= RunStack_BeingPopped;
+                _runStack = value;
+                RunStack.BeingPopped += new EventHandler<Stack<BaseType>.PopEventArgs>(RunStack_BeingPopped);
+            }
+        }
+
+        IStack<BaseType> ICommandContext.RunStack
+        {
+            get { return RunStack; }
         }
 
         public IFunctionLookup FunctionLookup

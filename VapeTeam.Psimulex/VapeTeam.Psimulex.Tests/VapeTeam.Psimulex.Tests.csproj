@@ -43,6 +43,7 @@
     <Compile Include="FunctionTests.cs" />
     <Compile Include="Helpers\AssertionHelpers.cs" />
     <Compile Include="Helpers\SystemHelper.cs" />
+    <Compile Include="HistorizationTests.cs" />
     <Compile Include="JumpTests.cs" />
     <Compile Include="ProcessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

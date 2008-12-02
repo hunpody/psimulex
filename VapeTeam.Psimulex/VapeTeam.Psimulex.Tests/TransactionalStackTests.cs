@@ -192,6 +192,64 @@ namespace VapeTeam.Psimulex.Tests
         }
 
         [TestMethod]
+        public void TransactionalStack4()
+        {
+            var stack = new TransactionalStack<int>();
+
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+
+            var t1 = stack.BeginTransaction();
+
+            t1.Pop();
+            t1.Pop();
+            t1.Push(10);
+            t1.Push(15);
+
+            Assert.AreEqual(15, t1.Top);
+            Assert.AreEqual(3, stack.Top);
+
+            t1.Commit();
+
+            Assert.AreEqual(15, stack.Pop());
+            Assert.AreEqual(10, stack.Pop());
+            Assert.AreEqual(1, stack.Pop());
+
+        }
+
+        [TestMethod]
+        public void TransactionalStack5()
+        {
+            var stack = new TransactionalStack<int>();
+
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+
+            var t1 = stack.BeginTransaction();
+
+            t1.Pop();
+            t1.Pop();
+            t1.Push(10);
+            t1.Push(15);
+
+            var list = t1.AsEnumerable().ToList();
+
+            Assert.AreEqual(15, list[0]);
+            Assert.AreEqual(10, list[1]);
+            Assert.AreEqual(1, list[2]);
+
+            t1.Commit();
+
+            var list2 = stack.AsEnumerable().ToList();
+
+            Assert.AreEqual(15, list2[0]);
+            Assert.AreEqual(10, list2[1]);
+            Assert.AreEqual(1, list2[2]);
+        }
+
+        [TestMethod]
         public void SpecialStackOperations1()
         {
             Psimulex.Core.Stack<int> stack = new VapeTeam.Psimulex.Core.Stack<int>();

@@ -130,7 +130,7 @@ namespace VapeTeam.Psimulex.Tests
 
             double cyclesPerSecond = (double)numberOfCycles / sw.Elapsed.TotalSeconds;
 
-            Assert.IsTrue(cyclesPerSecond > 100, string.Format("The virtual machine is too slow: only {0:0.00} KHz.", cyclesPerSecond / 1000));
+            Assert.IsTrue(cyclesPerSecond > 500, string.Format("The virtual machine is too slow: only {0:0.00} KHz.", cyclesPerSecond / 1000));
             Assert.IsTrue(Memory.Instance.AllocatedBytes <= 64, string.Format("The program took too much memory: {0} bytes.", Memory.Instance.AllocatedBytes));
             Assert.IsTrue(Memory.Instance.Reserved <= 64, string.Format("The program took too much memory: {0} bytes.", Memory.Instance.Reserved));
         }
