@@ -98,9 +98,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(FunctionCallNode node);
         void Visit(ArgumentsNode node);
         void Visit(IndexingNode node);
-        void Visit(DimensionsNode node);
-        void Visit(ConstantDimensionsNode node);
-        void Visit(DimensionMarkerNode node);
+        //void Visit(DimensionsNode node);
+        //void Visit(ConstantDimensionsNode node);        
         void Visit(ArrayInitializatorNode node);
         void Visit(CollectionInitializatorNode node);
 
@@ -117,6 +116,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         void Visit(InfinityLiteralNode node);
 
         /*Types*/
+        void Visit(DimensionMarkerNode node);
         void Visit(DataTypeNameNode node);
         void Visit(DataTypeNode node);
         /*

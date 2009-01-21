@@ -111,7 +111,7 @@ namespace VapeTeam.Psimulex.Compiler.Result
 
     /// <summary>
     /// It identifies an Command object.
-    /// If the Function Name is "", than it is the main program.
+    /// If the Function Name is "", than it is the main program. (Not the main() function!)
     /// </summary>
     public class CommandID
     {

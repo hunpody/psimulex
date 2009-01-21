@@ -22,7 +22,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         // For struct Members
         public BaseType Value { get; set; }
-        public bool IsInitialized { get; set; }
+        public bool IsInitialised { get; set; }
 
         // For Function Parameter
         public bool IsDynamicArray { get; set; }
@@ -36,7 +36,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             DimensionList = new List<int>();
             Name = "";
             Value = null;
-            IsInitialized = false;
+            IsInitialised = false;
             IsReference = false;
         }
 

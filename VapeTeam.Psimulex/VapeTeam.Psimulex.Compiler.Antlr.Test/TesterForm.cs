@@ -18,7 +18,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 {
     public partial class TesterForm : Form
     {
-        private Compiler compiler = new Compiler();
+        private Compiler compiler = new Compiler(new PsiNodeParser());
         public PsiCodeGeneratorVisitor visitor { get; set; }
         public PsiNode PsiNode { get; set; }
         
@@ -126,11 +126,12 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 
         private void btnRun_Click(object sender, EventArgs e)
         {
+            /*
             compileButton_Click(this, new EventArgs());
 
             var machine = MachineBuilder.Instance.CreateMachine(1, 1024);
 
-            visitor.Program.Program.AddFunctions(visitor.UserDefinedFunctionList);
+            visitor.Program.Program.AddFunctions(visitor.UserDefinedFunctionInfoList);
 
             var process = machine.System.Load(visitor.Program);
 
@@ -167,7 +168,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
                 sw = new StreamWriter(file,true);
             sw.WriteLine();
             sw.WriteLine(testCase);
-            sw.Close();
+            sw.Close();*/
         }
 
         private void viewProgramStringButton_Click(object sender, EventArgs e)

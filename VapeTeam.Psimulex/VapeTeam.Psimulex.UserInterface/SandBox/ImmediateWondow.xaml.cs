@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VapeTeam.Psimulex.Compiler;
+using VapeTeam.Psimulex.Compiler.Antlr;
 
 namespace VapeTeam.Psimulex.UserInterface.SandBox
 {
@@ -28,9 +29,9 @@ namespace VapeTeam.Psimulex.UserInterface.SandBox
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            compiler = new Compiler.Compiler();
+            compiler = new Compiler.Compiler(new PsiNodeParser());
 
-            compiler.Compile(psimulex.Text, "s", ProgramPart.Statement);
+            compiler.Compile(psimulex.Text, "s", false, ProgramPart.Statement);
 
             ProgramString();
         }
@@ -40,10 +41,10 @@ namespace VapeTeam.Psimulex.UserInterface.SandBox
             string funcString = "";
 
             int lineNumber = compiler.CompileResult.CompiledProgram.CommandList.Count;
-            foreach (var item in compiler.CompileResult.UserDefinedFunctionList)
+            foreach (var item in compiler.CompileResult.UserDefinedFunctionInfoList)
             {
-                funcString += "\r\n" + item.Name + "(ParameterCount : " + item.ParameterCount + ")\r\n";
-                foreach (VapeTeam.Psimulex.Core.Commands.ICommand command in item.Commands)
+                funcString += "\r\n" + item.Function.Name + "(ParameterCount : " + item.Function.ParameterCount + ")\r\n";
+                foreach (VapeTeam.Psimulex.Core.Commands.ICommand command in item.Function.Commands)
                 {
                     string line = "";
                     line = lineNumber.ToString("000") + " " + command.ToString() + "\r\n";

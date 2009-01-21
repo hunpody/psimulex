@@ -1,4 +1,4 @@
-// $ANTLR 3.1.1 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2008-11-11 15:45:08
+// $ANTLR 3.1.1 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2009-01-21 23:28:34
 
 using System;
 using Antlr.Runtime;
@@ -10,155 +10,153 @@ using Stack 		= Antlr.Runtime.Collections.StackList;
 public partial class PsimulexLexer : Lexer {
     public const int CAST = 51;
     public const int CONDITIONALBRANCH = 21;
-    public const int Iterator = 88;
-    public const int RelEqual = 96;
+    public const int Iterator = 86;
+    public const int RelEqual = 94;
     public const int FORMAL_PARAMETER_LIST = 14;
     public const int TYPE_DECLARATIONS = 8;
     public const int VARINIT = 45;
-    public const int AssignAndDivide = 92;
+    public const int AssignAndDivide = 90;
     public const int FORSTATEMENT = 24;
-    public const int AssignAndMultiply = 91;
+    public const int AssignAndMultiply = 89;
     public const int PFORSTATEMENT = 23;
     public const int CONDITION = 38;
-    public const int Decimal = 74;
-    public const int Modulo = 106;
+    public const int Decimal = 72;
+    public const int Modulo = 104;
     public const int PDOSTATEMENT = 39;
     public const int EOF = -1;
-    public const int IDLetter = 137;
-    public const int Int = 73;
-    public const int Identifier = 68;
+    public const int IDLetter = 135;
+    public const int Int = 71;
+    public const int Identifier = 66;
     public const int INDEXING = 59;
     public const int STATEMENT = 17;
-    public const int Thread = 87;
+    public const int Thread = 85;
     public const int TYPE = 47;
-    public const int CONSTANT_DIMS = 61;
-    public const int BinTree = 78;
+    public const int BinTree = 76;
     public const int PFOREACHSTATEMENT = 30;
     public const int T__148 = 148;
     public const int T__147 = 147;
     public const int T__149 = 149;
-    public const int To = 133;
-    public const int ForEach = 130;
-    public const int Char = 72;
-    public const int Edge = 86;
+    public const int To = 131;
+    public const int ForEach = 128;
+    public const int Char = 70;
+    public const int Edge = 84;
     public const int COMPILATION_UNIT = 4;
     public const int LOCKSTATEMENT = 41;
-    public const int Do = 128;
-    public const int RelGreaterThan = 100;
+    public const int Do = 126;
+    public const int RelGreaterThan = 98;
     public const int FORMAL_PARAMETER = 15;
-    public const int Node = 85;
-    public const int AssignAndModulo = 93;
+    public const int Node = 83;
+    public const int AssignAndModulo = 91;
     public const int LOOPLIMIT = 36;
     public const int FOREACHINIT = 32;
     public const int T__150 = 150;
     public const int T__151 = 151;
-    public const int T__152 = 152;
     public const int WHILESTATEMENT = 29;
-    public const int T__153 = 153;
     public const int FORUPDATE = 27;
-    public const int Bool = 71;
+    public const int Bool = 69;
     public const int FORINIT = 26;
     public const int ARGUMENTS = 57;
     public const int MEMBER_SELECT = 58;
-    public const int LogicalOr = 94;
-    public const int LogicalAnd = 95;
+    public const int LogicalOr = 92;
+    public const int LogicalAnd = 93;
     public const int CORE = 37;
-    public const int Tree = 77;
+    public const int Tree = 75;
     public const int T__145 = 145;
     public const int T__146 = 146;
+    public const int T__143 = 143;
+    public const int T__144 = 144;
     public const int POSTFIXOP = 53;
-    public const int Minus = 103;
-    public const int WS = 142;
-    public const int Break = 121;
+    public const int Minus = 101;
+    public const int WS = 140;
+    public const int Break = 119;
     public const int GLOBAL_VARIABLE_DECLARATIONS = 10;
-    public const int Async = 118;
+    public const int Async = 116;
     public const int MEMBER_FUNCTION_CALL = 55;
     public const int MULTY_FUNCTIONAL_PROGRAM = 6;
     public const int SIMPLE_PROGRAM = 5;
     public const int DATATYPE = 48;
     public const int EXPRESSION_STATEMENT = 43;
-    public const int NotNullDigit = 139;
-    public const int RelLessThan = 98;
-    public const int Star = 104;
-    public const int Else = 124;
+    public const int NotNullDigit = 137;
+    public const int RelLessThan = 96;
+    public const int Star = 102;
+    public const int Else = 122;
     public const int FUNCTION_CALL = 56;
-    public const int EscapeSequence = 141;
-    public const int Letter = 136;
-    public const int Loop = 132;
+    public const int EscapeSequence = 139;
+    public const int Letter = 134;
+    public const int Loop = 130;
     public const int VARIABLE_DECLARATION_STATEMENT = 44;
-    public const int BooleanLiteral = 113;
+    public const int BooleanLiteral = 111;
     public const int LOOPSTATEMENT = 34;
-    public const int DIMMARKER = 62;
-    public const int AssignAndAdd = 89;
-    public const int Stack = 81;
-    public const int NullLiteral = 114;
-    public const int RelGreaterThanOrEqual = 101;
+    public const int DIMMARKER = 60;
+    public const int AssignAndAdd = 87;
+    public const int Stack = 79;
+    public const int NullLiteral = 112;
+    public const int RelGreaterThanOrEqual = 99;
     public const int IFSTATEMENT = 18;
-    public const int PQueue = 83;
-    public const int SingleLineComment = 143;
-    public const int DIMS = 60;
-    public const int COLLECTION_INITIALIZER = 63;
-    public const int CharacterLiteral = 112;
-    public const int AssignAndSubstract = 90;
+    public const int PQueue = 81;
+    public const int SingleLineComment = 141;
+    public const int CharacterLiteral = 110;
+    public const int COLLECTION_INITIALIZER = 61;
+    public const int AssignAndSubstract = 88;
     public const int FOREACHCOLLECTION = 33;
-    public const int While = 127;
-    public const int Graph = 84;
-    public const int Queue = 82;
-    public const int Set = 79;
-    public const int Assign = 69;
+    public const int While = 125;
+    public const int Graph = 82;
+    public const int Queue = 80;
+    public const int Set = 77;
+    public const int Assign = 67;
     public const int SELECTOR = 54;
     public const int RETURN_STATEMENT = 42;
-    public const int PForEach = 129;
-    public const int RelNotEqual = 97;
+    public const int PForEach = 127;
+    public const int RelNotEqual = 95;
     public const int FOREACHSTATEMENT = 31;
     public const int IFBRANCH = 19;
-    public const int String = 75;
-    public const int Return = 120;
-    public const int Reference = 70;
-    public const int Struct = 67;
+    public const int String = 73;
+    public const int Return = 118;
+    public const int Reference = 68;
+    public const int Struct = 65;
     public const int EXPRESSION = 50;
-    public const int If = 122;
-    public const int MultiLineComment = 144;
+    public const int If = 120;
+    public const int MultiLineComment = 142;
     public const int FUNCTIONPOINTERTYPE = 49;
-    public const int Import = 65;
-    public const int In = 131;
+    public const int Import = 63;
+    public const int In = 129;
     public const int VARDECLARE = 46;
     public const int FUNCTION_DECLARATIONS = 12;
-    public const int Void = 76;
+    public const int Void = 74;
     public const int ELSEBRANCH = 22;
-    public const int Continue = 134;
+    public const int Continue = 132;
     public const int ASYNCSTATEMENT = 40;
-    public const int Lock = 119;
-    public const int PDo = 117;
+    public const int Lock = 117;
+    public const int PDo = 115;
     public const int IMPORT_DECLARATIONS = 7;
-    public const int ElseIf = 123;
+    public const int ElseIf = 121;
     public const int DOSTATEMENT = 28;
-    public const int Digit = 138;
+    public const int Digit = 136;
     public const int STRUCTDEC = 9;
-    public const int DecimalLiteral = 111;
-    public const int For = 125;
-    public const int Divide = 105;
-    public const int List = 80;
+    public const int DecimalLiteral = 109;
+    public const int For = 123;
+    public const int Divide = 103;
+    public const int List = 78;
     public const int FORCONDITION = 25;
-    public const int StringLiteral = 66;
-    public const int Plus = 102;
-    public const int LogicalNot = 107;
-    public const int Atomic = 135;
-    public const int RelLessThanOrEqual = 99;
-    public const int New = 116;
-    public const int MinusMinus = 109;
-    public const int PFor = 126;
-    public const int DecimalTypeSuffix = 140;
+    public const int StringLiteral = 64;
+    public const int Plus = 100;
+    public const int LogicalNot = 105;
+    public const int Atomic = 133;
+    public const int RelLessThanOrEqual = 97;
+    public const int New = 114;
+    public const int MinusMinus = 107;
+    public const int PFor = 124;
+    public const int DecimalTypeSuffix = 138;
     public const int PREFIXOP = 52;
     public const int BLOCK = 16;
     public const int MEMBERDEC = 11;
     public const int ELSEIFBRANCHES = 20;
-    public const int IntegerLiteral = 110;
+    public const int IntegerLiteral = 108;
     public const int LOOPINIT = 35;
     public const int FUNCDEC = 13;
-    public const int ARRAY_INITIALIZER = 64;
-    public const int PlusPlus = 108;
-    public const int InfinityLiteral = 115;
+    public const int ARRAY_INITIALIZER = 62;
+    public const int PlusPlus = 106;
+    public const int InfinityLiteral = 113;
 
     // delegates
     // delegators
@@ -181,6 +179,52 @@ public partial class PsimulexLexer : Lexer {
     	get { return "C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g";} 
     }
 
+    // $ANTLR start "T__143"
+    public void mT__143() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = T__143;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:7:8: ( ';' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:7:10: ';'
+            {
+            	Match(';'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "T__143"
+
+    // $ANTLR start "T__144"
+    public void mT__144() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = T__144;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:8:8: ( '{' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:8:10: '{'
+            {
+            	Match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "T__144"
+
     // $ANTLR start "T__145"
     public void mT__145() // throws RecognitionException [2]
     {
@@ -188,10 +232,10 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = T__145;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:7:8: ( ';' )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:7:10: ';'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:9:8: ( '}' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:9:10: '}'
             {
-            	Match(';'); 
+            	Match('}'); 
 
             }
 
@@ -211,10 +255,10 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = T__146;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:8:8: ( '{' )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:8:10: '{'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:10:8: ( '[' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:10:10: '['
             {
-            	Match('{'); 
+            	Match('['); 
 
             }
 
@@ -234,10 +278,10 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = T__147;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:9:8: ( '}' )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:9:10: '}'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:11:8: ( ',' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:11:10: ','
             {
-            	Match('}'); 
+            	Match(','); 
 
             }
 
@@ -257,10 +301,10 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = T__148;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:10:8: ( '[' )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:10:10: '['
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:12:8: ( ']' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:12:10: ']'
             {
-            	Match('['); 
+            	Match(']'); 
 
             }
 
@@ -280,10 +324,10 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = T__149;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:11:8: ( ',' )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:11:10: ','
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:13:8: ( '(' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:13:10: '('
             {
-            	Match(','); 
+            	Match('('); 
 
             }
 
@@ -303,10 +347,10 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = T__150;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:12:8: ( ']' )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:12:10: ']'
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:14:8: ( ')' )
+            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:14:10: ')'
             {
-            	Match(']'); 
+            	Match(')'); 
 
             }
 
@@ -326,52 +370,6 @@ public partial class PsimulexLexer : Lexer {
     		{
             int _type = T__151;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:13:8: ( '(' )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:13:10: '('
-            {
-            	Match('('); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "T__151"
-
-    // $ANTLR start "T__152"
-    public void mT__152() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = T__152;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:14:8: ( ')' )
-            // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:14:10: ')'
-            {
-            	Match(')'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "T__152"
-
-    // $ANTLR start "T__153"
-    public void mT__153() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = T__153;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:15:8: ( '.' )
             // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:15:10: '.'
             {
@@ -386,7 +384,7 @@ public partial class PsimulexLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "T__153"
+    // $ANTLR end "T__151"
 
     // $ANTLR start "LogicalAnd"
     public void mLogicalAnd() // throws RecognitionException [2]
@@ -5401,71 +5399,71 @@ public partial class PsimulexLexer : Lexer {
 
     override public void mTokens() // throws RecognitionException 
     {
-        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:8: ( T__145 | T__146 | T__147 | T__148 | T__149 | T__150 | T__151 | T__152 | T__153 | LogicalAnd | LogicalOr | LogicalNot | RelEqual | RelNotEqual | RelLessThan | RelLessThanOrEqual | RelGreaterThan | RelGreaterThanOrEqual | Assign | AssignAndAdd | AssignAndSubstract | AssignAndMultiply | AssignAndDivide | AssignAndModulo | Plus | Minus | Star | Divide | Modulo | PlusPlus | MinusMinus | Reference | Bool | Char | Int | Decimal | String | Void | Tree | BinTree | Set | List | Stack | Queue | PQueue | Graph | Edge | Node | Thread | Iterator | Struct | Import | New | Break | Continue | Return | If | Else | ElseIf | For | ForEach | PFor | PForEach | Do | PDo | While | Loop | To | In | Async | Atomic | Lock | IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral | Identifier | WS | SingleLineComment | MultiLineComment )
+        // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:8: ( T__143 | T__144 | T__145 | T__146 | T__147 | T__148 | T__149 | T__150 | T__151 | LogicalAnd | LogicalOr | LogicalNot | RelEqual | RelNotEqual | RelLessThan | RelLessThanOrEqual | RelGreaterThan | RelGreaterThanOrEqual | Assign | AssignAndAdd | AssignAndSubstract | AssignAndMultiply | AssignAndDivide | AssignAndModulo | Plus | Minus | Star | Divide | Modulo | PlusPlus | MinusMinus | Reference | Bool | Char | Int | Decimal | String | Void | Tree | BinTree | Set | List | Stack | Queue | PQueue | Graph | Edge | Node | Thread | Iterator | Struct | Import | New | Break | Continue | Return | If | Else | ElseIf | For | ForEach | PFor | PForEach | Do | PDo | While | Loop | To | In | Async | Atomic | Lock | IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral | Identifier | WS | SingleLineComment | MultiLineComment )
         int alt59 = 83;
         alt59 = dfa59.Predict(input);
         switch (alt59) 
         {
             case 1 :
-                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:10: T__145
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:10: T__143
+                {
+                	mT__143(); 
+
+                }
+                break;
+            case 2 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:17: T__144
+                {
+                	mT__144(); 
+
+                }
+                break;
+            case 3 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:24: T__145
                 {
                 	mT__145(); 
 
                 }
                 break;
-            case 2 :
-                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:17: T__146
+            case 4 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:31: T__146
                 {
                 	mT__146(); 
 
                 }
                 break;
-            case 3 :
-                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:24: T__147
+            case 5 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:38: T__147
                 {
                 	mT__147(); 
 
                 }
                 break;
-            case 4 :
-                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:31: T__148
+            case 6 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:45: T__148
                 {
                 	mT__148(); 
 
                 }
                 break;
-            case 5 :
-                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:38: T__149
+            case 7 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:52: T__149
                 {
                 	mT__149(); 
 
                 }
                 break;
-            case 6 :
-                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:45: T__150
+            case 8 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:59: T__150
                 {
                 	mT__150(); 
 
                 }
                 break;
-            case 7 :
-                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:52: T__151
+            case 9 :
+                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:66: T__151
                 {
                 	mT__151(); 
-
-                }
-                break;
-            case 8 :
-                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:59: T__152
-                {
-                	mT__152(); 
-
-                }
-                break;
-            case 9 :
-                // C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g:1:66: T__153
-                {
-                	mT__153(); 
 
                 }
                 break;
@@ -7410,7 +7408,7 @@ public partial class PsimulexLexer : Lexer {
 
         override public string Description
         {
-            get { return "1:1: Tokens : ( T__145 | T__146 | T__147 | T__148 | T__149 | T__150 | T__151 | T__152 | T__153 | LogicalAnd | LogicalOr | LogicalNot | RelEqual | RelNotEqual | RelLessThan | RelLessThanOrEqual | RelGreaterThan | RelGreaterThanOrEqual | Assign | AssignAndAdd | AssignAndSubstract | AssignAndMultiply | AssignAndDivide | AssignAndModulo | Plus | Minus | Star | Divide | Modulo | PlusPlus | MinusMinus | Reference | Bool | Char | Int | Decimal | String | Void | Tree | BinTree | Set | List | Stack | Queue | PQueue | Graph | Edge | Node | Thread | Iterator | Struct | Import | New | Break | Continue | Return | If | Else | ElseIf | For | ForEach | PFor | PForEach | Do | PDo | While | Loop | To | In | Async | Atomic | Lock | IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral | Identifier | WS | SingleLineComment | MultiLineComment );"; }
+            get { return "1:1: Tokens : ( T__143 | T__144 | T__145 | T__146 | T__147 | T__148 | T__149 | T__150 | T__151 | LogicalAnd | LogicalOr | LogicalNot | RelEqual | RelNotEqual | RelLessThan | RelLessThanOrEqual | RelGreaterThan | RelGreaterThanOrEqual | Assign | AssignAndAdd | AssignAndSubstract | AssignAndMultiply | AssignAndDivide | AssignAndModulo | Plus | Minus | Star | Divide | Modulo | PlusPlus | MinusMinus | Reference | Bool | Char | Int | Decimal | String | Void | Tree | BinTree | Set | List | Stack | Queue | PQueue | Graph | Edge | Node | Thread | Iterator | Struct | Import | New | Break | Continue | Return | If | Else | ElseIf | For | ForEach | PFor | PForEach | Do | PDo | While | Loop | To | In | Async | Atomic | Lock | IntegerLiteral | DecimalLiteral | CharacterLiteral | StringLiteral | BooleanLiteral | NullLiteral | InfinityLiteral | Identifier | WS | SingleLineComment | MultiLineComment );"; }
         }
 
     }

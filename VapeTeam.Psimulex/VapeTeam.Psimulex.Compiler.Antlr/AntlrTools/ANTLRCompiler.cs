@@ -7,7 +7,7 @@ using global::Antlr.Runtime;
 using global::Antlr.Runtime.Tree;
 using VapeTeam.Psimulex.Compiler.Result;
 
-namespace VapeTeam.Psimulex.Compiler.AntlrTools
+namespace VapeTeam.Psimulex.Compiler.Antlr.AntlrTools
 {
     /// <summary>
     /// Wrapp the ANTLR Lexer and Parser.

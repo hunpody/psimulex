@@ -89,15 +89,22 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         #region Typed Node Visit() -s
 
+        /*Unknow Nodes*/
+        #region Unknow Nodes
+
         /*Common Tree Node*/
-        public void Visit(PsiNode node) { VisitChildren(node); }
+        public virtual void Visit(PsiNode node) { VisitChildren(node); }
 
         /*Undefined Tree Node*/
-        public void Visit(XNode node) { VisitChildren(node); }
+        public virtual void Visit(XNode node) { VisitChildren(node); }
+
+        #endregion
 
         /*High Level Tree Nodes*/
         public void Visit(CompilationUnitNode node)
         {
+            if (node == null) return;
+
             PushNewList();
 
             PushVisitCreate(FileName, BlockType.CompilationUnitBlock, node);
@@ -241,9 +248,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(FunctionCallNode node) { VisitChildren(node); }
         public void Visit(ArgumentsNode node) { VisitChildren(node); }
         public void Visit(IndexingNode node) { VisitChildren(node); }
-        public void Visit(DimensionsNode node) { VisitChildren(node); }
-        public void Visit(ConstantDimensionsNode node) { VisitChildren(node); }
-        public void Visit(DimensionMarkerNode node) { VisitChildren(node); }
         public void Visit(ArrayInitializatorNode node) { VisitChildren(node); }
         public void Visit(CollectionInitializatorNode node) { VisitChildren(node); }
 
@@ -260,6 +264,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public void Visit(InfinityLiteralNode node) { VisitChildren(node); }
 
         /*Types*/
+        public void Visit(DimensionMarkerNode node) { VisitChildren(node); }
         public void Visit(DataTypeNameNode node) { VisitChildren(node); }
         public void Visit(DataTypeNode node) { VisitChildren(node); }
         /*

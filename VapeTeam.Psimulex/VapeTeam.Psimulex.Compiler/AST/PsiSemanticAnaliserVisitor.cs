@@ -2,422 +2,199 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VapeTeam.Psimulex.Compiler.Utils;
+using VapeTeam.Psimulex.Compiler.Result;
+using VapeTeam.Psimulex.Compiler.Info;
+using VapeTeam.Psimulex.Core.Types;
 
 namespace VapeTeam.Psimulex.Compiler.AST
 {
-    public class PsiSemanticAnaliserVisitor : IPsiVisitor
+    /// <summary>
+    /// Semantic analizer.
+    /// Search for semantic errors and generate Error/Warning messages.
+    /// </summary>
+    public class PsiSemanticAnaliserVisitor : PsiVisitor
     {
-        #region IPsiVisitor Members
+        /*Input*/
+        #region Input
 
-        public void VisitChildren(IPsiNode node)
+        public PsiSemanticAnaliserVisitor(CompilationUnit cu, CompilerDTO dto)
+            : base(cu, dto)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(PsiNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(XNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(CompilationUnitNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(SimpleProgramNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(MultiFuncionalProgramNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ImportDeclarationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(TypeDeclarationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(StructDeclarationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(MemberDeclarationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(GlobalVariableDeclarationsNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(FunctionDeclarationsNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(FunctionDeclarationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(FormalParameterListNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(FormalParameterNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(BlockNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(StatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(IfStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(IfBranchNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ElseIfBranchNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ConditionalBranchNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ElseBranchNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(PForStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ForStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ForInitializationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ForConditionNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ForUpdateNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(DoStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(WhileStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(PForEachStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ForEachStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ForEachInitializationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ForEachCollectionExpressionNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(LoopStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(LoopInitializationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(LoopLimitNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ConditionNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(CoreNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(PDoStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(AsynStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(LockStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ReturnStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ReturnNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(BreakNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ExpressionStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(VariableDeclarationStatementNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(VariableInitializationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(VariableDeclarationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(AssignmentOpNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(LogicalOrOpNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(LogicalAndOpNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(EqualityOpNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(RelationOpNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(AdditiveOpNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(MultiplicativeOpNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(UnaryOpNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(ExpressionNode node)
-        {
-            throw new NotImplementedException();
-        }
+            CurrentCompilationUnit = cu;
+            DTO = dto;
 
-        public void Visit(CastNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(PrefixUnaryOperationNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(SelectorNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(MemberSelectNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(MemberFunctionCallNode node)
-        {
-            throw new NotImplementedException();
+            InitHelpers();
         }
 
-        public void Visit(FunctionCallNode node)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
 
-        public void Visit(ArgumentsNode node)
-        {
-            throw new NotImplementedException();
-        }
+        /*Helper Methods*/
+        #region Helper Methods
 
-        public void Visit(IndexingNode node)
-        {
-            throw new NotImplementedException();
-        }
+        private List<List<VariableInfo>> currentLocalVariableList;
 
-        public void Visit(DimensionsNode node)
+        private void InitHelpers()
         {
-            throw new NotImplementedException();
+            currentLocalVariableList = new List<List<VariableInfo>>();
         }
 
-        public void Visit(ConstantDimensionsNode node)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
 
-        public void Visit(DimensionMarkerNode node)
-        {
-            throw new NotImplementedException();
-        }
+        /*Name collision checkings helpers*/
+        #region Name collision checkings helpers
 
-        public void Visit(ArrayInitializatorNode node)
+        private void NewScope()
         {
-            throw new NotImplementedException();
+            currentLocalVariableList.Add(new List<VariableInfo>());
         }
 
-        public void Visit(CollectionInitializatorNode node)
+        private void DeleteScope()
         {
-            throw new NotImplementedException();
+            currentLocalVariableList.RemoveAt(currentLocalVariableList.Count - 1);
         }
 
-        public void Visit(IdentifierNode node)
+        private bool IsExistsLocalVariable(string name)
         {
-            throw new NotImplementedException();
-        }
+            foreach (var varList in currentLocalVariableList)
+                foreach (var var in varList)
+                    if (var.Name == name)
+                        return true;
 
-        public void Visit(CharLiteralNode node)
-        {
-            throw new NotImplementedException();
+            return false;
         }
 
-        public void Visit(StringLiteralNode node)
+        private void AddLocalVariable(string name, TypeIdentifier ti, NodeValueInfo nvi)
         {
-            throw new NotImplementedException();
+            if (currentLocalVariableList.Count == 0)
+                NewScope();
+            currentLocalVariableList.Last<List<VariableInfo>>().Add(new VariableInfo(name, ti, SourceFileName, nvi));
         }
 
-        public void Visit(IntLiteralNode node)
+        private void CheckAndAddLocalVariable(string name, TypeIdentifier ti, NodeValueInfo nvi)
         {
-            throw new NotImplementedException();
+            if (IsExistsLocalVariable(name))
+                AddWarning(CompilerErrorCode.LocalVariableNameCollision, string.Format("Local variable name \"{0}\" is already exist in the current scope.", name), nvi);
+            else
+                AddLocalVariable(name, ti, nvi);
         }
 
-        public void Visit(DecimalLiteralNode node)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
 
-        public void Visit(BoolLiteralNode node)
-        {
-            throw new NotImplementedException();
-        }
+        #region IPsiVisitor members
 
-        public void Visit(NullLiteralNode node)
-        {
-            throw new NotImplementedException();
-        }
+        /*High Level Tree Nodes*/
+        #region High Level Tree Nodes
 
-        public void Visit(InfinityLiteralNode node)
+        //public override void Visit(CompilationUnitNode node) { if (node != null) VisitChildren(node); }
+        public override void Visit(SimpleProgramNode node)
         {
-            throw new NotImplementedException();
+            NewScope();
+            VisitChildren(node);
+            DeleteScope();
         }
 
-        public void Visit(DataTypeNameNode node)
-        {
-            throw new NotImplementedException();
-        }
+        public override void Visit(MultiFuncionalProgramNode node) { VisitChildren(node); }
+        public override void Visit(ImportDeclarationNode node) { VisitChildren(node); }
+        public override void Visit(TypeDeclarationNode node) { VisitChildren(node); }
+        public override void Visit(StructDeclarationNode node) { VisitChildren(node); }
+        public override void Visit(MemberDeclarationNode node) { VisitChildren(node); }
+        public override void Visit(GlobalVariableDeclarationsNode node) { VisitChildren(node); }
+        public override void Visit(FunctionDeclarationsNode node) { VisitChildren(node); }
+        public override void Visit(FunctionDeclarationNode node) { VisitChildren(node); }
+        public override void Visit(FormalParameterListNode node) { VisitChildren(node); }
+        public override void Visit(FormalParameterNode node) { VisitChildren(node); }
 
-        public void Visit(DataTypeNode node)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
 
-        public void Visit(TypeNode node)
-        {
-            throw new NotImplementedException();
-        }
+        /*Program Structures*/
+        #region Program Structures
 
-        public void Visit(ReferenceNode node)
-        {
-            throw new NotImplementedException();
-        }
+        public override void Visit(BlockNode node) { VisitChildren(node); }
+        public override void Visit(StatementNode node) { VisitChildren(node); }
+        public override void Visit(IfStatementNode node) { VisitChildren(node); }
+        public override void Visit(IfBranchNode node) { VisitChildren(node); }
+        public override void Visit(ElseIfBranchNode node) { VisitChildren(node); }
+        public override void Visit(ConditionalBranchNode node) { VisitChildren(node); }
+        public override void Visit(ElseBranchNode node) { VisitChildren(node); }
+        public override void Visit(PForStatementNode node) { VisitChildren(node); }
+        public override void Visit(ForStatementNode node) { VisitChildren(node); }
+        public override void Visit(ForInitializationNode node) { VisitChildren(node); }
+        public override void Visit(ForConditionNode node) { VisitChildren(node); }
+        public override void Visit(ForUpdateNode node) { VisitChildren(node); }
+        public override void Visit(DoStatementNode node) { VisitChildren(node); }
+        public override void Visit(WhileStatementNode node) { VisitChildren(node); }
+        public override void Visit(PForEachStatementNode node) { VisitChildren(node); }
+        public override void Visit(ForEachStatementNode node) { VisitChildren(node); }
+        public override void Visit(ForEachInitializationNode node) { VisitChildren(node); }
+        public override void Visit(ForEachCollectionExpressionNode node) { VisitChildren(node); }
+        public override void Visit(LoopStatementNode node) { VisitChildren(node); }
+        public override void Visit(LoopInitializationNode node) { VisitChildren(node); }
+        public override void Visit(LoopLimitNode node) { VisitChildren(node); }
+        public override void Visit(ConditionNode node) { VisitChildren(node); }
+        public override void Visit(CoreNode node) { VisitChildren(node); }
+        public override void Visit(PDoStatementNode node) { VisitChildren(node); }
+        public override void Visit(AsynStatementNode node) { VisitChildren(node); }
+        public override void Visit(LockStatementNode node) { VisitChildren(node); }
+        public override void Visit(ReturnStatementNode node) { VisitChildren(node); }
+        public override void Visit(ReturnNode node) { VisitChildren(node); }
+        public override void Visit(BreakNode node) { VisitChildren(node); }
+        public override void Visit(ExpressionStatementNode node) { VisitChildren(node); }
+        public override void Visit(VariableDeclarationStatementNode node) { VisitChildren(node); }
+        public override void Visit(VariableInitializationNode node) { VisitChildren(node); }
+        public override void Visit(VariableDeclarationNode node) { VisitChildren(node); }
+
+        #endregion
+
+        /*Operators*/
+        #region Operators
+
+        public override void Visit(AssignmentOpNode node) { VisitChildren(node); }
+        public override void Visit(LogicalOrOpNode node) { VisitChildren(node); }
+        public override void Visit(LogicalAndOpNode node) { VisitChildren(node); }
+        public override void Visit(EqualityOpNode node) { VisitChildren(node); }
+        public override void Visit(RelationOpNode node) { VisitChildren(node); }
+        public override void Visit(AdditiveOpNode node) { VisitChildren(node); }
+        public override void Visit(MultiplicativeOpNode node) { VisitChildren(node); }
+        public override void Visit(UnaryOpNode node) { VisitChildren(node); }
+
+        #endregion
+
+        /*Expressions*/
+        #region Expression
+
+        public override void Visit(ExpressionNode node) { VisitChildren(node); }
+        public override void Visit(CastNode node) { VisitChildren(node); }
+        public override void Visit(PrefixUnaryOperationNode node) { VisitChildren(node); }
+        public override void Visit(SelectorNode node) { VisitChildren(node); }
+        public override void Visit(MemberSelectNode node) { VisitChildren(node); }
+        public override void Visit(MemberFunctionCallNode node) { VisitChildren(node); }
+        public override void Visit(FunctionCallNode node) { VisitChildren(node); }
+        public override void Visit(ArgumentsNode node) { VisitChildren(node); }
+        public override void Visit(IndexingNode node) { VisitChildren(node); }
+        public override void Visit(ArrayInitializatorNode node) { VisitChildren(node); }
+        public override void Visit(CollectionInitializatorNode node) { VisitChildren(node); }
+
+        #endregion
+
+        /*Identifier*/
+        #region Identifier
+
+        public override void Visit(IdentifierNode node) { VisitChildren(node); }
+
+        #endregion
+
+        /*Types*/
+        #region Types
+
+        public virtual void Visit(TypeNode node)
+        {
+            VisitChildren(node);
+
+            // Elméletielg itt már összetudjuk pattintani a type Identifiert !
+        }
+
+        #endregion
 
         #endregion
     }

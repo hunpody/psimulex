@@ -181,9 +181,6 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                          new NodeBoolPair(NodeType.MemberFunctionCall, true),
                          new NodeBoolPair(NodeType.Arguments, true),
                          new NodeBoolPair(NodeType.Indexing, true),
-                         new NodeBoolPair(NodeType.Dimensions, true),
-                         new NodeBoolPair(NodeType.ConstantDimensions, true),
-                         new NodeBoolPair(NodeType.DimensionMarker, true)
                     }
                 },                
                 new NodeTypeGroup
@@ -193,6 +190,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                     new List<NodeBoolPair>
                     {
                          new NodeBoolPair(NodeType.Identifier, true),
+                         new NodeBoolPair(NodeType.DimensionMarker, true),
                          new NodeBoolPair(NodeType.DataTypeName, true),
                          new NodeBoolPair(NodeType.DataType, true),
                          new NodeBoolPair(NodeType.Type, true),

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Compiler.AST;
 
-namespace VapeTeam.Psimulex.Compiler.AntlrTools
+namespace VapeTeam.Psimulex.Compiler.Antlr.AntlrTools
 {
     public class NodeTypeFactory
     {
@@ -126,9 +126,6 @@ namespace VapeTeam.Psimulex.Compiler.AntlrTools
                 case PsimulexLexer.MEMBER_FUNCTION_CALL: type = NodeType.MemberFunctionCall; break;
                 case PsimulexLexer.ARGUMENTS: type = NodeType.Arguments; break;
                 case PsimulexLexer.INDEXING: type = NodeType.Indexing; break;
-                case PsimulexLexer.DIMS: type = NodeType.Dimensions; break;
-                case PsimulexLexer.CONSTANT_DIMS: type = NodeType.ConstantDimensions; break;
-                case PsimulexLexer.DIMMARKER: type = NodeType.DimensionMarker; break;
                 case PsimulexLexer.ARRAY_INITIALIZER: type = NodeType.ArrayInitializer; break;
                 case PsimulexLexer.COLLECTION_INITIALIZER: type = NodeType.CollectionInitializer; break;
                 
@@ -148,6 +145,7 @@ namespace VapeTeam.Psimulex.Compiler.AntlrTools
                 case PsimulexLexer.Queue:
                 case PsimulexLexer.PQueue: type = NodeType.DataTypeName; break;
 
+                case PsimulexLexer.DIMMARKER: type = NodeType.DimensionMarker; break;
                 case PsimulexLexer.DATATYPE: type = NodeType.DataType; break;
                 /*
                 case PsimulexLexer.FUNCTIONPOINTERTYPE: type = NodeType.FunctionPointerType; break;

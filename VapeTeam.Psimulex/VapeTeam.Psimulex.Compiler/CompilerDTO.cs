@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Compiler.Result;
 using VapeTeam.Psimulex.Compiler.AST;
+using VapeTeam.Psimulex.Compiler.Info;
 using VapeTeam.Psimulex.Core;
 using System.IO;
 using VapeTeam.Psimulex.Core.Types;
+using VapeTeam.Psimulex.Core.Factories;
 
 namespace VapeTeam.Psimulex.Compiler
 {
@@ -17,42 +19,113 @@ namespace VapeTeam.Psimulex.Compiler
     {
         public CompilerDTO()
         {
-            Source = "";
-            SourceFileName = "";
-            ProgramPath = "";
-            CommandPositionChanges = new CommandPositionChanges();            
-            GlobalVariableList = new List<string>();
-            CompilationUnitList = new List<CompilationUnit>();
-            UserDefinedFunctionList = new List<UserDefinedFunction>();
+            Program = ProgramBuilder.Create();
 
-            TypeIdentifierList = new List<TypeIdentifier>();
+            CompilationUnitList = new List<CompilationUnit>();   
+            
+            UserDefinedTypeInfoList = new List<UserDefinedTypeInfo>();
+            UserDefinedFunctionInfoList = new List<UserDefinedFunctionInfo>();
+            GlobalVariableInfoList = new List<GlobalVariableInfo>();            
+
+            CommandPositionChanges = new CommandPositionChanges();
+
+            CompilerMessages = new MessageList();
+            
+            ProgramPath = "";
         }
 
-        /// <summary>
-        /// The source code of a compilation unit.
-        /// </summary>
-        public string Source { get; set; }
+        /*Properties*/
+        #region Properties       
 
         /// <summary>
-        /// The file name of the source file.
+        /// The compiled program (Without User functions and User types)
         /// </summary>
-        public string SourceFileName { get; set; }
+        public ProgramBuilder Program { get; set; }
+
+        /// <summary>
+        /// List of Compilation Units
+        /// </summary>
+        public List<CompilationUnit> CompilationUnitList { get; set; }
+
+        /// <summary>
+        /// List of User defined type informations
+        /// </summary>
+        public List<UserDefinedTypeInfo> UserDefinedTypeInfoList { get; set; }
+
+        /// <summary>
+        /// List of User defined function informations
+        /// </summary>
+        public List<UserDefinedFunctionInfo> UserDefinedFunctionInfoList { get; set; }
+
+        /// <summary>
+        /// List of Global variable informations
+        /// </summary>
+        public List<GlobalVariableInfo> GlobalVariableInfoList { get; set; }
+
+        /// <summary>
+        /// Command position changes for the LexLighter function
+        /// </summary>
+        public CommandPositionChanges CommandPositionChanges { get; set; }
+
+        /// <summary>
+        /// Messages of the compiler. (Informations,Warnings,Errors,ANTLRErrors)
+        /// </summary>
+        public MessageList CompilerMessages { get; set; }
 
         /// <summary>
         /// The absolute path of the main source file.
         /// </summary>
         public string ProgramPath { get; set; }
 
+        #endregion
+
+        /*Helper Methods*/
+        #region Helper Methods
+
         /// <summary>
-        /// The absolute path of the source file.
+        /// Get the ITypeDescriptor of an User defined type, by name.
+        /// If does not exist (Undefined), return null.
         /// </summary>
-        public string SourceFile { get { return Path.IsPathRooted(SourceFileName) ? SourceFileName : Path.Combine(ProgramPath, SourceFileName); } }
+        /// <param name="typeName">The type name</param>
+        /// <returns>If type name does not exist, return null, else the UserTypeDescriptor.</returns>
+        public ITypeDescriptor GetUserTypeDescriptor(string typeName)
+        {
+            ITypeDescriptor td = null;
+            var ti = UserDefinedTypeInfoList.Find(t => t.Name == typeName);
+            if (ti != null)
+                td = ti.Type.UserDefinedType;
+            return td;
+        }
 
-        public CommandPositionChanges CommandPositionChanges { get; set; }
-        public List<string> GlobalVariableList { get; set; }
-        public List<CompilationUnit> CompilationUnitList { get; set; }
-        public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
+        #endregion
 
-        public List<TypeIdentifier> TypeIdentifierList { get; set; }
+        /*Message Generators*/
+        #region Message Generators
+
+        public void AddInformation(string msg, NodeValueInfo info, string sourceFileName)
+        {
+            CompilerMessages.Informations.Add(
+                new Information { MessageText = msg, Interval = info.ToInterval(sourceFileName) });
+        }
+
+        public void AddWarning(CompilerErrorCode code, string warning, NodeValueInfo info, string sourceFileName)
+        {
+            CompilerMessages.Warnings.Add(
+                new Warning { ErrorCode = code, MessageText = warning, Interval = info.ToInterval(sourceFileName) });
+        }
+
+        public void AddError(CompilerErrorCode code, string error, NodeValueInfo info, string sourceFileName)
+        {
+            CompilerMessages.Errors.Add(
+                new Error { ErrorCode = code, MessageText = error, Interval = info.ToInterval(sourceFileName) });
+        }
+
+        public void AddError(CompilerErrorCode code, string error, NodeValueInfo info, Exception ex, string sourceFileName)
+        {
+            AddError(code, error, info, sourceFileName);
+            throw ex;
+        }
+
+        #endregion
     }
 }
