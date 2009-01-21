@@ -8,10 +8,17 @@ namespace VapeTeam.Psimulex.Compiler.Result
     public enum CompilerErrorCode
     {
         Custom,
+
         FormalParameterNameCollision,
+        StructAttributeNameCollision,
         LocalVariableNameCollision,
         GlobalVariableNameCollision,
+
         FunctionCollison,
+        TypeCollision,
+
+        UndefinedType,
+        
         ImportFileNotFound,
         NotImplemented,
         NotSupported

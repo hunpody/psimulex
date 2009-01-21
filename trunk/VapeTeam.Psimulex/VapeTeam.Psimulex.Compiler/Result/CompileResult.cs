@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core;
 using VapeTeam.Psimulex.Compiler.AST;
+using VapeTeam.Psimulex.Compiler.Info;
 
 namespace VapeTeam.Psimulex.Compiler.Result
 {
@@ -30,16 +31,30 @@ namespace VapeTeam.Psimulex.Compiler.Result
         public List<PsiFunctionsVariablesNode> PsiFunctionsVariablesNodeList { get; set; }
 
         /// <summary>
-        /// User defined functions list.
+        /// User defined type informations list.
         /// </summary>
-        public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
-                
-        // public UserDefinedTypesList ...
+        public List<UserDefinedTypeInfo> UserDefinedTypeInfoList { get; set; }
+
+        /// <summary>
+        /// User defined function informations list.
+        /// </summary>
+        public List<UserDefinedFunctionInfo> UserDefinedFunctionInfoList { get; set; }
+
+        /// <summary>
+        /// Global variable informations list.
+        /// </summary>
+        public List<GlobalVariableInfo> GlobalVariableInfoList { get; set; }
+
+        /// <summary>
+        /// The absolute path of the main source file.
+        /// </summary>
+        public string ProgramPath { get; set; }
 
 
-        // Additional Properties //
+        // Additional message Properties //
 
         public MessageList CompilerMessages { get; set; }
+
         public List<Information> Informations { get { return CompilerMessages.Informations; } }
         public List<Warning> Warnings { get { return CompilerMessages.Warnings; } }
         public List<Error> Errors { get { return CompilerMessages.Errors; } }
@@ -49,7 +64,13 @@ namespace VapeTeam.Psimulex.Compiler.Result
             CompiledProgram = new Program();
             CompilationUnitList = new List<CompilationUnit>();
             CommandPositionChanges = new CommandPositionChanges();
-            UserDefinedFunctionList = new List<UserDefinedFunction>();
+            PsiFunctionsVariablesNodeList = new List<PsiFunctionsVariablesNode>();
+
+            UserDefinedFunctionInfoList = new List<UserDefinedFunctionInfo>();
+            UserDefinedTypeInfoList = new List<UserDefinedTypeInfo>();
+            GlobalVariableInfoList = new List<GlobalVariableInfo>();
+
+            ProgramPath = "";
 
             CompilerMessages = new MessageList();
         }

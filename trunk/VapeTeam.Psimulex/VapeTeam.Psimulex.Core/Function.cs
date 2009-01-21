@@ -15,7 +15,7 @@ namespace VapeTeam.Psimulex.Core
 
         public List<VariableDescriptor> Parameters { get; set; }
 
-        public VariableDescriptor ReturnValue { get; set; }
+        public VariableDescriptor ReturnValueType { get; set; }
 
         public virtual bool IsUserDefined
         {
@@ -37,7 +37,7 @@ namespace VapeTeam.Psimulex.Core
         {
             get
             {
-                return ReturnValue != null && ReturnValue.Type.TypeEnum != TypeEnum.Undefined;
+                return ReturnValueType != null && ReturnValueType.Type.TypeEnum != TypeEnum.Undefined;
             }
         }
 

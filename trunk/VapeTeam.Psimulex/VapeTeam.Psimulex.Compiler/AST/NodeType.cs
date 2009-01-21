@@ -97,10 +97,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         MemberFunctionCall,        
         FunctionCall,
         Arguments,
-        Indexing,
-        ConstantDimensions,
-        Dimensions,
-        DimensionMarker,        
+        Indexing,        
         ArrayInitializer,
         CollectionInitializer,
 
@@ -117,6 +114,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         InfinityLiteral,
 
         /*Types*/
+        DimensionMarker,
         DataTypeName,
         DataType,
         FunctionPointerType,

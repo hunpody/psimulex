@@ -7,115 +7,30 @@ using VapeTeam.Psimulex.Core.Types;
 using VapeTeam.Psimulex.Core.Commands;
 using VapeTeam.Psimulex.Core.Factories;
 using VapeTeam.Psimulex.Compiler.Result;
+using VapeTeam.Psimulex.Compiler.Utils;
 using System.IO;
+using VapeTeam.Psimulex.Compiler.Info;
 
 namespace VapeTeam.Psimulex.Compiler.AST
 {
-    #region PsiCodeGeneratorVisitor Exceptions
-
-    public class PsiCodeGeneratorVisitorException : Exception
-    {         
-        public PsiCodeGeneratorVisitorException(string message)
-            : base(message)
-        {
-        }
-
-        public PsiCodeGeneratorVisitorException()
-        : this("PsiCodeGeneratorVisitorException")
-        {
-        }
-    }
-
-    #endregion
-
-    public class CompilationUnit
+    public class PsiCodeGeneratorVisitor : PsiVisitor
     {
-        public string FileName { get; set; }
-        public string Source { get; set; }
-        public string CleanedSourceText { get; set; }
+        #region PsiBuilderVisitor Members   
 
-        public IPsiNode PsiNodeSyntaxTree { get; set; }
-        public MessageList CompilerMessages { get; set; }
+        /*Input*/
+        #region Input
 
-        public CompilationUnit()
+        private ProgramBuilder Program { get { return DTO.Program; } }
+        private int ProgramSize { get { return DTO.Program.Program.CommandList.Count; } }
+        private int CurrentFunctionSize { get { return isCurrentCompiledTheMainProgram ? ProgramSize : currentUserDefinedFunctionInfo.Function.Commands.Count; } }
+
+        public PsiCodeGeneratorVisitor(CompilationUnit cu, CompilerDTO dto)
+            : base (cu,dto)
         {
-            FileName = "";
-            Source = "";
-            CleanedSourceText = "";
-            PsiNodeSyntaxTree = null;
-            CompilerMessages = new MessageList();
-        }
-    }
-
-    public class PsiCodeGeneratorVisitor : IPsiVisitor
-    {
-        #region PsiBuilderVisitor Members
-
-        #region Result
-
-        public ProgramBuilder Program { get; set; }
-
-        public List<CompilationUnit> CompilationUnitList { get; set; }
-        public CompilationUnit CurrentCompilationUnit { get; set; }
-
-        public List<UserDefinedFunction> UserDefinedFunctionList { get; set; }
-        public CommandPositionChanges CommandPositionChanges { get; set; }
-
-        public List<TypeIdentifier> TypeIdentifierList { get; set; }
-
-        #endregion        
-
-        public string Source { get; set; }
-        public string SourceFileName { get; set; }
-        public string ProgramPath { get; set; }
-
-        public int ProgramSize { get { return Program.Program.CommandList.Count; } }
-
-        protected int CurrentFunctionSize
-        {
-            get
-            {
-                if (isCurrentCompiledTheMainProgram)
-                {
-                    return ProgramSize;
-                }
-                else
-                {
-                    return lastCompiledUserDefinedFunction.Commands.Count;
-                }
-            }
-        }
-        
-        public PsiCodeGeneratorVisitor(CompilerDTO dto)
-        {
-            Program = ProgramBuilder.Create();
-
-            Source = dto.Source;
-            SourceFileName = dto.SourceFileName;
-            ProgramPath = dto.ProgramPath;
-
-            UserDefinedFunctionList = dto.UserDefinedFunctionList;
-            CommandPositionChanges = dto.CommandPositionChanges;
-            CompilationUnitList = dto.CompilationUnitList;
-            TypeIdentifierList = dto.TypeIdentifierList;
-
             InitHelpers();
-
-            globalVariableNameList = dto.GlobalVariableList;
-
-            CurrentCompilationUnit = new CompilationUnit
-            {
-                Source = Source,
-                CleanedSourceText = Source,
-                FileName = SourceFileName
-            };
-
-            CurrentCompilationUnit.Source = Source;
-            CurrentCompilationUnit.CleanedSourceText = Source;
-            CurrentCompilationUnit.FileName = SourceFileName;
-
-            CompilationUnitList.Add(CurrentCompilationUnit);
         }
+
+        #endregion       
 
         /*Program build Helpers*/
         #region Program build Helpers
@@ -125,7 +40,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if (isCurrentCompiledTheMainProgram)
                 Program.Program.CommandList.Insert(Program.Program.CommandList.IndexOf(before), commandToAdd);
             else
-                lastCompiledUserDefinedFunction.Commands.Insert(lastCompiledUserDefinedFunction.Commands.IndexOf(before), commandToAdd);
+                currentUserDefinedFunctionInfo.Function.Commands.Insert(currentUserDefinedFunctionInfo.Function.Commands.IndexOf(before), commandToAdd);
         }
 
         public void AddCommand(ICommand command)
@@ -133,7 +48,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             if (isCurrentCompiledTheMainProgram)
                 Program.Add(command);
             else
-                lastCompiledUserDefinedFunction.Commands.Add(command);
+                currentUserDefinedFunctionInfo.Function.Commands.Add(command);
         }
 
         public void AddCommand(params ICommand[] commands)
@@ -142,48 +57,26 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 Program.Add(commands);
             else
                 foreach (var cmd in commands)
-                    lastCompiledUserDefinedFunction.Commands.Add(cmd);
+                    currentUserDefinedFunctionInfo.Function.Commands.Add(cmd);
         }
 
         public int GetCommandIndex(CommandBase cmd)
         {
             if (isCurrentCompiledTheMainProgram)
-            {
                 return Program.GetCommandIndex(cmd);
-            }
             else
-            {
-                return lastCompiledUserDefinedFunction.Commands.GetCommandIndex(cmd);
-            }
+                return currentUserDefinedFunctionInfo.Function.Commands.GetCommandIndex(cmd);
+        }
+
+        public void SetLastCompiledConstant(BaseType value)
+        {
+            lastCompiledConstantValue = value;
+            if (addToProgram)
+                AddCommand(new Push(lastCompiledConstantValue));
+            addToProgram = true;
         }
 
         #endregion        
-
-        /*Message generators*/
-        #region Message generators
-
-        public void AddInformation(string msg, NodeValueInfo info)
-        {
-            CurrentCompilationUnit.CompilerMessages.Informations.Add(new Information { MessageText = msg, Interval = info.ToInterval(SourceFileName) });
-        }
-
-        public void AddWarning(CompilerErrorCode code, string warning, NodeValueInfo info)
-        {
-            CurrentCompilationUnit.CompilerMessages.Warnings.Add(new Warning { ErrorCode = code, MessageText = warning, Interval = info.ToInterval(SourceFileName) });
-        }
-
-        public void AddError(CompilerErrorCode code, string error, NodeValueInfo info)
-        {
-            CurrentCompilationUnit.CompilerMessages.Errors.Add(new Error { ErrorCode = code, MessageText = error, Interval = info.ToInterval(SourceFileName) });
-        }
-
-        public void AddError(CompilerErrorCode code, string error, NodeValueInfo info, Exception ex)
-        {
-            AddError(code, error, info);
-            throw ex;
-        }
-
-        #endregion
 
         /*Highlighter, Stepping Helpers*/
         #region Highlighter, Stepping Helpers
@@ -193,10 +86,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             Interval range = SourceInfoUtils.CreateInterval(node, Source, lineLengthList, SourceFileName);
 
             // If lastCompiledUserDefinedFunction == null, than we compile, the main program
-            if (!isCurrentCompiledTheMainProgram && lastCompiledUserDefinedFunction != null)
+            if (!isCurrentCompiledTheMainProgram && currentUserDefinedFunctionInfo != null)
             {
-                CommandPositionChanges[lastCompiledUserDefinedFunction.Name,
-                    lastCompiledUserDefinedFunction.Commands.Count] = range;
+                CommandPositionChanges[currentUserDefinedFunctionInfo.Function.Name,
+                    currentUserDefinedFunctionInfo.Function.Commands.Count] = range;
             }
             else
             {
@@ -209,54 +102,41 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Compile Helpers*/
         #region Compiler Helpers
 
-        private Member lastCompiledMember;
-        private TypeEnum lastCompiledDataType;
-        private string lastCompiledUserDefinedDataTypeName;
-        private int lastCompiledDimensionCount;
-        private List<int> lastCompiledDimensionList;
         private bool addToProgram;
-        private BaseType lastCompiledConstantValue;
         private Assign lastCompiledAssign;
+
         private bool isOperatorUnaryPrefix;
         private bool isCompilingAssignmentTarget;
         private bool isSelectorsFirstCompile;
         private bool isCurrentCompiledTheMainProgram;
+
         private System.Collections.Generic.Stack<Jump> lazyEvaluationJumpStack;
         private System.Collections.Generic.Stack<Jump> jumpStack;
+
         private int conditionCount;
-        private UserDefinedFunction lastCompiledUserDefinedFunction;
         private List<int> lineLengthList;
 
-        private List<string> globalVariableNameList;
-        private List<List<string>> currentLocalVariableNameList;
+        private GlobalVariableInfo currentGlobalVariableInfo;
+        private UserDefinedFunctionInfo currentUserDefinedFunctionInfo;
 
         private void InitHelpers()
         {
-            lastCompiledMember = new Member();
-            lastCompiledDataType = TypeEnum.Undefined;
-            lastCompiledDimensionCount = 0;
-            lastCompiledDimensionList = new List<int>();
             addToProgram = true;
-            lastCompiledConstantValue = null;
             lastCompiledAssign = null;
+
             isOperatorUnaryPrefix = false;
             isCompilingAssignmentTarget = false;
             isSelectorsFirstCompile = true;
             isCurrentCompiledTheMainProgram = true;
+
             lazyEvaluationJumpStack = new System.Collections.Generic.Stack<Jump>();
             jumpStack = new System.Collections.Generic.Stack<Jump>();
-            conditionCount = 0;
-            lastCompiledUserDefinedFunction = new UserDefinedFunction();
-            lineLengthList = SourceInfoUtils.FindLineLengths(Source);
-            globalVariableNameList = new List<string>();
-            currentLocalVariableNameList = new List<List<string>>();
-        }
 
-        private string SplitQuotes(string s)
-        {
-            if (s[0] == '\'' || s[0] == '\"')
-                return s.Substring(1, s.Length - 2);
-            return s;
+            conditionCount = 0;
+            lineLengthList = SourceInfoUtils.FindLineLengths(Source);
+
+            currentGlobalVariableInfo = null;
+            currentUserDefinedFunctionInfo = null;
         }
 
         private string GenerateIteratorName()
@@ -270,294 +150,112 @@ namespace VapeTeam.Psimulex.Compiler.AST
             jmp.PC = CurrentFunctionSize - GetCommandIndex(jmp) + corrigation;
         }
 
-        #endregion
-
-        /*Name collision checkings helpers*/
-        #region Name collision checkings helpers
-
-        private void NewScope()
+        private bool IsCurrentCompilationUnitTheLastErrorFree()
         {
-            currentLocalVariableNameList.Add(new List<string>());
-        }
+            int index = DTO.CompilationUnitList.IndexOf(CurrentCompilationUnit);
 
-        private void DeleteScope()
-        {
-            currentLocalVariableNameList.RemoveAt(currentLocalVariableNameList.Count - 1);
-        }
+            if(index == DTO.CompilationUnitList.Count - 1)
+                return true;
 
-        private bool ExistsLocalVariableName(string name)
-        {
-            foreach (var varList in currentLocalVariableNameList)
-                foreach (var varName in varList)
-                    if (varName == name)
-                        return true;
-
-            return false;
-        }
-
-        private void AddLocalVariableName(string name)
-        {
-            if (currentLocalVariableNameList.Count == 0)
-                NewScope();
-            currentLocalVariableNameList.Last<List<string>>().Add(name);
-        }
-
-        private void CheckAndAddLocalVariableName(string name, NodeValueInfo nvi)
-        {
-            if (ExistsLocalVariableName(name))
-                AddWarning(CompilerErrorCode.LocalVariableNameCollision, string.Format("Local variable name \"{0}\" is already exist in the current scope.", name), nvi);
-            else
-                AddLocalVariableName(name);
-        }
-
-        private void CheckGlobalVariableName(string name, NodeValueInfo nvi)
-        {
-            if (globalVariableNameList.Contains(name))
-                AddWarning(CompilerErrorCode.GlobalVariableNameCollision, string.Format("Global variable name \"{0}\" is already exist.", name), nvi);
-            else
-                globalVariableNameList.Add(name);
-        }
-
-        private bool IsCompiledFunction(string name, int parameterCount, NodeValueInfo nvi)
-        {
-            if (UserDefinedFunctionList.Find(func =>
-                func.Name == name && func.ParameterCount == parameterCount) != null)
+            if (DTO.CompilerMessages.AntlrErrors.Find(x =>
+                x.Interval.FileName == DTO.CompilationUnitList[index + 1].FileName
+               ) == null)
             {
-                AddWarning(CompilerErrorCode.FunctionCollison, string.Format(
-                    "Function \"{0}\" with {1} parameter is already exist, the compilation of this function will skipped.",
-                    name, lastCompiledUserDefinedFunction.ParameterCount), nvi);
                 return true;
             }
+
             return false;
         }
 
-        private bool IsCompiledCompilationUnit(string name)
+        private void SetCurrentGlobalVariableInfo(string globalVariableName)
         {
-            if (CompilationUnitList.Find(cu => cu.FileName == name) == null)
-                return false;
-            return true;
+            currentGlobalVariableInfo = DTO.GlobalVariableInfoList.Find(global => global.Name == globalVariableName);
         }
 
-        #endregion
+        private void SetCurrentUserDefinedFunctionInfo(string name, int parameterCount)
+        {
+            currentUserDefinedFunctionInfo = DTO.UserDefinedFunctionInfoList.Find(func =>
+                func.Name == name && func.ParameterCount == parameterCount);
+        }
+
+        #endregion         
 
         #endregion
+
         #region IPsiVisitor Members
-
-        /*Children Visiting*/
-        public void VisitChildren(IPsiNode node)
-        {
-            foreach (IPsiNode child in node.Children)
-                child.Accept(this);
-        }
-
-        #region Unknow Nodes
-
-        /*Common Tree Node*/
-        public void Visit(PsiNode node) { AddInformation("PsiNode Found : " + node.ToString(), node.NodeValueInfo); VisitChildren(node); }
-
-        /*Undefined Tree Node*/
-        public void Visit(XNode node) { AddInformation("XNode Found : " + node.ToString(), node.NodeValueInfo); VisitChildren(node); }
-
-        #endregion
 
         /*High Level Tree Nodes*/
         #region High Level Tree Nodes
 
-        public void Visit(CompilationUnitNode node)
+        public override void Visit(CompilationUnitNode node)
         {
-            AddInformation(string.Format("Build started at {0}", DateTime.Now.ToLongTimeString()), node.NodeValueInfo);
-            VisitChildren(node);
-        }
-        public void Visit(SimpleProgramNode node) 
-        {
-            NewScope();
+            DTO.AddInformation(string.Format("Code generation started at {0}",
+                DateTime.Now.ToLongTimeString()), node.NodeValueInfo, SourceFileName);
 
+            base.Visit(node);
+        }
+
+        public override void Visit(SimpleProgramNode node)
+        {
             isCurrentCompiledTheMainProgram = true;
             VisitChildren(node);
-
-            DeleteScope();
         }
 
-        public void Visit(MultiFuncionalProgramNode node)
+        public override void Visit(MultiFuncionalProgramNode node)
         {
             // Compile the Functions
             isCurrentCompiledTheMainProgram = false;
 
-            node.ProgramTypeDeclarations.Accept(this);
             node.ProgramGlobalVariableDeclarations.Accept(this);
-            node.ProgramFunctionDeclarations.Accept(this);
-            node.ProgramImports.Accept(this);
+            node.ProgramFunctionDeclarations.Accept(this);            
 
             isCurrentCompiledTheMainProgram = true;
 
-            // Generate a main function call
-            AddCommand(new Call("main", 0));
-            AddCommand(new Return(false));
-        }
-
-        public void Visit(ImportDeclarationNode node)
-        {
-            // Message
-            string imports = "Imports Found : ( ";
-            foreach (IPsiNode child in node.Children)
+            // Generate a main function call if this is the last ANTLR Error free CompilationUnit
+            if (IsCurrentCompilationUnitTheLastErrorFree() && DTO.UserDefinedFunctionInfoList.Count != 0)
             {
-                imports += child.Value;
-                if (child != node.Right)
-                    imports += ", ";
-            }
-            imports += " )";
-            AddInformation(imports, node.NodeValueInfo);
+                string mainFunctionName = "main";
+                int mainFunctionArity = 0;
 
-            foreach (IPsiNode child in node.Children)
-            {
-                string importFileName = SplitQuotes(child.Value);
-
-                if (!IsCompiledCompilationUnit(importFileName))
+                // Check Existance of Main() function.
+                if (DTO.UserDefinedFunctionInfoList.Find(func =>
+                    func.Name.ToLower() == mainFunctionName.ToLower() &&
+                    func.ParameterCount == mainFunctionArity)
+                    != null)
                 {
-                    Compiler c = new Compiler();
-
-                    string importFile = "";
-                    if (Path.IsPathRooted(importFileName))
-                        importFile = importFileName;
-                    else
-                        importFile = Path.Combine(ProgramPath, importFileName);
-
-
-                    if (!File.Exists(importFile))
-                    {
-                        AddError(CompilerErrorCode.ImportFileNotFound, string.Format("Import file not found \"{0}\" !", importFile), child.NodeValueInfo);
-                    }
-                    else
-                    {
-                        string source = "";
-                        using (StreamReader sr = new StreamReader(importFile))
-                        {
-                            source = sr.ReadToEnd();
-                            sr.Close();
-                        }
-
-                        c.Compile(
-                                    new CompilerDTO
-                                    {
-                                        Source = source,
-                                        ProgramPath = ProgramPath,
-                                        SourceFileName = importFileName,
-                                        CommandPositionChanges = CommandPositionChanges,
-                                        GlobalVariableList = globalVariableNameList,
-                                        CompilationUnitList = CompilationUnitList,
-                                        UserDefinedFunctionList = UserDefinedFunctionList
-                                    }
-                                    , false, ProgramPart.CompilationUnit
-                                 );
-
-                        Program.Program.CommandList.AddRange(c.CompileResult.CompiledProgram.CommandList);
-                    }
+                    mainFunctionName = DTO.UserDefinedFunctionInfoList[0].Name;
+                    mainFunctionArity = DTO.UserDefinedFunctionInfoList[0].ParameterCount;
                 }
+
+                // Generate a main function call.
+                // This will be the work of the VurtualMachine
+                AddCommand(new Call(mainFunctionName, mainFunctionArity));
+                AddCommand(new Return(false));
             }
         }
 
-        public void Visit(TypeDeclarationNode node) { VisitChildren(node); }
-        public void Visit(StructDeclarationNode node)
+        public override void Visit(ImportDeclarationNode node)
         {
-            // User Defined Struct Name
-            string structName = node.StructName.Value;
-            List<Member> structMembers = new List<Member>();
-
-            foreach (IPsiNode member in node.StructMemberList)
-            {
-                member.Accept(this);
-                structMembers.Add(lastCompiledMember);
-            }
-
-            // Message
-            string msg = "Struct Found : " + structName + " { ";
-            foreach (Member member in structMembers)
-            {
-                msg += member.ToString();
-
-                if (member != structMembers[structMembers.Count - 1])
-                    msg += ", ";
-            }
-            msg += " }";
-            AddInformation(msg, node.NodeValueInfo);
-
-            // Add Struct to UserDefinedTypes
-            var desc = new StructDescriptor { Name = structName };
-
-            foreach (var member in structMembers)
-            {
-                if (member.Type == TypeEnum.Undefined)
-                    AddWarning(CompilerErrorCode.NotSupported, "User defined types in records is not supported, member will be skipped!", node.NodeValueInfo);
-                else
-                desc.Attributes.Add(new AttributeDescriptor
-                {
-                    Value = member.Value,
-                    Descriptor = new VariableDescriptor
-                    {
-                        IsReference = member.IsReference,
-                        Name = member.Name,
-                        Type = new TypeIdentifier
-                        {
-                            TypeEnum = member.Type,
-                            TypeName = member.TypeName,
-                            Dimensions = new List<int>(member.DimensionCount)
-                        }
-                    }
-                });
-            }
-
-            Program.Program.AddUserDefinedType(desc);            
+            // Nothing to do !
+            return;
         }
 
-        public void Visit(MemberDeclarationNode node)
+        public override void Visit(TypeDeclarationNode node)
+        {            
+            // Nothing to do !
+            return;
+        }
+
+        public override void Visit(MemberDeclarationNode node)
         {
-            // MemberType
-            node.MemberType.Accept(this);
-            TypeEnum memberType = lastCompiledDataType;
-            string memberTypeName = node.MemberTypeName.Value;
-
-            int memberDimensionCount = lastCompiledDimensionCount;
-            List<int> memberDimensionList = lastCompiledDimensionList;
-
             // MemberName
             string memberName = node.MemberName.Value;
-            bool memberIsInitialized = false;
 
-            // MemberInitiaValue
-            BaseType memberValue = null;
-            if (node.MemberInitialValue != null)
-            {
-                if( node.MemberInitialValue.Children.Count > 1 )
-                {
-                    AddWarning(CompilerErrorCode.NotSupported, "Initializers in struct default values not supported!", node.NodeValueInfo);
-                }
-                else
-                {
-                    addToProgram = false;
-                    node.MemberInitialValue.Accept(this);
-                    memberValue = lastCompiledConstantValue;
-                    memberIsInitialized = true;
-                }
-            }
-
-            lastCompiledMember = new Member{
-                Type = memberType,
-                TypeName = memberTypeName,
-                DimensionCount = memberDimensionCount,
-                DimensionList = memberDimensionList,
-                Name = memberName,
-                Value = memberValue,
-                IsInitialized = memberIsInitialized,
-                IsReference = false               
-            };
-
-            lastCompiledDimensionList = new List<int>();
-            lastCompiledDimensionCount = 0;
-            lastCompiledDataType = TypeEnum.Undefined;
-            lastCompiledUserDefinedDataTypeName = "Undefined";
+            // Set current global variable info
+            SetCurrentGlobalVariableInfo(memberName);
         }
 
-        public void Visit(GlobalVariableDeclarationsNode node)
+        public override void Visit(GlobalVariableDeclarationsNode node)
         {
             RegisterIntervalChange(node);
 
@@ -565,140 +263,62 @@ namespace VapeTeam.Psimulex.Compiler.AST
             {
                 child.Accept(this);
 
-                // Message
-                string global = "Global Variable Found : " + lastCompiledMember.ToString();
-                AddInformation(global, node.NodeValueInfo);
-
-                CheckGlobalVariableName(lastCompiledMember.Name, node.NodeValueInfo);
+                //CheckGlobalVariableName(lastCompiledMember.Name, node.NodeValueInfo);
 
                 // Add Global Variable declaration or Initialization to the progrem
-                if(lastCompiledMember.IsInitialized)
-                    AddCommand(new Push(lastCompiledMember.Value),
-                        new Initialize(lastCompiledMember.Name, lastCompiledMember.Type));
-                else
-                    if (lastCompiledMember.DimensionCount > 0)
-                        AddCommand(new ArrayDeclare(lastCompiledMember.Name,
-                            lastCompiledMember.Type, lastCompiledMember.DimensionCount));
+                // If NOT added already! (IsCompiled)
+                if (!currentGlobalVariableInfo.IsCompiled)
+                {
+                    if (currentGlobalVariableInfo.IsInitialised)
+                        AddCommand(
+                            new Push(currentGlobalVariableInfo.Value),
+                            new Initialize(currentGlobalVariableInfo.Name, currentGlobalVariableInfo.Type.TypeEnum)
+                            );
                     else
-                        AddCommand(new Declare(lastCompiledMember.Name, lastCompiledMember.Type));
+                        if (currentGlobalVariableInfo.Type.Dimensions.Count > 0)
+                            AddCommand(
+                                new ArrayDeclare(
+                                    currentGlobalVariableInfo.Name,
+                                    currentGlobalVariableInfo.Type.TypeEnum,
+                                    currentGlobalVariableInfo.Type.Dimensions.Count
+                                    )
+                                );
+                        else
+                            AddCommand(new Declare(currentGlobalVariableInfo.Name, currentGlobalVariableInfo.Type.TypeEnum));
+                }
             }
         }
 
-        public void Visit(FunctionDeclarationsNode node){ VisitChildren(node); }
-        public void Visit(FunctionDeclarationNode node)
+        public override void Visit(FunctionDeclarationNode node)
         {
-            NewScope();
-
-            // Start Compile a new function
-            lastCompiledUserDefinedFunction = new UserDefinedFunction();
-
-            // FunctionType
-            node.FunctionType.Accept(this);
-            TypeEnum functionType = lastCompiledDataType;
-            string functionTypeName = lastCompiledUserDefinedDataTypeName;
-
-            int functionDimensionCount = lastCompiledDimensionCount;
-            List<int> functionDimensionList = lastCompiledDimensionList;
-
-            // FunctionReference
-            bool functionIsReferenceType = false;
-            if (node.FunctionReference != null)
-                functionIsReferenceType = true;
+            //NewScope();
 
             // FunctionName
             string functionName = node.FunctionName.Value;
 
-            // Message
-            string function = "Function Found : " + functionType + " " + functionName + " () ";
-            AddInformation(function, node.NodeValueInfo);
-            // Message
+            // Function Parameter Count
+            int functionParameterCount = node.FunctionParameterList.Children.Count;
 
-            lastCompiledUserDefinedFunction.Name = functionName;
+            // Set current User defined function info
+            SetCurrentUserDefinedFunctionInfo(functionName, functionParameterCount);
 
-            // FunctionParameterList
-            node.FunctionParameterList.Accept(this);
-
-            if (!IsCompiledFunction(lastCompiledUserDefinedFunction.Name,
-                lastCompiledUserDefinedFunction.ParameterCount, node.NodeValueInfo))
+            if (!currentUserDefinedFunctionInfo.IsCompiled)
             {
                 // FunctionBlock
                 node.FunctionBlock.Accept(this);
 
-                // Set Up rest of the function property-s.
-                lastCompiledUserDefinedFunction.ReturnValue =
-                    new VariableDescriptor
-                        {
-                            Type = new TypeIdentifier
-                                {
-                                    TypeEnum = functionType,
-                                    TypeName = functionTypeName,
-                                    Dimensions = new List<int>(functionDimensionCount)
-                                },
-                            IsReference = functionIsReferenceType,
-                            Name = ""
-                        };
-
-                if (lastCompiledUserDefinedFunction.Commands.Count == 0
+                // Generate auto return if needed
+                if (currentUserDefinedFunctionInfo.Function.Commands.Count == 0
                     ||
-                    lastCompiledUserDefinedFunction.Commands
+                    currentUserDefinedFunctionInfo.Function.Commands
                     [
-                        lastCompiledUserDefinedFunction.Commands.Count - 1
+                    currentUserDefinedFunctionInfo.Function.Commands.Count - 1
                     ].GetType() != typeof(Return))
 
-                    lastCompiledUserDefinedFunction.Commands.Add(new Return(false));
-
-                // Add new compiled function to the UserDefinedCunctionList
-                UserDefinedFunctionList.Add(lastCompiledUserDefinedFunction);
+                    currentUserDefinedFunctionInfo.Function.Commands.Add(new Return(false));
             }
 
-            DeleteScope();
-        }
-
-        public void Visit(FormalParameterListNode node) { VisitChildren(node); }
-        public void Visit(FormalParameterNode node)
-        {
-             // Parameter Type
-            node.ParameterType.Accept(this);
-
-            TypeEnum parameterType = lastCompiledDataType;
-            string parameterTypeName = lastCompiledUserDefinedDataTypeName;
-
-            int parameterDimensionCount = lastCompiledDimensionCount;
-            List<int> parameterDimensionList = lastCompiledDimensionList;
-
-            // Parameter Reference
-            bool parameterIsReference = false;
-            if (node.ParameterReference != null)
-                parameterIsReference = true;
-
-            // Parameter Name
-            string parameterName = node.ParameterName.Value;
-
-            // Check Function Parameter
-            if (ExistsLocalVariableName(parameterName))
-                AddError(CompilerErrorCode.FormalParameterNameCollision, string.Format("Function {0} has already a parameter named {1}!",
-                    lastCompiledUserDefinedFunction.Name, parameterName), node.NodeValueInfo);
-            else
-                AddLocalVariableName(parameterName);
-
-            lastCompiledUserDefinedFunction.Parameters.Add
-                (new VariableDescriptor
-                    {
-                        Type = new TypeIdentifier
-                            {
-                                TypeEnum = parameterType,
-                                TypeName = parameterTypeName,
-                                Dimensions = new List<int>(parameterDimensionCount)
-                            },
-                        Name = parameterName,
-                        IsReference = parameterIsReference,
-                    }
-                );
-
-            lastCompiledDataType = TypeEnum.Undefined;
-            lastCompiledUserDefinedDataTypeName = "";
-            lastCompiledDimensionCount = 0;
-            lastCompiledDimensionList = new List<int>();
+            //DeleteScope();
         }
 
         #endregion
@@ -706,14 +326,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Program Structures*/
         #region Program Structures
 
-        public void Visit(BlockNode node) 
-        {
-            VisitChildren(node);
-        }
-
-        public void Visit(StatementNode node) { VisitChildren(node); }
-
-        public void Visit(IfStatementNode node)
+        public override void Visit(IfStatementNode node)
         {
             // The Count of the conditionJumps pushed in the jumpStack
             conditionCount = 0;
@@ -735,10 +348,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 SetUpTopJumpInJumpStack(0);
         }
 
-        public void Visit(ConditionalBranchNode node)
+        public override void Visit(ConditionalBranchNode node)
         {
             // AddCommand( new PushState() );
-            NewScope();
+            //NewScope();
             
             node.ConditionalBranchCondition.Accept(this);
 
@@ -769,33 +382,30 @@ namespace VapeTeam.Psimulex.Compiler.AST
             conditionCount++;
 
             // AddCommand( new PopState() );
-            DeleteScope();
+            //DeleteScope();
         }
-        
-        public void Visit(IfBranchNode node) { VisitChildren(node); }
-        public void Visit(ElseIfBranchNode node) { VisitChildren(node); }
 
-        public void Visit(ElseBranchNode node) 
+        public override void Visit(ElseBranchNode node) 
         {
             // AddCommand( new PushState() );
-            NewScope();
+            //NewScope();
 
             // ElseCore
             node.Left.Accept(this);
 
             // AddCommand( new PopState() );
-            DeleteScope();
+            //DeleteScope();
         }
 
-        public void Visit(PForStatementNode node)
+        public override void Visit(PForStatementNode node)
         {
             AddError(CompilerErrorCode.NotImplemented, "PFor is not implemented yet. It was skipped!", node.NodeValueInfo);
         }
 
-        public void Visit(ForStatementNode node) 
+        public override void Visit(ForStatementNode node) 
         {
             AddCommand(new PushScope());
-            NewScope();
+            //NewScope();
 
             // ForInitialization
             node.ForInitialization.Accept(this);
@@ -831,17 +441,17 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             AddCommand(new PopScope());
-            DeleteScope();
+            //DeleteScope();
         }
 
-        public void Visit(ForInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
-        public void Visit(ForConditionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
-        public void Visit(ForUpdateNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public override void Visit(ForInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public override void Visit(ForConditionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public override void Visit(ForUpdateNode node) { RegisterIntervalChange(node); VisitChildren(node); }
 
-        public void Visit(DoStatementNode node) 
+        public override void Visit(DoStatementNode node)
         {
             // AddCommand(new PushState());
-            NewScope();
+            //NewScope();
 
             int beginingAddress = CurrentFunctionSize;
 
@@ -864,13 +474,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(rj);
 
             // AddCommand(new PopState());
-            DeleteScope();
+            //DeleteScope();
         }
 
-        public void Visit(WhileStatementNode node) 
+        public override void Visit(WhileStatementNode node) 
         {
             // AddCommand(new PushState());
-            NewScope();
+            //NewScope();
 
             int conditionAddress = CurrentFunctionSize;
 
@@ -895,18 +505,18 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             // AddCommand(new PopState());
-            DeleteScope();
+            //DeleteScope();
         }
 
-        public void Visit(PForEachStatementNode node)
+        public override void Visit(PForEachStatementNode node)
         {
             AddError(CompilerErrorCode.NotImplemented, "PForEach is not implemented yet. It was skipped!", node.NodeValueInfo);
         }
 
-        public void Visit(ForEachStatementNode node)
+        public override void Visit(ForEachStatementNode node)
         {
             // AddCommand(new PushState());
-            NewScope();
+            //NewScope();
 
             RegisterIntervalChange(node.ForEachInitialization);
 
@@ -915,13 +525,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
             // If this is UserDefined, then use lastCompiledUserDefinedDataTypeName
             TypeEnum forEachRunningVariableType = lastCompiledDataType;
-            string forEachRunningVariableTypeName = lastCompiledUserDefinedDataTypeName;
+            string forEachRunningVariableTypeName = lastCompiledDataTypeName;
 
             // IteratorVariableName
             string forEachRunningVariableName = node.ForEachRunningVariableName.Value;
 
             // Check variable name
-            CheckAndAddLocalVariableName(forEachRunningVariableName, node.NodeValueInfo);
+            //CheckAndAddLocalVariableName(forEachRunningVariableName, node.NodeValueInfo);
 
             // IteratorVariableDeclaration
             AddCommand(new Declare(forEachRunningVariableName, forEachRunningVariableType));
@@ -960,16 +570,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             // AddCommand(new PopState());
-            DeleteScope();
+            //DeleteScope();
         }
 
-        public void Visit(ForEachInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
-        public void Visit(ForEachCollectionExpressionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public override void Visit(ForEachInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public override void Visit(ForEachCollectionExpressionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
 
-        public void Visit(LoopStatementNode node) 
+        public override void Visit(LoopStatementNode node) 
         {
             // AddCommand(new PushState());
-            NewScope();
+            //NewScope();
 
             // LoopIteratorInitialization
             node.LoopIteratorInitialization.Accept(this);
@@ -1009,31 +619,30 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             // AddCommand(new PopState());
-            DeleteScope();
+            //DeleteScope();
         }
 
-        public void Visit(LoopInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
-        public void Visit(LoopLimitNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public override void Visit(LoopInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
+        public override void Visit(LoopLimitNode node) { RegisterIntervalChange(node); VisitChildren(node); }
 
-        public void Visit(ConditionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
-        public void Visit(CoreNode node) { VisitChildren(node); }
+        public override void Visit(ConditionNode node) { RegisterIntervalChange(node); VisitChildren(node); }
 
-        public void Visit(PDoStatementNode node)
+        public override void Visit(PDoStatementNode node)
         {
             AddError(CompilerErrorCode.NotImplemented, "PDo is not implemented yet. It was skipped!", node.NodeValueInfo);
         }
 
-        public void Visit(AsynStatementNode node) 
+        public override void Visit(AsynStatementNode node) 
         {
             AddError(CompilerErrorCode.NotImplemented, "Async is not implemented yet. It was skipped!", node.NodeValueInfo);
         }
 
-        public void Visit(LockStatementNode node)
+        public override void Visit(LockStatementNode node)
         {
             AddError(CompilerErrorCode.NotImplemented, "Lock is not implemented yet. It was skipped!", node.NodeValueInfo);
         }
 
-        public void Visit(ReturnStatementNode node)
+        public override void Visit(ReturnStatementNode node)
         {             
             RegisterIntervalChange(node);
 
@@ -1048,9 +657,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(new Return(hasReturnValue));
         }
 
-        public void Visit(ReturnNode node) { VisitChildren(node); }
-
-        public void Visit(BreakNode node) 
+        public override void Visit(BreakNode node) 
         {
             RegisterIntervalChange(node);
 
@@ -1059,21 +666,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
             jumpStack.Push(b);
         }
 
-        //public void Visit(ContinueNode node) { VisitChildren(node); }
+        public override void Visit(ExpressionStatementNode node) { RegisterIntervalChange(node); VisitChildren(node); }
 
-        public void Visit(ExpressionStatementNode node) 
-        {
-            RegisterIntervalChange(node);
-            VisitChildren(node); 
-        }
+        public override void Visit(VariableDeclarationStatementNode node) { RegisterIntervalChange(node); VisitChildren(node); }
 
-        public void Visit(VariableDeclarationStatementNode node)
-        {
-            RegisterIntervalChange(node);
-            VisitChildren(node);
-        }
-
-        public void Visit(VariableInitializationNode node)
+        public override void Visit(VariableInitializationNode node)
         {
             // Type
             node.VariableType.Accept(this);
@@ -1081,7 +678,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // If this is UserDefined, than use lastCompiledUserDefinedDataType
             TypeEnum varType = lastCompiledDataType;
 
-            string varTypeName = lastCompiledUserDefinedDataTypeName;
+            string varTypeName = lastCompiledDataTypeName;
             int varDimensionCount = lastCompiledDimensionCount;
 
             // Reference
@@ -1093,7 +690,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             string varName = node.VariableName.Value;
 
             // Check variable name
-            CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
+            //CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
 
             // Initialize
             if (varType != TypeEnum.UserDefinedType)
@@ -1124,7 +721,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(VariableDeclarationNode node)
+        public override void Visit(VariableDeclarationNode node)
         {
             RegisterIntervalChange(node);
 
@@ -1134,14 +731,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // If this is UserDefined, then use lastCompiledUserDefinedDataTypeName
             TypeEnum varType = lastCompiledDataType;
 
-            string varTypeName = lastCompiledUserDefinedDataTypeName;
+            string varTypeName = lastCompiledDataTypeName;
             int varDimensionCount = lastCompiledDimensionCount;
 
             // Name
             string varName = node.VariableName.Value;
 
             // Check variable name
-            CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
+            //CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
 
             // Declare
             if (varType != TypeEnum.Undefined)
@@ -1163,12 +760,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     var ti =  new TypeIdentifier
                     {
                         TypeEnum = TypeEnum.UserDefinedType,
-                        TypeName = varTypeName
+                        TypeName = varTypeName,
+                        UserDefinedType = DTO.Program.Program.GetUserDefinedType(varTypeName)
                     };
 
                     AddCommand(new Declare(varName, ti));
-
-                    TypeIdentifierList.Add(ti);
                 }
             }
         }
@@ -1178,7 +774,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Operators*/
         #region Operators        
 
-        public void Visit(AssignmentOpNode node)
+        public override void Visit(AssignmentOpNode node)
         {
             if (node.Value == "=")
             {
@@ -1217,7 +813,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(LogicalOrOpNode node)
+        public override void Visit(LogicalOrOpNode node)
         {   
             // Left Operand
             node.Left.Accept(this);
@@ -1237,7 +833,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             lazyEvaluationJumpStack.Pop().PC = CurrentFunctionSize - address;
         }
 
-        public void Visit(LogicalAndOpNode node)
+        public override void Visit(LogicalAndOpNode node)
         {
             // Left Operand
             node.Left.Accept(this);
@@ -1257,7 +853,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             lazyEvaluationJumpStack.Pop().PC = CurrentFunctionSize - address;
         }
 
-        public void Visit(EqualityOpNode node)
+        public override void Visit(EqualityOpNode node)
         {
             // Left Operand
             node.Left.Accept(this);
@@ -1276,7 +872,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(RelationOpNode node)
+        public override void Visit(RelationOpNode node)
         {            
             // Left Operand
             node.Left.Accept(this);
@@ -1297,7 +893,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(AdditiveOpNode node)
+        public override void Visit(AdditiveOpNode node)
         {
             bool isUnary = isOperatorUnaryPrefix;
             isOperatorUnaryPrefix = false;
@@ -1322,7 +918,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(MultiplicativeOpNode node)
+        public override void Visit(MultiplicativeOpNode node)
         {
             // Left Operand
             node.Left.Accept(this);
@@ -1343,7 +939,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(UnaryOpNode node)
+        public override void Visit(UnaryOpNode node)
         {
             if (node.Value == "!")
             {
@@ -1517,14 +1113,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Expressions*/
         #region Expression        
 
-        public void Visit(ExpressionNode node)
+        public override void Visit(ExpressionNode node)
         {
             VisitChildren(node);
             if (lastCompiledAssign != null) lastCompiledAssign.PushResult = false;
             lastCompiledAssign = null;
         }
-        
-        public void Visit(CastNode node)
+
+        public override void Visit(CastNode node)
         {
             // Cast Operand
             node.CastOperand.Accept(this);
@@ -1536,14 +1132,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(new Cast(TypeEnumFactory.CreateTypeEnum(castTypeName)));
         }
 
-        public void Visit(PrefixUnaryOperationNode node)
+        public override void Visit(PrefixUnaryOperationNode node)
         {
             isOperatorUnaryPrefix = true;
             VisitChildren(node);
             isOperatorUnaryPrefix = false;
         }
 
-        public void Visit(SelectorNode node)
+        public override void Visit(SelectorNode node)
         {
             // SelectorList Compile Parameters
             isSelectorsFirstCompile = true;
@@ -1561,7 +1157,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 child.Accept(this);
         }
 
-        public void Visit(MemberSelectNode node)
+        public override void Visit(MemberSelectNode node)
         {
             if (!isSelectorsFirstCompile)
             {
@@ -1573,7 +1169,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(MemberFunctionCallNode node)
+        public override void Visit(MemberFunctionCallNode node)
         {
             if (isSelectorsFirstCompile)
             {
@@ -1591,7 +1187,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(FunctionCallNode node)
+        public override void Visit(FunctionCallNode node)
         {
             // Name
             string functionName = node.FunctionName.Value;
@@ -1604,8 +1200,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(new Call(functionName, node.FunctionArgumentList.Count));
         }
 
-        public void Visit(ArgumentsNode node) { VisitChildren(node); }
-        public void Visit(IndexingNode node)
+        public override void Visit(IndexingNode node)
         {
             if (isSelectorsFirstCompile)
             {
@@ -1625,35 +1220,13 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
         }
 
-        public void Visit(DimensionsNode node)
-        {
-            lastCompiledDimensionCount = node.ChildrenCount;
-            for (int i = 0; i < node.ChildrenCount; i++)
-                node.Children[i].Accept(this);
-
-        }
-
-        public void Visit(ConstantDimensionsNode node)
-        {
-            lastCompiledDimensionList = new List<int>();
-            for (int i = 0; i < node.ChildrenCount; i++)
-                lastCompiledDimensionList.Add(Convert.ToInt32(SplitQuotes(node.Children[i].Value)));
-            lastCompiledDimensionCount = lastCompiledDimensionList.Count;
-        }
-
-        public void Visit(DimensionMarkerNode node)
-        {
-            lastCompiledDimensionCount = node.ChildrenCount - 1;
-            lastCompiledDimensionList = new List<int>();
-        }
-
-        public void Visit(ArrayInitializatorNode node)
+        public override void Visit(ArrayInitializatorNode node)
         {
             // Array initialize type
             node.ArrayDataType.Accept(this);
 
             TypeEnum arrayType = lastCompiledDataType;
-            string arrayTypeName = lastCompiledUserDefinedDataTypeName;
+            string arrayTypeName = lastCompiledDataTypeName;
 
             int arrayDim = node.ArrayDimensionList.Count;            
 
@@ -1664,14 +1237,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(new CollectionInitializer(new TypeIdentifier { TypeEnum = TypeEnum.Array, GenericType = arrayType }, arrayDim));
         }
 
-        public void Visit(CollectionInitializatorNode node)
-        {            
+        public override void Visit(CollectionInitializatorNode node)
+        {
             // Collection Type
             node.CollectionType.Accept(this);
 
             // Collection Type
             TypeIdentifier collectionType = lastCompiledDataType;
-            string collectionTypeName = lastCompiledUserDefinedDataTypeName;
+            string collectionTypeName = lastCompiledDataTypeName;
 
             // IsArray init
             bool isArray = false;
@@ -1687,37 +1260,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Set the type identifier
             if (isArray)
             {
-                collectionType = new TypeIdentifier { TypeEnum = TypeEnum.Array, GenericType = collectionType, Dimensions = new List<int> { collectionCount }};
+                collectionType = new TypeIdentifier { TypeEnum = TypeEnum.Array, GenericType = collectionType, Dimensions = new List<int> { collectionCount } };
             }
 
-            //if (isArray)
-            //{
-                node.CollectionElementList.Reverse();
-                foreach (var item in node.CollectionElementList)
-                    item.Accept(this);
-                node.CollectionElementList.Reverse();
+            node.CollectionElementList.Reverse();
+            foreach (var item in node.CollectionElementList)
+                item.Accept(this);
+            node.CollectionElementList.Reverse();
 
-                AddCommand(new CollectionInitializer(collectionType, 1, collectionCount));
-            //}
-            //else
-            //{
-            //    switch (collectionType)
-            //    {
-            //        case TypeEnum.List:
-            //            node.CollectionElementList.Reverse();
-            //            foreach (var item in node.CollectionElementList)
-            //                item.Accept(this);
-            //            node.CollectionElementList.Reverse();
+            AddCommand(new CollectionInitializer(collectionType, 1, collectionCount));
 
-            //            AddCommand(new CollectionInitializer(collectionType, 1, collectionCount));                                              
-            //            break;
-            //        default:
-            //            AddWarning(CompilerErrorCode.NotSupported, string.Format(
-            //                "Type {0} does not support initialization.", collectionTypeName), node.NodeValueInfo);
-            //            AddCommand(new Push(new Integer(0)));
-            //            break;
-            //    }
-            //}
         }
 
         #endregion
@@ -1725,9 +1277,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Identifier*/
         #region Identifier
 
-        public void Visit(IdentifierNode node) 
+        public override void Visit(IdentifierNode node) 
         {
-            AddCommand(new Push(node.Value, isCompilingAssignmentTarget || node.ChildrenCount != 0 ? ValueAccessModes.LocalVariableReference : ValueAccessModes.LocalVariable));
+            AddCommand(
+                new Push(node.Value, isCompilingAssignmentTarget || node.ChildrenCount != 0
+                    ? ValueAccessModes.LocalVariableReference
+                    : ValueAccessModes.LocalVariable));
         }
 
         #endregion
@@ -1735,88 +1290,12 @@ namespace VapeTeam.Psimulex.Compiler.AST
         /*Literals*/
         #region Literals
 
-        public void Visit(CharLiteralNode node)
-        {
-            char charChar = ' ';
-            string strChar = SplitQuotes(node.Value);
-            switch (strChar)
-            {
-                case "\\n": charChar = '\n'; break; // Milegyne itt, hgyo jólegyen ?
-                case "\\\'": charChar = '\''; break;
-                case "\\\"": charChar = '\"'; break;
-                case "\\\\": charChar = '\\'; break;
-                default: charChar = strChar[0]; break;
-            }
-            lastCompiledConstantValue = ValueFactory.Create(charChar);
-            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
-            addToProgram = true;
-        }
-
-        public void Visit(StringLiteralNode node)
-        {
-            string str = SplitQuotes(node.Value).Replace("\\n", "\r\n").Replace("\\\'", "\'").Replace("\\\"", "\"").Replace("\\\\", "\\");            
-            lastCompiledConstantValue = ValueFactory.Create(Convert.ToString(str));
-            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
-            addToProgram = true;
-        }
-
-        public void Visit(IntLiteralNode node)
-        {
-            lastCompiledConstantValue = ValueFactory.Create(Convert.ToInt32(SplitQuotes(node.Value)));
-            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
-            addToProgram = true;
-        }
-
-        public void Visit(DecimalLiteralNode node)
-        {
-            string str = node.Value.Replace(".", ",").Replace("m", "").Replace("M", "").Replace("d", "").Replace("D", "");
-            if (str[0] == '.')
-                str = "0" + str;
-            if (str[str.Length - 1] == '.')
-                str += "0";
-
-            lastCompiledConstantValue = ValueFactory.Create(Convert.ToDecimal(str));
-            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
-            addToProgram = true;
-        }
-
-        public void Visit(BoolLiteralNode node)
-        {
-            string constant  = SplitQuotes(node.Value);
-            bool l = Convert.ToBoolean(constant);
-            lastCompiledConstantValue = ValueFactory.Create(l);
-            if (addToProgram) AddCommand(new Push(lastCompiledConstantValue));
-            addToProgram = true;
-        }
-
-        public void Visit(NullLiteralNode node)
-        {
-            AddCommand(new Push(new Null()));
-        }
-
-        public void Visit(InfinityLiteralNode node)
-        {
-            // ???
-            VisitChildren(node);
-        }
-
-        #endregion
-
-        /*Types*/
-        #region Types
-
-        public void Visit(TypeNode node) { VisitChildren(node); }
-        public void Visit(DataTypeNode node)
-        {
-            lastCompiledDataType = TypeEnumFactory.CreateTypeEnum(node.Left.Value);
-            lastCompiledUserDefinedDataTypeName = node.Left.Value;
-
-            lastCompiledDimensionCount = 0;
-            lastCompiledDimensionList = new List<int>();
-        }
-
-        public void Visit(DataTypeNameNode node) { VisitChildren(node); }
-        public void Visit(ReferenceNode node) { VisitChildren(node); }
+        public override void Visit(CharLiteralNode node) { SetLastCompiledConstant(CharLiteralNodeToBaseType(node)); }
+        public override void Visit(StringLiteralNode node) { SetLastCompiledConstant(StringLiteralNodeToBaseType(node)); }
+        public override void Visit(IntLiteralNode node) { SetLastCompiledConstant(IntLiteralNodeToBaseType(node)); }
+        public override void Visit(DecimalLiteralNode node) { SetLastCompiledConstant(DecimalLiteralNodeToBaseType(node)); }
+        public override void Visit(BoolLiteralNode node) { SetLastCompiledConstant(BoolLiteralNodeToBaseType(node)); }
+        public override void Visit(NullLiteralNode node) { SetLastCompiledConstant(NullLiteralNodeToBaseType(node)); }
 
         #endregion
 

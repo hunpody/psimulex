@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Compiler.Result;
 using VapeTeam.Psimulex.Compiler.AST;
-using VapeTeam.Psimulex.Compiler.AntlrTools;
 using VapeTeam.Psimulex.Core;
 using System.IO;
+using VapeTeam.Psimulex.Core.Types;
 
 namespace VapeTeam.Psimulex.Compiler
 {
@@ -17,128 +17,242 @@ namespace VapeTeam.Psimulex.Compiler
     /// </summary>
     public class Compiler : VapeTeam.Psimulex.Compiler.ICompiler
     {
+        //public Compiler()
+        //{
+        //    CompileResult = new CompileResult();
+        //}
+
+        public Compiler(IPsiNodeParser parser)
+        {
+            Parser = parser;
+            CompileResult = new CompileResult();
+        }
+
+        #region Properties
+
         /// <summary>
         /// The result of, the last compile.
         /// </summary>
         public CompileResult CompileResult { get; private set; }
 
-        public Compiler()
-        {
-            CompileResult = new CompileResult();
-        }
+        /// <summary>
+        /// With this parser will be generated the output PsiNode tree
+        /// </summary>
+        public IPsiNodeParser Parser { get; set; }
+
+        #endregion
+
+        #region Members
 
         public CompileResult Compile(string source, string sourceFileName)
         {
-            return Compile(source, sourceFileName, ProgramPart.CompilationUnit);
+            return Compile(source, sourceFileName, true, ProgramPart.CompilationUnit);
         }
 
-        public CompileResult Compile(string source, string sourceFileName, ProgramPart part)
-        {
-            // SourceFilePath is the path of the main source file.
-            // All other relative imports calculated from this path.
-
-            string fullPath = Path.GetFullPath(sourceFileName);
-            sourceFileName = Path.GetFileName(fullPath);
-            string sourceFilePath = Path.GetDirectoryName(fullPath);
-
-            return Compile(new CompilerDTO
-            {
-                Source = source,
-                SourceFileName = sourceFileName,
-                ProgramPath = sourceFilePath
-            }, true, part);
-        }
-
-        public CompileResult Compile(CompilerDTO dto, ProgramPart part)
-        {
-            return Compile(dto, true, part);
-        }
-
-        public CompileResult Compile(CompilerDTO dto, bool compileFuncVarTree, ProgramPart part)
+        public CompileResult Compile(string source, string sourceFileName, bool compileFuncVarTree, ProgramPart part)
         {
             CompileResult = new CompileResult();
 
-            GenerateMicrolexCode(dto, part);
+            string fullPath = Path.GetFullPath(sourceFileName);
+            sourceFileName = Path.GetFileName(fullPath);
 
+            // Data Transfer Object
+            var dto = new CompilerDTO{ ProgramPath = Path.GetDirectoryName(fullPath) };            
+
+            // Resolve Imports
+            ResolveImports(source, sourceFileName, dto);
+
+            // Finalize TypeIdentifiers
+            FinalizeTypeIdentifiers(dto);
+
+            // Analise and Compile all source file.
+            foreach (var cu in dto.CompilationUnitList)
+            {
+                if (dto.CompilerMessages.AntlrErrors.Find(x => x.Interval.FileName == cu.FileName) == null)
+                {
+                    // Semantic analisis
+                    Analise(cu, dto, part);
+
+                    // Code generation
+                    GenerateMicrolexCode(cu, dto, part);
+                }
+            }
+
+            // Function Variable tree builder.
             if (compileFuncVarTree && part == ProgramPart.CompilationUnit)
-                CompileResult.PsiFunctionsVariablesNodeList = GenerateFuncVarTree(CompileResult.CompilationUnitList);
+                CompileResult.PsiFunctionsVariablesNodeList = GenerateFuncVarTree(dto.CompilationUnitList);
 
-            FinalizeTheResult(dto);
+            // Finalise the overall result (CompilerDTO -> CompilerResult)
+            FinaliseTheResult(dto);
 
             return CompileResult;
         }
 
-        public void GenerateMicrolexCode(CompilerDTO dto, ProgramPart part)
+        public void ResolveImports(string source, string sourceFileName, CompilerDTO dto)
         {
-            var result = ANTLRCompiler.Compile(dto.Source, dto.SourceFileName, part);
+            // Parse
+            Parser.Parse(source, sourceFileName, dto);
 
-            if (result.ANTLRExceptionText != "" || result.ANTLRErrorMessages.Count != 0)
+            // Resolve Imports
+            var resolver = new PsiImportResolverVisitor(dto.CompilationUnitList.Last<CompilationUnit>(), dto, this);
+            var ast = dto.CompilationUnitList.Last<CompilationUnit>().PsiNodeSyntaxTree as CompilationUnitNode;
+            if(ast != null)
+                resolver.Visit(ast);
+        }
+
+        private void FinalizeTypeIdentifiers(CompilerDTO dto)
+        {
+            // Add TypeDescriptors to Program
+            foreach (var td in dto.UserDefinedTypeInfoList)
+                dto.Program.Program.AddUserDefinedType(td.Type.UserDefinedType);
+
+            // Finalize Global variables TypeIdentifiers
+            foreach (var global in dto.GlobalVariableInfoList)
             {
-                var msgList = new MessageList();
-
-                result.ANTLRErrorMessages.ForEach(x =>
-                    msgList.AntlrErrors.Add(new AntlrError
+                if (global.Type.TypeEnum == TypeEnum.UserDefinedType)
+                {
+                    ITypeDescriptor td = dto.GetUserTypeDescriptor(global.Type.TypeName);
+                    if (td == null)
                     {
-                        Interval = new Interval() { FileName = dto.SourceFileName },
-                        MessageText = x
-                    }));
+                        dto.AddError(CompilerErrorCode.UndefinedType,
+                            string.Format("Undefined type \"{0}\"!", global.Type.TypeName),
+                            global.NodeValueInfo, global.FileName);
 
-                if (result.ANTLRExceptionText != "")
-                    msgList.AntlrErrors.Add(new AntlrError
+                        // Set Type to undefined !
+                        global.Type.TypeEnum = TypeEnum.Undefined;
+                    }
+                    else
                     {
-                        Interval = new Interval(),
-                        MessageText = result.ANTLRExceptionText
-                    });
-
-                dto.CompilationUnitList.Add(new CompilationUnit{CompilerMessages = msgList});
-                CompileResult.CompilationUnitList = dto.CompilationUnitList;
-                return;
+                        global.Type.UserDefinedType = td;
+                    }
+                }
             }
 
-            var visitor = new PsiCodeGeneratorVisitor(dto);
+            // Finalize Function parameter and return TypeIdentifiers
+            foreach (var func in dto.UserDefinedFunctionInfoList)
+            {
+                // Return Type
+                if (func.Function.ReturnValueType.Type.TypeEnum == TypeEnum.UserDefinedType)
+                {
+                    ITypeDescriptor td = dto.GetUserTypeDescriptor(func.Function.ReturnValueType.Type.TypeName);
+                    if (td == null)
+                    {
+                        dto.AddError(CompilerErrorCode.UndefinedType,
+                            string.Format("Undefined type \"{0}\"!", func.Function.ReturnValueType.Type.TypeName),
+                            func.NodeValueInfo, func.FileName);
+
+                        // Set Type to undefined !
+                        func.Function.ReturnValueType.Type.TypeEnum = TypeEnum.Undefined;
+                    }
+                    else
+                    {
+                        func.Function.ReturnValueType.Type.UserDefinedType = td;
+                    }
+                }
+
+                // Parameter Types
+                foreach (var param in func.Function.Parameters)
+                {
+                    if (param.Type.TypeEnum == TypeEnum.UserDefinedType)
+                    {
+                        ITypeDescriptor td = dto.GetUserTypeDescriptor(param.Type.TypeName);
+                        if (td == null)
+                        {
+                            dto.AddError(CompilerErrorCode.UndefinedType, string.Format(
+                                "Undefined type \"{0}\" in function \"{1}\" at the \"{2}\" parameter!",
+                                param.Type.TypeName, func.Name, param.Name),
+                                func.NodeValueInfo, func.FileName);
+
+                            // Set Type to undefined !
+                            param.Type.TypeEnum = TypeEnum.Undefined;
+                        }
+                        else
+                        {
+                            param.Type.UserDefinedType = td;
+                        }
+                    }
+                }
+            }
+
+            // Finalize User defined type memeber TypeIdentifiers
+            // If this will be allowed !
+            // UDT in UDT not allowed yet !
+            foreach (var type in dto.UserDefinedTypeInfoList)
+            {
+                var udtd = type.Type.UserDefinedType as UserDefinedTypeDescriptor;
+                if (udtd == null)
+                {
+                    // Error ! Not an user defined type.
+                }
+                else
+                {
+                    foreach (var attr in udtd.Attributes)
+                    {
+                        if (attr.Descriptor.Type.TypeEnum == TypeEnum.UserDefinedType)
+                        {
+                            ITypeDescriptor td = dto.GetUserTypeDescriptor(attr.Descriptor.Type.TypeName);
+                            if (td == null)
+                            {
+                                dto.AddError(CompilerErrorCode.UndefinedType, string.Format(
+                                    "Undefined type \"{0}\" in User Defined Type \"{1}\" at Memeber \"{2}\"!",
+                                    attr.Descriptor.Type.TypeName, type.Name, attr.Descriptor.Name),
+                                    type.NodeValueInfo, type.FileName);
+
+                                // Set Type to undefined !
+                                attr.Descriptor.Type.TypeEnum = TypeEnum.Undefined;
+                            }
+                            else
+                            {
+                                attr.Descriptor.Type.UserDefinedType = td;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Analise(CompilationUnit cu, CompilerDTO dto, ProgramPart part)
+        {
+            if (part == ProgramPart.CompilationUnit)
+                new PsiSemanticAnaliserVisitor(cu, dto).Visit(cu.PsiNodeSyntaxTree as CompilationUnitNode);
+            //else What To Do ?
+        }
+
+        public void GenerateMicrolexCode(CompilationUnit cu, CompilerDTO dto, ProgramPart part)
+        {
+            var visitor = new PsiCodeGeneratorVisitor(cu, dto);
 
             try
             {
                 switch (part)
                 {
                     case ProgramPart.CompilationUnit:
-                        visitor.Visit(result.PsiNode as CompilationUnitNode);
+                        visitor.Visit(cu.PsiNodeSyntaxTree as CompilationUnitNode);
                         break;
                     case ProgramPart.Statement:
                         var node = new StatementNode();
                         node.Init();
                         node.Type = NodeType.Statement;
 
-                        node.Add(result.PsiNode);
+                        node.Add(cu.PsiNodeSyntaxTree);
                         visitor.Visit(node);
                         break;
                     default:
-                        visitor.Visit(result.PsiNode as CompilationUnitNode);
+                        visitor.Visit(cu.PsiNodeSyntaxTree as CompilationUnitNode);
                         break;
                 }
-                visitor.CurrentCompilationUnit.PsiNodeSyntaxTree = result.PsiNode as CompilationUnitNode;
+
+                //visitor.CurrentCompilationUnit.PsiNodeSyntaxTree = result.PsiNode as CompilationUnitNode;
 
             }
             catch (Exception e)
             {
-                visitor.CurrentCompilationUnit.CompilerMessages.Errors.Add(new Error
+                dto.CompilerMessages.Errors.Add(new Error
                 {
                     MessageText = e.ToString(),
-                    Interval = new Interval
-                    {
-                        FromLine = -1,
-                        FromColumn = -1,
-                        ToLine = -1,
-                        ToColumn = -1,
-                        FileName = dto.SourceFileName
-                    }
+                    Interval = new Interval { FileName = cu.FileName }
                 });
-            }
-
-            CompileResult.CompiledProgram = visitor.Program;
-            CompileResult.CommandPositionChanges = visitor.CommandPositionChanges;
-            CompileResult.CompilationUnitList = visitor.CompilationUnitList;
-            CompileResult.UserDefinedFunctionList = visitor.UserDefinedFunctionList;            
+            }            
         }
 
         public List<PsiFunctionsVariablesNode> GenerateFuncVarTree(List<CompilationUnit> compilationUnitList)
@@ -161,29 +275,24 @@ namespace VapeTeam.Psimulex.Compiler
         /// <summary>
         /// The last steps on the result befor return.
         /// </summary>
-        public void FinalizeTheResult(CompilerDTO dto)
+        public void FinaliseTheResult(CompilerDTO dto)
         {
             // Add functions to the program
-            CompileResult.CompiledProgram.AddFunctions(CompileResult.UserDefinedFunctionList);
-            foreach (var item in CompileResult.CompilationUnitList)
-            {
-                CompileResult.CompilerMessages.Informations.AddRange(item.CompilerMessages.Informations);
-                CompileResult.CompilerMessages.Warnings.AddRange(item.CompilerMessages.Warnings);
-                CompileResult.CompilerMessages.Errors.AddRange(item.CompilerMessages.Errors);
-            }
+            dto.UserDefinedFunctionInfoList.ForEach(func => dto.Program.Program.AddFunction(func.Function));
 
-            // Finalize User Defined Type TypeIdentifiers
-            foreach (var item in dto.TypeIdentifierList)
-	        {
-                try
-                {
-                    item.UserDefinedType = CompileResult.CompiledProgram.GetUserDefinedType(item.TypeName);
-                }
-                catch (Exception)
-                {
-                    // Here can give an error messages "Undeclared type name"
-                } 
-	        }
+            CompileResult.CompilerMessages = dto.CompilerMessages;
+
+            CompileResult.CompiledProgram = dto.Program;
+            CompileResult.ProgramPath = dto.ProgramPath;
+
+            CompileResult.CommandPositionChanges = dto.CommandPositionChanges;
+            CompileResult.CompilationUnitList = dto.CompilationUnitList;
+
+            CompileResult.UserDefinedFunctionInfoList = dto.UserDefinedFunctionInfoList;
+            CompileResult.UserDefinedTypeInfoList = dto.UserDefinedTypeInfoList;
+            CompileResult.GlobalVariableInfoList = dto.GlobalVariableInfoList;
         }
+
+        #endregion
     }
 }

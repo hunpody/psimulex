@@ -69,6 +69,12 @@ import ""src\\in.psi"";
 void main()
 {
 wr(""almacsek"");
+int a = 10;
+int b = 20;
+swap(a,b);
+wr(b);
+wr(a);
+wr(add(a,b));
 }
 
 void fv(int a)
@@ -78,10 +84,11 @@ void fv(int a)
 ";
 
             var result = Helpers.CompilerProxy.CompileResult(src);
-            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Warnings.Count, 0);
-            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Errors.Count, 0);
-            Assert.AreEqual(result.CompilationUnitList[1].CompilerMessages.Warnings.Count, 0);
-            Assert.AreEqual(result.CompilationUnitList[1].CompilerMessages.Errors.Count, 0);
+            Assert.AreEqual(result.Errors.Count, 0);            
+            Assert.AreEqual(result.Warnings.Count, 0);
+
+            var runResult = Helpers.SystemHelper.CompileAndRun(src);
+            Assert.AreEqual("almacsek102030", runResult);
 
             TestFileHandler.DeleteTestFiles();
         }
@@ -106,8 +113,8 @@ void fv(int a)
 ";
 
             var result = Helpers.CompilerProxy.CompileResult(src);
-            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Warnings.Count, 0);
-            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Errors.Count, 1);
+            Assert.AreEqual(result.Errors.Count, 1);
+            Assert.AreEqual(result.Warnings.Count, 0);
 
             TestFileHandler.DeleteTestFiles();
         }
@@ -132,13 +139,10 @@ void fv(int a)
 ";
 
             var result = Helpers.CompilerProxy.CompileResult(src);
-            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Warnings.Count, 0);
-            Assert.AreEqual(result.CompilationUnitList[0].CompilerMessages.Errors.Count, 0);
-            Assert.AreEqual(result.CompilationUnitList[1].CompilerMessages.Warnings.Count, 1);
-            Assert.AreEqual(result.CompilationUnitList[1].CompilerMessages.Errors.Count, 0);
+            Assert.AreEqual(result.Errors.Count, 1);
+            Assert.AreEqual(result.Warnings.Count, 0);
 
             TestFileHandler.DeleteTestFiles();
         }
-        
     }
 }

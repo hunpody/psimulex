@@ -245,9 +245,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     }; v = true; break;
                 case NodeType.Arguments: node = new ArgumentsNode(); v = true; break;
                 case NodeType.Indexing: node = new IndexingNode(); v = true; break;
-                case NodeType.Dimensions: node = new DimensionsNode(); v = true; break;
-                case NodeType.ConstantDimensions: node = new ConstantDimensionsNode(); v = true; break;
-                case NodeType.DimensionMarker: node = new DimensionMarkerNode(); v = true; break;
                 case NodeType.ArrayInitializer:
                     node = new ArrayInitializatorNode
                     {
@@ -274,6 +271,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 case NodeType.InfinityLiteral: node = new InfinityLiteralNode(); break;
 
                 /*Types*/
+                case NodeType.DimensionMarker: node = new DimensionMarkerNode(); v = true; break;
                 case NodeType.DataTypeName: node = new DataTypeNameNode(); break;
                 case NodeType.DataType: node = new DataTypeNode(); v = true; break;
                 /*

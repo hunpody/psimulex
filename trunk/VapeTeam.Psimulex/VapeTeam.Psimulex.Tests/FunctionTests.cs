@@ -205,7 +205,7 @@ namespace VapeTeam.Psimulex.Tests
                         Name = "b" 
                     }
                 },
-                ReturnValue = new VariableDescriptor 
+                ReturnValueType = new VariableDescriptor 
                 {
                     Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
                 },
@@ -250,7 +250,7 @@ namespace VapeTeam.Psimulex.Tests
                         Name = "b" 
                     }
                 },
-                ReturnValue = new VariableDescriptor
+                ReturnValueType = new VariableDescriptor
                 {
                     Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
                 },
@@ -300,7 +300,7 @@ namespace VapeTeam.Psimulex.Tests
                         Name = "b" 
                     }
                 },
-                ReturnValue = new VariableDescriptor
+                ReturnValueType = new VariableDescriptor
                 {
                     Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
                 },
@@ -333,7 +333,7 @@ namespace VapeTeam.Psimulex.Tests
                         Name = "c" 
                     }
                 },
-                ReturnValue = new VariableDescriptor
+                ReturnValueType = new VariableDescriptor
                 {
                     Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
                 },
@@ -374,7 +374,7 @@ namespace VapeTeam.Psimulex.Tests
                         Name = "n" 
                     }
                 },
-                ReturnValue = new VariableDescriptor
+                ReturnValueType = new VariableDescriptor
                 {
                     Type = new TypeIdentifier { TypeEnum = TypeEnum.Integer }
                 },

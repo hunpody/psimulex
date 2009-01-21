@@ -33,7 +33,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
     /// </summary>
     public partial class mainWindow : Window
     {
-        private Compiler compiler = new Compiler();
+        private Compiler compiler = new Compiler(new PsiNodeParser());
         private PsiCodeGeneratorVisitor visitor;
         private PsiNode psiNode;
 
@@ -83,16 +83,22 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
             string endl = "\n";
 
+
+            resultTextBox.Text += compiler.CompileResult.CompilerMessages.ToString() + endl;
+
+
+            /*
             foreach (var item in compiler.CompileResult.CompilationUnitList)
             {
-                /*foreach (var antlr in item.ANTLRErrorMessages)
-                {
-                    resultTextBox.Text += antlr + endl;
-                }
+                //foreach (var antlr in item.ANTLRErrorMessages)
+                //{
+                //    resultTextBox.Text += antlr + endl;
+                //}
 
-                if (item.ANTLRExceptionText != "")
-                    resultTextBox.Text += "ANTLR Error : " + item.ANTLRExceptionText + endl;
-                */
+                //if (item.ANTLRExceptionText != "")
+                //    resultTextBox.Text += "ANTLR Error : " + item.ANTLRExceptionText + endl;
+
+
                 foreach (var info in item.CompilerMessages.Informations)
                 {
                     resultTextBox.Text += info.ToString() + endl;
@@ -113,6 +119,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                     resultTextBox.Text += an.ToString() + endl;
                 }
             }
+            */
         }
 
         private void Run()
@@ -211,10 +218,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             string funcString = "";
 
             int lineNumber = compiler.CompileResult.CompiledProgram.CommandList.Count;
-            foreach (var item in compiler.CompileResult.UserDefinedFunctionList)
-            {                
-                funcString += "\r\n" + item.Name + "(ParameterCount : " + item.ParameterCount + ")\r\n";
-                foreach (VapeTeam.Psimulex.Core.Commands.ICommand command in item.Commands)
+            foreach (var item in compiler.CompileResult.UserDefinedFunctionInfoList)
+            {
+                funcString += "\r\n" + item.Function.Name + "(ParameterCount : " + item.Function.ParameterCount + ")\r\n";
+                foreach (VapeTeam.Psimulex.Core.Commands.ICommand command in item.Function.Commands)
                 {
                     string line = "";
                     line = lineNumber.ToString("000") + " " + command.ToString() + "\r\n";
@@ -229,17 +236,20 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                 "\r\n*** Compiler Messages ***\r\n\r\n";
 
             string endl = "\n";
+
+            window.ProgramString += compiler.CompileResult.CompilerMessages.ToString() + endl;
+
+            /*
             foreach (var item in compiler.CompileResult.CompilationUnitList)
             {
-                /*
-                foreach (var antlr in item.ANTLRErrorMessages)
-                {
-                    window.ProgramString += antlr + endl;
-                }
+                //foreach (var antlr in item.ANTLRErrorMessages)
+                //{
+                //    window.ProgramString += antlr + endl;
+                //}
 
-                if (item.ANTLRExceptionText != "")
-                    window.ProgramString += "ANTLR Error : " + item.ANTLRExceptionText + endl;
-                */
+                //if (item.ANTLRExceptionText != "")
+                //    window.ProgramString += "ANTLR Error : " + item.ANTLRExceptionText + endl;
+
                 foreach (var info in item.CompilerMessages.Informations)
                 {
                     window.ProgramString += info.ToString() + endl;
@@ -260,6 +270,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                     window.ProgramString += an.ToString() + endl;
                 }
             }
+            */
 
             window.Show();
         }

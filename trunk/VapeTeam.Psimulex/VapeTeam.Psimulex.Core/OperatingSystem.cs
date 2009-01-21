@@ -284,7 +284,7 @@ namespace VapeTeam.Psimulex.Core
                 };
                 if (method.ReturnType != typeof(void))
                 {
-                    systemFunction.ReturnValue = new VariableDescriptor { Name = null, Type = CreateTypeIdFromSystemType(method.ReturnType) };
+                    systemFunction.ReturnValueType = new VariableDescriptor { Name = null, Type = CreateTypeIdFromSystemType(method.ReturnType) };
                 }
 
                 foreach(var parameter in method.GetParameters())

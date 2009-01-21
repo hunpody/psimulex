@@ -78,7 +78,7 @@ namespace GraphDrawerPOC
             {
             };
             Random r = new Random();
-            for (int i = 0; i < 12; ++i)
+            for (int i = 0; i < 8; ++i)
             {
                 g.Nodes.Add(new Graph.Node
                 {
@@ -86,9 +86,9 @@ namespace GraphDrawerPOC
                     Size = new Size(42, 42)
                 });
             }
-            for (int i = 0; i < 20; ++i)
+            for (int i = 0; i < 17; ++i)
             {
-                g.Edges.Add(new Graph.Edge { From = g.Nodes[r.Next(0, 12)], To = g.Nodes[r.Next(0,12)] });
+                g.Edges.Add(new Graph.Edge { From = g.Nodes[r.Next(0, 8)], To = g.Nodes[r.Next(0,8)] });
             }
 
 

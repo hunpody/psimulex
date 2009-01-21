@@ -448,9 +448,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
     public class ArgumentsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class IndexingNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class DimensionsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class ConstantDimensionsNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
-    public class DimensionMarkerNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
     public class ArrayInitializatorNode : PsiNode
     {
@@ -479,6 +476,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
     public class InfinityLiteralNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
 
     /*Types*/
+    public class DimensionMarkerNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class DataTypeNameNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     public class DataTypeNode : PsiNode { public override void Accept(IPsiVisitor v) { v.Visit(this); } }
     /*

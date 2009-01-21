@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Windows.Controls;
 using VapeTeam.Psimulex.Compiler.AST;
 
-namespace VapeTeam.Psimulex.Compiler.AntlrTools
+namespace VapeTeam.Psimulex.Compiler.Antlr.AntlrTools
 {
     using CommonTree = global::Antlr.Runtime.Tree.CommonTree;
 
