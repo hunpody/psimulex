@@ -17,11 +17,6 @@ namespace VapeTeam.Psimulex.Compiler
     /// </summary>
     public class Compiler : VapeTeam.Psimulex.Compiler.ICompiler
     {
-        //public Compiler()
-        //{
-        //    CompileResult = new CompileResult();
-        //}
-
         public Compiler(IPsiNodeParser parser)
         {
             Parser = parser;
@@ -91,7 +86,20 @@ namespace VapeTeam.Psimulex.Compiler
         public void ResolveImports(string source, string sourceFileName, CompilerDTO dto)
         {
             // Parse
-            Parser.Parse(source, sourceFileName, dto);
+            try
+            {
+                Parser.Parse(source, sourceFileName, dto);
+            }
+            catch (Exception ex)
+            {
+                dto.CompilerMessages.AntlrErrors.Add(
+                    new AntlrError
+                    { 
+                        Interval = new Interval() 
+                        { FileName = sourceFileName }, 
+                        MessageText = "Parser Error!"
+                    });
+            }            
 
             // Resolve Imports
             var resolver = new PsiImportResolverVisitor(dto.CompilationUnitList.Last<CompilationUnit>(), dto, this);
@@ -211,14 +219,14 @@ namespace VapeTeam.Psimulex.Compiler
             }
         }
 
-        public void Analise(CompilationUnit cu, CompilerDTO dto, ProgramPart part)
+        private void Analise(CompilationUnit cu, CompilerDTO dto, ProgramPart part)
         {
             if (part == ProgramPart.CompilationUnit)
                 new PsiSemanticAnaliserVisitor(cu, dto).Visit(cu.PsiNodeSyntaxTree as CompilationUnitNode);
             //else What To Do ?
         }
 
-        public void GenerateMicrolexCode(CompilationUnit cu, CompilerDTO dto, ProgramPart part)
+        private void GenerateMicrolexCode(CompilationUnit cu, CompilerDTO dto, ProgramPart part)
         {
             var visitor = new PsiCodeGeneratorVisitor(cu, dto);
 
@@ -255,7 +263,7 @@ namespace VapeTeam.Psimulex.Compiler
             }            
         }
 
-        public List<PsiFunctionsVariablesNode> GenerateFuncVarTree(List<CompilationUnit> compilationUnitList)
+        private List<PsiFunctionsVariablesNode> GenerateFuncVarTree(List<CompilationUnit> compilationUnitList)
         {
             List<PsiFunctionsVariablesNode> list = new List<PsiFunctionsVariablesNode>();
 
@@ -275,7 +283,7 @@ namespace VapeTeam.Psimulex.Compiler
         /// <summary>
         /// The last steps on the result befor return.
         /// </summary>
-        public void FinaliseTheResult(CompilerDTO dto)
+        private void FinaliseTheResult(CompilerDTO dto)
         {
             // Add functions to the program
             dto.UserDefinedFunctionInfoList.ForEach(func => dto.Program.Program.AddFunction(func.Function));

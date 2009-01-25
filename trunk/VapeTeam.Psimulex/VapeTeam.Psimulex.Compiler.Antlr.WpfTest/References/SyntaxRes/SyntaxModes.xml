@@ -1,0 +1,9 @@
+<SyntaxModes version="1.0">
+	<Mode file       = "Psimulex-Mode.xshd"
+	      name       = "Psimulex"
+	      extensions = ".psi"/>
+	      
+	<Mode file       = "CSharp-Mode.xshd"
+	      name       = "C#"
+	      extensions = ".cs"/>
+</SyntaxModes>

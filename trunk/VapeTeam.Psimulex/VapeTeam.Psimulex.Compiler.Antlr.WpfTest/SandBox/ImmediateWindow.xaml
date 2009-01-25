@@ -1,0 +1,10 @@
+﻿<Window x:Class="VapeTeam.Psimulex.Compiler.Antlr.WpfTest.SandBox.ImmediateWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="ImmediateWindow" Height="299" Width="477">
+    <Grid>
+        <TextBox Name="microlex" Margin="0,0,0,112" />
+        <TextBox Height="106" Name="psimulex" AcceptsReturn="True" AcceptsTab="True" VerticalAlignment="Bottom" Margin="0,0,99,0" />
+        <Button HorizontalAlignment="Right" Name="button1" Width="101" Click="button1_Click" Height="51" VerticalAlignment="Bottom">Show Microlex</Button>
+    </Grid>
+</Window>

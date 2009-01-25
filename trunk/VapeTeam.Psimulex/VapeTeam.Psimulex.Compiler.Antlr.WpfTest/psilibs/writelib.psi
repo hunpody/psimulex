@@ -1,0 +1,9 @@
+﻿void w(string msg)
+{
+	Write(msg);
+}
+
+void wl(string msg)
+{
+	WriteLine(msg);
+}

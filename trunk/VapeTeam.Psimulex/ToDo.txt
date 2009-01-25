@@ -7,7 +7,6 @@ ToDo:
 -----
 
 - ContextMenu for SyntaxTree, KeyHandler ( Delete )
-- ConversionClass (Vari)
 - InputWindow(s) (Vari)
 - Projects
 - Configuration Wizard for Projects
@@ -18,11 +17,6 @@ ToDo:
 - Compiler Check if the type name is exists (primary, builtin and user defined type list)
 - Compiler Interval corrections in higher levels ( Brackts, keywords, etc )
 - Plugin InterFace for Inputs -> Excel. Plugin and/or Drag And Drop technik with selected area. ( Vari )
-
-- Compiler Consistent Checker
-
-
-- LowPriority Environment for .NET lesson ( Vari );
 
 Finished:
 ---------
@@ -39,3 +33,9 @@ Finished:
 
 UnderConstruction:
 ------------------
+
+
+Bug:
+----
+
+- Import search directory ! (Actual compiled src file lovation relative)
