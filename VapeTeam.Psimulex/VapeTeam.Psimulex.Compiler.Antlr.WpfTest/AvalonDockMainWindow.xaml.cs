@@ -10,52 +10,44 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.IO;
-
-using VapeTeam.Psimulex.Compiler;
-using VapeTeam.Psimulex.Compiler.Antlr;
 using VapeTeam.Psimulex.Compiler.AST;
-using VapeTeam.Psimulex.Compiler.Configuration;
-using VapeTeam.Psimulex.Core;
-using VapeTeam.Psimulex.Core.Commands;
-using VapeTeam.Psimulex.Core.Common;
-using VapeTeam.Psimulex.Core.Factories;
-using VapeTeam.Psimulex.Core.Types;
-using VapeTeam.Psimulex.Compiler.Result;
-
 using ICSharpCode.TextEditor;
+using System.IO;
 using ICSharpCode.TextEditor.Document;
+using VapeTeam.Psimulex.Core.Factories;
+using VapeTeam.Psimulex.Compiler.Result;
+using AvalonDock;
+using System.Windows.Forms.Integration;
+using System.ComponentModel;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 {
     /// <summary>
-    /// Interaction logic for mainWindow.xaml
+    /// Interaction logic for AvalonDockMainWindow.xaml
     /// </summary>
-    public partial class mainWindow : Window
-    {
+    public partial class AvalonDockMainWindow : Window
+    {               
         private Compiler compiler = new Compiler(new PsiNodeParser());
-        private PsiCodeGeneratorVisitor visitor;
-        private PsiNode psiNode;
 
         private TextEditorControl editor;
+        private string currentFile;
+
+        private string sourceToCompile;
+
         private int currentCommandToHighLight;
 
-        public mainWindow()
+        public AvalonDockMainWindow()
         {
             InitializeComponent();
-        }
+        } 
 
         #region HelpFunctions
 
         private void Init()
         {
-            //sourceCodeTextEditorControl = this.FindName("sourceCodeTextEditorControl") as TextEditorControl;
-            editor = winFormHost.Child as TextEditorControl;
+            currentFile = "teszt.psi";
 
-            if (!Directory.Exists("Teszt"))
-                Directory.CreateDirectory("Teszt");
-            if (File.Exists("Teszt\\teszt.psi"))
-                editor.LoadFile("Teszt\\teszt.psi");
+            editor = winFormHost.Child as TextEditorControl;
 
             // DynamicHighLight Settings
             HighlightingManager.Manager.AddSyntaxModeFileProvider(new FileSyntaxModeProvider(@"References\SyntaxRes\"));
@@ -63,68 +55,47 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             // HighLightting Strategy Name is Psimulex
             editor.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("Psimulex");
 
-            currentCommandToHighLight = 0;
+            ResetStepping();
         }
         
-        private void Bulid(string fileName)
+        private void Bulid()
         {
-            currentCommandToHighLight = 0;
+            if (mainDockingManager.Documents.Length == 0)
+                return;
 
-            resultTextBox.Text = "";
+            cmsg.SetAsActive();
+
+            ResetStepping();
+
+            runtimeResultTextBox.Text = "";
+            compilerMessagesTextBox.Text = "";
+
+            if (editor.Text == "")
+            {
+                compilerMessagesTextBox.Text = "Nothing To Do";
+                return;
+            }
 
             try
             {
-                compiler.Compile(editor.Text, fileName);
+                compiler.Compile(editor.Text, currentFile);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                resultTextBox.Text = e.ToString();
+                compilerMessagesTextBox.Text = ex.ToString();
             }
 
-            string endl = "\n";
-
-
-            resultTextBox.Text += compiler.CompileResult.CompilerMessages.ToString() + endl;
-
-
-            /*
-            foreach (var item in compiler.CompileResult.CompilationUnitList)
-            {
-                //foreach (var antlr in item.ANTLRErrorMessages)
-                //{
-                //    resultTextBox.Text += antlr + endl;
-                //}
-
-                //if (item.ANTLRExceptionText != "")
-                //    resultTextBox.Text += "ANTLR Error : " + item.ANTLRExceptionText + endl;
-
-
-                foreach (var info in item.CompilerMessages.Informations)
-                {
-                    resultTextBox.Text += info.ToString() + endl;
-                }
-                
-                foreach (var warn in item.CompilerMessages.Warnings)
-                {
-                    resultTextBox.Text += warn.ToString() + endl;
-                }
-
-                foreach (var err in item.CompilerMessages.Errors)
-                {
-                    resultTextBox.Text += err.ToString() + endl;
-                }
-
-                foreach (var an in item.CompilerMessages.AntlrErrors)
-                {
-                    resultTextBox.Text += an.ToString() + endl;
-                }
-            }
-            */
+            compilerMessagesTextBox.Text += compiler.CompileResult.CompilerMessages.ToString() + "\n";
         }
 
         private void Run()
         {
-            resultTextBox.Text = "";
+            if (mainDockingManager.Documents.Length == 0)
+                return;
+
+            rres.SetAsActive();
+
+            runtimeResultTextBox.Text = "";
             var maschine = MachineBuilder.Instance.CreateMachine(1, 1024);
 
             maschine.System.InstallLibrary(new SampleInputLibrary());
@@ -138,13 +109,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             }
             catch (Exception ex)
             {
-                resultTextBox.Text = ex.ToString();
+                runtimeResultTextBox.Text = ex.ToString();
                 return;
             }
 
-            resultTextBox.Text = process.StandardOutput;
+            runtimeResultTextBox.Text = process.StandardOutput;
 
-            GenerateUnitTestCase();
+            //GenerateUnitTestCase();
         }
 
         private void GenerateUnitTestCase()
@@ -160,34 +131,35 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 " + editor.Text.Replace("\"", "\"\"") + @"
 "";            
             var result = Helpers.SystemHelper.CompileAndRun(src);
-            Assert.AreEqual(@""" + resultTextBox.Text + @""", result);
+            Assert.AreEqual(@""" + runtimeResultTextBox.Text + @""", result);
         }
 ";
-            /*
-            Helpers.PsiNodHelpers.ParentTestOne(src);
-            Helpers.PsiNodHelpers.ParentTestTwo(src);
-             */
-
-            StreamWriter sw;
             string file = "Teszt\\testCase.cs";
             if (!File.Exists(file))
-                sw = new StreamWriter(file);
-            else
-                sw = new StreamWriter(file, true);
+                File.Create(file).Close();
 
-            sw.WriteLine();
-            sw.WriteLine(testCase);
-            sw.Close();
+            using (StreamWriter sw = new StreamWriter(file, true))
+            {
+                sw.WriteLine();
+                sw.WriteLine(testCase);
+                sw.Close();
+            }
+        }
+
+        private void ResetStepping()
+        {
+            currentCommandToHighLight = 0;
+            editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.Yellow);
+            editor.Refresh();
         }
 
         private void Step()
         {
-            // Tabbolás , scrolozás jólenne ...
             if (currentCommandToHighLight < compiler.CompileResult.CommandPositionChanges.CommandInfoList.Count)
             {
                 Interval iv = compiler.CompileResult.CommandPositionChanges.CommandInfoList[currentCommandToHighLight].Interval;
 
-                editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.Red);
+                editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.Yellow);
                 editor.Refresh();
 
                 editor.Document.MarkerStrategy.AddMarker
@@ -196,7 +168,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                        (
                        iv.StartIndex, iv.EndIndex - iv.StartIndex,
                        ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
-                       System.Drawing.Color.Red
+                       System.Drawing.Color.Yellow
                        )
                    );
                 editor.Refresh();
@@ -206,7 +178,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             else
             {
                 currentCommandToHighLight = 0;
-                editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.Red);
+                editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.Yellow);
                 editor.Refresh();
             }
         }
@@ -235,42 +207,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                 compiler.CompileResult.CompiledProgram.ToString() + funcString +
                 "\r\n*** Compiler Messages ***\r\n\r\n";
 
-            string endl = "\n";
-
-            window.ProgramString += compiler.CompileResult.CompilerMessages.ToString() + endl;
-
-            /*
-            foreach (var item in compiler.CompileResult.CompilationUnitList)
-            {
-                //foreach (var antlr in item.ANTLRErrorMessages)
-                //{
-                //    window.ProgramString += antlr + endl;
-                //}
-
-                //if (item.ANTLRExceptionText != "")
-                //    window.ProgramString += "ANTLR Error : " + item.ANTLRExceptionText + endl;
-
-                foreach (var info in item.CompilerMessages.Informations)
-                {
-                    window.ProgramString += info.ToString() + endl;
-                }
-
-                foreach (var warn in item.CompilerMessages.Warnings)
-                {
-                    window.ProgramString += warn.ToString() + endl;
-                }
-
-                foreach (var err in item.CompilerMessages.Errors)
-                {
-                    window.ProgramString += err.ToString() + endl;
-                }
-
-                foreach (var an in item.CompilerMessages.AntlrErrors)
-                {
-                    window.ProgramString += an.ToString() + endl;
-                }
-            }
-            */
+            window.ProgramString += compiler.CompileResult.CompilerMessages.ToString() + "\n";
 
             window.Show();
         }
@@ -290,12 +227,13 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         {
             var window = new FunctionVariableVisibleConfigurationWindow();
             window.PsiFunctionsVariablesNodeList = compiler.CompileResult.PsiFunctionsVariablesNodeList;
-            //window.Visitor = visitor;
             window.ConfigFilePath = "config.funcvar";
             window.ShowDialog();
         }
 
         #endregion
+
+        #region Window Events Handlers
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -304,20 +242,52 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            string s = "Teszt\\teszt " + DateTime.Now.ToLongDateString().Replace(':', '-') + " " + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".psi";
-            editor.SaveFile(s);
-            editor.SaveFile("Teszt\\teszt.psi");
+            editor.SaveFile(currentFile);
             Close();
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.F1:
+                    Bulid();
+                    ShowSyntaxTree();
+                    break;
+                case Key.F5:
+                    Bulid();
+                    Run();
+                    break;
+                case Key.F6:
+                    Bulid();
+                    break;
+                case Key.F7:
+                    Bulid();
+                    break;
+                case Key.F8:
+                    Bulid();
+                    ShowProgramString();
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Commands Event Handlers
+
         private void buildButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi");
+            Bulid();
+        }
+
+        private void runToolbarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Run();
         }
 
         private void buildAndRunButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi");
+            Bulid();
             if (compiler.CompileResult.Errors.Count + compiler.CompileResult.Warnings.Count != 0)
             {
                 MessageBoxResult result =
@@ -337,50 +307,20 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private void syntaxTreeButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi");
+            Bulid();
             ShowSyntaxTree();
         }
 
         private void programStringButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi"); 
+            Bulid(); 
             ShowProgramString();
         }
 
         private void variableFunctionTreeButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi"); 
+            Bulid(); 
             ShowFunctionsVariablesTree();
-        }
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.F1:
-                    Bulid("teszt.psi");
-                    ShowSyntaxTree();
-                    break;
-                case Key.F5:
-                    Bulid("teszt.psi");
-                    Run();
-                    break;
-                case Key.F6:
-                    Bulid("teszt.psi");
-                    break;
-                case Key.F7:
-                    Bulid("teszt.psi");
-                    break;
-                case Key.F8:
-                    Bulid("teszt.psi");
-                    ShowProgramString();
-                    break;
-            }
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            new InputTools.ValidatorTester().Show();
         }
 
         private void immediateWindowButton_Click(object sender, RoutedEventArgs e)
@@ -388,5 +328,77 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             var w = new SandBox.ImmediateWindow();
             w.ShowDialog();
         }
+
+        #endregion
+
+        #region Menu Event Handlers
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            editor.SaveFile(currentFile);
+            Close();
+        }
+
+        private void MenuItem_Click_New(object sender, RoutedEventArgs e)
+        {
+            if(mainDockingManager.Documents.Length > 0)
+                foreach (var doc in mainDockingManager.Documents)
+                    doc.Close();
+
+            currentFile = "untitled.psi";
+            var d = new DocumentContent { Content = new WindowsFormsHost { Child = editor}, Title = currentFile };
+            mainDockingManager.MainDocumentPane.Items.Add(d);
+
+            editor.Text = "";            
+        }
+
+        private void MenuItem_Click_Save(object sender, RoutedEventArgs e)
+        {
+            editor.SaveFile(currentFile);
+        }
+
+        private void MenuItem_Click_SaveAs(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Save Psimulex Source File";
+            dlg.DefaultExt = ".psi";
+            dlg.Filter = "Psimulex Source File (.psi)|*.psi";
+
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                currentFile = dlg.FileName;
+                editor.SaveFile(currentFile);
+            }
+        }
+
+        private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Open Psimulex Source File";
+            dlg.DefaultExt = ".psi";
+            dlg.Filter = "Psimulex Source File (.psi)|*.psi";
+
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                currentFile = dlg.FileName;
+
+                if (mainDockingManager.Documents.Length > 0)
+                    foreach (var doc in mainDockingManager.Documents)
+                        doc.Close();
+
+                var d = new DocumentContent { Content = new WindowsFormsHost { Child = editor }, Title = System.IO.Path.GetFileName(currentFile) };
+                mainDockingManager.MainDocumentPane.Items.Add(d);
+
+                editor.LoadFile(currentFile);
+
+                ResetStepping();
+            }
+        }
+
+        #endregion
     }
 }
