@@ -291,8 +291,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
         public override void Visit(FunctionDeclarationNode node)
         {
-            //NewScope();
-
             // FunctionName
             string functionName = node.FunctionName.Value;
 
@@ -317,8 +315,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
 
                     currentUserDefinedFunctionInfo.Function.Commands.Add(new Return(false));
             }
-
-            //DeleteScope();
         }
 
         #endregion
@@ -351,7 +347,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Visit(ConditionalBranchNode node)
         {
             // AddCommand( new PushState() );
-            //NewScope();
             
             node.ConditionalBranchCondition.Accept(this);
 
@@ -382,19 +377,16 @@ namespace VapeTeam.Psimulex.Compiler.AST
             conditionCount++;
 
             // AddCommand( new PopState() );
-            //DeleteScope();
         }
 
         public override void Visit(ElseBranchNode node) 
         {
             // AddCommand( new PushState() );
-            //NewScope();
 
             // ElseCore
             node.Left.Accept(this);
 
             // AddCommand( new PopState() );
-            //DeleteScope();
         }
 
         public override void Visit(PForStatementNode node)
@@ -405,7 +397,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Visit(ForStatementNode node) 
         {
             AddCommand(new PushScope());
-            //NewScope();
 
             // ForInitialization
             node.ForInitialization.Accept(this);
@@ -441,7 +432,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             AddCommand(new PopScope());
-            //DeleteScope();
         }
 
         public override void Visit(ForInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
@@ -451,7 +441,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Visit(DoStatementNode node)
         {
             // AddCommand(new PushState());
-            //NewScope();
 
             int beginingAddress = CurrentFunctionSize;
 
@@ -474,13 +463,11 @@ namespace VapeTeam.Psimulex.Compiler.AST
             AddCommand(rj);
 
             // AddCommand(new PopState());
-            //DeleteScope();
         }
 
         public override void Visit(WhileStatementNode node) 
         {
             // AddCommand(new PushState());
-            //NewScope();
 
             int conditionAddress = CurrentFunctionSize;
 
@@ -505,7 +492,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             // AddCommand(new PopState());
-            //DeleteScope();
         }
 
         public override void Visit(PForEachStatementNode node)
@@ -516,7 +502,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Visit(ForEachStatementNode node)
         {
             // AddCommand(new PushState());
-            //NewScope();
 
             RegisterIntervalChange(node.ForEachInitialization);
 
@@ -570,7 +555,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             // AddCommand(new PopState());
-            //DeleteScope();
         }
 
         public override void Visit(ForEachInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }
@@ -579,7 +563,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Visit(LoopStatementNode node) 
         {
             // AddCommand(new PushState());
-            //NewScope();
 
             // LoopIteratorInitialization
             node.LoopIteratorInitialization.Accept(this);
@@ -619,7 +602,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             SetUpTopJumpInJumpStack(0);
 
             // AddCommand(new PopState());
-            //DeleteScope();
         }
 
         public override void Visit(LoopInitializationNode node) { RegisterIntervalChange(node); VisitChildren(node); }

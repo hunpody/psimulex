@@ -101,7 +101,14 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Visit(MemberDeclarationNode node) { VisitChildren(node); }
         public override void Visit(GlobalVariableDeclarationsNode node) { VisitChildren(node); }
         public override void Visit(FunctionDeclarationsNode node) { VisitChildren(node); }
-        public override void Visit(FunctionDeclarationNode node) { VisitChildren(node); }
+        
+        public override void Visit(FunctionDeclarationNode node)
+        {
+            NewScope();
+            VisitChildren(node);
+            DeleteScope();
+        }
+
         public override void Visit(FormalParameterListNode node) { VisitChildren(node); }
         public override void Visit(FormalParameterNode node) { VisitChildren(node); }
 
@@ -115,20 +122,67 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Visit(IfStatementNode node) { VisitChildren(node); }
         public override void Visit(IfBranchNode node) { VisitChildren(node); }
         public override void Visit(ElseIfBranchNode node) { VisitChildren(node); }
-        public override void Visit(ConditionalBranchNode node) { VisitChildren(node); }
-        public override void Visit(ElseBranchNode node) { VisitChildren(node); }
+
+        public override void Visit(ConditionalBranchNode node)
+        {
+            NewScope();
+            VisitChildren(node);
+            DeleteScope();
+        }
+
+        public override void Visit(ElseBranchNode node) 
+        {
+            NewScope();
+            VisitChildren(node);
+            DeleteScope();
+        }
+
         public override void Visit(PForStatementNode node) { VisitChildren(node); }
-        public override void Visit(ForStatementNode node) { VisitChildren(node); }
+
+        public override void Visit(ForStatementNode node)
+        {
+            NewScope();
+            VisitChildren(node);
+            DeleteScope();
+        }
+
         public override void Visit(ForInitializationNode node) { VisitChildren(node); }
         public override void Visit(ForConditionNode node) { VisitChildren(node); }
         public override void Visit(ForUpdateNode node) { VisitChildren(node); }
-        public override void Visit(DoStatementNode node) { VisitChildren(node); }
-        public override void Visit(WhileStatementNode node) { VisitChildren(node); }
+
+        public override void Visit(DoStatementNode node)
+        {
+            NewScope();
+            VisitChildren(node);
+            DeleteScope();
+        }
+
+        public override void Visit(WhileStatementNode node)
+        {
+            NewScope();
+            VisitChildren(node);
+            DeleteScope();
+        }
+
         public override void Visit(PForEachStatementNode node) { VisitChildren(node); }
-        public override void Visit(ForEachStatementNode node) { VisitChildren(node); }
+        
+        public override void Visit(ForEachStatementNode node)
+        {
+            NewScope();
+            VisitChildren(node);
+            DeleteScope();
+        }
+
         public override void Visit(ForEachInitializationNode node) { VisitChildren(node); }
         public override void Visit(ForEachCollectionExpressionNode node) { VisitChildren(node); }
-        public override void Visit(LoopStatementNode node) { VisitChildren(node); }
+
+        public override void Visit(LoopStatementNode node)
+        {
+            NewScope();
+            VisitChildren(node);
+            DeleteScope();
+        }
+
         public override void Visit(LoopInitializationNode node) { VisitChildren(node); }
         public override void Visit(LoopLimitNode node) { VisitChildren(node); }
         public override void Visit(ConditionNode node) { VisitChildren(node); }

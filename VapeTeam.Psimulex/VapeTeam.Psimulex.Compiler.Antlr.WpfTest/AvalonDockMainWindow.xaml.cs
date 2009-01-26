@@ -36,6 +36,12 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private int currentCommandToHighLight;
 
+        //private DockableContent cmsg;
+        //private DockableContent rres;
+
+        //private TextBox compilerMessagesTextBox;
+        //private TextBox runtimeResultTextBox;
+
         public AvalonDockMainWindow()
         {
             InitializeComponent();
@@ -56,6 +62,19 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             editor.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("Psimulex");
 
             ResetStepping();
+
+            // Doccable content
+            //cmsg = new DockableContent();
+            //compilerMessagesTextBox = new TextBox();
+            //cmsg.Content = compilerMessagesTextBox;
+            //cmsg.Title = "Compiler Messages";
+            //TextBlocks.Items.Add(cmsg);
+
+            //rres = new DockableContent();
+            //runtimeResultTextBox = new TextBox();
+            //rres.Content = runtimeResultTextBox;
+            //rres.Title = "Runtime Result";
+            //TextBlocks.Items.Add(rres);
         }
         
         private void Bulid()
