@@ -288,6 +288,7 @@ namespace VapeTeam.Psimulex.Core
         /// <param name="baseType"></param>
         public virtual void Allocate(VapeTeam.Psimulex.Core.Types.BaseType baseType)
         {
+            return; // Temporary
             if (referenceCounter.ContainsKey(baseType.MemoryAddress))
                 return;
             int pos = 0;
@@ -334,6 +335,7 @@ namespace VapeTeam.Psimulex.Core
         /// <param name="baseType"></param>
         public virtual void DeAllocate(BaseType baseType)
         {
+            return; // Temporary
             int refCount = 0;
             if (referenceCounter.TryGetValue(baseType.MemoryAddress, out refCount))
             {
@@ -396,6 +398,7 @@ namespace VapeTeam.Psimulex.Core
         /// <param name="value"></param>
         public virtual void ReAllocate(BaseType value)
         {
+            return;
             if (!_allocationSizeInfo.ContainsKey(value.MemoryAddress))
             {
                 throw new VapeTeam.Psimulex.Core.Exceptions.MemoryException("Trying to reallocate a value that has been freed or not allocated yet.");
