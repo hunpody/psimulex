@@ -167,6 +167,65 @@ void main()
             Assert.AreEqual(@"3 2 ", result);
         }
 
+        [TestMethod]
+        public void BubbleSort_01()
+        {
+            string src =
+            @"
+void main()
+{
+	// Generate Random Int array
+	int[] array = new int[10];
+	for(int i = 0; i <10; i++)
+		array[i] = IntRandom(0,100);
+	
+	// Print Out Array
+	for(int i = 0; i <10; i++)
+		print(array[i] + "" "");
+	print(""\n"");
+	
+	// BubbleSort
+	int j = array.Length - 1;
+	while( j >= 1 )
+	{
+		int i = 0;
+		while( i <= j - 1 )
+		{
+			if( array[i] > array[i + 1] )
+			{
+				int tmp = array[i];
+				array[i] = array[i + 1];
+				array[i + 1] = tmp;			
+			}
+			i = i + 1;
+		}
+		j = j - 1;
+	}
+	
+	// Print Out Array
+	for(int i = 0; i <10; i++)
+		print(array[i] + "" "");
+	print(""\n"");
+}
+";
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+            string orderedNumbersString = result.Substring(result.IndexOf('\n'));
+            var orderedNumbers = orderedNumbersString.Split(new char[] { ' ', '\n', '\r' }).Select(num =>
+                {
+                    int x;
+                    if (int.TryParse(num, out x))
+                        return x;
+                    else
+                        return -1;
+                }).Where(i => i != -1).ToList();
+
+            int count = orderedNumbers.Count;
+            for (int i = 0; i < count-1; ++i)
+            {
+                Assert.IsTrue(orderedNumbers[i] <= orderedNumbers[i + 1], string.Format("The result of the bubblesort is not in correct order. ({0}<={1} is not true)",
+                    orderedNumbers[i], orderedNumbers[i + 1]));
+            }
+        }
 
         #region Generated Tests
 
