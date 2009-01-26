@@ -60,6 +60,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         
         private void Bulid()
         {
+            compiler = new Compiler(new PsiNodeParser());
+
             if (mainDockingManager.Documents.Length == 0)
                 return;
 
@@ -76,15 +78,33 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
                 return;
             }
 
+            // Compile in the back ground
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.DoWork += new DoWorkEventHandler(DoCompile);
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CompileFinished);
+            sourceToCompile = editor.Text;
+            bw.RunWorkerAsync();
+        }
+
+        private delegate void WriteMsg();
+        private WriteMsg WriteCompilerMsg;
+
+        private void DoCompile(object sender, DoWorkEventArgs e)
+        {
             try
             {
-                compiler.Compile(editor.Text, currentFile);
+                compiler.Compile(sourceToCompile, currentFile);
             }
             catch (Exception ex)
             {
-                compilerMessagesTextBox.Text = ex.ToString();
+                WriteCompilerMsg = new WriteMsg((WriteMsg)(() => compilerMessagesTextBox.Text = ex.ToString()));
             }
+        }
 
+        void CompileFinished(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (WriteCompilerMsg != null)
+                WriteCompilerMsg();
             compilerMessagesTextBox.Text += compiler.CompileResult.CompilerMessages.ToString() + "\n";
         }
 

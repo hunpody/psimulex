@@ -39,6 +39,17 @@
                     </StackPanel>
                 </Button>
             </ToolBar>
+            <ToolBar Height="26">
+                <Button Name="stepButton" BorderBrush="Green" Click="stepButton_Click">Step</Button>
+                <Separator/>
+                <Button Name="syntaxTreeButton" BorderBrush="Green" Click="syntaxTreeButton_Click">SyntaxTree</Button>
+                <Separator/>
+                <Button Name="programStringButton" BorderBrush="Green" Click="programStringButton_Click">Program string</Button>
+                <Separator/>
+                <Button Name="variableFunctionTreeButton" BorderBrush="Green" Click="variableFunctionTreeButton_Click">Functions, Variables</Button>
+                <Separator/>
+                <Button Name="immediateWindowButton" BorderBrush="Green" Click="immediateWindowButton_Click">Immediate</Button>
+            </ToolBar>
         </ToolBarTray>
         <ad:DockingManager DockPanel.Dock="Top" Name="mainDockingManager" SnapsToDevicePixels="True">
             <ad:ResizingPanel Orientation="Vertical">
@@ -52,7 +63,7 @@
                         </ad:DocumentContent>
                     </ad:DocumentPane>
                     <ad:DockablePane>
-                        <ad:DockableContent Title="Controls">
+                        <!--<ad:DockableContent Title="Controls">
                             <StackPanel>
                                 <Button Name="buildButton" Click="buildButton_Click">Build</Button>
                                 <Button Name="buildAndRunButton" Click="buildAndRunButton_Click">Build &amp; Run</Button>
@@ -62,7 +73,7 @@
                                 <Button Name="variableFunctionTreeButton" Click="variableFunctionTreeButton_Click">Functions, Variables</Button>
                                 <Button Name="immediateWindowButton" Click="immediateWindowButton_Click">Immediate</Button>
                             </StackPanel>
-                        </ad:DockableContent>
+                        </ad:DockableContent>-->
                     </ad:DockablePane>
                 </ad:ResizingPanel>
                 <ad:DockablePane Name="TextBlocks" SelectedIndex="0">
