@@ -19,6 +19,7 @@ using VapeTeam.Psimulex.Compiler.Result;
 using AvalonDock;
 using System.Windows.Forms.Integration;
 using System.ComponentModel;
+using VapeTeam.Psimulex.Core;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 {
@@ -28,6 +29,7 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
     public partial class AvalonDockMainWindow : Window
     {               
         private Compiler compiler = new Compiler(new PsiNodeParser());
+        private Process process;
 
         private TextEditorControl editor;
         private string currentFile;
@@ -36,11 +38,14 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private int currentCommandToHighLight;
 
-        //private DockableContent cmsg;
-        //private DockableContent rres;
+        private bool canRun;
+        private bool canBuild;
 
-        //private TextBox compilerMessagesTextBox;
-        //private TextBox runtimeResultTextBox;
+        private DockableContent cmsg;
+        private DockableContent rres;
+
+        private TextBox compilerMessagesTextBox;
+        private TextBox runtimeResultTextBox;
 
         public AvalonDockMainWindow()
         {
@@ -52,6 +57,8 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
         private void Init()
         {
             currentFile = "teszt.psi";
+            canRun = false;
+            canBuild = true;
 
             editor = winFormHost.Child as TextEditorControl;
 
@@ -63,50 +70,80 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
             ResetStepping();
 
-            // Doccable content
-            //cmsg = new DockableContent();
-            //compilerMessagesTextBox = new TextBox();
-            //cmsg.Content = compilerMessagesTextBox;
-            //cmsg.Title = "Compiler Messages";
-            //TextBlocks.Items.Add(cmsg);
+            // Menu setup
 
-            //rres = new DockableContent();
-            //runtimeResultTextBox = new TextBox();
-            //rres.Content = runtimeResultTextBox;
-            //rres.Title = "Runtime Result";
-            //TextBlocks.Items.Add(rres);
+            ShowRuntimeResultsChecBox.IsChecked = true;
+            ShowCompilerMessagesChecBox.IsChecked = true;
+
+            // Avalon Dock Set Up
+
+            mainDockingManager.KeyDown += new System.Windows.Input.KeyEventHandler(mainDockingManager_KeyDown);
+
+            cmsg = new DockableContent();
+            compilerMessagesTextBox = new TextBox();
+            cmsg.Content = compilerMessagesTextBox;
+            cmsg.Title = "Compiler Messages";
+            TextBlocks.Items.Add(cmsg);
+
+            rres = new DockableContent();
+            runtimeResultTextBox = new TextBox();
+            rres.Content = runtimeResultTextBox;
+            rres.Title = "Runtime Result";
+            TextBlocks.Items.Add(rres);
+
+            this.Width = this.Width + 1;
+        }
+
+        void mainDockingManager_KeyDown(object sender, KeyEventArgs e)
+        {
+            Window_KeyDown(sender, e);
         }
         
         private void Bulid()
         {
-            compiler = new Compiler(new PsiNodeParser());
-
-            if (mainDockingManager.Documents.Length == 0)
-                return;
-
-            cmsg.SetAsActive();
-
-            ResetStepping();
-
-            runtimeResultTextBox.Text = "";
-            compilerMessagesTextBox.Text = "";
-
-            if (editor.Text == "")
+            if (canBuild)
             {
-                compilerMessagesTextBox.Text = "Nothing To Do";
-                return;
-            }
+                canRun = false;
 
-            // Compile in the back ground
-            BackgroundWorker bw = new BackgroundWorker();
-            bw.DoWork += new DoWorkEventHandler(DoCompile);
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CompileFinished);
-            sourceToCompile = editor.Text;
-            bw.RunWorkerAsync();
+                statusLabel.Content = "Building ...";
+
+                compiler = new Compiler(new PsiNodeParser());
+
+                if (mainDockingManager.Documents.Length == 0)
+                    return;
+
+                cmsg.SetAsActive();
+
+                ResetStepping();
+
+                runtimeResultTextBox.Text = "";
+                compilerMessagesTextBox.Text = "";
+
+                if (editor.Text == "")
+                {
+                    compilerMessagesTextBox.Text = "Nothing To Do";
+                    canRun = true;
+                    statusLabel.Content = "Building Succesfull";
+                    return;
+                }
+
+                sourceToCompile = editor.Text;
+
+                // Compile in the back ground
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.DoWork += new DoWorkEventHandler(DoCompile);
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CompileFinished);
+                sourceToCompile = editor.Text;
+                bw.RunWorkerAsync();
+            }
+            else
+            {
+                MessageBox.Show("Running in progress. You must wait to begin Build !");
+            }
         }
 
-        private delegate void WriteMsg();
-        private WriteMsg WriteCompilerMsg;
+        private delegate void WriteCompileMsg();
+        private WriteCompileMsg WriteCompilerMsg;
 
         private void DoCompile(object sender, DoWorkEventArgs e)
         {
@@ -116,45 +153,84 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             }
             catch (Exception ex)
             {
-                WriteCompilerMsg = new WriteMsg((WriteMsg)(() => compilerMessagesTextBox.Text = ex.ToString()));
+                WriteCompilerMsg = new WriteCompileMsg((WriteCompileMsg)(() => compilerMessagesTextBox.Text = ex.Message));
             }
         }
 
-        void CompileFinished(object sender, RunWorkerCompletedEventArgs e)
+        private void CompileFinished(object sender, RunWorkerCompletedEventArgs e)
         {
             if (WriteCompilerMsg != null)
                 WriteCompilerMsg();
+
             compilerMessagesTextBox.Text += compiler.CompileResult.CompilerMessages.ToString() + "\n";
+
+            cmsg.SetAsActive();
+
+            canRun = true;
+
+            statusLabel.Content = "Building Succesfull";
         }
+
+        private delegate void WriteRuntimeMsg();
+        private WriteRuntimeMsg WriteRuntimerMsg;
 
         private void Run()
         {
-            if (mainDockingManager.Documents.Length == 0)
-                return;
+            if (canRun)
+            {
+                canBuild = false;
 
-            rres.SetAsActive();
+                statusLabel.Content = "Running ...";
 
-            runtimeResultTextBox.Text = "";
+                if (mainDockingManager.Documents.Length == 0)
+                    return;
+
+                rres.SetAsActive();
+
+                runtimeResultTextBox.Text = "";
+
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.DoWork += new DoWorkEventHandler(DoRun);
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(RunFinished);
+                bw.RunWorkerAsync();
+            }
+            else
+            {
+                MessageBox.Show("Building in progress. You must wait to begin Run !");
+            }
+            //GenerateUnitTestCase();
+        }
+
+        private void DoRun(object sender, DoWorkEventArgs e)
+        {
             var maschine = MachineBuilder.Instance.CreateMachine(1, 1024);
 
             maschine.System.InstallLibrary(new SampleInputLibrary());
             maschine.System.InstallLibrary(new InputTools.PrimaryInputLibrary());
             maschine.System.InstallLibrary(new InputTools.CollectionInputLibrary());
 
-            var process = maschine.System.Load(compiler.CompileResult.CompiledProgram);
+            process = maschine.System.Load(compiler.CompileResult.CompiledProgram);
             try
             {
                 maschine.System.Run(process);
             }
             catch (Exception ex)
             {
-                runtimeResultTextBox.Text = ex.ToString();
-                return;
+                WriteRuntimerMsg += new WriteRuntimeMsg((WriteRuntimeMsg)(() => runtimeResultTextBox.Text = ex.Message));
             }
+        }
 
-            runtimeResultTextBox.Text = process.StandardOutput;
+        private void RunFinished(object sender, RunWorkerCompletedEventArgs e)
+        {
+            rres.SetAsActive();
 
-            //GenerateUnitTestCase();
+            if (WriteRuntimerMsg != null)
+                WriteRuntimerMsg();
+            runtimeResultTextBox.Text = process.StandardOutput +"\n";
+
+            canBuild = true;
+
+            statusLabel.Content = "Running Finished";
         }
 
         private void GenerateUnitTestCase()
@@ -290,21 +366,30 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             switch (e.Key)
             {
                 case Key.F1:
-                    Bulid();
+                    //Bulid();
                     ShowSyntaxTree();
                     break;
                 case Key.F5:
-                    Bulid();
+                    //Bulid();
+                    if (compiler.CompileResult.Errors.Count + compiler.CompileResult.Warnings.Count != 0)
+                    {
+                        MessageBoxResult result =
+                        MessageBox.Show(string.Format("There is {0} warning and {1} error are you sure to run ?",
+                            compiler.CompileResult.Warnings.Count, compiler.CompileResult.Errors.Count), "Warning"
+                           , MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.No)
+                            return;
+                    }
                     Run();
                     break;
                 case Key.F6:
                     Bulid();
                     break;
-                case Key.F7:
-                    Bulid();
-                    break;
+                //case Key.F7:
+                //    Run();
+                //    break;
                 case Key.F8:
-                    Bulid();
+                    //Bulid();
                     ShowProgramString();
                     break;
             }
@@ -321,12 +406,21 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private void runToolbarButton_Click(object sender, RoutedEventArgs e)
         {
+            if (compiler.CompileResult.Errors.Count + compiler.CompileResult.Warnings.Count != 0)
+            {
+                MessageBoxResult result =
+                MessageBox.Show(string.Format("There is {0} warning and {1} error are you sure to run ?",
+                    compiler.CompileResult.Warnings.Count, compiler.CompileResult.Errors.Count), "Warning"
+                   , MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                    return;
+            }
             Run();
         }
 
         private void buildAndRunButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid();
+            //Bulid();
             if (compiler.CompileResult.Errors.Count + compiler.CompileResult.Warnings.Count != 0)
             {
                 MessageBoxResult result =
@@ -346,19 +440,19 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
 
         private void syntaxTreeButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid();
+            //Bulid();
             ShowSyntaxTree();
         }
 
         private void programStringButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid(); 
+            //Bulid(); 
             ShowProgramString();
         }
 
         private void variableFunctionTreeButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid(); 
+            //Bulid(); 
             ShowFunctionsVariablesTree();
         }
 
@@ -438,6 +532,63 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest
             }
         }
 
+        private void MenuItem_Click_View(object sender, RoutedEventArgs e)
+        {
+            ShowCompilerMessagesChecBox.IsChecked = cmsg.IsLoaded;
+            ShowRuntimeResultsChecBox.IsChecked = rres.IsLoaded;
+        }
+
+        private void ShowCompilerMessagesChecBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (ShowCompilerMessagesChecBox.IsChecked == true)
+            {
+                if (!cmsg.IsLoaded)
+                {
+                    cmsg = new DockableContent();
+                    compilerMessagesTextBox = new TextBox();
+                    cmsg.Content = compilerMessagesTextBox;
+                    cmsg.Title = "Compiler Messages";
+                    TextBlocks.Items.Add(cmsg);
+
+                    this.Width = this.Width + 1;
+                }
+            }
+            else
+            {
+                if (cmsg.IsLoaded)
+                {
+                    TextBlocks.Items.Remove(cmsg);
+                }
+            }
+        }
+
+        private void ShowRuntimeResultsChecBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (ShowRuntimeResultsChecBox.IsChecked == true)
+            {
+                if (!rres.IsLoaded)
+                {
+                    rres = new DockableContent();
+                    runtimeResultTextBox = new TextBox();
+                    rres.Content = runtimeResultTextBox;
+                    rres.Title = "Runtime Result";
+                    TextBlocks.Items.Add(rres);
+
+                    this.Width = this.Width + 1;
+                }
+            }
+            else
+            {
+                if (rres.IsLoaded)
+                {
+                    TextBlocks.Items.Remove(rres);
+                }
+            }
+        }
+
         #endregion
+
+
+
     }
 }

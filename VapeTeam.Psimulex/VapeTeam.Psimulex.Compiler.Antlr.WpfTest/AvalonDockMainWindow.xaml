@@ -4,7 +4,7 @@
     xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
     xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
     xmlns:tec="clr-namespace:ICSharpCode.TextEditor;assembly=ICSharpCode.TextEditor"
-    Title="AvalonDockMainWindow" Height="521" Width="808" Loaded="Window_Loaded" Closed="Window_Closed">
+    Title="AvalonDockMainWindow" Height="521" Width="973" Loaded="Window_Loaded" Closed="Window_Closed">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -14,6 +14,10 @@
                 <MenuItem Header="Open ..." Click="MenuItem_Click_Open"/>
                 <Separator></Separator>
                 <MenuItem Header="Exit" Click="MenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="View" Click="MenuItem_Click_View">
+                <CheckBox Name="ShowCompilerMessagesChecBox" Click="ShowCompilerMessagesChecBox_Click">Show Compiler Messages</CheckBox>
+                <CheckBox Name="ShowRuntimeResultsChecBox" Click="ShowRuntimeResultsChecBox_Click">Show Runtime Results</CheckBox>
             </MenuItem>
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
@@ -31,13 +35,13 @@
                         <TextBlock>Run</TextBlock>
                     </StackPanel>
                 </Button>
-                <Separator/>
+                <!--<Separator/>
                 <Button Name="buildAndRunToolbarButton" BorderBrush="Blue" Click="buildAndRunButton_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pic\buildandrun.png"/>
                         <TextBlock>Build &amp; Run</TextBlock>
                     </StackPanel>
-                </Button>
+                </Button>-->
             </ToolBar>
             <ToolBar Height="26">
                 <Button Name="stepButton" BorderBrush="Green" Click="stepButton_Click">Step</Button>
@@ -49,6 +53,11 @@
                 <Button Name="variableFunctionTreeButton" BorderBrush="Green" Click="variableFunctionTreeButton_Click">Functions, Variables</Button>
                 <Separator/>
                 <Button Name="immediateWindowButton" BorderBrush="Green" Click="immediateWindowButton_Click">Immediate</Button>
+            </ToolBar>
+            <ToolBar Height="32" >
+                <Label Name="statusLabel" FontFamily="Courier New">
+                    Reday To Work
+                </Label>
             </ToolBar>
         </ToolBarTray>
         <ad:DockingManager DockPanel.Dock="Top" Name="mainDockingManager" SnapsToDevicePixels="True">
@@ -62,27 +71,14 @@
                             </wfi:WindowsFormsHost>
                         </ad:DocumentContent>
                     </ad:DocumentPane>
-                    <ad:DockablePane>
-                        <!--<ad:DockableContent Title="Controls">
-                            <StackPanel>
-                                <Button Name="buildButton" Click="buildButton_Click">Build</Button>
-                                <Button Name="buildAndRunButton" Click="buildAndRunButton_Click">Build &amp; Run</Button>
-                                <Button Name="stepButton" Click="stepButton_Click">Step</Button>
-                                <Button Name="syntaxTreeButton" Click="syntaxTreeButton_Click">SyntaxTree</Button>
-                                <Button Name="programStringButton" Click="programStringButton_Click">Program string</Button>
-                                <Button Name="variableFunctionTreeButton" Click="variableFunctionTreeButton_Click">Functions, Variables</Button>
-                                <Button Name="immediateWindowButton" Click="immediateWindowButton_Click">Immediate</Button>
-                            </StackPanel>
-                        </ad:DockableContent>-->
-                    </ad:DockablePane>
                 </ad:ResizingPanel>
                 <ad:DockablePane Name="TextBlocks" SelectedIndex="0">
-                    <ad:DockableContent Name="cmsg" Title="Compiler Messages">
+                    <!--<ad:DockableContent Name="cmsg" Title="Compiler Messages">
                         <TextBox x:Name="compilerMessagesTextBox"></TextBox>
                     </ad:DockableContent>
                     <ad:DockableContent Name="rres" Title="Runtime Result">
                         <TextBox x:Name="runtimeResultTextBox" />
-                    </ad:DockableContent>
+                    </ad:DockableContent>-->
                 </ad:DockablePane>                
             </ad:ResizingPanel>
         </ad:DockingManager>
