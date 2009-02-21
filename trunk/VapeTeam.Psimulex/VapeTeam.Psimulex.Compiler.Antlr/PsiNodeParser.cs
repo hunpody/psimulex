@@ -8,7 +8,7 @@ using VapeTeam.Psimulex.Compiler.AST;
 
 namespace VapeTeam.Psimulex.Compiler.Antlr
 {
-    public class PsiNodeParser :IPsiNodeParser
+    public class PsiNodeParser : IPsiNodeParser
     {
         #region IPsiNodeParser Members
 

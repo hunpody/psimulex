@@ -571,7 +571,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.AbstractCollection" Collapsed="true">
-    <Position X="71.75" Y="21.75" Width="3.25" />
+    <Position X="72.5" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAQAIACAAAkACMAAYAgARAAAEAAABBAAlAIABAAAI=</HashCode>
       <FileName>Types\AbstractCollection.cs</FileName>
@@ -579,21 +579,21 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.AbstractList" Collapsed="true">
-    <Position X="75.5" Y="21.75" Width="3.25" />
+    <Position X="74.5" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IQYJWEQAAAAAgQAAEAKAAAEAAAAQEAAACAEGAIBkAAA=</HashCode>
       <FileName>Types\AbstractList.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Array" Collapsed="true">
-    <Position X="79.25" Y="21.75" Width="3.25" />
+    <Position X="76.5" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAQAQAAAAAgAQACIAAgAAAAAAAAAAEAQEAAAEAABA=</HashCode>
       <FileName>Types\Array.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Types.BaseType" Collapsed="true">
-    <Position X="67.25" Y="21.75" Width="3.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Types.BaseType">
+    <Position X="70" Y="21.75" Width="2" />
     <NestedTypes>
       <Interface Name="VapeTeam.Psimulex.Core.Types.BaseType.IValueAccessor" Collapsed="true">
         <TypeIdentifier>
@@ -617,17 +617,13 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Boolean" Collapsed="true">
-    <Position X="58" Y="28" Width="2" />
+    <Position X="68" Y="21.75" Width="1.5" />
     <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="69" Y="21.75" />
-        <Point X="69" Y="21.375" />
-        <Point X="63.25" Y="21.375" />
-        <Point X="63.25" Y="27.358" />
-        <Point X="61.927" Y="27.358" Type="JumpStart" />
-        <Point X="61.76" Y="27.358" Type="JumpEnd" />
-        <Point X="58.833" Y="27.358" />
-        <Point X="58.833" Y="28" />
+        <Point X="71" Y="21.75" />
+        <Point X="71" Y="21.375" />
+        <Point X="68.625" Y="21.375" />
+        <Point X="68.625" Y="21.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -636,25 +632,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Character" Collapsed="true">
-    <Position X="55.5" Y="28" Width="2" />
+    <Position X="68" Y="23.75" Width="1.5" />
     <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="69" Y="21.75" />
-        <Point X="69" Y="21.375" />
-        <Point X="71.125" Y="21.375" />
-        <Point X="71.125" Y="27.358" />
-        <Point X="69.083" Y="27.358" Type="JumpStart" />
-        <Point X="68.917" Y="27.358" Type="JumpEnd" />
-        <Point X="66.958" Y="27.358" Type="JumpStart" />
-        <Point X="66.792" Y="27.358" Type="JumpEnd" />
-        <Point X="65.333" Y="27.358" Type="JumpStart" />
-        <Point X="65.167" Y="27.358" Type="JumpEnd" />
-        <Point X="63.333" Y="27.358" Type="JumpStart" />
-        <Point X="63.167" Y="27.358" Type="JumpEnd" />
-        <Point X="61.927" Y="27.358" Type="JumpStart" />
-        <Point X="61.76" Y="27.358" Type="JumpEnd" />
-        <Point X="56.333" Y="27.358" />
-        <Point X="56.333" Y="28" />
+        <Point X="71" Y="21.75" />
+        <Point X="71" Y="21.375" />
+        <Point X="69.921" Y="21.375" />
+        <Point X="69.921" Y="23.596" />
+        <Point X="69.843" Y="23.596" Type="JumpStart" />
+        <Point X="69.677" Y="23.596" Type="JumpEnd" />
+        <Point X="68.625" Y="23.596" />
+        <Point X="68.625" Y="23.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -663,27 +651,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Decimal" Collapsed="true">
-    <Position X="50" Y="23.25" Width="2" />
-    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedToPoint="true">
+    <Position X="68" Y="24.75" Width="1.5" />
+    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="69" Y="22.312" />
-        <Point X="69" Y="23.035" />
-        <Point X="66.958" Y="23.035" Type="JumpStart" />
-        <Point X="66.792" Y="23.035" Type="JumpEnd" />
-        <Point X="65.333" Y="23.035" Type="JumpStart" />
-        <Point X="65.167" Y="23.035" Type="JumpEnd" />
-        <Point X="63.333" Y="23.035" Type="JumpStart" />
-        <Point X="63.167" Y="23.035" Type="JumpEnd" />
-        <Point X="58.833" Y="23.035" Type="JumpStart" />
-        <Point X="58.667" Y="23.035" Type="JumpEnd" />
-        <Point X="56.208" Y="23.035" Type="JumpStart" />
-        <Point X="56.042" Y="23.035" Type="JumpEnd" />
-        <Point X="54.354" Y="23.035" Type="JumpStart" />
-        <Point X="54.188" Y="23.035" Type="JumpEnd" />
-        <Point X="53.135" Y="23.035" Type="JumpStart" />
-        <Point X="52.969" Y="23.035" Type="JumpEnd" />
-        <Point X="50.833" Y="23.035" />
-        <Point X="50.833" Y="23.25" />
+        <Point X="70" Y="27.562" />
+        <Point X="69.808" Y="27.562" />
+        <Point X="69.808" Y="24.596" />
+        <Point X="68.625" Y="24.596" />
+        <Point X="68.625" Y="24.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -692,13 +667,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Float" Collapsed="true">
-    <Position X="52.25" Y="23.25" Width="1.75" />
+    <Position X="68" Y="26.75" Width="1.5" />
     <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="69" Y="21.75" />
-        <Point X="69" Y="21.375" />
-        <Point X="53.052" Y="21.375" />
-        <Point X="53.052" Y="23.25" />
+        <Point X="71" Y="21.75" />
+        <Point X="71" Y="21.375" />
+        <Point X="69.921" Y="21.375" />
+        <Point X="69.921" Y="26.596" />
+        <Point X="69.904" Y="26.596" Type="JumpStart" />
+        <Point X="69.677" Y="26.596" Type="JumpEnd" />
+        <Point X="68.687" Y="26.596" />
+        <Point X="68.687" Y="26.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -707,13 +686,13 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Graph" Collapsed="true">
-    <Position X="58" Y="23.25" Width="2.25" />
+    <Position X="64" Y="21.75" Width="1.5" />
     <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="69" Y="21.75" />
-        <Point X="69" Y="21.375" />
-        <Point X="58.75" Y="21.375" />
-        <Point X="58.75" Y="23.25" />
+        <Point X="71" Y="21.75" />
+        <Point X="71" Y="21.375" />
+        <Point X="64.5" Y="21.375" />
+        <Point X="64.5" Y="21.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -722,27 +701,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.GraphEdge" Collapsed="true">
-    <Position X="58.25" Y="25.75" Width="1.75" />
+    <Position X="64" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Types\GraphEdge.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.GraphNode" Collapsed="true">
-    <Position X="54" Y="32.75" Width="2" />
-    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true" FixedToPoint="true">
+    <Position X="64" Y="23.75" Width="1.5" />
+    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="67.25" Y="22.206" />
-        <Point X="66.875" Y="22.206" />
-        <Point X="66.875" Y="24.41" />
-        <Point X="65.333" Y="24.41" Type="JumpStart" />
-        <Point X="65.167" Y="24.41" Type="JumpEnd" />
-        <Point X="63.25" Y="24.41" />
-        <Point X="63.25" Y="32.375" />
-        <Point X="61.927" Y="32.375" Type="JumpStart" />
-        <Point X="61.76" Y="32.375" Type="JumpEnd" />
-        <Point X="54.833" Y="32.375" />
-        <Point X="54.833" Y="32.75" />
+        <Point X="70" Y="27.581" />
+        <Point X="69.76" Y="27.581" />
+        <Point X="69.76" Y="23.596" />
+        <Point X="64.625" Y="23.596" />
+        <Point X="64.625" Y="23.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -751,16 +724,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Integer" Collapsed="true">
-    <Position X="56.25" Y="32.75" Width="2" />
+    <Position X="68" Y="22.75" Width="1.5" />
     <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="67.25" Y="22.206" />
-        <Point X="66.875" Y="22.206" />
-        <Point X="66.875" Y="32.375" />
-        <Point X="61.927" Y="32.375" Type="JumpStart" />
-        <Point X="61.76" Y="32.375" Type="JumpEnd" />
-        <Point X="57.25" Y="32.375" />
-        <Point X="57.25" Y="32.75" />
+        <Point X="70" Y="27.581" />
+        <Point X="69.76" Y="27.581" />
+        <Point X="69.76" Y="22.596" />
+        <Point X="68.75" Y="22.596" />
+        <Point X="68.75" Y="22.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -769,27 +740,36 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Iterator" Collapsed="true">
-    <Position X="62.75" Y="32.75" Width="2.75" />
+    <Position X="72.5" Y="23.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAAAAAAAAAAACAAAAAAAAAAAAAIQAAAAAAAAA=</HashCode>
       <FileName>Types\Iterator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.List" Collapsed="true">
-    <Position X="79.75" Y="37.25" Width="2.25" />
+    <Position X="76.5" Y="25.75" Width="1.5" />
+    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.AbstractList" FixedToPoint="true">
+      <Path>
+        <Point X="75.25" Y="22.441" />
+        <Point X="75.25" Y="23.061" />
+        <Point X="76.125" Y="23.061" />
+        <Point X="76.125" Y="26.062" />
+        <Point X="76.5" Y="26.062" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAABA=</HashCode>
       <FileName>Types\List.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Null" Collapsed="true">
-    <Position X="53.25" Y="28" Width="1.75" />
+    <Position X="66" Y="21.75" Width="1.5" />
     <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="69" Y="21.75" />
-        <Point X="69" Y="21.375" />
-        <Point X="54.271" Y="21.375" />
-        <Point X="54.271" Y="28" />
+        <Point X="71" Y="21.75" />
+        <Point X="71" Y="21.375" />
+        <Point X="66.875" Y="21.375" />
+        <Point X="66.875" Y="21.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -798,27 +778,24 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.PriorityQueue" Collapsed="true">
-    <Position X="71.75" Y="28.5" Width="3.25" />
-    <NestedTypes>
-      <Class Name="VapeTeam.Psimulex.Core.Types.PriorityQueue.Pair" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Types\PriorityQueue.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
+    <Position X="72.5" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AANAQEQACBAAgAAEEAIAgAAAAAAABBABAQEBAABAABE=</HashCode>
       <FileName>Types\PriorityQueue.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.PropertyWrapper" Collapsed="true">
-    <Position X="54.5" Y="23.25" Width="3" />
+    <Position X="66" Y="24.75" Width="1.5" />
     <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="69" Y="21.75" />
-        <Point X="69" Y="21.375" />
-        <Point X="56.125" Y="21.375" />
-        <Point X="56.125" Y="23.25" />
+        <Point X="71" Y="21.75" />
+        <Point X="71" Y="21.375" />
+        <Point X="69.921" Y="21.375" />
+        <Point X="69.921" Y="24.596" />
+        <Point X="69.843" Y="24.596" Type="JumpStart" />
+        <Point X="69.677" Y="24.596" Type="JumpEnd" />
+        <Point X="66.812" Y="24.596" />
+        <Point X="66.812" Y="24.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -827,14 +804,23 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Queue" Collapsed="true">
-    <Position X="78.75" Y="28.5" Width="2.25" />
+    <Position X="76.5" Y="24.75" Width="1.5" />
+    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.AbstractList" FixedToPoint="true">
+      <Path>
+        <Point X="75.25" Y="22.441" />
+        <Point X="75.25" Y="25.062" />
+        <Point X="76.042" Y="25.062" Type="JumpStart" />
+        <Point X="76.208" Y="25.062" Type="JumpEnd" />
+        <Point X="76.5" Y="25.062" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAAAAhAAAAAAABAAAAQAAAAAAABA=</HashCode>
       <FileName>Types\Queue.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.ReferenceType" Collapsed="true">
-    <Position X="60.75" Y="23.25" Width="2.25" />
+    <Position X="66" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABMBAAZAAQAAIAGEgDADAAAABAUAACBBAYgEKAAAABA=</HashCode>
       <FileName>Types\ReferenceType.cs</FileName>
@@ -848,34 +834,46 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Set" Collapsed="true">
-    <Position X="78.75" Y="24.5" Width="2.25" />
+    <Position X="76.5" Y="23.75" Width="1.5" />
+    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.AbstractList" FixedToPoint="true">
+      <Path>
+        <Point X="75.25" Y="22.441" />
+        <Point X="75.25" Y="24.125" />
+        <Point X="76.042" Y="24.125" Type="JumpStart" />
+        <Point X="76.208" Y="24.125" Type="JumpEnd" />
+        <Point X="76.5" Y="24.125" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAIAAEAAAQACAAAAAAADhAAAAAAAAAAAAQAAAAAQABA=</HashCode>
       <FileName>Types\Set.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Stack" Collapsed="true">
-    <Position X="78.75" Y="23" Width="2.25" />
+    <Position X="76.5" Y="22.75" Width="1.5" />
+    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.AbstractList" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="75.25" Y="22.441" />
+        <Point X="75.25" Y="23.061" />
+        <Point X="76.5" Y="23.061" />
+        <Point X="76.5" Y="23.125" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAACIAAAAAQAAAAAACBA=</HashCode>
       <FileName>Types\Stack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.String" Collapsed="true">
-    <Position X="58.5" Y="32.75" Width="2" />
-    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true" FixedToPoint="true">
+    <Position X="68" Y="25.75" Width="1.5" />
+    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="67.25" Y="22.206" />
-        <Point X="66.875" Y="22.206" />
-        <Point X="66.875" Y="24.41" />
-        <Point X="65.333" Y="24.41" Type="JumpStart" />
-        <Point X="65.167" Y="24.41" Type="JumpEnd" />
-        <Point X="63.25" Y="24.41" />
-        <Point X="63.25" Y="32.375" />
-        <Point X="61.927" Y="32.375" Type="JumpStart" />
-        <Point X="61.76" Y="32.375" Type="JumpEnd" />
-        <Point X="59.583" Y="32.375" />
-        <Point X="59.583" Y="32.75" />
+        <Point X="70" Y="27.562" />
+        <Point X="69.921" Y="27.583" />
+        <Point X="69.76" Y="27.583" />
+        <Point X="69.76" Y="25.596" />
+        <Point X="68.812" Y="25.596" />
+        <Point X="68.812" Y="25.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -884,18 +882,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Thread" Collapsed="true">
-    <Position X="60.75" Y="32.75" Width="1.75" />
-    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true" FixedToPoint="true">
+    <Position X="64" Y="24.75" Width="1.5" />
+    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="67.25" Y="22.206" />
-        <Point X="66.875" Y="22.206" />
-        <Point X="66.875" Y="24.41" />
-        <Point X="65.333" Y="24.41" Type="JumpStart" />
-        <Point X="65.167" Y="24.41" Type="JumpEnd" />
-        <Point X="63.333" Y="24.41" Type="JumpStart" />
-        <Point X="63.167" Y="24.41" Type="JumpEnd" />
-        <Point X="61.844" Y="24.41" />
-        <Point X="61.844" Y="32.75" />
+        <Point X="70" Y="27.562" />
+        <Point X="69.821" Y="27.562" />
+        <Point X="69.821" Y="24.596" />
+        <Point X="64.938" Y="24.596" />
+        <Point X="64.938" Y="24.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -904,14 +898,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Tree" Collapsed="true">
-    <Position X="63.75" Y="35.75" Width="3" />
-    <NestedTypes>
-      <Class Name="VapeTeam.Psimulex.Core.Types.Tree.TreeNodeCollection" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Types\Tree.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
+    <Position X="72.25" Y="25.75" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAIgAARAAAAAEAQECgAEQAAAEAgAQAAIAQAAAAAAARA=</HashCode>
       <FileName>Types\Tree.cs</FileName>
@@ -953,21 +940,29 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.UserDefinedType" Collapsed="true">
-    <Position X="64.25" Y="22" Width="2" />
+    <Position X="66" Y="25.75" Width="1.5" />
+    <InheritanceLine Type="VapeTeam.Psimulex.Core.Types.BaseType" FixedFromPoint="true">
+      <Path>
+        <Point X="70" Y="28" />
+        <Point X="67.74" Y="28" />
+        <Point X="67.74" Y="26.096" />
+        <Point X="67.5" Y="26.096" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACAAAAAQAAAAAAAAAAQAAAAAAABA=</HashCode>
       <FileName>Types\UserDefinedTypes.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Struct" Collapsed="true">
-    <Position X="63.5" Y="24.75" Width="3.5" />
+    <Position X="66" Y="27" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAECAAAAAAQAAAQAAABAABBAAAAABA=</HashCode>
       <FileName>Types\UserDefinedTypes.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Class" Collapsed="true">
-    <Position X="63.5" Y="28.25" Width="3.5" />
+    <Position X="66" Y="28" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Types\UserDefinedTypes.cs</FileName>
@@ -988,7 +983,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.BinaryTree" Collapsed="true">
-    <Position X="71" Y="35.75" Width="3" />
+    <Position X="73.75" Y="25.75" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAIAAAQAAAAAAAAEAgAAQAAAEAAAQAAACQCAAAAAARA=</HashCode>
       <FileName>Types\BinaryTree.cs</FileName>
@@ -1059,8 +1054,16 @@
       <FileName>Historization\HistoricalProperty.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Historization.HistoricalStack&lt;T&gt;" Collapsed="true">
-    <Position X="29" Y="27.75" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Historization.HistoricalStack&lt;T&gt;">
+    <Position X="29" Y="27.75" Width="2.5" />
+    <NestedTypes>
+      <Class Name="VapeTeam.Psimulex.Core.Historization.HistoricalStack&lt;T&gt;.StackOperation" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Historization\HistoricalStack.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAAAAAAQAAAAAAACAAAAAAAAAAAAACgA=</HashCode>
       <FileName>Historization\HistoricalStack.cs</FileName>
@@ -1087,8 +1090,8 @@
       <FileName>Historization\HistoricalVariableMap.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VapeTeam.Psimulex.Core.Historization.History" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="114.25" Y="2.5" Width="1.5" />
+  <Class Name="VapeTeam.Psimulex.Core.Historization.History" BaseTypeListCollapsed="true">
+    <Position X="114" Y="3.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAIgAAAAAACDAAAAAAAAAAAAAACAAABAA=</HashCode>
       <FileName>Historization\History.cs</FileName>
@@ -1117,14 +1120,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.Point" Collapsed="true">
-    <Position X="64.25" Y="30.25" Width="1.75" />
+    <Position X="66" Y="23.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAYAA=</HashCode>
       <FileName>Types\Point.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VapeTeam.Psimulex.Core.Types.TreeBase" Collapsed="true">
-    <Position X="67.5" Y="35.75" Width="3" />
+    <Position X="72.75" Y="24.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAAAAAAEAQAAAAAQAAAAAAgAAAAAAA=</HashCode>
       <FileName>Types\TreeBase.cs</FileName>
@@ -1250,22 +1253,22 @@
       <FileName>Types\IIndexable.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.Factories.IThreadFactory" Collapsed="true">
+  <Interface Name="VapeTeam.Psimulex.Core.Factories.IThreadFactory">
     <Position X="117.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Factories\IThreadFactory.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.Historization.IHistoricalOperation" Collapsed="true">
-    <Position X="114.25" Y="3.75" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.Historization.IHistoricalOperation">
+    <Position X="109" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Historization\IHistoricalOperation.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="VapeTeam.Psimulex.Core.Historization.IHistory" Collapsed="true">
-    <Position X="116" Y="3.75" Width="1.5" />
+  <Interface Name="VapeTeam.Psimulex.Core.Historization.IHistory">
+    <Position X="110.75" Y="3" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAIAAAAAAAACAAAAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>Historization\IHistory.cs</FileName>

@@ -101,7 +101,8 @@ namespace VapeTeam.Psimulex.Core
         /// </summary>
         public bool CanExecuteNext
         {
-            get {
+            get 
+            {
                 return PC < Program.CommandList.Count;
             }
         }
