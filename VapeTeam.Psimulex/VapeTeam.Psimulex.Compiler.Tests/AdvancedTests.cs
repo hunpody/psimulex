@@ -227,6 +227,43 @@ void main()
             }
         }
 
+        [TestMethod]
+        public void SuspiciousMemoryProblematicSwapByUserCode()
+        {
+            /* The BubbleSort test failed many times so the main logic, the swapping of
+             * two neighbour array elements was abstracted to this separate test.
+             * 
+             * The solution to this issue was to remove the autocleanup closure of from the assign
+             * command's main instruction.
+             * 
+             */
+
+            string src = @"
+void main()
+{
+	// Generate Random Int array
+	int[] array = new int[2];
+	for(int i = 0; i <array.length; i++)
+		array[i] = IntRandom(0,100);
+
+    int i=0;
+    while (i<=array.length-2) {
+        if (array[i] > array[i+1] || true)
+        {
+            int tmp = array[i]; array[i] = array[i+1]; array[i+1] = tmp;
+        }
+        ++i;
+    }
+
+    print(""OK"");
+}
+";
+
+            var result = Helpers.SystemHelper.CompileAndRun(src);
+
+            Assert.AreEqual("OK", result);
+        }
+
         #region Generated Tests
 
         [TestMethod]
