@@ -15,7 +15,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
 {
     public class PsiCodeGeneratorVisitor : PsiVisitor
     {
-        #region PsiBuilderVisitor Members   
+        #region PsiBuilderVisitor Members
 
         /*Input*/
         #region Input

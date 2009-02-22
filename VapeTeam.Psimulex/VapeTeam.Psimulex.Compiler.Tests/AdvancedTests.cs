@@ -233,9 +233,8 @@ void main()
             /* The BubbleSort test failed many times so the main logic, the swapping of
              * two neighbour array elements was abstracted to this separate test.
              * 
-             * The solution to this issue was to remove the autocleanup closure of from the assign
+             * The solution to this issue was to remove the autocleanup closure from the assign
              * command's main instruction.
-             * 
              */
 
             string src = @"

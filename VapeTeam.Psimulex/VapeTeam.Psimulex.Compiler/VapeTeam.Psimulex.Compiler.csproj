@@ -87,6 +87,7 @@
     <Compile Include="AST\PsiProgramStringBuilderVisitor.cs" />
     <Compile Include="Result\CompilerErrorCode.cs" />
     <Compile Include="Result\MessageList.cs" />
+    <Compile Include="Result\SimpleCommandPositionProvider.cs" />
     <Compile Include="Result\SourceInfoUtils.cs" />
     <Compile Include="AST\TypeEnumFactory.cs" />
     <Compile Include="Configuration\CompilerSettings.cs" />
