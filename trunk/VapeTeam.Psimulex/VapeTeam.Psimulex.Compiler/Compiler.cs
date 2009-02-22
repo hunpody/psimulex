@@ -26,7 +26,7 @@ namespace VapeTeam.Psimulex.Compiler
         #region Properties
 
         /// <summary>
-        /// The result of, the last compile.
+        /// The result of the last compile.
         /// </summary>
         public CompileResult CompileResult { get; private set; }
 
@@ -291,6 +291,8 @@ namespace VapeTeam.Psimulex.Compiler
             CompileResult.CompilerMessages = dto.CompilerMessages;
 
             CompileResult.CompiledProgram = dto.Program;
+            CompileResult.CompiledProgram.CommandPositionProvider =
+                new SimpleCommandPositionProvider(dto.CommandPositionChanges);
             CompileResult.ProgramPath = dto.ProgramPath;
 
             CompileResult.CommandPositionChanges = dto.CommandPositionChanges;

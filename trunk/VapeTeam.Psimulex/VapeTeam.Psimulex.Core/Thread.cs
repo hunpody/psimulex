@@ -5,6 +5,7 @@ using System.Text;
 using VapeTeam.Psimulex.Core.Types;
 using VapeTeam.Psimulex.Core.Common;
 using VapeTeam.Psimulex.Core.Exceptions;
+using VapeTeam.Psimulex.Core.Commands;
 
 namespace VapeTeam.Psimulex.Core
 {
@@ -94,6 +95,39 @@ namespace VapeTeam.Psimulex.Core
                 }
             }
             e.PoppedValue.Delete();
+        }
+
+        private SourcePosition GetSourcePosition(int commandIndex)
+        {
+            if (Program.CommandPositionProvider != null)
+            {
+                return Program.CommandPositionProvider.GetPosition(commandIndex);
+            }
+            else
+            {
+                return new SourcePosition();
+            }
+        }
+
+        public StackTrace GetStackTrace()
+        {
+            var stackTrace = new StackTrace();
+            stackTrace.Trace.Add(new StackTrace.StackElement
+            {
+                Command = Program[PC],
+                Position = GetSourcePosition(PC),
+                PC = PC
+            });
+            foreach (var state in CallStack.AsEnumerable())
+            {
+                stackTrace.Trace.Add(new StackTrace.StackElement
+                {
+                    Command = Program[state.PC],
+                    Position = GetSourcePosition(state.PC),
+                    PC = state.PC
+                });
+            }
+            return stackTrace;
         }
 
         /// <summary>

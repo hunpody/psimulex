@@ -19,6 +19,8 @@ namespace VapeTeam.Psimulex.Core
 
         //protected Dictionary<UserDefinedFunction, int> EntryPoints { get; private set; }
 
+        public ICommandPositionProvider CommandPositionProvider { get; set; }
+
         public Program()
         {
             Name = "";
@@ -135,7 +137,7 @@ namespace VapeTeam.Psimulex.Core
             return UserDefinedTypes[name];
         }
 
-        public UserDefinedType CreataAnInstanceOfUserDefinedType(string name)
+        public UserDefinedType CreateAnInstanceOfUserDefinedType(string name)
         {
             return UserDefinedTypes.CreatAnInstanceOf(name);
         }

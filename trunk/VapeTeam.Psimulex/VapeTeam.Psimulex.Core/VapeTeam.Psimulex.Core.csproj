@@ -61,6 +61,7 @@
     <Compile Include="Commands\PushScope.cs" />
     <Compile Include="Commands\Return.cs" />
     <Compile Include="Commands\Select.cs" />
+    <Compile Include="SourcePosition.cs" />
     <Compile Include="Commands\UnaryOperation.cs" />
     <Compile Include="Commands\ValueAccessor.cs" />
     <Compile Include="Common\DictionaryExtension.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Historization\IHistoricalOperation.cs" />
     <Compile Include="Historization\IHistory.cs" />
     <Compile Include="ICommandContext.cs" />
+    <Compile Include="ICommandPositionProvider.cs" />
     <Compile Include="IFunctionLookup.cs" />
     <Compile Include="IRegistry.cs" />
     <Compile Include="IStack.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Schedulers\RandomScheduler.cs" />
     <Compile Include="Schedulers\RoundRobinScheduler.cs" />
     <Compile Include="Stack.cs" />
+    <Compile Include="StackTrace.cs" />
     <Compile Include="State.cs" />
     <Compile Include="SystemFunction.cs" />
     <Compile Include="Thread.cs" />
