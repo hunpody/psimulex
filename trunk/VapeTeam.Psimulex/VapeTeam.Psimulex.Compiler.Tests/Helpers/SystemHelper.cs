@@ -8,6 +8,11 @@ namespace VapeTeam.Psimulex.Compiler.Tests.Helpers
 {
     class SystemHelper
     {
+        internal static string WrapInFunction(string str)
+        {
+            return @"void Main(){" + str + "}";
+        }
+
         internal static Process CreateMachineAndRunProgram(Program program)
         {
             return CreateMachineAndRunProgram(1, program);

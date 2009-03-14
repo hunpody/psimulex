@@ -112,19 +112,19 @@ return 2;
         [TestMethod]
         public void MemoryTest01()
         {
-            var result = Helpers.SystemHelper.CompileAndRunGetProcess(@"
+            var result = Helpers.SystemHelper.CompileAndRunGetProcess(Helpers.SystemHelper.WrapInFunction(@"
 for (int i=0; i<40; i++)
 {
   string s = ""hello""; 
 }
-");
+"));
             Assert.IsTrue(VapeTeam.Psimulex.Core.Memory.Instance.AllocatedBytes == 0, string.Format("Memory leak: {0} bytes.", VapeTeam.Psimulex.Core.Memory.Instance.AllocatedBytes));
         }
 
         [TestMethod]
         public void MemoryTest02()
         {
-            var result = Helpers.SystemHelper.CompileAndRunGetProcess(@"
+            var result = Helpers.SystemHelper.CompileAndRunGetProcess(Helpers.SystemHelper.WrapInFunction(@"
 for (int i=0; i<10; i++)
 {
   string s = """";
@@ -133,7 +133,7 @@ for (int i=0; i<10; i++)
     s += intrandom(60,70);  
 }
 
-");
+"));
 
             Assert.IsTrue(VapeTeam.Psimulex.Core.Memory.Instance.AllocatedBytes == 0, string.Format("Memory leak: {0} bytes.", VapeTeam.Psimulex.Core.Memory.Instance.AllocatedBytes));
         }
@@ -141,13 +141,13 @@ for (int i=0; i<10; i++)
         [TestMethod]
         public void MemoryTest03()
         {
-            var result = Helpers.SystemHelper.CompileAndRunGetProcess(@"
+            var result = Helpers.SystemHelper.CompileAndRunGetProcess(Helpers.SystemHelper.WrapInFunction(@"
 string a = ""abcdefghijklmnopqrstuvwxyz"";
 string b = ""11111111111111111111111111"";
 string c = a.ToUpper();
 string d = a + b + c;
 print(GetUsedMemory());
-");
+"));
             int mem = int.Parse(result.StandardOutput);
 
             Assert.IsTrue(mem > 52*6, string.Format("Too low memory usage. ({0} bytes)", mem));
@@ -180,13 +180,13 @@ string d = a + b + c;
         [TestMethod]
         public void TestGenAt_2008__szeptember_26_23_59_23()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int[] t = new int[2];
 t[0] = 111;
 t[1] = t[0];	
 print(t[1]);
 
-");
+"));
 
             Assert.AreEqual("111", result);
         }
@@ -195,13 +195,13 @@ print(t[1]);
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_1_09_29()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 for(int i = 0;i<10;i++)
 {
 	print(i);
 }
 
-");
+"));
 
             Assert.AreEqual("0123456789", result);
         }
@@ -211,14 +211,14 @@ for(int i = 0;i<10;i++)
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_1_11_06()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 for(int i = 0;i<10;i++)
 {
 	print(i);
 	break;
 }
 
-");
+"));
 
             Assert.AreEqual("0", result);
         }
@@ -229,7 +229,7 @@ for(int i = 0;i<10;i++)
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_12_22_38()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 for(int i = 0;i<10;i=i+1)
 {
 	for(int j = 0;j<10;j=j+1)
@@ -240,7 +240,7 @@ for(int i = 0;i<10;i=i+1)
 	print(""\n"");
 }
 
-");
+"));
 
             Assert.AreEqual(@"01234567890
 01234567891
@@ -259,7 +259,7 @@ for(int i = 0;i<10;i=i+1)
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_12_24_01()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 for(int i = 0;i<10;i++)
 {
 	for(int j = 0;j<10;j++)
@@ -269,7 +269,7 @@ for(int i = 0;i<10;i++)
 	print(""\n"");
 }
 
-");
+"));
 
             Assert.AreEqual(@"0123456789
 0123456789
@@ -288,7 +288,7 @@ for(int i = 0;i<10;i++)
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_12_24_08()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 for(int i = 0;i<10;++i++)
 {
 	for(int j = 0;j<10;j++)
@@ -298,7 +298,7 @@ for(int i = 0;i<10;++i++)
 	print(""\n"");
 }
 
-");
+"));
 
             Assert.AreEqual(@"0123456789
 0123456789
@@ -313,7 +313,7 @@ for(int i = 0;i<10;++i++)
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_12_24_19()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 for(int i = 0;i<10;++i++)
 {
 	for(int j = 0;j<10;++j++)
@@ -323,7 +323,7 @@ for(int i = 0;i<10;++i++)
 	print(""\n"");
 }
 
-");
+"));
 
             Assert.AreEqual(@"02468
 02468
@@ -338,7 +338,7 @@ for(int i = 0;i<10;++i++)
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_15_24_19()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 if(true)
 {
 print(""if"");
@@ -355,7 +355,7 @@ else
 {
 print(""else"");
 }
-");
+"));
 
             Assert.AreEqual(@"if", result);
         }
@@ -365,7 +365,7 @@ print(""else"");
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_15_24_27()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 if(false)
 {
 print(""if"");
@@ -382,7 +382,7 @@ else
 {
 print(""else"");
 }
-");
+"));
 
             Assert.AreEqual(@"elseif1", result);
         }
@@ -419,7 +419,7 @@ print(""else"");
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_15_24_43()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 if(false)
 {
 print(""if"");
@@ -436,7 +436,7 @@ else
 {
 print(""else"");
 }
-");
+"));
 
             Assert.AreEqual(@"elseif2", result);
         }
@@ -445,7 +445,7 @@ print(""else"");
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_15_24_57()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 if(false)
 {
 print(""if"");
@@ -462,7 +462,7 @@ else
 {
 print(""else"");
 }
-");
+"));
 
             Assert.AreEqual(@"else", result);
         }
@@ -472,11 +472,11 @@ print(""else"");
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_15_27_50()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 for(int i = 0; i < 10; i++)
 	if( i == 5 )
 		break;
-");
+"));
 
             Assert.AreEqual(@"", result);
         }
@@ -499,7 +499,7 @@ void main() {
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_15_28_21()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 for(int i = 0; i < 10; i++)
 {
 	print(i);
@@ -509,7 +509,7 @@ for(int i = 0; i < 10; i++)
 		break;
 	}
 }
-");
+"));
 
             Assert.AreEqual(@"012345break", result);
         }
@@ -517,14 +517,14 @@ for(int i = 0; i < 10; i++)
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_20_51_45()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 0;
 while( i < 10 )
 {
 	print(i);
 	i++;
 }
-");
+"));
 
             Assert.AreEqual(@"0123456789", result);
         }
@@ -533,14 +533,14 @@ while( i < 10 )
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_21_18_09()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 0;
 do
 {
 	print(i);
 	++i;
 }while( i < 10 );
-");
+"));
 
             Assert.AreEqual(@"0123456789", result);
         }
@@ -565,14 +565,14 @@ void main() {
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_21_18_17()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 0;
 do
 {
 	print(i);
 	++i;
 }while( i < 0 );
-");
+"));
 
             Assert.AreEqual(@"0", result);
         }
@@ -580,12 +580,12 @@ do
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_22_44_22()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 loop( int i = 0 to 10 )
 {
 print(i);
 }
-");
+"));
 
             Assert.AreEqual(@"012345678910", result);
         }
@@ -594,10 +594,10 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_22_47_08()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 loop( char ch = 'a' to 'z' )
 	print(ch);
-");
+"));
 
             Assert.AreEqual(@"abcdefghijklmnopqrstuvwxyz", result);
         }
@@ -605,10 +605,10 @@ loop( char ch = 'a' to 'z' )
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_22_51_45()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 loop( char ch = 'A' to 'Z' )
 	print(ch);
-");
+"));
 
             Assert.AreEqual(@"ABCDEFGHIJKLMNOPQRSTUVWXYZ", result);
         }
@@ -616,10 +616,10 @@ loop( char ch = 'A' to 'Z' )
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_22_52_14()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 loop( char ch = 'A' to 'z' )
 	print(ch);
-");
+"));
 
             Assert.AreEqual(@"ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz", result);
         }
@@ -640,7 +640,7 @@ void main() {
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_23_08_47()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 0;
 while( i < 10 )
 {
@@ -666,7 +666,7 @@ print(""\n"");
 
 loop( int i = 0 to 9 )
 	print(i);
-");
+"));
 
             Assert.AreEqual(@"0123456789
 0123456789
@@ -717,7 +717,7 @@ void main() {
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_23_10_44()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 loop( char ch = 'a' to 'z' )
 	print(ch);
 
@@ -725,7 +725,7 @@ print(""\n"");
 
 loop( char ch = 'A' to 'Z' )
 	print(ch);
-");
+"));
 
             Assert.AreEqual(@"abcdefghijklmnopqrstuvwxyz
 ABCDEFGHIJKLMNOPQRSTUVWXYZ", result);
@@ -735,7 +735,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ", result);
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_23_15_44()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 loop( char ch = 'a' to 'z' )
 	print(ch);
 
@@ -761,7 +761,7 @@ loop( char ch = 'A' to 'Z' )
 		break;
 	print(ch);
 }
-");
+"));
 
             Assert.AreEqual(@"abcdefghijklmnopqrstuvwxyz
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -774,7 +774,7 @@ ABC", result);
         [TestMethod]
         public void TestGenAt_2008__szeptember_27_23_18_15()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 if(true)
 	print(""IF\n"");
 elseif(true)
@@ -795,7 +795,7 @@ elseif(false)
 	print(""ELSEIF\n"");
 else
 	print(""ELSE\n"");
-");
+"));
 
             Assert.AreEqual(@"IF
 ELSEIF
@@ -840,7 +840,7 @@ ELSE
         [TestMethod]
         public void TestGenAt_2008__szeptember_28_18_24_20()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 list L;
 L.Insert(0);
 L.Insert(1);
@@ -848,7 +848,7 @@ L.Insert(2);
 
 foreach( int i in L )
 	print(i);
-");
+"));
 
             Assert.AreEqual(@"012", result);
         }
@@ -856,7 +856,7 @@ foreach( int i in L )
         [TestMethod]
         public void TestGenAt_2008__szeptember_28_19_06_53()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 list L;
 
 for(int i = 0; i < 10; ++i)
@@ -873,7 +873,7 @@ while(it.movenext())
 	int i=it.current();
 	print(i);
 }
-");
+"));
 
             Assert.AreEqual(@"0123456789
 0123456789", result);
