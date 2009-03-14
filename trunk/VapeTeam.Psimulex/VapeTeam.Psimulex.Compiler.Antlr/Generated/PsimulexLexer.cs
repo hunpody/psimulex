@@ -1,4 +1,9 @@
-// $ANTLR 3.1.1 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2009-01-21 23:28:34
+// $ANTLR 3.1.2 C:\\Works\\Psimulex\\VapeTeam.Psimulex\\VapeTeam.Psimulex.Compiler.Antlr\\Grammar\\Psimulex.g 2009-03-14 13:32:17
+
+// The variable 'variable' is assigned but its value is never used.
+#pragma warning disable 168, 219
+// Unreachable code detected.
+#pragma warning disable 162
 
 using System;
 using Antlr.Runtime;
@@ -4481,9 +4486,9 @@ public partial class PsimulexLexer : Lexer {
 
                     			default:
                     			    if ( cnt44 >= 1 ) goto loop44;
-                    		            EarlyExitException eee =
+                    		            EarlyExitException eee44 =
                     		                new EarlyExitException(44, input);
-                    		            throw eee;
+                    		            throw eee44;
                     	    }
                     	    cnt44++;
                     	} while (true);
@@ -4554,9 +4559,9 @@ public partial class PsimulexLexer : Lexer {
 
                     			default:
                     			    if ( cnt46 >= 1 ) goto loop46;
-                    		            EarlyExitException eee =
+                    		            EarlyExitException eee46 =
                     		                new EarlyExitException(46, input);
-                    		            throw eee;
+                    		            throw eee46;
                     	    }
                     	    cnt46++;
                     	} while (true);
@@ -4595,9 +4600,9 @@ public partial class PsimulexLexer : Lexer {
 
                     			default:
                     			    if ( cnt47 >= 1 ) goto loop47;
-                    		            EarlyExitException eee =
+                    		            EarlyExitException eee47 =
                     		                new EarlyExitException(47, input);
-                    		            throw eee;
+                    		            throw eee47;
                     	    }
                     	    cnt47++;
                     	} while (true);
