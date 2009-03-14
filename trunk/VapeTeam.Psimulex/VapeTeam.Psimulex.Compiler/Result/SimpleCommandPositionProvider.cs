@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VapeTeam.Psimulex.Core;
 
 namespace VapeTeam.Psimulex.Compiler.Result
 {
@@ -15,13 +16,27 @@ namespace VapeTeam.Psimulex.Compiler.Result
 
         private List<Pair> positions = new List<Pair>();
 
-        public SimpleCommandPositionProvider(CommandPositionChanges cmdChanges)
+        public SimpleCommandPositionProvider(CommandPositionChanges cmdChanges, Program program)
         {
+            program.JoinCommands();
+
+            //int currentCmdIndex = 0;
+            //int previousCommandIndex = -1;
             foreach (var ci in cmdChanges.CommandInfoList)
             {
+                if (cmdChanges.CommandInfoList.FirstOrDefault() == ci)
+                    continue;
+
+                var func = program.GetFunction(ci.CommandID.FunctionName);//, ci.CommandID.FunctionParameterCount);
+
+                if (func == null)
+                    continue;
+
+                int currentCmdIndex = program.CommandList.IndexOf(func.Commands[ci.CommandID.CommandIndex]);
+
                 positions.Add(new Pair
                 {
-                    CmdIndex = ci.CommandID.CommandIndex,
+                    CmdIndex = currentCmdIndex,
                     Position = new VapeTeam.Psimulex.Core.SourcePosition
                     {
                         FileName = ci.Interval.FileName,
@@ -36,9 +51,15 @@ namespace VapeTeam.Psimulex.Compiler.Result
 
         #region ICommandPositionProvider Members
 
+
+        /// <summary>
+        /// Gets the last position that is before the supplied command.
+        /// </summary>
+        /// <param name="commandIndex"></param>
+        /// <returns></returns>
         public VapeTeam.Psimulex.Core.SourcePosition GetPosition(int commandIndex)
         {
-            var p = positions.LastOrDefault(pos => pos.CmdIndex < commandIndex);
+            var p = positions.LastOrDefault(pos => pos.CmdIndex <= commandIndex);
             if (p != default(Pair))
             {
                 return p.Position;

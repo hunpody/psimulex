@@ -292,7 +292,7 @@ namespace VapeTeam.Psimulex.Compiler
 
             CompileResult.CompiledProgram = dto.Program;
             CompileResult.CompiledProgram.CommandPositionProvider =
-                new SimpleCommandPositionProvider(dto.CommandPositionChanges);
+                new SimpleCommandPositionProvider(dto.CommandPositionChanges, CompileResult.CompiledProgram);
             CompileResult.ProgramPath = dto.ProgramPath;
 
             CompileResult.CommandPositionChanges = dto.CommandPositionChanges;

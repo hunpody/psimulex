@@ -30,25 +30,38 @@ namespace VapeTeam.Psimulex.Core
             //EntryPoints = new Dictionary<UserDefinedFunction, int>();
         }
 
+        private void EnsureNotJoined()
+        {
+            if (isJoined)
+                throw new Psimulex.Core.Exceptions.PsimulexCoreException("Invalid operation. The program's functions have been joined already.");                
+        }
+
+        private bool isJoined = false;
+
         /// <summary>
         /// Joins every user-defined function to the end of the command list.
         /// After calling this function you should NOT change the command list.
         /// </summary>
         public void JoinCommands()
         {
-            originalCommandList = CommandList;
-            CommandList = new CommandList();
-            CommandList.AddRange(originalCommandList);
-            if (CommandList.Count > 0 && !(CommandList.Last() is Return))
+            if (!isJoined)
             {
-                CommandList.Add(new Return(false));
-            }
-            //EntryPoints.Clear();
-            foreach (var udf in Functions)
-            {
-                //EntryPoints.Add(udf, CommandList.Count);
-                udf.EntryPoint = CommandList.Count;
-                CommandList.AddRange(udf.Commands);
+                originalCommandList = CommandList;
+                CommandList = new CommandList();
+                CommandList.AddRange(originalCommandList);
+                if (CommandList.Count > 0 && !(CommandList.Last() is Return))
+                {
+                    CommandList.Add(new Return(false));
+                }
+                //EntryPoints.Clear();
+                foreach (var udf in Functions)
+                {
+                    //EntryPoints.Add(udf, CommandList.Count);
+                    udf.EntryPoint = CommandList.Count;
+                    CommandList.AddRange(udf.Commands);
+                }
+
+                isJoined = true;
             }
         }
 
@@ -66,11 +79,13 @@ namespace VapeTeam.Psimulex.Core
         /// <param name="command">The command</param>
         public void AddCommand(ICommand command)
         {
+            EnsureNotJoined();
             CommandList.Add(command);
         }
 
         public void AddFunction(UserDefinedFunction function)
         {
+            EnsureNotJoined();
             if (GetFunction(function.Name, function.ParameterCount) != null)
             {
                 throw new Exceptions.PsimulexCoreException(string.Format("There is already a user defined function with name \"{0}\" and having {1} parameters.",
@@ -81,6 +96,7 @@ namespace VapeTeam.Psimulex.Core
 
         public void AddFunctions(List<UserDefinedFunction> functionList)
         {
+            EnsureNotJoined();
             foreach (var func in functionList)
                 AddFunction(func);
         }
@@ -107,7 +123,7 @@ namespace VapeTeam.Psimulex.Core
         {
             get
             {
-                return CommandList.Count + Functions.Sum(f => f.Commands.Count);
+                return CommandList.Count + (isJoined ? 0 : Functions.Sum(f => f.Commands.Count));
             }
         }
 
@@ -129,6 +145,7 @@ namespace VapeTeam.Psimulex.Core
 
         public void AddUserDefinedType(ITypeDescriptor td)
         {
+            EnsureNotJoined();
             UserDefinedTypes.AddDescriptor(td);
         }
 
