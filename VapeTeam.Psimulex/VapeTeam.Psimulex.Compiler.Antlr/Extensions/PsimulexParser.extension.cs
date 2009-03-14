@@ -21,7 +21,6 @@ public partial class PsimulexParser
         //string msg = string.Format("{0}", e.ToString());
 
 
-        // Evri data
         /*
           string msg = string.Format(
 @"
@@ -58,24 +57,24 @@ Input               : {13}
          */
 
         string msg = string.Format(" {0} [{1}:{2}]",
-                e.UnexpectedType != -1 ? PsimulexParser.tokenNames[e.UnexpectedType] : "unknow",
+                e.UnexpectedType != -1 ? PsimulexParser.tokenNames[e.UnexpectedType] : "unknown",
                 e.Line, e.CharPositionInLine);
 
         if (e.GetType() == typeof(MismatchedTokenException))
         {
-            msg = string.Format("Mismatched Token: {0}", msg);
+            msg = string.Format("Mismatched token: {0}", msg);
         }
         else if (e.GetType() == typeof(MissingTokenException))
         {
-            msg = string.Format("Missing Token: {0}", msg);
+            msg = string.Format("Missing token: {0}", msg);
         }
         else if (e.GetType() == typeof(NoViableAltException))
         {
-            msg = string.Format("Unknow symbol sequens: {0}", msg);     // Valami általánosat kéne. Jobb ötletem egynelőre nincs.
+            msg = string.Format("Unexpected symbol: {0}", msg);     
         }
         else
         {
-            msg = string.Format("Problem: {0}", msg);     // Valami általánosat kéne. Jobb ötletem egynelőre nincs.
+            msg = string.Format("Problem: {0}", msg);    
         }
 
         _errorMessages.Add(msg);
