@@ -63,33 +63,33 @@ namespace VapeTeam.Psimulex.Compiler.Tests
         [TestMethod]
         public void PostfixPlusPlus()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int a=10;
 print(a++);
 print(a);
-".WrapInMainFunction());
+"));
             Assert.AreEqual("1011", result);
         }
 
         [TestMethod]
         public void PrefixPlusPlus()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int a=10;
 print(--a);
 print(a);
-".WrapInMainFunction());
+"));
             Assert.AreEqual("99", result);
         }
 
         [TestMethod]
         public void ArraySizeAsExpression()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int[] a = new int[(7+5)*2];
 print(a[0]);
 print(a.Size);
-".WrapInMainFunction());
+"));
             Assert.AreEqual("024", result);
         }
 
@@ -178,12 +178,12 @@ void main()
         [TestMethod]
         public void TestGenAt_2008__szeptember_22_23_11_42()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int a;
 a = 10;
 a += 10;
 print(a);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("20", result);
         }
@@ -191,7 +191,7 @@ print(a);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_0_36_29()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int b;
 int c;
 int a;
@@ -199,7 +199,7 @@ a = b = c = 20;
 print(a);
 print(b);
 print(c);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("202020", result);
         }
@@ -207,9 +207,9 @@ print(c);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_12_49()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print(10==10);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("True", result);
         }
@@ -219,9 +219,9 @@ print(10==10);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_12_52()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print(10!=10);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("False", result);
         }
@@ -229,9 +229,9 @@ print(10!=10);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_14_47()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print(10<10);
-");
+"));
 
             Assert.AreEqual("False", result);
         }
@@ -241,9 +241,9 @@ print(10<10);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_14_51()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print(10<=10);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("True", result);
         }
@@ -253,9 +253,9 @@ print(10<=10);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_14_55()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print(10>10);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("False", result);
         }
@@ -265,9 +265,9 @@ print(10>10);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_14_59()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print(10>=10);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("True", result);
         }
@@ -277,12 +277,12 @@ print(10>=10);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_27_02()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 0;
 i += 1;
 i = ( ( 10 + i - 11 + i) * 10 / 10 ) - 1;
 print(i);
-");
+"));
 
             Assert.AreEqual("0", result);
         }
@@ -292,10 +292,10 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_27_20()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 10 * 10;
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("100", result);
         }
@@ -305,10 +305,10 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_27_27()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 20 / 10;
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("2", result);
         }
@@ -318,10 +318,10 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_27_30()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 20 - 10;
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("10", result);
         }
@@ -331,10 +331,10 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_27_32()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 20 + 10;
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("30", result);
         }
@@ -344,10 +344,10 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_27_42()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 20 % 10;
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("0", result);
         }
@@ -357,10 +357,10 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_28_05()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 20 % 11;
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("9", result);
         }
@@ -370,10 +370,10 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_28_11()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 20 % 15;
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("5", result);
         }
@@ -383,10 +383,10 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_28_13()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 20 % 19;
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("1", result);
         }
@@ -396,9 +396,9 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_28_30()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print(12 % 2 == 0);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("True", result);
         }
@@ -408,9 +408,9 @@ print(12 % 2 == 0);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_17_45_32()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print((int)10);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("10", result);
         }
@@ -420,9 +420,9 @@ print((int)10);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_19_19_21()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print((int)'1');
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("1", result);
         }
@@ -432,9 +432,9 @@ print((int)'1');
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_19_24_36()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print((int)'9');
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("9", result);
         }
@@ -444,9 +444,9 @@ print((int)'9');
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_19_24_53()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print((int)""120"");
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("120", result);
         }
@@ -454,9 +454,9 @@ print((int)""120"");
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_20_59_16()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print((int)'a');
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("97", result);
         }
@@ -466,9 +466,9 @@ print((int)'a');
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_22_22_15()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print(true || true);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("True", result);
         }
@@ -477,9 +477,9 @@ print(true || true);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_22_22_58()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print( true || 10 / 0 == 0);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("True", result);
         }
@@ -491,9 +491,9 @@ print( true || 10 / 0 == 0);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_22_28_33()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print( false || false);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("False", result);
         }
@@ -503,9 +503,9 @@ print( false || false);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_22_28_37()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 print( false || true);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("True", result);
         }
@@ -515,13 +515,13 @@ print( false || true);
         [TestMethod]
         public void TestGenAt_2008__szeptember_23_22_29_31()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int a = 10;
 int b = 10;
 int c;
 a += b -= c = 5;
 print (a);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("15", result);
         }
@@ -531,11 +531,11 @@ print (a);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_11_47()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 10;
 print(------i++);
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("78", result);
         }
@@ -545,11 +545,11 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_12_04()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 10;
 print(!i++);
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("False11", result);
         }
@@ -558,11 +558,11 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_14_30()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 10;
 print((int)'a');
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("9710", result);
         }
@@ -571,11 +571,11 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_15_37()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = (int)'a';
 print((char)(i++));
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("a98", result);
         }
@@ -585,11 +585,11 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_15_47()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = (int)'a';
 print((char)(i++));
 print((char)i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("ab", result);
         }
@@ -599,11 +599,11 @@ print((char)i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_16_08()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = (int)'a';
 print(++--++--++i++);
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("9899", result);
         }
@@ -613,11 +613,11 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_16_13()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 10;
 print(++--++--++i++);
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("1112", result);
         }
@@ -627,11 +627,11 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_16_22()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 10;
 print(-++--++--++i++);
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("-1112", result);
         }
@@ -641,11 +641,11 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_16_27()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 10;
 print(!-++--++--++i++);
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("False12", result);
         }
@@ -655,12 +655,12 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_14_17_46()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 int i = 0;
 print(!--i++);
 print(-++--++--++i++);
 print(i);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("True-12", result);
         }
@@ -669,11 +669,11 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_17_00_03()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 	int[] t = new int[2];
 	t[0] = 111;
 	print(t[0]);
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("111", result);
         }
@@ -681,13 +681,13 @@ print(i);
         [TestMethod]
         public void TestGenAt_2008__szeptember_25_17_04_32()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 	int[] t = new int[2];
 	t[0] = 111;
 	t[1] = t[0];	
 	print(t[1]);
 
-".WrapInMainFunction());
+"));
 
             Assert.AreEqual("111", result);
         }

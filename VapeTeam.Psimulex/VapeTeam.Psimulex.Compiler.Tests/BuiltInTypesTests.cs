@@ -82,7 +82,7 @@ p.removemax();
 writeline(q==p);
 write((list)(p + 5 + 6 + 7));
 ";
-            var result = Helpers.SystemHelper.CompileAndRun(src);
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(src));
             Assert.AreEqual(@"True False True False
 (2, 5, 6, 7) ", result);
         }
@@ -109,7 +109,7 @@ write(p);
 write(p[0]);
 
 ";
-            var result = Helpers.SystemHelper.CompileAndRun(src);
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(src));
             Assert.AreEqual(@"9 155 True True True <(Priority: 2, Value: 5), (Priority: -3, Value: 155)> <(Priority: 2, Value: 5)> 5 ", result);
         }
 
@@ -130,7 +130,7 @@ writeline(q);
 write(p);
 ";
 
-            var result = Helpers.SystemHelper.CompileAndRun(src);
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(src));
             Assert.AreEqual(@"False <(Priority: 3, Value: 4), (Priority: 3, Value: 4), (Priority: 1, Value: 2)>
 <(Priority: 3, Value: 4), (Priority: 1, Value: 2)> ", result);
         }
@@ -155,7 +155,7 @@ print(t);
 
 ";
 
-            var result = Helpers.SystemHelper.CompileAndRun(src);
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(src));
             Assert.AreEqual(@"154
 8 (4, 15 (12), 9)", result);
         }
@@ -179,7 +179,7 @@ print(r.Value == t.Value);
 
 ";
 
-            var result = Helpers.SystemHelper.CompileAndRun(src);
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(src));
             Assert.AreEqual(@"TrueTrue", result);
         }
 
@@ -202,7 +202,7 @@ print(r.Value == t.Value);
 
 ";
 
-            var result = Helpers.SystemHelper.CompileAndRun(src);
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(src));
             Assert.AreEqual(@"TrueTrue", result);
         }
 
@@ -240,7 +240,7 @@ print(t.value == t.children[4].value);
 print(t.value == t.children[4].children[3].value);
 
 ";
-            var result = Helpers.SystemHelper.CompileAndRun(src);
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(src));
             Assert.AreEqual(@"TrueTrueTrueTrueFalseFalseFalseFalse", result);
         }
 
@@ -249,7 +249,7 @@ print(t.value == t.children[4].children[3].value);
         [TestMethod]
         public void TestGenAt_2008__szeptember_28_23_28_17()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 list L;
 
 for(int i = 0; i < 10; ++i)
@@ -290,7 +290,7 @@ for(int i = 0; i < L.size; ++i)
 L.Clear();
 print(""\n"" + L.Length);
 print(L.IsEmpty);
-");
+"));
 
             Assert.AreEqual(@"10 20 30 40 50 60 70 80 90 100 
 10, 100, 10, 10, 100
@@ -303,7 +303,7 @@ print(L.IsEmpty);
         [TestMethod]
         public void TestGenAt_2008__szeptember_28_23_46_01()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 queue q;
 
 q.Insert( 10 );
@@ -339,7 +339,7 @@ print(q.DeQueue() + "" "");
 print(q.DeQueue() + "" "");
 print(q.DeQueue() + "" "");
 print(q.size);
-");
+"));
 
             Assert.AreEqual(@"10 20 
 10 20 
@@ -352,7 +352,7 @@ print(q.size);
         [TestMethod]
         public void TestGenAt_2008__szeptember_29_0_33_08()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 stack s;
 
 for( int i = 0; i < 10; ++i )
@@ -376,7 +376,7 @@ while( s.size != 0)
 	write(s.top);
 	s.pop();
 }
-");
+"));
 
             Assert.AreEqual(@"100 90 80 70 60 50 40 30 20 10 
 100 90 80 70 60 50 40 30 20 10 
@@ -387,7 +387,7 @@ while( s.size != 0)
         [TestMethod]
         public void TestGenAt_2008__szeptember_30_13_46_15()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
 queue q;
 q.insert(1);
 q.insert(2);
@@ -433,7 +433,7 @@ queue a;
 queue b;
 writeline(a==b);
 
-");
+"));
 
             Assert.AreEqual(@">1, 2, 3>
 >3, 2, 1>

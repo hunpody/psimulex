@@ -96,7 +96,7 @@ tokens {
 }
 
 compilationUnit
-    :	( simpleProgram | multiFunctionalProgram )? EOF!
+    :	( /*simpleProgram |*/ multiFunctionalProgram )? EOF!
     ;
 
 simpleProgram

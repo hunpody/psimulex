@@ -63,7 +63,7 @@ namespace VapeTeam.Psimulex.Compiler.Tests
         [TestMethod]
         public void SimpleHelloWorld1()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"print(""Hello world!"");");
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"print(""Hello world!"");"));
 
             Assert.AreEqual("Hello world!", result);
         }
@@ -71,7 +71,7 @@ namespace VapeTeam.Psimulex.Compiler.Tests
         [TestMethod]
         public void SimpleBasicVariableInitialization1()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
                 int i = 10;
                 bool bt = true;
                 bool bf = false;
@@ -81,7 +81,7 @@ namespace VapeTeam.Psimulex.Compiler.Tests
                 print(bt);
                 print(bf);
                 print(s);
-                print(c);");
+                print(c);"));
 
             Assert.AreEqual("10TrueFalsealmac", result);
         }
@@ -89,7 +89,7 @@ namespace VapeTeam.Psimulex.Compiler.Tests
         [TestMethod]
         public void SimpleEscapeCharUse1()
         {
-            var result = Helpers.SystemHelper.CompileAndRun(@"
+            var result = Helpers.SystemHelper.CompileAndRun(Helpers.SystemHelper.WrapInFunction(@"
                 string sEsc = ""a\na\'a\""a\\a"";
                 char cEscSQ = '\'';
                 char cEscDQ = '\""';
@@ -97,7 +97,7 @@ namespace VapeTeam.Psimulex.Compiler.Tests
                 print(cEscSQ);
                 print(cEscDQ);
                 print(cEscBS);
-                print(sEsc);");
+                print(sEsc);"));
 
             Assert.AreEqual("'\"\\a\r\na'a\"a\\a", result);
         }
