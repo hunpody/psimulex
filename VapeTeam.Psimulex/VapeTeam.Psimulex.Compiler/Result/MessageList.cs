@@ -80,5 +80,12 @@ namespace VapeTeam.Psimulex.Compiler.Result
     public class AntlrError : Message
     {
         public override MessageType Type { get { return MessageType.Antlr; } }
+
+        public override string ToString()
+        {
+            return string.Format(
+                "{0} : In file \"{1}\" {2}",
+                Type.ToString(), Interval.FileName, MessageText);
+        }
     }
 }
