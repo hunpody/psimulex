@@ -67,7 +67,7 @@ namespace VapeTeam.Psimulex.Compiler.Tests
 int a=10;
 print(a++);
 print(a);
-");
+".WrapInMainFunction());
             Assert.AreEqual("1011", result);
         }
 
@@ -78,7 +78,7 @@ print(a);
 int a=10;
 print(--a);
 print(a);
-");
+".WrapInMainFunction());
             Assert.AreEqual("99", result);
         }
 
@@ -89,7 +89,7 @@ print(a);
 int[] a = new int[(7+5)*2];
 print(a[0]);
 print(a.Size);
-");
+".WrapInMainFunction());
             Assert.AreEqual("024", result);
         }
 
@@ -183,7 +183,7 @@ int a;
 a = 10;
 a += 10;
 print(a);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("20", result);
         }
@@ -199,7 +199,7 @@ a = b = c = 20;
 print(a);
 print(b);
 print(c);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("202020", result);
         }
@@ -209,7 +209,7 @@ print(c);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print(10==10);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("True", result);
         }
@@ -221,7 +221,7 @@ print(10==10);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print(10!=10);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("False", result);
         }
@@ -243,7 +243,7 @@ print(10<10);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print(10<=10);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("True", result);
         }
@@ -255,7 +255,7 @@ print(10<=10);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print(10>10);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("False", result);
         }
@@ -267,7 +267,7 @@ print(10>10);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print(10>=10);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("True", result);
         }
@@ -295,7 +295,7 @@ print(i);
             var result = Helpers.SystemHelper.CompileAndRun(@"
 int i = 10 * 10;
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("100", result);
         }
@@ -308,7 +308,7 @@ print(i);
             var result = Helpers.SystemHelper.CompileAndRun(@"
 int i = 20 / 10;
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("2", result);
         }
@@ -321,7 +321,7 @@ print(i);
             var result = Helpers.SystemHelper.CompileAndRun(@"
 int i = 20 - 10;
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("10", result);
         }
@@ -334,7 +334,7 @@ print(i);
             var result = Helpers.SystemHelper.CompileAndRun(@"
 int i = 20 + 10;
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("30", result);
         }
@@ -347,7 +347,7 @@ print(i);
             var result = Helpers.SystemHelper.CompileAndRun(@"
 int i = 20 % 10;
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("0", result);
         }
@@ -360,7 +360,7 @@ print(i);
             var result = Helpers.SystemHelper.CompileAndRun(@"
 int i = 20 % 11;
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("9", result);
         }
@@ -373,7 +373,7 @@ print(i);
             var result = Helpers.SystemHelper.CompileAndRun(@"
 int i = 20 % 15;
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("5", result);
         }
@@ -386,7 +386,7 @@ print(i);
             var result = Helpers.SystemHelper.CompileAndRun(@"
 int i = 20 % 19;
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("1", result);
         }
@@ -398,7 +398,7 @@ print(i);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print(12 % 2 == 0);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("True", result);
         }
@@ -410,7 +410,7 @@ print(12 % 2 == 0);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print((int)10);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("10", result);
         }
@@ -422,7 +422,7 @@ print((int)10);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print((int)'1');
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("1", result);
         }
@@ -434,7 +434,7 @@ print((int)'1');
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print((int)'9');
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("9", result);
         }
@@ -446,7 +446,7 @@ print((int)'9');
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print((int)""120"");
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("120", result);
         }
@@ -456,7 +456,7 @@ print((int)""120"");
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print((int)'a');
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("97", result);
         }
@@ -468,7 +468,7 @@ print((int)'a');
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print(true || true);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("True", result);
         }
@@ -479,7 +479,7 @@ print(true || true);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print( true || 10 / 0 == 0);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("True", result);
         }
@@ -493,7 +493,7 @@ print( true || 10 / 0 == 0);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print( false || false);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("False", result);
         }
@@ -505,7 +505,7 @@ print( false || false);
         {
             var result = Helpers.SystemHelper.CompileAndRun(@"
 print( false || true);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("True", result);
         }
@@ -521,7 +521,7 @@ int b = 10;
 int c;
 a += b -= c = 5;
 print (a);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("15", result);
         }
@@ -535,7 +535,7 @@ print (a);
 int i = 10;
 print(------i++);
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("78", result);
         }
@@ -549,7 +549,7 @@ print(i);
 int i = 10;
 print(!i++);
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("False11", result);
         }
@@ -562,7 +562,7 @@ print(i);
 int i = 10;
 print((int)'a');
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("9710", result);
         }
@@ -575,7 +575,7 @@ print(i);
 int i = (int)'a';
 print((char)(i++));
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("a98", result);
         }
@@ -589,7 +589,7 @@ print(i);
 int i = (int)'a';
 print((char)(i++));
 print((char)i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("ab", result);
         }
@@ -603,7 +603,7 @@ print((char)i);
 int i = (int)'a';
 print(++--++--++i++);
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("9899", result);
         }
@@ -617,7 +617,7 @@ print(i);
 int i = 10;
 print(++--++--++i++);
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("1112", result);
         }
@@ -631,7 +631,7 @@ print(i);
 int i = 10;
 print(-++--++--++i++);
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("-1112", result);
         }
@@ -645,7 +645,7 @@ print(i);
 int i = 10;
 print(!-++--++--++i++);
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("False12", result);
         }
@@ -660,7 +660,7 @@ int i = 0;
 print(!--i++);
 print(-++--++--++i++);
 print(i);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("True-12", result);
         }
@@ -673,7 +673,7 @@ print(i);
 	int[] t = new int[2];
 	t[0] = 111;
 	print(t[0]);
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("111", result);
         }
@@ -687,7 +687,7 @@ print(i);
 	t[1] = t[0];	
 	print(t[1]);
 
-");
+".WrapInMainFunction());
 
             Assert.AreEqual("111", result);
         }

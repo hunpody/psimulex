@@ -48,6 +48,7 @@
     <Compile Include="ExpressionTests.cs" />
     <Compile Include="HelloWorldTests.cs" />
     <Compile Include="Helpers\CompilerProxy.cs" />
+    <Compile Include="Helpers\ProgramStringManipulators.cs" />
     <Compile Include="Helpers\PsiNodHelpers.cs" />
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="Helpers\TestFileHandler.cs" />

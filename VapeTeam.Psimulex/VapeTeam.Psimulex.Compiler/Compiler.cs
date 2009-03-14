@@ -52,7 +52,7 @@ namespace VapeTeam.Psimulex.Compiler
             sourceFileName = Path.GetFileName(fullPath);
 
             // Data Transfer Object
-            var dto = new CompilerDTO{ ProgramPath = Path.GetDirectoryName(fullPath) };            
+            var dto = new CompilerDTO { ProgramPath = Path.GetDirectoryName(fullPath) };
 
             // Resolve Imports
             ResolveImports(source, sourceFileName, dto);
