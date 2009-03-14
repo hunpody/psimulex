@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.1.0.39723, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL" />
-    <Reference Include="Antlr3.Utility, Version=0.1.0.39726, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL" />
+    <Reference Include="antlr.runtime, Version=2.7.7.3, Culture=neutral, PublicKeyToken=d7701e059243744f" />
+    <Reference Include="Antlr3.Runtime, Version=3.1.2.41038, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL" />
+    <Reference Include="Antlr3.Utility, Version=0.1.0.41038, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -63,7 +64,8 @@
     <Compile Include="PsiNodeParser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="antlrworks-1.2.1.jar" />
+    <Content Include="antlrworks-1.2.3.jar" />
+    <Content Include="Runtime\antlr.runtime.dll" />
     <Content Include="Runtime\Antlr3.Runtime.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
