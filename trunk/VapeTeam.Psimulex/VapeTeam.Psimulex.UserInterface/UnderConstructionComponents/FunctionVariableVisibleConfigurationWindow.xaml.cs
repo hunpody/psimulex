@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Collections;
 
 using VapeTeam.Psimulex.Compiler.AST;
+using VapeTeam.Psimulex.DisplayConverter;
 
 namespace VapeTeam.Psimulex.UserInterface
 {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Controls;
 using VapeTeam.Psimulex.Compiler.Result;
 
 namespace VapeTeam.Psimulex.Compiler.AST
@@ -56,25 +55,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 child.Parent = this;
                 Children.Add(child);
             }
-        }
-
-        public TreeViewItem ToTreeView(List<KeyValuePair<PsiFunctionsVariablesNode,CheckBox>> list)
-        {
-            TreeViewItem twi = new TreeViewItem();
-            twi.IsExpanded = true;
-
-            CheckBox cb = new CheckBox();
-            cb.IsChecked = IsMarked;
-            cb.Content = ToString(ViewConfig[0], ViewConfig[1]);
-
-            twi.Header = cb;
-
-            if (Children != null)
-                Children.ForEach(item => twi.Items.Add((item as PsiFunctionsVariablesNode).ToTreeView(list)));
-
-            list.Add(new KeyValuePair<PsiFunctionsVariablesNode,CheckBox>(this,cb));
-
-            return twi;
         }
 
         public bool StructuralEquals(PsiFunctionsVariablesNode node)

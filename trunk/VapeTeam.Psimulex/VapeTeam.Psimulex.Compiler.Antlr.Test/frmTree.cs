@@ -21,19 +21,19 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 
         private void Init()
         {
-            // AST -> TreeView
-            treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.All));
-            treeView.SelectedNode = treeView.Nodes[0];
-            treeView.ExpandAll();
-            treeView.Nodes[0].EnsureVisible();
+            //// AST -> TreeView
+            //treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.All));
+            //treeView.SelectedNode = treeView.Nodes[0];
+            //treeView.ExpandAll();
+            //treeView.Nodes[0].EnsureVisible();
 
-            // Collapse Import, Typedef, Global Variable Declaration sections
-            if (treeView.Nodes[0].GetNodeCount(false) > 2)
-            {
-                treeView.Nodes[0].Nodes[0].Collapse();
-                treeView.Nodes[0].Nodes[1].Collapse();
-                treeView.Nodes[0].Nodes[2].Collapse();
-            }
+            //// Collapse Import, Typedef, Global Variable Declaration sections
+            //if (treeView.Nodes[0].GetNodeCount(false) > 2)
+            //{
+            //    treeView.Nodes[0].Nodes[0].Collapse();
+            //    treeView.Nodes[0].Nodes[1].Collapse();
+            //    treeView.Nodes[0].Nodes[2].Collapse();
+            //}
         }
 
         private void frmTree_Load(object sender, EventArgs e)
@@ -43,26 +43,26 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.Test
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            treeView.Nodes.Clear();
-            treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.All));
-            treeView.SelectedNode = treeView.Nodes[0];
-            treeView.ExpandAll();
+            //treeView.Nodes.Clear();
+            //treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.All));
+            //treeView.SelectedNode = treeView.Nodes[0];
+            //treeView.ExpandAll();
         }
 
         private void valuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            treeView.Nodes.Clear();
-            treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.Values));
-            treeView.SelectedNode = treeView.Nodes[0];
-            treeView.ExpandAll();
+            //treeView.Nodes.Clear();
+            //treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.Values));
+            //treeView.SelectedNode = treeView.Nodes[0];
+            //treeView.ExpandAll();
         }
 
         private void hibridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            treeView.Nodes.Clear();
-            treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.Hibrid));
-            treeView.SelectedNode = treeView.Nodes[0];
-            treeView.ExpandAll();
+            //treeView.Nodes.Clear();
+            //treeView.Nodes.Add(PsiNodeConverter.ToWFTreeNode(PsiNode, ViewMode.Hibrid));
+            //treeView.SelectedNode = treeView.Nodes[0];
+            //treeView.ExpandAll();
         }
     }
 }

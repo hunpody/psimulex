@@ -252,6 +252,10 @@
       <Project>{64AE91ED-9627-44F2-9CD5-FC04DA7310EC}</Project>
       <Name>VapeTeam.Psimulex.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VapeTeam.Psimulex.DisplayConverter\VapeTeam.Psimulex.DisplayConverter.csproj">
+      <Project>{1599540D-6438-4BCA-9D4B-C3A2289A3E66}</Project>
+      <Name>VapeTeam.Psimulex.DisplayConverter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VapeTeam.Psimulex.Graphics\VapeTeam.Psimulex.Graphics.csproj">
       <Project>{752FC692-7769-4309-B300-97072AB91AC4}</Project>
       <Name>VapeTeam.Psimulex.Graphics</Name>
