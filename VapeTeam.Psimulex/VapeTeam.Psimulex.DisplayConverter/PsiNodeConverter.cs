@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Controls;
+using VapeTeam.Psimulex.Compiler.AST;
 
-namespace VapeTeam.Psimulex.Compiler.AST
+namespace VapeTeam.Psimulex.DisplayConverter
 {
     /// <summary>
     /// Display Modes
@@ -140,6 +141,31 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
 
             return list;
+        }
+
+        /// <summary>
+        /// Convert PsiFunctionsVariablesNode tree to TreeViewItem tree. ( PsiFunctionsVariablesNode -> WPF TreeView )
+        /// </summary>
+        /// <param name="tree">Tree to convert</param>
+        /// <param name="list">Result carrier</param>
+        /// <returns>TreeViewItem tree</returns>   
+        public static TreeViewItem ToTreeView(this PsiFunctionsVariablesNode tree, List<KeyValuePair<PsiFunctionsVariablesNode, System.Windows.Controls.CheckBox>> list)
+        {
+            TreeViewItem twi = new TreeViewItem();
+            twi.IsExpanded = true;
+
+            System.Windows.Controls.CheckBox cb = new System.Windows.Controls.CheckBox();
+            cb.IsChecked = tree.IsMarked;
+            cb.Content = tree.ToString(tree.ViewConfig[0], tree.ViewConfig[1]);
+
+            twi.Header = cb;
+
+            if (tree.Children != null)
+                tree.Children.ForEach(item => twi.Items.Add((item as PsiFunctionsVariablesNode).ToTreeView(list)));
+
+            list.Add(new KeyValuePair<PsiFunctionsVariablesNode, System.Windows.Controls.CheckBox>(tree, cb));
+
+            return twi;
         }
     }
 }
