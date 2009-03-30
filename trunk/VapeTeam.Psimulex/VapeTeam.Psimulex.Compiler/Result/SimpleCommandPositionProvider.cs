@@ -42,7 +42,9 @@ namespace VapeTeam.Psimulex.Compiler.Result
                         FileName = ci.Interval.FileName,
                         FunctionName = ci.CommandID.FunctionName,
                         Line = ci.Interval.FromLine,
-                        Column = ci.Interval.FromColumn
+                        Column = ci.Interval.FromColumn,
+                        CharacterStartIndex = ci.Interval.StartIndex,
+                        CharacterEndIndex = ci.Interval.EndIndex
                     }
                 });                
             }

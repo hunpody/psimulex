@@ -44,11 +44,13 @@
                     </ad:DockablePane>
                 </ad:ResizingPanel>
                 <ad:DockablePane SelectedIndex="0">
-                    <ad:DockableContent Title="Output">
-                        <TextBox x:Name="resultTextBox"></TextBox>
+                    <ad:DockableContent Title="Messages" Name="messagesPanel">
+                        <TextBox x:Name="messagesTextBox"></TextBox>
                     </ad:DockableContent>
-                    <ad:DockableContent Title="Visualization">
-                        <TextBlock Text="Coming soon..." />
+                    <ad:DockableContent Title="Visualization" Name="visualizationPanel">
+                    </ad:DockableContent>
+                    <ad:DockableContent Title="Output" Name="outputPanel">
+                        <TextBox x:Name="resultTextBox"></TextBox>
                     </ad:DockableContent>
                 </ad:DockablePane>
             </ad:ResizingPanel>

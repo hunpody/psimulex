@@ -54,6 +54,54 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
+        #region Events
+
+        public class ThreadEventArgs : EventArgs
+        {
+            public Thread Thread { get; set; }
+        }
+
+        #region Instruction Pointer Change
+
+        public class ThreadInstructionPointerChangedEventArgs : ThreadEventArgs
+        {
+            public int IP { get; set; }
+            public SourcePosition SourcePosition { get; set; }
+        }
+
+        public event EventHandler<ThreadInstructionPointerChangedEventArgs> ThreadInstructionPointerChanged;
+
+        protected void OnInstructionPointerChanged(Thread thread)
+        {
+            if (ThreadInstructionPointerChanged != null)
+            {
+                ThreadInstructionPointerChanged(this, new ThreadInstructionPointerChangedEventArgs { Thread = thread, IP = thread.PC, SourcePosition = thread.CurrentSourcePosition });
+            }
+        }
+
+        #endregion
+        
+        #region Thread stopping
+		
+        public class ThreadStopEventArgs : ThreadEventArgs
+        {            
+        }
+
+        public event EventHandler<ThreadStopEventArgs> ThreadStopped;
+
+        protected void OnThreadStopped(Thread thread)
+        {
+            if (ThreadStopped != null)
+            {
+                ThreadStopped(this, new ThreadStopEventArgs() {Thread = thread});
+            }
+        }
+
+
+	    #endregion        
+        
+        #endregion
+
         /// <summary>
         /// This is the thread that has currently called the library functions of the operating system.
         /// It is usually null unless it calls down to the system (f.e. print, or new_thread) 
@@ -115,6 +163,11 @@ namespace VapeTeam.Psimulex.Core
             return thread;
         }
 
+        /// <summary>
+        /// This is the main thread creation method. 
+        /// </summary>
+        /// <param name="process"></param>
+        /// <returns></returns>
         protected virtual Thread CreateThread(Process process)
         {
             var id = NextThreadId;
@@ -124,6 +177,8 @@ namespace VapeTeam.Psimulex.Core
             thread.Name = string.Format("{0} Thread Id={1}", process.Program.Name, id);
             thread.State = ThreadStates.Stopped;
             thread.HostProcess = process;
+            thread.ProgramCounterChanged += (o,e) => OnInstructionPointerChanged(thread);
+            thread.ThreadStopped += (o, e) => OnThreadStopped(thread);
             return thread;
         }
 
@@ -182,16 +237,16 @@ namespace VapeTeam.Psimulex.Core
             }                        
         }
 
-        private static object _stepObject = new object();
+        private static readonly object _stepObject = new object();
 
-        private void Step()
+        public void Step()
         {
             lock (_stepObject)
             {
                 Memory.Instance = machine.Memory;
                 try
                 {
-                    machine.Step();
+                    machine.Cycle();
                 }
                 catch (Exceptions.RuntimeException rex)
                 {
@@ -202,6 +257,16 @@ namespace VapeTeam.Psimulex.Core
 
         public void Run(Process process)
         {
+            Start(process);
+
+            while (HasActiveProcesses)
+            {
+                Step();
+            }
+        }
+
+        public void Start(Process process)
+        {
             if (!machine.Processors.Exists(p => p.CurrentThread == null))
             {
                 Schedule();
@@ -210,12 +275,6 @@ namespace VapeTeam.Psimulex.Core
             process.MainThread.State = ThreadStates.Running;
 
             Schedule();
-
-            while (HasActiveProcesses)
-            {
-                Step();
-            }
-
         }
 
         public void Run(string programName)
@@ -233,7 +292,7 @@ namespace VapeTeam.Psimulex.Core
         {
             this.machine = machine;
             Scheduler.Initialize(machine.Processors);
-            this.machine.Processors[0].SetupPeriodicalTimeInterrupt(Scheduler.SwitchTime, new EventHandler<InterruptRequestEventArgs>(ProcessorInterruptEventHandler));
+            this.machine.Processors[0].SetupPeriodicalTimeInterrupt(Scheduler.SwitchTime, ProcessorInterruptEventHandler);
         }
 
         private void ProcessorInterruptEventHandler(object sender, InterruptRequestEventArgs e)

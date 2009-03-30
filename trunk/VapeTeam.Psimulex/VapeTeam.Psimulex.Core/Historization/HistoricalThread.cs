@@ -24,6 +24,7 @@ namespace VapeTeam.Psimulex.Core.Historization
             set
             {
                 _historicalPc.Value = value;
+                base.PC = value;
             }
         }
     }
