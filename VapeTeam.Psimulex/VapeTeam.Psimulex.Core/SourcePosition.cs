@@ -14,5 +14,7 @@ namespace VapeTeam.Psimulex.Core
         public string FunctionName { get; set; }
         public int Line { get; set; }
         public int Column { get; set; }
+        public int CharacterStartIndex { get; set; }
+        public int CharacterEndIndex { get; set; }
     }
 }

@@ -44,15 +44,89 @@ namespace VapeTeam.Psimulex.Core
         /// </summary>
         public Program Program { get; set; }
 
+        private int _pc = 0;
+
         /// <summary>
         /// The pointer to the current instruction that the thread is running.
         /// </summary>
-        public virtual int PC { get; set; }
+        public virtual int PC
+        {
+            get { return _pc; }
+            set
+            {
+                var _oldValue = _pc;
+                _pc = value;
+                if (this.State == ThreadStates.Running && _oldValue != _pc)
+                {
+                    OnProgramCounterChanged();
+                }
+            }
+        }
+
+        #region Events
+
+        public event EventHandler ProgramCounterChanged;
+
+        protected void OnProgramCounterChanged()
+        {
+            if (ProgramCounterChanged != null)
+            {
+                ProgramCounterChanged(this, EventArgs.Empty);
+            }
+        }
+
+        public event EventHandler ThreadStarted;
+
+        protected void OnThreadStarted()
+        {
+            if (ThreadStarted != null)
+            {
+                ThreadStarted(this, EventArgs.Empty);
+            }
+        }
+
+        public event EventHandler ThreadStopped;
+
+        protected void OnThreadStopped()
+        {
+            if (ThreadStopped != null)
+            {
+                ThreadStopped(this, EventArgs.Empty);
+            }
+        }
+        
+        #endregion
+
+        private ThreadStates _state;
 
         /// <summary>
         /// The current state of the thread.
         /// </summary>
-        public ThreadStates State { get; set; }
+        public ThreadStates State
+        {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                var oldState = _state;
+                _state = value;
+                if (oldState == _state) return;
+                switch (_state)
+                {
+                    case ThreadStates.Stopped:
+                        OnThreadStopped();
+                        break;
+                    case ThreadStates.Running:
+                        OnThreadStarted();
+                        break;
+                    case ThreadStates.Finished:
+                        OnThreadStopped();
+                        break;
+                }
+            }
+        }
 
         /// <summary>
         /// The process that owns the thread.
@@ -106,6 +180,14 @@ namespace VapeTeam.Psimulex.Core
             else
             {
                 return new SourcePosition();
+            }
+        }
+
+        internal SourcePosition CurrentSourcePosition
+        {
+            get
+            {
+                return GetSourcePosition(PC);
             }
         }
 

@@ -14,6 +14,7 @@ using ICSharpCode.TextEditor;
 using VapeTeam.Psimulex.Compiler.AST;
 using System.IO;
 using ICSharpCode.TextEditor.Document;
+using VapeTeam.Psimulex.Core;
 using VapeTeam.Psimulex.Core.Factories;
 using VapeTeam.Psimulex.Compiler.Result;
 using VapeTeam.Psimulex.Core.Commands;
@@ -32,6 +33,8 @@ namespace VapeTeam.Psimulex.UserInterface
 
         private TextEditorControl editor;
         private int currentCommandToHighLight;
+        private Machine machine;
+        private bool isProgramLoaded;
 
         public MainWindow()
         {
@@ -52,13 +55,13 @@ namespace VapeTeam.Psimulex.UserInterface
             // DynamicHighLight Settings
             HighlightingManager.Manager.AddSyntaxModeFileProvider(new FileSyntaxModeProvider(@"References\SyntaxRes\"));
 
-            // HighLightting Strategy Name is Psimulex
+            // HighLighting Strategy Name is Psimulex
             editor.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("Psimulex");
 
             currentCommandToHighLight = 0;
         }
         
-        private void Bulid(string fileName)
+        private void Build(string fileName)
         {
             currentCommandToHighLight = 0;
 
@@ -109,19 +112,14 @@ namespace VapeTeam.Psimulex.UserInterface
             */
         }
 
+
         private void Run()
         {
-            resultTextBox.Text = "";
-            var maschine = MachineBuilder.Instance.CreateMachine(1, 1024);
+            Process process = LoadProgram();
 
-            //maschine.System.InstallLibrary(new SampleInputLibrary());
-            maschine.System.InstallLibrary(new InputTools.PrimaryInputLibrary());
-            maschine.System.InstallLibrary(new InputTools.CollectionInputLibrary());
-
-            var process = maschine.System.Load(compiler.CompileResult.CompiledProgram);
             try
             {
-                maschine.System.Run(process);
+                this.machine.System.Run(process);
             }
             catch (Exception ex)
             {
@@ -132,6 +130,33 @@ namespace VapeTeam.Psimulex.UserInterface
             resultTextBox.Text = process.StandardOutput;
 
             GenerateUnitTestCase();
+        }
+
+        private Process LoadProgram()
+        {
+            resultTextBox.Text = "";
+
+            if (machine != null)
+            {
+                this.machine.System.ThreadInstructionPointerChanged -= System_ThreadInstructionPointerChanged;
+                // remove other handlers too
+            }
+
+            machine = MachineBuilder.Instance.CreateMachine(1, 1024);
+
+            //maschine.System.InstallLibrary(new SampleInputLibrary());
+            this.machine.System.InstallLibrary(new InputTools.PrimaryInputLibrary());
+            this.machine.System.InstallLibrary(new InputTools.CollectionInputLibrary());
+
+            this.machine.System.ThreadInstructionPointerChanged += System_ThreadInstructionPointerChanged;
+            this.machine.System.ThreadStopped += (o,e) => RemoveHighlight();
+            isProgramLoaded = true;
+            return this.machine.System.Load(compiler.CompileResult.CompiledProgram);
+        }
+
+        void System_ThreadInstructionPointerChanged(object sender, VapeTeam.Psimulex.Core.OperatingSystem.ThreadInstructionPointerChangedEventArgs e)
+        {
+            HighlightCurrentStatement(e.SourcePosition.CharacterStartIndex, e.SourcePosition.CharacterEndIndex);
         }
 
         private void GenerateUnitTestCase()
@@ -167,35 +192,52 @@ namespace VapeTeam.Psimulex.UserInterface
             sw.Close();
         }
 
+        /// <summary>
+        /// Hightlights the given part of the source code.
+        /// </summary>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        private void HighlightCurrentStatement(int startIndex, int endIndex)
+        {
+            editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.YellowGreen);
+            editor.Refresh();
+
+            editor.Document.MarkerStrategy.AddMarker
+               (
+               new ICSharpCode.TextEditor.Document.TextMarker
+                   (
+                   startIndex, endIndex - startIndex,
+                   ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
+                   System.Drawing.Color.YellowGreen
+                   )
+               );
+            editor.Refresh();
+        }
+
+        private void RemoveHighlight()
+        {
+            HighlightCurrentStatement(-1, -1);
+        }
+
         private void Step()
         {
-            // Tabbolás , scrolozás jólenne ...
-            if (currentCommandToHighLight < compiler.CompileResult.CommandPositionChanges.CommandInfoList.Count)
-            {
-                Interval iv = compiler.CompileResult.CommandPositionChanges.CommandInfoList[currentCommandToHighLight].Interval;
+            //// Tabbolás , scrolozás jólenne ...
+            //if (currentCommandToHighLight < compiler.CompileResult.CommandPositionChanges.CommandInfoList.Count)
+            //{
+            //    Interval iv = compiler.CompileResult.CommandPositionChanges.CommandInfoList[currentCommandToHighLight].Interval;
 
-                editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.YellowGreen);
-                editor.Refresh();
 
-                editor.Document.MarkerStrategy.AddMarker
-                   (
-                   new ICSharpCode.TextEditor.Document.TextMarker
-                       (
-                       iv.StartIndex, iv.EndIndex - iv.StartIndex,
-                       ICSharpCode.TextEditor.Document.TextMarkerType.SolidBlock,
-                       System.Drawing.Color.YellowGreen
-                       )
-                   );
-                editor.Refresh();
 
-                ++currentCommandToHighLight;
-            }
-            else
-            {
-                currentCommandToHighLight = 0;
-                editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.YellowGreen);
-                editor.Refresh();
-            }
+            //    ++currentCommandToHighLight;
+            //}
+            //else
+            //{
+            //    currentCommandToHighLight = 0;
+            //    editor.Document.MarkerStrategy.RemoveAll(x => x.Color == System.Drawing.Color.YellowGreen);
+            //    editor.Refresh();
+            //}
+
+            machine.System.Step();
         }
 
         private void ShowProgramString()
@@ -290,16 +332,17 @@ namespace VapeTeam.Psimulex.UserInterface
 
         private void buildButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi");
+            Build("teszt.psi");
+            isProgramLoaded = false;
         }
 
         private void buildAndRunButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi");
+            Build("teszt.psi");
             if (compiler.CompileResult.Errors.Count + compiler.CompileResult.Warnings.Count != 0)
             {
                 MessageBoxResult result =
-                MessageBox.Show(string.Format("There is {0} warning and {1} error are you sure to run ?",
+                MessageBox.Show(string.Format("There are {0} warning(s) and {1} error(s). Are you sure you would like to run the previously compiled version?",
                     compiler.CompileResult.Warnings.Count, compiler.CompileResult.Errors.Count), "Warning"
                    , MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
@@ -310,24 +353,30 @@ namespace VapeTeam.Psimulex.UserInterface
 
         private void stepButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!isProgramLoaded)
+            {
+                var process = LoadProgram();
+                machine.System.Start(process);
+            }
+
             Step();
         }
 
         private void syntaxTreeButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi");
+            Build("teszt.psi");
             ShowSyntaxTree();
         }
 
         private void programStringButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi");
+            Build("teszt.psi");
             ShowProgramString();
         }
 
         private void variableFunctionTreeButton_Click(object sender, RoutedEventArgs e)
         {
-            Bulid("teszt.psi");
+            Build("teszt.psi");
             ShowFunctionsVariablesTree();
         }
 
@@ -336,21 +385,21 @@ namespace VapeTeam.Psimulex.UserInterface
         //    switch (e.Key)
         //    {
         //        case Key.F1:
-        //            Bulid("teszt.psi");
+        //            Build("teszt.psi");
         //            ShowSyntaxTree();
         //            break;
         //        case Key.F5:
-        //            Bulid("teszt.psi");
+        //            Build("teszt.psi");
         //            Run();
         //            break;
         //        case Key.F6:
-        //            Bulid("teszt.psi");
+        //            Build("teszt.psi");
         //            break;
         //        case Key.F7:
-        //            Bulid("teszt.psi");
+        //            Build("teszt.psi");
         //            break;
         //        case Key.F8:
-        //            Bulid("teszt.psi");
+        //            Build("teszt.psi");
         //            ShowProgramString();
         //            break;
         //    }
