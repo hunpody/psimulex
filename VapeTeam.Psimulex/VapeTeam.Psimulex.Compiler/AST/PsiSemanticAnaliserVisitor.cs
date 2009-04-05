@@ -79,6 +79,34 @@ namespace VapeTeam.Psimulex.Compiler.AST
                 AddLocalVariable(name, ti, nvi);
         }
 
+        private void ChecktVariable(IPsiNode node, TypeEnum varType, string varTypeName, int varDimensionCount, string varName)
+        {
+            if (varDimensionCount > 0)
+            {
+                CheckAndAddLocalVariable(
+                   varName,
+                   new TypeIdentifier()
+                   {
+                       TypeEnum = varType,
+                       TypeName = varTypeName,
+                       Dimensions = new List<int>(varDimensionCount),
+                       GenericType = new TypeIdentifier() { TypeEnum = varType }
+                   },
+                   node.NodeValueInfo);
+            }
+            else
+            {
+                CheckAndAddLocalVariable(
+                   varName,
+                   new TypeIdentifier()
+                   {
+                       TypeEnum = varType,
+                       TypeName = varTypeName
+                   },
+                   node.NodeValueInfo);
+            }
+        }
+
         #endregion
 
         #region IPsiVisitor members
@@ -110,7 +138,42 @@ namespace VapeTeam.Psimulex.Compiler.AST
         }
 
         public override void Visit(FormalParameterListNode node) { VisitChildren(node); }
-        public override void Visit(FormalParameterNode node) { VisitChildren(node); }
+
+        public override void Visit(FormalParameterNode node)
+        {
+            // Parameter Type
+            node.ParameterType.Accept(this);
+
+            TypeEnum parameterType = lastCompiledDataType;
+            string parameterTypeName = lastCompiledDataTypeName;
+
+            int parameterDimensionCount = lastCompiledDimensionCount;
+            List<int> parameterDimensionList = lastCompiledDimensionList;
+
+            // Parameter Reference
+            bool parameterIsReference = false;
+            if (node.ParameterReference != null)
+                parameterIsReference = true;
+
+            // Parameter Name
+            string parameterName = node.ParameterName.Value;
+
+            AddLocalVariable(
+                parameterName,
+                new TypeIdentifier()
+                {
+                    TypeEnum = parameterType,
+                    TypeName = parameterTypeName,
+                    GenericType = new TypeIdentifier()
+                    {
+                        TypeEnum = parameterType,
+                        TypeName = parameterTypeName
+                    },
+                    Dimensions = parameterDimensionList,
+                    UserDefinedType = DTO.GetUserTypeDescriptor(parameterTypeName)
+                },
+                node.NodeValueInfo);
+        }
 
         #endregion
 
@@ -195,46 +258,105 @@ namespace VapeTeam.Psimulex.Compiler.AST
         public override void Visit(BreakNode node) { VisitChildren(node); }
         public override void Visit(ExpressionStatementNode node) { VisitChildren(node); }
         public override void Visit(VariableDeclarationStatementNode node) { VisitChildren(node); }
-        public override void Visit(VariableInitializationNode node) { VisitChildren(node); }
-        public override void Visit(VariableDeclarationNode node) { VisitChildren(node); }
+
+        public override void Visit(VariableInitializationNode node)
+        {
+            // Type
+            node.VariableType.Accept(this);
+
+            // If this is UserDefined, than use lastCompiledUserDefinedDataType
+            TypeEnum varType = lastCompiledDataType;
+
+            string varTypeName = lastCompiledDataTypeName;
+            int varDimensionCount = lastCompiledDimensionCount;
+
+            // Reference
+            bool varIsReference = false;
+            if (node.VariableReference != null)
+                varIsReference = true;
+
+            // Name
+            string varName = node.VariableName.Value;
+
+            // Check variable name
+            if (varType != TypeEnum.UserDefinedType)
+            {
+                ChecktVariable(node, varType, varTypeName, varDimensionCount, varName);
+            }
+            else
+            {
+                AddError(CompilerErrorCode.Custom, string.Format("User defined type initialization is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+            }
+        }
+
+        public override void Visit(VariableDeclarationNode node)
+        {
+            // Type
+            node.VariableType.Accept(this);
+
+            // If this is UserDefined, then use lastCompiledUserDefinedDataTypeName
+            TypeEnum varType = lastCompiledDataType;
+
+            string varTypeName = lastCompiledDataTypeName;
+            int varDimensionCount = lastCompiledDimensionCount;
+
+            // Name
+            string varName = node.VariableName.Value;
+
+            // Check variable name
+            if (varType != TypeEnum.Undefined)
+            {
+                ChecktVariable(node, varType, varTypeName, varDimensionCount, varName);
+            }
+            else
+            {
+                if (varDimensionCount > 0)
+                {
+                    AddError(CompilerErrorCode.Custom, string.Format("User defined array types is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                }
+                else
+                {
+                    var ti = new TypeIdentifier
+                    {
+                        TypeEnum = TypeEnum.UserDefinedType,
+                        TypeName = varTypeName,
+                        UserDefinedType = DTO.Program.Program.GetUserDefinedType(varTypeName)
+                    };
+
+                    CheckAndAddLocalVariable(varName, ti, node.NodeValueInfo);
+                }
+            }
+        }
 
         #endregion
 
         /*Operators*/
         #region Operators
 
-        public override void Visit(AssignmentOpNode node) { VisitChildren(node); }
-        public override void Visit(LogicalOrOpNode node) { VisitChildren(node); }
-        public override void Visit(LogicalAndOpNode node) { VisitChildren(node); }
-        public override void Visit(EqualityOpNode node) { VisitChildren(node); }
-        public override void Visit(RelationOpNode node) { VisitChildren(node); }
-        public override void Visit(AdditiveOpNode node) { VisitChildren(node); }
-        public override void Visit(MultiplicativeOpNode node) { VisitChildren(node); }
-        public override void Visit(UnaryOpNode node) { VisitChildren(node); }
-
         #endregion
 
         /*Expressions*/
         #region Expression
-
-        public override void Visit(ExpressionNode node) { VisitChildren(node); }
-        public override void Visit(CastNode node) { VisitChildren(node); }
-        public override void Visit(PrefixUnaryOperationNode node) { VisitChildren(node); }
-        public override void Visit(SelectorNode node) { VisitChildren(node); }
-        public override void Visit(MemberSelectNode node) { VisitChildren(node); }
-        public override void Visit(MemberFunctionCallNode node) { VisitChildren(node); }
-        public override void Visit(FunctionCallNode node) { VisitChildren(node); }
-        public override void Visit(ArgumentsNode node) { VisitChildren(node); }
-        public override void Visit(IndexingNode node) { VisitChildren(node); }
-        public override void Visit(ArrayInitializatorNode node) { VisitChildren(node); }
-        public override void Visit(CollectionInitializatorNode node) { VisitChildren(node); }
 
         #endregion
 
         /*Identifier*/
         #region Identifier
 
-        public override void Visit(IdentifierNode node) { VisitChildren(node); }
+        public override void Visit(IdentifierNode node)
+        {
+            if (node.Parent.GetType() != typeof(FunctionCallNode)
+                && node.Parent.GetType() != typeof(FunctionCallNode)
+                && node.Parent.GetType() != typeof(FunctionDeclarationNode)
+                && node.Parent.GetType() != typeof(FormalParameterNode)
+                )
+            {
+                if (!IsExistsLocalVariable(node.Value))
+                {
+                    AddError(CompilerErrorCode.Custom, string.Format("Undeclared identifier ({0})!", node.Value), node.NodeValueInfo);
+                }
+            }
+        }
 
         #endregion
 
