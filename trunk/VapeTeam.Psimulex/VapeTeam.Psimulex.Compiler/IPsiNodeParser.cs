@@ -11,6 +11,7 @@ namespace VapeTeam.Psimulex.Compiler
     /// </summary>
     public interface IPsiNodeParser
     {
+
         /// <summary>
         /// Parse the source code into a PsiAST tree.
         /// This function dont load source code from file.
@@ -20,6 +21,7 @@ namespace VapeTeam.Psimulex.Compiler
         /// <param name="source">The source code</param>
         /// <param name="sourceFileName">The file name of teh source code</param>
         /// <param name="dto">The place of teh result</param>
-        void Parse(string source, string sourceFileName, CompilerDTO dto);
+        /// <param name="part">The part of the program witch need to parse</param>
+        void Parse(string source, string sourceFileName, CompilerDTO dto, ProgramPart part);
     }
 }
