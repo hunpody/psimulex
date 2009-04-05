@@ -671,9 +671,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Name
             string varName = node.VariableName.Value;
 
-            // Check variable name
-            //CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
-
             // Initialize
             if (varType != TypeEnum.UserDefinedType)
             {
@@ -699,7 +696,8 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             else
             {
-                AddError(CompilerErrorCode.Custom, string.Format("User defined type initialization is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                //AddError(CompilerErrorCode.Custom, string.Format("User defined type initialization is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                // Checked in the semantic analiser
             }
         }
 
@@ -719,9 +717,6 @@ namespace VapeTeam.Psimulex.Compiler.AST
             // Name
             string varName = node.VariableName.Value;
 
-            // Check variable name
-            //CheckAndAddLocalVariableName(varName, node.NodeValueInfo);
-
             // Declare
             if (varType != TypeEnum.Undefined)
             {
@@ -732,10 +727,10 @@ namespace VapeTeam.Psimulex.Compiler.AST
             }
             else
             {
-                //AddError(CompilerErrorCode.Custom, string.Format("User defined types is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
                 if (varDimensionCount > 0)
                 {    //AddCommand(new ArrayDeclare(varName, TypeEnum.UserDefinedType, varDimensionCount));
-                    AddError(CompilerErrorCode.Custom, string.Format("User defined array types is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                    // AddError(CompilerErrorCode.Custom, string.Format("User defined array types is not supported yet! ({0})", varTypeName), node.NodeValueInfo);
+                    // Checked in the semantic analiser
                 }
                 else
                 {
