@@ -51,7 +51,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr.WpfTest.SandBox
                 }
             }
 
-            microlex.Text = compiler.CompileResult.CompiledProgram.ToString() + funcString;
+            microlex.Text =
+                  compiler.CompileResult.CompiledProgram.ToString() + "\n"
+                + funcString + "\n"
+                + compiler.CompileResult.CompilerMessages.ToString();
         }
     }
 }

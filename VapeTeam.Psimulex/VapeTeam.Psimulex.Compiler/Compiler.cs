@@ -55,7 +55,7 @@ namespace VapeTeam.Psimulex.Compiler
             var dto = new CompilerDTO { ProgramPath = Path.GetDirectoryName(fullPath) };
 
             // Resolve Imports
-            ResolveImports(source, sourceFileName, dto);
+            ResolveImports(source, sourceFileName, dto, part);
 
             // Finalize TypeIdentifiers
             FinalizeTypeIdentifiers(dto);
@@ -83,12 +83,12 @@ namespace VapeTeam.Psimulex.Compiler
             return CompileResult;
         }
 
-        public void ResolveImports(string source, string sourceFileName, CompilerDTO dto)
+        public void ResolveImports(string source, string sourceFileName, CompilerDTO dto, ProgramPart part)
         {
             // Parse
             try
             {
-                Parser.Parse(source, sourceFileName, dto);
+                Parser.Parse(source, sourceFileName, dto, part);
             }
             catch (Exception ex)
             {
@@ -100,12 +100,15 @@ namespace VapeTeam.Psimulex.Compiler
                         MessageText = "Parser Error!"
                     });
             }            
-
-            // Resolve Imports
-            var resolver = new PsiImportResolverVisitor(dto.CompilationUnitList.Last<CompilationUnit>(), dto, this);
-            var ast = dto.CompilationUnitList.Last<CompilationUnit>().PsiNodeSyntaxTree as CompilationUnitNode;
-            if(ast != null)
-                resolver.Visit(ast);
+            
+            if (part == ProgramPart.CompilationUnit)
+            {
+                // Resolve Imports
+                var resolver = new PsiImportResolverVisitor(dto.CompilationUnitList.Last<CompilationUnit>(), dto, this);
+                var ast = dto.CompilationUnitList.Last<CompilationUnit>().PsiNodeSyntaxTree as CompilationUnitNode;
+                if (ast != null)
+                    resolver.Visit(ast);
+            }
         }
 
         private void FinalizeTypeIdentifiers(CompilerDTO dto)

@@ -12,10 +12,10 @@ namespace VapeTeam.Psimulex.Compiler.Antlr
     {
         #region IPsiNodeParser Members
 
-        public void Parse(string source, string sourceFileName, CompilerDTO dto)
+        public void Parse(string source, string sourceFileName, CompilerDTO dto, ProgramPart part)
         {
             // ANTLR Compile
-            var result = ANTLRCompiler.Compile(source, sourceFileName, ProgramPart.CompilationUnit);
+            var result = ANTLRCompiler.Compile(source, sourceFileName, part);
 
             // Simple program can not be imported
             if (dto.CompilationUnitList.Count != 0 &&

@@ -150,7 +150,7 @@ namespace VapeTeam.Psimulex.Compiler.AST
                     {
                         using (StreamReader sr = new StreamReader(importFile))
                         {
-                            compiler.ResolveImports(sr.ReadToEnd(), importFileName, DTO);
+                            compiler.ResolveImports(sr.ReadToEnd(), importFileName, DTO, ProgramPart.CompilationUnit);
                             sr.Close();
                         }
                     }
