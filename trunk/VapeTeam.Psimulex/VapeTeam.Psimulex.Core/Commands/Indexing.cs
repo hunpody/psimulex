@@ -30,7 +30,7 @@ namespace VapeTeam.Psimulex.Core.Commands
                 index = context.RunStack.Pop().ToInt32();
             }
 
-            context.RunStack.Push(container.Index(index).ToReference());
+            context.RunStack.Push(container.Index(index, context).ToReference());
         }
 
         public Indexing(int index)

@@ -71,11 +71,20 @@ namespace VapeTeam.Psimulex.Core
 
         public event EventHandler<ThreadInstructionPointerChangedEventArgs> ThreadInstructionPointerChanged;
 
+        private bool isThreadInstructionChangeEventHandlingEnabled = true;
+        private Thread lastThreadInstructionChangeThread = null;
+
         protected void OnInstructionPointerChanged(Thread thread)
         {
-            if (ThreadInstructionPointerChanged != null)
+            lastThreadInstructionChangeThread = thread;
+            if (ThreadInstructionPointerChanged != null && isThreadInstructionChangeEventHandlingEnabled)
             {
-                ThreadInstructionPointerChanged(this, new ThreadInstructionPointerChangedEventArgs { Thread = thread, IP = thread.PC, SourcePosition = thread.CurrentSourcePosition });
+                ThreadInstructionPointerChanged(this, new ThreadInstructionPointerChangedEventArgs
+                                                       {
+                                                           Thread = thread,
+                                                           IP = thread.PC,
+                                                           SourcePosition = thread.CurrentSourcePosition
+                                                       });
             }
         }
 
@@ -402,5 +411,21 @@ namespace VapeTeam.Psimulex.Core
         }
 
         #endregion
+
+        /// <summary>
+        /// Makes a stepover. It is a temporary implementation.
+        /// </summary>
+        public void StepOver()
+        {
+            int currentCallStackDepth = Threads[0].CallStack.Count;
+            isThreadInstructionChangeEventHandlingEnabled = false;
+            do
+            {
+                Step();
+            } while (currentCallStackDepth < Threads[0].CallStack.Count);
+                
+            isThreadInstructionChangeEventHandlingEnabled = true;
+            OnInstructionPointerChanged(lastThreadInstructionChangeThread);
+        }
     }
 }

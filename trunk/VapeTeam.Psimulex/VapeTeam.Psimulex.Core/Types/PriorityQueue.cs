@@ -186,17 +186,20 @@ namespace VapeTeam.Psimulex.Core.Types
             }
         }
 
-        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable()
+        public override System.Collections.Generic.IEnumerable<BaseType> AsEnumerable()
         {
             return rep.Select(pair => pair.Value);
         }
 
-        public override BaseType Index(int index)
+        public override BaseType Index(int index, ICommandContext context)
         {
             if (index < 0 || index >= Count)
             {
                 throw new Core.Exceptions.IndexOutOfRangeException(index, 0, Count - 1);
             }
+
+            OnIndexed(index, context);
+
             return rep[index].Value;
         }
 
@@ -223,7 +226,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Relational comparison operators
 
-        public override bool EqualsTo(BaseType value)
+        public override bool EqualsTo(IBaseType value)
         {
             var otherQueueRep = value.ToPriorityQueue().rep;
 

@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VapeTeam.Psimulex.UserInterface.GraphicsComponents;
 
 namespace VapeTeam.Psimulex.UserInterface
 {
@@ -21,7 +22,7 @@ namespace VapeTeam.Psimulex.UserInterface
         public GraphDraw()
         {
             InitializeComponent();
-            this.Canvas.Children.Add(new GraphDrawerPOC.GraphEditor());
+            this.Canvas.Children.Add(new GraphEditor());
         }
     }
 }

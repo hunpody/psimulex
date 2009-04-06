@@ -66,5 +66,36 @@ namespace VapeTeam.Psimulex.Core.Types
                 type == TypeEnum.Integer ||
                 type == TypeEnum.String;
         }
+
+        /// <summary>
+        /// Returns true if the value is a type of scalar.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsContainer(BaseType value)
+        {
+            TypeEnum type = value.Type;
+            return type == TypeEnum.Array ||
+                   type == TypeEnum.LinkedList ||
+                   type == TypeEnum.List ||
+                   type == TypeEnum.Matrix ||
+                   type == TypeEnum.PriorityQueue ||
+                   type == TypeEnum.Queue ||
+                   type == TypeEnum.Set ||
+                   type == TypeEnum.Stack;
+        }
+
+        /// <summary>
+        /// Returns true if the value is numerical.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsNumeric(BaseType value)
+        {
+            TypeEnum type = value.Type;
+            return type == TypeEnum.Decimal ||
+                   type == TypeEnum.Float ||
+                   type == TypeEnum.Integer;
+        }
     }
 }

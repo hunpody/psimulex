@@ -15,6 +15,15 @@ namespace VapeTeam.Psimulex.Core.Types
         public TypeEnum TypeEnum { get; set; }
         public string TypeName { get; set; }
 
+        /// <summary>
+        /// Returns true if the supplied BaseType is derived from the abstract collection.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsContainerType(BaseType value)
+        {
+            return value is AbstractCollection;
+        }
 
         public List<int> Dimensions { get; set; }
 

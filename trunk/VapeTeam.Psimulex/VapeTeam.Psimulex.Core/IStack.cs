@@ -21,6 +21,10 @@ namespace VapeTeam.Psimulex.Core
         void Clear();
         bool IsEmpty { get; }
         IEnumerable<T> AsEnumerable();
+
+        event EventHandler Pushed;
+        event EventHandler Popped;
+
         //T this[int index] { get; }
     }
 }

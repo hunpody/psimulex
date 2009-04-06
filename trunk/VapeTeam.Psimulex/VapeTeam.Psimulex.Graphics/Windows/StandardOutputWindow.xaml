@@ -1,0 +1,18 @@
+﻿<Window x:Class="VapeTeam.Psimulex.Graphics.Windows.StandardOutputWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Standard Output" Height="380" Width="543" AllowsTransparency="True" Loaded="Window_Loaded" WindowStyle="None" SnapsToDevicePixels="True"  WindowStartupLocation="CenterScreen" Visibility="Collapsed" ResizeMode="CanResizeWithGrip" Topmost="True" BorderThickness="1">
+
+    <Window.Opacity>
+        <Binding ElementName="slider1" Path="Value">
+        </Binding>
+    </Window.Opacity>
+    <Grid SnapsToDevicePixels="True" Name="grid1">
+        <Thumb Name="thumb" Opacity="0.25" />
+        <TextBox Margin="12,45,12,41" Name="outputTextBox" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Courier New" FontSize="18" IsUndoEnabled="False" TextDecorations="None" VerticalScrollBarVisibility="Auto" />
+        <Button Height="23" HorizontalAlignment="Right" Name="closeButton" VerticalAlignment="Bottom" Width="75" Margin="0,0,12,12" Opacity="1" Click="closeButton_Click">Hide</Button>
+        <Slider Height="22" HorizontalAlignment="Left" Margin="68,0,0,13" Name="slider1" VerticalAlignment="Bottom" Width="100" Value="0.9" Maximum="1" Minimum="0.1" />
+        <Label Height="28" Margin="12,0,0,7" Name="label1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="50">Opacity</Label>
+        <Label Height="27" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label2" VerticalAlignment="Top" Width="120">Standard Output</Label>
+    </Grid>
+</Window>

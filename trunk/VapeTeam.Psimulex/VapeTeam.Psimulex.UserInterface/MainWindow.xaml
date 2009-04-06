@@ -33,6 +33,7 @@
                                 <Button  Name="buildButton"  Click="buildButton_Click">Build</Button>
                                 <Button  Name="buildAndRunButton"  Click="buildAndRunButton_Click">Build &amp; Run</Button>
                                 <Button  Name="stepButton"  Click="stepButton_Click">Step</Button>
+                                <Button  Name="stepOverButton"  Click="stepOverButton_Click">Step Over</Button>
                                 <Button   Name="syntaxTreeButton"  Click="syntaxTreeButton_Click">SyntaxTree</Button>
                                 <Button  Name="programStringButton"   Click="programStringButton_Click">Program string</Button>
                                 <Button Name="variableFunctionTreeButton"  Click="variableFunctionTreeButton_Click">Functions, Variables</Button>

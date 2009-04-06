@@ -1,0 +1,24 @@
+﻿<Window x:Class="VapeTeam.Psimulex.Graphics.Windows.WatchWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Watch" Height="380" Width="543" KeyUp="Window_KeyUp" AllowsTransparency="True" Loaded="Window_Loaded" WindowStyle="None" SnapsToDevicePixels="True"  WindowStartupLocation="CenterScreen" Visibility="Collapsed" ResizeMode="CanResizeWithGrip" Topmost="True" BorderThickness="1">
+
+    <Window.Opacity>
+        <Binding ElementName="slider1" Path="Value">
+        </Binding>
+    </Window.Opacity>
+    <Grid SnapsToDevicePixels="True" Name="grid1">
+        <Label Height="27" Name="titleLabel" VerticalAlignment="Top" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,1,0,0">Watch Window</Label>
+        <Thumb Name="thumb" Opacity="0.2" DragDelta="thumb_DragDelta_1" MouseDoubleClick="thumb_MouseDoubleClick" />
+        <Border Margin="4,36,8,59" Name="border">
+            <Border.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding ElementName=scaleSlider, Path=Value}" ScaleY="{Binding ElementName=scaleSlider, Path=Value}" />
+            </Border.LayoutTransform>
+        </Border>
+        <Button Height="23" HorizontalAlignment="Right" Name="closeButton" VerticalAlignment="Bottom" Width="75" Margin="0,0,12,12" Opacity="1" Click="closeButton_Click">Close</Button>
+        <Slider Height="22" HorizontalAlignment="Left" Margin="72,0,0,12" Name="slider1" VerticalAlignment="Bottom" Width="83" Value="0.8" Maximum="1" Minimum="0.1" />
+        <Label Height="28" Margin="12,0,0,7" Name="label1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="54">Opacity</Label>
+        <Slider Height="22" Margin="212,0,207,13" Name="scaleSlider" VerticalAlignment="Bottom" Value="1" Minimum="0.5" Maximum="5" />
+        <Label Height="28" Margin="161,0,0,6" Name="label3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="45">Scale</Label>
+    </Grid>
+</Window>

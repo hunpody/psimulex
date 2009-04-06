@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GraphDrawerPOC.GraphEditor"
+﻿<UserControl x:Class="VapeTeam.Psimulex.UserInterface.GraphicsComponents.GraphEditor"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Height="286" Width="415"

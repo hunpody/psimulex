@@ -129,7 +129,7 @@ namespace VapeTeam.Psimulex.UserInterface
 
             resultTextBox.Text = process.StandardOutput;
 
-            GenerateUnitTestCase();
+            //GenerateUnitTestCase();
         }
 
         private Process LoadProgram()
@@ -151,12 +151,17 @@ namespace VapeTeam.Psimulex.UserInterface
             this.machine.System.ThreadInstructionPointerChanged += System_ThreadInstructionPointerChanged;
             this.machine.System.ThreadStopped += (o,e) => RemoveHighlight();
             isProgramLoaded = true;
-            return this.machine.System.Load(compiler.CompileResult.CompiledProgram);
+            var process = this.machine.System.Load(compiler.CompileResult.CompiledProgram);
+            visualizationPanel.Content = new VapeTeam.Psimulex.Graphics.EnvironmentGraphics(process.MainThread);
+            return process;
         }
 
         void System_ThreadInstructionPointerChanged(object sender, VapeTeam.Psimulex.Core.OperatingSystem.ThreadInstructionPointerChangedEventArgs e)
         {
-            HighlightCurrentStatement(e.SourcePosition.CharacterStartIndex, e.SourcePosition.CharacterEndIndex);
+            if (e.SourcePosition != null)
+            {
+                HighlightCurrentStatement(e.SourcePosition.CharacterStartIndex, e.SourcePosition.CharacterEndIndex);
+            }
         }
 
         private void GenerateUnitTestCase()
@@ -238,6 +243,7 @@ namespace VapeTeam.Psimulex.UserInterface
             //}
 
             machine.System.Step();
+            resultTextBox.Text = machine.ScreenContent;
         }
 
         private void ShowProgramString()
@@ -440,6 +446,12 @@ namespace VapeTeam.Psimulex.UserInterface
             string s = "Teszt\\teszt " + DateTime.Now.ToLongDateString().Replace(':', '-') + " " + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".psi";
             editor.SaveFile(s);
             editor.SaveFile("Teszt\\teszt.psi");
+        }
+
+        private void stepOverButton_Click(object sender, RoutedEventArgs e)
+        {
+            machine.System.StepOver();
+            resultTextBox.Text = machine.ScreenContent;
         }
     }
 }

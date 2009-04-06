@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VapeTeam.Psimulex.Core.Types;
+using VapeTeam.Psimulex.Core.Common;
 
 namespace VapeTeam.Psimulex.Core
 {
@@ -22,5 +23,8 @@ namespace VapeTeam.Psimulex.Core
         void PopState();
         void PushScope();
         void PopScope();
+
+        event EventHandler<VariableEventArgs> VariableCreated;
+        //event EventHandler<VariableEventArgs> VariableDeleted;
     }
 }

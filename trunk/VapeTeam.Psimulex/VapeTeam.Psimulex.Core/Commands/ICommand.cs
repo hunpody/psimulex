@@ -12,13 +12,6 @@ namespace VapeTeam.Psimulex.Core.Commands
     {
         Process HostProcess { get; }
         void Do(ICommandContext context);
-
-        /* Ha marad rá idő. ( Microlex )
-         * Teljes információs stringé alakítás. ( ANTLR nyelvtan álltal benyelt )
-         * 
-         * string SaveToString();
-         * void LoadFromString(string command);
-        */
     }
 
     public class CommandList : List<ICommand>

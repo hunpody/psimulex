@@ -36,7 +36,7 @@ namespace VapeTeam.Psimulex.Core.Types
             return referencedValue.Equals(obj);
         }
 
-        public override bool EqualsTo(BaseType value)
+        public override bool EqualsTo(IBaseType value)
         {
             return referencedValue.EqualsTo(value);
         }

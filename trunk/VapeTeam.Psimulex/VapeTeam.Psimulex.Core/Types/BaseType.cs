@@ -9,7 +9,7 @@ namespace VapeTeam.Psimulex.Core.Types
     /// <summary>
     /// General base class for the value objects.
     /// </summary>
-    public abstract class BaseType
+    public abstract class BaseType : IBaseType
     {
         #region Universal value accessor
 
@@ -100,13 +100,14 @@ namespace VapeTeam.Psimulex.Core.Types
         {
             if (isAllocated)
             {
-                if (Changed != null)
-                {
-                    foreach (var deleg in Changed.GetInvocationList())
-                    {
-                        Changed -= (EventHandler<ValueChangedEventArgs>)deleg;
-                    }
-                }
+                // TODO: Check why this deletion happens too often, because the delegate empties earlier than it should
+                //if (Changed != null)
+                //{
+                //    foreach (var deleg in Changed.GetInvocationList())
+                //    {
+                //        Changed -= (EventHandler<ValueChangedEventArgs>)deleg;
+                //    }
+                //}
                 Memory.Instance.DeAllocate(this);
                 isAllocated = false;
             }
@@ -137,7 +138,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Relational comparison operators
 
-        public virtual bool EqualsTo(BaseType value)
+        public virtual bool EqualsTo(IBaseType value)
         {
             return ToObject().Equals(value.ToObject());
         }

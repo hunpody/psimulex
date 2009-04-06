@@ -17,9 +17,15 @@ namespace VapeTeam.Psimulex.Core.Types
             get { return TypeEnum.Iterator; }
         }
 
+        public int Position
+        {
+            get; private set;
+        }
+
         public bool MoveNext()
         {
             return enumerator.MoveNext();
+            ++this.Position;
         }
 
         public BaseType Current()
@@ -30,6 +36,7 @@ namespace VapeTeam.Psimulex.Core.Types
         public Iterator(System.Collections.Generic.IEnumerable<BaseType> enumerable)
         {
             this.enumerator = enumerable.GetEnumerator();
+            this.Position = -1;
         }
     }
 }

@@ -90,16 +90,6 @@ namespace VapeTeam.Psimulex.Core.Types
             get { return _type; }
         }
 
-        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable()
-        {
-            return rep;
-        }
-
-        public override BaseType Index(int index)
-        {
-            return ListIndexing(rep, index);
-        }
-
         public override BaseType Clone() 
         {
             return new Array(rep); 
@@ -189,7 +179,7 @@ namespace VapeTeam.Psimulex.Core.Types
             //else
             //{
             //    rep.Clear();
-            //    foreach (var item in value.ToArray().GetAsEnumerable())
+            //    foreach (var item in value.ToArray().AsEnumerable())
             //    {
             //        rep.Add(item);                    
             //    }
