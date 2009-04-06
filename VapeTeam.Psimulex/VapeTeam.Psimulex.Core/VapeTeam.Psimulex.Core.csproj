@@ -61,6 +61,7 @@
     <Compile Include="Commands\PushScope.cs" />
     <Compile Include="Commands\Return.cs" />
     <Compile Include="Commands\Select.cs" />
+    <Compile Include="Common\VariableEventArgs.cs" />
     <Compile Include="SourcePosition.cs" />
     <Compile Include="Commands\UnaryOperation.cs" />
     <Compile Include="Commands\ValueAccessor.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Types\Graph.cs" />
     <Compile Include="Types\GraphEdge.cs" />
     <Compile Include="Types\GraphNode.cs" />
+    <Compile Include="Types\IBaseType.cs" />
     <Compile Include="Types\IIndexable.cs" />
     <Compile Include="Types\Integer.cs" />
     <Compile Include="Types\Iterator.cs" />

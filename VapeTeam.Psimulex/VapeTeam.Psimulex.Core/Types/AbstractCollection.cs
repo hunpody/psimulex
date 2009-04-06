@@ -9,7 +9,7 @@ namespace VapeTeam.Psimulex.Core.Types
     {
         #region IIndexable Members
 
-        public abstract BaseType Index(int index);
+        public abstract BaseType Index(int index, ICommandContext context);
 
         /// <summary>
         /// Base method for accessing an IList element.
@@ -26,10 +26,56 @@ namespace VapeTeam.Psimulex.Core.Types
             return list[index];
         }
 
-        public override BaseType ToReference()
+        #region Indexing Event
+
+        public class IndexedEventArgs : EventArgs
         {
-            return new ReferenceType(this);
+            public IndexedEventArgs()
+            {
+                IndexDimensions = new List<int>();
+
+            }
+            public int Index
+            {
+                get
+                {
+                    return IndexDimensions[0];
+                }
+                set
+                {
+                    if (IndexDimensions.Count == 0)
+                    {
+                        IndexDimensions.Add(value);
+                    }
+                    else
+                    {
+                        IndexDimensions[0] = value;
+                    }
+                }
+            }
+
+            /// <summary>
+            /// The Program Counter pointing to the indexer command
+            /// </summary>
+            public int IP { get; set; }
+
+            public List<int> IndexDimensions { get; set; }
+
+            /// <summary>
+            /// The length of the call stack. This is useful if you are interested in the indexing operations of a recursive function.
+            /// </summary>
+            public int CallStackDepth { get; set; }
         }
+
+        public event EventHandler<IndexedEventArgs> Indexed;
+
+        protected void OnIndexed(int index, ICommandContext context)
+        {
+            if (Indexed != null)
+                Indexed(this, new IndexedEventArgs() { CallStackDepth = context.CallStack.Count, Index = index, IP = context.PC});
+        }
+
+        #endregion
 
         #endregion
 
@@ -87,13 +133,13 @@ namespace VapeTeam.Psimulex.Core.Types
             return Size;
         }
 
-        public override bool EqualsTo(BaseType value)
+        public override bool EqualsTo(IBaseType value)
         {
             // If collection, compare each element
             if (value is AbstractCollection)
             {
-                var thisList = GetAsEnumerable().ToList();
-                var valueList = (value as AbstractCollection).GetAsEnumerable().ToList();
+                var thisList = AsEnumerable().ToList();
+                var valueList = (value as AbstractCollection).AsEnumerable().ToList();
                 if (thisList.Count != valueList.Count)
                 {
                     return false;
@@ -123,11 +169,11 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Iterator
 
-        public abstract System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable();
+        public abstract System.Collections.Generic.IEnumerable<BaseType> AsEnumerable();
 
         public Iterator GetIterator()
         {
-            return new Iterator(GetAsEnumerable());
+            return new Iterator(AsEnumerable());
         }
 
         public override Iterator ToIterator()
@@ -135,6 +181,12 @@ namespace VapeTeam.Psimulex.Core.Types
             return GetIterator();
         }
 
+        /// <summary>
+        /// Decorates the string representation of the collection with prefix and suffix in 
+        /// order to support special notation of the different container types.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         protected virtual string DecorateToString(string s)
         {
             return s;
@@ -142,7 +194,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override string ToString()
         {
-            string csv = string.Join(", ", GetAsEnumerable().Select(x => x.ToString()).ToArray());
+            string csv = string.Join(", ", AsEnumerable().Select(x => x.ToString()).ToArray());
             return DecorateToString(csv);
         }
 
@@ -179,38 +231,44 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #endregion
 
-        #region Covnersions
+        #region Conversions
 
         public override Array ToArray()
         {
-            return new Array(GetAsEnumerable());
+            return new Array(AsEnumerable());
         }
 
         public override List ToList()
         {
-            return new List(GetAsEnumerable());
+            return new List(AsEnumerable());
         }
 
         public override Set ToSet()
         {
-            return new Set(GetAsEnumerable());
+            return new Set(AsEnumerable());
         }
 
         public override Stack ToStack()
         {
-            return new Stack(GetAsEnumerable());
+            return new Stack(AsEnumerable());
         }
 
         public override Queue ToQueue()
         {
-            return new Queue(GetAsEnumerable());
+            return new Queue(AsEnumerable());
         }
 
         public override PriorityQueue ToPriorityQueue()
         {
-            return new PriorityQueue(GetAsEnumerable());
+            return new PriorityQueue(AsEnumerable());
+        }
+
+        public override BaseType ToReference()
+        {
+            return new ReferenceType(this);
         }
 
         #endregion
+
     }
 }

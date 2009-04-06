@@ -179,7 +179,7 @@ namespace VapeTeam.Psimulex.Core
             }
             else
             {
-                return new SourcePosition();
+                return null;// new SourcePosition();
             }
         }
 
@@ -376,8 +376,20 @@ namespace VapeTeam.Psimulex.Core
             {
                 GlobalVariables.AddOrOverwrite(name, value);
             }
+
+            OnVariableCreated(name, value);
         }
 
+        public event EventHandler<VariableEventArgs> VariableCreated;
+
+        protected void OnVariableCreated(string name, BaseType value)
+        {
+            if (VariableCreated != null)
+            {
+                VariableCreated(this, new VariableEventArgs() {Name = name, Variable = value});
+            }
+        }
+        
         #endregion
 
         /// <summary>

@@ -37,6 +37,7 @@ namespace VapeTeam.Psimulex.Core
         {
             stack.Add(item);
             ++pointer;
+            OnPushed();
         }
 
         #region Events
@@ -56,6 +57,22 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
+        public event EventHandler Pushed;
+
+        protected virtual void OnPushed()
+        {
+            if (Pushed != null)
+                Pushed(this, EventArgs.Empty);
+        }
+
+        public event EventHandler Popped;
+
+        protected virtual void OnPopped()
+        {
+            if (Popped != null)
+                Popped(this, EventArgs.Empty);
+        }
+
         #endregion
 
         public virtual T Pop()
@@ -67,6 +84,7 @@ namespace VapeTeam.Psimulex.Core
             OnBeingPopped(item);
             stack.RemoveAt(pointer);
             pointer = Math.Max(-1, pointer - 1);
+            OnPopped();
             return item;
         }
 

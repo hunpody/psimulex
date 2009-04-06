@@ -172,15 +172,18 @@ namespace VapeTeam.Psimulex.Core.Types
 
         #region Implemented Members
 
-
-        public override System.Collections.Generic.IEnumerable<BaseType> GetAsEnumerable()
+        public override System.Collections.Generic.IEnumerable<BaseType> AsEnumerable()
         {
             return rep;
         }
 
-        public override BaseType Index(int index)
+        public override BaseType Index(int index, ICommandContext context)
         {
-            return ListIndexing(rep, index);
+            var indexedValue = ListIndexing(rep, index);
+
+            OnIndexed(index, context);
+
+            return indexedValue;
         }
 
         public override int Size
@@ -224,7 +227,7 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public virtual void AddRange(BaseType value)
         {
-            rep.AddRange(value.Clone().ToList().GetAsEnumerable());
+            rep.AddRange(value.Clone().ToList().AsEnumerable());
             OnChanged();
         }
 

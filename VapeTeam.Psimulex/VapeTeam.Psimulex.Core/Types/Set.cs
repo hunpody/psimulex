@@ -87,7 +87,7 @@ namespace VapeTeam.Psimulex.Core.Types
         /// <param name="value"></param>
         public override void Add(BaseType value)
         {
-            rep.AddRange(value.ToSet().GetAsEnumerable().Where(x => !Contains(x)));
+            rep.AddRange(value.ToSet().AsEnumerable().Where(x => !Contains(x)));
             OnChanged();
         }
 

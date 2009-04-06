@@ -10,6 +10,6 @@ namespace VapeTeam.Psimulex.Core.Types
     /// </summary>
     public interface IIndexable
     {
-        BaseType Index(int index);
+        BaseType Index(int index, ICommandContext context);
     }
 }

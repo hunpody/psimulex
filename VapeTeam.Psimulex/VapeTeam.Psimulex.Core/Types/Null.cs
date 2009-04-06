@@ -19,7 +19,7 @@ namespace VapeTeam.Psimulex.Core.Types
             return new Null();
         }
 
-        public override bool EqualsTo(BaseType value)
+        public override bool EqualsTo(IBaseType value)
         {
             return value.ToNull().IsNull;
         }

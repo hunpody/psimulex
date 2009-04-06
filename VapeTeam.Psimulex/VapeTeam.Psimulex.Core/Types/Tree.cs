@@ -21,7 +21,7 @@ namespace VapeTeam.Psimulex.Core.Types
                 this.tree = tree;
             }
 
-            public override BaseType Index(int index)
+            public override BaseType Index(int index, ICommandContext context)
             {
                 return tree.children[index];
             }
@@ -37,14 +37,16 @@ namespace VapeTeam.Psimulex.Core.Types
             public override void Add(BaseType value)
             {
                 tree.children.Add(value.ToTree());
+                tree.OnChanged();
             }
 
             public override void Clear()
             {
                 tree.children.Clear();
+                tree.OnChanged();
             }
 
-            public override IEnumerable<BaseType> GetAsEnumerable()
+            public override IEnumerable<BaseType> AsEnumerable()
             {
                 return tree.children.Cast<BaseType>();
             }
@@ -52,6 +54,7 @@ namespace VapeTeam.Psimulex.Core.Types
             public override void Insert(BaseType value)
             {
                 tree.children.Add(value.ToTree());
+                tree.OnChanged();
             }
         }
 

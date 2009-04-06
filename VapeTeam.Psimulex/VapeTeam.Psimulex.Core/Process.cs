@@ -49,10 +49,25 @@ namespace VapeTeam.Psimulex.Core
             }
         }
 
+        #region Events
+
+        public event EventHandler StandardOutputChanged;
+
+        protected void OnStandardOutputChanged()
+        {
+            if (StandardOutputChanged != null)
+            {
+                StandardOutputChanged(this, EventArgs.Empty);
+            }
+        }
+
+        #endregion
+
         internal void AddToStandardOutput(string message)
         {
             StandardOutput += message;
             Machine.ScreenContent += message;
+            OnStandardOutputChanged();
         }
 
         private Historization.HistoricalValue<string> _stdOut;

@@ -156,6 +156,13 @@ namespace VapeTeam.Psimulex.Core
             return values;
         }
 
+        #region Events that never get invoked
+
+        public event EventHandler Pushed;
+        public event EventHandler Popped;
+
+        #endregion
+
         #region ITransaction Members
 
         public TransactionStates Status

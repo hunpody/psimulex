@@ -7,9 +7,47 @@ namespace VapeTeam.Psimulex.Core.Types
 {
     public abstract class TreeBase : BaseType
     {
-        public BaseType Value { get; set; }
+        public event EventHandler ValueInitialized;
+
+        protected void OnValueInitialized()
+        {
+            if (ValueInitialized != null)
+                ValueInitialized(this, EventArgs.Empty);
+        }
+
+        private BaseType _value;
+        public BaseType Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                if (_value != null)
+                {
+                    _value.Changed -= _value_Changed;
+                }                
+                _value = value;
+                if (_value != null)
+                {
+                    _value.Changed += _value_Changed;
+                    OnValueInitialized();
+                }
+            }
+        }
+
+        void _value_Changed(object sender, BaseType.ValueChangedEventArgs e)
+        {
+            OnChanged();
+        }
 
         protected abstract IEnumerable<TreeBase> GetChildren();
+
+        public IEnumerable<TreeBase> GetChildrenAsTreeBase() 
+        {
+            return GetChildren();
+        }
 
         public int ChildrenCount
         {

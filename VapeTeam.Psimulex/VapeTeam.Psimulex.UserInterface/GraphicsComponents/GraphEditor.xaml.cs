@@ -12,8 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using GraphDrawerPOC;
 
-namespace GraphDrawerPOC
+namespace VapeTeam.Psimulex.UserInterface.GraphicsComponents
 {
     /// <summary>
     /// Interaction logic for GraphEditor.xaml
@@ -75,16 +76,16 @@ namespace GraphDrawerPOC
 
 
             g = new Graph
-            {
-            };
+                    {
+                    };
             Random r = new Random();
             for (int i = 0; i < 8; ++i)
             {
                 g.Nodes.Add(new Graph.Node
-                {
-                    Position = new Point(r.Next(0, 700), r.Next(0, 600)),
-                    Size = new Size(42, 42)
-                });
+                                {
+                                    Position = new Point(r.Next(0, 700), r.Next(0, 600)),
+                                    Size = new Size(42, 42)
+                                });
             }
             for (int i = 0; i < 17; ++i)
             {
@@ -227,7 +228,7 @@ namespace GraphDrawerPOC
         {
             if (e.Key == Key.LeftCtrl)
             {
-                canvas.Children.OfType<Border>().ToList().ForEach(b => b.IsHitTestVisible = false);
+                Enumerable.OfType<Border>(canvas.Children).ToList().ForEach(b => b.IsHitTestVisible = false);
             }
         }
     }

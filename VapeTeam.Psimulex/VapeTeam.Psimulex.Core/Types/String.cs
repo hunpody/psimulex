@@ -68,7 +68,35 @@ namespace VapeTeam.Psimulex.Core.Types
 
         public override object ToObject()
         {
+            int _infinity = 0;
+            if (TryConvertToInfinity(value, out _infinity))
+            {
+                return _infinity;
+            }
+
             return value;
+        }
+
+        /// <summary>
+        /// Converts the string literal to the current infinity representation (int.MaxValue).
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        static private bool TryConvertToInfinity(string value, out int i)
+        {
+            if (value.ToLower() == "inf" || value.ToLower() == "infinity")
+            {
+                i = Int32.MaxValue;
+                return true;
+            }
+            else if (value.ToLower().Replace(" ", "") == "-inf" || value.ToLower().Replace(" ", "") == "-infinity")
+            {
+                i = -Int32.MaxValue;
+                return true;
+            }
+            i = 0;
+            return false;
         }
 
         public override char ToChar()
